@@ -16,6 +16,7 @@ class NguoiDung extends Migration {
 	private $tai_khoan = ['admin', 'user', 'duong', 'cuong'];
 	private $mat_khau = ['1', '1', '1', '1'];
 	private $email = ['a@gmail.com', 'b@gmail.com', 'c@gmail.com', 'd@gmail.com'];
+	private $sdt = ['0', '1', '2', '4'];
 	private $cap_do = ['0', '1', '2', '0'];
 	private $key = ['0', '1', '2', '4'];
 	public function up() {
@@ -24,6 +25,7 @@ class NguoiDung extends Migration {
 			$table->string('tai_khoan', 50)->nullable(false)->unique();
 			$table->string('mat_khau', 256)->nullable(false);
 			$table->string('email', 50)->nullable(false)->unique();
+			$table->string('sdt', 12)->nullable(false)->unique();
 			$table->integer('cap_do');
 			$table->string('key', 256)->nullable(false)->unique();
 		});
@@ -32,6 +34,7 @@ class NguoiDung extends Migration {
 				'tai_khoan' => $this->tai_khoan[$i],
 				'mat_khau' => Hash::make($this->mat_khau[$i]),
 				'email' => $this->email[$i],
+				'sdt' => $this->sdt[$i],
 				'cap_do' => $this->cap_do[$i],
 				'key' => $this->key[$i],
 			));
