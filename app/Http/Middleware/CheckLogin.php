@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Http\Middleware;
-use App\Http\Controllers\Api\Mau;
 use App\Models\NguoiDung;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use ResponseMau;
 
 class CheckLogin {
 	/**
@@ -18,10 +17,10 @@ class CheckLogin {
 	public function handle($request, Closure $next) {
 		$key = NguoiDung::where('key', $request->input('key'))->first();
 		if (!is_null($key)) {
+			$request->request->add(['cap_do' => $key->cap_do, 'ma_nguoi_dung' => $key->ma_nguoi_dung]);
 			return $next($request);
 		} else {
-			$res = Mau::Store(['bool' => false, 'string' => 'Bạn không có quyền truy cập']);
-			return response()->json($res, Response::HTTP_UNAUTHORIZED);
+			return ResponseMau::Store(['bool' => false, 'string' => ResponseMau::ERROR_KEY]);
 		}
 	}
 }

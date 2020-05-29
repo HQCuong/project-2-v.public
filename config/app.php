@@ -226,7 +226,9 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+		'ResponseMau' => App\Http\Custom\ResponseMau::class,
+		'RegexValue' => App\Http\Custom\RegexValue::class,
+        'RegexRule' => App\Rules\RegexRule::class,
     ],
 
 ];

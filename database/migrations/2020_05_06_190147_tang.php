@@ -19,6 +19,7 @@ class Tang extends Migration {
 			$table->increments('ma_tang');
 			$table->string('ten_tang', 50);
 			$table->integer('ma_toa')->unsigned();
+			$table->integer('tinh_trang');
 			$table->foreign('ma_toa')->references('ma_toa')->on('toa');
 		});
 		for ($i = 0; $i < count($this->ma_toa); $i++) {
@@ -26,6 +27,7 @@ class Tang extends Migration {
 				DB::table($this->name)->insert(array(
 				'ten_tang' => $this->ten_tang[$j],
 				'ma_toa' => $this->ma_toa[$i],
+				'tinh_trang' => 1,
 			));
 			}
 		}

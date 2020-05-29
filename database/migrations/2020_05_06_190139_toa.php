@@ -14,16 +14,19 @@ class Toa extends Migration {
 	private $name = 'toa';
 	private $ten_toa = ['Tòa 1', 'Tòa 2'];
 	private $dia_chi = ['A17 Tạ Quang Bửu', 'D5 Trần Đại Nghĩa'];
+	private $tinh_trang = ['1', '1'];
 	public function up() {
 		Schema::create($this->name, function (Blueprint $table) {
 			$table->increments('ma_toa');
 			$table->string('ten_toa', 20);
-			$table->string('dia_chi', 100);
+			$table->string('dia_chi', 100)->nullable();
+			$table->integer('tinh_trang');
 		});
 		for ($i = 0; $i < count($this->ten_toa); $i++) {
 			DB::table($this->name)->insert(array(
 				'ten_toa' => $this->ten_toa[$i],
 				'dia_chi' => $this->dia_chi[$i],
+				'tinh_trang' => $this->tinh_trang[$i],
 			));
 		}
 	}
