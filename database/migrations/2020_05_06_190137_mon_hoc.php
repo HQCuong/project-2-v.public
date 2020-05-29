@@ -15,11 +15,11 @@ class MonHoc extends Migration
     public function up()
     {
         Schema::create($this->name,function(Blueprint $table){
-            $table->string('ma_mon_hoc',10);
-            $table->string('ten_mon_tieng_anh',100);
-            $table->string('ten_mon_tieng_viet',100);
-            $table->integer('so_gio')->unsigned();
-            $table->integer('ma_kieu_thi');
+            $table->string('ma_mon_hoc',30);
+            $table->string('ten_mon_tieng_anh',100)->nullable();
+            $table->string('ten_mon_tieng_viet',100)->nullable();
+            $table->string('so_gio',10)->nullable();
+            $table->integer('ma_kieu_thi')->nullable();
             $table->primary('ma_mon_hoc');
         });
     }

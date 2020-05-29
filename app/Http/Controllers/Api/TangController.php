@@ -10,90 +10,49 @@ use Illuminate\Http\Request;
 use ResponseMau;
 use Illuminate\Validation\Validator;
 use App\Http\Resources\Tang as TangResource;
+use Illuminate\Database\QueryException;
 
 class TangController extends Controller {
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
 	public function gettang(TangRequest $rq) {
 		$tang = new Tang();
 		return ResponseMau::Store([
 			'data' => TangResource::collection($tang->gettang($rq)),
 		]);
 	}
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function create(Request $rq) {
-
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @return \Illuminate\Http\Response
-	 */
-	public function store(Request $request) {
-		//
-	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  \App\Tang  $tang
-	 * @return \Illuminate\Http\Response
-	 */
-	public function show(Tang $tang) {
-		//
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  \App\Tang  $tang
-	 * @return \Illuminate\Http\Response
-	 */
-	public function editorcreate(TangRequest $rq) {
+	public function update(TangRequest $rq,$ma_tang) {
 		try {
-			$a = Tang::updateOrCreate(['ma_tang' => $rq->ma_tang],[
-				'ten_tang' => $rq->ten_tang,
-				'ma_toa' => $rq->ma_toa
-			]);
+			$tang = Tang::where('ma_tang',$ma_tang)
+					->join('toa', 'toa.ma_toa', 'tang.ma_toa')
+					->first();
+			!is_null($rq->get('ten_tang'))?$tang->ten_tang = $rq->get('ten_tang'):'';
+			!is_null($rq->get('ma_toa'))?$tang->ma_toa = $rq->get('ma_toa'):'';
+			!is_null($rq->get('tinh_trang'))?$tang->tinh_trang = $rq->get('tinh_trang'):'';
+			$tang->save();
 			return ResponseMau::Store([
-				'data' => $a,
+				'data' => new TangResource($tang),
 			]);
 		} catch (\Illuminate\Database\QueryException $e) {
 			return ResponseMau::Store([
-				'string' => 'error',
-				'string' =>DB::getQueryLog(),
+				'bool' => false,
+				'string' => ResponseMau::ERROR_TANG_UPDATE_INFO,
 			]);
 		}
 	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @param  \App\Tang  $tang
-	 * @return \Illuminate\Http\Response
-	 */
-	public function update(Request $request, Tang $tang) {
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  \App\Tang  $tang
-	 * @return \Illuminate\Http\Response
-	 */
-	public function destroy(Tang $tang) {
-		//
+	public function create(TangRequest $rq) {
+		try {
+			$tang = new Tang();
+			!is_null($rq->get('ten_tang'))?$tang->ten_tang = $rq->get('ten_tang'):'';
+			!is_null($rq->get('ma_toa'))?$tang->ma_toa = $rq->get('ma_toa'):'';
+			$tang->tinh_trang = !is_null($rq->get('tinh_trang'))?$rq->get('tinh_trang'):1;
+			$tang->save();
+			return ResponseMau::Store([
+				'data' => new TangResource($tang),
+			]);
+		} catch (\Illuminate\Database\QueryException $e) {
+			return ResponseMau::Store([
+				'bool' => false,
+				'string' => ResponseMau::ERROR_TANG_CREATE,
+			]);
+		}
 	}
 }

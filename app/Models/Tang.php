@@ -8,7 +8,7 @@ class Tang extends Model {
 	protected $table = 'tang';
 	protected $primaryKey = 'ma_tang';
 	protected $fillable = [
-		'ten_tang', 'ma_toa',
+		'ten_tang', 'ma_toa','tinh_trang',
 	];
 	public $timestamps = false;
 

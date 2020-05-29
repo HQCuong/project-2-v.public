@@ -18,6 +18,21 @@ class Tang extends JsonResource {
 			'ma_toa' => $this->ma_toa,
 			'ten_toa' => $this->ten_toa,
 			'dia_chi' => $this->dia_chi,
+			'tinh_trang' => $this->tinh_trang,
+			'ten_tinh_trang' => $this->tenTinhTrang(),
 		];
+	}
+	public function tenTinhTrang() {
+		switch ($this->tinh_trang) {
+		case 1:
+			return 'Hoạt Động';
+			break;
+		case 0:
+			return 'Đã Đóng';
+			break;
+		default:
+			return 'None';
+			break;
+		}
 	}
 }

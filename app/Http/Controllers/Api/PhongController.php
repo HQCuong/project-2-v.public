@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Phong;
+use App\Models\Phong;
 use Illuminate\Http\Request;
+use App\Http\Requests\PhongRequest;
 
 class PhongController extends Controller {
 	/**
@@ -12,8 +13,12 @@ class PhongController extends Controller {
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function index() {
-		//
+	public function getPhongTheoTang(PhongRequest $rq) {
+		$phong = Phong::where('ma_tang',$rq->get('ma_tang'))
+				->join('cau_hinh', 'phong.ma_cau_hinh', 'cau_hinh.ma_cau_hinh')
+				->
+				->get();
+
 	}
 
 	/**

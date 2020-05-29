@@ -53,9 +53,17 @@ Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVu']], function () {
 });
 
 //TangController--Giáo Vụ
-Route::group(['middleware' => 'CheckLogin', 'prefix' => 'tang'], function () {
-	Route::post('gettang', 'Api\TangController@gettang')
+Route::group(['middleware' => 'CheckLogin'], function () {
+	Route::post('tang/gettang', 'Api\TangController@gettang')
 		->name('api.tang.gettang');
-	Route::post('editorcreate', 'Api\TangController@editorcreate')
-		->name('api.tang.editorcreate');
+	Route::post('tang/update/{ma_tang}', 'Api\TangController@update')
+		->name('api.tang.update');
+	Route::post('tang/create', 'Api\TangController@create')
+		->name('api.tang.create');
+});
+
+//PhongController--Giáo Vụ
+Route::group(['middleware' => 'CheckLogin'], function () {
+	Route::post('phong/getphong', 'Api\PhongController@gettang')
+		->name('api.tang.gettang');
 });

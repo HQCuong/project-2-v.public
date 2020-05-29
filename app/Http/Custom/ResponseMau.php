@@ -30,8 +30,17 @@ class ResponseMau {
 	const ERROR_KEY = 'Bạn không có quyền truy cập';
 	const ERROR_TOA_TEN_TOA = 'Tên tòa không hợp lệ (từ 6-20 kí tự)';
 	const ERROR_TOA_DIA_CHI = 'Địa chỉ không hợp lệ (từ 6-100 kí tự)';
-	const ERROR_TOA_TRANG_THAI = 'Trạng thái không hợp lệ';
+	const ERROR_TOA_TINH_TRANG = 'Trạng thái không hợp lệ';
 	const ERROR_TOA_UPDATE_INFO = 'Cập nhật thông tin thất bại có lỗi của hệ thống';
+	const ERROR_TANG_MA_TOA = 'Mã tòa bị trùng hoặc không hợp lệ';
+	const ERROR_TANG_TINH_TRANG = 'Trạng thái không hợp lệ';
+	const ERROR_TANG_TEN_TANG = 'Tên tầng bị trùng hoặc không hợp lệ (4-20 kí tự và không có kí tự đặc biệt)';
+	const ERROR_TANG_MA_TANG = 'Mã tầng bị trùng hoặc không hợp lệ';
+	const ERROR_TANG_UPDATE_INFO = 'Cập nhật thông tin thất bại có lỗi của hệ thống';
+	const ERROR_TANG_CREATE = 'Tao tầng thất bại hãy kiểm tra lại các dữ liệu';
+
+
+
 	public function __construct() {
 		$this->success = true;
 		$this->message = '';

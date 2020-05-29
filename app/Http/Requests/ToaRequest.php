@@ -54,7 +54,7 @@ class ToaRequest extends FormRequest
             $messages_return = ResponseMau::ERROR_TOA_DIA_CHI;
         }
         if ($error->has('tinh_trang')) {
-            $messages_return = ResponseMau::ERROR_TOA_TRANG_THAI;
+            $messages_return = ResponseMau::ERROR_TOA_TINH_TRANG;
         }
         throw new HttpResponseException(
             ResponseMau::Store(['bool' => false, 'string' => $messages_return])
