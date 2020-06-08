@@ -13,6 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// laravel-router
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('app');
 });
+
+// vue-router
+
+Route::get('{any}', function () { 
+    return view('app'); 
+})->where('any', '.*'); 

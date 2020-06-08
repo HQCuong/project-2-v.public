@@ -1,0 +1,99 @@
+<template>
+    <div class="sidebar" data-color="azure" data-background-color="white" data-image="./img/sidebar-1.jpg">
+        <div class="logo"><a href="/" class="simple-text logo-normal">
+                HOME
+            </a></div>
+        <div class="sidebar-wrapper">
+            <ul class="nav navbar-nav nav-mobile-menu">
+                <li class="nav-item dropdown user-nav">
+                    <a class="nav-link nav-control" href="javascript:;" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 100%">
+                        <i class="material-icons">person</i>
+                        <p class="d-lg-none d-md-block">
+                            Account
+                        </p>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
+                        <router-link class="dropdown-item" to="/profile">Thông tin tài khoản</router-link>
+                        <router-link class="dropdown-item" to="/account_setting">Cài đặt</router-link>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Đăng xuất</a>
+                    </div>
+                </li>
+            </ul>
+            <ul class="nav">
+                <li class="nav-item">
+                    <router-link class="nav-link" to="/xem_thong_tin_lab">
+                        <i class="material-icons">library_books</i>
+                        <p>Xem thông tin lab</p>
+                    </router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link class="nav-link" to="/quan_ly_lab">
+                        <i class="material-icons">laptop</i>
+                        <p>Tùy chỉnh Phòng lab</p>
+                    </router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link class="nav-link" to="/cau_hinh_mon">
+                        <i class="material-icons">laptop</i>
+                        <p>Cấu hình - môn</p>
+                    </router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link class="nav-link" to="/xem_lich">
+                        <i class="material-icons">date_range</i>
+                        <p>Xem lịch dạy</p>
+                    </router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link class="nav-link" to="/them_ngay_nghi">
+                        <i class="material-icons">event_available</i>
+                        <p>Thêm ngày nghỉ</p>
+                    </router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link class="nav-link" to="/them_lich_hoc">
+                        <i class="material-icons">event_available</i>
+                        <p>Thêm lịch học</p>
+                    </router-link>
+                </li>
+            </ul>
+        </div>
+    </div>
+</template>
+<script>
+export default {
+    data() {
+        return {
+
+        }
+    },
+    mounted() {
+        // Bat sidebar theo url va add active class onclick
+        var pathname = window.location.pathname;
+        if (pathname == '/profile' || pathname == '/account_setting') {
+            $('.user-nav').addClass('active');
+        } else {
+            $('.nav-item > a[href="' + pathname + '"]').parent().addClass('active');
+        }
+
+        $('.sidebar .nav-link:not(.nav-control)').on('click', function() {
+            $('.nav-item').removeClass('active');
+            $(this).parent().addClass('active');
+        });
+
+        $('.dropdown-menu').on('click', function() {
+            $('.user-nav').addClass('active');
+        })
+
+        $('.dropdown-item, .nav-link:not(.nav-control), .current_user_nav').on('click', function() {
+            if ($(window).width() < 992) {
+                $('.close-layer').trigger('click');
+            }
+        });
+    }
+}
+
+</script>
+<style lang="css" scoped>
+</style>
