@@ -12,9 +12,9 @@ class Phong extends Migration {
 	 * @return void
 	 */
 	private $name = 'phong';
-	private $ten_phong = ['Lab 201', 'Lab 202', 'Lab 203', 'Lab 5'];
-	private $so_cho_ngoi = ['20', '40', '50', '35'];
-	private $ma_tang = ['4', '4', '1', '4'];
+	private $ten_phong = ['Kho', 'Lab 201', 'Lab 202', 'Lab 203', 'Lab 5'];
+	private $so_cho_ngoi = ['0', '20', '40', '50', '35'];
+	private $ma_tang = ['4', '4', '4', '1', '4'];
 	public function up() {
 		Schema::create($this->name, function (Blueprint $table) {
 			$table->increments('ma_phong');
