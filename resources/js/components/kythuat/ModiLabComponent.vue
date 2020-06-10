@@ -3,7 +3,6 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header"></div>
                     <div class="card-body">
                         <!-- button -->
                         <mainbutton @change_current_view="change_current_view"></mainbutton>
@@ -23,7 +22,7 @@
                             </multiselect>
                             <br>
                             <!-- main view -->
-                            <showmodilab v-if="show"></showmodilab>
+                            <showmodilab v-if="show_main_view"></showmodilab>
                         </div> 
                         <keep-alive>
                             <addlab v-if="!current_view"></addlab>
@@ -45,7 +44,7 @@ export default {
     },
     data() {
         return {
-            show: false,
+            show_main_view: false,
             current_view: true,
             value_tang: '',
             value_lab: '',
@@ -60,7 +59,6 @@ export default {
     },
     methods: {
         change_current_view() {
-            console.log(1);
             this.current_view = !this.current_view;
         },
         get_toa() {
@@ -76,11 +74,11 @@ export default {
         value_toa() {
             this.value_tang = "";
             this.value_lab = "";
-            this.show = false;
+            this.show_main_view = false;
             // trong truong hop bo chon toa
             if (this.value_toa == "" || this.value_toa == null) {
                 this.tang = [];
-                this.show = false;
+                this.show_main_view = false;
                 return false;
             }
             // dung axios gui len lay so tang
@@ -89,11 +87,11 @@ export default {
 
         value_tang() {
             this.value_lab = "";
-            this.show = false;
+            this.show_main_view = false;
             // trong truong hop bo chon tang 
             if (this.value_tang == "" || this.value_tang == null) {
                 this.lab = [];
-                this.show = false;
+                this.show_main_view = false;
                 return false
             }
             // dung axios gui len lay so lab
@@ -103,9 +101,9 @@ export default {
         value_lab() {
             // trong truong hop bo chon lab
             if (this.value_lab == "" || this.value_lab == null) {
-                this.show = false;
+                this.show_main_view = false;
             } else if (this.toa != "" || this.toa != null || this.tang != "" || this.tang != null) {
-                this.show = true;
+                this.show_main_view = true;
             }
         }
     },

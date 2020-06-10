@@ -50,4 +50,8 @@ export default {
     flex-direction: row;
     padding-left: 10px;
 }
+
+.status-title {
+    width: 100px;
+}
 </style>

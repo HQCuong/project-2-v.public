@@ -13486,7 +13486,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      show: false,
+      show_main_view: false,
       current_view: true,
       value_tang: '',
       value_lab: '',
@@ -13515,11 +13515,11 @@ __webpack_require__.r(__webpack_exports__);
     value_toa: function value_toa() {
       this.value_tang = "";
       this.value_lab = "";
-      this.show = false; // trong truong hop bo chon toa
+      this.show_main_view = false; // trong truong hop bo chon toa
 
       if (this.value_toa == "" || this.value_toa == null) {
         this.tang = [];
-        this.show = false;
+        this.show_main_view = false;
         return false;
       } // dung axios gui len lay so tang
 
@@ -13528,11 +13528,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     value_tang: function value_tang() {
       this.value_lab = "";
-      this.show = false; // trong truong hop bo chon tang 
+      this.show_main_view = false; // trong truong hop bo chon tang 
 
       if (this.value_tang == "" || this.value_tang == null) {
         this.lab = [];
-        this.show = false;
+        this.show_main_view = false;
         return false;
       } // dung axios gui len lay so lab
 
@@ -13542,9 +13542,9 @@ __webpack_require__.r(__webpack_exports__);
     value_lab: function value_lab() {
       // trong truong hop bo chon lab
       if (this.value_lab == "" || this.value_lab == null) {
-        this.show = false;
+        this.show_main_view = false;
       } else if (this.toa != "" || this.toa != null || this.tang != "" || this.tang != null) {
-        this.show = true;
+        this.show_main_view = true;
       }
     }
   }
@@ -13741,15 +13741,89 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _formaddlab_FormAddLab_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./formaddlab/FormAddLab.vue */ "./resources/js/components/kythuat/ModiLabChild/formaddlab/FormAddLab.vue");
 //
 //
 //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  created: function created() {
+    this.get_toa();
+  },
   data: function data() {
-    return {};
+    return {
+      value_tang: '',
+      value_toa: '',
+      toa: [],
+      tang: [],
+      lab: []
+    };
+  },
+  computed: {},
+  methods: {
+    change_current_view: function change_current_view() {
+      this.current_view = !this.current_view;
+    },
+    get_toa: function get_toa() {
+      this.toa = ['A17'];
+
+      if (this.toa.length == 1) {
+        this.value_toa = this.toa[0];
+      } else {
+        this.value_toa = '';
+      }
+    }
+  },
+  watch: {
+    value_toa: function value_toa() {
+      this.value_tang = "";
+      this.value_lab = "";
+      this.show = false; // trong truong hop bo chon toa
+
+      if (this.value_toa == "" || this.value_toa == null) {
+        this.tang = [];
+        this.show = false;
+        return false;
+      } // dung axios gui len lay so tang
+
+
+      this.tang = ['tang 2', 'tang 5'];
+    },
+    value_tang: function value_tang() {
+      this.value_lab = "";
+      this.show = false; // trong truong hop bo chon tang 
+
+      if (this.value_tang == "" || this.value_tang == null) {
+        this.lab = [];
+        this.show = false;
+        return false;
+      } // dung axios gui len lay so lab
+
+
+      this.lab = ['lab 1', 'lab 2', 'lab 3'];
+    },
+    value_lab: function value_lab() {
+      // trong truong hop bo chon lab
+      if (this.value_lab == "" || this.value_lab == null) {
+        this.show = false;
+      } else if (this.toa != "" || this.toa != null || this.tang != "" || this.tang != null) {
+        this.show = true;
+      }
+    }
+  },
+  components: {
+    mainform: _formaddlab_FormAddLab_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
 
@@ -13900,6 +13974,53 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/kythuat/ModiLabChild/formaddlab/FormAddLab.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/kythuat/ModiLabChild/formaddlab/FormAddLab.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {};
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/kythuat/ModiLabChild/hardware/HardWareInfoComponent.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/kythuat/ModiLabChild/hardware/HardWareInfoComponent.vue?vue&type=script&lang=js& ***!
@@ -13970,7 +14091,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -13980,7 +14100,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      show: false,
+      show_main_view: false,
       current_view: true,
       value_tang: '',
       value_lab: '',
@@ -13993,7 +14113,6 @@ __webpack_require__.r(__webpack_exports__);
   computed: {},
   methods: {
     change_current_view: function change_current_view() {
-      console.log(1);
       this.current_view = !this.current_view;
     },
     get_toa: function get_toa() {
@@ -14010,11 +14129,11 @@ __webpack_require__.r(__webpack_exports__);
     value_toa: function value_toa() {
       this.value_tang = "";
       this.value_lab = "";
-      this.show = false; // trong truong hop bo chon toa
+      this.show_main_view = false; // trong truong hop bo chon toa
 
       if (this.value_toa == "" || this.value_toa == null) {
         this.tang = [];
-        this.show = false;
+        this.show_main_view = false;
         return false;
       } // dung axios gui len lay so tang
 
@@ -14023,11 +14142,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     value_tang: function value_tang() {
       this.value_lab = "";
-      this.show = false; // trong truong hop bo chon tang 
+      this.show_main_view = false; // trong truong hop bo chon tang 
 
       if (this.value_tang == "" || this.value_tang == null) {
         this.lab = [];
-        this.show = false;
+        this.show_main_view = false;
         return false;
       } // dung axios gui len lay so lab
 
@@ -14037,9 +14156,9 @@ __webpack_require__.r(__webpack_exports__);
     value_lab: function value_lab() {
       // trong truong hop bo chon lab
       if (this.value_lab == "" || this.value_lab == null) {
-        this.show = false;
+        this.show_main_view = false;
       } else if (this.toa != "" || this.toa != null || this.tang != "" || this.tang != null) {
-        this.show = true;
+        this.show_main_view = true;
       }
     }
   },
@@ -14452,7 +14571,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n.label-sw-btn[data-v-191edd83] {\r\n    display: flex;\r\n    flex-direction: row;\r\n    padding-left: 10px;\n}\r\n", ""]);
+exports.push([module.i, "\n.label-sw-btn[data-v-191edd83] {\r\n    display: flex;\r\n    flex-direction: row;\r\n    padding-left: 10px;\n}\n.status-title[data-v-191edd83] {\r\n    width: 100px;\n}\r\n", ""]);
 
 // exports
 
@@ -16039,7 +16158,7 @@ var render = function() {
               _vm._v(" "),
               _c("br"),
               _vm._v(" "),
-              _vm.show
+              _vm.show_main_view
                 ? _c(
                     "div",
                     [
@@ -16296,16 +16415,62 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    [
+      _c("span", [_vm._v("Chọn tòa")]),
+      _vm._v(" "),
+      _c("multiselect", {
+        attrs: {
+          options: _vm.toa,
+          "close-on-select": true,
+          "show-labels": false,
+          placeholder: "Tòa",
+          "open-direction": "bottom"
+        },
+        model: {
+          value: _vm.value_toa,
+          callback: function($$v) {
+            _vm.value_toa = $$v
+          },
+          expression: "value_toa"
+        }
+      }),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("span", [_vm._v("Chọn tầng")]),
+      _vm._v(" "),
+      _c(
+        "multiselect",
+        {
+          attrs: {
+            options: _vm.tang,
+            "close-on-select": true,
+            "show-labels": false,
+            placeholder: "Tầng",
+            "open-direction": "bottom"
+          },
+          model: {
+            value: _vm.value_tang,
+            callback: function($$v) {
+              _vm.value_tang = $$v
+            },
+            expression: "value_tang"
+          }
+        },
+        [_c("template", { slot: "noOptions" }, [_vm._v("Chưa chọn tòa")])],
+        2
+      ),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("mainform")
+    ],
+    1
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [_c("p", [_vm._v("aaaaaaaaaaaaaaaaaaaaa")])])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -16497,6 +16662,125 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/kythuat/ModiLabChild/formaddlab/FormAddLab.vue?vue&type=template&id=0462b0aa&scoped=true&":
+/*!*********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/kythuat/ModiLabChild/formaddlab/FormAddLab.vue?vue&type=template&id=0462b0aa&scoped=true& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "exampleInputEmail1" } }, [_vm._v("CPU")]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: {
+            type: "text",
+            id: "exampleInputEmail1",
+            "aria-describedby": "emailHelp",
+            placeholder: "Nhập CPU"
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "exampleInputEmail1" } }, [_vm._v("Ram")]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: {
+            type: "text",
+            id: "exampleInputEmail1",
+            "aria-describedby": "emailHelp",
+            placeholder: "Nhập Ram"
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+          _vm._v("Ổ cứng")
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: {
+            type: "text",
+            id: "exampleInputEmail1",
+            "aria-describedby": "emailHelp",
+            placeholder: "Nhập ổ cứng"
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+          _vm._v("Số chỗ ngồi")
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: {
+            type: "number",
+            id: "exampleInputEmail1",
+            "aria-describedby": "emailHelp",
+            placeholder: "Nhập số chõ ngồi"
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+          _vm._v("Số máy")
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: {
+            type: "number",
+            id: "exampleInputEmail1",
+            "aria-describedby": "emailHelp",
+            placeholder: "Nhập số máy"
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("button", { staticClass: "btn btn-info", attrs: { type: "submit" } }, [
+        _vm._v("Submit")
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/kythuat/ModiLabChild/hardware/HardWareInfoComponent.vue?vue&type=template&id=515559b5&scoped=true&":
 /*!******************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/kythuat/ModiLabChild/hardware/HardWareInfoComponent.vue?vue&type=template&id=515559b5&scoped=true& ***!
@@ -16547,8 +16831,6 @@ var render = function() {
     _c("div", { staticClass: "row justify-content-center" }, [
       _c("div", { staticClass: "col-md-12" }, [
         _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-header" }),
-          _vm._v(" "),
           _c(
             "div",
             { staticClass: "card-body" },
@@ -16644,7 +16926,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("br"),
                       _vm._v(" "),
-                      _vm.show ? _c("showmodilab") : _vm._e()
+                      _vm.show_main_view ? _c("showmodilab") : _vm._e()
                     ],
                     1
                   )
@@ -34601,6 +34883,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ComputerComponent_vue_vue_type_template_id_191edd83_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ComputerComponent_vue_vue_type_template_id_191edd83_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/kythuat/ModiLabChild/formaddlab/FormAddLab.vue":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/kythuat/ModiLabChild/formaddlab/FormAddLab.vue ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _FormAddLab_vue_vue_type_template_id_0462b0aa_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FormAddLab.vue?vue&type=template&id=0462b0aa&scoped=true& */ "./resources/js/components/kythuat/ModiLabChild/formaddlab/FormAddLab.vue?vue&type=template&id=0462b0aa&scoped=true&");
+/* harmony import */ var _FormAddLab_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FormAddLab.vue?vue&type=script&lang=js& */ "./resources/js/components/kythuat/ModiLabChild/formaddlab/FormAddLab.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _FormAddLab_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _FormAddLab_vue_vue_type_template_id_0462b0aa_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _FormAddLab_vue_vue_type_template_id_0462b0aa_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "0462b0aa",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/kythuat/ModiLabChild/formaddlab/FormAddLab.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/kythuat/ModiLabChild/formaddlab/FormAddLab.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************!*\
+  !*** ./resources/js/components/kythuat/ModiLabChild/formaddlab/FormAddLab.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FormAddLab_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./FormAddLab.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/kythuat/ModiLabChild/formaddlab/FormAddLab.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FormAddLab_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/kythuat/ModiLabChild/formaddlab/FormAddLab.vue?vue&type=template&id=0462b0aa&scoped=true&":
+/*!***************************************************************************************************************************!*\
+  !*** ./resources/js/components/kythuat/ModiLabChild/formaddlab/FormAddLab.vue?vue&type=template&id=0462b0aa&scoped=true& ***!
+  \***************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FormAddLab_vue_vue_type_template_id_0462b0aa_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./FormAddLab.vue?vue&type=template&id=0462b0aa&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/kythuat/ModiLabChild/formaddlab/FormAddLab.vue?vue&type=template&id=0462b0aa&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FormAddLab_vue_vue_type_template_id_0462b0aa_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FormAddLab_vue_vue_type_template_id_0462b0aa_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
