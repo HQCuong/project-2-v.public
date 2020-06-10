@@ -1,30 +1,30 @@
 <template>
     <div>
         <div class="form-group">
-            <label for="exampleInputEmail1">CPU</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập CPU">
+            <label for="inputCPU">CPU</label>
+            <input type="text" class="form-control" id="inputCPU" aria-describedby="emailHelp" placeholder="Nhập CPU">
         </div>
         <br>
         <div class="form-group">
-            <label for="exampleInputEmail1">Ram</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập Ram">
+            <label for="insertRam">Ram</label>
+            <input type="text" class="form-control" id="insertRam" aria-describedby="emailHelp" placeholder="Nhập Ram">
         </div>
         <br>
         <div class="form-group">
-            <label for="exampleInputEmail1">Ổ cứng</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập ổ cứng">
+            <label for="insertHarddrive">Ổ cứng</label>
+            <input type="text" class="form-control" id="insertHarddrive" aria-describedby="emailHelp" placeholder="Nhập ổ cứng">
         </div>
         <br>
-        <div class="form-group">
+        <div class="insertSeats">
             <label for="exampleInputEmail1">Số chỗ ngồi</label>
-            <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập số chõ ngồi">
+            <input type="number" class="form-control" id="insertSeats" aria-describedby="emailHelp" placeholder="Nhập số chõ ngồi">
         </div>
         <br>
-        <div class="form-group">
+        <div class="insertCpts">
             <label for="exampleInputEmail1">Số máy</label>
-            <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập số máy">
+            <input type="number" class="form-control" id="insertCpts" aria-describedby="emailHelp" placeholder="Nhập số máy">
         </div>
-		
+		<br>
         <button type="submit" class="btn btn-info">Submit</button>
     </div>
 </template>

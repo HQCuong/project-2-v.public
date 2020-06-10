@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="computer">
         <p>may</p>
         <div class="form-check">
             <label class="form-check-label">
@@ -45,6 +45,11 @@ export default {
 
 </script>
 <style lang="css" scoped>
+.computer {
+    width: 100%;
+    border: 1px solid black;
+}
+
 .label-sw-btn {
     display: flex;
     flex-direction: row;
@@ -54,4 +59,5 @@ export default {
 .status-title {
     width: 100px;
 }
+
 </style>

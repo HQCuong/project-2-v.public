@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="computer">
 		<h4>máy ...</h4>
 		<p>tinh trang</p>
 	</div>
@@ -16,4 +16,8 @@ export default {
 </script>
 
 <style lang="css" scoped>
+	.computer {
+		width: 100%;
+		border: 1px solid black;
+	}
 </style>
