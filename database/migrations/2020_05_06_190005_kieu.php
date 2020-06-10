@@ -12,7 +12,7 @@ class Kieu extends Migration {
 	 * @return void
 	 */
 	private $name = 'kieu';
-	private $ten_kieu = ['Thêm', 'Cho Mượn', 'Sửa', 'Trả Về'];
+	private $ten_kieu = ['Hoạt Động','Thêm', 'Cho Mượn', 'Sửa', 'Trả Về'];
 	public function up() {
 		Schema::create($this->name, function (Blueprint $table) {
 			$table->increments('ma_kieu');
