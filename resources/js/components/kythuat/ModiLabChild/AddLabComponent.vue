@@ -8,6 +8,11 @@
             <template slot="noOptions">Chưa chọn tòa</template>
         </multiselect>
         <br>
+        <span>Chọn cấu hình có sẵn</span>
+        <multiselect v-model="value_cau_hinh" :options="cau_hinh" :close-on-select="true" :show-labels="false" placeholder="Để trống nếu muốn thêm cấu hình mới" open-direction="bottom">
+            <template slot="noOptions">Chưa chọn tòa</template>
+        </multiselect>
+        <br>
         <!-- form insert -->
         <mainform></mainform>
     </div>
@@ -23,9 +28,11 @@ export default {
         return {
             value_tang: '',
             value_toa: '',
+            value_cau_hinh: '',
             toa: [],
             tang: [],
             lab: [],
+            cau_hinh: ['cau hinh 1', 'cau hinh 2', 'cau hinh 3']
         }
     },
     computed: {

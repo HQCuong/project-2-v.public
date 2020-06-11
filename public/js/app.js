@@ -13756,6 +13756,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
@@ -13765,9 +13770,11 @@ __webpack_require__.r(__webpack_exports__);
     return {
       value_tang: '',
       value_toa: '',
+      value_cau_hinh: '',
       toa: [],
       tang: [],
-      lab: []
+      lab: [],
+      cau_hinh: ['cau hinh 1', 'cau hinh 2', 'cau hinh 3']
     };
   },
   computed: {},
@@ -13983,6 +13990,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -14434,7 +14449,7 @@ exports = module.exports = __webpack_require__(/*! ../../css-loader/lib/css-base
 
 
 // module
-exports.push([module.i, "@charset \"UTF-8\";\n.fc {\n  direction: ltr;\n  text-align: left;\n}\n.fc-rtl {\n  text-align: right;\n}\nbody .fc {\n  /* extra precedence to overcome jqui */\n  font-size: 1em;\n}\n\n/* Colors\n--------------------------------------------------------------------------------------------------*/\n.fc-highlight {\n  /* when user is selecting cells */\n  background: #bce8f1;\n  opacity: 0.3;\n}\n.fc-bgevent {\n  /* default look for background events */\n  background: #8fdf82;\n  opacity: 0.3;\n}\n.fc-nonbusiness {\n  /* default look for non-business-hours areas */\n  /* will inherit .fc-bgevent's styles */\n  background: #d7d7d7;\n}\n\n/* Popover\n--------------------------------------------------------------------------------------------------*/\n.fc-popover {\n  position: absolute;\n  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);\n}\n.fc-popover .fc-header {\n  /* TODO: be more consistent with fc-head/fc-body */\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n  padding: 2px 4px;\n}\n.fc-rtl .fc-popover .fc-header {\n  flex-direction: row-reverse;\n}\n.fc-popover .fc-header .fc-title {\n  margin: 0 2px;\n}\n.fc-popover .fc-header .fc-close {\n  cursor: pointer;\n  opacity: 0.65;\n  font-size: 1.1em;\n}\n\n/* Misc Reusable Components\n--------------------------------------------------------------------------------------------------*/\n.fc-divider {\n  border-style: solid;\n  border-width: 1px;\n}\nhr.fc-divider {\n  height: 0;\n  margin: 0;\n  padding: 0 0 2px;\n  /* height is unreliable across browsers, so use padding */\n  border-width: 1px 0;\n}\n.fc-bg,\n.fc-bgevent-skeleton,\n.fc-highlight-skeleton,\n.fc-mirror-skeleton {\n  /* these element should always cling to top-left/right corners */\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n}\n.fc-bg {\n  bottom: 0;\n  /* strech bg to bottom edge */\n}\n.fc-bg table {\n  height: 100%;\n  /* strech bg to bottom edge */\n}\n\n/* Tables\n--------------------------------------------------------------------------------------------------*/\n.fc table {\n  width: 100%;\n  box-sizing: border-box;\n  /* fix scrollbar issue in firefox */\n  table-layout: fixed;\n  border-collapse: collapse;\n  border-spacing: 0;\n  font-size: 1em;\n  /* normalize cross-browser */\n}\n.fc th {\n  text-align: center;\n}\n.fc th,\n.fc td {\n  border-style: solid;\n  border-width: 1px;\n  padding: 0;\n  vertical-align: top;\n}\n.fc td.fc-today {\n  border-style: double;\n  /* overcome neighboring borders */\n}\n\n/* Internal Nav Links\n--------------------------------------------------------------------------------------------------*/\na[data-goto] {\n  cursor: pointer;\n}\na[data-goto]:hover {\n  text-decoration: underline;\n}\n\n/* Fake Table Rows\n--------------------------------------------------------------------------------------------------*/\n.fc .fc-row {\n  /* extra precedence to overcome themes forcing a 1px border */\n  /* no visible border by default. but make available if need be (scrollbar width compensation) */\n  border-style: solid;\n  border-width: 0;\n}\n.fc-row table {\n  /* don't put left/right border on anything within a fake row.\n     the outer tbody will worry about this */\n  border-left: 0 hidden transparent;\n  border-right: 0 hidden transparent;\n  /* no bottom borders on rows */\n  border-bottom: 0 hidden transparent;\n}\n.fc-row:first-child table {\n  border-top: 0 hidden transparent;\n  /* no top border on first row */\n}\n\n/* Day Row (used within the header and the DayGrid)\n--------------------------------------------------------------------------------------------------*/\n.fc-row {\n  position: relative;\n}\n.fc-row .fc-bg {\n  z-index: 1;\n}\n\n/* highlighting cells & background event skeleton */\n.fc-row .fc-bgevent-skeleton,\n.fc-row .fc-highlight-skeleton {\n  bottom: 0;\n  /* stretch skeleton to bottom of row */\n}\n.fc-row .fc-bgevent-skeleton table,\n.fc-row .fc-highlight-skeleton table {\n  height: 100%;\n  /* stretch skeleton to bottom of row */\n}\n.fc-row .fc-highlight-skeleton td,\n.fc-row .fc-bgevent-skeleton td {\n  border-color: transparent;\n}\n.fc-row .fc-bgevent-skeleton {\n  z-index: 2;\n}\n.fc-row .fc-highlight-skeleton {\n  z-index: 3;\n}\n\n/*\nrow content (which contains day/week numbers and events) as well as \"mirror\" (which contains\ntemporary rendered events).\n*/\n.fc-row .fc-content-skeleton {\n  position: relative;\n  z-index: 4;\n  padding-bottom: 2px;\n  /* matches the space above the events */\n}\n.fc-row .fc-mirror-skeleton {\n  z-index: 5;\n}\n.fc .fc-row .fc-content-skeleton table,\n.fc .fc-row .fc-content-skeleton td,\n.fc .fc-row .fc-mirror-skeleton td {\n  /* see-through to the background below */\n  /* extra precedence to prevent theme-provided backgrounds */\n  background: none;\n  /* in case <td>s are globally styled */\n  border-color: transparent;\n}\n.fc-row .fc-content-skeleton td,\n.fc-row .fc-mirror-skeleton td {\n  /* don't put a border between events and/or the day number */\n  border-bottom: 0;\n}\n.fc-row .fc-content-skeleton tbody td,\n.fc-row .fc-mirror-skeleton tbody td {\n  /* don't put a border between event cells */\n  border-top: 0;\n}\n\n/* Scrolling Container\n--------------------------------------------------------------------------------------------------*/\n.fc-scroller {\n  -webkit-overflow-scrolling: touch;\n}\n\n/* TODO: move to timegrid/daygrid */\n.fc-scroller > .fc-day-grid,\n.fc-scroller > .fc-time-grid {\n  position: relative;\n  /* re-scope all positions */\n  width: 100%;\n  /* hack to force re-sizing this inner element when scrollbars appear/disappear */\n}\n\n/* Global Event Styles\n--------------------------------------------------------------------------------------------------*/\n.fc-event {\n  position: relative;\n  /* for resize handle and other inner positioning */\n  display: block;\n  /* make the <a> tag block */\n  font-size: 0.85em;\n  line-height: 1.4;\n  border-radius: 3px;\n  border: 1px solid #3788d8;\n}\n.fc-event,\n.fc-event-dot {\n  background-color: #3788d8;\n  /* default BACKGROUND color */\n}\n.fc-event,\n.fc-event:hover {\n  color: #fff;\n  /* default TEXT color */\n  text-decoration: none;\n  /* if <a> has an href */\n}\n.fc-event[href],\n.fc-event.fc-draggable {\n  cursor: pointer;\n  /* give events with links and draggable events a hand mouse pointer */\n}\n.fc-not-allowed,\n.fc-not-allowed .fc-event {\n  /* to override an event's custom cursor */\n  cursor: not-allowed;\n}\n.fc-event .fc-content {\n  position: relative;\n  z-index: 2;\n}\n\n/* resizer (cursor AND touch devices) */\n.fc-event .fc-resizer {\n  position: absolute;\n  z-index: 4;\n}\n\n/* resizer (touch devices) */\n.fc-event .fc-resizer {\n  display: none;\n}\n.fc-event.fc-allow-mouse-resize .fc-resizer,\n.fc-event.fc-selected .fc-resizer {\n  /* only show when hovering or selected (with touch) */\n  display: block;\n}\n\n/* hit area */\n.fc-event.fc-selected .fc-resizer:before {\n  /* 40x40 touch area */\n  content: \"\";\n  position: absolute;\n  z-index: 9999;\n  /* user of this util can scope within a lower z-index */\n  top: 50%;\n  left: 50%;\n  width: 40px;\n  height: 40px;\n  margin-left: -20px;\n  margin-top: -20px;\n}\n\n/* Event Selection (only for touch devices)\n--------------------------------------------------------------------------------------------------*/\n.fc-event.fc-selected {\n  z-index: 9999 !important;\n  /* overcomes inline z-index */\n  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);\n}\n.fc-event.fc-selected:after {\n  content: \"\";\n  position: absolute;\n  z-index: 1;\n  /* same z-index as fc-bg, behind text */\n  /* overcome the borders */\n  top: -1px;\n  right: -1px;\n  bottom: -1px;\n  left: -1px;\n  /* darkening effect */\n  background: #000;\n  opacity: 0.25;\n}\n\n/* Event Dragging\n--------------------------------------------------------------------------------------------------*/\n.fc-event.fc-dragging.fc-selected {\n  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);\n}\n.fc-event.fc-dragging:not(.fc-selected) {\n  opacity: 0.75;\n}\n\n/* Horizontal Events\n--------------------------------------------------------------------------------------------------*/\n/* bigger touch area when selected */\n.fc-h-event.fc-selected:before {\n  content: \"\";\n  position: absolute;\n  z-index: 3;\n  /* below resizers */\n  top: -10px;\n  bottom: -10px;\n  left: 0;\n  right: 0;\n}\n\n/* events that are continuing to/from another week. kill rounded corners and butt up against edge */\n.fc-ltr .fc-h-event.fc-not-start,\n.fc-rtl .fc-h-event.fc-not-end {\n  margin-left: 0;\n  border-left-width: 0;\n  padding-left: 1px;\n  /* replace the border with padding */\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n}\n.fc-ltr .fc-h-event.fc-not-end,\n.fc-rtl .fc-h-event.fc-not-start {\n  margin-right: 0;\n  border-right-width: 0;\n  padding-right: 1px;\n  /* replace the border with padding */\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n\n/* resizer (cursor AND touch devices) */\n/* left resizer  */\n.fc-ltr .fc-h-event .fc-start-resizer,\n.fc-rtl .fc-h-event .fc-end-resizer {\n  cursor: w-resize;\n  left: -1px;\n  /* overcome border */\n}\n\n/* right resizer */\n.fc-ltr .fc-h-event .fc-end-resizer,\n.fc-rtl .fc-h-event .fc-start-resizer {\n  cursor: e-resize;\n  right: -1px;\n  /* overcome border */\n}\n\n/* resizer (mouse devices) */\n.fc-h-event.fc-allow-mouse-resize .fc-resizer {\n  width: 7px;\n  top: -1px;\n  /* overcome top border */\n  bottom: -1px;\n  /* overcome bottom border */\n}\n\n/* resizer (touch devices) */\n.fc-h-event.fc-selected .fc-resizer {\n  /* 8x8 little dot */\n  border-radius: 4px;\n  border-width: 1px;\n  width: 6px;\n  height: 6px;\n  border-style: solid;\n  border-color: inherit;\n  background: #fff;\n  /* vertically center */\n  top: 50%;\n  margin-top: -4px;\n}\n\n/* left resizer  */\n.fc-ltr .fc-h-event.fc-selected .fc-start-resizer,\n.fc-rtl .fc-h-event.fc-selected .fc-end-resizer {\n  margin-left: -4px;\n  /* centers the 8x8 dot on the left edge */\n}\n\n/* right resizer */\n.fc-ltr .fc-h-event.fc-selected .fc-end-resizer,\n.fc-rtl .fc-h-event.fc-selected .fc-start-resizer {\n  margin-right: -4px;\n  /* centers the 8x8 dot on the right edge */\n}\n\n/* DayGrid events\n----------------------------------------------------------------------------------------------------\nWe use the full \"fc-day-grid-event\" class instead of using descendants because the event won't\nbe a descendant of the grid when it is being dragged.\n*/\n.fc-day-grid-event {\n  margin: 1px 2px 0;\n  /* spacing between events and edges */\n  padding: 0 1px;\n}\ntr:first-child > td > .fc-day-grid-event {\n  margin-top: 2px;\n  /* a little bit more space before the first event */\n}\n.fc-mirror-skeleton tr:first-child > td > .fc-day-grid-event {\n  margin-top: 0;\n  /* except for mirror skeleton */\n}\n.fc-day-grid-event .fc-content {\n  /* force events to be one-line tall */\n  white-space: nowrap;\n  overflow: hidden;\n}\n.fc-day-grid-event .fc-time {\n  font-weight: bold;\n}\n\n/* resizer (cursor devices) */\n/* left resizer  */\n.fc-ltr .fc-day-grid-event.fc-allow-mouse-resize .fc-start-resizer,\n.fc-rtl .fc-day-grid-event.fc-allow-mouse-resize .fc-end-resizer {\n  margin-left: -2px;\n  /* to the day cell's edge */\n}\n\n/* right resizer */\n.fc-ltr .fc-day-grid-event.fc-allow-mouse-resize .fc-end-resizer,\n.fc-rtl .fc-day-grid-event.fc-allow-mouse-resize .fc-start-resizer {\n  margin-right: -2px;\n  /* to the day cell's edge */\n}\n\n/* Event Limiting\n--------------------------------------------------------------------------------------------------*/\n/* \"more\" link that represents hidden events */\na.fc-more {\n  margin: 1px 3px;\n  font-size: 0.85em;\n  cursor: pointer;\n  text-decoration: none;\n}\na.fc-more:hover {\n  text-decoration: underline;\n}\n.fc-limited {\n  /* rows and cells that are hidden because of a \"more\" link */\n  display: none;\n}\n\n/* popover that appears when \"more\" link is clicked */\n.fc-day-grid .fc-row {\n  z-index: 1;\n  /* make the \"more\" popover one higher than this */\n}\n.fc-more-popover {\n  z-index: 2;\n  width: 220px;\n}\n.fc-more-popover .fc-event-container {\n  padding: 10px;\n}\n\n/* Now Indicator\n--------------------------------------------------------------------------------------------------*/\n.fc-now-indicator {\n  position: absolute;\n  border: 0 solid red;\n}\n\n/* Utilities\n--------------------------------------------------------------------------------------------------*/\n.fc-unselectable {\n  -webkit-user-select: none;\n  -khtml-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  -webkit-touch-callout: none;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n\n/*\nTODO: more distinction between this file and common.css\n*/\n/* Colors\n--------------------------------------------------------------------------------------------------*/\n.fc-unthemed th,\n.fc-unthemed td,\n.fc-unthemed thead,\n.fc-unthemed tbody,\n.fc-unthemed .fc-divider,\n.fc-unthemed .fc-row,\n.fc-unthemed .fc-content,\n.fc-unthemed .fc-popover,\n.fc-unthemed .fc-list-view,\n.fc-unthemed .fc-list-heading td {\n  border-color: #ddd;\n}\n.fc-unthemed .fc-popover {\n  background-color: #fff;\n}\n.fc-unthemed .fc-divider,\n.fc-unthemed .fc-popover .fc-header,\n.fc-unthemed .fc-list-heading td {\n  background: #eee;\n}\n.fc-unthemed td.fc-today {\n  background: #fcf8e3;\n}\n.fc-unthemed .fc-disabled-day {\n  background: #d7d7d7;\n  opacity: 0.3;\n}\n\n/* Icons\n--------------------------------------------------------------------------------------------------\nfrom https://feathericons.com/ and built with IcoMoon\n*/\n@font-face {\n  font-family: \"fcicons\";\n  src: url(\"data:application/x-font-ttf;charset=utf-8;base64,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\") format(\"truetype\");\n  font-weight: normal;\n  font-style: normal;\n}\n.fc-icon {\n  /* use !important to prevent issues with browser extensions that change fonts */\n  font-family: \"fcicons\" !important;\n  speak: none;\n  font-style: normal;\n  font-weight: normal;\n  font-variant: normal;\n  text-transform: none;\n  line-height: 1;\n  /* Better Font Rendering =========== */\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n}\n.fc-icon-chevron-left:before {\n  content: \"\\E900\";\n}\n.fc-icon-chevron-right:before {\n  content: \"\\E901\";\n}\n.fc-icon-chevrons-left:before {\n  content: \"\\E902\";\n}\n.fc-icon-chevrons-right:before {\n  content: \"\\E903\";\n}\n.fc-icon-minus-square:before {\n  content: \"\\E904\";\n}\n.fc-icon-plus-square:before {\n  content: \"\\E905\";\n}\n.fc-icon-x:before {\n  content: \"\\E906\";\n}\n.fc-icon {\n  display: inline-block;\n  width: 1em;\n  height: 1em;\n  text-align: center;\n}\n\n/* Buttons\n--------------------------------------------------------------------------------------------------\nLots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css\n*/\n/* reset */\n.fc-button {\n  border-radius: 0;\n  overflow: visible;\n  text-transform: none;\n  margin: 0;\n  font-family: inherit;\n  font-size: inherit;\n  line-height: inherit;\n}\n.fc-button:focus {\n  outline: 1px dotted;\n  outline: 5px auto -webkit-focus-ring-color;\n}\n.fc-button {\n  -webkit-appearance: button;\n}\n.fc-button:not(:disabled) {\n  cursor: pointer;\n}\n.fc-button::-moz-focus-inner {\n  padding: 0;\n  border-style: none;\n}\n\n/* theme */\n.fc-button {\n  display: inline-block;\n  font-weight: 400;\n  color: #212529;\n  text-align: center;\n  vertical-align: middle;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  background-color: transparent;\n  border: 1px solid transparent;\n  padding: 0.4em 0.65em;\n  font-size: 1em;\n  line-height: 1.5;\n  border-radius: 0.25em;\n}\n.fc-button:hover {\n  color: #212529;\n  text-decoration: none;\n}\n.fc-button:focus {\n  outline: 0;\n  -webkit-box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25);\n  box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25);\n}\n.fc-button:disabled {\n  opacity: 0.65;\n}\n\n/* \"primary\" coloring */\n.fc-button-primary {\n  color: #fff;\n  background-color: #2C3E50;\n  border-color: #2C3E50;\n}\n.fc-button-primary:hover {\n  color: #fff;\n  background-color: #1e2b37;\n  border-color: #1a252f;\n}\n.fc-button-primary:focus {\n  -webkit-box-shadow: 0 0 0 0.2rem rgba(76, 91, 106, 0.5);\n  box-shadow: 0 0 0 0.2rem rgba(76, 91, 106, 0.5);\n}\n.fc-button-primary:disabled {\n  color: #fff;\n  background-color: #2C3E50;\n  border-color: #2C3E50;\n}\n.fc-button-primary:not(:disabled):active,\n.fc-button-primary:not(:disabled).fc-button-active {\n  color: #fff;\n  background-color: #1a252f;\n  border-color: #151e27;\n}\n.fc-button-primary:not(:disabled):active:focus,\n.fc-button-primary:not(:disabled).fc-button-active:focus {\n  -webkit-box-shadow: 0 0 0 0.2rem rgba(76, 91, 106, 0.5);\n  box-shadow: 0 0 0 0.2rem rgba(76, 91, 106, 0.5);\n}\n\n/* icons within buttons */\n.fc-button .fc-icon {\n  vertical-align: middle;\n  font-size: 1.5em;\n}\n\n/* Buttons Groups\n--------------------------------------------------------------------------------------------------*/\n.fc-button-group {\n  position: relative;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  vertical-align: middle;\n}\n.fc-button-group > .fc-button {\n  position: relative;\n  -webkit-box-flex: 1;\n  -ms-flex: 1 1 auto;\n  flex: 1 1 auto;\n}\n.fc-button-group > .fc-button:hover {\n  z-index: 1;\n}\n.fc-button-group > .fc-button:focus,\n.fc-button-group > .fc-button:active,\n.fc-button-group > .fc-button.fc-button-active {\n  z-index: 1;\n}\n.fc-button-group > .fc-button:not(:first-child) {\n  margin-left: -1px;\n}\n.fc-button-group > .fc-button:not(:last-child) {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n.fc-button-group > .fc-button:not(:first-child) {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n}\n\n/* Popover\n--------------------------------------------------------------------------------------------------*/\n.fc-unthemed .fc-popover {\n  border-width: 1px;\n  border-style: solid;\n}\n\n/* List View\n--------------------------------------------------------------------------------------------------*/\n.fc-unthemed .fc-list-item:hover td {\n  background-color: #f5f5f5;\n}\n\n/* Toolbar\n--------------------------------------------------------------------------------------------------*/\n.fc-toolbar {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.fc-toolbar.fc-header-toolbar {\n  margin-bottom: 1.5em;\n}\n.fc-toolbar.fc-footer-toolbar {\n  margin-top: 1.5em;\n}\n\n/* inner content */\n.fc-toolbar > * > :not(:first-child) {\n  margin-left: 0.75em;\n}\n.fc-toolbar h2 {\n  font-size: 1.75em;\n  margin: 0;\n}\n\n/* View Structure\n--------------------------------------------------------------------------------------------------*/\n.fc-view-container {\n  position: relative;\n}\n\n/* undo twitter bootstrap's box-sizing rules. normalizes positioning techniques */\n/* don't do this for the toolbar because we'll want bootstrap to style those buttons as some pt */\n.fc-view-container *,\n.fc-view-container *:before,\n.fc-view-container *:after {\n  -webkit-box-sizing: content-box;\n  -moz-box-sizing: content-box;\n  box-sizing: content-box;\n}\n.fc-view,\n.fc-view > table {\n  /* so dragged elements can be above the view's main element */\n  position: relative;\n  z-index: 1;\n}\n@media print {\n.fc {\n    max-width: 100% !important;\n}\n\n  /* Global Event Restyling\n  --------------------------------------------------------------------------------------------------*/\n.fc-event {\n    background: #fff !important;\n    color: #000 !important;\n    page-break-inside: avoid;\n}\n.fc-event .fc-resizer {\n    display: none;\n}\n\n  /* Table & Day-Row Restyling\n  --------------------------------------------------------------------------------------------------*/\n.fc th,\n.fc td,\n.fc hr,\n.fc thead,\n.fc tbody,\n.fc-row {\n    border-color: #ccc !important;\n    background: #fff !important;\n}\n\n  /* kill the overlaid, absolutely-positioned components */\n  /* common... */\n.fc-bg,\n.fc-bgevent-skeleton,\n.fc-highlight-skeleton,\n.fc-mirror-skeleton,\n.fc-bgevent-container,\n.fc-business-container,\n.fc-highlight-container,\n.fc-mirror-container {\n    display: none;\n}\n\n  /* don't force a min-height on rows (for DayGrid) */\n.fc tbody .fc-row {\n    height: auto !important;\n    /* undo height that JS set in distributeHeight */\n    min-height: 0 !important;\n    /* undo the min-height from each view's specific stylesheet */\n}\n.fc tbody .fc-row .fc-content-skeleton {\n    position: static;\n    /* undo .fc-rigid */\n    padding-bottom: 0 !important;\n    /* use a more border-friendly method for this... */\n}\n.fc tbody .fc-row .fc-content-skeleton tbody tr:last-child td {\n    /* only works in newer browsers */\n    padding-bottom: 1em;\n    /* ...gives space within the skeleton. also ensures min height in a way */\n}\n.fc tbody .fc-row .fc-content-skeleton table {\n    /* provides a min-height for the row, but only effective for IE, which exaggerates this value,\n       making it look more like 3em. for other browers, it will already be this tall */\n    height: 1em;\n}\n\n  /* Undo month-view event limiting. Display all events and hide the \"more\" links\n  --------------------------------------------------------------------------------------------------*/\n.fc-more-cell,\n.fc-more {\n    display: none !important;\n}\n.fc tr.fc-limited {\n    display: table-row !important;\n}\n.fc td.fc-limited {\n    display: table-cell !important;\n}\n.fc-popover {\n    display: none;\n    /* never display the \"more..\" popover in print mode */\n}\n\n  /* TimeGrid Restyling\n  --------------------------------------------------------------------------------------------------*/\n  /* undo the min-height 100% trick used to fill the container's height */\n.fc-time-grid {\n    min-height: 0 !important;\n}\n\n  /* don't display the side axis at all (\"all-day\" and time cells) */\n.fc-timeGrid-view .fc-axis {\n    display: none;\n}\n\n  /* don't display the horizontal lines */\n.fc-slats,\n.fc-time-grid hr {\n    /* this hr is used when height is underused and needs to be filled */\n    display: none !important;\n    /* important overrides inline declaration */\n}\n\n  /* let the container that holds the events be naturally positioned and create real height */\n.fc-time-grid .fc-content-skeleton {\n    position: static;\n}\n\n  /* in case there are no events, we still want some height */\n.fc-time-grid .fc-content-skeleton table {\n    height: 4em;\n}\n\n  /* kill the horizontal spacing made by the event container. event margins will be done below */\n.fc-time-grid .fc-event-container {\n    margin: 0 !important;\n}\n\n  /* TimeGrid *Event* Restyling\n  --------------------------------------------------------------------------------------------------*/\n  /* naturally position events, vertically stacking them */\n.fc-time-grid .fc-event {\n    position: static !important;\n    margin: 3px 2px !important;\n}\n\n  /* for events that continue to a future day, give the bottom border back */\n.fc-time-grid .fc-event.fc-not-end {\n    border-bottom-width: 1px !important;\n}\n\n  /* indicate the event continues via \"...\" text */\n.fc-time-grid .fc-event.fc-not-end:after {\n    content: \"...\";\n}\n\n  /* for events that are continuations from previous days, give the top border back */\n.fc-time-grid .fc-event.fc-not-start {\n    border-top-width: 1px !important;\n}\n\n  /* indicate the event is a continuation via \"...\" text */\n.fc-time-grid .fc-event.fc-not-start:before {\n    content: \"...\";\n}\n\n  /* time */\n  /* undo a previous declaration and let the time text span to a second line */\n.fc-time-grid .fc-event .fc-time {\n    white-space: normal !important;\n}\n\n  /* hide the the time that is normally displayed... */\n.fc-time-grid .fc-event .fc-time span {\n    display: none;\n}\n\n  /* ...replace it with a more verbose version (includes AM/PM) stored in an html attribute */\n.fc-time-grid .fc-event .fc-time:after {\n    content: attr(data-full);\n}\n\n  /* Vertical Scroller & Containers\n  --------------------------------------------------------------------------------------------------*/\n  /* kill the scrollbars and allow natural height */\n.fc-scroller,\n.fc-day-grid-container,\n.fc-time-grid-container {\n    /* */\n    overflow: visible !important;\n    height: auto !important;\n}\n\n  /* kill the horizontal border/padding used to compensate for scrollbars */\n.fc-row {\n    border: 0 !important;\n    margin: 0 !important;\n}\n\n  /* Button Controls\n  --------------------------------------------------------------------------------------------------*/\n.fc-button-group,\n.fc button {\n    display: none;\n    /* don't display any button-related controls */\n}\n}\n", ""]);
+exports.push([module.i, "@charset \"UTF-8\";\n.fc {\r\n  direction: ltr;\r\n  text-align: left;\n}\n.fc-rtl {\r\n  text-align: right;\n}\nbody .fc {\r\n  /* extra precedence to overcome jqui */\r\n  font-size: 1em;\n}\r\n\r\n/* Colors\r\n--------------------------------------------------------------------------------------------------*/\n.fc-highlight {\r\n  /* when user is selecting cells */\r\n  background: #bce8f1;\r\n  opacity: 0.3;\n}\n.fc-bgevent {\r\n  /* default look for background events */\r\n  background: #8fdf82;\r\n  opacity: 0.3;\n}\n.fc-nonbusiness {\r\n  /* default look for non-business-hours areas */\r\n  /* will inherit .fc-bgevent's styles */\r\n  background: #d7d7d7;\n}\r\n\r\n/* Popover\r\n--------------------------------------------------------------------------------------------------*/\n.fc-popover {\r\n  position: absolute;\r\n  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);\n}\n.fc-popover .fc-header {\r\n  /* TODO: be more consistent with fc-head/fc-body */\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: space-between;\r\n  align-items: center;\r\n  padding: 2px 4px;\n}\n.fc-rtl .fc-popover .fc-header {\r\n  flex-direction: row-reverse;\n}\n.fc-popover .fc-header .fc-title {\r\n  margin: 0 2px;\n}\n.fc-popover .fc-header .fc-close {\r\n  cursor: pointer;\r\n  opacity: 0.65;\r\n  font-size: 1.1em;\n}\r\n\r\n/* Misc Reusable Components\r\n--------------------------------------------------------------------------------------------------*/\n.fc-divider {\r\n  border-style: solid;\r\n  border-width: 1px;\n}\nhr.fc-divider {\r\n  height: 0;\r\n  margin: 0;\r\n  padding: 0 0 2px;\r\n  /* height is unreliable across browsers, so use padding */\r\n  border-width: 1px 0;\n}\n.fc-bg,\r\n.fc-bgevent-skeleton,\r\n.fc-highlight-skeleton,\r\n.fc-mirror-skeleton {\r\n  /* these element should always cling to top-left/right corners */\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\n}\n.fc-bg {\r\n  bottom: 0;\r\n  /* strech bg to bottom edge */\n}\n.fc-bg table {\r\n  height: 100%;\r\n  /* strech bg to bottom edge */\n}\r\n\r\n/* Tables\r\n--------------------------------------------------------------------------------------------------*/\n.fc table {\r\n  width: 100%;\r\n  box-sizing: border-box;\r\n  /* fix scrollbar issue in firefox */\r\n  table-layout: fixed;\r\n  border-collapse: collapse;\r\n  border-spacing: 0;\r\n  font-size: 1em;\r\n  /* normalize cross-browser */\n}\n.fc th {\r\n  text-align: center;\n}\n.fc th,\r\n.fc td {\r\n  border-style: solid;\r\n  border-width: 1px;\r\n  padding: 0;\r\n  vertical-align: top;\n}\n.fc td.fc-today {\r\n  border-style: double;\r\n  /* overcome neighboring borders */\n}\r\n\r\n/* Internal Nav Links\r\n--------------------------------------------------------------------------------------------------*/\na[data-goto] {\r\n  cursor: pointer;\n}\na[data-goto]:hover {\r\n  text-decoration: underline;\n}\r\n\r\n/* Fake Table Rows\r\n--------------------------------------------------------------------------------------------------*/\n.fc .fc-row {\r\n  /* extra precedence to overcome themes forcing a 1px border */\r\n  /* no visible border by default. but make available if need be (scrollbar width compensation) */\r\n  border-style: solid;\r\n  border-width: 0;\n}\n.fc-row table {\r\n  /* don't put left/right border on anything within a fake row.\r\n     the outer tbody will worry about this */\r\n  border-left: 0 hidden transparent;\r\n  border-right: 0 hidden transparent;\r\n  /* no bottom borders on rows */\r\n  border-bottom: 0 hidden transparent;\n}\n.fc-row:first-child table {\r\n  border-top: 0 hidden transparent;\r\n  /* no top border on first row */\n}\r\n\r\n/* Day Row (used within the header and the DayGrid)\r\n--------------------------------------------------------------------------------------------------*/\n.fc-row {\r\n  position: relative;\n}\n.fc-row .fc-bg {\r\n  z-index: 1;\n}\r\n\r\n/* highlighting cells & background event skeleton */\n.fc-row .fc-bgevent-skeleton,\r\n.fc-row .fc-highlight-skeleton {\r\n  bottom: 0;\r\n  /* stretch skeleton to bottom of row */\n}\n.fc-row .fc-bgevent-skeleton table,\r\n.fc-row .fc-highlight-skeleton table {\r\n  height: 100%;\r\n  /* stretch skeleton to bottom of row */\n}\n.fc-row .fc-highlight-skeleton td,\r\n.fc-row .fc-bgevent-skeleton td {\r\n  border-color: transparent;\n}\n.fc-row .fc-bgevent-skeleton {\r\n  z-index: 2;\n}\n.fc-row .fc-highlight-skeleton {\r\n  z-index: 3;\n}\r\n\r\n/*\r\nrow content (which contains day/week numbers and events) as well as \"mirror\" (which contains\r\ntemporary rendered events).\r\n*/\n.fc-row .fc-content-skeleton {\r\n  position: relative;\r\n  z-index: 4;\r\n  padding-bottom: 2px;\r\n  /* matches the space above the events */\n}\n.fc-row .fc-mirror-skeleton {\r\n  z-index: 5;\n}\n.fc .fc-row .fc-content-skeleton table,\r\n.fc .fc-row .fc-content-skeleton td,\r\n.fc .fc-row .fc-mirror-skeleton td {\r\n  /* see-through to the background below */\r\n  /* extra precedence to prevent theme-provided backgrounds */\r\n  background: none;\r\n  /* in case <td>s are globally styled */\r\n  border-color: transparent;\n}\n.fc-row .fc-content-skeleton td,\r\n.fc-row .fc-mirror-skeleton td {\r\n  /* don't put a border between events and/or the day number */\r\n  border-bottom: 0;\n}\n.fc-row .fc-content-skeleton tbody td,\r\n.fc-row .fc-mirror-skeleton tbody td {\r\n  /* don't put a border between event cells */\r\n  border-top: 0;\n}\r\n\r\n/* Scrolling Container\r\n--------------------------------------------------------------------------------------------------*/\n.fc-scroller {\r\n  -webkit-overflow-scrolling: touch;\n}\r\n\r\n/* TODO: move to timegrid/daygrid */\n.fc-scroller > .fc-day-grid,\r\n.fc-scroller > .fc-time-grid {\r\n  position: relative;\r\n  /* re-scope all positions */\r\n  width: 100%;\r\n  /* hack to force re-sizing this inner element when scrollbars appear/disappear */\n}\r\n\r\n/* Global Event Styles\r\n--------------------------------------------------------------------------------------------------*/\n.fc-event {\r\n  position: relative;\r\n  /* for resize handle and other inner positioning */\r\n  display: block;\r\n  /* make the <a> tag block */\r\n  font-size: 0.85em;\r\n  line-height: 1.4;\r\n  border-radius: 3px;\r\n  border: 1px solid #3788d8;\n}\n.fc-event,\r\n.fc-event-dot {\r\n  background-color: #3788d8;\r\n  /* default BACKGROUND color */\n}\n.fc-event,\r\n.fc-event:hover {\r\n  color: #fff;\r\n  /* default TEXT color */\r\n  text-decoration: none;\r\n  /* if <a> has an href */\n}\n.fc-event[href],\r\n.fc-event.fc-draggable {\r\n  cursor: pointer;\r\n  /* give events with links and draggable events a hand mouse pointer */\n}\n.fc-not-allowed,\r\n.fc-not-allowed .fc-event {\r\n  /* to override an event's custom cursor */\r\n  cursor: not-allowed;\n}\n.fc-event .fc-content {\r\n  position: relative;\r\n  z-index: 2;\n}\r\n\r\n/* resizer (cursor AND touch devices) */\n.fc-event .fc-resizer {\r\n  position: absolute;\r\n  z-index: 4;\n}\r\n\r\n/* resizer (touch devices) */\n.fc-event .fc-resizer {\r\n  display: none;\n}\n.fc-event.fc-allow-mouse-resize .fc-resizer,\r\n.fc-event.fc-selected .fc-resizer {\r\n  /* only show when hovering or selected (with touch) */\r\n  display: block;\n}\r\n\r\n/* hit area */\n.fc-event.fc-selected .fc-resizer:before {\r\n  /* 40x40 touch area */\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: 9999;\r\n  /* user of this util can scope within a lower z-index */\r\n  top: 50%;\r\n  left: 50%;\r\n  width: 40px;\r\n  height: 40px;\r\n  margin-left: -20px;\r\n  margin-top: -20px;\n}\r\n\r\n/* Event Selection (only for touch devices)\r\n--------------------------------------------------------------------------------------------------*/\n.fc-event.fc-selected {\r\n  z-index: 9999 !important;\r\n  /* overcomes inline z-index */\r\n  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);\n}\n.fc-event.fc-selected:after {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: 1;\r\n  /* same z-index as fc-bg, behind text */\r\n  /* overcome the borders */\r\n  top: -1px;\r\n  right: -1px;\r\n  bottom: -1px;\r\n  left: -1px;\r\n  /* darkening effect */\r\n  background: #000;\r\n  opacity: 0.25;\n}\r\n\r\n/* Event Dragging\r\n--------------------------------------------------------------------------------------------------*/\n.fc-event.fc-dragging.fc-selected {\r\n  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);\n}\n.fc-event.fc-dragging:not(.fc-selected) {\r\n  opacity: 0.75;\n}\r\n\r\n/* Horizontal Events\r\n--------------------------------------------------------------------------------------------------*/\r\n/* bigger touch area when selected */\n.fc-h-event.fc-selected:before {\r\n  content: \"\";\r\n  position: absolute;\r\n  z-index: 3;\r\n  /* below resizers */\r\n  top: -10px;\r\n  bottom: -10px;\r\n  left: 0;\r\n  right: 0;\n}\r\n\r\n/* events that are continuing to/from another week. kill rounded corners and butt up against edge */\n.fc-ltr .fc-h-event.fc-not-start,\r\n.fc-rtl .fc-h-event.fc-not-end {\r\n  margin-left: 0;\r\n  border-left-width: 0;\r\n  padding-left: 1px;\r\n  /* replace the border with padding */\r\n  border-top-left-radius: 0;\r\n  border-bottom-left-radius: 0;\n}\n.fc-ltr .fc-h-event.fc-not-end,\r\n.fc-rtl .fc-h-event.fc-not-start {\r\n  margin-right: 0;\r\n  border-right-width: 0;\r\n  padding-right: 1px;\r\n  /* replace the border with padding */\r\n  border-top-right-radius: 0;\r\n  border-bottom-right-radius: 0;\n}\r\n\r\n/* resizer (cursor AND touch devices) */\r\n/* left resizer  */\n.fc-ltr .fc-h-event .fc-start-resizer,\r\n.fc-rtl .fc-h-event .fc-end-resizer {\r\n  cursor: w-resize;\r\n  left: -1px;\r\n  /* overcome border */\n}\r\n\r\n/* right resizer */\n.fc-ltr .fc-h-event .fc-end-resizer,\r\n.fc-rtl .fc-h-event .fc-start-resizer {\r\n  cursor: e-resize;\r\n  right: -1px;\r\n  /* overcome border */\n}\r\n\r\n/* resizer (mouse devices) */\n.fc-h-event.fc-allow-mouse-resize .fc-resizer {\r\n  width: 7px;\r\n  top: -1px;\r\n  /* overcome top border */\r\n  bottom: -1px;\r\n  /* overcome bottom border */\n}\r\n\r\n/* resizer (touch devices) */\n.fc-h-event.fc-selected .fc-resizer {\r\n  /* 8x8 little dot */\r\n  border-radius: 4px;\r\n  border-width: 1px;\r\n  width: 6px;\r\n  height: 6px;\r\n  border-style: solid;\r\n  border-color: inherit;\r\n  background: #fff;\r\n  /* vertically center */\r\n  top: 50%;\r\n  margin-top: -4px;\n}\r\n\r\n/* left resizer  */\n.fc-ltr .fc-h-event.fc-selected .fc-start-resizer,\r\n.fc-rtl .fc-h-event.fc-selected .fc-end-resizer {\r\n  margin-left: -4px;\r\n  /* centers the 8x8 dot on the left edge */\n}\r\n\r\n/* right resizer */\n.fc-ltr .fc-h-event.fc-selected .fc-end-resizer,\r\n.fc-rtl .fc-h-event.fc-selected .fc-start-resizer {\r\n  margin-right: -4px;\r\n  /* centers the 8x8 dot on the right edge */\n}\r\n\r\n/* DayGrid events\r\n----------------------------------------------------------------------------------------------------\r\nWe use the full \"fc-day-grid-event\" class instead of using descendants because the event won't\r\nbe a descendant of the grid when it is being dragged.\r\n*/\n.fc-day-grid-event {\r\n  margin: 1px 2px 0;\r\n  /* spacing between events and edges */\r\n  padding: 0 1px;\n}\ntr:first-child > td > .fc-day-grid-event {\r\n  margin-top: 2px;\r\n  /* a little bit more space before the first event */\n}\n.fc-mirror-skeleton tr:first-child > td > .fc-day-grid-event {\r\n  margin-top: 0;\r\n  /* except for mirror skeleton */\n}\n.fc-day-grid-event .fc-content {\r\n  /* force events to be one-line tall */\r\n  white-space: nowrap;\r\n  overflow: hidden;\n}\n.fc-day-grid-event .fc-time {\r\n  font-weight: bold;\n}\r\n\r\n/* resizer (cursor devices) */\r\n/* left resizer  */\n.fc-ltr .fc-day-grid-event.fc-allow-mouse-resize .fc-start-resizer,\r\n.fc-rtl .fc-day-grid-event.fc-allow-mouse-resize .fc-end-resizer {\r\n  margin-left: -2px;\r\n  /* to the day cell's edge */\n}\r\n\r\n/* right resizer */\n.fc-ltr .fc-day-grid-event.fc-allow-mouse-resize .fc-end-resizer,\r\n.fc-rtl .fc-day-grid-event.fc-allow-mouse-resize .fc-start-resizer {\r\n  margin-right: -2px;\r\n  /* to the day cell's edge */\n}\r\n\r\n/* Event Limiting\r\n--------------------------------------------------------------------------------------------------*/\r\n/* \"more\" link that represents hidden events */\na.fc-more {\r\n  margin: 1px 3px;\r\n  font-size: 0.85em;\r\n  cursor: pointer;\r\n  text-decoration: none;\n}\na.fc-more:hover {\r\n  text-decoration: underline;\n}\n.fc-limited {\r\n  /* rows and cells that are hidden because of a \"more\" link */\r\n  display: none;\n}\r\n\r\n/* popover that appears when \"more\" link is clicked */\n.fc-day-grid .fc-row {\r\n  z-index: 1;\r\n  /* make the \"more\" popover one higher than this */\n}\n.fc-more-popover {\r\n  z-index: 2;\r\n  width: 220px;\n}\n.fc-more-popover .fc-event-container {\r\n  padding: 10px;\n}\r\n\r\n/* Now Indicator\r\n--------------------------------------------------------------------------------------------------*/\n.fc-now-indicator {\r\n  position: absolute;\r\n  border: 0 solid red;\n}\r\n\r\n/* Utilities\r\n--------------------------------------------------------------------------------------------------*/\n.fc-unselectable {\r\n  -webkit-user-select: none;\r\n  -khtml-user-select: none;\r\n  -moz-user-select: none;\r\n  -ms-user-select: none;\r\n  user-select: none;\r\n  -webkit-touch-callout: none;\r\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\r\n\r\n/*\r\nTODO: more distinction between this file and common.css\r\n*/\r\n/* Colors\r\n--------------------------------------------------------------------------------------------------*/\n.fc-unthemed th,\r\n.fc-unthemed td,\r\n.fc-unthemed thead,\r\n.fc-unthemed tbody,\r\n.fc-unthemed .fc-divider,\r\n.fc-unthemed .fc-row,\r\n.fc-unthemed .fc-content,\r\n.fc-unthemed .fc-popover,\r\n.fc-unthemed .fc-list-view,\r\n.fc-unthemed .fc-list-heading td {\r\n  border-color: #ddd;\n}\n.fc-unthemed .fc-popover {\r\n  background-color: #fff;\n}\n.fc-unthemed .fc-divider,\r\n.fc-unthemed .fc-popover .fc-header,\r\n.fc-unthemed .fc-list-heading td {\r\n  background: #eee;\n}\n.fc-unthemed td.fc-today {\r\n  background: #fcf8e3;\n}\n.fc-unthemed .fc-disabled-day {\r\n  background: #d7d7d7;\r\n  opacity: 0.3;\n}\r\n\r\n/* Icons\r\n--------------------------------------------------------------------------------------------------\r\nfrom https://feathericons.com/ and built with IcoMoon\r\n*/\n@font-face {\r\n  font-family: \"fcicons\";\r\n  src: url(\"data:application/x-font-ttf;charset=utf-8;base64,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\") format(\"truetype\");\r\n  font-weight: normal;\r\n  font-style: normal;\n}\n.fc-icon {\r\n  /* use !important to prevent issues with browser extensions that change fonts */\r\n  font-family: \"fcicons\" !important;\r\n  speak: none;\r\n  font-style: normal;\r\n  font-weight: normal;\r\n  font-variant: normal;\r\n  text-transform: none;\r\n  line-height: 1;\r\n  /* Better Font Rendering =========== */\r\n  -webkit-font-smoothing: antialiased;\r\n  -moz-osx-font-smoothing: grayscale;\n}\n.fc-icon-chevron-left:before {\r\n  content: \"\\E900\";\n}\n.fc-icon-chevron-right:before {\r\n  content: \"\\E901\";\n}\n.fc-icon-chevrons-left:before {\r\n  content: \"\\E902\";\n}\n.fc-icon-chevrons-right:before {\r\n  content: \"\\E903\";\n}\n.fc-icon-minus-square:before {\r\n  content: \"\\E904\";\n}\n.fc-icon-plus-square:before {\r\n  content: \"\\E905\";\n}\n.fc-icon-x:before {\r\n  content: \"\\E906\";\n}\n.fc-icon {\r\n  display: inline-block;\r\n  width: 1em;\r\n  height: 1em;\r\n  text-align: center;\n}\r\n\r\n/* Buttons\r\n--------------------------------------------------------------------------------------------------\r\nLots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css\r\n*/\r\n/* reset */\n.fc-button {\r\n  border-radius: 0;\r\n  overflow: visible;\r\n  text-transform: none;\r\n  margin: 0;\r\n  font-family: inherit;\r\n  font-size: inherit;\r\n  line-height: inherit;\n}\n.fc-button:focus {\r\n  outline: 1px dotted;\r\n  outline: 5px auto -webkit-focus-ring-color;\n}\n.fc-button {\r\n  -webkit-appearance: button;\n}\n.fc-button:not(:disabled) {\r\n  cursor: pointer;\n}\n.fc-button::-moz-focus-inner {\r\n  padding: 0;\r\n  border-style: none;\n}\r\n\r\n/* theme */\n.fc-button {\r\n  display: inline-block;\r\n  font-weight: 400;\r\n  color: #212529;\r\n  text-align: center;\r\n  vertical-align: middle;\r\n  -webkit-user-select: none;\r\n  -moz-user-select: none;\r\n  -ms-user-select: none;\r\n  user-select: none;\r\n  background-color: transparent;\r\n  border: 1px solid transparent;\r\n  padding: 0.4em 0.65em;\r\n  font-size: 1em;\r\n  line-height: 1.5;\r\n  border-radius: 0.25em;\n}\n.fc-button:hover {\r\n  color: #212529;\r\n  text-decoration: none;\n}\n.fc-button:focus {\r\n  outline: 0;\r\n  -webkit-box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25);\r\n  box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25);\n}\n.fc-button:disabled {\r\n  opacity: 0.65;\n}\r\n\r\n/* \"primary\" coloring */\n.fc-button-primary {\r\n  color: #fff;\r\n  background-color: #2C3E50;\r\n  border-color: #2C3E50;\n}\n.fc-button-primary:hover {\r\n  color: #fff;\r\n  background-color: #1e2b37;\r\n  border-color: #1a252f;\n}\n.fc-button-primary:focus {\r\n  -webkit-box-shadow: 0 0 0 0.2rem rgba(76, 91, 106, 0.5);\r\n  box-shadow: 0 0 0 0.2rem rgba(76, 91, 106, 0.5);\n}\n.fc-button-primary:disabled {\r\n  color: #fff;\r\n  background-color: #2C3E50;\r\n  border-color: #2C3E50;\n}\n.fc-button-primary:not(:disabled):active,\r\n.fc-button-primary:not(:disabled).fc-button-active {\r\n  color: #fff;\r\n  background-color: #1a252f;\r\n  border-color: #151e27;\n}\n.fc-button-primary:not(:disabled):active:focus,\r\n.fc-button-primary:not(:disabled).fc-button-active:focus {\r\n  -webkit-box-shadow: 0 0 0 0.2rem rgba(76, 91, 106, 0.5);\r\n  box-shadow: 0 0 0 0.2rem rgba(76, 91, 106, 0.5);\n}\r\n\r\n/* icons within buttons */\n.fc-button .fc-icon {\r\n  vertical-align: middle;\r\n  font-size: 1.5em;\n}\r\n\r\n/* Buttons Groups\r\n--------------------------------------------------------------------------------------------------*/\n.fc-button-group {\r\n  position: relative;\r\n  display: -webkit-inline-box;\r\n  display: -ms-inline-flexbox;\r\n  display: inline-flex;\r\n  vertical-align: middle;\n}\n.fc-button-group > .fc-button {\r\n  position: relative;\r\n  -webkit-box-flex: 1;\r\n  -ms-flex: 1 1 auto;\r\n  flex: 1 1 auto;\n}\n.fc-button-group > .fc-button:hover {\r\n  z-index: 1;\n}\n.fc-button-group > .fc-button:focus,\r\n.fc-button-group > .fc-button:active,\r\n.fc-button-group > .fc-button.fc-button-active {\r\n  z-index: 1;\n}\n.fc-button-group > .fc-button:not(:first-child) {\r\n  margin-left: -1px;\n}\n.fc-button-group > .fc-button:not(:last-child) {\r\n  border-top-right-radius: 0;\r\n  border-bottom-right-radius: 0;\n}\n.fc-button-group > .fc-button:not(:first-child) {\r\n  border-top-left-radius: 0;\r\n  border-bottom-left-radius: 0;\n}\r\n\r\n/* Popover\r\n--------------------------------------------------------------------------------------------------*/\n.fc-unthemed .fc-popover {\r\n  border-width: 1px;\r\n  border-style: solid;\n}\r\n\r\n/* List View\r\n--------------------------------------------------------------------------------------------------*/\n.fc-unthemed .fc-list-item:hover td {\r\n  background-color: #f5f5f5;\n}\r\n\r\n/* Toolbar\r\n--------------------------------------------------------------------------------------------------*/\n.fc-toolbar {\r\n  display: flex;\r\n  justify-content: space-between;\r\n  align-items: center;\n}\n.fc-toolbar.fc-header-toolbar {\r\n  margin-bottom: 1.5em;\n}\n.fc-toolbar.fc-footer-toolbar {\r\n  margin-top: 1.5em;\n}\r\n\r\n/* inner content */\n.fc-toolbar > * > :not(:first-child) {\r\n  margin-left: 0.75em;\n}\n.fc-toolbar h2 {\r\n  font-size: 1.75em;\r\n  margin: 0;\n}\r\n\r\n/* View Structure\r\n--------------------------------------------------------------------------------------------------*/\n.fc-view-container {\r\n  position: relative;\n}\r\n\r\n/* undo twitter bootstrap's box-sizing rules. normalizes positioning techniques */\r\n/* don't do this for the toolbar because we'll want bootstrap to style those buttons as some pt */\n.fc-view-container *,\r\n.fc-view-container *:before,\r\n.fc-view-container *:after {\r\n  -webkit-box-sizing: content-box;\r\n  -moz-box-sizing: content-box;\r\n  box-sizing: content-box;\n}\n.fc-view,\r\n.fc-view > table {\r\n  /* so dragged elements can be above the view's main element */\r\n  position: relative;\r\n  z-index: 1;\n}\n@media print {\n.fc {\r\n    max-width: 100% !important;\n}\r\n\r\n  /* Global Event Restyling\r\n  --------------------------------------------------------------------------------------------------*/\n.fc-event {\r\n    background: #fff !important;\r\n    color: #000 !important;\r\n    page-break-inside: avoid;\n}\n.fc-event .fc-resizer {\r\n    display: none;\n}\r\n\r\n  /* Table & Day-Row Restyling\r\n  --------------------------------------------------------------------------------------------------*/\n.fc th,\r\n.fc td,\r\n.fc hr,\r\n.fc thead,\r\n.fc tbody,\r\n.fc-row {\r\n    border-color: #ccc !important;\r\n    background: #fff !important;\n}\r\n\r\n  /* kill the overlaid, absolutely-positioned components */\r\n  /* common... */\n.fc-bg,\r\n.fc-bgevent-skeleton,\r\n.fc-highlight-skeleton,\r\n.fc-mirror-skeleton,\r\n.fc-bgevent-container,\r\n.fc-business-container,\r\n.fc-highlight-container,\r\n.fc-mirror-container {\r\n    display: none;\n}\r\n\r\n  /* don't force a min-height on rows (for DayGrid) */\n.fc tbody .fc-row {\r\n    height: auto !important;\r\n    /* undo height that JS set in distributeHeight */\r\n    min-height: 0 !important;\r\n    /* undo the min-height from each view's specific stylesheet */\n}\n.fc tbody .fc-row .fc-content-skeleton {\r\n    position: static;\r\n    /* undo .fc-rigid */\r\n    padding-bottom: 0 !important;\r\n    /* use a more border-friendly method for this... */\n}\n.fc tbody .fc-row .fc-content-skeleton tbody tr:last-child td {\r\n    /* only works in newer browsers */\r\n    padding-bottom: 1em;\r\n    /* ...gives space within the skeleton. also ensures min height in a way */\n}\n.fc tbody .fc-row .fc-content-skeleton table {\r\n    /* provides a min-height for the row, but only effective for IE, which exaggerates this value,\r\n       making it look more like 3em. for other browers, it will already be this tall */\r\n    height: 1em;\n}\r\n\r\n  /* Undo month-view event limiting. Display all events and hide the \"more\" links\r\n  --------------------------------------------------------------------------------------------------*/\n.fc-more-cell,\r\n.fc-more {\r\n    display: none !important;\n}\n.fc tr.fc-limited {\r\n    display: table-row !important;\n}\n.fc td.fc-limited {\r\n    display: table-cell !important;\n}\n.fc-popover {\r\n    display: none;\r\n    /* never display the \"more..\" popover in print mode */\n}\r\n\r\n  /* TimeGrid Restyling\r\n  --------------------------------------------------------------------------------------------------*/\r\n  /* undo the min-height 100% trick used to fill the container's height */\n.fc-time-grid {\r\n    min-height: 0 !important;\n}\r\n\r\n  /* don't display the side axis at all (\"all-day\" and time cells) */\n.fc-timeGrid-view .fc-axis {\r\n    display: none;\n}\r\n\r\n  /* don't display the horizontal lines */\n.fc-slats,\r\n.fc-time-grid hr {\r\n    /* this hr is used when height is underused and needs to be filled */\r\n    display: none !important;\r\n    /* important overrides inline declaration */\n}\r\n\r\n  /* let the container that holds the events be naturally positioned and create real height */\n.fc-time-grid .fc-content-skeleton {\r\n    position: static;\n}\r\n\r\n  /* in case there are no events, we still want some height */\n.fc-time-grid .fc-content-skeleton table {\r\n    height: 4em;\n}\r\n\r\n  /* kill the horizontal spacing made by the event container. event margins will be done below */\n.fc-time-grid .fc-event-container {\r\n    margin: 0 !important;\n}\r\n\r\n  /* TimeGrid *Event* Restyling\r\n  --------------------------------------------------------------------------------------------------*/\r\n  /* naturally position events, vertically stacking them */\n.fc-time-grid .fc-event {\r\n    position: static !important;\r\n    margin: 3px 2px !important;\n}\r\n\r\n  /* for events that continue to a future day, give the bottom border back */\n.fc-time-grid .fc-event.fc-not-end {\r\n    border-bottom-width: 1px !important;\n}\r\n\r\n  /* indicate the event continues via \"...\" text */\n.fc-time-grid .fc-event.fc-not-end:after {\r\n    content: \"...\";\n}\r\n\r\n  /* for events that are continuations from previous days, give the top border back */\n.fc-time-grid .fc-event.fc-not-start {\r\n    border-top-width: 1px !important;\n}\r\n\r\n  /* indicate the event is a continuation via \"...\" text */\n.fc-time-grid .fc-event.fc-not-start:before {\r\n    content: \"...\";\n}\r\n\r\n  /* time */\r\n  /* undo a previous declaration and let the time text span to a second line */\n.fc-time-grid .fc-event .fc-time {\r\n    white-space: normal !important;\n}\r\n\r\n  /* hide the the time that is normally displayed... */\n.fc-time-grid .fc-event .fc-time span {\r\n    display: none;\n}\r\n\r\n  /* ...replace it with a more verbose version (includes AM/PM) stored in an html attribute */\n.fc-time-grid .fc-event .fc-time:after {\r\n    content: attr(data-full);\n}\r\n\r\n  /* Vertical Scroller & Containers\r\n  --------------------------------------------------------------------------------------------------*/\r\n  /* kill the scrollbars and allow natural height */\n.fc-scroller,\r\n.fc-day-grid-container,\r\n.fc-time-grid-container {\r\n    /* */\r\n    overflow: visible !important;\r\n    height: auto !important;\n}\r\n\r\n  /* kill the horizontal border/padding used to compensate for scrollbars */\n.fc-row {\r\n    border: 0 !important;\r\n    margin: 0 !important;\n}\r\n\r\n  /* Button Controls\r\n  --------------------------------------------------------------------------------------------------*/\n.fc-button-group,\r\n.fc button {\r\n    display: none;\r\n    /* don't display any button-related controls */\n}\n}\r\n", ""]);
 
 // exports
 
@@ -14453,7 +14468,7 @@ exports = module.exports = __webpack_require__(/*! ../../css-loader/lib/css-base
 
 
 // module
-exports.push([module.i, "/* DayGridView\n--------------------------------------------------------------------------------------------------*/\n/* day row structure */\n.fc-dayGridWeek-view .fc-content-skeleton,\n.fc-dayGridDay-view .fc-content-skeleton {\n  /* there may be week numbers in these views, so no padding-top */\n  padding-bottom: 1em;\n  /* ensure a space at bottom of cell for user selecting/clicking */\n}\n.fc-dayGrid-view .fc-body .fc-row {\n  min-height: 4em;\n  /* ensure that all rows are at least this tall */\n}\n\n/* a \"rigid\" row will take up a constant amount of height because content-skeleton is absolute */\n.fc-row.fc-rigid {\n  overflow: hidden;\n}\n.fc-row.fc-rigid .fc-content-skeleton {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n}\n\n/* week and day number styling */\n.fc-day-top.fc-other-month {\n  opacity: 0.3;\n}\n.fc-dayGrid-view .fc-week-number,\n.fc-dayGrid-view .fc-day-number {\n  padding: 2px;\n}\n.fc-dayGrid-view th.fc-week-number,\n.fc-dayGrid-view th.fc-day-number {\n  padding: 0 2px;\n  /* column headers can't have as much v space */\n}\n.fc-ltr .fc-dayGrid-view .fc-day-top .fc-day-number {\n  float: right;\n}\n.fc-rtl .fc-dayGrid-view .fc-day-top .fc-day-number {\n  float: left;\n}\n.fc-ltr .fc-dayGrid-view .fc-day-top .fc-week-number {\n  float: left;\n  border-radius: 0 0 3px 0;\n}\n.fc-rtl .fc-dayGrid-view .fc-day-top .fc-week-number {\n  float: right;\n  border-radius: 0 0 0 3px;\n}\n.fc-dayGrid-view .fc-day-top .fc-week-number {\n  min-width: 1.5em;\n  text-align: center;\n  background-color: #f2f2f2;\n  color: #808080;\n}\n\n/* when week/day number have own column */\n.fc-dayGrid-view td.fc-week-number {\n  text-align: center;\n}\n.fc-dayGrid-view td.fc-week-number > * {\n  /* work around the way we do column resizing and ensure a minimum width */\n  display: inline-block;\n  min-width: 1.25em;\n}\n", ""]);
+exports.push([module.i, "/* DayGridView\r\n--------------------------------------------------------------------------------------------------*/\r\n/* day row structure */\n.fc-dayGridWeek-view .fc-content-skeleton,\r\n.fc-dayGridDay-view .fc-content-skeleton {\r\n  /* there may be week numbers in these views, so no padding-top */\r\n  padding-bottom: 1em;\r\n  /* ensure a space at bottom of cell for user selecting/clicking */\n}\n.fc-dayGrid-view .fc-body .fc-row {\r\n  min-height: 4em;\r\n  /* ensure that all rows are at least this tall */\n}\r\n\r\n/* a \"rigid\" row will take up a constant amount of height because content-skeleton is absolute */\n.fc-row.fc-rigid {\r\n  overflow: hidden;\n}\n.fc-row.fc-rigid .fc-content-skeleton {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\n}\r\n\r\n/* week and day number styling */\n.fc-day-top.fc-other-month {\r\n  opacity: 0.3;\n}\n.fc-dayGrid-view .fc-week-number,\r\n.fc-dayGrid-view .fc-day-number {\r\n  padding: 2px;\n}\n.fc-dayGrid-view th.fc-week-number,\r\n.fc-dayGrid-view th.fc-day-number {\r\n  padding: 0 2px;\r\n  /* column headers can't have as much v space */\n}\n.fc-ltr .fc-dayGrid-view .fc-day-top .fc-day-number {\r\n  float: right;\n}\n.fc-rtl .fc-dayGrid-view .fc-day-top .fc-day-number {\r\n  float: left;\n}\n.fc-ltr .fc-dayGrid-view .fc-day-top .fc-week-number {\r\n  float: left;\r\n  border-radius: 0 0 3px 0;\n}\n.fc-rtl .fc-dayGrid-view .fc-day-top .fc-week-number {\r\n  float: right;\r\n  border-radius: 0 0 0 3px;\n}\n.fc-dayGrid-view .fc-day-top .fc-week-number {\r\n  min-width: 1.5em;\r\n  text-align: center;\r\n  background-color: #f2f2f2;\r\n  color: #808080;\n}\r\n\r\n/* when week/day number have own column */\n.fc-dayGrid-view td.fc-week-number {\r\n  text-align: center;\n}\n.fc-dayGrid-view td.fc-week-number > * {\r\n  /* work around the way we do column resizing and ensure a minimum width */\r\n  display: inline-block;\r\n  min-width: 1.25em;\n}\r\n", ""]);
 
 // exports
 
@@ -14472,7 +14487,7 @@ exports = module.exports = __webpack_require__(/*! ../../css-loader/lib/css-base
 
 
 // module
-exports.push([module.i, "/* List View\n--------------------------------------------------------------------------------------------------*/\n/* possibly reusable */\n.fc-event-dot {\n  display: inline-block;\n  width: 10px;\n  height: 10px;\n  border-radius: 5px;\n}\n\n/* view wrapper */\n.fc-rtl .fc-list-view {\n  direction: rtl;\n  /* unlike core views, leverage browser RTL */\n}\n.fc-list-view {\n  border-width: 1px;\n  border-style: solid;\n}\n\n/* table resets */\n.fc .fc-list-table {\n  table-layout: auto;\n  /* for shrinkwrapping cell content */\n}\n.fc-list-table td {\n  border-width: 1px 0 0;\n  padding: 8px 14px;\n}\n.fc-list-table tr:first-child td {\n  border-top-width: 0;\n}\n\n/* day headings with the list */\n.fc-list-heading {\n  border-bottom-width: 1px;\n}\n.fc-list-heading td {\n  font-weight: bold;\n}\n.fc-ltr .fc-list-heading-main {\n  float: left;\n}\n.fc-ltr .fc-list-heading-alt {\n  float: right;\n}\n.fc-rtl .fc-list-heading-main {\n  float: right;\n}\n.fc-rtl .fc-list-heading-alt {\n  float: left;\n}\n\n/* event list items */\n.fc-list-item.fc-has-url {\n  cursor: pointer;\n  /* whole row will be clickable */\n}\n.fc-list-item-marker,\n.fc-list-item-time {\n  white-space: nowrap;\n  width: 1px;\n}\n\n/* make the dot closer to the event title */\n.fc-ltr .fc-list-item-marker {\n  padding-right: 0;\n}\n.fc-rtl .fc-list-item-marker {\n  padding-left: 0;\n}\n.fc-list-item-title a {\n  /* every event title cell has an <a> tag */\n  text-decoration: none;\n  color: inherit;\n}\n.fc-list-item-title a[href]:hover {\n  /* hover effect only on titles with hrefs */\n  text-decoration: underline;\n}\n\n/* message when no events */\n.fc-list-empty-wrap2 {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n}\n.fc-list-empty-wrap1 {\n  width: 100%;\n  height: 100%;\n  display: table;\n}\n.fc-list-empty {\n  display: table-cell;\n  vertical-align: middle;\n  text-align: center;\n}\n.fc-unthemed .fc-list-empty {\n  /* theme will provide own background */\n  background-color: #eee;\n}", ""]);
+exports.push([module.i, "/* List View\r\n--------------------------------------------------------------------------------------------------*/\r\n/* possibly reusable */\n.fc-event-dot {\r\n  display: inline-block;\r\n  width: 10px;\r\n  height: 10px;\r\n  border-radius: 5px;\n}\r\n\r\n/* view wrapper */\n.fc-rtl .fc-list-view {\r\n  direction: rtl;\r\n  /* unlike core views, leverage browser RTL */\n}\n.fc-list-view {\r\n  border-width: 1px;\r\n  border-style: solid;\n}\r\n\r\n/* table resets */\n.fc .fc-list-table {\r\n  table-layout: auto;\r\n  /* for shrinkwrapping cell content */\n}\n.fc-list-table td {\r\n  border-width: 1px 0 0;\r\n  padding: 8px 14px;\n}\n.fc-list-table tr:first-child td {\r\n  border-top-width: 0;\n}\r\n\r\n/* day headings with the list */\n.fc-list-heading {\r\n  border-bottom-width: 1px;\n}\n.fc-list-heading td {\r\n  font-weight: bold;\n}\n.fc-ltr .fc-list-heading-main {\r\n  float: left;\n}\n.fc-ltr .fc-list-heading-alt {\r\n  float: right;\n}\n.fc-rtl .fc-list-heading-main {\r\n  float: right;\n}\n.fc-rtl .fc-list-heading-alt {\r\n  float: left;\n}\r\n\r\n/* event list items */\n.fc-list-item.fc-has-url {\r\n  cursor: pointer;\r\n  /* whole row will be clickable */\n}\n.fc-list-item-marker,\r\n.fc-list-item-time {\r\n  white-space: nowrap;\r\n  width: 1px;\n}\r\n\r\n/* make the dot closer to the event title */\n.fc-ltr .fc-list-item-marker {\r\n  padding-right: 0;\n}\n.fc-rtl .fc-list-item-marker {\r\n  padding-left: 0;\n}\n.fc-list-item-title a {\r\n  /* every event title cell has an <a> tag */\r\n  text-decoration: none;\r\n  color: inherit;\n}\n.fc-list-item-title a[href]:hover {\r\n  /* hover effect only on titles with hrefs */\r\n  text-decoration: underline;\n}\r\n\r\n/* message when no events */\n.fc-list-empty-wrap2 {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\n}\n.fc-list-empty-wrap1 {\r\n  width: 100%;\r\n  height: 100%;\r\n  display: table;\n}\n.fc-list-empty {\r\n  display: table-cell;\r\n  vertical-align: middle;\r\n  text-align: center;\n}\n.fc-unthemed .fc-list-empty {\r\n  /* theme will provide own background */\r\n  background-color: #eee;\n}", ""]);
 
 // exports
 
@@ -16514,6 +16529,32 @@ var render = function() {
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
+      _c("span", [_vm._v("Chọn cấu hình có sẵn")]),
+      _vm._v(" "),
+      _c(
+        "multiselect",
+        {
+          attrs: {
+            options: _vm.cau_hinh,
+            "close-on-select": true,
+            "show-labels": false,
+            placeholder: "Để trống nếu muốn thêm cấu hình mới",
+            "open-direction": "bottom"
+          },
+          model: {
+            value: _vm.value_cau_hinh,
+            callback: function($$v) {
+              _vm.value_cau_hinh = $$v
+            },
+            expression: "value_cau_hinh"
+          }
+        },
+        [_c("template", { slot: "noOptions" }, [_vm._v("Chưa chọn tòa")])],
+        2
+      ),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
       _c("mainform")
     ],
     1
@@ -16726,101 +16767,177 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _vm._m(1),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _vm._m(2),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _vm._m(3),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _vm._m(4),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c(
+      "div",
+      [
+        _c("label", { staticClass: "typo__label" }, [
+          _vm._v("Simple select / dropdown")
+        ]),
+        _vm._v(" "),
+        _c("multiselect", {
+          attrs: {
+            options: _vm.options,
+            multiple: true,
+            "close-on-select": false,
+            "clear-on-select": false,
+            "preserve-search": true,
+            placeholder: "Pick some",
+            label: "name",
+            "track-by": "name",
+            "preselect-first": true
+          },
+          scopedSlots: _vm._u([
+            {
+              key: "selection",
+              fn: function(ref) {
+                var values = ref.values
+                var search = ref.search
+                var isOpen = ref.isOpen
+                return [
+                  values.length && !isOpen
+                    ? _c("span", { staticClass: "multiselect__single" }, [
+                        _vm._v(_vm._s(values.length) + " options selected")
+                      ])
+                    : _vm._e()
+                ]
+              }
+            }
+          ]),
+          model: {
+            value: _vm.value,
+            callback: function($$v) {
+              _vm.value = $$v
+            },
+            expression: "value"
+          }
+        }),
+        _vm._v(" "),
+        _c("pre", { staticClass: "language-json" }, [
+          _c("code", [_vm._v(_vm._s(_vm.value))])
+        ])
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("button", { staticClass: "btn btn-info", attrs: { type: "submit" } }, [
+      _vm._v("Submit")
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "inputCPU" } }, [_vm._v("CPU")]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            type: "text",
-            id: "inputCPU",
-            "aria-describedby": "emailHelp",
-            placeholder: "Nhập CPU"
-          }
-        })
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "inputCPU" } }, [_vm._v("CPU")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: {
+          type: "text",
+          id: "inputCPU",
+          "aria-describedby": "emailHelp",
+          placeholder: "Nhập CPU"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "insertRam" } }, [_vm._v("Ram")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: {
+          type: "text",
+          id: "insertRam",
+          "aria-describedby": "emailHelp",
+          placeholder: "Nhập Ram"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "insertHarddrive" } }, [_vm._v("Ổ cứng")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: {
+          type: "text",
+          id: "insertHarddrive",
+          "aria-describedby": "emailHelp",
+          placeholder: "Nhập ổ cứng"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "insertSeats" }, [
+      _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+        _vm._v("Số chỗ ngồi")
       ]),
       _vm._v(" "),
-      _c("br"),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: {
+          type: "number",
+          id: "insertSeats",
+          "aria-describedby": "emailHelp",
+          placeholder: "Nhập số chõ ngồi"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "insertCpts" }, [
+      _c("label", { attrs: { for: "exampleInputEmail1" } }, [_vm._v("Số máy")]),
       _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "insertRam" } }, [_vm._v("Ram")]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            type: "text",
-            id: "insertRam",
-            "aria-describedby": "emailHelp",
-            placeholder: "Nhập Ram"
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "insertHarddrive" } }, [_vm._v("Ổ cứng")]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            type: "text",
-            id: "insertHarddrive",
-            "aria-describedby": "emailHelp",
-            placeholder: "Nhập ổ cứng"
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("div", { staticClass: "insertSeats" }, [
-        _c("label", { attrs: { for: "exampleInputEmail1" } }, [
-          _vm._v("Số chỗ ngồi")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            type: "number",
-            id: "insertSeats",
-            "aria-describedby": "emailHelp",
-            placeholder: "Nhập số chõ ngồi"
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("div", { staticClass: "insertCpts" }, [
-        _c("label", { attrs: { for: "exampleInputEmail1" } }, [
-          _vm._v("Số máy")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            type: "number",
-            id: "insertCpts",
-            "aria-describedby": "emailHelp",
-            placeholder: "Nhập số máy"
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("button", { staticClass: "btn btn-info", attrs: { type: "submit" } }, [
-        _vm._v("Submit")
-      ])
+      _c("input", {
+        staticClass: "form-control",
+        attrs: {
+          type: "number",
+          id: "insertCpts",
+          "aria-describedby": "emailHelp",
+          placeholder: "Nhập số máy"
+        }
+      })
     ])
   }
 ]
@@ -16900,9 +17017,11 @@ var render = function() {
                         attrs: {
                           options: _vm.toa,
                           "close-on-select": true,
-                          "show-labels": false,
+                          "show-labels": true,
                           placeholder: "Tòa",
-                          "open-direction": "bottom"
+                          "open-direction": "bottom",
+                          deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
+                          selectLabel: "Click hoặc nhấn Enter để chọn"
                         },
                         model: {
                           value: _vm.value_toa,
@@ -16923,9 +17042,11 @@ var render = function() {
                           attrs: {
                             options: _vm.tang,
                             "close-on-select": true,
-                            "show-labels": false,
+                            "show-labels": true,
                             placeholder: "Tầng",
-                            "open-direction": "bottom"
+                            "open-direction": "bottom",
+                            deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
+                            selectLabel: "Click hoặc nhấn Enter để chọn"
                           },
                           model: {
                             value: _vm.value_tang,
@@ -16953,9 +17074,11 @@ var render = function() {
                           attrs: {
                             options: _vm.lab,
                             "close-on-select": true,
-                            "show-labels": false,
+                            "show-labels": true,
                             placeholder: "Phòng",
-                            "open-direction": "bottom"
+                            "open-direction": "bottom",
+                            deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
+                            selectLabel: "Click hoặc nhấn Enter để chọn"
                           },
                           model: {
                             value: _vm.value_lab,
@@ -35669,8 +35792,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\QuocAnh\Desktop\project-2\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\QuocAnh\Desktop\project-2\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\quocc\Desktop\project-2\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\quocc\Desktop\project-2\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
