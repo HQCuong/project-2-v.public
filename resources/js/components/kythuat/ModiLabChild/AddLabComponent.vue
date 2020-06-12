@@ -1,15 +1,15 @@
 <template>
     <div>
         <span>Chọn tòa</span>
-        <multiselect v-model="value_toa" :options="toa" :close-on-select="true" :show-labels="false" placeholder="Tòa" open-direction="bottom"></multiselect>
+        <multiselect v-model="value_toa" :options="toa" :close-on-select="true" :show-labels="false" placeholder="Tòa" open-direction="bottom"></multiselect deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false">
         <br>
         <span>Chọn tầng</span>
-        <multiselect v-model="value_tang" :options="tang" :close-on-select="true" :show-labels="false" placeholder="Tầng" open-direction="bottom">
+        <multiselect v-model="value_tang" :options="tang" :close-on-select="true" :show-labels="false" placeholder="Tầng" open-direction="bottom" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false">
             <template slot="noOptions">Chưa chọn tòa</template>
         </multiselect>
         <br>
         <span>Chọn cấu hình có sẵn</span>
-        <multiselect v-model="value_cau_hinh" :options="cau_hinh" :close-on-select="true" :show-labels="false" placeholder="Để trống nếu muốn thêm cấu hình mới" open-direction="bottom">
+        <multiselect v-model="value_cau_hinh" :options="cau_hinh" :close-on-select="true" :show-labels="false" placeholder="Chọn cấu hình" open-direction="bottom" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false">
             <template slot="noOptions">Chưa chọn tòa</template>
         </multiselect>
         <br>
@@ -18,7 +18,7 @@
     </div>
 </template>
 <script>
-import mainform from './formaddlab/FormAddLab.vue';
+import mainform from './formaddlab/MainFormComponent.vue';
 
 export default {
     created() {
@@ -86,6 +86,10 @@ export default {
             } else if (this.toa != "" || this.toa != null || this.tang != "" || this.tang != null) {
                 this.show = true;
             }
+        },
+
+        value_cau_hinh() {
+
         }
     },
     components: {
