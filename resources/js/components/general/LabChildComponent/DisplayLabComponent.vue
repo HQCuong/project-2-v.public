@@ -11,7 +11,7 @@
                 <p class="teacher-seat">Bàn giáo viên</p>
             </div>
             <div class="student-area">
-                <div class="student-seat" v-for="item in may">
+                <div class="student-row" v-for="item in may">
                     <div class="each-student-seat" v-for="each in item">
                         <div v-if="each != ''" class="able">
                             <cptinfo></cptinfo>
@@ -74,7 +74,7 @@ export default {
     border: 1px solid black;
 }
 
-.student-seat {
+.student-row {
     display: block;
     display: flex;
     flex-direction: row;
@@ -85,15 +85,6 @@ export default {
     padding-top: 10px;
     padding-bottom: 10px;
     padding-right: 5px;
-}
-
-.able {
-    width: 100%;
-    border: 1px solid black;
-}
-
-.disable {
-    width: 100%;
 }
 
 @media (max-width: 520px) {

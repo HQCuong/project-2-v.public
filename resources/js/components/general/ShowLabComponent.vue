@@ -5,19 +5,19 @@
                 <div class="card">
                     <div class="card-body">
                         <span>Chọn tòa</span>
-                        <multiselect v-model="value_toa" :options="toa" :close-on-select="true" :show-labels="false" placeholder="Tòa" open-direction="bottom"></multiselect>
+                        <multiselect v-model="value_toa" :options="toa" :close-on-select="true" :show-labels="false" placeholder="Tòa" open-direction="bottom" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false"></multiselect>
                         <br>
                         <span>Chọn tầng</span>
-                        <multiselect v-model="value_tang" :options="tang" :close-on-select="true" :show-labels="false" placeholder="Tầng" open-direction="bottom">
+                        <multiselect v-model="value_tang" :options="tang" :close-on-select="true" :show-labels="false" placeholder="Tầng" open-direction="bottom" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false">
                             <template slot="noOptions">Chưa chọn tòa</template>
                         </multiselect>
                         <br>
                         <span>Chọn lab</span>
-                        <multiselect v-model="value_lab" :options="lab" :close-on-select="true" :show-labels="false" placeholder="Phòng" open-direction="bottom">
+                        <multiselect v-model="value_lab" :options="lab" :close-on-select="true" :show-labels="false" placeholder="Phòng" open-direction="bottom" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false">
                             <template slot="noOptions">Chưa chọn tầng</template>
                         </multiselect>
                         <br>
-                        <div v-if="show">
+                        <div v-if="show_main_view">
                             <!-- button -->
                             <mainbutton @change_current_view="change_current_view"></mainbutton>
                             <!-- hard ware -->
@@ -53,7 +53,7 @@ export default {
     },
     data() {
         return {
-            show: false,
+            show_main_view: false,
             current_view: true,
             value_tang: '',
             value_lab: '',
@@ -83,11 +83,11 @@ export default {
         value_toa() {
             this.value_tang = "";
             this.value_lab = "";
-            this.show = false;
+            this.show_main_view = false;
             // trong truong hop bo chon toa
             if (this.value_toa == "" || this.value_toa == null) {
                 this.tang = [];
-                this.show = false;
+                this.show_main_view = false;
                 return false;
             }
             // dung axios gui len lay so tang
@@ -96,11 +96,11 @@ export default {
 
         value_tang() {
             this.value_lab = "";
-            this.show = false;
+            this.show_main_view = false;
             // trong truong hop bo chon tang 
             if (this.value_tang == "" || this.value_tang == null) {
                 this.lab = [];
-                this.show = false;
+                this.show_main_view = false;
                 return false
             }
             // dung axios gui len lay so lab
@@ -110,9 +110,9 @@ export default {
         value_lab() {
             // trong truong hop bo chon lab
             if (this.value_lab == "" || this.value_lab == null) {
-                this.show = false;
+                this.show_main_view = false;
             } else if (this.toa != "" || this.toa != null || this.tang != "" || this.tang != null) {
-                this.show = true;
+                this.show_main_view = true;
             }
         }
 

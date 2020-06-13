@@ -3,7 +3,8 @@ import home from './components/HomeComponent.vue';
 import thong_tin_lab from './components/general/ShowLabComponent.vue';
 
 import quan_ly_lab from './components/kythuat/ModiLabComponent.vue';
-import cau_hinh_mon from './components/kythuat/CauHinhMonComponent.vue';
+import cau_hinh from './components/kythuat/CauHinhComponent.vue';
+import thiet_bi from './components/kythuat/ThietBiComponent.vue';
 
 import lich_gv from './components/giaovien/LichGiaoVienComponent.vue';
 
@@ -20,7 +21,8 @@ export default [
     { path: '/xem_thong_tin_lab', component: thong_tin_lab },
 
     { path: '/quan_ly_lab', component: quan_ly_lab },
-    { path: '/cau_hinh_mon', component: cau_hinh_mon },
+    { path: '/quan_ly_cau_hinh', component: cau_hinh },
+    { path: '/quan_ly_thiet_bi', component: thiet_bi },
 
     { path: '/xem_lich', component: lich_gv },
 

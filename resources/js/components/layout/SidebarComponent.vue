@@ -30,13 +30,19 @@
                 <li class="nav-item">
                     <router-link class="nav-link" to="/quan_ly_lab">
                         <i class="material-icons">laptop</i>
-                        <p>Tùy chỉnh Phòng lab</p>
+                        <p>Quản lý Phòng lab</p>
                     </router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link class="nav-link" to="/cau_hinh_mon">
+                    <router-link class="nav-link" to="/quan_ly_cau_hinh">
                         <i class="material-icons">laptop</i>
-                        <p>Cấu hình - môn</p>
+                        <p>Quản lý cấu hình</p>
+                    </router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link class="nav-link" to="/quan_ly_thiet_bi">
+                        <i class="material-icons">laptop</i>
+                        <p>Quản lý thiết bị</p>
                     </router-link>
                 </li>
                 <li class="nav-item">
