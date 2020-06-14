@@ -12201,7 +12201,7 @@ fieldset[disabled][disabled] .form-control,
 
 .is-focused [class^='bmd-label'],
 .is-focused [class*=' bmd-label'] {
-    color: #9c27b0;
+    color: #2196f3;
 }
 
 .is-focused .bmd-label-placeholder {

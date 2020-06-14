@@ -20,23 +20,32 @@
                 <label for="insert_vga">Card đồ họa</label>
                 <input type="text" class="form-control" id="insert_vga" aria-describedby="emailHelp" placeholder="Nhập card đồ họa">
             </div>
-			<br>
+            <br>
             <div class="form-group">
                 <label for="insert_seats">Số chỗ ngồi</label>
                 <input type="number" class="form-control" id="insert_seats" aria-describedby="emailHelp" placeholder="Nhập card đồ họa">
             </div>
-			<br>
+            <br>
             <div class="form-group">
                 <label for="insert_cpt">Số máy</label>
                 <input type="number" class="form-control" id="insert_cpt" aria-describedby="emailHelp" placeholder="Nhập card đồ họa">
             </div>
-			<br>
+            <br>
             <button type="submit" class="btn btn-info">Submit</button>
         </form>
     </div>
 </template>
 <script>
 export default {
+    mounted() {
+        // change label color
+        $(".form-group").addClass("bmd-form-group");
+        $("label").addClass("bmd-label-static"); 
+        $(".form-group").on("click", function() {
+            $(".form-group").removeClass("is-focused");
+            $(this).addClass("is-focused");
+        })
+    },
     data() {
         return {
 
@@ -45,7 +54,7 @@ export default {
     methods: {
         nameWithLang({ name, language }) {
             return `${name} — [${language}]`
-        }
+        },
     }
 }
 
