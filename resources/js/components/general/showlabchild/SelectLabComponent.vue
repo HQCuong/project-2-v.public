@@ -48,11 +48,11 @@ export default {
         value_toa() {
             this.value_tang = "";
             this.value_lab = "";
-            this.$emit('change_main_view', 0);
+            this.$emit('show_main_view', 0);
             // trong truong hop bo chon toa
             if (this.value_toa == "" || this.value_toa == null) {
                 this.tang = [];
-                this.$emit('change_main_view', 0);
+                this.$emit('show_main_view', 0);
                 return false;
             }
             // dung axios gui len lay so tang
@@ -61,11 +61,11 @@ export default {
 
         value_tang() {
             this.value_lab = "";
-            this.$emit('change_main_view', 0);
+            this.$emit('show_main_view', 0);
             // trong truong hop bo chon tang 
             if (this.value_tang == "" || this.value_tang == null) {
                 this.lab = [];
-                this.$emit('change_main_view', 0);
+                this.$emit('show_main_view', 0);
                 return false
             }
             // dung axios gui len lay so lab
@@ -75,9 +75,9 @@ export default {
         value_lab() {
             // trong truong hop bo chon lab
             if (this.value_lab == "" || this.value_lab == null) {
-                this.$emit('change_main_view', 0);
+                this.$emit('show_main_view', 0);
             } else if (this.toa != "" || this.toa != null || this.tang != "" || this.tang != null) {
-                this.$emit('change_main_view', 1);
+                this.$emit('show_main_view', 1);
             }
         }
 

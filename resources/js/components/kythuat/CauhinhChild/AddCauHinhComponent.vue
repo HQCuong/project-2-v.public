@@ -40,11 +40,16 @@ export default {
     mounted() {
         // change label color
         $(".form-group").addClass("bmd-form-group");
-        $("label").addClass("bmd-label-static"); 
+        $("label").addClass("bmd-label-static");
         $(".form-group").on("click", function() {
             $(".form-group").removeClass("is-focused");
             $(this).addClass("is-focused");
         })
+
+        // remove color while move out input
+        $("input").blur(function() {
+            $(".form-group").removeClass("is-focused");
+        });
     },
     data() {
         return {
@@ -52,9 +57,7 @@ export default {
         }
     },
     methods: {
-        nameWithLang({ name, language }) {
-            return `${name} — [${language}]`
-        },
+
     }
 }
 

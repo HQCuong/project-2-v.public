@@ -1,79 +1,31 @@
 <template>
     <div>
-        
+        <selectlab @show_map_lab="show_map_lab"></selectlab>
+        <maplab v-if="map_lab"></maplab>
     </div>
 </template>
 <script>
+import selectlab from './selectmodilab/SelectLabComponent.vue';
+import maplab from './maplab/MapLabComponent.vue';
+
 export default {
-    created() {
-        this.get_toa();
-    },
     data() {
         return {
-            show_map_lab: false,
-            current_view: true,
-            value_tang: '',
-            value_lab: '',
-            value_toa: '',
-            toa: [],
-            tang: [],
-            lab: [],
+            map_lab: false
         }
     },
     methods: {
-        change_current_view() {
-            this.current_view = !this.current_view;
-        },
-        get_toa() {
-            this.toa = ['A17'];
-            if (this.toa.length == 1) {
-                this.value_toa = this.toa[0];
+        show_map_lab(map_lab) {
+            if(map_lab == 0) {
+                this.map_lab = false;
             } else {
-                this.value_toa = '';
-            }
-        }
-    },
-    watch: {
-        value_toa() {
-            this.value_tang = "";
-            this.value_lab = "";
-            this.show_main_view = false;
-            // trong truong hop bo chon toa
-            if (this.value_toa == "" || this.value_toa == null) {
-                this.tang = [];
-                this.show_main_view = false;
-                return false;
-            }
-            // dung axios gui len lay so tang
-            this.tang = ['tang 2', 'tang 5'];
-        },
-
-        value_tang() {
-            this.value_lab = "";
-            this.show_main_view = false;
-            // trong truong hop bo chon tang 
-            if (this.value_tang == "" || this.value_tang == null) {
-                this.lab = [];
-                this.show_main_view = false;
-                return false
-            }
-            // dung axios gui len lay so lab
-            this.lab = ['lab 1', 'lab 2', 'lab 3'];
-        },
-
-        value_lab() {
-            // trong truong hop bo chon lab
-            if (this.value_lab == "" || this.value_lab == null) {
-                this.show_main_view = false;
-            } else if (this.toa != "" || this.toa != null || this.tang != "" || this.tang != null) {
-                this.show_main_view = true;
+                this.map_lab = true;
             }
         }
     },
     components: {
-        // showmodilab,
-        // addlab,
-        // mainbutton
+        selectlab,
+        maplab
     }
 }
 

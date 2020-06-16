@@ -13257,29 +13257,29 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    showlab: _showlabchild_MapLabComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    labcalendar: _showlabchild_LabCalendarComponent_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-    mainbutton: _showlabchild_ButtonComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    mainselect: _showlabchild_SelectLabComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
   data: function data() {
     return {
-      show_main_view: false,
+      main_view: false,
       current_view: true
     };
   },
   methods: {
-    change_main_view: function change_main_view(main_view) {
+    show_main_view: function show_main_view(main_view) {
       if (main_view == 0) {
-        this.show_main_view = false;
+        this.main_view = false;
       } else {
-        this.show_main_view = true;
+        this.main_view = true;
       }
     },
     change_current_view: function change_current_view() {
       this.current_view = !this.current_view;
     }
+  },
+  components: {
+    showlab: _showlabchild_MapLabComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    labcalendar: _showlabchild_LabCalendarComponent_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    mainbutton: _showlabchild_ButtonComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    mainselect: _showlabchild_SelectLabComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
 
@@ -13504,11 +13504,11 @@ __webpack_require__.r(__webpack_exports__);
     value_toa: function value_toa() {
       this.value_tang = "";
       this.value_lab = "";
-      this.$emit('change_main_view', 0); // trong truong hop bo chon toa
+      this.$emit('show_main_view', 0); // trong truong hop bo chon toa
 
       if (this.value_toa == "" || this.value_toa == null) {
         this.tang = [];
-        this.$emit('change_main_view', 0);
+        this.$emit('show_main_view', 0);
         return false;
       } // dung axios gui len lay so tang
 
@@ -13517,11 +13517,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     value_tang: function value_tang() {
       this.value_lab = "";
-      this.$emit('change_main_view', 0); // trong truong hop bo chon tang 
+      this.$emit('show_main_view', 0); // trong truong hop bo chon tang 
 
       if (this.value_tang == "" || this.value_tang == null) {
         this.lab = [];
-        this.$emit('change_main_view', 0);
+        this.$emit('show_main_view', 0);
         return false;
       } // dung axios gui len lay so lab
 
@@ -13531,9 +13531,9 @@ __webpack_require__.r(__webpack_exports__);
     value_lab: function value_lab() {
       // trong truong hop bo chon lab
       if (this.value_lab == "" || this.value_lab == null) {
-        this.$emit('change_main_view', 0);
+        this.$emit('show_main_view', 0);
       } else if (this.toa != "" || this.toa != null || this.tang != "" || this.tang != null) {
-        this.$emit('change_main_view', 1);
+        this.$emit('show_main_view', 1);
       }
     }
   }
@@ -13761,10 +13761,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/kythuat/ModiLabComponent.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/kythuat/ModiLabComponent.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/kythuat/QuanLyLabComponent.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/kythuat/QuanLyLabComponent.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13791,76 +13791,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  created: function created() {
-    this.get_toa();
-  },
   data: function data() {
     return {
-      show_map_lab: false,
-      current_view: true,
-      value_tang: '',
-      value_lab: '',
-      value_toa: '',
-      toa: [],
-      tang: [],
-      lab: []
+      current_view: true
     };
   },
   methods: {
-    change_current_view: function change_current_view() {
+    change_current_view: function change_current_view(map_lab) {
       this.current_view = !this.current_view;
-    },
-    get_toa: function get_toa() {
-      this.toa = ['A17'];
-
-      if (this.toa.length == 1) {
-        this.value_toa = this.toa[0];
-      } else {
-        this.value_toa = '';
-      }
-    }
-  },
-  watch: {
-    value_toa: function value_toa() {
-      this.value_tang = "";
-      this.value_lab = "";
-      this.show_main_view = false; // trong truong hop bo chon toa
-
-      if (this.value_toa == "" || this.value_toa == null) {
-        this.tang = [];
-        this.show_main_view = false;
-        return false;
-      } // dung axios gui len lay so tang
-
-
-      this.tang = ['tang 2', 'tang 5'];
-    },
-    value_tang: function value_tang() {
-      this.value_lab = "";
-      this.show_main_view = false; // trong truong hop bo chon tang 
-
-      if (this.value_tang == "" || this.value_tang == null) {
-        this.lab = [];
-        this.show_main_view = false;
-        return false;
-      } // dung axios gui len lay so lab
-
-
-      this.lab = ['lab 1', 'lab 2', 'lab 3'];
-    },
-    value_lab: function value_lab() {
-      // trong truong hop bo chon lab
-      if (this.value_lab == "" || this.value_lab == null) {
-        this.show_main_view = false;
-      } else if (this.toa != "" || this.toa != null || this.tang != "" || this.tang != null) {
-        this.show_main_view = true;
-      }
     }
   },
   components: {
@@ -13946,18 +13888,16 @@ __webpack_require__.r(__webpack_exports__);
     $(".form-group").on("click", function () {
       $(".form-group").removeClass("is-focused");
       $(this).addClass("is-focused");
+    }); // remove color while move out input
+
+    $("input").blur(function () {
+      $(".form-group").removeClass("is-focused");
     });
   },
   data: function data() {
     return {};
   },
-  methods: {
-    nameWithLang: function nameWithLang(_ref) {
-      var name = _ref.name,
-          language = _ref.language;
-      return "".concat(name, " \u2014 [").concat(language, "]");
-    }
-  }
+  methods: {}
 });
 
 /***/ }),
@@ -14048,10 +13988,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.get_toa();
+  },
+  mounted: function mounted() {
+    // change label color
+    $(".form-group").addClass("bmd-form-group");
+    $("label").addClass("bmd-label-static");
+    $(".form-group").on("click", function () {
+      $(".form-group").removeClass("is-focused");
+      $(this).addClass("is-focused");
+    }); // remove color while move out input
+
+    $("input").blur(function () {
+      $(".form-group").removeClass("is-focused");
+    });
   },
   data: function data() {
     return {
@@ -14060,11 +14012,9 @@ __webpack_require__.r(__webpack_exports__);
       value_cau_hinh: '',
       toa: [],
       tang: [],
-      lab: [],
       cau_hinh: ['cau hinh 1', 'cau hinh 2', 'cau hinh 3']
     };
   },
-  computed: {},
   methods: {
     change_current_view: function change_current_view() {
       this.current_view = !this.current_view;
@@ -14082,12 +14032,10 @@ __webpack_require__.r(__webpack_exports__);
   watch: {
     value_toa: function value_toa() {
       this.value_tang = "";
-      this.value_lab = "";
-      this.show = false; // trong truong hop bo chon toa
+      this.value_lab = ""; // trong truong hop bo chon toa
 
       if (this.value_toa == "" || this.value_toa == null) {
         this.tang = [];
-        this.show = false;
         return false;
       } // dung axios gui len lay so tang
 
@@ -14095,27 +14043,16 @@ __webpack_require__.r(__webpack_exports__);
       this.tang = ['tang 2', 'tang 5'];
     },
     value_tang: function value_tang() {
-      this.value_lab = "";
-      this.show = false; // trong truong hop bo chon tang 
+      this.value_lab = ""; // trong truong hop bo chon tang 
 
       if (this.value_tang == "" || this.value_tang == null) {
         this.lab = [];
-        this.show = false;
         return false;
       } // dung axios gui len lay so lab
 
 
       this.lab = ['lab 1', 'lab 2', 'lab 3'];
-    },
-    value_lab: function value_lab() {
-      // trong truong hop bo chon lab
-      if (this.value_lab == "" || this.value_lab == null) {
-        this.show = false;
-      } else if (this.toa != "" || this.toa != null || this.tang != "" || this.tang != null) {
-        this.show = true;
-      }
-    },
-    value_cau_hinh: function value_cau_hinh() {}
+    }
   }
 });
 
@@ -14164,6 +14101,124 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _selectmodilab_SelectLabComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./selectmodilab/SelectLabComponent.vue */ "./resources/js/components/kythuat/modilabchild/selectmodilab/SelectLabComponent.vue");
+/* harmony import */ var _maplab_MapLabComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./maplab/MapLabComponent.vue */ "./resources/js/components/kythuat/modilabchild/maplab/MapLabComponent.vue");
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      map_lab: false
+    };
+  },
+  methods: {
+    show_map_lab: function show_map_lab(map_lab) {
+      if (map_lab == 0) {
+        this.map_lab = false;
+      } else {
+        this.map_lab = true;
+      }
+    }
+  },
+  components: {
+    selectlab: _selectmodilab_SelectLabComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    maplab: _maplab_MapLabComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/kythuat/modilabchild/maplab/MapLabComponent.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/kythuat/modilabchild/maplab/MapLabComponent.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _hardwareinfo_HardWareInfoComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./hardwareinfo/HardWareInfoComponent.vue */ "./resources/js/components/kythuat/modilabchild/maplab/hardwareinfo/HardWareInfoComponent.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {};
+  },
+  components: {
+    hardware: _hardwareinfo_HardWareInfoComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/kythuat/modilabchild/maplab/hardwareinfo/HardWareInfoComponent.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/kythuat/modilabchild/maplab/hardwareinfo/HardWareInfoComponent.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {};
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/kythuat/modilabchild/selectmodilab/SelectLabComponent.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/kythuat/modilabchild/selectmodilab/SelectLabComponent.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -14175,8 +14230,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      show_map_lab: false,
-      current_view: true,
       value_tang: '',
       value_lab: '',
       value_toa: '',
@@ -14203,11 +14256,11 @@ __webpack_require__.r(__webpack_exports__);
     value_toa: function value_toa() {
       this.value_tang = "";
       this.value_lab = "";
-      this.show_main_view = false; // trong truong hop bo chon toa
+      this.$emit('show_map_lab', 0); // trong truong hop bo chon toa
 
       if (this.value_toa == "" || this.value_toa == null) {
         this.tang = [];
-        this.show_main_view = false;
+        this.$emit('show_map_lab', 0);
         return false;
       } // dung axios gui len lay so tang
 
@@ -14216,11 +14269,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     value_tang: function value_tang() {
       this.value_lab = "";
-      this.show_main_view = false; // trong truong hop bo chon tang 
+      this.$emit('show_map_lab', 0); // trong truong hop bo chon tang 
 
       if (this.value_tang == "" || this.value_tang == null) {
         this.lab = [];
-        this.show_main_view = false;
+        this.$emit('show_map_lab', 0);
         return false;
       } // dung axios gui len lay so lab
 
@@ -14230,9 +14283,9 @@ __webpack_require__.r(__webpack_exports__);
     value_lab: function value_lab() {
       // trong truong hop bo chon lab
       if (this.value_lab == "" || this.value_lab == null) {
-        this.show_main_view = false;
+        this.$emit('show_map_lab', 0);
       } else if (this.toa != "" || this.toa != null || this.tang != "" || this.tang != null) {
-        this.show_main_view = true;
+        this.$emit('show_map_lab', 1);
       }
     }
   },
@@ -15890,11 +15943,9 @@ var render = function() {
             "div",
             { staticClass: "card-body" },
             [
-              _c("mainselect", {
-                on: { change_main_view: _vm.change_main_view }
-              }),
+              _c("mainselect", { on: { show_main_view: _vm.show_main_view } }),
               _vm._v(" "),
-              _vm.show_main_view
+              _vm.main_view
                 ? _c(
                     "div",
                     [
@@ -16450,10 +16501,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/kythuat/ModiLabComponent.vue?vue&type=template&id=55adf86a&scoped=true&":
-/*!***************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/kythuat/ModiLabComponent.vue?vue&type=template&id=55adf86a&scoped=true& ***!
-  \***************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/kythuat/QuanLyLabComponent.vue?vue&type=template&id=5aaa303c&scoped=true&":
+/*!*****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/kythuat/QuanLyLabComponent.vue?vue&type=template&id=5aaa303c&scoped=true& ***!
+  \*****************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -16481,7 +16532,7 @@ var render = function() {
               _vm._v(" "),
               _vm.current_view ? _c("showmodilab") : _vm._e(),
               _vm._v(" "),
-              _c("keep-alive", [!_vm.current_view ? _c("addlab") : _vm._e()], 1)
+              !_vm.current_view ? _c("addlab") : _vm._e()
             ],
             1
           )
@@ -16939,7 +16990,206 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c(
+    "div",
+    [
+      _c("selectlab", { on: { show_map_lab: _vm.show_map_lab } }),
+      _vm._v(" "),
+      _vm.map_lab ? _c("maplab") : _vm._e()
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/kythuat/modilabchild/maplab/MapLabComponent.vue?vue&type=template&id=f93d47fa&scoped=true&":
+/*!**********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/kythuat/modilabchild/maplab/MapLabComponent.vue?vue&type=template&id=f93d47fa&scoped=true& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("hardware"),
+      _vm._v(" "),
+      _c("center", [
+        _c("table", { attrs: { width: "100%", border: "1" } }, [
+          _c("tr", [
+            _c("th", [_vm._v("a")]),
+            _vm._v(" "),
+            _c("th", [_vm._v("b")]),
+            _vm._v(" "),
+            _c("th", [_vm._v("c")])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", [_vm._v("1")]),
+            _vm._v(" "),
+            _c("td", [_vm._v("2")]),
+            _vm._v(" "),
+            _c("td", [_vm._v("3")])
+          ])
+        ])
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/kythuat/modilabchild/maplab/hardwareinfo/HardWareInfoComponent.vue?vue&type=template&id=8d4d91f2&scoped=true&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/kythuat/modilabchild/maplab/hardwareinfo/HardWareInfoComponent.vue?vue&type=template&id=8d4d91f2&scoped=true& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [_c("p", [_vm._v("Cấu hình: ")])])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/kythuat/modilabchild/selectmodilab/SelectLabComponent.vue?vue&type=template&id=6428dda6&scoped=true&":
+/*!********************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/kythuat/modilabchild/selectmodilab/SelectLabComponent.vue?vue&type=template&id=6428dda6&scoped=true& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("span", [_vm._v("Chọn tòa")]),
+      _vm._v(" "),
+      _c("multiselect", {
+        attrs: {
+          options: _vm.toa,
+          "close-on-select": true,
+          "show-labels": true,
+          placeholder: "Tòa",
+          "open-direction": "bottom",
+          deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
+          selectLabel: "Click hoặc nhấn Enter để chọn",
+          searchable: false
+        },
+        model: {
+          value: _vm.value_toa,
+          callback: function($$v) {
+            _vm.value_toa = $$v
+          },
+          expression: "value_toa"
+        }
+      }),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("span", [_vm._v("Chọn tầng")]),
+      _vm._v(" "),
+      _c(
+        "multiselect",
+        {
+          attrs: {
+            options: _vm.tang,
+            "close-on-select": true,
+            "show-labels": true,
+            placeholder: "Tầng",
+            "open-direction": "bottom",
+            deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
+            selectLabel: "Click hoặc nhấn Enter để chọn",
+            searchable: false
+          },
+          model: {
+            value: _vm.value_tang,
+            callback: function($$v) {
+              _vm.value_tang = $$v
+            },
+            expression: "value_tang"
+          }
+        },
+        [_c("template", { slot: "noOptions" }, [_vm._v("Chưa chọn tòa")])],
+        2
+      ),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("span", [_vm._v("Chọn lab")]),
+      _vm._v(" "),
+      _c(
+        "multiselect",
+        {
+          attrs: {
+            options: _vm.lab,
+            "close-on-select": true,
+            "show-labels": true,
+            placeholder: "Phòng",
+            "open-direction": "bottom",
+            deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
+            selectLabel: "Click hoặc nhấn Enter để chọn",
+            searchable: false
+          },
+          model: {
+            value: _vm.value_lab,
+            callback: function($$v) {
+              _vm.value_lab = $$v
+            },
+            expression: "value_lab"
+          }
+        },
+        [_c("template", { slot: "noOptions" }, [_vm._v("Chưa chọn tầng")])],
+        2
+      ),
+      _vm._v(" "),
+      _c("br")
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -34682,17 +34932,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/kythuat/ModiLabComponent.vue":
-/*!**************************************************************!*\
-  !*** ./resources/js/components/kythuat/ModiLabComponent.vue ***!
-  \**************************************************************/
+/***/ "./resources/js/components/kythuat/QuanLyLabComponent.vue":
+/*!****************************************************************!*\
+  !*** ./resources/js/components/kythuat/QuanLyLabComponent.vue ***!
+  \****************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ModiLabComponent_vue_vue_type_template_id_55adf86a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ModiLabComponent.vue?vue&type=template&id=55adf86a&scoped=true& */ "./resources/js/components/kythuat/ModiLabComponent.vue?vue&type=template&id=55adf86a&scoped=true&");
-/* harmony import */ var _ModiLabComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ModiLabComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/kythuat/ModiLabComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _QuanLyLabComponent_vue_vue_type_template_id_5aaa303c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./QuanLyLabComponent.vue?vue&type=template&id=5aaa303c&scoped=true& */ "./resources/js/components/kythuat/QuanLyLabComponent.vue?vue&type=template&id=5aaa303c&scoped=true&");
+/* harmony import */ var _QuanLyLabComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./QuanLyLabComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/kythuat/QuanLyLabComponent.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -34702,50 +34952,50 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _ModiLabComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ModiLabComponent_vue_vue_type_template_id_55adf86a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ModiLabComponent_vue_vue_type_template_id_55adf86a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _QuanLyLabComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _QuanLyLabComponent_vue_vue_type_template_id_5aaa303c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _QuanLyLabComponent_vue_vue_type_template_id_5aaa303c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "55adf86a",
+  "5aaa303c",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/kythuat/ModiLabComponent.vue"
+component.options.__file = "resources/js/components/kythuat/QuanLyLabComponent.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/kythuat/ModiLabComponent.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************!*\
-  !*** ./resources/js/components/kythuat/ModiLabComponent.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************/
+/***/ "./resources/js/components/kythuat/QuanLyLabComponent.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/kythuat/QuanLyLabComponent.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ModiLabComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ModiLabComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/kythuat/ModiLabComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ModiLabComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_QuanLyLabComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./QuanLyLabComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/kythuat/QuanLyLabComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_QuanLyLabComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/kythuat/ModiLabComponent.vue?vue&type=template&id=55adf86a&scoped=true&":
-/*!*********************************************************************************************************!*\
-  !*** ./resources/js/components/kythuat/ModiLabComponent.vue?vue&type=template&id=55adf86a&scoped=true& ***!
-  \*********************************************************************************************************/
+/***/ "./resources/js/components/kythuat/QuanLyLabComponent.vue?vue&type=template&id=5aaa303c&scoped=true&":
+/*!***********************************************************************************************************!*\
+  !*** ./resources/js/components/kythuat/QuanLyLabComponent.vue?vue&type=template&id=5aaa303c&scoped=true& ***!
+  \***********************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModiLabComponent_vue_vue_type_template_id_55adf86a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ModiLabComponent.vue?vue&type=template&id=55adf86a&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/kythuat/ModiLabComponent.vue?vue&type=template&id=55adf86a&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModiLabComponent_vue_vue_type_template_id_55adf86a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_QuanLyLabComponent_vue_vue_type_template_id_5aaa303c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./QuanLyLabComponent.vue?vue&type=template&id=5aaa303c&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/kythuat/QuanLyLabComponent.vue?vue&type=template&id=5aaa303c&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_QuanLyLabComponent_vue_vue_type_template_id_5aaa303c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModiLabComponent_vue_vue_type_template_id_55adf86a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_QuanLyLabComponent_vue_vue_type_template_id_5aaa303c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -35165,6 +35415,213 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/kythuat/modilabchild/maplab/MapLabComponent.vue":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/kythuat/modilabchild/maplab/MapLabComponent.vue ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _MapLabComponent_vue_vue_type_template_id_f93d47fa_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MapLabComponent.vue?vue&type=template&id=f93d47fa&scoped=true& */ "./resources/js/components/kythuat/modilabchild/maplab/MapLabComponent.vue?vue&type=template&id=f93d47fa&scoped=true&");
+/* harmony import */ var _MapLabComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MapLabComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/kythuat/modilabchild/maplab/MapLabComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _MapLabComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _MapLabComponent_vue_vue_type_template_id_f93d47fa_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _MapLabComponent_vue_vue_type_template_id_f93d47fa_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "f93d47fa",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/kythuat/modilabchild/maplab/MapLabComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/kythuat/modilabchild/maplab/MapLabComponent.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************!*\
+  !*** ./resources/js/components/kythuat/modilabchild/maplab/MapLabComponent.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MapLabComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./MapLabComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/kythuat/modilabchild/maplab/MapLabComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MapLabComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/kythuat/modilabchild/maplab/MapLabComponent.vue?vue&type=template&id=f93d47fa&scoped=true&":
+/*!****************************************************************************************************************************!*\
+  !*** ./resources/js/components/kythuat/modilabchild/maplab/MapLabComponent.vue?vue&type=template&id=f93d47fa&scoped=true& ***!
+  \****************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MapLabComponent_vue_vue_type_template_id_f93d47fa_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./MapLabComponent.vue?vue&type=template&id=f93d47fa&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/kythuat/modilabchild/maplab/MapLabComponent.vue?vue&type=template&id=f93d47fa&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MapLabComponent_vue_vue_type_template_id_f93d47fa_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MapLabComponent_vue_vue_type_template_id_f93d47fa_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/kythuat/modilabchild/maplab/hardwareinfo/HardWareInfoComponent.vue":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/components/kythuat/modilabchild/maplab/hardwareinfo/HardWareInfoComponent.vue ***!
+  \****************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _HardWareInfoComponent_vue_vue_type_template_id_8d4d91f2_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./HardWareInfoComponent.vue?vue&type=template&id=8d4d91f2&scoped=true& */ "./resources/js/components/kythuat/modilabchild/maplab/hardwareinfo/HardWareInfoComponent.vue?vue&type=template&id=8d4d91f2&scoped=true&");
+/* harmony import */ var _HardWareInfoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./HardWareInfoComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/kythuat/modilabchild/maplab/hardwareinfo/HardWareInfoComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _HardWareInfoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _HardWareInfoComponent_vue_vue_type_template_id_8d4d91f2_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _HardWareInfoComponent_vue_vue_type_template_id_8d4d91f2_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "8d4d91f2",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/kythuat/modilabchild/maplab/hardwareinfo/HardWareInfoComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/kythuat/modilabchild/maplab/hardwareinfo/HardWareInfoComponent.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************!*\
+  !*** ./resources/js/components/kythuat/modilabchild/maplab/hardwareinfo/HardWareInfoComponent.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_HardWareInfoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./HardWareInfoComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/kythuat/modilabchild/maplab/hardwareinfo/HardWareInfoComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_HardWareInfoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/kythuat/modilabchild/maplab/hardwareinfo/HardWareInfoComponent.vue?vue&type=template&id=8d4d91f2&scoped=true&":
+/*!***********************************************************************************************************************************************!*\
+  !*** ./resources/js/components/kythuat/modilabchild/maplab/hardwareinfo/HardWareInfoComponent.vue?vue&type=template&id=8d4d91f2&scoped=true& ***!
+  \***********************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HardWareInfoComponent_vue_vue_type_template_id_8d4d91f2_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./HardWareInfoComponent.vue?vue&type=template&id=8d4d91f2&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/kythuat/modilabchild/maplab/hardwareinfo/HardWareInfoComponent.vue?vue&type=template&id=8d4d91f2&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HardWareInfoComponent_vue_vue_type_template_id_8d4d91f2_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HardWareInfoComponent_vue_vue_type_template_id_8d4d91f2_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/kythuat/modilabchild/selectmodilab/SelectLabComponent.vue":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/kythuat/modilabchild/selectmodilab/SelectLabComponent.vue ***!
+  \*******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _SelectLabComponent_vue_vue_type_template_id_6428dda6_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SelectLabComponent.vue?vue&type=template&id=6428dda6&scoped=true& */ "./resources/js/components/kythuat/modilabchild/selectmodilab/SelectLabComponent.vue?vue&type=template&id=6428dda6&scoped=true&");
+/* harmony import */ var _SelectLabComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SelectLabComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/kythuat/modilabchild/selectmodilab/SelectLabComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _SelectLabComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SelectLabComponent_vue_vue_type_template_id_6428dda6_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _SelectLabComponent_vue_vue_type_template_id_6428dda6_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "6428dda6",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/kythuat/modilabchild/selectmodilab/SelectLabComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/kythuat/modilabchild/selectmodilab/SelectLabComponent.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************!*\
+  !*** ./resources/js/components/kythuat/modilabchild/selectmodilab/SelectLabComponent.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectLabComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./SelectLabComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/kythuat/modilabchild/selectmodilab/SelectLabComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectLabComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/kythuat/modilabchild/selectmodilab/SelectLabComponent.vue?vue&type=template&id=6428dda6&scoped=true&":
+/*!**************************************************************************************************************************************!*\
+  !*** ./resources/js/components/kythuat/modilabchild/selectmodilab/SelectLabComponent.vue?vue&type=template&id=6428dda6&scoped=true& ***!
+  \**************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectLabComponent_vue_vue_type_template_id_6428dda6_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./SelectLabComponent.vue?vue&type=template&id=6428dda6&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/kythuat/modilabchild/selectmodilab/SelectLabComponent.vue?vue&type=template&id=6428dda6&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectLabComponent_vue_vue_type_template_id_6428dda6_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectLabComponent_vue_vue_type_template_id_6428dda6_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/layout/FooterComponent.vue":
 /*!************************************************************!*\
   !*** ./resources/js/components/layout/FooterComponent.vue ***!
@@ -35521,7 +35978,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_HomeComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/HomeComponent.vue */ "./resources/js/components/HomeComponent.vue");
 /* harmony import */ var _components_general_ShowLabComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/general/ShowLabComponent.vue */ "./resources/js/components/general/ShowLabComponent.vue");
-/* harmony import */ var _components_kythuat_ModiLabComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/kythuat/ModiLabComponent.vue */ "./resources/js/components/kythuat/ModiLabComponent.vue");
+/* harmony import */ var _components_kythuat_QuanLyLabComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/kythuat/QuanLyLabComponent.vue */ "./resources/js/components/kythuat/QuanLyLabComponent.vue");
 /* harmony import */ var _components_kythuat_CauHinhComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/kythuat/CauHinhComponent.vue */ "./resources/js/components/kythuat/CauHinhComponent.vue");
 /* harmony import */ var _components_kythuat_ThietBiComponent_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/kythuat/ThietBiComponent.vue */ "./resources/js/components/kythuat/ThietBiComponent.vue");
 /* harmony import */ var _components_giaovien_LichGiaoVienComponent_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/giaovien/LichGiaoVienComponent.vue */ "./resources/js/components/giaovien/LichGiaoVienComponent.vue");
@@ -35547,7 +36004,7 @@ __webpack_require__.r(__webpack_exports__);
   component: _components_general_ShowLabComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
 }, {
   path: '/quan_ly_lab',
-  component: _components_kythuat_ModiLabComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+  component: _components_kythuat_QuanLyLabComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
 }, {
   path: '/quan_ly_cau_hinh',
   component: _components_kythuat_CauHinhComponent_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
@@ -35677,8 +36134,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\quocc\Desktop\project-2\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\quocc\Desktop\project-2\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\QuocAnh\Desktop\project-2\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\QuocAnh\Desktop\project-2\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

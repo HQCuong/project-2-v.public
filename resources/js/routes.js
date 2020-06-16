@@ -2,7 +2,7 @@ import home from './components/HomeComponent.vue';
 
 import thong_tin_lab from './components/general/ShowLabComponent.vue';
 
-import quan_ly_lab from './components/kythuat/ModiLabComponent.vue';
+import quan_ly_lab from './components/kythuat/QuanLyLabComponent.vue';
 import cau_hinh from './components/kythuat/CauHinhComponent.vue';
 import thiet_bi from './components/kythuat/ThietBiComponent.vue';
 

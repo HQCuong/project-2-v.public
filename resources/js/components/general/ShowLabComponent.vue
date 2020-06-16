@@ -4,8 +4,8 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <mainselect @change_main_view="change_main_view"></mainselect>
-                        <div v-if="show_main_view">
+                        <mainselect @show_main_view="show_main_view"></mainselect>
+                        <div v-if="main_view">
                             <!-- button -->
                             <mainbutton @change_current_view="change_current_view"></mainbutton>
                             <!-- show lab -->
@@ -25,30 +25,30 @@ import showlab from './showlabchild/MapLabComponent.vue';
 import labcalendar from './showlabchild/LabCalendarComponent.vue';
 
 export default {
+    data() {
+        return {
+            main_view: false,
+            current_view: true,
+        }
+    },
+    methods: {
+        show_main_view(main_view) {
+            if (main_view == 0) {
+                this.main_view = false;
+            } else {
+                this.main_view = true;
+            }
+        },
+        change_current_view() {
+            this.current_view = !this.current_view;
+        }
+    },
     components: {
         showlab,
         labcalendar,
         mainbutton,
         mainselect
     },
-    data() {
-        return {
-            show_main_view: false,
-            current_view: true,
-        }
-    },
-    methods: {
-        change_main_view(main_view) {
-            if (main_view == 0) {
-                this.show_main_view = false;
-            } else {
-                this.show_main_view = true;
-            }
-        },
-        change_current_view() {
-            this.current_view = !this.current_view;
-        }
-    }
 }
 
 </script>

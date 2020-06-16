@@ -2,7 +2,7 @@
     <div>
         <hardware></hardware>
         <center>
- 			<table>
+ 			<table width="100%" border="1">
  				<tr>
  					<th>a</th>
  					<th>b</th>
@@ -18,7 +18,7 @@
     </div>
 </template>
 <script>
-import hardware from './hardware/HardWareInfoComponent.vue';
+import hardware from './hardwareinfo/HardWareInfoComponent.vue';
 
 export default {
     data() {

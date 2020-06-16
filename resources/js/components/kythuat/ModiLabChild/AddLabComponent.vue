@@ -13,7 +13,6 @@
             <template slot="noOptions">Chưa chọn tòa</template>
         </multiselect>
         <br>
-        <!-- form insert -->
         <form>
             <div class="form-group">
                 <label for="insertSeats">Số chỗ ngồi</label>
@@ -30,10 +29,24 @@
     </div>
 </template>
 <script>
-
 export default {
     created() {
         this.get_toa();
+    },
+    mounted() {
+        // change label color
+        $(".form-group").addClass("bmd-form-group");
+        $("label").addClass("bmd-label-static");
+        $(".form-group").on("click", function() {
+            $(".form-group").removeClass("is-focused");
+            $(this).addClass("is-focused");
+        })
+
+
+        // remove color while move out input
+        $("input").blur(function() {
+            $(".form-group").removeClass("is-focused");
+        });
     },
     data() {
         return {
@@ -42,12 +55,8 @@ export default {
             value_cau_hinh: '',
             toa: [],
             tang: [],
-            lab: [],
             cau_hinh: ['cau hinh 1', 'cau hinh 2', 'cau hinh 3']
         }
-    },
-    computed: {
-
     },
     methods: {
         change_current_view() {
@@ -66,11 +75,9 @@ export default {
         value_toa() {
             this.value_tang = "";
             this.value_lab = "";
-            this.show = false;
             // trong truong hop bo chon toa
             if (this.value_toa == "" || this.value_toa == null) {
                 this.tang = [];
-                this.show = false;
                 return false;
             }
             // dung axios gui len lay so tang
@@ -79,29 +86,14 @@ export default {
 
         value_tang() {
             this.value_lab = "";
-            this.show = false;
             // trong truong hop bo chon tang 
             if (this.value_tang == "" || this.value_tang == null) {
                 this.lab = [];
-                this.show = false;
-                return false
+                return false;
             }
             // dung axios gui len lay so lab
             this.lab = ['lab 1', 'lab 2', 'lab 3'];
         },
-
-        value_lab() {
-            // trong truong hop bo chon lab
-            if (this.value_lab == "" || this.value_lab == null) {
-                this.show = false;
-            } else if (this.toa != "" || this.toa != null || this.tang != "" || this.tang != null) {
-                this.show = true;
-            }
-        },
-
-        value_cau_hinh() {
-
-        }
     }
 }
 
