@@ -17,8 +17,8 @@
     </div>
 </template>
 <script>
-import mainbutton from './CauhinhChild/ButtonComponent.vue';
-import addcauhinh from './CauhinhChild/AddCauHinhComponent.vue';
+import mainbutton from './cauhinhchild/ButtonComponent.vue';
+import addcauhinh from './cauhinhchild/AddCauHinhComponent.vue';
 
 export default {
     data() {

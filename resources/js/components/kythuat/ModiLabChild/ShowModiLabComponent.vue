@@ -1,101 +1,82 @@
 <template>
     <div>
-        <hardware></hardware>
-        <center>
-            <div class="lab-container">
-                <div class="top-class">
-                    <p class="table left-table">Bảng viết</p>
-                    <p class="screen">Màn hình</p>
-                    <p class="table left-table">Bảng viết</p>
-                </div>
-                <br>
-                <div class="teacher-area">
-                    <p class="teacher-seat">Bàn giáo viên</p>
-                </div>
-                <div class="student-area">
-                    <div class="student-row" v-for="item in may">
-                        <div class="each-student-seat" v-for="each in item">
-                            <div v-if="each != ''" class="able">
-                                <computer :checked="true"></computer>
-                            </div>
-                            <div v-if="each == ''" class="disable"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </center>
+        
     </div>
 </template>
 <script>
-import hardware from './hardware/HardWareInfoComponent.vue';
-import computer from './computer/ComputerComponent.vue';
-
 export default {
-    props: ['arr_may'],
+    created() {
+        this.get_toa();
+    },
     data() {
         return {
-            may: [
-                ['may1', 'may2', 'may3', '', 'may4', 'may5', 'may6'],
-                ['may7', 'may8', 'may9', '', 'may10', 'may11', 'may12'],
-            ]
+            show_map_lab: false,
+            current_view: true,
+            value_tang: '',
+            value_lab: '',
+            value_toa: '',
+            toa: [],
+            tang: [],
+            lab: [],
+        }
+    },
+    methods: {
+        change_current_view() {
+            this.current_view = !this.current_view;
+        },
+        get_toa() {
+            this.toa = ['A17'];
+            if (this.toa.length == 1) {
+                this.value_toa = this.toa[0];
+            } else {
+                this.value_toa = '';
+            }
+        }
+    },
+    watch: {
+        value_toa() {
+            this.value_tang = "";
+            this.value_lab = "";
+            this.show_main_view = false;
+            // trong truong hop bo chon toa
+            if (this.value_toa == "" || this.value_toa == null) {
+                this.tang = [];
+                this.show_main_view = false;
+                return false;
+            }
+            // dung axios gui len lay so tang
+            this.tang = ['tang 2', 'tang 5'];
+        },
+
+        value_tang() {
+            this.value_lab = "";
+            this.show_main_view = false;
+            // trong truong hop bo chon tang 
+            if (this.value_tang == "" || this.value_tang == null) {
+                this.lab = [];
+                this.show_main_view = false;
+                return false
+            }
+            // dung axios gui len lay so lab
+            this.lab = ['lab 1', 'lab 2', 'lab 3'];
+        },
+
+        value_lab() {
+            // trong truong hop bo chon lab
+            if (this.value_lab == "" || this.value_lab == null) {
+                this.show_main_view = false;
+            } else if (this.toa != "" || this.toa != null || this.tang != "" || this.tang != null) {
+                this.show_main_view = true;
+            }
         }
     },
     components: {
-        computer,
-        hardware
+        // showmodilab,
+        // addlab,
+        // mainbutton
     }
 }
 
 </script>
 <style lang="css" scoped>
-.lab-container {
-    padding-top: 10px;
-    width: 95%;
-}
-
-.top-class {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-}
-
-.screen {
-    width: 25%;
-    border: 1px solid black;
-}
-
-.table {
-    width: 25%;
-    border: 1px solid black;
-}
-
-.teacher-area {
-    text-align: left;
-}
-
-.teacher-seat {
-    width: 15%;
-    text-align: center;
-    border: 1px solid black;
-}
-
-.student-row {
-    display: block;
-    display: flex;
-    flex-direction: row;
-}
-
-.each-student-seat {
-    width: 15%;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-right: 5px;
-}
-
-@media (max-width: 520px) {
-    .teacher-seat {
-        width: 35%;
-    }
-}
-
 </style>

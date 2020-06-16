@@ -1,5 +1,6 @@
 <template>
     <div>
+        <hardware></hardware>
         <FullCalendar :defaultView="defaultView" :header="headers" :plugins="calendarPlugins" :events="events" :displayEventEnd="true" :eventTimeFormat="eventTimeFormat" />
     </div>
 </template>
@@ -7,6 +8,7 @@
 import FullCalendar from '@fullcalendar/vue';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import listPlugin from '@fullcalendar/list';
+import hardware from './hardwareinfo/HardWareInfoComponent.vue';
 
 export default {
     created() {
@@ -51,7 +53,8 @@ export default {
         }
     },
     components: {
-        FullCalendar
+        FullCalendar,
+        hardware
     }
 }
 

@@ -1,58 +1,40 @@
 <template>
     <div>
         <span>Chọn tòa</span>
-        <multiselect v-model="value_toa" :options="toa" :close-on-select="true" :show-labels="false" placeholder="Tòa" open-direction="bottom"></multiselect deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false">
+        <multiselect v-model="value_toa" :options="toa" :close-on-select="true" :show-labels="false" placeholder="Tòa" open-direction="bottom" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false"></multiselect>
         <br>
         <span>Chọn tầng</span>
         <multiselect v-model="value_tang" :options="tang" :close-on-select="true" :show-labels="false" placeholder="Tầng" open-direction="bottom" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false">
             <template slot="noOptions">Chưa chọn tòa</template>
         </multiselect>
         <br>
-        <span>Chọn cấu hình</span>
-        <multiselect v-model="value_cau_hinh" :options="cau_hinh" :close-on-select="true" :show-labels="false" placeholder="Chọn cấu hình" open-direction="bottom" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false">
-            <template slot="noOptions">Chưa chọn tòa</template>
+        <span>Chọn lab</span>
+        <multiselect v-model="value_lab" :options="lab" :close-on-select="true" :show-labels="false" placeholder="Phòng" open-direction="bottom" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false">
+            <template slot="noOptions">Chưa chọn tầng</template>
         </multiselect>
         <br>
-        <!-- form insert -->
-        <form>
-            <div class="form-group">
-                <label for="insertSeats">Số chỗ ngồi</label>
-                <input type="number" class="form-control" id="insertSeats" aria-describedby="emailHelp" placeholder="Nhập số chõ ngồi">
-            </div>
-            <br>
-            <div class="form-group">
-                <label for="insertCpts">Số máy</label>
-                <input type="number" class="form-control" id="insertCpts" aria-describedby="emailHelp" placeholder="Nhập số máy">
-            </div>
-            <br>
-            <button type="submit" class="btn btn-info">Submit</button>
-        </form>
     </div>
 </template>
 <script>
-
 export default {
     created() {
+        // goi axios lay so toa
         this.get_toa();
     },
     data() {
         return {
             value_tang: '',
+            value_lab: '',
             value_toa: '',
-            value_cau_hinh: '',
             toa: [],
             tang: [],
             lab: [],
-            cau_hinh: ['cau hinh 1', 'cau hinh 2', 'cau hinh 3']
         }
     },
     computed: {
 
     },
     methods: {
-        change_current_view() {
-            this.current_view = !this.current_view;
-        },
         get_toa() {
             this.toa = ['A17'];
             if (this.toa.length == 1) {
@@ -66,11 +48,11 @@ export default {
         value_toa() {
             this.value_tang = "";
             this.value_lab = "";
-            this.show = false;
+            this.$emit('change_main_view', 0);
             // trong truong hop bo chon toa
             if (this.value_toa == "" || this.value_toa == null) {
                 this.tang = [];
-                this.show = false;
+                this.$emit('change_main_view', 0);
                 return false;
             }
             // dung axios gui len lay so tang
@@ -79,11 +61,11 @@ export default {
 
         value_tang() {
             this.value_lab = "";
-            this.show = false;
+            this.$emit('change_main_view', 0);
             // trong truong hop bo chon tang 
             if (this.value_tang == "" || this.value_tang == null) {
                 this.lab = [];
-                this.show = false;
+                this.$emit('change_main_view', 0);
                 return false
             }
             // dung axios gui len lay so lab
@@ -93,18 +75,15 @@ export default {
         value_lab() {
             // trong truong hop bo chon lab
             if (this.value_lab == "" || this.value_lab == null) {
-                this.show = false;
+                this.$emit('change_main_view', 0);
             } else if (this.toa != "" || this.toa != null || this.tang != "" || this.tang != null) {
-                this.show = true;
+                this.$emit('change_main_view', 1);
             }
-        },
-
-        value_cau_hinh() {
-
         }
+
     }
 }
 
 </script>
-<style scoped>
+<style lang="css" scoped>
 </style>

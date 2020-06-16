@@ -1,33 +1,36 @@
 <template>
-    <center>
-        <div class="lab-container">
-            <div class="top-class">
-                <p class="table left-table">Bảng viết</p>
-                <p class="screen">Màn hình</p>
-                <p class="table left-table">Bảng viết</p>
-            </div>
-            <br>
-            <div class="teacher-area">
-                <p class="teacher-seat">Bàn giáo viên</p>
-            </div>
-            <div class="student-area">
-                <div class="student-row" v-for="item in may">
-                    <div class="each-student-seat" v-for="each in item">
-                        <div v-if="each != ''" class="able">
-                            <cptinfo></cptinfo>
+    <div>
+        <hardware></hardware>
+        <center>
+            <div class="lab-container">
+                <div class="top-class">
+                    <p class="table left-table">Bảng viết</p>
+                    <p class="screen">Màn hình</p>
+                    <p class="table left-table">Bảng viết</p>
+                </div>
+                <br>
+                <div class="teacher-area">
+                    <p class="teacher-seat">Bàn giáo viên</p>
+                </div>
+                <div class="student-area">
+                    <div class="student-row" v-for="item in may">
+                        <div class="each-student-seat" v-for="each in item">
+                            <div v-if="each != ''" class="able">
+                                <cptinfo></cptinfo>
+                            </div>
+                            <div v-if="each == ''" class="disable"></div>
                         </div>
-                        <div v-if="each == ''" class="disable"></div>
                     </div>
                 </div>
             </div>
-        </div>
-    </center>
+        </center>
+    </div>
 </template>
 <script>
-import cptinfo from './Computer/ComputerInfoComponent.vue';
+import cptinfo from './computermap/ComputerInfoComponent.vue';
+import hardware from './hardwareinfo/HardWareInfoComponent.vue';
 
 export default {
-    props: ['arr_may'],
     data() {
         return {
             may: [
@@ -37,7 +40,8 @@ export default {
         }
     },
     components: {
-        cptinfo
+        cptinfo,
+        hardware
     }
 }
 
