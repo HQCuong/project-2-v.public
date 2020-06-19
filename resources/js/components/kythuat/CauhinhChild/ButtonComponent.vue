@@ -18,14 +18,17 @@ export default {
         change_current_view(btn) {
         	this.$emit('change_current_view', btn);
             if (btn == 'add_ch') {
+                this.$emit('change_main_view', 1);
                 this.is_add_ch = true;
                 this.is_modi_ch = false;
                 this.is_ch_mon = false;
             } else if (btn == 'modi_ch') {
+                this.$emit('change_main_view', 2);
                 this.is_add_ch = false;
                 this.is_modi_ch = true;
                 this.is_ch_mon = false;
             } else {
+                this.$emit('change_main_view', 3);
                 this.is_add_ch = false;
                 this.is_modi_ch = false;
                 this.is_ch_mon = true;

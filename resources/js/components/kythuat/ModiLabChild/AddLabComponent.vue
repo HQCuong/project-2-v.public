@@ -13,6 +13,7 @@
             <template slot="noOptions">Chưa chọn tòa</template>
         </multiselect>
         <br>
+        <br>
         <form>
             <div class="form-group">
                 <label for="insertSeats">Số chỗ ngồi</label>

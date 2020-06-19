@@ -13296,7 +13296,7 @@ fieldset[disabled][disabled] .has-rose .form-control,
 }
 
 .bmd-form-group label {
-    color: #AAAAAA;
+    color: #333333;
 }
 
 .bmd-form-group .radio label,
@@ -19765,3 +19765,4 @@ Copyright (c) 2015 Daniel Eden
 }
 
 /*# sourceMappingURL=dashboard-free.css.map */
+

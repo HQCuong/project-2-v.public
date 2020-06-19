@@ -6,7 +6,7 @@ import quan_ly_lab from './components/kythuat/QuanLyLabComponent.vue';
 import cau_hinh from './components/kythuat/CauHinhComponent.vue';
 import thiet_bi from './components/kythuat/ThietBiComponent.vue';
 
-import lich_gv from './components/giaovien/LichGiaoVienComponent.vue';
+import lich_gv from './components/giaovien/GiaoVienComponent.vue';
 
 import ngay_nghi from './components/giaovu/NgayNghiComponent.vue';
 import them_lich_hoc from './components/giaovu/ThemLichComponent.vue';

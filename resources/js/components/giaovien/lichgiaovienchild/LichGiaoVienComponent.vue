@@ -1,16 +1,5 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">Xem lich</div>
-                    <div class="card-body">
-                        <FullCalendar defaultView="dayGridMonth" :header="headers" :plugins="calendarPlugins" :events="events" :displayEventEnd="true" :eventTimeFormat="eventTimeFormat"/>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <FullCalendar defaultView="dayGridMonth" :header="headers" :plugins="calendarPlugins" :events="events" :displayEventEnd="true" :eventTimeFormat="eventTimeFormat" />
 </template>
 <script>
 import FullCalendar from '@fullcalendar/vue';
@@ -57,4 +46,5 @@ export default {
 .title-font {
     font-size: 50px;
 }
+
 </style>
