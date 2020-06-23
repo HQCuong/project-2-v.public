@@ -58,6 +58,7 @@ Vue.component('navbar-component', require('./components/layout/NavbarComponent.v
 Vue.component('sidebar-component', require('./components/layout/SidebarComponent.vue').default);
 Vue.component('footer-component', require('./components/layout/FooterComponent.vue').default);
 
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

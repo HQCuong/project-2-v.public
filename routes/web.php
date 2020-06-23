@@ -15,8 +15,12 @@ use Illuminate\Support\Facades\Route;
 
 // laravel-router
 
-Route::get('/', function () {
-    return view('app');
+Route::get('/', function() {
+	return view('login');
+});
+
+Route::get('/home', function() {
+	return view('app');
 });
 
 // vue-router

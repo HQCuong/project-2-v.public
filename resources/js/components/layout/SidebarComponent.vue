@@ -1,6 +1,6 @@
 <template>
     <div class="sidebar" data-color="azure" data-background-color="white" data-image="./img/sidebar-1.jpg">
-        <div class="logo"><a href="/" class="simple-text logo-normal">
+        <div class="logo"><a href="/home" class="simple-text logo-normal">
                 HOME
             </a></div>
         <div class="sidebar-wrapper">

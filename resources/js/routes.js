@@ -1,4 +1,4 @@
-import home from './components/HomeComponent.vue';
+import home from './components/home/HomeComponent.vue';
 
 import thong_tin_lab from './components/general/ShowLabComponent.vue';
 
@@ -16,7 +16,7 @@ import account_setting from './components/nguoidung/AccountSettingComponent.vue'
 
 
 export default [
-	{ path: '/', component: home},
+	{ path: '/home', component: home},
 
     { path: '/xem_thong_tin_lab', component: thong_tin_lab },
 
