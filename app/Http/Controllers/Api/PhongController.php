@@ -3,80 +3,72 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PhongRequest;
+use App\Http\Resources\Phong as PhongResource;
+use App\Models\LichSuChiTiet;
 use App\Models\Phong;
 use Illuminate\Http\Request;
-use App\Http\Requests\PhongRequest;
+use ResponseMau;
 
 class PhongController extends Controller {
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
 	public function getPhongTheoTang(PhongRequest $rq) {
-		$phong = Phong::where('ma_tang',$rq->get('ma_tang'))
-				->join('cau_hinh', 'phong.ma_cau_hinh', 'cau_hinh.ma_cau_hinh')
-				->
+		try {
+			$phong = Phong::where('ma_tang', $rq->get('ma_tang'))
 				->get();
-
+			return ResponseMau::Store([
+				'data' => PhongResource::collection($phong),
+			]);
+		} catch (\Illuminate\Database\QueryException $e) {
+			return ResponseMau::Store([
+				'string' => ResponseMau::ERROR_NOT_DETERMINED,
+				'bool' => false,
+			]);
+		}
 	}
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function create() {
-		//
+	public function taoPhong(PhongRequest $rq) {
+		try {
+			$phong = Phong::create($rq->all());
+			return ResponseMau::Store([
+				'string' => ResponseMau::SUCCESS_PHONG_CREATE,
+			]);
+		} catch (\Illuminate\Database\QueryException $e) {
+			return ResponseMau::Store([
+				'string' => ResponseMau::ERROR_PHONG_CREATE,
+				'bool' => false,
+				'data' =>$e,
+			]);
+		}
 	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @return \Illuminate\Http\Response
-	 */
-	public function store(Request $request) {
-		//
+	public function xoaPhong(PhongRequest $rq) {
+		try {
+			$phong = Phong::find($rq->get('ma_phong'))->delete();
+			return ResponseMau::Store([
+				'string' => ResponseMau::SUCCESS_PHONG_DELETE,
+			]);
+		} catch (\Illuminate\Database\QueryException $e) {
+			return ResponseMau::Store([
+				'string' => ResponseMau::ERROR_PHONG_DELETE,
+				'bool' => false,
+			]);
+		}
 	}
+	public function hienThiPhong(PhongRequest $rq) {
+		try {
+			$phong = Phong::find($rq->get('ma_phong'));
+			$phong_value =
+				dd($phong);
+		} catch (\Illuminate\Database\QueryException $e) {
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  \App\Phong  $phong
-	 * @return \Illuminate\Http\Response
-	 */
-	public function show(Phong $phong) {
-		//
+		}
 	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  \App\Phong  $phong
-	 * @return \Illuminate\Http\Response
-	 */
-	public function edit(Phong $phong) {
-		//
+	public function edit(Request $request) {
+		$ls = LichSuChiTiet::where('ma_lich_su', '2')
+			->where('ma_thiet_bi', '1')
+			->update(['ma_kieu' => 1]);
 	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @param  \App\Phong  $phong
-	 * @return \Illuminate\Http\Response
-	 */
 	public function update(Request $request, Phong $phong) {
 		//
 	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  \App\Phong  $phong
-	 * @return \Illuminate\Http\Response
-	 */
 	public function destroy(Phong $phong) {
 		//
 	}

@@ -15,7 +15,7 @@ class TangRequest extends FormRequest{
 			'ma_toa' =>RegexRule::regex_tang_ma_toa,
 			'ma_tang' =>RegexRule::regex_tang_ma_tang,
 			'ten_tang' =>RegexRule::regex_tang_name,
-			'tinh_trang' =>RegexRule::regex_tang_tinh_trang,
+			'ma_tinh_trang' =>RegexRule::regex_tang_tinh_trang,
 		];
 	}
 	public function messages() {
@@ -49,7 +49,7 @@ class TangRequest extends FormRequest{
 		if ($error->has('ten_tang')) {
 			$messages_return = ResponseMau::ERROR_TANG_TEN_TANG;
 		}
-		if ($error->has('tinh_trang')) {
+		if ($error->has('ma_tinh_trang')) {
 			$messages_return = ResponseMau::ERROR_TANG_TINH_TRANG;
 		}
 		throw new HttpResponseException(

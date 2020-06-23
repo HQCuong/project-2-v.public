@@ -16,10 +16,10 @@ class LichSuChiTiet extends Migration {
 			$table->integer('ma_lich_su')->unsigned();
 			$table->integer('ma_thiet_bi')->unsigned();
 			$table->string('gia', 20)->default('0');
-			$table->integer('ma_kieu')->unsigned();
+			$table->integer('ma_tinh_trang_thiet_bi')->unsigned();
 			$table->foreign('ma_lich_su')->references('ma_lich_su')->on('lich_su');
 			$table->foreign('ma_thiet_bi')->references('ma_thiet_bi')->on('thiet_bi_phong');
-			$table->foreign('ma_kieu')->references('ma_kieu')->on('kieu');
+			$table->foreign('ma_tinh_trang_thiet_bi')->references('ma_tinh_trang_thiet_bi')->on('tinh_trang_thiet_bi');
 			$table->primary(['ma_lich_su', 'ma_thiet_bi']);
 		});
 	}

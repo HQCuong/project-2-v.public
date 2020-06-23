@@ -18,11 +18,8 @@ class ThietBiPhong extends Migration {
 			$table->increments('ma_thiet_bi');
 			$table->integer('ma_phong')->unsigned();
 			$table->integer('ma_cau_hinh')->unsigned();
-			$table->integer('thu_tu')->unsigned()->nullable();
-			//$table->integer('ma_kieu')->default(1)->unsigned();
 			$table->foreign('ma_phong')->references('ma_phong')->on('phong');
 			$table->foreign('ma_cau_hinh')->references('ma_cau_hinh')->on('cau_hinh');
-			//$table->foreign('ma_kieu')->references('ma_kieu')->on('kieu');
 		});
 		for ($i = 0; $i < count($this->ma_phong); $i++) {
 			DB::table($this->name)->insert(array(

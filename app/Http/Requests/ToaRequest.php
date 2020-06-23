@@ -30,7 +30,7 @@ class ToaRequest extends FormRequest
         return [
             'ten_toa' => RegexRule::regex_toa_name,
             'dia_chi' => RegexRule::regex_toa_dia_chi,
-            'tinh_trang' => RegexRule::regex_toa_tinh_trang,
+            'ma_tinh_trang' => RegexRule::regex_toa_tinh_trang,
         ];
     }
     public function messages() {
@@ -53,7 +53,7 @@ class ToaRequest extends FormRequest
         if ($error->has('dia_chi')) {
             $messages_return = ResponseMau::ERROR_TOA_DIA_CHI;
         }
-        if ($error->has('tinh_trang')) {
+        if ($error->has('ma_tinh_trang')) {
             $messages_return = ResponseMau::ERROR_TOA_TINH_TRANG;
         }
         throw new HttpResponseException(
