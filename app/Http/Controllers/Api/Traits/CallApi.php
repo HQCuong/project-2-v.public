@@ -31,6 +31,16 @@ trait CallApi {
             return false;
         }
     }
+    public function postRaw($url) {
+        $client = new \GuzzleHttp\Client();
+        try {
+            $request  = $client->createRequest("POST", $url, ['body' => $this->body]);
+            $response = $client->send($request)->getBody();
+            return json_decode($response, true);
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
     public function setBody($body) {
         $this->body = $body;
         return $this;

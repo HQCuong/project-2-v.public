@@ -142,8 +142,11 @@ class NguoiDungController extends Controller {
     public function kiemTra(NguoiDungRequest $rq) {
         return ResponseMau::Store([]);
     }
-    public function kiemTraKey() {
-        return ResponseMau::Store([]);
+    public function kiemTraKey(Request $rq) {
+        $data = (object) ['cap_do' => $rq->cap_do];
+        return ResponseMau::Store([
+            'data' => $data,
+        ]);
     }
     public function giaoVienClone() {
         try {

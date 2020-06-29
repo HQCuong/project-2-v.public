@@ -46,6 +46,16 @@ class Kernel extends HttpKernel {
             \App\Http\Middleware\CheckLogin::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
+        'CheckKey'              => [
+            \App\Http\Middleware\EncryptCookies::class,
+            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+            \Illuminate\Session\Middleware\StartSession::class,
+            // \Illuminate\Session\Middleware\AuthenticateSession::class,
+            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+            //\App\Http\Middleware\VerifyCsrfToken::class,
+            \App\Http\Middleware\CheckKey::class,
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        ],
         'CheckGiaoVu'           => [
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
