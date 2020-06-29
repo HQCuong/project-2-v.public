@@ -31,9 +31,6 @@ export default {
         }
     },
     methods: {
-        change_current_view() {
-            this.current_view = !this.current_view;
-        },
         get_toa() {
             this.toa = ['A17'];
             if (this.toa.length == 1) {
@@ -47,11 +44,11 @@ export default {
         value_toa() {
             this.value_tang = "";
             this.value_lab = "";
-            this.$emit('show_map_lab', 0);
+            this.$emit('show_table_lab', 0);
             // trong truong hop bo chon toa
             if (this.value_toa == "" || this.value_toa == null) {
                 this.tang = [];
-                this.$emit('show_map_lab', 0);
+                this.$emit('show_table_lab', 0);
                 return false;
             }
             // dung axios gui len lay so tang
@@ -60,11 +57,11 @@ export default {
 
         value_tang() {
             this.value_lab = "";
-            this.$emit('show_map_lab', 0);
+            this.$emit('show_table_lab', 0);
             // trong truong hop bo chon tang 
             if (this.value_tang == "" || this.value_tang == null) {
                 this.lab = [];
-                this.$emit('show_map_lab', 0);
+                this.$emit('show_table_lab', 0);
                 return false
             }
             // dung axios gui len lay so lab
@@ -74,16 +71,11 @@ export default {
         value_lab() {
             // trong truong hop bo chon lab
             if (this.value_lab == "" || this.value_lab == null) {
-                this.$emit('show_map_lab', 0);
+                this.$emit('show_table_lab', 0);
             } else if (this.toa != "" || this.toa != null || this.tang != "" || this.tang != null) {
-                this.$emit('show_map_lab', 1);
+                this.$emit('show_table_lab', 1);
             }
         }
-    },
-    components: {
-        // showmodilab,
-        // addlab,
-        // mainbutton
     }
 }
 

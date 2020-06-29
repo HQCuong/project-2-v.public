@@ -1,4 +1,5 @@
 <template>
+	<div>thiet bi component</div>
 </template>
 
 <script>

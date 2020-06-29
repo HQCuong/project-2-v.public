@@ -52,15 +52,15 @@
                     </router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link class="nav-link" to="/them_ngay_nghi">
+                    <router-link class="nav-link" to="/quan_ly_lich">
                         <i class="material-icons">event_available</i>
-                        <p>Thêm ngày nghỉ</p>
+                        <p>Quản lý lịch dạy</p>
                     </router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link class="nav-link" to="/them_lich_hoc">
-                        <i class="material-icons">event_available</i>
-                        <p>Thêm lịch học</p>
+                    <router-link class="nav-link" to="/quan_ly_nguoi_dung">
+                        <i class="material-icons">account_circle</i>
+                        <p>Quản lý người dùng</p>
                     </router-link>
                 </li>
             </ul>

@@ -1,11 +1,14 @@
 <template>
 	<div>
-		<p>Cấu hình: </p>
+		khong the xac dinh yeu cau cua ban
 	</div>
 </template>
 
 <script>
 export default {
+
+  name: 'CantDirectComponent',
+
   data () {
     return {
 

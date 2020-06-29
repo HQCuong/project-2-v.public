@@ -6,11 +6,7 @@
                     <div class="card-body">
                         <mainselect @show_main_view="show_main_view"></mainselect>
                         <div v-if="main_view">
-                            <!-- button -->
-                            <mainbutton @change_current_view="change_current_view"></mainbutton>
-                            <!-- show lab -->
-                            <showlab v-if="current_view"></showlab>
-                            <labcalendar v-if="!current_view"></labcalendar>
+                            <labcalendar></labcalendar>
                         </div>
                     </div>
                 </div>
@@ -20,15 +16,12 @@
 </template>
 <script>
 import mainselect from './showlabchild/SelectLabComponent.vue';
-import mainbutton from './showlabchild/ButtonComponent.vue';
-import showlab from './showlabchild/MapLabComponent.vue';
 import labcalendar from './showlabchild/LabCalendarComponent.vue';
 
 export default {
     data() {
         return {
-            main_view: false,
-            current_view: true,
+            main_view: false
         }
     },
     methods: {
@@ -44,9 +37,7 @@ export default {
         }
     },
     components: {
-        showlab,
         labcalendar,
-        mainbutton,
         mainselect
     },
 }

@@ -1,24 +1,42 @@
 <template>
     <div>
-        <button :disabled="is_modi" class="btn btn-info" @click="change_current_view">Tùy chỉnh lab</button>
-        <button :disabled="is_add" class="btn btn-info" @click="change_current_view">Thêm lab</button>
+        <router-link to="/quan_ly_lab/danh_sach_lab"><span class="btn btn-info" :class="{active:isListLab}">Danh sách lab</span></router-link>
+        <router-link to="/quan_ly_lab/add_lab"><span class="btn btn-info" :class="{active:isAddLab}">Thêm lab</span></router-link>
     </div>
 </template>
-
 <script>
 export default {
     data() {
         return {
-            is_modi: true,
-            is_add: false
+            isListLab: false,
+            isAddLab: false
         }
     },
-    methods: {
-    	change_current_view() {
-    		this.$emit('change_current_view');
-    		this.is_modi = !this.is_modi;
-    		this.is_add = !this.is_add;
-    	}
+    mounted() {
+        if (this.$router.history.current.path == '/quan_ly_lab/danh_sach_lab') {
+            this.isListLab = true;
+            this.isAddLab = false;
+        } else if (this.$router.history.current.path == '/quan_ly_lab/add_lab') {
+            this.isAddLab = true;
+            this.isListLab = false;
+        } else {
+            this.isListLab = false;
+            this.isAddLab = false;
+        }
+    },
+    watch: {
+        $route(to, from) {
+            if (to.path == '/quan_ly_lab/danh_sach_lab') {
+                this.isListLab = true;
+                this.isAddLab = false;
+            } else if (to.path == '/quan_ly_lab/add_lab') {
+                this.isAddLab = true;
+                this.isListLab = false;
+            } else {
+                this.isListLab = false;
+                this.isAddLab = false;
+            }
+        }
     }
 }
 

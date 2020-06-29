@@ -4,20 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    <link rel="stylesheet" href="{{ asset('/css/material-dashboard.css') }}">
 </head>
 
 <body>
-    <form method="GET">
-        @csrf
-        tai khoan
-        <input type="text" name="tai_khoan">
-        <br>
-        mat khau 
-        <input type="password" name="mat_khau">
-        <br>
-        <button>ok</button>
-    </form>
-
-    <script></script>
+    <div id="app">
+        <login-component></login-component>
+    </div>
+        
+    <script src="{{ asset('/js/core/jquery.min.js') }}"></script>
+    <script src="{{ asset('/js/plugin/jquery.md5.min.js') }}"></script>
+    <script src="{{ asset('/js/app.js') }}"></script>
 </body>
 </html>

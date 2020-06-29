@@ -7,11 +7,11 @@
 window.Vue = require('vue');
 
 // Vue-multiselect
- import Multiselect from 'vue-multiselect'
- Vue.component('multiselect', Multiselect);
+import Multiselect from 'vue-multiselect'
+Vue.component('multiselect', Multiselect);
 
 // Axios
-import axios from 'axios';
+window.axios = require('axios');
 
 // Vue-router
 import VueRouter from 'vue-router';
@@ -54,9 +54,10 @@ const store = new Vuex.Store({
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('navbar-component', require('./components/layout/NavbarComponent.vue').default);
-Vue.component('sidebar-component', require('./components/layout/SidebarComponent.vue').default);
-Vue.component('footer-component', require('./components/layout/FooterComponent.vue').default);
+Vue.component('navbar-component', require('./layout/NavbarComponent.vue').default);
+Vue.component('sidebar-component', require('./layout/SidebarComponent.vue').default);
+Vue.component('footer-component', require('./layout/FooterComponent.vue').default);
+Vue.component('login-component', require('./components/LoginComponent.vue').default);
 
 
 /**
