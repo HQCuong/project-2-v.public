@@ -8,10 +8,15 @@ use Closure;
 class CheckKey {
     use CallApi;
     public function handle($request, Closure $next) {
-        $this->setBody(['key' => $request->key]);
-        $result = (object) $this->postRaw(route('api.nguoidung.kiemTraKey'));
-        if ($result->success) {
-            return $next($request);
+        if (!empty($_COOKIE['key'])) {
+            $this->setBody(['key' => $_COOKIE['key']]);
+            $result = (object) $this->postRaw(route('api.nguoidung.kiemTraKey'));
+            if ($result->success) {
+                dd('done');
+                return $next($request);
+            } else {
+                dd("No ACCSECS");
+            }
         } else {
             dd("No ACCSECS");
         }

@@ -41,7 +41,7 @@ export default {
                 .then((response) => {
                     if (response.data.success) {
                         document.cookie = `key=${response.data.data.key}`;
-                        window.location.href = "/home";
+                        //window.location.href = "/home";
                     } else {
                         this.error = response.data.message;
                     }
