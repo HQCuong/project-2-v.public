@@ -10,7 +10,7 @@ class InsertCa extends Migration {
     public function up() {
         for ($i = 0; $i < count($this->gio_bat_dau); $i++) {
             DB::table($this->name)->insert(array(
-                'ma_ca'        => $i,
+                'ma_ca'        => $i + 1,
                 'gio_bat_dau'  => $this->gio_bat_dau[$i],
                 'gio_ket_thuc' => $this->gio_ket_thuc[$i],
             ));

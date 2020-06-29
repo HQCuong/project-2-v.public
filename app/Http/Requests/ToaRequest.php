@@ -3,61 +3,29 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Contracts\Validation\Validator;
 use RegexRule;
 use ResponseMau;
 
-class ToaRequest extends FormRequest
-{
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules()
-    {
+class ToaRequest extends FormRequest {
+    use Traits\ListError;
+    public function rules() {
         return [
-            'ten_toa' => RegexRule::regex_toa_name,
-            'dia_chi' => RegexRule::regex_toa_dia_chi,
-            'ma_tinh_trang' => RegexRule::regex_toa_tinh_trang,
-        ];
-    }
-    public function messages() {
-        return [
-            // 'required' => ':attributes trùng hoặc chưa điền',
+            'ten_toa'       => RegexRule::REGEX_TOA_NAME,
+            'dia_chi'       => RegexRule::REGEX_TOA_DIA_CHI,
+            'ma_tinh_trang' => RegexRule::REGEX_TOA_TINH_TRANG,
         ];
     }
     public function attributes() {
         return [
-            // 'email' => 'Email',
-            // 'sdt' => 'Sđt',
+            'ten_toa'    => 'Tên tòa',
+            'dia_chi'    => 'Địa chỉ',
+            'tinh_trang' => 'Tình trạng',
         ];
     }
-    protected function failedValidation(Validator $validator) {
-        $error = $validator->messages();
-        $messages_return = ResponseMau::ERROR_NOT_DETERMINED;
-        if ($error->has('ten_toa')) {
-            $messages_return = ResponseMau::ERROR_TOA_TEN_TOA;
-        }
-        if ($error->has('dia_chi')) {
-            $messages_return = ResponseMau::ERROR_TOA_DIA_CHI;
-        }
-        if ($error->has('ma_tinh_trang')) {
-            $messages_return = ResponseMau::ERROR_TOA_TINH_TRANG;
-        }
-        throw new HttpResponseException(
-            ResponseMau::Store(['bool' => false, 'string' => $messages_return])
-        );
+    public function messages() {
+        return array_merge($this->defaultMessages(), [
+            'ten_toa.regex' => ResponseMau::ERROR_TOA_TEN_TOA,
+            'dia_chi.regex' => ResponseMau::ERROR_TOA_DIA_CHI,
+        ]);
     }
 }

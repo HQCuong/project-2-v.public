@@ -2,67 +2,36 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\RegexRule;
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
+use RegexRule;
 use ResponseMau;
 
 class NguoiDungRequest extends FormRequest {
-	/**
-	 * Determine if the user is authorized to make this request.
-	 *
-	 * @return bool
-	 */
-	public function authorize() {
-		return true;
-	}
-
-	/**
-	 * Get the validation rules that apply to the request.
-	 *
-	 * @return array
-	 */
-	public function rules() {
-		return [
-			'email' => RegexRule::regex_email_rule,
-			'sdt' => RegexRule::regex_sdt_rule,
-			'tai_khoan' => RegexRule::regex_user_name_rule,
-			'mat_khau' => RegexRule::regex_password_rule,
-			'mat_khau_moi' => RegexRule::regex_password_rule,
-		];
-	}
-	public function messages() {
-		return [
-			// 'required' => ':attributes trùng hoặc chưa điền',
-		];
-	}
-	public function attributes() {
-		return [
-			// 'email' => 'Email',
-			// 'sdt' => 'Sđt',
-		];
-	}
-	protected function failedValidation(Validator $validator) {
-		$error = $validator->messages();
-		$messages_return = ResponseMau::ERROR_NOT_DETERMINED;
-		if ($error->has('sdt')) {
-			$messages_return = ResponseMau::ERROR_USER_DUPLICATE_SDT;
-		}
-		if ($error->has('email')) {
-			$messages_return = ResponseMau::ERROR_USER_DUPLICATE_EMAIL;
-		}
-		if ($error->has('tai_khoan')) {
-			$messages_return = ResponseMau::ERROR_USER_NAME;
-		}
-		if ($error->has('mat_khau_moi')) {
-			$messages_return = ResponseMau::ERROR_USER_PASSWORD_NEW;
-		}
-		if ($error->has(['email', 'sdt'])) {
-			$messages_return = ResponseMau::ERROR_USER_DUPLICATE_INFO;
-		}
-		throw new HttpResponseException(
-			ResponseMau::Store(['bool' => false, 'string' => $messages_return])
-		);
-	}
+    use Traits\ListError;
+    public function rules() {
+        return [
+            'email'        => RegexRule::REGEX_EMAIL_RULE,
+            'sdt'          => RegexRule::REGEX_SDT_RULE,
+            'tai_khoan'    => RegexRule::REGEX_USER_NAME_RULE,
+            'mat_khau'     => RegexRule::REGEX_PASSWORD_RULE,
+            'mat_khau_moi' => RegexRule::REGEX_PASSWORD_RULE,
+            'ma_cap_do'    => RegexRule::REGEX_MA_CAP_DO,
+        ];
+    }
+    public function attributes() {
+        return [
+            'email'        => 'Email',
+            'sdt'          => 'Số điện thoại',
+            'tai_khoan'    => 'Tài khoản',
+            'mat_khau'     => 'Mật khẩu',
+            'mat_khau_moi' => 'Mật khẩu mới',
+            'ma_cap_do'    => 'Cấp độ',
+        ];
+    }
+    public function messages() {
+        return array_merge($this->defaultMessages(), [
+            'tai_khoan.regex' => ResponseMau::ERROR_USER_NAME,
+            'ma_cap_do.regex' => ResponseMau::ERROR_USER_MA_CAP_DO,
+        ]);
+    }
 }

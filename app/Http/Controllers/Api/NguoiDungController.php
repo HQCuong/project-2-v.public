@@ -3,61 +3,59 @@
 namespace App\Http\Controllers\Api;
 
 use App;
-//use App\Http\Controllers\Api\Response;
+use App\Http\Controllers\Api\GiaoVienController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\NguoiDungRequest;
-use App\Http\Resources\NguoiDung as NguoiDungResource;
+use App\Http\Resources\NguoiDungResource;
 use App\Models\NguoiDung;
-use Illuminate\Database\QueryException;
+use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use RegexRule;
 use ResponseMau;
 
-//
-//demo
 class NguoiDungController extends Controller {
-    public function create(NguoiDungRequest $rq) {
+    use Traits\ReturnError;
+    use Traits\CallApi;
+    public function taoNguoiDung(NguoiDungRequest $rq) {
         try {
-            $user            = new NguoiDung();
-            $user->tai_khoan = $rq->get('tai_khoan');
-            $user->email     = $rq->get('email');
-            $user->sdt       = $rq->get('sdt');
-            $user->cap_do    = 2;
-            $user->mat_khau  = Hash::make($rq->get('mat_khau'));
-            $user->key       = Str::random(256);
-            $user->save();
+            $user = new NguoiDung();
+            $user = NguoiDung::create([
+                'tai_khoan' => strtolower($rq->get('tai_khoan')),
+                'email'     => strtolower($rq->get('email')),
+                'sdt'       => $rq->has('sdt') ? $rq->get('sdt') : "0" . rand(000000000, 999999999),
+                'mat_khau'  => Hash::make(strtolower($rq->get('mat_khau'))),
+                'key'       => Str::random(256),
+                'cap_do'    => $rq->has('cap_do') ? $rq->get('cap_do') : 3,
+            ]);
             return ResponseMau::Store([
                 'string' => ResponseMau::SUCCESS_USER_CREATE,
-                'data'   => NguoiDungResource::viewinfo($user),
-                'code'   => Response::HTTP_OK,
+                'data'   => new NguoiDungResource($user),
             ]);
-        } catch (\Illuminate\Database\QueryException $e) {
-            return ResponseMau::Store([
-                'string' => ResponseMau::ERROR_USER_DUPLICATE_INFO,
-                'bool'   => false,
-            ]);
+        } catch (Exception $e) {
+            return $this->endCatch();
         }
     }
-    public function login($tai_khoan, $mat_khau) {
-        $user = NguoiDung::where('tai_khoan', $tai_khoan)
-            ->orWhere('email', $tai_khoan)
-            ->first();
-        if (!is_null($user) && Hash::check($mat_khau, $user->mat_khau) == true) {
-            $user->key = Str::random(256);
-            $user->save();
-            return ResponseMau::Store([
-                'data' => new NguoiDungResource($user),
-            ]);
-        } else {
-            return ResponseMau::Store([
-                'bool'   => false,
-                'string' => ResponseMau::ERROR_USER_LOGIN,
-            ]);
+    public function dangNhap($tai_khoan, $mat_khau) {
+        try {
+            $user = NguoiDung::where('tai_khoan', $tai_khoan)
+                ->orWhere('email', $tai_khoan)
+                ->first();
+            if (!is_null($user) && Hash::check($mat_khau, $user->mat_khau) == true) {
+                $user->key = Str::random(256);
+                $user->save();
+                return ResponseMau::Store([
+                    'data' => (new NguoiDungResource($user))->fullInfo(),
+                ]);
+            } else {
+                return $this->endCatchValue(ResponseMau::ERROR_USER_LOGIN);
+            }
+        } catch (Exception $e) {
+            return $this->endCatch();
         }
     }
-    public function logout(Request $rq) {
+    public function dangXuat(NguoiDungRequest $rq) {
         try {
             $user      = NguoiDung::where('ma_nguoi_dung', $rq->get('ma_nguoi_dung'))->first();
             $user->key = Str::random(256);
@@ -65,88 +63,171 @@ class NguoiDungController extends Controller {
             return ResponseMau::Store([
                 'string' => ResponseMau::SUCCESS_USER_LOGOUT,
             ]);
-        } catch (\Illuminate\Database\QueryException $e) {
-            return ResponseMau::Store([
-                'string' => ResponseMau::ERROR_NOT_DETERMINED,
-                'bool'   => false,
-            ]);
+        } catch (Exception $e) {
+            return $this->endCatch();
         }
     }
-    public function changepassword(NguoiDungRequest $rq) {
-        $user = NguoiDung::where('ma_nguoi_dung', $rq->get('ma_nguoi_dung'))->first();
-        if (Hash::check($rq->get('mat_khau'), $user->mat_khau) == true) {
-            $user->mat_khau = Hash::make($rq->get('mat_khau_moi'));
-            $user->key      = Str::random(256);
-            $user->save();
-            return ResponseMau::Store([
-                'string' => ResponseMau::SUCCESS_USER_CHANGEPASSWORD,
-                'data'   => new NguoiDungResource($user),
-            ]);
-        } else {
-            return ResponseMau::Store([
-                'bool'   => false,
-                'string' => ResponseMau::ERROR_USER_CHANGEPASSWORD,
-            ]);
-        }
-    }
-    public function resetpassword(Request $rq) {
-        return ResponseMau::Store([
-            'string' => ResponseMau::ERROR_USER_RESETPASSWORD,
-            'bool'   => false,
-        ]);
-    }
-    public function updateinfo(NguoiDungRequest $rq, $id) {
+    public function doiMatKhau(NguoiDungRequest $rq) {
         try {
-            if ($rq->cap_do == 0 && $id != $rq->get('ma_nguoi_dung')) {
-                $user = NguoiDung::where('ma_nguoi_dung', $id)->first();
-                if ($user->cap_do == 0) {
-                    return ResponseMau::Store([
-                        'bool'   => false,
-                        'string' => ResponseMau::ERROR_USER_UPDATE_INFO_CAP_DO,
-                    ]);
-                }
-                if (!is_null($rq->get('mat_khau'))) {
-                    $user->mat_khau = Hash::make($rq->get('mat_khau'));
-                }
-
-            } else {
-                $user = NguoiDung::where('ma_nguoi_dung', $rq->get('ma_nguoi_dung'))->first();
+            $user = NguoiDung::where('ma_nguoi_dung', $rq->get('ma_nguoi_dung'))->first();
+            if ($rq->get('mat_khau') == $rq->get('mat_khau_moi')) {
+                return $this->endCatchValue(ResponseMau::ERROR_USER_PASS_DUPLICATE);
             }
-            $user->tai_khoan = !is_null($rq->get('tai_khoan')) ? $rq->get('tai_khoan') : $user->tai_khoan;
-            $user->email     = !is_null($rq->get('email')) ? $rq->get('email') : $user->email;
-            $user->sdt       = !is_null($rq->get('sdt')) ? $rq->get('sdt') : $user->sdt;
-            $user->key       = Str::random(256);
+            if (Hash::check($rq->get('mat_khau'), $user->mat_khau) == true) {
+                $user->mat_khau = Hash::make($rq->get('mat_khau_moi'));
+                $user->key      = Str::random(256);
+                $user->save();
+                return ResponseMau::Store([
+                    'data'   => (new NguoiDungResource($user))->key(),
+                    'string' => ResponseMau::SUCCESS_USER_CHANGEPASSWORD,
+                ]);
+            } else {
+                return $this->endCatchValue(ResponseMau::ERROR_USER_PASS_OLD);
+            }
+        } catch (Exception $e) {
+            return $this->endCatchValue(ResponseMau::ERROR_USER_CHANGEPASSWORD);
+        }
+    }
+    public function khoiPhucMatKhau(Request $rq) {
+        return $this->endCatchValue(ResponseMau::ERROR_USER_RESETPASSWORD);
+    }
+    public function capNhatThongTin(NguoiDungRequest $rq, $id) {
+        try {
+            if ($id != $rq->get('ma_nguoi_dung')) {
+                if ($rq->get('cap_do') == 1) {
+                    $user = NguoiDung::find($id);
+                    if ($user->cap_do == 1) {
+                        return $this->endCatchValue(ResponseMau::ERROR_USER_UPDATE_INFO_CAP_DO);
+                    }
+                    if ($rq->has('ma_cap_do')) {
+                        $user->ma_cap_do = $rq->get('ma_cap_do');
+                    }
+                }
+            } else {
+                $user = NguoiDung::find($rq->get('ma_nguoi_dung'));
+            }
+            if ($rq->has('tai_khoan')) {
+                $user->tai_khoan = $rq->get('tai_khoan');
+            }
+            if ($rq->has('email')) {
+                $user->email = $rq->get('email');
+            }
+            if ($rq->has('sdt')) {
+                $user->sdt = $rq->get('sdt');
+            }
+            if ($rq->has('mat_khau')) {
+                $user->mat_khau = Hash::make($rq->get('mat_khau'));
+            }
+            $user->key = Str::random(256);
             $user->save();
             return ResponseMau::Store([
                 'string' => ResponseMau::SUCCESS_USER_UPDATE_INFO,
                 'data'   => new NguoiDungResource($user),
             ]);
-        } catch (\Illuminate\Database\QueryException $e) {
-            return ResponseMau::Store([
-                'string' => ResponseMau::ERROR_NOT_DETERMINED,
-                'bool'   => false,
-            ]);
+        } catch (Exception $e) {
+            return $this->endCatch();
         }
     }
-    public function viewgiaovienkithuat() {
+    public function danhSachGiaoVienKiThuat() {
         try {
-            $user = NguoiDung::where('cap_do', 1)
-                ->orWhere('cap_do', 2)
-                ->get();
+            $user = NguoiDung::where('ma_cap_do', '!=', 1)->get();
             return ResponseMau::Store([
-                'data' => NguoiDungResource::viewmuti($user),
+                'string' => ResponseMau::SUCCESS_GET,
+                'data'   => NguoiDungResource::Collection($user),
             ]);
-        } catch (\Illuminate\Database\QueryException $e) {
-            return ResponseMau::Store([
-                'bool'   => false,
-                'string' => ResponseMau::ERROR_NOT_DETERMINED,
-            ]);
+        } catch (Exception $e) {
+            return $this->endCatchValue(ResponseMau::ERROR_GET);
         }
     }
-    public function duplicateEmailSdt(NguoiDungRequest $rq) {
+    public function kiemTra(NguoiDungRequest $rq) {
         return ResponseMau::Store([]);
     }
-    public function checkKey() {
+    public function kiemTraKey() {
         return ResponseMau::Store([]);
+    }
+    public function giaoVienClone() {
+        try {
+            $list_gv = (new GiaoVienController)->getAllInfo();
+            $re      = "/^[a-z][a-z0-9_\.]{3,32}/";
+            $create  = 0;
+            $update  = 0;
+            $data    = (object) ['create' => [], 'update' => []];
+            foreach ($list_gv as $key => $value) {
+                preg_match_all($re, $value['email'], $matches);
+                if (count($matches[0]) == 1) {
+                    $value['tai_khoan'] = $matches[0][0];
+                } else {
+                    continue;
+                }
+                $value['mat_khau'] = $value['password'];
+                $value             = new Request($value);
+                try {
+                    $validatedData = $value->validate([
+                        'ho_ten'    => RegexRule::REGEX_HO_TEN,
+                        'email'     => RegexRule::REGEX_EMAIL_RULE_C,
+                        'sdt'       => RegexRule::REGEX_SDT_RULE,
+                        'tai_khoan' => RegexRule::REGEX_USER_NAME_RULE,
+                        'mat_khau'  => RegexRule::REGEX_PASSWORD_RULE,
+                        'ma_cap_do' => RegexRule::REGEX_MA_CAP_DO_C,
+                    ]);
+                    $validatedData['key']      = Str::random(256);
+                    $validatedData['mat_khau'] = Hash::make($validatedData['mat_khau']);
+                    $user                      = NguoiDung::create($validatedData);
+                    $create++;
+                    array_push($data->create, new NguoiDungResource($user));
+                } catch (Exception $e) {
+                    try {
+                        $validatedData = $value->validate([
+                            'ho_ten'    => RegexRule::REGEX_HO_TEN,
+                            'email'     => RegexRule::REGEX_EMAIL_CHECK_IN,
+                            'sdt'       => RegexRule::REGEX_SDT_CHECK_IN,
+                            'mat_khau'  => RegexRule::REGEX_PASSWORD_RULE,
+                            'ma_cap_do' => RegexRule::REGEX_MA_CAP_DO_C,
+                        ]);
+                        $changer = [];
+                        $user    = NguoiDung::where('email', $value['email'])
+                            ->where('sdt', $value['sdt'])->first();
+                        if ($user->ho_ten != $validatedData['ho_ten']) {
+                            $old          = $user->ho_ten;
+                            $user->ho_ten = $validatedData['ho_ten'];
+                            $changer      = array_merge($changer, [
+                                'old.ho_ten' => $old,
+                                'new.ho_ten' => $validatedData['ho_ten'],
+                            ]);
+                        }
+                        if ($user->ma_cap_do != $validatedData['ma_cap_do']) {
+                            $old             = $user->ma_cap_do;
+                            $user->ma_cap_do = $validatedData['ma_cap_do'];
+                            $changer         = array_merge($changer, [
+                                'old.ma_cap_do' => $old,
+                                'new.ma_cap_do' => $validatedData['ma_cap_do'],
+                            ]);
+                        }
+                        if (Hash::check($validatedData['mat_khau'], $user->mat_khau) == false) {
+                            $changer        = array_merge($changer, ['mat_khau' => true]);
+                            $user->mat_khau = Hash::make($validatedData['mat_khau']);
+                        }
+                        $user->key = Str::random(256);
+                        $user->save();
+                        if (count($changer) > 0) {
+                            $update++;
+                            $arr = (object) [
+                                'email'   => $value['email'],
+                                'sdt'     => $value['sdt'],
+                                'changer' => $changer];
+                            array_push($data->update, $arr);
+                        }
+                    } catch (Exception $e) {
+                    }
+                }
+            }
+            return ResponseMau::Store([
+                'string' => "Đã tạo mới " . $create . " bản ghi và Cập nhật " . $update . " bản ghi",
+                'data'   => $data,
+            ]);
+        } catch (Exception $e) {
+            return $this->endCatch();
+        }
     }
 }
+//

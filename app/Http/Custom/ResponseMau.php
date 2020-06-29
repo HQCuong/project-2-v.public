@@ -7,6 +7,9 @@ use Illuminate\Http\Response;
 
 class ResponseMau {
     private $success, $message, $data;
+    const SUCCESS_DONE_DATA = 'Lấy dữ liệu thành công';
+    const SUCCESS_GET       = 'Lấy dữ liệu thành công';
+    const SUCCESS_UPDATE    = 'Cập nhật dữ liệu thành công';
     ///success return
     const SUCCESS_USER_CREATE         = 'Tạo tài khoản thành công';
     const SUCCESS_USER_LOGOUT         = 'Đăng xuất thành công';
@@ -21,31 +24,41 @@ class ResponseMau {
     //Cấu Hình
     const SUCCESS_CAU_HINH_CREATE = 'Thêm cấu hình thành công !';
     const SUCCESS_CAU_HINH        = 'Lấy thông tin thành công !';
+    //Ngay Nghi
+    const SUCCESS_NGAY_NGHI_THEM = 'Thêm ngày nghỉ thành công';
+    const SUCCESS_NGAY_NGHI_SUA  = 'Sửa ngày nghỉ thành công';
+    const SUCCESS_NGAY_NGHI_XOA  = 'Xóa ngày nghỉ thành công';
     ///ERROR RETURN
-    const ERROR_NOT_DETERMINED          = 'Có lỗi từ hệ thống hãy thực hiện lại hoặc liên hệ kĩ thuật';
-    const ERROR_USER_DUPLICATE_INFO     = 'Email hoặc SĐT có thể đã bị trùng hoặc không hợp lệ';
-    const ERROR_USER_INFO               = 'Bị trùng hoặc không hợp lệ';
-    const ERROR_USER_DUPLICATE_EMAIL    = 'Email có thể đã bị trùng hoặc không hợp lệ';
-    const ERROR_USER_DUPLICATE_SDT      = 'SĐT có thể đã bị trùng hoặc không hợp lệ';
-    const ERROR_USER_CREATE_PRIVATE_KEY = 'Bạn không có quyền tạo tài khoản';
+    //NguoiDung
+    const ERROR_NOT_DETERMINED = 'Có lỗi từ hệ thống hãy thực hiện lại hoặc liên hệ kĩ thuật';
+    const ERROR_GET            = 'Lấy dữ liệu thất bại';
+    const ERROR_UPDATE         = 'Cập nhật dữ liệu thất bại';
+    const ERROR_KEY            = 'Bạn không có quyền truy cập';
+
+    const ERROR_USER_NAME               = ':attribute cần từ 4-20 kí tự và không có kí tự đặc biệt';
+    const ERROR_USER_PASSWORD_ILLEGAL   = ':attribute cần từ 5-32 kí tự và không bao gồm kí tự đặc biệt';
+    const ERROR_USER_MA_CAP_DO          = ':attribute chỉ có thể chọn Giáo Viên hoặc Kĩ Thuật';
     const ERROR_USER_CHANGEPASSWORD     = 'Đổi mật khẩu thất bại';
+    const ERROR_USER_PASS_DUPLICATE     = 'Đổi thất bại, mật khẩu mới phải khác mật khẩu hiện tại';
+    const ERROR_USER_PASS_OLD           = 'Mật khẩu hiện tại bạn nhập không chính xác ';
     const ERROR_USER_RESETPASSWORD      = 'Chức năng chưa phát triển';
     const ERROR_USER_UPDATE_INFO        = 'Thay đổi thông tin không thành công';
-    const ERROR_USER_UPDATE_INFO_CAP_DO = 'Bạn không được phép cập nhật mật khẩu cho Giáo Vụ khác';
+    const ERROR_USER_UPDATE_INFO_CAP_DO = 'Bạn không được phép cập nhật thông tin cho Giáo Vụ khác';
     const ERROR_USER_LOGIN              = 'Đăng nhập thất bại kiểm tra lại tài khoản hoặc mật khẩu';
-    const ERROR_USER_NAME               = 'Tên tài khoản bị trùng hoặc không hợp lệ (4-20 kí tự và không có kí tự đặc biệt)';
-    const ERROR_USER_PASSWORD_ILLEGAL   = 'Tên tài khoản bị trùng hoặc không hợp lệ (4-20 kí tự và không có kí tự đặc biệt)';
-    const ERROR_KEY                     = 'Bạn không có quyền truy cập';
-    const ERROR_TOA_TEN_TOA             = 'Tên tòa không hợp lệ (từ 6-20 kí tự)';
-    const ERROR_TOA_DIA_CHI             = 'Địa chỉ không hợp lệ (từ 6-100 kí tự)';
-    const ERROR_TOA_TINH_TRANG          = 'Trạng thái không hợp lệ';
-    const ERROR_TOA_UPDATE_INFO         = 'Cập nhật thông tin thất bại có lỗi của hệ thống';
-    const ERROR_TANG_MA_TOA             = 'Mã tòa bị trùng hoặc không hợp lệ';
-    const ERROR_TANG_TINH_TRANG         = 'Trạng thái không hợp lệ';
-    const ERROR_TANG_TEN_TANG           = 'Tên tầng bị trùng hoặc không hợp lệ (4-20 kí tự và không có kí tự đặc biệt)';
-    const ERROR_TANG_MA_TANG            = 'Mã tầng bị trùng hoặc không hợp lệ';
-    const ERROR_TANG_UPDATE_INFO        = 'Cập nhật thông tin thất bại có lỗi của hệ thống';
-    const ERROR_TANG_CREATE             = 'Tao tầng thất bại hãy kiểm tra lại các dữ liệu';
+
+    //Tòa
+    const ERROR_TOA_TEN_TOA     = ':attribute chỉ từ 6-20 kí tự và không chứa kí tự đặc biệt';
+    const ERROR_TOA_DIA_CHI     = ':attribute chỉ từ 6-100 kí tự và không chứa kí tự đặc biệt';
+    const ERROR_TOA_UPDATE_INFO = 'Cập nhật thông tin thất bại có lỗi của hệ thống';
+    const ERROR_TANG_MA_TOA     = 'Mã tòa bị trùng hoặc không hợp lệ';
+    const ERROR_TANG_TINH_TRANG = 'Trạng thái không hợp lệ';
+    const ERROR_TOA_MA_TOA      = 'Không có Tòa để update';
+
+    //Tang
+    const ERROR_TANG_TEN_TANG    = 'Tên tầng bị trùng hoặc không hợp lệ (4-20 kí tự và không có kí tự đặc biệt)';
+    const ERROR_TANG_MA_TANG     = 'Mã tầng bị trùng hoặc không hợp lệ';
+    const ERROR_TANG_UPDATE_INFO = 'Cập nhật thông tin thất bại có lỗi của hệ thống';
+    const ERROR_TANG_CREATE      = 'Tao tầng thất bại hãy kiểm tra lại các dữ liệu';
     //Phong
     const ERROR_PHONG_CREATE     = 'Tao phòng thất bại hãy kiểm tra lại các dữ liệu';
     const ERROR_PHONG_DELETE     = 'Xóa phòng thất bại';
@@ -70,6 +83,13 @@ class ResponseMau {
     const ERROR_CAU_HINH_MA_LOAI       = 'Mã Loại không tồn tại !';
     const ERROR_CAU_HINH_TAO           = 'Tạo thông tin cho thiết bị thất bại !';
     const ERROR_CAU_HINH_GET_INFO_CASE = 'Lấy thông tin thất bại !';
+    const ERROR_GIAO_VIEN_API          = 'Lấy thông tin Giáo Viên thất bại !';
+
+    //Ngay Nghi
+
+    const ERROR_NGAY_NGHI_THEM = 'Ngày nghỉ đã tồn tại hoặc không hợp lệ !';
+    const ERROR_NGAY_NGHI_SUA  = 'Ngày nghỉ không tồn tại hoặc không hợp lệ !';
+    const ERROR_NGAY_NGHI_XOA  = 'Ngày nghỉ không tồn tại hoặc không hợp lệ !';
     public function __construct() {
         $this->success = true;
         $this->message = '';

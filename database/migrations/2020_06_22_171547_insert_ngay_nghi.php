@@ -11,7 +11,7 @@ class InsertNgayNghi extends Migration {
     private $name         = 'ngay_nghi';
     private $ngay         = ['2020-06-23', '2020-07-01', '2020-06-29'];
     private $ma_giao_vien = ['1', '0', '7'];
-    private $ma_ca        = ['1', '0', '5'];
+    private $ma_ca        = ['1', '4', '5'];
     public function up() {
         for ($i = 0; $i < count($this->ngay); $i++) {
             DB::table($this->name)->insert(array(
