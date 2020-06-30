@@ -7,6 +7,8 @@
                         <!-- button -->
                         <mainbutton></mainbutton>
                         <br>
+                        <maininfo></maininfo>
+                        <br>
                         <!-- main view -->
                         <router-view></router-view>
                     </div>
@@ -17,6 +19,7 @@
 </template>
 <script>
 import mainbutton from './modilabchild/ButtonComponent.vue';
+import maininfo from './modilabchild/MainInfoComponent.vue';
 
 export default {
     data() {
@@ -25,7 +28,8 @@ export default {
         }
     },
     components: {
-        mainbutton
+        mainbutton,
+        maininfo
     }
 }
 

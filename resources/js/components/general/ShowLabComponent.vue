@@ -4,6 +4,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
+                        <maininfo></maininfo>
                         <mainselect @show_main_view="show_main_view"></mainselect>
                         <div v-if="main_view">
                             <labcalendar></labcalendar>
@@ -17,6 +18,7 @@
 <script>
 import mainselect from './showlabchild/SelectLabComponent.vue';
 import labcalendar from './showlabchild/LabCalendarComponent.vue';
+import maininfo from './showlabchild/MainInfoComponent.vue';
 
 export default {
     data() {
@@ -38,7 +40,8 @@ export default {
     },
     components: {
         labcalendar,
-        mainselect
+        mainselect,
+        maininfo
     },
 }
 
