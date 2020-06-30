@@ -5,7 +5,7 @@
                 <div class="card">
                     <div class="card-body">
                         <!-- button -->
-                        <mainbutton @change_main_view="change_main_view"></mainbutton>
+                        <mainbutton></mainbutton>
                         <br>
                         <maininfo></maininfo>
                         <br>
@@ -31,21 +31,7 @@ export default {
         }
     },
     methods: {
-        change_main_view(main_view) {
-            if (main_view == 1) {
-                this.view_add_ch = true;
-                this.view_modi_ch = false;
-                this.view_ch_mon = false;
-            } else if (main_view == 2) {
-                this.view_add_ch = false;
-                this.view_modi_ch = true;
-                this.view_ch_mon = false;
-            } else {
-                this.view_add_ch = false;
-                this.view_modi_ch = false;
-                this.view_ch_mon = true;
-            }
-        }
+
     },
     components: {
         mainbutton,
