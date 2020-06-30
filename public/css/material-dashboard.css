@@ -12049,7 +12049,7 @@ fieldset[disabled] .is-focused .switch label:focus {
 
 [class^='bmd-label'],
 [class*=' bmd-label'] {
-    color: #999999;
+    color: #333333;
 }
 
 .form-control,
@@ -17041,7 +17041,7 @@ a .material-icons {
 label {
     font-size: 14px;
     line-height: 1.42857;
-    color: #AAAAAA;
+    color: #333333;
     font-weight: 400;
 }
 

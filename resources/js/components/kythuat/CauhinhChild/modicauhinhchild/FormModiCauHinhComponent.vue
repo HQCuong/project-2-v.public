@@ -21,9 +21,6 @@
                 <input type="text" class="form-control" id="insert_vga" aria-describedby="emailHelp" placeholder="Nhập card đồ họa">
             </div>
             <br>
-            <label>Những môn có thể học</label>
-            <multiselect v-model="ma_mon" :options="arr_mon" :close-on-select="true" :show-labels="true" placeholder="Chọn môn phù hợp với cấu hình trên" open-direction="bottom" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="true" :multiple="true"></multiselect>
-            <br>
             <button type="submit" class="btn btn-info">Submit</button>
         </form>
     </div>
@@ -46,12 +43,7 @@ export default {
     },
     data() {
         return {
-            ma_mon: [],
-            arr_mon: [
-                'mon 1',
-                'mon 2',
-                'mon 3'
-            ]
+
         }
     }
 }

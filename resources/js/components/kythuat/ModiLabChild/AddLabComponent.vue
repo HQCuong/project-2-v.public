@@ -1,15 +1,15 @@
 <template>
     <div>
-        <span>Chọn tòa</span>
-        <multiselect v-model="value_toa" :options="toa" :close-on-select="true" :show-labels="false" placeholder="Tòa" open-direction="bottom"></multiselect deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false">
+        <label>Chọn tòa</label>
+        <multiselect v-model="value_toa" :options="toa" :close-on-select="true" :show-labels="true" placeholder="Tòa" open-direction="bottom"></multiselect deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false">
         <br>
-        <span>Chọn tầng</span>
-        <multiselect v-model="value_tang" :options="tang" :close-on-select="true" :show-labels="false" placeholder="Tầng" open-direction="bottom" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false">
+        <label>Chọn tầng</label>
+        <multiselect v-model="value_tang" :options="tang" :close-on-select="true" :show-labels="true" placeholder="Tầng" open-direction="bottom" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false">
             <template slot="noOptions">Chưa chọn tòa</template>
         </multiselect>
         <br>
-        <span>Chọn cấu hình</span>
-        <multiselect v-model="value_cau_hinh" :options="cau_hinh" :close-on-select="true" :show-labels="false" placeholder="Chọn cấu hình" open-direction="bottom" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false">
+        <label>Chọn cấu hình</label>
+        <multiselect v-model="value_cau_hinh" :options="cau_hinh" :close-on-select="true" :show-labels="true" placeholder="Chọn cấu hình" open-direction="bottom" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false">
             <template slot="noOptions">Chưa chọn tòa</template>
         </multiselect>
         <br>

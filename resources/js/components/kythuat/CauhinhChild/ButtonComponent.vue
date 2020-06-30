@@ -1,37 +1,56 @@
 <template>
     <div>
-        <button class="btn btn-info" :disabled="is_add_ch" @click="change_current_view('add_ch')">Thêm cấu hình</button>
-        <button class="btn btn-info" :disabled="is_modi_ch" @click="change_current_view('modi_ch')">Tùy chỉnh cấu hình</button>
-        <button class="btn btn-info" :disabled="is_ch_mon" @click="change_current_view('ch_mon')">Tùy chỉnh cấu hình - môn</button>
+        <router-link to="/quan_ly_cau_hinh/them_cau_hinh"><span class="btn btn-info" :class="{active:isAddCh}">Thêm cấu hình</span></router-link>
+        <router-link to="/quan_ly_cau_hinh/modi_cau_hinh"><span class="btn btn-info" :class="{active:isModiCh}">Tùy chỉnh cấu hình</span></router-link>
+        <router-link to="/quan_ly_cau_hinh/cau_hinh_mon"><span class="btn btn-info" :class="{active:isChMon}">Tùy chỉnh cấu hình - môn</span></router-link>
     </div>
 </template>
 <script>
 export default {
     data() {
         return {
-            is_add_ch: true,
-            is_modi_ch: false,
-            is_ch_mon: false
+            isAddCh: false,
+            isModiCh: false,
+            isChMon: false
         }
     },
-    methods: {
-        change_current_view(btn) {
-        	this.$emit('change_current_view', btn);
-            if (btn == 'add_ch') {
-                this.$emit('change_main_view', 1);
-                this.is_add_ch = true;
-                this.is_modi_ch = false;
-                this.is_ch_mon = false;
-            } else if (btn == 'modi_ch') {
-                this.$emit('change_main_view', 2);
-                this.is_add_ch = false;
-                this.is_modi_ch = true;
-                this.is_ch_mon = false;
+    mounted() {
+        if (this.$router.history.current.path == '/quan_ly_cau_hinh/them_cau_hinh') {
+            this.isAddCh = true;
+            this.isModiCh = false;
+            this.isChMon = false;
+        } else if (this.$router.history.current.path == '/quan_ly_cau_hinh/modi_cau_hinh') {
+            this.isAddCh = false;
+            this.isModiCh = true;
+            this.isChMon = false;
+        } else if (this.$router.history.current.path == '/quan_ly_cau_hinh/cau_hinh_mon') {
+            this.isAddCh = false;
+            this.isModiCh = false;
+            this.isChMon = true;
+        } else {
+            this.isAddCh = false;
+            this.isModiCh = false;
+            this.isChMon = false;
+        }
+    },
+    watch: {
+        $route(to, from) {
+            if (to.path == '/quan_ly_cau_hinh/them_cau_hinh') {
+                this.isAddCh = true;
+                this.isModiCh = false;
+                this.isChMon = false;
+            } else if (to.path == '/quan_ly_cau_hinh/modi_cau_hinh') {
+                this.isAddCh = false;
+                this.isModiCh = true;
+                this.isChMon = false;
+            } else if (to.path == '/quan_ly_cau_hinh/cau_hinh_mon') {
+                this.isAddCh = false;
+                this.isModiCh = false;
+                this.isChMon = true;
             } else {
-                this.$emit('change_main_view', 3);
-                this.is_add_ch = false;
-                this.is_modi_ch = false;
-                this.is_ch_mon = true;
+                this.isAddCh = false;
+                this.isModiCh = false;
+                this.isChMon = false;
             }
         }
     }

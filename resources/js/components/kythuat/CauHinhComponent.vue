@@ -7,11 +7,11 @@
                         <!-- button -->
                         <mainbutton @change_main_view="change_main_view"></mainbutton>
                         <br>
+                        <maininfo></maininfo>
+                        <br>
                         <br>
                         <!-- main view -->
-                        <addcauhinh v-if="view_add_ch"></addcauhinh>
-                        <modicauhinh v-if="view_modi_ch"></modicauhinh>
-                        <cauhinhmon v-if="view_ch_mon"></cauhinhmon>
+                        <router-view></router-view>
                     </div>
                 </div>
             </div>
@@ -20,9 +20,7 @@
 </template>
 <script>
 import mainbutton from './cauhinhchild/ButtonComponent.vue';
-import addcauhinh from './cauhinhchild/AddCauHinhComponent.vue';
-import modicauhinh from './cauhinhchild/ModiCauHinhComponent.vue';
-import cauhinhmon from './cauhinhchild/CauHinhMonComponent.vue';
+import maininfo from './CauhinhChild/MainInfoComponent.vue';
 
 export default {
     data() {
@@ -51,9 +49,7 @@ export default {
     },
     components: {
         mainbutton,
-        addcauhinh,
-        modicauhinh,
-        cauhinhmon
+        maininfo
     }
 }
 
