@@ -13242,7 +13242,8 @@ __webpack_require__.r(__webpack_exports__);
       var request = "api/dangnhap/".concat(tai_khoan, "/").concat(mat_khau);
       axios.post(request).then(function (response) {
         if (response.data.success) {
-          document.cookie = "key=".concat(response.data.data.key); //window.location.href = "/home";
+          document.cookie = "key=".concat(response.data.data.key);
+          window.location.href = "home";
         } else {
           _this.error = response.data.message;
         }
@@ -34018,6 +34019,7 @@ window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
 Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
 
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
+  base: 'project-2/public',
   routes: _routes_js__WEBPACK_IMPORTED_MODULE_2__["default"],
   // short for `routes: routes`
   mode: 'history'
@@ -36309,8 +36311,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\github\project-2\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\github\project-2\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\xampp\htdocs\project-2\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\xampp\htdocs\project-2\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

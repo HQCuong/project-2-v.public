@@ -20,6 +20,7 @@ Vue.use(VueRouter);
 import routes from './routes.js';
 
 const router = new VueRouter({
+    base: 'project-2/public',
     routes, // short for `routes: routes`
     mode: 'history'
 })

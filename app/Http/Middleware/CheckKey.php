@@ -12,13 +12,12 @@ class CheckKey {
             $this->setBody(['key' => $_COOKIE['key']]);
             $result = (object) $this->postRaw(route('api.nguoidung.kiemTraKey'));
             if ($result->success) {
-                dd('done');
                 return $next($request);
             } else {
-                dd("No ACCSECS");
+                return redirect()->route('login');
             }
         } else {
-            dd("No ACCSECS");
+            return redirect()->route('login');
         }
     }
 }
