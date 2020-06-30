@@ -1,6 +1,6 @@
 <template>
     <div class="sidebar" data-color="azure" data-background-color="white" data-image="./img/sidebar-1.jpg">
-        <div class="logo"><a href="/home" class="simple-text logo-normal">
+        <div class="logo"><a href="home" class="simple-text logo-normal">
                 HOME
             </a></div>
         <div class="sidebar-wrapper">
@@ -77,10 +77,11 @@ export default {
     mounted() {
         // Bat sidebar theo url va add active class onclick
         var pathname = window.location.pathname;
+        var pathsidebar = '/project-2/public/' + pathname.split('/')[3];
         if (pathname == '/profile' || pathname == '/account_setting') {
             $('.user-nav').addClass('active');
         } else {
-            $('.nav-item > a[href="' + pathname + '"]').parent().addClass('active');
+            $('.nav-item > a[href="' + pathsidebar + '"]').parent().addClass('active');
         }
 
         $('.sidebar .nav-link:not(.nav-control)').on('click', function() {
@@ -96,6 +97,33 @@ export default {
             if ($(window).width() < 992) {
                 $('.close-layer').trigger('click');
             }
+        });
+
+        // Active class on back button
+        $(window).on('popstate', function(event) {
+            $('.nav-item').removeClass('active');
+            var pathname = window.location.pathname;
+            var pathsidebar = '/project-2/public/' + pathname.split('/')[3];
+            if (pathname == '/project-2/public/profile' || pathname == '/project-2/public/account_setting') {
+                $('.user-nav').addClass('active');
+            } else {
+                $('.nav-item > a[href="' + pathsidebar + '"]').parent().addClass('active');
+            }
+
+            $('.sidebar .nav-link:not(.nav-control)').on('click', function() {
+                $('.nav-item').removeClass('active');
+                $(this).parent().addClass('active');
+            });
+
+            $('.dropdown-menu').on('click', function() {
+                $('.user-nav').addClass('active');
+            })
+
+            $('.dropdown-item, .nav-link:not(.nav-control), .current_user_nav').on('click', function() {
+                if ($(window).width() < 992) {
+                    $('.close-layer').trigger('click');
+                }
+            });
         });
     }
 }

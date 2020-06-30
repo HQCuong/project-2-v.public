@@ -1,7 +1,7 @@
 <template>
     <div>
         <hardware></hardware>
-        <FullCalendar :defaultView="defaultView" :header="headers" :plugins="calendarPlugins" :events="events" :displayEventEnd="true" :eventTimeFormat="eventTimeFormat" />
+        <FullCalendar :defaultView="defaultView" :header="headers" :plugins="calendarPlugins" :events="events" :displayEventEnd="true" :eventTimeFormat="eventTimeFormat" :textColor="textcolor"/>
     </div>
 </template>
 <script>
@@ -21,6 +21,7 @@ export default {
     },
     data() {
         return {
+            textcolor: "white",
             calendarPlugins: [dayGridPlugin, listPlugin],
             eventTimeFormat: {
                 hour: '2-digit',
