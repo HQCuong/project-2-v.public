@@ -17462,11 +17462,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card" }, [
       _c("div", { staticClass: "card-header card-header-info" }, [
-        _c("h4", { staticClass: "card-title" }, [_vm._v("Employees Stats")]),
-        _vm._v(" "),
-        _c("p", { staticClass: "card-category" }, [
-          _vm._v("New employees on 15th September, 2016")
-        ])
+        _c("h4", { staticClass: "card-title" }, [_vm._v("Danh sách các phòng")])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "card-body table-responsive" }, [
@@ -36785,13 +36781,15 @@ __webpack_require__.r(__webpack_exports__);
       var ev1 = {
         title: 'BKD01K10',
         start: '2020-06-03T10:00:00',
-        end: '2020-06-03T12:00:00'
+        end: '2020-06-03T12:00:00',
+        textColor: 'white'
       };
       state.events.push(ev1);
       var ev2 = {
         title: 'BKD01K10',
         start: '2020-06-15T08:00:00',
-        end: '2020-06-15T12:00:00'
+        end: '2020-06-15T12:00:00',
+        textColor: 'white'
       };
       state.events.push(ev2);
     }
