@@ -10,6 +10,10 @@ import list_lab from './components/kythuat/modilabchild/ListLabComponent.vue';
 import add_lab from './components/kythuat/modilabchild/AddLabComponent.vue';
 
 import cau_hinh from './components/kythuat/CauHinhComponent.vue';
+import add_ch from './components/kythuat/CauhinhChild/AddCauHinhComponent.vue';
+import modi_ch from './components/kythuat/CauhinhChild/ModiCauHinhComponent.vue';
+import ch_mon from './components/kythuat/CauhinhChild/CauHinhMonComponent.vue';
+
 import thiet_bi from './components/kythuat/ThietBiComponent.vue';
 
 
@@ -32,26 +36,38 @@ import error_url from './components/error/CantDirectComponent.vue';
 
 
 export default [
+    // general
 	{ path: '/home', component: home},
 
     { path: '/xem_thong_tin_lab', component: thong_tin_lab },
 
+    // ky thuat
     { path: '/quan_ly_lab', component: lab, 
         children: [
             { path: 'danh_sach_lab', component: list_lab},
             { path: 'add_lab', component: add_lab}
         ]
     },
-    { path: '/quan_ly_cau_hinh', component: cau_hinh },
+    { path: '/quan_ly_cau_hinh', component: cau_hinh, 
+        children: [
+            { path: 'them_cau_hinh', component: add_ch},
+            { path: 'modi_cau_hinh', component: modi_ch},
+            { path: 'cau_hinh_mon', component: ch_mon}
+        ]
+    },
+
     { path: '/quan_ly_thiet_bi', component: thiet_bi },
 
+    // giao vu
     { path: '/xem_lich', component: lich_gv },
-
     { path: '/quan_ly_lich', component: lich_gv },
     { path: '/quan_ly_nguoi_dung', component: user },
 
+
+    // user
     { path: '/profile', component: user_info }, 
     { path: '/account_setting', component: account_setting },
 
+    // error
     { path: '*', component: error_url} 
 ]

@@ -77,8 +77,9 @@ export default {
     mounted() {
         // Bat sidebar theo url va add active class onclick
         var pathname = window.location.pathname;
+        console.log(pathname);
         var pathsidebar = '/project-2/public/' + pathname.split('/')[3];
-        if (pathname == '/profile' || pathname == '/account_setting') {
+        if (pathname == '/project-2/public/profile' || pathname == '/project-2/public/account_setting') {
             $('.user-nav').addClass('active');
         } else {
             $('.nav-item > a[href="' + pathsidebar + '"]').parent().addClass('active');

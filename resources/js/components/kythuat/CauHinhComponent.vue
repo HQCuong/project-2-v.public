@@ -5,13 +5,13 @@
                 <div class="card">
                     <div class="card-body">
                         <!-- button -->
-                        <mainbutton @change_main_view="change_main_view"></mainbutton>
+                        <mainbutton></mainbutton>
+                        <br>
+                        <maininfo></maininfo>
                         <br>
                         <br>
                         <!-- main view -->
-                        <addcauhinh v-if="view_add_ch"></addcauhinh>
-                        <modicauhinh v-if="view_modi_ch"></modicauhinh>
-                        <cauhinhmon v-if="view_ch_mon"></cauhinhmon>
+                        <router-view></router-view>
                     </div>
                 </div>
             </div>
@@ -20,9 +20,7 @@
 </template>
 <script>
 import mainbutton from './cauhinhchild/ButtonComponent.vue';
-import addcauhinh from './cauhinhchild/AddCauHinhComponent.vue';
-import modicauhinh from './cauhinhchild/ModiCauHinhComponent.vue';
-import cauhinhmon from './cauhinhchild/CauHinhMonComponent.vue';
+import maininfo from './CauhinhChild/MainInfoComponent.vue';
 
 export default {
     data() {
@@ -33,27 +31,11 @@ export default {
         }
     },
     methods: {
-        change_main_view(main_view) {
-            if (main_view == 1) {
-                this.view_add_ch = true;
-                this.view_modi_ch = false;
-                this.view_ch_mon = false;
-            } else if (main_view == 2) {
-                this.view_add_ch = false;
-                this.view_modi_ch = true;
-                this.view_ch_mon = false;
-            } else {
-                this.view_add_ch = false;
-                this.view_modi_ch = false;
-                this.view_ch_mon = true;
-            }
-        }
+
     },
     components: {
         mainbutton,
-        addcauhinh,
-        modicauhinh,
-        cauhinhmon
+        maininfo
     }
 }
 
