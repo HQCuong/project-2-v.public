@@ -13825,23 +13825,7 @@ __webpack_require__.r(__webpack_exports__);
       view_ch_mon: false
     };
   },
-  methods: {
-    change_main_view: function change_main_view(main_view) {
-      if (main_view == 1) {
-        this.view_add_ch = true;
-        this.view_modi_ch = false;
-        this.view_ch_mon = false;
-      } else if (main_view == 2) {
-        this.view_add_ch = false;
-        this.view_modi_ch = true;
-        this.view_ch_mon = false;
-      } else {
-        this.view_add_ch = false;
-        this.view_modi_ch = false;
-        this.view_ch_mon = true;
-      }
-    }
-  },
+  methods: {},
   components: {
     mainbutton: _cauhinhchild_ButtonComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     maininfo: _CauhinhChild_MainInfoComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -16880,9 +16864,7 @@ var render = function() {
             "div",
             { staticClass: "card-body" },
             [
-              _c("mainbutton", {
-                on: { change_main_view: _vm.change_main_view }
-              }),
+              _c("mainbutton"),
               _vm._v(" "),
               _c("br"),
               _vm._v(" "),
