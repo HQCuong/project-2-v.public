@@ -22,7 +22,7 @@ import lich_gv from './components/giaovien/GiaoVienComponent.vue';
 
 
 // giao vu
-import lich_day from './components/giaovu/QuanLyLichComponent.vue';
+import quan_ly_lich from './components/giaovu/QuanLyLichComponent.vue';
 import user from './components/giaovu/QuanLyUserComponent.vue';
 
 
@@ -60,7 +60,9 @@ export default [
 
     // giao vu
     { path: '/xem_lich', component: lich_gv },
-    { path: '/quan_ly_lich', component: lich_gv },
+
+    // giao vu
+    { path: '/quan_ly_lich', component: quan_ly_lich },
     { path: '/quan_ly_nguoi_dung', component: user },
 
 

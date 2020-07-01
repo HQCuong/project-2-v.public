@@ -7,9 +7,7 @@
                         <i class="material-icons">content_copy</i>
                     </div>
                     <p class="card-category">Tình trạng hoạt động các phòng</p>
-                    <h3 class="card-title">49/50
-                        <small>GB</small>
-                    </h3>
+                    <h3 class="card-title">49/50</h3>
                 </div>
             </div>
         </div>
@@ -20,9 +18,7 @@
                         <i class="material-icons">content_copy</i>
                     </div>
                     <p class="card-category">Số phòng đang được sử dụng</p>
-                    <h3 class="card-title">49/50
-                        <small>GB</small>
-                    </h3>
+                    <h3 class="card-title">49/50</h3>
                 </div>
             </div>
         </div>

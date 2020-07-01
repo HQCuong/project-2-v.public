@@ -1,9 +1,6 @@
 export default {
     namespaced: true,
     state: {
-        // mon: 'abc',
-        // lop: 'bbb',
-        // GV: tran manh phong
         events: []
     },
     mutations: {},

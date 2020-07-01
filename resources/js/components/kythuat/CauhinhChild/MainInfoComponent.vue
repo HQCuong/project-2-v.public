@@ -7,9 +7,7 @@
                         <i class="material-icons">content_copy</i>
                     </div>
                     <p class="card-category">Tổng số cấu hình đã có</p>
-                    <h3 class="card-title">20
-                        <small>GB</small>
-                    </h3>
+                    <h3 class="card-title">20</h3>
                 </div>
             </div>
         </div>

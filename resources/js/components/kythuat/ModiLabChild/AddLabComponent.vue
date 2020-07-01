@@ -1,15 +1,15 @@
 <template>
     <div>
         <label>Chọn tòa</label>
-        <multiselect v-model="value_toa" :options="toa" :close-on-select="true" :show-labels="true" placeholder="Tòa" open-direction="bottom"></multiselect deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false">
+        <multiselect v-model="ma_toa" :options="arr_toa" :close-on-select="true" :show-labels="true" placeholder="Tòa"></multiselect deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false">
         <br>
         <label>Chọn tầng</label>
-        <multiselect v-model="value_tang" :options="tang" :close-on-select="true" :show-labels="true" placeholder="Tầng" open-direction="bottom" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false">
+        <multiselect v-model="ma_tang" :options="arr_tang" :close-on-select="true" :show-labels="true" placeholder="Tầng" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false">
             <template slot="noOptions">Chưa chọn tòa</template>
         </multiselect>
         <br>
         <label>Chọn cấu hình</label>
-        <multiselect v-model="value_cau_hinh" :options="cau_hinh" :close-on-select="true" :show-labels="true" placeholder="Chọn cấu hình" open-direction="bottom" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false">
+        <multiselect v-model="ma_cau_hinh" :options="arr_cau_hinh" :close-on-select="true" :show-labels="true" placeholder="Chọn cấu hình" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false">
             <template slot="noOptions">Chưa chọn tòa</template>
         </multiselect>
         <br>
@@ -51,12 +51,12 @@ export default {
     },
     data() {
         return {
-            value_tang: '',
-            value_toa: '',
-            value_cau_hinh: '',
-            toa: [],
-            tang: [],
-            cau_hinh: ['cau hinh 1', 'cau hinh 2', 'cau hinh 3']
+            ma_tang: '',
+            ma_toa: '',
+            ma_cau_hinh: '',
+            arr_toa: [],
+            arr_tang: [],
+            arr_cau_hinh: ['cau hinh 1', 'cau hinh 2', 'cau hinh 3']
         }
     },
     methods: {
@@ -64,36 +64,24 @@ export default {
             this.current_view = !this.current_view;
         },
         get_toa() {
-            this.toa = ['A17'];
-            if (this.toa.length == 1) {
-                this.value_toa = this.toa[0];
+            this.arr_toa = ['A17'];
+            if (this.arr_toa.length == 1) {
+                this.value_toa = this.arr_toa[0];
             } else {
                 this.value_toa = '';
             }
         }
     },
     watch: {
-        value_toa() {
-            this.value_tang = "";
-            this.value_lab = "";
+        ma_toa() {
+            this.ma_tang = "";
             // trong truong hop bo chon toa
-            if (this.value_toa == "" || this.value_toa == null) {
-                this.tang = [];
+            if (!this.ma_toa) {
+                this.arr_tang = [];
                 return false;
             }
             // dung axios gui len lay so tang
-            this.tang = ['tang 2', 'tang 5'];
-        },
-
-        value_tang() {
-            this.value_lab = "";
-            // trong truong hop bo chon tang 
-            if (this.value_tang == "" || this.value_tang == null) {
-                this.lab = [];
-                return false;
-            }
-            // dung axios gui len lay so lab
-            this.lab = ['lab 1', 'lab 2', 'lab 3'];
+            this.arr_tang = ['tang 2', 'tang 5'];
         },
     }
 }

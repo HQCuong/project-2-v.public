@@ -13448,10 +13448,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {};
@@ -13493,60 +13489,62 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      value_tang: '',
-      value_lab: '',
-      value_toa: '',
-      toa: [],
-      tang: [],
-      lab: []
+      ma_toa: '',
+      ma_tang: '',
+      ma_lab: '',
+      arr_toa: [],
+      arr_tang: [],
+      arr_lab: []
     };
   },
   computed: {},
   methods: {
     get_toa: function get_toa() {
-      this.toa = ['A17'];
+      this.arr_toa = ['A17'];
 
-      if (this.toa.length == 1) {
-        this.value_toa = this.toa[0];
+      if (this.arr_toa.length == 1) {
+        this.ma_toa = this.arr_toa[0];
       } else {
-        this.value_toa = '';
+        this.ma_toa = '';
       }
     }
   },
   watch: {
-    value_toa: function value_toa() {
-      this.value_tang = "";
-      this.value_lab = "";
+    ma_toa: function ma_toa() {
+      this.ma_tang = "";
+      this.ma_lab = "";
       this.$emit('show_main_view', 0); // trong truong hop bo chon toa
 
-      if (this.value_toa == "" || this.value_toa == null) {
-        this.tang = [];
+      if (!this.ma_toa) {
+        this.arr_tang = [];
         this.$emit('show_main_view', 0);
         return false;
       } // dung axios gui len lay so tang
 
 
-      this.tang = ['tang 2', 'tang 5'];
+      this.arr_tang = ['tang 2', 'tang 5'];
     },
-    value_tang: function value_tang() {
-      this.value_lab = "";
+    ma_tang: function ma_tang() {
+      this.ma_lab = "";
       this.$emit('show_main_view', 0); // trong truong hop bo chon tang 
 
-      if (this.value_tang == "" || this.value_tang == null) {
-        this.lab = [];
+      if (!this.ma_tang) {
+        this.arr_lab = [];
         this.$emit('show_main_view', 0);
         return false;
       } // dung axios gui len lay so lab
 
 
-      this.lab = ['lab 1', 'lab 2', 'lab 3'];
+      this.arr_lab = ['lab 1', 'lab 2', 'lab 3'];
     },
-    value_lab: function value_lab() {
+    ma_lab: function ma_lab() {
       // trong truong hop bo chon lab
-      if (this.value_lab == "" || this.value_lab == null) {
+      if (!this.ma_lab) {
         this.$emit('show_main_view', 0);
-      } else if (this.toa != "" || this.toa != null || this.tang != "" || this.tang != null) {
+      } else if (this.ma_toa && this.ma_tang) {
         this.$emit('show_main_view', 1);
+      } else {
+        this.$emit('show_main_view', 0);
       }
     }
   }
@@ -13912,9 +13910,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {};
+    return {
+      arr_ch: ['ch1', 'ch2', 'ch3'],
+      ma_ch: '',
+      arr_mon: [],
+      arr_ma_mon: ''
+    };
+  },
+  watch: {
+    ma_ch: function ma_ch() {
+      if (!this.ma_ch) {
+        this.arr_mon = [];
+      } else {
+        this.arr_mon = ['mon1', 'mon2', 'mon3'];
+      }
+    }
   }
 });
 
@@ -13929,8 +13946,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
 //
 //
 //
@@ -13964,6 +13979,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modicauhinhchild_FormModiCauHinhComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modicauhinhchild/FormModiCauHinhComponent.vue */ "./resources/js/components/kythuat/CauhinhChild/modicauhinhchild/FormModiCauHinhComponent.vue");
+//
 //
 //
 //
@@ -14250,12 +14266,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      value_tang: '',
-      value_toa: '',
-      value_cau_hinh: '',
-      toa: [],
-      tang: [],
-      cau_hinh: ['cau hinh 1', 'cau hinh 2', 'cau hinh 3']
+      ma_tang: '',
+      ma_toa: '',
+      ma_cau_hinh: '',
+      arr_toa: [],
+      arr_tang: [],
+      arr_cau_hinh: ['cau hinh 1', 'cau hinh 2', 'cau hinh 3']
     };
   },
   methods: {
@@ -14263,38 +14279,26 @@ __webpack_require__.r(__webpack_exports__);
       this.current_view = !this.current_view;
     },
     get_toa: function get_toa() {
-      this.toa = ['A17'];
+      this.arr_toa = ['A17'];
 
-      if (this.toa.length == 1) {
-        this.value_toa = this.toa[0];
+      if (this.arr_toa.length == 1) {
+        this.value_toa = this.arr_toa[0];
       } else {
         this.value_toa = '';
       }
     }
   },
   watch: {
-    value_toa: function value_toa() {
-      this.value_tang = "";
-      this.value_lab = ""; // trong truong hop bo chon toa
+    ma_toa: function ma_toa() {
+      this.ma_tang = ""; // trong truong hop bo chon toa
 
-      if (this.value_toa == "" || this.value_toa == null) {
-        this.tang = [];
+      if (!this.ma_toa) {
+        this.arr_tang = [];
         return false;
       } // dung axios gui len lay so tang
 
 
-      this.tang = ['tang 2', 'tang 5'];
-    },
-    value_tang: function value_tang() {
-      this.value_lab = ""; // trong truong hop bo chon tang 
-
-      if (this.value_tang == "" || this.value_tang == null) {
-        this.lab = [];
-        return false;
-      } // dung axios gui len lay so lab
-
-
-      this.lab = ['lab 1', 'lab 2', 'lab 3'];
+      this.arr_tang = ['tang 2', 'tang 5'];
     }
   }
 });
@@ -14432,10 +14436,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {};
@@ -14526,71 +14526,50 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.get_toa();
   },
   data: function data() {
     return {
-      value_tang: '',
-      value_lab: '',
-      value_toa: '',
-      toa: [],
-      tang: [],
-      lab: []
+      ma_toa: '',
+      ma_tang: '',
+      arr_toa: [],
+      arr_tang: []
     };
   },
   methods: {
     get_toa: function get_toa() {
-      this.toa = ['A17'];
+      this.arr_toa = ['A17'];
 
-      if (this.toa.length == 1) {
-        this.value_toa = this.toa[0];
+      if (this.arr_toa.length == 1) {
+        this.ma_toa = this.arr_toa[0];
       } else {
-        this.value_toa = '';
+        this.ma_toa = '';
       }
     }
   },
   watch: {
-    value_toa: function value_toa() {
-      this.value_tang = "";
-      this.value_lab = "";
-      this.$emit('show_table_lab', 0); // trong truong hop bo chon toa
+    ma_toa: function ma_toa() {
+      this.ma_tang = ""; // trong truong hop bo chon toa
 
-      if (this.value_toa == "" || this.value_toa == null) {
-        this.tang = [];
-        this.$emit('show_table_lab', 0);
+      if (!this.ma_toa) {
+        this.arr_tang = [];
         return false;
       } // dung axios gui len lay so tang
 
 
-      this.tang = ['tang 2', 'tang 5'];
+      this.arr_tang = ['tang 2', 'tang 5'];
     },
-    value_tang: function value_tang() {
-      this.value_lab = "";
-      this.$emit('show_table_lab', 0); // trong truong hop bo chon tang 
-
-      if (this.value_tang == "" || this.value_tang == null) {
-        this.lab = [];
-        this.$emit('show_table_lab', 0);
+    ma_tang: function ma_tang() {
+      // trong truong hop bo chon tang 
+      if (!this.ma_tang) {
+        this.arr_lab = [];
         return false;
       } // dung axios gui len lay so lab
 
 
-      this.lab = ['lab 1', 'lab 2', 'lab 3'];
-    },
-    value_lab: function value_lab() {
-      // trong truong hop bo chon lab
-      if (this.value_lab == "" || this.value_lab == null) {
-        this.$emit('show_table_lab', 0);
-      } else if (this.toa != "" || this.toa != null || this.tang != "" || this.tang != null) {
-        this.$emit('show_table_lab', 1);
-      }
+      this.arr_lab = ['lab 1', 'lab 2', 'lab 3'];
     }
   }
 });
@@ -14830,7 +14809,6 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     // Bat sidebar theo url va add active class onclick
     var pathname = window.location.pathname;
-    console.log(pathname);
     var pathsidebar = '/project-2/public/' + pathname.split('/')[3];
 
     if (pathname == '/project-2/public/profile' || pathname == '/project-2/public/account_setting') {
@@ -16386,10 +16364,7 @@ var staticRenderFns = [
                 _vm._v("Tình trạng hoạt động các phòng")
               ]),
               _vm._v(" "),
-              _c("h3", { staticClass: "card-title" }, [
-                _vm._v("49/50\n                    "),
-                _c("small", [_vm._v("GB")])
-              ])
+              _c("h3", { staticClass: "card-title" }, [_vm._v("49/50")])
             ]
           )
         ])
@@ -16411,10 +16386,7 @@ var staticRenderFns = [
                 _vm._v("Số phòng đang được sử dụng")
               ]),
               _vm._v(" "),
-              _c("h3", { staticClass: "card-title" }, [
-                _vm._v("49/50\n                    "),
-                _c("small", [_vm._v("GB")])
-              ])
+              _c("h3", { staticClass: "card-title" }, [_vm._v("49/50")])
             ]
           )
         ])
@@ -16450,21 +16422,20 @@ var render = function() {
       _vm._v(" "),
       _c("multiselect", {
         attrs: {
-          options: _vm.toa,
+          options: _vm.arr_toa,
           "close-on-select": true,
           "show-labels": true,
           placeholder: "Tòa",
-          "open-direction": "bottom",
           deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
           selectLabel: "Click hoặc nhấn Enter để chọn",
           searchable: false
         },
         model: {
-          value: _vm.value_toa,
+          value: _vm.ma_toa,
           callback: function($$v) {
-            _vm.value_toa = $$v
+            _vm.ma_toa = $$v
           },
-          expression: "value_toa"
+          expression: "ma_toa"
         }
       }),
       _vm._v(" "),
@@ -16476,21 +16447,20 @@ var render = function() {
         "multiselect",
         {
           attrs: {
-            options: _vm.tang,
+            options: _vm.arr_tang,
             "close-on-select": true,
             "show-labels": true,
             placeholder: "Tầng",
-            "open-direction": "bottom",
             deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
             selectLabel: "Click hoặc nhấn Enter để chọn",
             searchable: false
           },
           model: {
-            value: _vm.value_tang,
+            value: _vm.ma_tang,
             callback: function($$v) {
-              _vm.value_tang = $$v
+              _vm.ma_tang = $$v
             },
-            expression: "value_tang"
+            expression: "ma_tang"
           }
         },
         [_c("template", { slot: "noOptions" }, [_vm._v("Chưa chọn tòa")])],
@@ -16505,21 +16475,20 @@ var render = function() {
         "multiselect",
         {
           attrs: {
-            options: _vm.lab,
+            options: _vm.arr_lab,
             "close-on-select": true,
             "show-labels": true,
             placeholder: "Phòng",
-            "open-direction": "bottom",
             deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
             selectLabel: "Click hoặc nhấn Enter để chọn",
             searchable: false
           },
           model: {
-            value: _vm.value_lab,
+            value: _vm.ma_lab,
             callback: function($$v) {
-              _vm.value_lab = $$v
+              _vm.ma_lab = $$v
             },
-            expression: "value_lab"
+            expression: "ma_lab"
           }
         },
         [_c("template", { slot: "noOptions" }, [_vm._v("Chưa chọn tầng")])],
@@ -16933,7 +16902,6 @@ var render = function() {
             "close-on-select": true,
             "show-labels": true,
             placeholder: "Chọn môn phù hợp với cấu hình trên",
-            "open-direction": "bottom",
             deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
             selectLabel: "Click hoặc nhấn Enter để chọn",
             searchable: true,
@@ -17055,16 +17023,62 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    [
+      _c("label", [_vm._v("Chọn cấu hình")]),
+      _vm._v(" "),
+      _c("multiselect", {
+        attrs: {
+          options: _vm.arr_ch,
+          "close-on-select": true,
+          "show-labels": true,
+          placeholder: "Chọn môn",
+          deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
+          selectLabel: "Click hoặc nhấn Enter để chọn",
+          searchable: true
+        },
+        model: {
+          value: _vm.ma_ch,
+          callback: function($$v) {
+            _vm.ma_ch = $$v
+          },
+          expression: "ma_ch"
+        }
+      }),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("label", [_vm._v("Những môn có thể học")]),
+      _vm._v(" "),
+      _c("multiselect", {
+        attrs: {
+          options: _vm.arr_mon,
+          "close-on-select": true,
+          "show-labels": true,
+          placeholder: "Những môn học phù hợp",
+          deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
+          selectLabel: "Click hoặc nhấn Enter để chọn",
+          searchable: false,
+          multiple: true
+        },
+        model: {
+          value: _vm.arr_ma_mon,
+          callback: function($$v) {
+            _vm.arr_ma_mon = $$v
+          },
+          expression: "arr_ma_mon"
+        }
+      }),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("button", { staticClass: "btn btn-info" }, [_vm._v("submit")])
+    ],
+    1
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [_c("p", [_vm._v("day la cau hinh mon component")])])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -17110,10 +17124,7 @@ var staticRenderFns = [
                 _vm._v("Tổng số cấu hình đã có")
               ]),
               _vm._v(" "),
-              _c("h3", { staticClass: "card-title" }, [
-                _vm._v("20\n                    "),
-                _c("small", [_vm._v("GB")])
-              ])
+              _c("h3", { staticClass: "card-title" }, [_vm._v("20")])
             ]
           )
         ])
@@ -17147,25 +17158,29 @@ var render = function() {
     [
       _c("label", [_vm._v("Chọn cấu hình")]),
       _vm._v(" "),
-      _c("multiselect", {
-        attrs: {
-          options: _vm.arr_cau_hinh,
-          "close-on-select": true,
-          "show-labels": true,
-          placeholder: "Chọn cấu hình",
-          "open-direction": "bottom",
-          deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
-          selectLabel: "Click hoặc nhấn Enter để chọn",
-          searchable: true
-        },
-        model: {
-          value: _vm.ma_ch,
-          callback: function($$v) {
-            _vm.ma_ch = $$v
+      _c(
+        "multiselect",
+        {
+          attrs: {
+            options: _vm.arr_cau_hinh,
+            "close-on-select": true,
+            "show-labels": true,
+            placeholder: "Chọn cấu hình",
+            deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
+            selectLabel: "Click hoặc nhấn Enter để chọn",
+            searchable: true
           },
-          expression: "ma_ch"
-        }
-      }),
+          model: {
+            value: _vm.ma_ch,
+            callback: function($$v) {
+              _vm.ma_ch = $$v
+            },
+            expression: "ma_ch"
+          }
+        },
+        [_c("template", { slot: "noOptions" }, [_vm._v("Chưa chọn cấu hình")])],
+        2
+      ),
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
@@ -17433,18 +17448,17 @@ var render = function() {
       _vm._v(" "),
       _c("multiselect", {
         attrs: {
-          options: _vm.toa,
+          options: _vm.arr_toa,
           "close-on-select": true,
           "show-labels": true,
-          placeholder: "Tòa",
-          "open-direction": "bottom"
+          placeholder: "Tòa"
         },
         model: {
-          value: _vm.value_toa,
+          value: _vm.ma_toa,
           callback: function($$v) {
-            _vm.value_toa = $$v
+            _vm.ma_toa = $$v
           },
-          expression: "value_toa"
+          expression: "ma_toa"
         }
       }),
       _vm._v(" "),
@@ -17456,21 +17470,20 @@ var render = function() {
         "multiselect",
         {
           attrs: {
-            options: _vm.tang,
+            options: _vm.arr_tang,
             "close-on-select": true,
             "show-labels": true,
             placeholder: "Tầng",
-            "open-direction": "bottom",
             deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
             selectLabel: "Click hoặc nhấn Enter để chọn",
             searchable: false
           },
           model: {
-            value: _vm.value_tang,
+            value: _vm.ma_tang,
             callback: function($$v) {
-              _vm.value_tang = $$v
+              _vm.ma_tang = $$v
             },
-            expression: "value_tang"
+            expression: "ma_tang"
           }
         },
         [_c("template", { slot: "noOptions" }, [_vm._v("Chưa chọn tòa")])],
@@ -17485,21 +17498,20 @@ var render = function() {
         "multiselect",
         {
           attrs: {
-            options: _vm.cau_hinh,
+            options: _vm.arr_cau_hinh,
             "close-on-select": true,
             "show-labels": true,
             placeholder: "Chọn cấu hình",
-            "open-direction": "bottom",
             deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
             selectLabel: "Click hoặc nhấn Enter để chọn",
             searchable: false
           },
           model: {
-            value: _vm.value_cau_hinh,
+            value: _vm.ma_cau_hinh,
             callback: function($$v) {
-              _vm.value_cau_hinh = $$v
+              _vm.ma_cau_hinh = $$v
             },
-            expression: "value_cau_hinh"
+            expression: "ma_cau_hinh"
           }
         },
         [_c("template", { slot: "noOptions" }, [_vm._v("Chưa chọn tòa")])],
@@ -17680,10 +17692,7 @@ var staticRenderFns = [
                 _vm._v("Tình trạng hoạt động các phòng ")
               ]),
               _vm._v(" "),
-              _c("h3", { staticClass: "card-title" }, [
-                _vm._v("49/50\n                    "),
-                _c("small", [_vm._v("GB")])
-              ])
+              _c("h3", { staticClass: "card-title" }, [_vm._v("49/50")])
             ]
           )
         ])
@@ -17705,10 +17714,7 @@ var staticRenderFns = [
                 _vm._v("Số phòng đang được sử dụng")
               ]),
               _vm._v(" "),
-              _c("h3", { staticClass: "card-title" }, [
-                _vm._v("49/50\n                    "),
-                _c("small", [_vm._v("GB")])
-              ])
+              _c("h3", { staticClass: "card-title" }, [_vm._v("49/50")])
             ]
           )
         ])
@@ -17835,21 +17841,20 @@ var render = function() {
       _vm._v(" "),
       _c("multiselect", {
         attrs: {
-          options: _vm.toa,
+          options: _vm.arr_toa,
           "close-on-select": true,
           "show-labels": true,
           placeholder: "Tòa",
-          "open-direction": "bottom",
           deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
           selectLabel: "Click hoặc nhấn Enter để chọn",
           searchable: false
         },
         model: {
-          value: _vm.value_toa,
+          value: _vm.ma_toa,
           callback: function($$v) {
-            _vm.value_toa = $$v
+            _vm.ma_toa = $$v
           },
-          expression: "value_toa"
+          expression: "ma_toa"
         }
       }),
       _vm._v(" "),
@@ -17861,53 +17866,23 @@ var render = function() {
         "multiselect",
         {
           attrs: {
-            options: _vm.tang,
+            options: _vm.arr_tang,
             "close-on-select": true,
             "show-labels": true,
             placeholder: "Tầng",
-            "open-direction": "bottom",
             deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
             selectLabel: "Click hoặc nhấn Enter để chọn",
             searchable: false
           },
           model: {
-            value: _vm.value_tang,
+            value: _vm.ma_tang,
             callback: function($$v) {
-              _vm.value_tang = $$v
+              _vm.ma_tang = $$v
             },
-            expression: "value_tang"
+            expression: "ma_tang"
           }
         },
         [_c("template", { slot: "noOptions" }, [_vm._v("Chưa chọn tòa")])],
-        2
-      ),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("label", [_vm._v("Chọn lab")]),
-      _vm._v(" "),
-      _c(
-        "multiselect",
-        {
-          attrs: {
-            options: _vm.lab,
-            "close-on-select": true,
-            "show-labels": true,
-            placeholder: "Phòng",
-            "open-direction": "bottom",
-            deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
-            selectLabel: "Click hoặc nhấn Enter để chọn",
-            searchable: false
-          },
-          model: {
-            value: _vm.value_lab,
-            callback: function($$v) {
-              _vm.value_lab = $$v
-            },
-            expression: "value_lab"
-          }
-        },
-        [_c("template", { slot: "noOptions" }, [_vm._v("Chưa chọn tầng")])],
         2
       ),
       _vm._v(" "),
@@ -37176,9 +37151,10 @@ __webpack_require__.r(__webpack_exports__);
 {
   path: '/xem_lich',
   component: _components_giaovien_GiaoVienComponent_vue__WEBPACK_IMPORTED_MODULE_10__["default"]
-}, {
+}, // giao vu
+{
   path: '/quan_ly_lich',
-  component: _components_giaovien_GiaoVienComponent_vue__WEBPACK_IMPORTED_MODULE_10__["default"]
+  component: _components_giaovu_QuanLyLichComponent_vue__WEBPACK_IMPORTED_MODULE_11__["default"]
 }, {
   path: '/quan_ly_nguoi_dung',
   component: _components_giaovu_QuanLyUserComponent_vue__WEBPACK_IMPORTED_MODULE_12__["default"]
@@ -37209,9 +37185,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,
   state: {
-    // mon: 'abc',
-    // lop: 'bbb',
-    // GV: tran manh phong
     events: []
   },
   mutations: {},
