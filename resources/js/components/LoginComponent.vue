@@ -14,7 +14,7 @@
                 <br>
                 <br>
                 <p style="color: red">{{error}}</p>
-                <button class="btn btn-info" style="width: 150px">
+                <button class="btn btn-info" style="width: 150px;">
                     <span v-if="is_loading" class="spinner-border spinner-border-sm"></span>
                     <span v-if="!is_loading">Đăng nhập</span>
                 </button>
@@ -50,6 +50,7 @@ export default {
                         window.location.href = "home";
                     } else {
                         this.error = response.data.message;
+                        this.is_loading = false;
                     }
                 }).catch((error) => {
                     console.error(error);

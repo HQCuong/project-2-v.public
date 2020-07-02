@@ -13252,6 +13252,7 @@ __webpack_require__.r(__webpack_exports__);
           window.location.href = "home";
         } else {
           _this.error = response.data.message;
+          _this.is_loading = false;
         }
       })["catch"](function (error) {
         console.error(error);
