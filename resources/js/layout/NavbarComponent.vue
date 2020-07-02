@@ -33,7 +33,7 @@
                             <router-link class="dropdown-item" to="/profile">Thông tin tài khoản</router-link>
                             <router-link class="dropdown-item" to="/account_setting">Cài đặt</router-link>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Đăng xuất</a>
+                            <a class="dropdown-item" href="logout">Đăng xuất</a>
                         </div>
                     </li>
                 </ul>

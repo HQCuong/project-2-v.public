@@ -12,6 +12,7 @@
         <login-component></login-component>
     </div>
         
+
     <script src="{{ asset('/js/core/jquery.min.js') }}"></script>
     <script src="{{ asset('/js/plugin/jquery.md5.min.js') }}"></script>
     <script src="{{ asset('/js/app.js') }}"></script>

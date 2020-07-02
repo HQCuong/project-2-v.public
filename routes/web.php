@@ -20,9 +20,14 @@ Route::get('/', function () {
 })->name('login');
 
 
-Route::group(['middleware' => 'CheckKey'], function () {
+Route::group(['middleware' => ['CheckKey', 'PreventBackButton']], function () {
 	Route::get('/home', function () {
 	    return view('app');
+	});
+
+	Route::get('/logout', function() {
+		setcookie("key", "", time() - 3600);
+		return redirect()->route('login');
 	});
 
 	// vue-router
