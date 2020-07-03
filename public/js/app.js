@@ -13278,8 +13278,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'CantDirectComponent',
   data: function data() {
     return {};
   }
@@ -16644,9 +16652,52 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n\tkhong the xac dinh yeu cau cua ban\n")])
+  return _c("div", { staticClass: "col-md-12" }, [
+    _c("div", { staticClass: "card" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "card-body" },
+        [
+          _vm._m(1),
+          _vm._v("\n            nhấn vào "),
+          _c("router-link", { attrs: { to: { name: "home" } } }, [
+            _vm._v("đây")
+          ]),
+          _vm._v(
+            " để trở về trang chủ hoặc thực hiện yêu cầu hợp lệ.\n        "
+          )
+        ],
+        1
+      )
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header card-header-icon card-header-warning" },
+      [
+        _c("div", { staticClass: "card-icon" }, [
+          _c("i", { staticClass: "material-icons" }, [_vm._v("error")])
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h4", { staticClass: "card-title" }, [
+      _c("b", [_vm._v("Không thể xác định yêu cầu của bạn")])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -38502,6 +38553,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ([// general
 {
   path: '/home',
+  name: 'home',
   component: _components_home_HomeComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
 }, {
   path: '/xem_thong_tin_lab',

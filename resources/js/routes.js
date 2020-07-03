@@ -39,7 +39,7 @@ import error_url from './components/error/CantDirectComponent.vue';
 
 export default [
     // general
-	{ path: '/home', component: home},
+	{ path: '/home', name:'home', component: home},
 
     { path: '/xem_thong_tin_lab', component: thong_tin_lab },
 
