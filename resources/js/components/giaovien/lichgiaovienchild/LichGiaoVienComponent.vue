@@ -12,7 +12,6 @@ export default {
     },
     data() {
         return {
-            // Setup fullcalendar
             calendarPlugins: [dayGridPlugin, listPlugin],
             eventTimeFormat: {
                 hour: '2-digit',
@@ -33,7 +32,7 @@ export default {
         }
     },
     components: {
-        FullCalendar // make the <FullCalendar> tag available
+        FullCalendar
     }
 }
 

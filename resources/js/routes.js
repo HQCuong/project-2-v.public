@@ -15,6 +15,8 @@ import modi_ch from './components/kythuat/CauhinhChild/ModiCauHinhComponent.vue'
 import ch_mon from './components/kythuat/CauhinhChild/CauHinhMonComponent.vue';
 
 import thiet_bi from './components/kythuat/ThietBiComponent.vue';
+import list_thiet_bi from './components/kythuat/thietbichild/ModiThietBiComponent.vue';
+import add_thiet_bi from './components/kythuat/thietbichild/AddThietBiComponent.vue';
 
 
 // giao vien
@@ -56,7 +58,12 @@ export default [
         ]
     },
 
-    { path: '/quan_ly_thiet_bi', component: thiet_bi },
+    { path: '/quan_ly_thiet_bi', component: thiet_bi,
+        children: [
+            {path: 'danh_sach_thiet_bi', component: list_thiet_bi},
+            {path: 'add_thiet_bi', component: add_thiet_bi}
+        ]   
+    },
 
     // giao vu
     { path: '/xem_lich', component: lich_gv },

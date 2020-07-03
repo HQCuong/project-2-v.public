@@ -75,12 +75,10 @@ export default {
     watch: {
         ma_toa() {
             this.ma_tang = "";
-            // trong truong hop bo chon toa
             if (!this.ma_toa) {
                 this.arr_tang = [];
                 return false;
             }
-            // dung axios gui len lay so tang
             this.arr_tang = ['tang 2', 'tang 5'];
         },
     }

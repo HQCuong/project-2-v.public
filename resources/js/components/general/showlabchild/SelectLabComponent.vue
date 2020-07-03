@@ -18,7 +18,6 @@
 <script>
 export default {
     created() {
-        // goi axios lay so toa
         this.get_toa();
     },
     data() {
@@ -49,31 +48,26 @@ export default {
             this.ma_tang = "";
             this.ma_lab = "";
             this.$emit('show_main_view', 0);
-            // trong truong hop bo chon toa
             if (!this.ma_toa) {
                 this.arr_tang = [];
                 this.$emit('show_main_view', 0);
                 return false;
             }
-            // dung axios gui len lay so tang
             this.arr_tang = ['tang 2', 'tang 5'];
         },
 
         ma_tang() {
             this.ma_lab = "";
             this.$emit('show_main_view', 0);
-            // trong truong hop bo chon tang 
             if (!this.ma_tang) {
                 this.arr_lab = [];
                 this.$emit('show_main_view', 0);
                 return false
             }
-            // dung axios gui len lay so lab
             this.arr_lab = ['lab 1', 'lab 2', 'lab 3'];
         },
 
         ma_lab() {
-            // trong truong hop bo chon lab
             if (!this.ma_lab) {
                 this.$emit('show_main_view', 0);
             } else if (this.ma_toa && this.ma_tang) {

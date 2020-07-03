@@ -36,23 +36,20 @@ export default {
     watch: {
         ma_toa() {
             this.ma_tang = "";
-            // trong truong hop bo chon toa
             if (!this.ma_toa) {
                 this.arr_tang = [];
+                this.$emit('show_table_lab', 0);
                 return false;
             }
-            // dung axios gui len lay so tang
             this.arr_tang = ['tang 2', 'tang 5'];
         },
 
         ma_tang() {
-            // trong truong hop bo chon tang 
             if (!this.ma_tang) {
-                this.arr_lab = [];
+                this.$emit('show_table_lab', 0);
                 return false
             }
-            // dung axios gui len lay so lab
-            this.arr_lab = ['lab 1', 'lab 2', 'lab 3'];
+            this.$emit('show_table_lab', 1);
         },
     }
 }

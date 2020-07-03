@@ -52,7 +52,6 @@
     <script src="{{ asset('/js/core/popper.min.js') }}"></script>
     <script src="{{ asset('/js/core/bootstrap-material-design.min.js') }}"></script>
     <script src="{{ asset('/js/app.js') }}"></script>
-    <script src="path/to/vue-simple-spinner.js"></script> 
 
     <!-- Plugin files -->
     <!-- Scroll bar -->

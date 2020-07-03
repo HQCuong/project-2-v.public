@@ -3,7 +3,6 @@ export default {
     state: {
         // mon: 'abc',
         // lop: 'bbb',
-        // phong: 123
         events: []
     },
     mutations: {},
@@ -13,17 +12,19 @@ export default {
             rootState.lich_gv = [];
             
             var ev1 = {
-                title: 'phong: ' + 'Lab 1' + '\n' + ' mon: ' + 'PHP' + ' - ' + 'lop: ' + 'BKD01K10',
+                title: 'BKD01K10' + ' - ' + 'ten mon hoc',
                 start: '2020-06-03T10:00:00',
-                end: '2020-06-03T12:00:00'
+                end: '2020-06-03T12:00:00',
+                textColor: 'white'
             }
 
             state.events.push(ev1);
 
             var ev2 = {
-                title: 'phong: ' + 'Lab 1' + '\n' + ' mon: ' + 'PHP' + ' - ' + 'lop: ' + 'BKD01K10',
+                title: 'BKD01K10' + ' - ' +'ten mon hoc',
                 start: '2020-06-15T08:00:00',
-                end: '2020-06-15T12:00:00'
+                end: '2020-06-15T12:00:00',
+                textColor: 'white'
             }
             state.events.push(ev2);
 
