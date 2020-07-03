@@ -6,7 +6,7 @@
 </template>
 <script>
 import selectlab from './selectlab/SelectLabComponent.vue';
-import tablelab from './listlab/TableLabComponent.vue';
+import tablelab from './tablelab/TableLabComponent.vue';
 
 export default {
     data() {

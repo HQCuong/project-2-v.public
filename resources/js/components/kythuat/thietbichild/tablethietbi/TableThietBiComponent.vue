@@ -1,0 +1,56 @@
+<template>
+    <div class="card">
+        <div class="card-header card-header-info">
+            <h4 class="card-title">Danh sách thiết bị</h4>
+            <!-- <p class="card-category">New employees on 15th September, 2016</p> -->
+        </div>
+        <div class="card-body table-responsive">
+            <table class="table table-hover">
+                <thead class="text-info">
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Salary</th>
+                    <th>Country</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Dakota Rice</td>
+                        <td>$36,738</td>
+                        <td>Niger</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Minerva Hooper</td>
+                        <td>$23,789</td>
+                        <td>Curaçao</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Sage Rodriguez</td>
+                        <td>$56,142</td>
+                        <td>Netherlands</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Philip Chaney</td>
+                        <td>$38,735</td>
+                        <td>Korea, South</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</template>
+<script>
+export default {
+    data() {
+        return {
+
+        }
+    }
+}
+
+</script>
+<style lang="css" scoped>
+</style>

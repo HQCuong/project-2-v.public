@@ -38,7 +38,7 @@ export default {
             this.ma_tang = "";
             if (!this.ma_toa) {
                 this.arr_tang = [];
-                this.$emit('show_table_lab', 0);
+                this.$emit('show_main_view', 0);
                 return false;
             }
             this.arr_tang = ['tang 2', 'tang 5'];
@@ -46,10 +46,10 @@ export default {
 
         ma_tang() {
             if (!this.ma_tang) {
-                this.$emit('show_table_lab', 0);
+                this.$emit('show_main_view', 0);
                 return false
             }
-            this.$emit('show_table_lab', 1);
+            this.$emit('show_main_view', 1);
         },
     }
 }

@@ -15,7 +15,7 @@ import modi_ch from './components/kythuat/CauhinhChild/ModiCauHinhComponent.vue'
 import ch_mon from './components/kythuat/CauhinhChild/CauHinhMonComponent.vue';
 
 import thiet_bi from './components/kythuat/ThietBiComponent.vue';
-import list_thiet_bi from './components/kythuat/thietbichild/ModiThietBiComponent.vue';
+import list_thiet_bi from './components/kythuat/thietbichild/ListThietBiComponent.vue';
 import add_thiet_bi from './components/kythuat/thietbichild/AddThietBiComponent.vue';
 
 

@@ -5,8 +5,8 @@
                 <div class="card">
                     <div class="card-body">
                         <maininfo></maininfo>
-                        <mainselect @show_main_view="show_main_view"></mainselect>
-                        <div v-if="main_view">
+                        <mainselect @show_lab_info="show_lab_info"></mainselect>
+                        <div v-if="show_lab_calendar">
                             <labcalendar></labcalendar>
                         </div>
                     </div>
@@ -23,19 +23,16 @@ import maininfo from './showlabchild/MainInfoComponent.vue';
 export default {
     data() {
         return {
-            main_view: false
+            show_lab_calendar: false
         }
     },
     methods: {
-        show_main_view(main_view) {
-            if (main_view == 0) {
-                this.main_view = false;
+        show_lab_info(show_lab_calendar) {
+            if (show_lab_calendar == 0) {
+                this.show_lab_calendar = false;
             } else {
-                this.main_view = true;
+                this.show_lab_calendar = true;
             }
-        },
-        change_current_view() {
-            this.current_view = !this.current_view;
         }
     },
     components: {
