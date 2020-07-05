@@ -13,10 +13,10 @@ export default {
         }
     },
     mounted() {
-        if (this.$router.history.current.path == '/quan_ly_thiet_bi/danh_sach_thiet_bi') {
+        if (this.$route.path == '/quan_ly_thiet_bi/danh_sach_thiet_bi') {
             this.isListTools = true;
             this.isAddTools = false;
-        } else if (this.$router.history.current.path == '/quan_ly_thiet_bi/add_thiet_bi') {
+        } else if (this.$route.path == '/quan_ly_thiet_bi/add_thiet_bi') {
             this.isAddTools = true;
             this.isListTools = false;
         } else {

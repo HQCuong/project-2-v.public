@@ -15,15 +15,15 @@ export default {
         }
     },
     mounted() {
-        if (this.$router.history.current.path == '/quan_ly_cau_hinh/them_cau_hinh') {
+        if (this.$route.path == '/quan_ly_cau_hinh/them_cau_hinh') {
             this.isAddCh = true;
             this.isModiCh = false;
             this.isChMon = false;
-        } else if (this.$router.history.current.path == '/quan_ly_cau_hinh/modi_cau_hinh') {
+        } else if (this.$route.path == '/quan_ly_cau_hinh/modi_cau_hinh') {
             this.isAddCh = false;
             this.isModiCh = true;
             this.isChMon = false;
-        } else if (this.$router.history.current.path == '/quan_ly_cau_hinh/cau_hinh_mon') {
+        } else if (this.$route.path == '/quan_ly_cau_hinh/cau_hinh_mon') {
             this.isAddCh = false;
             this.isModiCh = false;
             this.isChMon = true;

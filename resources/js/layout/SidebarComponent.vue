@@ -98,9 +98,11 @@ export default {
                 $('.close-layer').trigger('click');
             }
         });
+    },
+    watch: {
+        $route(to, from) {
+            $('.main-panel').scrollTop(0);
 
-        // Active class on back button
-        $(window).on('popstate', function(event) {
             $('.nav-item').removeClass('active');
             var pathname = window.location.pathname;
             var pathsidebar = '/project-2/public/' + pathname.split('/')[3];
@@ -124,7 +126,7 @@ export default {
                     $('.close-layer').trigger('click');
                 }
             });
-        });
+        }
     }
 }
 

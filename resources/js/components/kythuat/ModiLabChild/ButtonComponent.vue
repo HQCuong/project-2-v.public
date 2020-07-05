@@ -13,10 +13,10 @@ export default {
         }
     },
     mounted() {
-        if (this.$router.history.current.path == '/quan_ly_lab/danh_sach_lab') {
+        if (this.$route.path == '/quan_ly_lab/danh_sach_lab') {
             this.isListLab = true;
             this.isAddLab = false;
-        } else if (this.$router.history.current.path == '/quan_ly_lab/add_lab') {
+        } else if (this.$route.path == '/quan_ly_lab/add_lab') {
             this.isAddLab = true;
             this.isListLab = false;
         } else {

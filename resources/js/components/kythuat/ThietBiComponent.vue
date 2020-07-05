@@ -18,7 +18,7 @@
     </div>
 </template>
 <script>
-import mainbutton from './thietbichild/MainButtonComponent.vue';
+import mainbutton from './thietbichild/ButtonComponent.vue';
 import maininfo from './thietbichild/MainInfoComponent.vue';
 
 export default {
