@@ -11,7 +11,7 @@ class ToaResource extends JsonResource {
             'ten_toa'        => $this->ten_toa,
             'dia_chi'        => $this->dia_chi,
             'ma_tinh_trang'  => $this->ma_tinh_trang,
-            'ten_tinh_trang' => $this->tenTrangThai($this->ma_tinh_trang),
+            'ten_tinh_trang' => $this->tinhTrang->ten_tinh_trang,
         ];
     }
 }

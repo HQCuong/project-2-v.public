@@ -17,16 +17,11 @@ class NgayNghi extends Migration {
             $table->integer('ma_giao_vien')->unsigned();
             $table->integer('ma_ca')->unsigned();
             $table->text('ghi_chu')->nullable();
+            $table->integer('tinh_trang')->default(1);
             $table->foreign('ma_ca')->references('ma_ca')->on('ca');
             $table->primary(['ngay', 'ma_giao_vien', 'ma_ca']);
         });
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down() {
         Schema::dropIfExists($this->name);
     }

@@ -16,9 +16,9 @@ class PhanCong extends Migration {
             $table->increments('ma_phan_cong');
             $table->string('ma_lop', 30);
             $table->string('ma_mon_hoc', 30);
-            $table->integer('ma_giao_vien')->nullable();
+            $table->integer('ma_nguoi_dung')->nullable();
             $table->integer('tinh_trang');
-            //$table->foreign('ma_mon_hoc')->references('ma_mon_hoc')->on('mon_hoc');
+            $table->foreign('ma_mon_hoc')->references('ma_mon_hoc')->on('mon_hoc');
         });
     }
 

@@ -14,6 +14,6 @@ class Toa extends Model {
         return $this->hasMany('App\Models\Tang', 'ma_toa');
     }
     public function tinhTrang() {
-        return $this->hasMany('App\Models\Tang', 'ma_toa');
+        return $this->hasOne('App\Models\TinhTrang', 'ma_tinh_trang', 'ma_tinh_trang');
     }
 }

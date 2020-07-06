@@ -31,9 +31,9 @@ class ToaController extends Controller {
             if ($rq->has('ma_toa')) {
                 $toa = Toa::find($rq->ma_toa)
                     ->update([
-                        'ten_toa'    => $rq->get('ten_toa'),
-                        'dia_chi'    => $rq->get('dia_chi'),
-                        'tinh_trang' => $rq->get('tinh_trang'),
+                        'ten_toa'       => $rq->get('ten_toa'),
+                        'dia_chi'       => $rq->get('dia_chi'),
+                        'ma_tinh_trang' => $rq->get('ma_tinh_trang'),
                     ]);
                 return ResponseMau::Store([
                     'string' => ResponseMau::SUCCESS_UPDATE,
@@ -46,7 +46,7 @@ class ToaController extends Controller {
             return $this->endCatchValue(ResponseMau::ERROR_UPDATE);
         }
     }
-    public function checkInfo(ToaRequest $rq) {
+    public function kiemTra(ToaRequest $rq) {
         return ResponseMau::Store([]);
     }
 }

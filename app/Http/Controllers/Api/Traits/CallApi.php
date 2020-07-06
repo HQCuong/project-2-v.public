@@ -7,8 +7,9 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 trait CallApi {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     private $base_url = 'https://api.bkacad.xyz/api/';
-    private $key      = 'duongbavl';
-    private $body     = [];
+    //private $base_url = 'http://localhost:8080/github/api.bkacad.xyz/public/api/';
+    private $key  = 'duongbavl';
+    private $body = [];
     public function getApi($url) {
         $url    = $this->base_url . $url;
         $client = new \GuzzleHttp\Client();
@@ -44,5 +45,8 @@ trait CallApi {
     public function setBody($body) {
         $this->body = $body;
         return $this;
+    }
+    public function getBody() {
+        return $this->body;
     }
 }

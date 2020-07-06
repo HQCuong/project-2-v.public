@@ -4,16 +4,16 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PhanCongResource extends JsonResource
-{
-    /**
-     * Transform the resource into an array.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function toArray($request)
-    {
-        return parent::toArray($request);
+class PhanCongResource extends JsonResource {
+
+    public function toArray($request) {
+        return [
+            'ma_phan_cong'   => $this->ma_phan_cong,
+            'ma_lop'         => $this->ma_lop,
+            'ma_mon_hoc'     => $this->ma_mon_hoc,
+            'ma_nguoi_dung'  => $this->ma_nguoi_dung,
+            'ma_tinh_trang'  => $this->tinh_trang,
+            'ten_tinh_trang' => $this->tinhTrang(),
+        ];
     }
 }

@@ -11,42 +11,46 @@ use Exception;
 use ResponseMau;
 
 class CauHinhMonController extends Controller {
+    use Traits\ReturnError;
     public function hienThiDanhSachMon(CauHinhMonRequest $rq) {
         try {
-            $cau_hinh_mon           = new CauHinhMon();
-            $cau_hinh_mon->cau_hinh = (new CauHinhController())->layThongTinCauHinh($rq->get('ma_cau_hinh'));
-            $cau_hinh_mon->list_mon = CauHinhMonResource::collection(
-                CauHinhMon::where('ma_cau_hinh', $rq->get('ma_cau_hinh'))
-                    ->get()
-            );
+            $return_data           = (object) ['cau_hinh' => null, 'list_mon' => null];
+            $return_data->cau_hinh = (new CauHinhController())->layThongTinCauHinh($rq->get('ma_cau_hinh'));
+            $cau_hinh_mon          = CauHinhMon::where('ma_cau_hinh', $rq->get('ma_cau_hinh'))->get();
+            $return_data->list_mon = CauHinhMonResource::collection($cau_hinh_mon);
             return ResponseMau::Store([
-                'data' => $cau_hinh_mon,
+                'data'   => $return_data,
+                'string' => ResponseMau::SUCCESS_GET,
             ]);
         } catch (Exception $e) {
-            return ResponseMau::Store([
-                'string' => ResponseMau::ERROR_NOT_DETERMINED,
-                'bool'   => false,
-            ]);
+            return $this->endCatchValue(ResponseMau::ERROR_GET);
         }
     }
-    public function suaDoiMonTheoCauHinh(CauHinhMonRequest $rq) {
+    public function monHocDuocTheoCauHinh(CauHinhMonRequest $rq) {
         try {
             $cau_hinh_mon = CauHinhMon::where('ma_cau_hinh', $rq->get('ma_cau_hinh'))->delete();
             $data         = [];
-            for ($i = 0; $i < count($rq->get('ma_mon_hoc')); $i++) {
+            if (is_array($rq->get('ma_mon_hoc'))) {
+                for ($i = 0; $i < count($rq->get('ma_mon_hoc')); $i++) {
+                    $cache = [
+                        'ma_cau_hinh' => $rq->get('ma_cau_hinh'),
+                        'ma_mon_hoc'  => $rq->get('ma_mon_hoc')[$i],
+                    ];
+                    array_push($data, $cache);
+                }
+            } else {
                 $cache = [
                     'ma_cau_hinh' => $rq->get('ma_cau_hinh'),
-                    'ma_mon_hoc'  => $rq->get('ma_mon_hoc')[$i],
+                    'ma_mon_hoc'  => $rq->get('ma_mon_hoc'),
                 ];
                 array_push($data, $cache);
             }
             CauHinhMon::insert($data);
-            return ResponseMau::Store([]);
-        } catch (Exception $e) {
             return ResponseMau::Store([
-                'string' => ResponseMau::ERROR_NOT_DETERMINED,
-                'bool'   => false,
+                'string' => ResponseMau::SUCCESS_UPDATE,
             ]);
+        } catch (Exception $e) {
+            return $this->endCatchValue(ResponseMau::ERROR_UPDATE);
         }
     }
 }

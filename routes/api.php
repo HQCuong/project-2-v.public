@@ -1,18 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
- */
-
 //Chưa login cũng được phép truy cập
 ///NguoiDungController-ALL
 Route::post('dangnhap/{tai_khoan}/{mat_khau}', 'Api\NguoiDungController@dangNhap')
@@ -30,14 +18,18 @@ Route::group(['middleware' => 'CheckLogin'], function () {
         ->name('api.nguoidung.view.kiemTra');
     Route::post('nguoidung/kiemtrakey', 'Api\NguoiDungController@kiemTraKey')
         ->name('api.nguoidung.kiemTraKey');
+    Route::post('nguoidung/danhsach', 'Api\NguoiDungController@danhSachGiaoVienKiThuat')
+        ->name('api.nguoidung.danhSachGiaoVienKiThuat');
+    Route::post('nguoidung/thongtin', 'Api\NguoiDungController@thongTin')
+        ->name('api.nguoidung.thongTin');
 });
 ///NguoiDungController-Giáo Vụ
 Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVu']], function () {
     Route::post('nguoidung/tao', 'Api\NguoiDungController@taoNguoiDung')
         ->name('api.nguoidung.taoNguoiDung');
-    Route::post('nguoidung/danhsach', 'Api\NguoiDungController@danhSachGiaoVienKiThuat')
-        ->name('api.nguoidung.danhSachGiaoVienKiThuat');
-    Route::post('nguoidung/clone', 'Api\NguoiDungController@giaoVienClone')
+    Route::any('nguoidung/danhsachall', 'Api\NguoiDungController@danhSachAll')
+        ->name('api.nguoidung.danhSachAll');
+    Route::any('nguoidung/clone', 'Api\NguoiDungController@giaoVienClone')
         ->name('api.nguoidung.giaoVienClone');
 });
 ///ToaController--ALL USER
@@ -48,20 +40,20 @@ Route::group(['middleware' => ['CheckLogin']], function () {
 
 ///ToaController--Giáo Vụ
 Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVu']], function () {
-    Route::post('toa/capnhattoa', 'Api\ToaController@capNhatToa')
+    Route::post('toa/capnhat', 'Api\ToaController@capNhatToa')
         ->name('api.toa.capNhatToa');
-    Route::post('toa/check/info', 'Api\ToaController@checkInfo')
-        ->name('api.toa.checkInfo');
+    Route::post('toa/kiemtra', 'Api\ToaController@kiemTra')
+        ->name('api.toa.kiemTra');
 });
 
 //TangController--Giáo Vụ
 Route::group(['middleware' => 'CheckLogin'], function () {
-    Route::post('tang/gettang', 'Api\TangController@gettang')
-        ->name('api.tang.gettang');
-    Route::post('tang/update/{ma_tang}', 'Api\TangController@update')
+    Route::post('tang', 'Api\TangController@hienthiCacTang')
+        ->name('api.tang.hienthiCacTang');
+    Route::post('tang/capnhat', 'Api\TangController@capNhatTang')
         ->name('api.tang.update');
-    Route::post('tang/create', 'Api\TangController@create')
-        ->name('api.tang.create');
+    Route::post('tang/tao', 'Api\TangController@taoTang')
+        ->name('api.tang.taoTang');
 });
 
 //PhongController--Giáo Vụ
@@ -80,23 +72,23 @@ Route::group(['middleware' => 'CheckLogin'], function () {
 
 //LoaiController
 Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVuOrKiThuat']], function () {
-    Route::post('loai', 'Api\LoaiController@hienThiTatCa')
-        ->name('api.loai.hienThiTatCa');
-    Route::post('loai/edit', 'Api\LoaiController@suaLoai')
+    Route::post('loai', 'Api\LoaiController@hienThi')
+        ->name('api.loai.hienThi');
+    Route::post('loai/sua', 'Api\LoaiController@suaLoai')
         ->name('api.loai.suaLoai');
-    Route::post('loai/create', 'Api\LoaiController@themLoai')
+    Route::post('loai/them', 'Api\LoaiController@themLoai')
         ->name('api.loai.themLoai');
 });
 
 //CauHinhController
 Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVuOrKiThuat']], function () {
     Route::post('cauhinh', 'Api\CauHinhController@hienThi')
-        ->name('api.cauhinh.hienThiTatCa');
+        ->name('api.cauhinh.hienThi');
+    Route::post('cauhinh/case', 'Api\CauHinhController@hienThiCase')
+        ->name('api.cauhinh.hienThiCase');
     Route::post('cauhinh/them', 'Api\CauHinhController@themCauHinh')
         ->name('api.cauhinh.themCauHinh');
-    Route::post('cauhinh/case/info', 'Api\CauHinhController@hienThiCase')
-        ->name('api.cauhinh.hienThiCase');
-    Route::post('cauhinh/update/info', 'Api\CauHinhController@capNhatCauHinh')
+    Route::post('cauhinh/sua', 'Api\CauHinhController@capNhatCauHinh')
         ->name('api.cauhinh.capNhatCauHinh');
 });
 
@@ -104,13 +96,15 @@ Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVuOrKiThuat']], function 
 Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVuOrKiThuat']], function () {
     Route::post('cauhinhmon', 'Api\CauHinhMonController@hienThiDanhSachMon')
         ->name('api.cauhinhmon.hienThiDanhSachMon');
-    Route::post('cauhinhmon/update', 'Api\CauHinhMonController@suaDoiMonTheoCauHinh')
-        ->name('api.cauhinhmon.suaDoiMonTheoCauHinh');
+    Route::post('cauhinhmon/capnhat', 'Api\CauHinhMonController@monHocDuocTheoCauHinh')
+        ->name('api.cauhinhmon.monHocDuocTheoCauHinh');
 });
 //NgàyNghỉController --Giáo Vụ + Giáo Viên
 Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVuOrGiaoVien']], function () {
-    Route::post('ngaynghi', 'Api\NgayNghiController@hienThiTatCaLichNghi')
-        ->name('api.ngaynghi.hienThiTatCaLichNghi');
+    Route::any('ngaynghi', 'Api\NgayNghiController@hienThiTatCa')
+        ->name('api.ngaynghi.hienThiTatCa');
+    Route::any('ngaynghi/giaovien', 'Api\NgayNghiController@ngayNghiTheoGiaoVien')
+        ->name('api.ngaynghi.ngayNghiTheoGiaoVien');
     Route::post('ngaynghi/them', 'Api\NgayNghiController@themNgayNghi')
         ->name('api.ngaynghi.themNgayNghi');
     Route::post('ngaynghi/sua', 'Api\NgayNghiController@suaNgayNghi')
@@ -132,8 +126,6 @@ Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVuOrGiaoVien']], function
 Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVuOrGiaoVien']], function () {
     Route::post('monhoc', 'Api\MonHocController@hienThiTatCaMon')
         ->name('api.monhoc.hienThiTatCaMon');
-    Route::post('monhoc/mot', 'Api\MonHocController@hienThiMotMon')
-        ->name('api.monhoc.hienThiMotMon');
 });
 Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVu']], function () {
     Route::post('monhoc/clone', 'Api\MonHocController@cloneBKACADToLocal')
@@ -144,6 +136,24 @@ Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVu']], function () {
 Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVu']], function () {
     Route::post('phancong/clone', 'Api\PhanCongController@cloneBKACADToLocal')
         ->name('api.phancong.cloneBKACADToLocal');
+});
+Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVuOrGiaoVien']], function () {
     Route::post('phancong', 'Api\PhanCongController@phanCongWithTtGv')
         ->name('api.phancong.phanCongWithTtGv');
+});
+Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVuOrGiaoVien']], function () {
+    Route::post('khoa', 'Api\ShowCallController@khoa')
+        ->name('api.khoa.all');
+    Route::post('ctdt', 'Api\ShowCallController@ctdt')
+        ->name('api.khoa.ctdt');
+});
+
+//PhanCongChiTiet Controller
+Route::group(['middleware' => ['CheckLogin']], function () {
+    Route::post('phancongchitiet', 'Api\PhanCongChiTietController@hienThi')
+        ->name('api.phancongchitiet.hienThi');
+    Route::post('phancongchitiet/tao', 'Api\PhanCongChiTietController@taoPcct')
+        ->name('api.phancongchitiet.taoPcct');
+    Route::post('phancongchitiet/dexuatlichmoi', 'Api\PhanCongChiTietController@deXuatPcct')
+        ->name('api.phancongchitiet.deXuatPcct');
 });

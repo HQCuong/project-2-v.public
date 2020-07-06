@@ -2,26 +2,19 @@
 
 namespace App\Rules;
 
-use App\Http\Controllers\Api\GiaoVienController;
+use App\Models\NguoiDung;
 use Illuminate\Contracts\Validation\Rule;
+use ResponseMau;
 
 class MaGiaoVienRule implements Rule {
     public function passes($attribute, $value) {
-        if ($value == 0) {
+        if ($value == 0 || NguoiDung::where('ma_nguoi_dung', $value)->exists()) {
             return true;
         }
-        $list_gv = (new GiaoVienController)->getGiaoVien();
-        if ($list_gv == false) {
-            return false;
-        }
-        foreach ($list_gv as $key) {
-            $data = (object) $key;
-            if ($data->ma_can_bo == $value) {
-                return true;
-            }
-        }
+        return false;
+
     }
     public function message() {
-        return ':attribute không hợp lệ';
+        return ResponseMau::RES_KHONG_TON_TAI;
     }
 }

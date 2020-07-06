@@ -3,11 +3,9 @@
 namespace App\Http\Requests;
 
 use App\Rules\MaGiaoVienRule;
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Validator;
 use RegexRule;
-use ResponseMau;
 
 class NgayNghiRequest extends FormRequest {
     use Traits\ListError;
@@ -20,6 +18,7 @@ class NgayNghiRequest extends FormRequest {
             'ma_giao_vien_cu' => new MaGiaoVienRule(),
             'ngay_cu'         => RegexRule::REGEX_NGAY,
             'ma_ca_cu'        => RegexRule::REGEX_MA_CA,
+            'tinh_trang'      => RegexRule::REGEX_NGAY_NGHI_TINH_TRANG,
         ];
     }
     public function attributes() {
@@ -31,14 +30,26 @@ class NgayNghiRequest extends FormRequest {
             'ma_giao_vien_cu' => 'Giáo viên cũ',
             'ngay_cu'         => 'Ngày cũ',
             'ma_ca_cu'        => 'Ca cũ',
+            'tinh_trang'      => 'Tình trạng',
         ];
     }
-    protected function failedValidation(Validator $validator) {
-        throw new HttpResponseException(
-            ResponseMau::Store([
-                'bool'   => false,
-                'string' => $this->resultError($validator->messages()->toArray()),
-            ])
-        );
+    public function withValidator(Validator $validator) {
+        $error = $validator->messages();
+        if ($this->query->has('ngay') && !$error->has('ngay')) {
+            $this->query->add([
+                'ngay' => $this->stringToDate($this->query->get('ngay')),
+            ]);
+        }
+        if ($this->query->has('ngay_cu') && !$error->has('ngay_cu')) {
+            $this->query->add([
+                'ngay_cu' => $this->stringToDate($this->query->get('ngay_cu')),
+            ]);
+        }
+    }
+    public function stringToDate($string) {
+        $string = str_replace('/', '-', $string);
+        $create = date_create($string);
+        $format = date_format($create, "Y-m-d");
+        return $format;
     }
 }

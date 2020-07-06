@@ -2,11 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
 use RegexRule;
-use ResponseMau;
 
 class CauHinhRequest extends FormRequest {
     use Traits\ListError;
@@ -31,33 +28,5 @@ class CauHinhRequest extends FormRequest {
             'mo_ta'       => 'Mô tả',
             'ma_loai'     => 'Loại',
         ];
-    }
-    protected function failedValidation(Validator $validator) {
-        $error           = $validator->messages();
-        $messages_return = ResponseMau::ERROR_NOT_DETERMINED;
-        if ($error->has('cpu')) {
-            $messages_return = ResponseMau::ERROR_CAU_HINH_CPU;
-        }
-        if ($error->has('ram')) {
-            $messages_return = ResponseMau::ERROR_CAU_HINH_RAM;
-        }
-        if ($error->has('main')) {
-            $messages_return = ResponseMau::ERROR_CAU_HINH_MAIN;
-        }
-        if ($error->has('o_cung')) {
-            $messages_return = ResponseMau::ERROR_CAU_HINH_O_CUNG;
-        }
-        if ($error->has('ma_cau_hinh')) {
-            $messages_return = ResponseMau::ERROR_CAU_HINH_MA_CAU_HINH;
-        }
-        if ($error->has('mo_ta')) {
-            $messages_return = ResponseMau::ERROR_CAU_HINH_MO_TA;
-        }
-        if ($error->has('ma_loai')) {
-            $messages_return = ResponseMau::ERROR_CAU_HINH_MA_LOAI;
-        }
-        throw new HttpResponseException(
-            ResponseMau::Store(['bool' => false, 'string' => $messages_return])
-        );
     }
 }

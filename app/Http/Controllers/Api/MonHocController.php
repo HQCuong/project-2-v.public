@@ -12,22 +12,17 @@ use ResponseMau;
 class MonHocController extends Controller {
     use Traits\ReturnError;
     use Traits\CallApi;
-    public function hienThiTatCaMon() {
+    public function hienThiTatCaMon(MonHocRequest $rq) {
         try {
-            $mon_hoc = MonHoc::all();
+            $mon_hoc = MonHoc::where(function ($query) use ($rq) {
+                if ($rq->has('ma_mon_hoc')) {
+                    $query->find($rq->get('ma_mon_hoc'));
+                }
+            })->get();
+            $data = ($mon_hoc->count() == 1) ?
+            (new MonHocResource($mon_hoc->first()))->toOne() : MonHocResource::collection($mon_hoc);
             return ResponseMau::Store([
-                'data'   => MonHocResource::collection($mon_hoc),
-                'string' => ResponseMau::SUCCESS_DONE_DATA,
-            ]);
-        } catch (Exception $e) {
-            return $this->endCatch();
-        }
-    }
-    public function hienThiMotMon(MonHocRequest $rq) {
-        try {
-            $mon_hoc = MonHoc::find($rq->get('ma_mon_hoc'));
-            return ResponseMau::Store([
-                'data'   => (new MonHocResource($mon_hoc))->toOne(),
+                'data'   => $data,
                 'string' => ResponseMau::SUCCESS_DONE_DATA,
             ]);
         } catch (Exception $e) {

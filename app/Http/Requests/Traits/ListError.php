@@ -18,18 +18,16 @@ trait ListError {
     }
     public function defaultMessages() {
         return [
-            'exists'        => ':attribute không tồn tại',
-            'regex'         => ':attribute không hợp lệ',
-            'unique'        => ':attribute đã tồn tại',
-            'ngay.regex'    => ':attribute không hợp lệ (ngày/tháng/năm)',
-            'ghi_chu.regex' => ':attribute không hợp lệ (Gồm tiếng việt có thể có dấu hoặc không và từ 0-500 kí tự)',
+            'exists' => ResponseMau::RES_KHONG_TON_TAI,
+            'regex'  => ResponseMau::RES_KHONG_HOP_LE,
+            'unique' => ResponseMau::RES_DA_TON_TAI,
         ];
     }
     public function messages() {
         return [
-            'exists'        => ':attribute không tồn tại',
-            'regex'         => ':attribute không hợp lệ',
-            'unique'        => ':attribute đã tồn tại',
+            'exists'        => ResponseMau::RES_KHONG_TON_TAI,
+            'regex'         => ResponseMau::RES_KHONG_HOP_LE,
+            'unique'        => ResponseMau::RES_DA_TON_TAI,
             'ngay.regex'    => ':attribute không hợp lệ (ngày/tháng/năm)',
             'ghi_chu.regex' => ':attribute không hợp lệ (Gồm tiếng việt có thể có dấu hoặc không và từ 0-500 kí tự)',
         ];

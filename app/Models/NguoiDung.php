@@ -30,4 +30,10 @@ class NguoiDung extends Model {
     public function capDo() {
         return $this->hasOne(new CapDo, 'ma_cap_do', 'ma_cap_do');
     }
+    public function ngayNghi() {
+        return $this->hasMany('App\Models\NgayNghi', 'ma_giao_vien', 'ma_nguoi_dung');
+    }
+    public function phanCong() {
+        return $this->hasMany('App\Models\PhanCong', 'ma_nguoi_dung', 'ma_nguoi_dung');
+    }
 }

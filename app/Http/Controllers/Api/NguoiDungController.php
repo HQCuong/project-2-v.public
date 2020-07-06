@@ -21,14 +21,27 @@ class NguoiDungController extends Controller {
     public function taoNguoiDung(NguoiDungRequest $rq) {
         try {
             $user = new NguoiDung();
-            $user = NguoiDung::create([
-                'tai_khoan' => strtolower($rq->get('tai_khoan')),
-                'email'     => strtolower($rq->get('email')),
-                'sdt'       => $rq->has('sdt') ? $rq->get('sdt') : "0" . rand(000000000, 999999999),
-                'mat_khau'  => Hash::make(strtolower($rq->get('mat_khau'))),
-                'key'       => Str::random(256),
-                'cap_do'    => $rq->has('cap_do') ? $rq->get('cap_do') : 3,
-            ]);
+            if ($rq->has('tai_khoan')) {
+                $user->tai_khoan = strtolower($rq->get('tai_khoan'));
+            }
+            if ($rq->has('email')) {
+                $user->email = strtolower($rq->get('email'));
+            }
+            if ($rq->has('ho_ten')) {
+                $user->ho_ten = $rq->get('ho_ten');
+            }
+            if ($rq->has('sdt')) {
+                $user->sdt = strtolower($rq->get('sdt'));
+            } else {
+                $user->sdt = "0" . rand(000000000, 999999999);
+            }
+            if ($rq->has('mat_khau')) {
+                $user->mat_khau = Hash::make($rq->get('mat_khau'));
+            } else {
+                $user->mat_khau = Hash::make(Str::random(32));
+            }
+            $user->key = Str::random(256);
+            $user->save();
             return ResponseMau::Store([
                 'string' => ResponseMau::SUCCESS_USER_CREATE,
                 'data'   => new NguoiDungResource($user),
@@ -46,7 +59,8 @@ class NguoiDungController extends Controller {
                 $user->key = Str::random(256);
                 $user->save();
                 return ResponseMau::Store([
-                    'data' => (new NguoiDungResource($user))->fullInfo(),
+                    'string' => ResponseMau::SUCCESS_USER_LOGIN,
+                    'data'   => (new NguoiDungResource($user))->fullInfo(),
                 ]);
             } else {
                 return $this->endCatchValue(ResponseMau::ERROR_USER_LOGIN);
@@ -70,7 +84,7 @@ class NguoiDungController extends Controller {
     public function doiMatKhau(NguoiDungRequest $rq) {
         try {
             $user = NguoiDung::where('ma_nguoi_dung', $rq->get('ma_nguoi_dung'))->first();
-            if ($rq->get('mat_khau') == $rq->get('mat_khau_moi')) {
+            if (($rq->get('mat_khau') == $rq->get('mat_khau_moi')) || !$rq->has('mat_khau') || !$rq->has('mat_khau_moi')) {
                 return $this->endCatchValue(ResponseMau::ERROR_USER_PASS_DUPLICATE);
             }
             if (Hash::check($rq->get('mat_khau'), $user->mat_khau) == true) {
@@ -93,14 +107,24 @@ class NguoiDungController extends Controller {
     }
     public function capNhatThongTin(NguoiDungRequest $rq, $id) {
         try {
+            $changer = 0;
             if ($id != $rq->get('ma_nguoi_dung')) {
                 if ($rq->get('cap_do') == 1) {
                     $user = NguoiDung::find($id);
                     if ($user->cap_do == 1) {
                         return $this->endCatchValue(ResponseMau::ERROR_USER_UPDATE_INFO_CAP_DO);
                     }
-                    if ($rq->has('ma_cap_do')) {
-                        $user->ma_cap_do = $rq->get('ma_cap_do');
+                    if ($rq->has('ma_cap_do') && $rq->has('ma_cap_do') != $user->ma_cap_do) {
+                        if ($rq->get('ma_cap_do') == 1) {
+                            return $this->endCatchValue(ResponseMau::ERROR_USER_UPDATE_CAP_DO);
+                        } else {
+                            $user->ma_cap_do = $rq->get('ma_cap_do');
+                            $changer++;
+                        }
+                    }
+                    if ($rq->has('mat_khau')) {
+                        $user->mat_khau = Hash::make($rq->get('mat_khau'));
+                        $changer++;
                     }
                 }
             } else {
@@ -108,29 +132,50 @@ class NguoiDungController extends Controller {
             }
             if ($rq->has('tai_khoan')) {
                 $user->tai_khoan = $rq->get('tai_khoan');
+                $changer++;
             }
             if ($rq->has('email')) {
                 $user->email = $rq->get('email');
+                $changer++;
             }
             if ($rq->has('sdt')) {
                 $user->sdt = $rq->get('sdt');
+                $changer++;
             }
-            if ($rq->has('mat_khau')) {
-                $user->mat_khau = Hash::make($rq->get('mat_khau'));
+            if ($changer > 0) {
+                $user->key = Str::random(256);
+                $user->save();
+                return ResponseMau::Store([
+                    'string' => ResponseMau::SUCCESS_USER_UPDATE_INFO,
+                    'data'   => new NguoiDungResource($user),
+                ]);
+            } else {
+                return $this->endCatchValue(ResponseMau::ERROR_USER_KHONG_CO_THAY_DOI);
             }
-            $user->key = Str::random(256);
-            $user->save();
-            return ResponseMau::Store([
-                'string' => ResponseMau::SUCCESS_USER_UPDATE_INFO,
-                'data'   => new NguoiDungResource($user),
-            ]);
         } catch (Exception $e) {
             return $this->endCatch();
         }
     }
-    public function danhSachGiaoVienKiThuat() {
+    public function danhSachGiaoVienKiThuat(NguoiDungRequest $rq) {
         try {
-            $user = NguoiDung::where('ma_cap_do', '!=', 1)->get();
+            if ($rq->cap_do != 1) {
+                $user = NguoiDung::where('ma_nguoi_dung', $rq->ma_nguoi_dung)->get();
+            } else {
+                $user = NguoiDung::where('ma_cap_do', '!=', 1)
+                    ->orderBy('ma_cap_do', 'ASC')
+                    ->get();
+            }
+            return ResponseMau::Store([
+                'string' => ResponseMau::SUCCESS_GET,
+                'data'   => NguoiDungResource::collection($user),
+            ]);
+        } catch (Exception $e) {
+            return $this->endCatchValue(ResponseMau::ERROR_GET);
+        }
+    }
+    public function danhSachAll() {
+        try {
+            $user = NguoiDung::all();
             return ResponseMau::Store([
                 'string' => ResponseMau::SUCCESS_GET,
                 'data'   => NguoiDungResource::Collection($user),
@@ -148,10 +193,29 @@ class NguoiDungController extends Controller {
             'data' => $data,
         ]);
     }
+    public function thongTin(NguoiDungRequest $rq) {
+        try {
+            if ($rq->cap_do == 1 && $rq->ma != $rq->ma_nguoi_dung) {
+                $nguoi_dung = NguoiDung::where('ma_nguoi_dung', $rq->ma)
+                    ->where('ma_cap_do', '!=', 1)
+                    ->first();
+            }
+            if (!$rq->has('ma')) {
+                $nguoi_dung = NguoiDung::find($rq->ma_nguoi_dung);
+            }
+            return ResponseMau::Store([
+                'string' => ResponseMau::SUCCESS_GET,
+                'data'   => new NguoiDungResource($nguoi_dung),
+            ]);
+        } catch (Exception $e) {
+            dd($e->getMessage());
+            return $this->endCatchValue(ResponseMau::ERROR_GET);
+        }
+    }
     public function giaoVienClone() {
         try {
             $list_gv = (new GiaoVienController)->getAllInfo();
-            $re      = "/^[a-z][a-z0-9_\.]{3,32}/";
+            $re      = "/^[a-z][a-z0-9_\.]{2,32}/";
             $create  = 0;
             $update  = 0;
             $data    = (object) ['create' => [], 'update' => []];
@@ -160,13 +224,16 @@ class NguoiDungController extends Controller {
                 if (count($matches[0]) == 1) {
                     $value['tai_khoan'] = $matches[0][0];
                 } else {
-                    continue;
+                    $value['tai_khoan'] = strtolower(Str::random(10));
+                }
+                if (strlen($value['sdt']) != 10) {
+                    $value['sdt'] = "0" . rand(300000000, 399999999);
                 }
                 $value['mat_khau'] = $value['password'];
                 $value             = new Request($value);
                 try {
                     $validatedData = $value->validate([
-                        'ho_ten'    => RegexRule::REGEX_HO_TEN,
+                        'ho_ten'    => RegexRule::REGEX_HO_TEN_C,
                         'email'     => RegexRule::REGEX_EMAIL_RULE_C,
                         'sdt'       => RegexRule::REGEX_SDT_RULE,
                         'tai_khoan' => RegexRule::REGEX_USER_NAME_RULE,
@@ -181,15 +248,13 @@ class NguoiDungController extends Controller {
                 } catch (Exception $e) {
                     try {
                         $validatedData = $value->validate([
-                            'ho_ten'    => RegexRule::REGEX_HO_TEN,
+                            'ho_ten'    => RegexRule::REGEX_HO_TEN_C,
                             'email'     => RegexRule::REGEX_EMAIL_CHECK_IN,
-                            'sdt'       => RegexRule::REGEX_SDT_CHECK_IN,
                             'mat_khau'  => RegexRule::REGEX_PASSWORD_RULE,
                             'ma_cap_do' => RegexRule::REGEX_MA_CAP_DO_C,
                         ]);
                         $changer = [];
-                        $user    = NguoiDung::where('email', $value['email'])
-                            ->where('sdt', $value['sdt'])->first();
+                        $user    = NguoiDung::where('email', $value['email'])->first();
                         if ($user->ho_ten != $validatedData['ho_ten']) {
                             $old          = $user->ho_ten;
                             $user->ho_ten = $validatedData['ho_ten'];

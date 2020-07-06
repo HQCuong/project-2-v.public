@@ -7,12 +7,20 @@ use Illuminate\Http\Response;
 
 class ResponseMau {
     private $success, $message, $data;
+    ///VAL
+    const RES_KHONG_HOP_LE  = ':attribute không hợp lệ';
+    const RES_KHONG_TON_TAI = ':attribute không tồn tại';
+    const RES_DA_TON_TAI    = ':attribute đã tồn tại';
+
+    //end Val
     const SUCCESS_DONE_DATA = 'Lấy dữ liệu thành công';
     const SUCCESS_GET       = 'Lấy dữ liệu thành công';
-    const SUCCESS_UPDATE    = 'Cập nhật dữ liệu thành công';
+    const SUCCESS_UPDATE    = 'Cập nhật thành công';
+    const SUCCESS_CREATE    = 'Tạo thành công';
     ///success return
     const SUCCESS_USER_CREATE         = 'Tạo tài khoản thành công';
     const SUCCESS_USER_LOGOUT         = 'Đăng xuất thành công';
+    const SUCCESS_USER_LOGIN          = 'Đăng nhập thành công';
     const SUCCESS_USER_CHANGEPASSWORD = 'Đổi mật khẩu thành công';
     const SUCCESS_USER_RESETPASSWORD  = '';
     const SUCCESS_USER_UPDATE_INFO    = 'Thay đổi thông tin thành công';
@@ -34,6 +42,7 @@ class ResponseMau {
     const ERROR_GET            = 'Lấy dữ liệu thất bại';
     const ERROR_UPDATE         = 'Cập nhật dữ liệu thất bại';
     const ERROR_KEY            = 'Bạn không có quyền truy cập';
+    const ERROR_CREATE         = 'Tạo thất bại hay kiểm tra lại dữ liệu';
 
     const ERROR_USER_NAME               = ':attribute cần từ 4-20 kí tự và không có kí tự đặc biệt';
     const ERROR_USER_PASSWORD_ILLEGAL   = ':attribute cần từ 5-32 kí tự và không bao gồm kí tự đặc biệt';
@@ -44,6 +53,8 @@ class ResponseMau {
     const ERROR_USER_RESETPASSWORD      = 'Chức năng chưa phát triển';
     const ERROR_USER_UPDATE_INFO        = 'Thay đổi thông tin không thành công';
     const ERROR_USER_UPDATE_INFO_CAP_DO = 'Bạn không được phép cập nhật thông tin cho Giáo Vụ khác';
+    const ERROR_USER_UPDATE_CAP_DO      = 'Bạn không được phép thêm người khác làm giáo vụ';
+    const ERROR_USER_KHONG_CO_THAY_DOI  = 'Bạn chưa điền thay đổi gì ';
     const ERROR_USER_LOGIN              = 'Đăng nhập thất bại kiểm tra lại tài khoản hoặc mật khẩu';
 
     //Tòa
@@ -57,8 +68,8 @@ class ResponseMau {
     //Tang
     const ERROR_TANG_TEN_TANG    = 'Tên tầng bị trùng hoặc không hợp lệ (4-20 kí tự và không có kí tự đặc biệt)';
     const ERROR_TANG_MA_TANG     = 'Mã tầng bị trùng hoặc không hợp lệ';
-    const ERROR_TANG_UPDATE_INFO = 'Cập nhật thông tin thất bại có lỗi của hệ thống';
-    const ERROR_TANG_CREATE      = 'Tao tầng thất bại hãy kiểm tra lại các dữ liệu';
+    const ERROR_TANG_UPDATE_INFO = 'Thông tin không thay đổi hoặc không tồn tại Tầng';
+    //const ERROR_TANG_CREATE      = 'Tao tầng thất bại hãy kiểm tra lại các dữ liệu';
     //Phong
     const ERROR_PHONG_CREATE     = 'Tao phòng thất bại hãy kiểm tra lại các dữ liệu';
     const ERROR_PHONG_DELETE     = 'Xóa phòng thất bại';
@@ -83,6 +94,8 @@ class ResponseMau {
     const ERROR_CAU_HINH_MA_LOAI       = 'Mã Loại không tồn tại !';
     const ERROR_CAU_HINH_TAO           = 'Tạo thông tin cho thiết bị thất bại !';
     const ERROR_CAU_HINH_GET_INFO_CASE = 'Lấy thông tin thất bại !';
+    const ERROR_CAU_HINH_DA_TON_TAI    = 'Cấu hình bạn thêm hiện đã tồn tại';
+    const ERROR_CAU_HINH_UPDATE        = 'Cấu hình bạn thêm hiện đã tồn tại';
     const ERROR_GIAO_VIEN_API          = 'Lấy thông tin Giáo Viên thất bại !';
 
     //Ngay Nghi
@@ -138,13 +151,11 @@ class ResponseMau {
         return $res;
     }
     public static function Store(array $data) {
-        $res = new Response();
+        $res = (object) ['success' => null, 'message' => null, 'data' => null];
         if (isset($data['bool']) && $data['bool'] == false) {
             $res->success = $data['bool'];
-            //$methob = Response::HTTP_UNAUTHORIZED;
         } else {
             $res->success = true;
-            //$methob = Response::HTTP_OK;
         }
         if (isset($data['string']) && !is_null($data['string'])) {
             $res->message = $data['string'];

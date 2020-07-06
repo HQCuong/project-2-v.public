@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Schema;
 
 class NguoiDung extends Migration {
     private $name      = 'nguoi_dung';
-    private $tai_khoan = ['admin', 'user', 'duong', 'cuong', 'kithuat'];
+    private $tai_khoan = ['superadmin', 'user', 'duong', 'cuong', 'kithuat'];
     private $mat_khau  = ['1', '1', '1', '1', '1'];
     private $email     = ['a@gmail.com', 'b@gmail.com', 'c@gmail.com', 'd@gmail.com', 'kithuat@gmail.com'];
     private $sdt       = ['0', '1', '2', '4', '6'];

@@ -17,13 +17,19 @@ class NgayNghi extends Model {
         'ma_giao_vien',
         'ma_ca',
         'ghi_chu',
+        'tinh_trang',
     ];
     protected $attributes = array(
-        'ghi_chu' => null,
+        'ghi_chu'    => null,
+        'tinh_trang' => 1,
+        'ma_ca'      => 1,
     );
     public $timestamps   = false;
     public $incrementing = false;
     public function ca() {
         return $this->hasOne('App\Models\Ca', 'ma_ca', 'ma_ca');
+    }
+    public function nguoiDung() {
+        return $this->hasOne('App\Models\NguoiDung', 'ma_nguoi_dung', 'ma_giao_vien');
     }
 }
