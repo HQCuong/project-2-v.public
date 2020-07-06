@@ -19,10 +19,19 @@
 import selectgv from './lichgiaovienchild/SelectGiaoVienComponent.vue';
 import lichgv from './lichgiaovienchild/LichGiaoVienComponent.vue';
 export default {
-
+    mounted() {
+        if (this.$route.path == '/xem_lich') {
+            this.$store.commit('content/page_title', 'Xem lịch dạy');
+        }
+    },
     data() {
         return {
 
+        }
+    },
+    watch: {
+        $route(to, from) {
+            this.$store.commit('content/page_title', 'Xem lịch dạy');
         }
     },
     components: {

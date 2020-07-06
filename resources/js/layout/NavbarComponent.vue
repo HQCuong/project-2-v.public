@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top">
         <div class="container-fluid">
             <div class="navbar-wrapper">
-                <p class="navbar-brand" href="javascript:;">Tiêu đề</p>
+                <p class="navbar-brand" href="javascript:;">{{page_title}}</p>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="sr-only">Toggle navigation</span>
@@ -44,7 +44,11 @@
 <script>
 export default {
     data() {
-        return {
+        return {}
+    },
+    computed: {
+        page_title() {
+            return this.$store.state.content.page_title;
         }
     },
     mounted() {

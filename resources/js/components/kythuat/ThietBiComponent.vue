@@ -22,14 +22,24 @@ import mainbutton from './thietbichild/ButtonComponent.vue';
 import maininfo from './thietbichild/MainInfoComponent.vue';
 
 export default {
+    mounted() {
+        if (this.$route.path == 'quan_ly_thiet_bi') {
+            return this.$store.commit('content/page_title', 'Quản lý thiết bị');
+        }
+    },
     data() {
         return {
 
         }
     },
+    watch: {
+        $route(to, from) {
+            this.$store.commit('content/page_title', 'Quản lý thiết bị');
+        }
+    },
     components: {
-    	mainbutton,
-    	maininfo
+        mainbutton,
+        maininfo
     }
 }
 

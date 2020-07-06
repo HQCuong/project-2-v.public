@@ -41,13 +41,15 @@ export default {
         $(".form-group").on("click", function() {
             $(".form-group").removeClass("is-focused");
             $(this).addClass("is-focused");
-        })
+        });
 
 
         // remove color while move out input
         $("input").blur(function() {
             $(".form-group").removeClass("is-focused");
         });
+
+        this.$store.commit('content/page_title', 'Thêm lab');
     },
     data() {
         return {
@@ -66,9 +68,9 @@ export default {
         get_toa() {
             this.arr_toa = ['A17'];
             if (this.arr_toa.length == 1) {
-                this.value_toa = this.arr_toa[0];
+                this.ma_toa = this.arr_toa[0];
             } else {
-                this.value_toa = '';
+                this.ma_toa = '';
             }
         }
     },

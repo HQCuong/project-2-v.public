@@ -13328,6 +13328,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    this.$store.commit('content/page_title', 'Xem thông tin lab');
+  },
   data: function data() {
     return {
       show_lab_calendar: false
@@ -13617,8 +13620,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    if (this.$route.path == '/xem_lich') {
+      this.$store.commit('content/page_title', 'Xem lịch dạy');
+    }
+  },
   data: function data() {
     return {};
+  },
+  watch: {
+    $route: function $route(to, from) {
+      this.$store.commit('content/page_title', 'Xem lịch dạy');
+    }
   },
   components: {
     lichgv: _lichgiaovienchild_LichGiaoVienComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -13822,6 +13835,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    if (this.$route.path == '/quan_ly_cau_hinh') {
+      return this.$store.commit('content/page_title', 'Quản lý cấu hình');
+    }
+  },
   data: function data() {
     return {
       view_add_ch: true,
@@ -13830,6 +13848,11 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {},
+  watch: {
+    $route: function $route(to, from) {
+      this.$store.commit('content/page_title', 'Quản lý cấu hình');
+    }
+  },
   components: {
     mainbutton: _cauhinhchild_ButtonComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     maininfo: _CauhinhChild_MainInfoComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -13890,6 +13913,7 @@ __webpack_require__.r(__webpack_exports__);
     $("input").blur(function () {
       $(".form-group").removeClass("is-focused");
     });
+    this.$store.commit('content/page_title', 'Thêm cấu hình');
   },
   data: function data() {
     return {
@@ -13922,6 +13946,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    this.$store.commit('content/page_title', 'Tùy chỉnh cấu hình - môn');
+  },
   data: function data() {
     return {
       arr_ch: ['ch1', 'ch2', 'ch3'],
@@ -13998,6 +14025,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    this.$store.commit('content/page_title', 'Tùy chỉnh cấu hình');
+  },
   data: function data() {
     return {
       show_form_modi: false,
@@ -14111,10 +14141,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    if (this.$route.path == '/quan_ly_lab') {
+      this.$store.commit('content/page_title', 'Quản lý phòng lab');
+    }
+  },
   data: function data() {
     return {
       current_view: true
     };
+  },
+  watch: {
+    $route: function $route(to, from) {
+      this.$store.commit('content/page_title', 'Quản lý phòng lab');
+    }
   },
   components: {
     mainbutton: _modilabchild_ButtonComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -14157,8 +14197,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    if (this.$route.path == 'quan_ly_thiet_bi') {
+      return this.$store.commit('content/page_title', 'Quản lý thiết bị');
+    }
+  },
   data: function data() {
     return {};
+  },
+  watch: {
+    $route: function $route(to, from) {
+      this.$store.commit('content/page_title', 'Quản lý thiết bị');
+    }
   },
   components: {
     mainbutton: _thietbichild_ButtonComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -14292,6 +14342,7 @@ __webpack_require__.r(__webpack_exports__);
     $("input").blur(function () {
       $(".form-group").removeClass("is-focused");
     });
+    this.$store.commit('content/page_title', 'Thêm lab');
   },
   data: function data() {
     return {
@@ -14311,9 +14362,9 @@ __webpack_require__.r(__webpack_exports__);
       this.arr_toa = ['A17'];
 
       if (this.arr_toa.length == 1) {
-        this.value_toa = this.arr_toa[0];
+        this.ma_toa = this.arr_toa[0];
       } else {
-        this.value_toa = '';
+        this.ma_toa = '';
       }
     }
   },
@@ -14405,6 +14456,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    this.$store.commit('content/page_title', 'Danh sách phòng');
+  },
   data: function data() {
     return {
       table_lab: false
@@ -14624,6 +14678,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    this.$store.commit('content/page_title', 'Thêm thiết bị');
+  },
   data: function data() {
     return {
       show_form_add_device: false
@@ -14720,6 +14777,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    this.$store.commit('content/page_title', 'Danh sách thiết bị');
+  },
   data: function data() {
     return {
       show_table_tbi: false
@@ -15122,6 +15182,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {};
+  },
+  computed: {
+    page_title: function page_title() {
+      return this.$store.state.content.page_title;
+    }
   },
   mounted: function mounted() {
     // remove active class khi thao tac voi user
@@ -19001,19 +19066,25 @@ var render = function() {
     },
     [
       _c("div", { staticClass: "container-fluid" }, [
-        _vm._m(0),
+        _c("div", { staticClass: "navbar-wrapper" }, [
+          _c(
+            "p",
+            { staticClass: "navbar-brand", attrs: { href: "javascript:;" } },
+            [_vm._v(_vm._s(_vm.page_title))]
+          )
+        ]),
         _vm._v(" "),
-        _vm._m(1),
+        _vm._m(0),
         _vm._v(" "),
         _c(
           "div",
           { staticClass: "collapse navbar-collapse justify-content-end" },
           [
-            _vm._m(2),
+            _vm._m(1),
             _vm._v(" "),
             _c("ul", { staticClass: "navbar-nav" }, [
               _c("li", { staticClass: "nav-item dropdown" }, [
-                _vm._m(3),
+                _vm._m(2),
                 _vm._v(" "),
                 _c(
                   "div",
@@ -19062,18 +19133,6 @@ var render = function() {
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "navbar-wrapper" }, [
-      _c(
-        "p",
-        { staticClass: "navbar-brand", attrs: { href: "javascript:;" } },
-        [_vm._v("Tiêu đề")]
-      )
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -35621,8 +35680,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _routes_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./routes.js */ "./resources/js/routes.js");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _store_GiaoVien_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store/GiaoVien.js */ "./resources/js/store/GiaoVien.js");
-/* harmony import */ var _store_General_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./store/General.js */ "./resources/js/store/General.js");
+/* harmony import */ var _store_Content_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store/Content.js */ "./resources/js/store/Content.js");
+/* harmony import */ var _store_GiaoVien_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./store/GiaoVien.js */ "./resources/js/store/GiaoVien.js");
+/* harmony import */ var _store_General_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./store/General.js */ "./resources/js/store/General.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -35649,14 +35709,12 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 Vue.use(vuex__WEBPACK_IMPORTED_MODULE_3__["default"]);
 
 
+
 var store = new vuex__WEBPACK_IMPORTED_MODULE_3__["default"].Store({
-  state: {
-    lich_gv: [],
-    lich_lab: []
-  },
   modules: {
-    giaovien: _store_GiaoVien_js__WEBPACK_IMPORTED_MODULE_4__["default"],
-    general: _store_General_js__WEBPACK_IMPORTED_MODULE_5__["default"]
+    giaovien: _store_GiaoVien_js__WEBPACK_IMPORTED_MODULE_5__["default"],
+    general: _store_General_js__WEBPACK_IMPORTED_MODULE_6__["default"],
+    content: _store_Content_js__WEBPACK_IMPORTED_MODULE_4__["default"]
   }
 });
 /**
@@ -38617,6 +38675,30 @@ __webpack_require__.r(__webpack_exports__);
   path: '*',
   component: _components_error_CantDirectComponent_vue__WEBPACK_IMPORTED_MODULE_17__["default"]
 }]);
+
+/***/ }),
+
+/***/ "./resources/js/store/Content.js":
+/*!***************************************!*\
+  !*** ./resources/js/store/Content.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: {
+    page_title: ''
+  },
+  mutations: {
+    page_title: function page_title(state, title) {
+      state.page_title = title;
+    }
+  },
+  actions: {}
+});
 
 /***/ }),
 

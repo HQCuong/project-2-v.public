@@ -23,6 +23,12 @@ import mainbutton from './cauhinhchild/ButtonComponent.vue';
 import maininfo from './CauhinhChild/MainInfoComponent.vue';
 
 export default {
+    mounted() {
+        if (this.$route.path == '/quan_ly_cau_hinh') {
+            return this.$store.commit('content/page_title', 'Quản lý cấu hình');
+
+        }
+    },
     data() {
         return {
             view_add_ch: true,
@@ -32,6 +38,11 @@ export default {
     },
     methods: {
 
+    },
+    watch: {
+        $route(to, from) {
+            this.$store.commit('content/page_title', 'Quản lý cấu hình');
+        }
     },
     components: {
         mainbutton,

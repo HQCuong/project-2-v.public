@@ -11,6 +11,9 @@
 </template>
 <script>
 export default {
+    mounted() {
+        this.$store.commit('content/page_title', 'Tùy chỉnh cấu hình - môn');
+    },
     data() {
         return {
         	arr_ch: ['ch1', 'ch2', 'ch3'],

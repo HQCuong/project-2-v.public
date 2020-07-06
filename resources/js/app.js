@@ -29,17 +29,15 @@ const router = new VueRouter({
 import Vuex from 'vuex';
 Vue.use(Vuex);
 
+import content from './store/Content.js';
 import giaovien from './store/GiaoVien.js';
 import general from './store/General.js';
 
 const store = new Vuex.Store({
-    state: {
-        lich_gv: [],
-        lich_lab: []
-    },
     modules: {
         giaovien: giaovien,
-        general: general
+        general: general,
+        content: content
     }
 });
 

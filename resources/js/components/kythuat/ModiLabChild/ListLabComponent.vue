@@ -9,6 +9,9 @@ import selectlab from './selectlab/SelectLabComponent.vue';
 import tablelab from './tablelab/TableLabComponent.vue';
 
 export default {
+    mounted() {
+        this.$store.commit('content/page_title', 'Danh sách phòng')
+    },
     data() {
         return {
             table_lab: false

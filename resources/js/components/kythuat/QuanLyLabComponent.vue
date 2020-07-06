@@ -22,9 +22,19 @@ import mainbutton from './modilabchild/ButtonComponent.vue';
 import maininfo from './modilabchild/MainInfoComponent.vue';
 
 export default {
+    mounted() {
+        if (this.$route.path == '/quan_ly_lab') {
+            this.$store.commit('content/page_title', 'Quản lý phòng lab');
+        }
+    },
     data() {
         return {
             current_view: true
+        }
+    },
+    watch: {
+        $route(to, from) {
+            this.$store.commit('content/page_title', 'Quản lý phòng lab');
         }
     },
     components: {
