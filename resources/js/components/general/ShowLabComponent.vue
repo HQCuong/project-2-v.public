@@ -21,6 +21,9 @@ import labcalendar from './showlabchild/LabCalendarComponent.vue';
 import maininfo from './showlabchild/MainInfoComponent.vue';
 
 export default {
+    mounted() {
+        this.$store.commit('content/page_title', 'Xem thông tin lab');
+    },
     data() {
         return {
             show_lab_calendar: false

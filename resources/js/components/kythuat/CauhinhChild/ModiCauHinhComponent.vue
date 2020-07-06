@@ -13,6 +13,9 @@
 import formmodi from './modicauhinhchild/FormModiCauHinhComponent.vue';
 
 export default {
+    mounted() {
+        this.$store.commit('content/page_title', 'Tùy chỉnh cấu hình');
+    },
     data() {
         return {
             show_form_modi: false,

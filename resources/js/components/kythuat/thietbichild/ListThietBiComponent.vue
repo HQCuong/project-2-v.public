@@ -11,6 +11,9 @@ import selectlab from './selectlab/SelectLabComponent.vue';
 import tablethietbi from './tablethietbi/TableThietBiComponent.vue';
 
 export default {
+    mounted() {
+        this.$store.commit('content/page_title', 'Danh sách thiết bị');
+    },
     data() {
         return {
         	show_table_tbi: false

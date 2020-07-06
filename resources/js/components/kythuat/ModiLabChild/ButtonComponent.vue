@@ -23,6 +23,8 @@ export default {
             this.isListLab = false;
             this.isAddLab = false;
         }
+
+        
     },
     watch: {
         $route(to, from) {
