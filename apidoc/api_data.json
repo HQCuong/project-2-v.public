@@ -9,7 +9,7 @@
     "description": "<p>Dùng để cập nhật thông tin Cấu Hình <br></p> <h1 class=\"display-1\">-Lưu ý: </h1> <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\"> <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button> <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button> <!--<button type=\"button\" class=\"btn btn-info\">Giáo Viên</button>--> </div><br> +Nếu loại case cần truyền thêm mã loại +Nếu cập nhật loại Case thì có thể truyền các yếu tố ['cpu', 'ram', 'main', 'o_cung', 'vga'] <br> +Các loại khác chỉ cần truyền mo_ta,ma_loại <br>",
     "sampleRequest": [
       {
-        "url": "http://localhost/project-2/public/api/cauhinh/sua"
+        "url": "http://localhost:8080/project-2/public/api/cauhinh/sua"
       }
     ],
     "examples": [
@@ -123,7 +123,7 @@
     "description": "<p>Dùng để hiện thị thông tin Cấu Hình CASE<br></p> <h1 class=\"display-1\">-Lưu ý: </h1> <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\"> <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button> <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button> <!--<button type=\"button\" class=\"btn btn-info\">Giáo Viên</button>--> </div><br> +Cần lấy thông tin Cấu Hình nào truyền thông tin mã Cấu Hình đó<br> +Chỉ hỗ trợ lấy một cấu hình theo ma_cau_hinh<br> +Chỉ lấy loại case",
     "sampleRequest": [
       {
-        "url": "http://localhost/project-2/public/api/cauhinh/case"
+        "url": "http://localhost:8080/project-2/public/api/cauhinh/case"
       }
     ],
     "examples": [
@@ -195,7 +195,7 @@
     "description": "<p>Dùng để hiện thị thông tin Cấu Hình<br></p> <h1 class=\"display-1\">-Lưu ý: </h1> <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\"> <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button> <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button> <!--<button type=\"button\" class=\"btn btn-info\">Giáo Viên</button>--> </div><br> +Cần lấy thông tin Cấu Hình nào truyền thông tin mã Cấu Hình đó<br> +Nếu lấy tất cả thì không truyền gì cả<br> +Nếu lấy theo Loại thì không truyền ma_loai<br> +Có cả ma_loai và ma_cau_hinh sẽ ưu tiên ma_loai<br>",
     "sampleRequest": [
       {
-        "url": "http://localhost/project-2/public/api/cauhinh"
+        "url": "http://localhost:8080/project-2/public/api/cauhinh"
       }
     ],
     "examples": [
@@ -274,7 +274,7 @@
     "description": "<p>Dùng để Kiểm tra thông tin hợp lệ<br></p> <h1 class=\"display-1\">-Lưu ý: </h1>  <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">      <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button>      <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button>      <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button>  </div><br>         +Có thể truyền 1 hay nhiều yếu tố<br>         +Sẽ chỉ trả về lỗi của yếu tố đầu tiên<br>         +Nếu trả về hợp lệ là tất cả đều hợp lệ<br>",
     "sampleRequest": [
       {
-        "url": "http://localhost/project-2/public/api/cauhinh/kiemtra"
+        "url": "http://localhost:8080/project-2/public/api/cauhinh/kiemtra"
       }
     ],
     "examples": [
@@ -388,7 +388,7 @@
     "description": "<p>Dùng để tạo ra một Cấu Hình<br></p> <h1 class=\"display-1\">-Lưu ý: </h1>  <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">      <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button>      <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button>      <!--<button type=\"button\" class=\"btn btn-info\">Giáo Viên</button>-->  </div><br>     +Cần gửi đủ ma_loai,mo_ta.<br>     +Nếu mô tả là loại case thì truyền thêm các thông tin của case ['cpu', 'ram', 'main', 'o_cung', 'vga']     có thể bỏ trống hoặc không truyền bất cứ yếu tố nào.<br>",
     "sampleRequest": [
       {
-        "url": "http://localhost/project-2/public/api/cauhinh/them"
+        "url": "http://localhost:8080/project-2/public/api/cauhinh/them"
       }
     ],
     "examples": [
@@ -467,7 +467,7 @@
     "description": "<p>Dùng để cập nhật thông tin Loại<br></p> <h1 class=\"display-1\">-Lưu ý: </h1>  <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">      <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button>      <!--      <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button>      <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button>      -->  </div><br>     +Cần có mã loại<br>     +Chỉnh sửa thông tin nào truyền thông tin đó<br>",
     "sampleRequest": [
       {
-        "url": "http://localhost/project-2/public/api/loai/sua"
+        "url": "http://localhost:8080/project-2/public/api/loai/sua"
       }
     ],
     "examples": [
@@ -553,7 +553,7 @@
     "description": "<p>Dùng để hiện thị thông tin Loại<br></p> <h1 class=\"display-1\">-Lưu ý: </h1>  <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">      <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button>      <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button>      <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button>  </div><br>     +Cần lấy thông tin Loại nào truyền thông tin mã loại đó<br>     +Nếu lấy tất cả thì không truyền gì cả<br>",
     "sampleRequest": [
       {
-        "url": "http://localhost/project-2/public/api/loai"
+        "url": "http://localhost:8080/project-2/public/api/loai"
       }
     ],
     "examples": [
@@ -625,7 +625,7 @@
     "description": "<p>Dùng để Kiểm tra thông tin hợp lệ<br></p> <h1 class=\"display-1\">-Lưu ý: </h1>  <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">      <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button>      <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button>      <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button>  </div><br>         +Có thể truyền 1 hay nhiều yếu tố<br>         +Sẽ chỉ trả về lỗi của yếu tố đầu tiên<br>         +Nếu trả về hợp lệ là tất cả đều hợp lệ<br>",
     "sampleRequest": [
       {
-        "url": "http://localhost/project-2/public/api/loai/kiemtra"
+        "url": "http://localhost:8080/project-2/public/api/loai/kiemtra"
       }
     ],
     "examples": [
@@ -711,7 +711,7 @@
     "description": "<p>Dùng để tạo ra một Loại<br></p> <h1 class=\"display-1\">-Lưu ý: </h1>  <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">      <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button>      <!--      <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button>      <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button>      -->  </div><br>     +Cần gửi đủ tên loại,mô tả.<br>     +Nếu mo_ta không tồn tại sẽ auto null<br>",
     "sampleRequest": [
       {
-        "url": "http://localhost/project-2/public/api/loai/them"
+        "url": "http://localhost:8080/project-2/public/api/loai/them"
       }
     ],
     "examples": [
@@ -790,7 +790,7 @@
     "description": "<p>Sử dụng để lấy tài khoản cũng như cập nhật thông tin cho tài khoản<br></p> <h1 class=\"display-1\">-Lưu ý: </h1>  <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">      <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button>      <!--      <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button>      <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button>      -->  </div><br>     +Chỉ chạy một lần<br>     +Email thay đổi sẽ tạo user mới<br>     +Lấy thông tin của chính mình không cần truyền ma<br>",
     "sampleRequest": [
       {
-        "url": "http://localhost/project-2/public/api/nguoidung/clone"
+        "url": "http://localhost:8080/project-2/public/api/nguoidung/clone"
       }
     ],
     "examples": [
@@ -862,7 +862,7 @@
     "description": "<p>Sử dụng để khôi phục mật khẩu cho tài khoản</p> <h1 class=\"display-1\">-Lưu ý: </h1>  <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">      <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button>      <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button>      <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button>  </div><br>",
     "sampleRequest": [
       {
-        "url": "http://localhost/project-2/public/api/nguoidung/reset"
+        "url": "http://localhost:8080/project-2/public/api/nguoidung/reset"
       }
     ],
     "examples": [
@@ -934,7 +934,7 @@
     "description": "<p>Sử dụng để kiểm tra quy tắc hợp lệ cũng như trong hệ thống đã có chưa: <br></p> <h1 class=\"display-1\">-Lưu ý: </h1>  <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">      <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button>      <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button>      <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button>  </div><br>     +Chức năng dành cho tất cả user phục vụ cho việc đổi thông tin<br>     +Phục vụ cho Giáo Vụ khi tạo tài khoản<br>     +Cần kiểm tra dữ liệu nào thì truyền tương ứng<br>     +Có thể truyền 1,2 hoặc tất cả các dữ liệu<br>",
     "sampleRequest": [
       {
-        "url": "http://localhost/project-2/public/api/nguoidung/kiemtra"
+        "url": "http://localhost:8080/project-2/public/api/nguoidung/kiemtra"
       }
     ],
     "examples": [
@@ -1041,7 +1041,7 @@
     "description": "<p>Sử dụng để kiểm tra key của người dùng cung cấp</p> <h1 class=\"display-1\">-Lưu ý: </h1>  <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">      <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button>      <!--      <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button>      <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button>      -->  </div><br>",
     "sampleRequest": [
       {
-        "url": "http://localhost/project-2/public/api/nguoidung/kiemtrakey"
+        "url": "http://localhost:8080/project-2/public/api/nguoidung/kiemtrakey"
       }
     ],
     "examples": [
@@ -1113,7 +1113,7 @@
     "description": "<p>Sử dụng để hiển thị danh sách Kĩ Thuật Và Giáo Viên<br> -Lưu ý: <br></p> <h1 class=\"display-1\">-Lưu ý: </h1>  <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">      <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button>      <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button>      <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button>  </div><br>         *Nếu là Giáo Vụ : trả về danh sách Giáo Viên và Kĩ Thuật         *Nếu là GV hoặc KT:trả về thông tin của chính mình     +Chưa có phân trang (sẽ update nếu cần)<br>",
     "sampleRequest": [
       {
-        "url": "http://localhost/project-2/public/api/nguoidung/danhsach"
+        "url": "http://localhost:8080/project-2/public/api/nguoidung/danhsach"
       }
     ],
     "examples": [
@@ -1185,7 +1185,7 @@
     "description": "<p>Sử dụng để lấy thông tin người dùng<br></p> <h1 class=\"display-1\">-Lưu ý: </h1>  <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">      <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button>      <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button>      <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button>  </div><br>     +Chức năng dành cho tất cả user phục vụ cho việc lấy thông tin<br>     +Giáo vụ lấy thông tin các người dùng khác và không lấy được thông tin của Giáo Vụ khác<br>     +GV hoặc KT sẽ trả về thông tin của mình<br>     +Lấy thông tin của chính mình không cần truyền ma<br>",
     "sampleRequest": [
       {
-        "url": "http://localhost/project-2/public/api/nguoidung/thongtin"
+        "url": "http://localhost:8080/project-2/public/api/nguoidung/thongtin"
       }
     ],
     "examples": [
@@ -1264,7 +1264,7 @@
     "description": "<p>Sử dụng thay đổi thông tin tài khoản<br></p> <h1 class=\"display-1\">-Lưu ý: </h1>  <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">      <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button>      <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button>      <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button>  </div><br>     +Email,Sdt,mat_khau phải tuân thủ quy tắc như khi tạo tài khoản<br>     +Có thể truyền yếu tố thay đổi không bắt buộc truyền tất cả<br>     +Nếu là giáo vụ mới được phép thay đổi thông tin của Giáo Viên hoặc Kĩ Thuật<br>     +Nếu là Giáo Viên hoặc Kĩ Thuật có thể để \"id\" ngẫu nhiên nhưng vẫn sẽ thay đổi thông tin tài khoản của chính họ<br>     +Giáo Vụ không được đổi thông tin của giáo vụ khác<br>     +Giáo Vụ có thể đổi mật khẩu của KT hoặc GV mà không cần biết mật khẩu cũ<br>     +GV hoặc KT không thể đổi mật khẩu của mình bằng chức năng này <br>",
     "sampleRequest": [
       {
-        "url": "http://localhost/project-2/public/api/nguoidung/capnhatthongtin/{id}"
+        "url": "http://localhost:8080/project-2/public/api/nguoidung/capnhatthongtin/{id}"
       }
     ],
     "examples": [
@@ -1364,7 +1364,7 @@
     "description": "<p>Sử dụng để đăng nhập vào hệ thông với tài khoản và mật khẩu</p> <h1 class=\"display-1\">-Lưu ý: </h1>  <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">      <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button>      <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button>      <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button>  </div><br>",
     "sampleRequest": [
       {
-        "url": "http://localhost/project-2/public/api/dangnhap"
+        "url": "http://localhost:8080/project-2/public/api/dangnhap"
       }
     ],
     "examples": [
@@ -1436,7 +1436,7 @@
     "description": "<p>Sử dụng để đăng xuất cho tài khoản</p> <h1 class=\"display-1\">-Lưu ý: </h1>  <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">      <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button>      <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button>      <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button>  </div><br>",
     "sampleRequest": [
       {
-        "url": "http://localhost/project-2/public/api/dangxuat"
+        "url": "http://localhost:8080/project-2/public/api/dangxuat"
       }
     ],
     "examples": [
@@ -1501,7 +1501,7 @@
     "description": "<p>Dùng để tạo người dùng là giáo viên<br></p> <h1 class=\"display-1\">-Lưu ý: </h1>  <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">      <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button>      <!--      <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button>      <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button>      -->  </div><br>     +Cần gửi đầy đủ các dữ liệu được yêu cầu.<br>     +Nếu SDT,Họ Tên,Mật Khẩu trống hệ thống sẽ tự tạo ngẫu nhiên.<br>",
     "sampleRequest": [
       {
-        "url": "http://localhost/project-2/public/api/nguoidung/tao"
+        "url": "http://localhost:8080/project-2/public/api/nguoidung/tao"
       }
     ],
     "examples": [
@@ -1601,7 +1601,7 @@
     "description": "<p>Sử dụng để đổi mật khẩu cho tài khoản</p> <h1 class=\"display-1\">-Lưu ý: </h1>  <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">      <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button>      <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button>      <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button>  </div><br>     +Cần gửi đầy đủ các dữ liệu được yêu cầu.<br>     +Nếu trùng mật khẩu mới và cũ sẽ không thực hiện đổi.<br>",
     "sampleRequest": [
       {
-        "url": "http://localhost/project-2/public/api/nguoidung/doimatkhau"
+        "url": "http://localhost:8080/project-2/public/api/nguoidung/doimatkhau"
       }
     ],
     "examples": [
@@ -1687,7 +1687,7 @@
     "description": "<p>Dùng để cập nhật thông tin Tầng<br></p> <h1 class=\"display-1\">-Lưu ý: </h1>  <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">      <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button>      <!--      <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button>      <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button>      -->  </div><br>     +Bắt buộc cần có mã tầng để cập nhật<br>     +Cập nhật gì có thể truyền nguyên yếu tố đó<br>",
     "sampleRequest": [
       {
-        "url": "http://localhost/project-2/public/api/tang/capnhat"
+        "url": "http://localhost:8080/project-2/public/api/tang/capnhat"
       }
     ],
     "examples": [
@@ -1780,7 +1780,7 @@
     "description": "<p>Dùng để hiện thị thông tin Tầng<br></p> <h1 class=\"display-1\">-Lưu ý: </h1>  <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">      <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button>      <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button>      <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button>  </div><br>     +Cần lấy thông tin tầng nào truyền thông tin mã tầng đó<br>     +Nếu lấy tất cả thì không truyền gì cả<br>     +Nếu lấy tất cả tầng của một tòa thì truyền vào mã tòa<br>     +Có cả mã tầng và mã tòa mã tòa sẽ được ưu tiên hơn<br>     +Nếu không có mã tình trạng tự động trả về những tầng hoạt động<br>",
     "sampleRequest": [
       {
-        "url": "http://localhost/project-2/public/api/tang"
+        "url": "http://localhost:8080/project-2/public/api/tang"
       }
     ],
     "examples": [
@@ -1859,7 +1859,7 @@
     "description": "<p>Dùng để Kiểm tra thông tin hợp lệ<br></p> <h1 class=\"display-1\">-Lưu ý: </h1>  <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">      <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button>      <!--      <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button>      <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button>      -->  </div><br>         +Có thể truyền 1 hay nhiều yếu tố         +Sẽ chỉ trả về lỗi của yếu tố đầu tiên         +Nếu trả về hợp lệ là tất cả đều hợp lệ",
     "sampleRequest": [
       {
-        "url": "http://localhost/project-2/public/api/tang/kiemtra"
+        "url": "http://localhost:8080/project-2/public/api/tang/kiemtra"
       }
     ],
     "examples": [
@@ -1945,7 +1945,7 @@
     "description": "<p>Dùng để tạo ra một Tầng<br></p> <h1 class=\"display-1\">-Lưu ý: </h1>  <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">      <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button>      <!--      <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button>      <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button>      -->  </div><br>     +Cần gửi đủ tên tầng,mã tòa.<br>     +mã tình trạng Có thể không gửi nếu nó Hoạt Động. <br>",
     "sampleRequest": [
       {
-        "url": "http://localhost/project-2/public/api/tang/tao"
+        "url": "http://localhost:8080/project-2/public/api/tang/tao"
       }
     ],
     "examples": [
@@ -2031,7 +2031,7 @@
     "description": "<p>Dùng để Kiểm tra thông tin hợp lệ<br></p> <h1 class=\"display-1\">-Lưu ý: </h1>  <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">      <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button>      <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button>      <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button>  </div><br>         +Có thể truyền 1 hay nhiều yếu tố         +Sẽ chỉ trả về lỗi của yếu tố đầu tiên         +Nếu trả về hợp lệ là tất cả đều hợp lệ",
     "sampleRequest": [
       {
-        "url": "http://localhost/project-2/public/api/toa/kiemtra"
+        "url": "http://localhost:8080/project-2/public/api/toa/kiemtra"
       }
     ],
     "examples": [
@@ -2117,7 +2117,7 @@
     "description": "<p>Dùng để hiện thị thông tin tòa<br></p> <h1 class=\"display-1\">-Lưu ý: </h1>  <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">      <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button>      <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button>      <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button>  </div><br>     +Cần lấy thông tin tòa nào truyền thông tin mã tòa đó<br>     +Nếu lấy tất cả thì không truyền gì cả<br>",
     "sampleRequest": [
       {
-        "url": "http://localhost/project-2/public/api/toa/hienthicactoa"
+        "url": "http://localhost:8080/project-2/public/api/toa/hienthicactoa"
       }
     ],
     "examples": [
@@ -2189,7 +2189,7 @@
     "description": "<p>Dùng để cập nhật thông tin cho các tòa<br></p> <h1 class=\"display-1\">-Lưu ý: </h1>  <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">      <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button>      <!--      <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button>      <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button>      -->  </div><br>",
     "sampleRequest": [
       {
-        "url": "http://localhost/project-2/public/api/toa/capnhat"
+        "url": "http://localhost:8080/project-2/public/api/toa/capnhat"
       }
     ],
     "examples": [
