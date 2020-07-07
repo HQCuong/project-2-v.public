@@ -46,10 +46,16 @@ Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVu']], function () {
         ->name('api.toa.kiemTra');
 });
 
-//TangController--Giáo Vụ
+//TangController--
+//--ALL
 Route::group(['middleware' => 'CheckLogin'], function () {
     Route::post('tang', 'Api\TangController@hienthiCacTang')
         ->name('api.tang.hienthiCacTang');
+    Route::post('tang/kiemtra', 'Api\TangController@kiemTra')
+        ->name('api.tang.kiemTra');
+});
+//-Giáo Vụ
+Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVu']], function () {
     Route::post('tang/capnhat', 'Api\TangController@capNhatTang')
         ->name('api.tang.update');
     Route::post('tang/tao', 'Api\TangController@taoTang')
@@ -71,13 +77,18 @@ Route::group(['middleware' => 'CheckLogin'], function () {
 });
 
 //LoaiController
-Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVuOrKiThuat']], function () {
-    Route::post('loai', 'Api\LoaiController@hienThi')
-        ->name('api.loai.hienThi');
+//--Giáo Vụ
+Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVu']], function () {
     Route::post('loai/sua', 'Api\LoaiController@suaLoai')
         ->name('api.loai.suaLoai');
     Route::post('loai/them', 'Api\LoaiController@themLoai')
         ->name('api.loai.themLoai');
+});
+Route::group(['middleware' => ['CheckLogin']], function () {
+    Route::post('loai', 'Api\LoaiController@hienThi')
+        ->name('api.loai.hienThi');
+    Route::post('loai/kiemtra', 'Api\LoaiController@kiemTra')
+        ->name('api.loai.kiemTra');
 });
 
 //CauHinhController
@@ -86,10 +97,12 @@ Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVuOrKiThuat']], function 
         ->name('api.cauhinh.hienThi');
     Route::post('cauhinh/case', 'Api\CauHinhController@hienThiCase')
         ->name('api.cauhinh.hienThiCase');
-    Route::post('cauhinh/them', 'Api\CauHinhController@themCauHinh')
-        ->name('api.cauhinh.themCauHinh');
     Route::post('cauhinh/sua', 'Api\CauHinhController@capNhatCauHinh')
         ->name('api.cauhinh.capNhatCauHinh');
+    Route::post('cauhinh/them', 'Api\CauHinhController@themCauHinh')
+        ->name('api.cauhinh.themCauHinh');
+    Route::post('cauhinh/kiemtra', 'Api\CauHinhController@kiemTra')
+        ->name('api.cauhinh.kiemTra');
 });
 
 //CauHinhMonController

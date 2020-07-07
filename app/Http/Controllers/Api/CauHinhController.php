@@ -40,7 +40,7 @@ class CauHinhController extends Controller {
                     'string' => ResponseMau::SUCCESS_GET,
                 ]);
             } else {
-                return $this->endCatchValue(ResponseMau::ERROR_GET);
+                return $this->endCatchValue(ResponseMau::ERROR_CAU_HINH_CASE);
             }
         } catch (Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_GET);
@@ -123,5 +123,8 @@ class CauHinhController extends Controller {
             return true;
         }
         return false;
+    }
+    public function kiemTra(CauHinhRequest $rq) {
+        return ResponseMau::Store([]);
     }
 }

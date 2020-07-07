@@ -9,6 +9,9 @@ class Tang extends Model {
     protected $fillable   = [
         'ten_tang', 'ma_toa', 'ma_tinh_trang',
     ];
+    protected $attributes = array(
+        'ma_tinh_trang' => 1,
+    );
     public $timestamps = false;
 
     public function toa() {

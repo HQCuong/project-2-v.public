@@ -69,6 +69,8 @@ class RegexRule {
     const REGEX_EXISTS_MA_NGUOI_DUNG = ['exists:nguoi_dung,ma_nguoi_dung'];
     const REGEX_EXISTS_MA_TOA        = ['exists:toa,ma_toa'];
     const REGEX_EXISTS_MA_TINH_TRANG = ['exists:tinh_trang,ma_tinh_trang'];
+    const REGEX_EXISTS_MA_LOAI       = ['exists:loai,ma_loai'];
+    const REGEX_EXISTS_MA_CAU_HINH   = ['exists:cau_hinh,ma_cau_hinh'];
 
     const REGEX_TEN_LIMIT_100 = ['nullable', 'regex:/^\w[a-zA-Z0-9ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹêếềễệ\ \_\.]{0,100}$/'];
 }

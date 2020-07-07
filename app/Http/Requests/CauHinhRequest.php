@@ -15,7 +15,7 @@ class CauHinhRequest extends FormRequest {
             'o_cung'      => RegexRule::REGEX_CAU_HINH_O_CUNG,
             'ma_cau_hinh' => RegexRule::REGEX_CAU_HINH_MA_CAU_HINH,
             'mo_ta'       => RegexRule::REGEX_CAU_HINH_MO_TA,
-            'ma_loai'     => RegexRule::REGEX_CAU_HINH_MA_LOAI,
+            'ma_loai'     => RegexRule::REGEX_EXISTS_MA_LOAI,
         ];
     }
     public function attributes() {

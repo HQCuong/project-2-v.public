@@ -21,6 +21,11 @@ class TangController extends Controller {
                         $query->where('ma_tang', $rq->ma_tang);
                     }
                 }
+                if ($rq->has('ma_tinh_trang')) {
+                    $query->where('ma_tinh_trang', $rq->ma_tinh_trang);
+                } else {
+                    $query->where('ma_tinh_trang', 1);
+                }
             })->get();
             return ResponseMau::Store([
                 'string' => ResponseMau::SUCCESS_GET,
@@ -49,6 +54,7 @@ class TangController extends Controller {
             if ($tang) {
                 return ResponseMau::Store([
                     'string' => ResponseMau::SUCCESS_UPDATE,
+                    'data'   => new TangResource(Tang::find($rq->ma_tang)),
                 ]);
             } else {
                 return $this->endCatchValue(ResponseMau::ERROR_TANG_UPDATE_INFO);
@@ -56,5 +62,8 @@ class TangController extends Controller {
         } catch (Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_UPDATE);
         }
+    }
+    public function kiemTra(TangRequest $rq) {
+        return ResponseMau::Store([]);
     }
 }

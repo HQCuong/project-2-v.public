@@ -13,10 +13,11 @@ class ResponseMau {
     const RES_DA_TON_TAI    = ':attribute đã tồn tại';
 
     //end Val
-    const SUCCESS_DONE_DATA = 'Lấy dữ liệu thành công';
-    const SUCCESS_GET       = 'Lấy dữ liệu thành công';
-    const SUCCESS_UPDATE    = 'Cập nhật thành công';
-    const SUCCESS_CREATE    = 'Tạo thành công';
+    const SUCCESS_DONE_DATA      = 'Lấy dữ liệu thành công';
+    const SUCCESS_GET            = 'Lấy dữ liệu thành công';
+    const SUCCESS_UPDATE         = 'Cập nhật thành công';
+    const SUCCESS_CREATE         = 'Tạo thành công';
+    const SUCCESS_NO_DATA_UPDATE = 'Không có dữ liệu nào mới để thay đổi';
     ///success return
     const SUCCESS_USER_CREATE         = 'Tạo tài khoản thành công';
     const SUCCESS_USER_LOGOUT         = 'Đăng xuất thành công';
@@ -85,6 +86,7 @@ class ResponseMau {
     const ERROR_LOAI_CREATE   = "Thêm loại thất bại hãy kiểm tra lại thông tin hoặc liên hệ kĩ thuật ! ";
 
     //Cấu Hình
+    const ERROR_CAU_HINH_CASE          = 'Cấu hình bạn chọn không phải Case';
     const ERROR_CAU_HINH_CPU           = 'CPU không hợp lệ chỉ bao gồm chữ,số và (_,-, ,+,\,/)';
     const ERROR_CAU_HINH_RAM           = 'RAM chỉ có số từ 1-99';
     const ERROR_CAU_HINH_MAIN          = 'MAIN không hợp lệ chỉ bao gồm chữ,số và (_,-, ,+,\,/)';
