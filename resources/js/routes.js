@@ -1,3 +1,6 @@
+import store from './store/store.js';
+
+// home
 import home from './components/home/HomeComponent.vue';
 
 // general
@@ -35,34 +38,61 @@ import account_setting from './components/nguoidung/AccountSettingComponent.vue'
 
 // error
 import error_url from './components/error/CantDirectComponent.vue';
+import error_author from './components/error/AuthorErrComponent.vue';
 
 
 export default [
     // general
-	{ path: '/home', name:'home', component: home},
+    { path: '/home', name: 'home', component: home },
 
     { path: '/xem_thong_tin_lab', component: thong_tin_lab },
 
     // ky thuat
-    { path: '/quan_ly_lab', component: lab, 
+    {
+        path: '/quan_ly_lab',
+        component: lab,
         children: [
-            { path: 'danh_sach_lab', component: list_lab},
-            { path: 'add_lab', component: add_lab}
-        ]
+            { path: 'danh_sach_lab', component: list_lab },
+            { path: 'add_lab', component: add_lab }
+        ],
+        beforeEnter: (to, from, next) => {
+            if (store.state.user.cap_do == 1 || store.state.user.cap_do == 2) {
+                next();
+            } else {
+                next('/err_author');
+            }
+        }
     },
-    { path: '/quan_ly_cau_hinh', component: cau_hinh, 
+    {
+        path: '/quan_ly_cau_hinh',
+        component: cau_hinh,
         children: [
-            { path: 'them_cau_hinh', component: add_ch},
-            { path: 'modi_cau_hinh', component: modi_ch},
-            { path: 'cau_hinh_mon', component: ch_mon}
-        ]
+            { path: 'them_cau_hinh', component: add_ch },
+            { path: 'modi_cau_hinh', component: modi_ch },
+            { path: 'cau_hinh_mon', component: ch_mon }
+        ],
+        beforeEnter: (to, from, next) => {
+            if (store.state.user.cap_do == 1 || store.state.user.cap_do == 2) {
+                next();
+            } else {
+                next('/err_author');
+            }
+        }
     },
-
-    { path: '/quan_ly_thiet_bi', component: thiet_bi,
+    {
+        path: '/quan_ly_thiet_bi',
+        component: thiet_bi,
         children: [
-            {path: 'danh_sach_thiet_bi', component: list_thiet_bi},
-            {path: 'add_thiet_bi', component: add_thiet_bi}
-        ]   
+            { path: 'danh_sach_thiet_bi', component: list_thiet_bi },
+            { path: 'add_thiet_bi', component: add_thiet_bi }
+        ],
+        beforeEnter: (to, from, next) => {
+            if (store.state.user.cap_do == 1 || store.state.user.cap_do == 2) {
+                next();
+            } else {
+                next('/err_author');
+            }
+        }
     },
 
     // giao vu
@@ -74,9 +104,10 @@ export default [
 
 
     // user
-    { path: '/profile', component: user_info }, 
+    { path: '/profile', component: user_info },
     { path: '/account_setting', component: account_setting },
 
     // error
-    { path: '*', component: error_url} 
+    { path: '/err_author', component: error_author },
+    { path: '*', component: error_url }
 ]

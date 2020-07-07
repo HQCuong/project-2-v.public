@@ -1,7 +1,7 @@
 <template>
     <div>
-        <router-link to="/quan_ly_lab/danh_sach_lab"><span class="btn btn-info" :class="{active:isListLab}">Danh sách lab</span></router-link>
-        <router-link to="/quan_ly_lab/add_lab"><span class="btn btn-info" :class="{active:isAddLab}">Thêm lab</span></router-link>
+        <router-link to="/quan_ly_lab/danh_sach_lab" class="btn btn-info" :class="{disabled:isListLab}">Danh sách lab</router-link>
+        <router-link to="/quan_ly_lab/add_lab" class="btn btn-info" :class="{disabled:isAddLab}">Thêm lab</router-link>
     </div>
 </template>
 <script>

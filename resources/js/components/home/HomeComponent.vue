@@ -10,13 +10,13 @@
                 </div>
             </div>
         </div>
-    </div>	
+    </div>
 </template>
-
 <script>
 export default {
-}
-</script>
 
+}
+
+</script>
 <style lang="css" scoped>
 </style>

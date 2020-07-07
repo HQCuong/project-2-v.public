@@ -24,7 +24,7 @@ import maininfo from './thietbichild/MainInfoComponent.vue';
 export default {
     mounted() {
         if (this.$route.path == 'quan_ly_thiet_bi') {
-            return this.$store.commit('content/page_title', 'Quản lý thiết bị');
+            this.$store.commit('content/page_title', 'Quản lý thiết bị');
         }
     },
     data() {

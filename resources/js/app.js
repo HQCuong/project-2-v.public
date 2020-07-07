@@ -4,7 +4,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-window.Vue = require('vue');
+import Vue from 'vue';
 
 // Vue-multiselect
 import Multiselect from 'vue-multiselect'
@@ -21,26 +21,12 @@ import routes from './routes.js';
 
 const router = new VueRouter({
     base: 'project-2/public',
-    routes, // short for `routes: routes`
+    routes, 
     mode: 'history'
 })
 
 // Vuex
-import Vuex from 'vuex';
-Vue.use(Vuex);
-
-import content from './store/Content.js';
-import giaovien from './store/GiaoVien.js';
-import general from './store/General.js';
-
-const store = new Vuex.Store({
-    modules: {
-        giaovien: giaovien,
-        general: general,
-        content: content
-    }
-});
-
+import store from './store/store.js';
 
 /**
  * The following block of code may be used to automatically register your
@@ -58,6 +44,12 @@ Vue.component('sidebar-component', require('./layout/SidebarComponent.vue').defa
 Vue.component('footer-component', require('./layout/FooterComponent.vue').default);
 Vue.component('login-component', require('./components/LoginComponent.vue').default);
 
+// get cookie function
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+}
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -65,8 +57,18 @@ Vue.component('login-component', require('./components/LoginComponent.vue').defa
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+
 const app = new Vue({
     el: '#app',
     router,
-    store
+    store,
+    created() {
+    	axios.post('api/nguoidung/kiemtrakey', {
+    	  key: getCookie('key')
+    	}).then((response) => {
+    		store.state.user.cap_do = response.data.data.cap_do;
+    	}).catch((error) => {
+    	  console.error(error);
+    	})
+    }
 });

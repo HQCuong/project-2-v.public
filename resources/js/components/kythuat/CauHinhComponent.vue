@@ -25,7 +25,7 @@ import maininfo from './CauhinhChild/MainInfoComponent.vue';
 export default {
     mounted() {
         if (this.$route.path == '/quan_ly_cau_hinh') {
-            return this.$store.commit('content/page_title', 'Quản lý cấu hình');
+            this.$store.commit('content/page_title', 'Quản lý cấu hình');
 
         }
     },
