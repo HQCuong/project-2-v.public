@@ -13,7 +13,7 @@ export default {
     mutations: {},
     actions: {
         get_toa({state, commit, rootState}) {
-        	axios.post('http://localhost:8080/project-2/public/api/toa/hienthicactoa', {
+        	axios.post('http://localhost:8080/project-2/public/api/tang', {
         	  key: getCookie('key')
         	}).then((response) => {
         		console.log(response.data.data);

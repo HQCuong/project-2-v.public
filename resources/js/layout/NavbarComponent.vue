@@ -31,7 +31,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
                             <router-link class="dropdown-item" to="/profile">Thông tin tài khoản</router-link>
-                            <router-link class="dropdown-item" to="/account_setting">Cài đặt</router-link>
+                            <router-link class="dropdown-item" to="/forgot_password">Quên mật khẩu</router-link>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="logout">Đăng xuất</a>
                         </div>

@@ -41,7 +41,7 @@ import user from './components/giaovu/QuanLyUserComponent.vue';
 
 // user
 import user_info from './components/nguoidung/UserProfileComponent.vue';
-import account_setting from './components/nguoidung/AccountSettingComponent.vue';
+import forgot_password from './components/nguoidung/ForgotPassComponent.vue';
 
 
 // error
@@ -147,7 +147,7 @@ export default [
 
     // user
     { path: '/profile', component: user_info },
-    { path: '/account_setting', component: account_setting },
+    { path: '/forgot_password', component: forgot_password },
 
     // error
     { path: '/err_author', component: error_author },

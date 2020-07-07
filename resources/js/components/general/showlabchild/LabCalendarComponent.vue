@@ -12,11 +12,11 @@ import hardware from './hardwareinfo/HardWareInfoComponent.vue';
 
 export default {
     created() {
-        this.$store.dispatch('general/get_lich_lab');
+        this.$store.dispatch('lab/get_lich_lab');
     },
     computed: {
         events() {
-            return this.$store.state.general.events;
+            return this.$store.state.lab.events;
         }
     },
     data() {

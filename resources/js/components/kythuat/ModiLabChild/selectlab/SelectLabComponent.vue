@@ -13,14 +13,24 @@
 <script>
 export default {
     created() {
-        this.get_toa();
+        this.$store.dispatch('toa/get_toa');
     },
     data() {
         return {
-            ma_toa: '',
             ma_tang: '',
-            arr_toa: [],
             arr_tang: [],
+        }
+    },
+    computed: {
+        ma_toa() {
+            if(this.$store.state.arr_toa.length == 1) {
+                return this.$store.state.arr_toa.length[0];
+            } else {
+                return '';
+            }
+        },
+        arr_toa() {
+            return this.$store.state.arr_toa;
         }
     },
     methods: {

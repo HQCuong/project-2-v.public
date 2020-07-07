@@ -1,20 +1,21 @@
 <template>
-	<div class="container">
+    <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Component Cau hinh mon</div>
+                    <div class="card-header">Quên mật khẩu</div>
                     <div class="card-body">
-                        I'm an component.
+                        Chức năng này đang trong quá trình phát triển
                     </div>
                 </div>
             </div>
         </div>
-    </div>	
+    </div>  
 </template>
 
 <script>
 export default {
+
 }
 </script>
 
