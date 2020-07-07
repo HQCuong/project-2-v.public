@@ -11,10 +11,15 @@ use ResponseMau;
 
 class LoaiController extends Controller {
     use Traits\ReturnError;
-    public function hienThi() {
+    public function hienThi(LoaiRequest $rq) {
         try {
+            if ($rq->has('ma_loai')) {
+                $loai = Loai::where('ma_loai', $rq->ma_loai)->get();
+            } else {
+                $loai = Loai::all();
+            }
             return ResponseMau::Store([
-                'data' => LoaiResource::collection(Loai::all()),
+                'data' => LoaiResource::collection($loai),
             ]);
         } catch (Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_GET);
@@ -25,6 +30,7 @@ class LoaiController extends Controller {
             $loai = Loai::find($rq->ma_loai)->update($rq->all());
             return ResponseMau::Store([
                 'string' => ResponseMau::SUCCESS_UPDATE,
+                'data'   => new LoaiResource(Loai::find($rq->ma_loai)),
             ]);
         } catch (Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_UPDATE);
@@ -39,5 +45,8 @@ class LoaiController extends Controller {
         } catch (Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_CREATE);
         }
+    }
+    public function kiemTra(LoaiRequest $rq) {
+        return ResponseMau::Store([]);
     }
 }
