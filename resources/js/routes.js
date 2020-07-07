@@ -1,9 +1,4 @@
-// get cookie function
-function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-}
+import getCookie from './customfunc/getCookie.js';
 
 // import store
 import store from './store/store.js';

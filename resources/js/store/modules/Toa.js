@@ -1,22 +1,22 @@
-// get cookie function
-function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-}
+import getCookie from '../../customfunc/getCookie.js';
 
 export default {
     namespaced: true,
     state: {
         arr_toa: []
     },
-    mutations: {},
+    mutations: {
+        reset_arr_toa(state) {
+            state.arr_toa = [];
+        }
+    },
     actions: {
-        get_toa({state, commit, rootState}) {
+        get_toa({state, commit, rootState}, ma_toa) {
+            state.arr_toa = [];
         	axios.post('http://localhost:8080/project-2/public/api/toa/hienthicactoa', {
         	  key: getCookie('key')
         	}).then((response) => {
-        		console.log(response.data.data);
+                state.arr_toa = response.data.data;
         	}).catch((error) => {
         	  console.error(error);
         	});

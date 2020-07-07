@@ -1,22 +1,23 @@
-// get cookie function
-function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-}
+import getCookie from '../../customfunc/getCookie.js';
 
 export default {
     namespaced: true,
     state: {
-        arr_toa: []
+        arr_tang: []
     },
-    mutations: {},
+    mutations: {
+        reset_arr_tang(state) {
+            state.arr_tang = [];
+        }
+    },
     actions: {
-        get_toa({state, commit, rootState}) {
+        get_tang({state, commit, rootState}, ma_toa) {
+            state.arr_tang = [];
         	axios.post('http://localhost:8080/project-2/public/api/tang', {
-        	  key: getCookie('key')
+        	  key: getCookie('key'),
+              ma_toa: ma_toa
         	}).then((response) => {
-        		console.log(response.data.data);
+        		state.arr_tang = response.data.data;
         	}).catch((error) => {
         	  console.error(error);
         	});

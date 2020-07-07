@@ -1,10 +1,10 @@
 <template>
     <div>
         <label>Chọn tòa</label>
-        <multiselect v-model="ma_toa" :options="arr_toa" :close-on-select="true" :show-labels="true" placeholder="Tòa" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false"></multiselect>
+        <multiselect v-model="toa" :options="arr_toa" :close-on-select="true" :show-labels="true" placeholder="Tòa" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false" :custom-label="toaLabel"></multiselect>
         <br>
         <label>Chọn tầng</label>
-        <multiselect v-model="ma_tang" :options="arr_tang" :close-on-select="true" :show-labels="true" placeholder="Tầng" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false">
+        <multiselect v-model="tang" :options="arr_tang" :close-on-select="true" :show-labels="true" placeholder="Tầng" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false" :custom-label="tangLabel">
             <template slot="noOptions">Chưa chọn tòa</template>
         </multiselect>
         <br>
@@ -17,45 +17,39 @@ export default {
     },
     data() {
         return {
-            ma_tang: '',
-            arr_tang: [],
+            toa: '',
+            tang: ''
         }
     },
     computed: {
-        ma_toa() {
-            if(this.$store.state.arr_toa.length == 1) {
-                return this.$store.state.arr_toa.length[0];
-            } else {
-                return '';
-            }
-        },
         arr_toa() {
-            return this.$store.state.arr_toa;
+            return this.$store.state.toa.arr_toa;
+        },
+        arr_tang() {
+            return this.$store.state.tang.arr_tang;
         }
     },
     methods: {
-        get_toa() {
-            this.arr_toa = ['A17'];
-            if (this.arr_toa.length == 1) {
-                this.ma_toa = this.arr_toa[0];
-            } else {
-                this.ma_toa = '';
-            }
+        toaLabel({ten_toa}) {
+            return `${ten_toa}`;
+        },
+        tangLabel({ten_tang}) {
+            return `${ten_tang}`;
         }
     },
     watch: {
-        ma_toa() {
-            this.ma_tang = "";
-            if (!this.ma_toa) {
-                this.arr_tang = [];
+        toa() {
+            this.tang = "";
+            if (!this.toa) {
+                this.$store.commit('tang/reset_arr_tang');
                 this.$emit('show_main_view', 0);
                 return false;
             }
-            this.arr_tang = ['tang 2', 'tang 5'];
+            this.$store.dispatch('tang/get_tang', this.toa.ma_toa);
         },
 
-        ma_tang() {
-            if (!this.ma_tang) {
+        tang() {
+            if (!this.tang) {
                 this.$emit('show_main_view', 0);
                 return false
             }

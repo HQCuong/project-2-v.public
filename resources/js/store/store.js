@@ -9,6 +9,7 @@ import lab from './modules/Lab.js';
 import user from './modules/User.js';
 import toa from './modules/Toa.js';
 import tang from './modules/Tang.js';
+import cau_hinh from './modules/CauHinh.js';
 
 export default new Vuex.Store({
     modules: {
@@ -17,6 +18,7 @@ export default new Vuex.Store({
         lab: lab,
         user: user,
         toa: toa,
-        tang: tang
+        tang: tang,
+        cau_hinh: cau_hinh
     }
 })

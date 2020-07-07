@@ -13538,49 +13538,53 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
-    this.get_toa();
+    this.$store.dispatch('toa/get_toa');
   },
   data: function data() {
     return {
-      ma_toa: '',
-      ma_tang: '',
-      ma_lab: '',
-      arr_toa: [],
-      arr_tang: [],
+      toa: '',
+      tang: '',
+      lab: '',
       arr_lab: []
     };
   },
-  computed: {},
+  computed: {
+    arr_toa: function arr_toa() {
+      return this.$store.state.toa.arr_toa;
+    },
+    arr_tang: function arr_tang() {
+      return this.$store.state.tang.arr_tang;
+    }
+  },
   methods: {
-    get_toa: function get_toa() {
-      this.arr_toa = ['A17'];
-
-      if (this.arr_toa.length == 1) {
-        this.ma_toa = this.arr_toa[0];
-      } else {
-        this.ma_toa = '';
-      }
+    toaLabel: function toaLabel(_ref) {
+      var ten_toa = _ref.ten_toa;
+      return "".concat(ten_toa);
+    },
+    tangLabel: function tangLabel(_ref2) {
+      var ten_tang = _ref2.ten_tang;
+      return "".concat(ten_tang);
     }
   },
   watch: {
-    ma_toa: function ma_toa() {
-      this.ma_tang = "";
-      this.ma_lab = "";
+    toa: function toa() {
+      this.tang = "";
+      this.lab = "";
       this.$emit('show_lab_info', 0);
 
-      if (!this.ma_toa) {
-        this.arr_tang = [];
+      if (!this.toa) {
+        this.$store.commit('tang/reset_arr_tang');
         this.$emit('show_lab_info', 0);
         return false;
       }
 
-      this.arr_tang = ['tang 2', 'tang 5'];
+      this.$store.dispatch('tang/get_tang', this.toa.ma_toa);
     },
-    ma_tang: function ma_tang() {
-      this.ma_lab = "";
+    tang: function tang() {
+      this.lab = "";
       this.$emit('show_lab_info', 0);
 
-      if (!this.ma_tang) {
+      if (!this.tang) {
         this.arr_lab = [];
         this.$emit('show_lab_info', 0);
         return false;
@@ -13588,10 +13592,10 @@ __webpack_require__.r(__webpack_exports__);
 
       this.arr_lab = ['lab 1', 'lab 2', 'lab 3'];
     },
-    ma_lab: function ma_lab() {
-      if (!this.ma_lab) {
+    lab: function lab() {
+      if (!this.lab) {
         this.$emit('show_lab_info', 0);
-      } else if (this.ma_toa && this.ma_tang) {
+      } else if (this.toa && this.tang) {
         this.$emit('show_lab_info', 1);
       } else {
         this.$emit('show_lab_info', 0);
@@ -14559,10 +14563,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
-    this.get_toa();
+    this.$store.dispatch('toa/get_toa');
+    this.$store.dispatch('cau_hinh/get_cau_hinh');
   },
   mounted: function mounted() {
     // change label color
@@ -14580,38 +14584,46 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      ma_tang: '',
-      ma_toa: '',
-      ma_cau_hinh: '',
-      arr_toa: [],
-      arr_tang: [],
-      arr_cau_hinh: ['cau hinh 1', 'cau hinh 2', 'cau hinh 3']
+      tang: '',
+      toa: '',
+      cau_hinh: ''
     };
   },
-  methods: {
-    change_current_view: function change_current_view() {
-      this.current_view = !this.current_view;
+  computed: {
+    arr_toa: function arr_toa() {
+      return this.$store.state.toa.arr_toa;
     },
-    get_toa: function get_toa() {
-      this.arr_toa = ['A17'];
-
-      if (this.arr_toa.length == 1) {
-        this.ma_toa = this.arr_toa[0];
-      } else {
-        this.ma_toa = '';
-      }
+    arr_tang: function arr_tang() {
+      return this.$store.state.tang.arr_tang;
+    },
+    arr_cau_hinh: function arr_cau_hinh() {
+      return this.$store.state.cau_hinh.arr_cau_hinh;
+    }
+  },
+  methods: {
+    labelToa: function labelToa(_ref) {
+      var ten_toa = _ref.ten_toa;
+      return "".concat(ten_toa);
+    },
+    labelTang: function labelTang(_ref2) {
+      var ten_tang = _ref2.ten_tang;
+      return "".concat(ten_tang);
+    },
+    labelCauHinh: function labelCauHinh(_ref3) {
+      var mo_ta = _ref3.mo_ta;
+      return "".concat(mo_ta);
     }
   },
   watch: {
-    ma_toa: function ma_toa() {
-      this.ma_tang = "";
+    toa: function toa() {
+      this.tang = "";
 
-      if (!this.ma_toa) {
-        this.arr_tang = [];
+      if (!this.toa) {
+        this.$store.commit('tang/reset_arr_tang');
         return false;
       }
 
-      this.arr_tang = ['tang 2', 'tang 5'];
+      this.$store.dispatch('tang/get_tang', this.toa.ma_toa);
     }
   }
 });
@@ -14787,47 +14799,42 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      ma_tang: '',
-      arr_tang: []
+      toa: '',
+      tang: ''
     };
   },
   computed: {
-    ma_toa: function ma_toa() {
-      if (this.$store.state.arr_toa.length == 1) {
-        return this.$store.state.arr_toa.length[0];
-      } else {
-        return '';
-      }
-    },
     arr_toa: function arr_toa() {
-      return this.$store.state.arr_toa;
+      return this.$store.state.toa.arr_toa;
+    },
+    arr_tang: function arr_tang() {
+      return this.$store.state.tang.arr_tang;
     }
   },
   methods: {
-    get_toa: function get_toa() {
-      this.arr_toa = ['A17'];
-
-      if (this.arr_toa.length == 1) {
-        this.ma_toa = this.arr_toa[0];
-      } else {
-        this.ma_toa = '';
-      }
+    toaLabel: function toaLabel(_ref) {
+      var ten_toa = _ref.ten_toa;
+      return "".concat(ten_toa);
+    },
+    tangLabel: function tangLabel(_ref2) {
+      var ten_tang = _ref2.ten_tang;
+      return "".concat(ten_tang);
     }
   },
   watch: {
-    ma_toa: function ma_toa() {
-      this.ma_tang = "";
+    toa: function toa() {
+      this.tang = "";
 
-      if (!this.ma_toa) {
-        this.arr_tang = [];
+      if (!this.toa) {
+        this.$store.commit('tang/reset_arr_tang');
         this.$emit('show_main_view', 0);
         return false;
       }
 
-      this.arr_tang = ['tang 2', 'tang 5'];
+      this.$store.dispatch('tang/get_tang', this.toa.ma_toa);
     },
-    ma_tang: function ma_tang() {
-      if (!this.ma_tang) {
+    tang: function tang() {
+      if (!this.tang) {
         this.$emit('show_main_view', 0);
         return false;
       }
@@ -17270,14 +17277,15 @@ var render = function() {
           placeholder: "Tòa",
           deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
           selectLabel: "Click hoặc nhấn Enter để chọn",
-          searchable: false
+          searchable: false,
+          "custom-label": _vm.toaLabel
         },
         model: {
-          value: _vm.ma_toa,
+          value: _vm.toa,
           callback: function($$v) {
-            _vm.ma_toa = $$v
+            _vm.toa = $$v
           },
-          expression: "ma_toa"
+          expression: "toa"
         }
       }),
       _vm._v(" "),
@@ -17295,14 +17303,15 @@ var render = function() {
             placeholder: "Tầng",
             deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
             selectLabel: "Click hoặc nhấn Enter để chọn",
-            searchable: false
+            searchable: false,
+            "custom-label": _vm.tangLabel
           },
           model: {
-            value: _vm.ma_tang,
+            value: _vm.tang,
             callback: function($$v) {
-              _vm.ma_tang = $$v
+              _vm.tang = $$v
             },
-            expression: "ma_tang"
+            expression: "tang"
           }
         },
         [_c("template", { slot: "noOptions" }, [_vm._v("Chưa chọn tòa")])],
@@ -17326,11 +17335,11 @@ var render = function() {
             searchable: false
           },
           model: {
-            value: _vm.ma_lab,
+            value: _vm.lab,
             callback: function($$v) {
-              _vm.ma_lab = $$v
+              _vm.lab = $$v
             },
-            expression: "ma_lab"
+            expression: "lab"
           }
         },
         [_c("template", { slot: "noOptions" }, [_vm._v("Chưa chọn tầng")])],
@@ -18542,14 +18551,18 @@ var render = function() {
           options: _vm.arr_toa,
           "close-on-select": true,
           "show-labels": true,
-          placeholder: "Tòa"
+          placeholder: "Tòa",
+          "custom-label": _vm.labelToa,
+          deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
+          selectLabel: "Click hoặc nhấn Enter để chọn",
+          searchable: false
         },
         model: {
-          value: _vm.ma_toa,
+          value: _vm.toa,
           callback: function($$v) {
-            _vm.ma_toa = $$v
+            _vm.toa = $$v
           },
-          expression: "ma_toa"
+          expression: "toa"
         }
       }),
       _vm._v(" "),
@@ -18567,14 +18580,15 @@ var render = function() {
             placeholder: "Tầng",
             deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
             selectLabel: "Click hoặc nhấn Enter để chọn",
-            searchable: false
+            searchable: false,
+            "custom-label": _vm.labelTang
           },
           model: {
-            value: _vm.ma_tang,
+            value: _vm.tang,
             callback: function($$v) {
-              _vm.ma_tang = $$v
+              _vm.tang = $$v
             },
-            expression: "ma_tang"
+            expression: "tang"
           }
         },
         [_c("template", { slot: "noOptions" }, [_vm._v("Chưa chọn tòa")])],
@@ -18585,29 +18599,25 @@ var render = function() {
       _vm._v(" "),
       _c("label", [_vm._v("Chọn cấu hình")]),
       _vm._v(" "),
-      _c(
-        "multiselect",
-        {
-          attrs: {
-            options: _vm.arr_cau_hinh,
-            "close-on-select": true,
-            "show-labels": true,
-            placeholder: "Chọn cấu hình",
-            deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
-            selectLabel: "Click hoặc nhấn Enter để chọn",
-            searchable: false
-          },
-          model: {
-            value: _vm.ma_cau_hinh,
-            callback: function($$v) {
-              _vm.ma_cau_hinh = $$v
-            },
-            expression: "ma_cau_hinh"
-          }
+      _c("multiselect", {
+        attrs: {
+          options: _vm.arr_cau_hinh,
+          "close-on-select": true,
+          "show-labels": true,
+          placeholder: "Chọn cấu hình",
+          deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
+          selectLabel: "Click hoặc nhấn Enter để chọn",
+          searchable: false,
+          "custom-label": _vm.labelCauHinh
         },
-        [_c("template", { slot: "noOptions" }, [_vm._v("Chưa chọn tòa")])],
-        2
-      ),
+        model: {
+          value: _vm.cau_hinh,
+          callback: function($$v) {
+            _vm.cau_hinh = $$v
+          },
+          expression: "cau_hinh"
+        }
+      }),
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
@@ -18851,14 +18861,15 @@ var render = function() {
           placeholder: "Tòa",
           deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
           selectLabel: "Click hoặc nhấn Enter để chọn",
-          searchable: false
+          searchable: false,
+          "custom-label": _vm.toaLabel
         },
         model: {
-          value: _vm.ma_toa,
+          value: _vm.toa,
           callback: function($$v) {
-            _vm.ma_toa = $$v
+            _vm.toa = $$v
           },
-          expression: "ma_toa"
+          expression: "toa"
         }
       }),
       _vm._v(" "),
@@ -18876,14 +18887,15 @@ var render = function() {
             placeholder: "Tầng",
             deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
             selectLabel: "Click hoặc nhấn Enter để chọn",
-            searchable: false
+            searchable: false,
+            "custom-label": _vm.tangLabel
           },
           model: {
-            value: _vm.ma_tang,
+            value: _vm.tang,
             callback: function($$v) {
-              _vm.ma_tang = $$v
+              _vm.tang = $$v
             },
-            expression: "ma_tang"
+            expression: "tang"
           }
         },
         [_c("template", { slot: "noOptions" }, [_vm._v("Chưa chọn tòa")])],
@@ -39152,6 +39164,25 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/customfunc/getCookie.js":
+/*!**********************************************!*\
+  !*** ./resources/js/customfunc/getCookie.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return getCookie; });
+// get cookie function
+function getCookie(name) {
+  var value = "; ".concat(document.cookie);
+  var parts = value.split("; ".concat(name, "="));
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
+/***/ }),
+
 /***/ "./resources/js/layout/FooterComponent.vue":
 /*!*************************************************!*\
   !*** ./resources/js/layout/FooterComponent.vue ***!
@@ -39368,33 +39399,28 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _store_store_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./store/store.js */ "./resources/js/store/store.js");
-/* harmony import */ var _components_home_HomeComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/home/HomeComponent.vue */ "./resources/js/components/home/HomeComponent.vue");
-/* harmony import */ var _components_general_ShowLabComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/general/ShowLabComponent.vue */ "./resources/js/components/general/ShowLabComponent.vue");
-/* harmony import */ var _components_kythuat_QuanLyLabComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/kythuat/QuanLyLabComponent.vue */ "./resources/js/components/kythuat/QuanLyLabComponent.vue");
-/* harmony import */ var _components_kythuat_modilabchild_ListLabComponent_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/kythuat/modilabchild/ListLabComponent.vue */ "./resources/js/components/kythuat/modilabchild/ListLabComponent.vue");
-/* harmony import */ var _components_kythuat_modilabchild_AddLabComponent_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/kythuat/modilabchild/AddLabComponent.vue */ "./resources/js/components/kythuat/modilabchild/AddLabComponent.vue");
-/* harmony import */ var _components_kythuat_CauHinhComponent_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/kythuat/CauHinhComponent.vue */ "./resources/js/components/kythuat/CauHinhComponent.vue");
-/* harmony import */ var _components_kythuat_CauhinhChild_AddCauHinhComponent_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/kythuat/CauhinhChild/AddCauHinhComponent.vue */ "./resources/js/components/kythuat/CauhinhChild/AddCauHinhComponent.vue");
-/* harmony import */ var _components_kythuat_CauhinhChild_ModiCauHinhComponent_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/kythuat/CauhinhChild/ModiCauHinhComponent.vue */ "./resources/js/components/kythuat/CauhinhChild/ModiCauHinhComponent.vue");
-/* harmony import */ var _components_kythuat_CauhinhChild_CauHinhMonComponent_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/kythuat/CauhinhChild/CauHinhMonComponent.vue */ "./resources/js/components/kythuat/CauhinhChild/CauHinhMonComponent.vue");
-/* harmony import */ var _components_kythuat_ThietBiComponent_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/kythuat/ThietBiComponent.vue */ "./resources/js/components/kythuat/ThietBiComponent.vue");
-/* harmony import */ var _components_kythuat_thietbichild_ListThietBiComponent_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/kythuat/thietbichild/ListThietBiComponent.vue */ "./resources/js/components/kythuat/thietbichild/ListThietBiComponent.vue");
-/* harmony import */ var _components_kythuat_thietbichild_AddThietBiComponent_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/kythuat/thietbichild/AddThietBiComponent.vue */ "./resources/js/components/kythuat/thietbichild/AddThietBiComponent.vue");
-/* harmony import */ var _components_giaovien_GiaoVienComponent_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/giaovien/GiaoVienComponent.vue */ "./resources/js/components/giaovien/GiaoVienComponent.vue");
-/* harmony import */ var _components_giaovu_QuanLyLichComponent_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/giaovu/QuanLyLichComponent.vue */ "./resources/js/components/giaovu/QuanLyLichComponent.vue");
-/* harmony import */ var _components_giaovu_QuanLyUserComponent_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/giaovu/QuanLyUserComponent.vue */ "./resources/js/components/giaovu/QuanLyUserComponent.vue");
-/* harmony import */ var _components_nguoidung_UserProfileComponent_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/nguoidung/UserProfileComponent.vue */ "./resources/js/components/nguoidung/UserProfileComponent.vue");
-/* harmony import */ var _components_nguoidung_ForgotPassComponent_vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/nguoidung/ForgotPassComponent.vue */ "./resources/js/components/nguoidung/ForgotPassComponent.vue");
-/* harmony import */ var _components_error_CantDirectComponent_vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/error/CantDirectComponent.vue */ "./resources/js/components/error/CantDirectComponent.vue");
-/* harmony import */ var _components_error_AuthorErrComponent_vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/error/AuthorErrComponent.vue */ "./resources/js/components/error/AuthorErrComponent.vue");
-// get cookie function
-function getCookie(name) {
-  var value = "; ".concat(document.cookie);
-  var parts = value.split("; ".concat(name, "="));
-  if (parts.length === 2) return parts.pop().split(';').shift();
-} // import store
-
+/* harmony import */ var _customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./customfunc/getCookie.js */ "./resources/js/customfunc/getCookie.js");
+/* harmony import */ var _store_store_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store/store.js */ "./resources/js/store/store.js");
+/* harmony import */ var _components_home_HomeComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/home/HomeComponent.vue */ "./resources/js/components/home/HomeComponent.vue");
+/* harmony import */ var _components_general_ShowLabComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/general/ShowLabComponent.vue */ "./resources/js/components/general/ShowLabComponent.vue");
+/* harmony import */ var _components_kythuat_QuanLyLabComponent_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/kythuat/QuanLyLabComponent.vue */ "./resources/js/components/kythuat/QuanLyLabComponent.vue");
+/* harmony import */ var _components_kythuat_modilabchild_ListLabComponent_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/kythuat/modilabchild/ListLabComponent.vue */ "./resources/js/components/kythuat/modilabchild/ListLabComponent.vue");
+/* harmony import */ var _components_kythuat_modilabchild_AddLabComponent_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/kythuat/modilabchild/AddLabComponent.vue */ "./resources/js/components/kythuat/modilabchild/AddLabComponent.vue");
+/* harmony import */ var _components_kythuat_CauHinhComponent_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/kythuat/CauHinhComponent.vue */ "./resources/js/components/kythuat/CauHinhComponent.vue");
+/* harmony import */ var _components_kythuat_CauhinhChild_AddCauHinhComponent_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/kythuat/CauhinhChild/AddCauHinhComponent.vue */ "./resources/js/components/kythuat/CauhinhChild/AddCauHinhComponent.vue");
+/* harmony import */ var _components_kythuat_CauhinhChild_ModiCauHinhComponent_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/kythuat/CauhinhChild/ModiCauHinhComponent.vue */ "./resources/js/components/kythuat/CauhinhChild/ModiCauHinhComponent.vue");
+/* harmony import */ var _components_kythuat_CauhinhChild_CauHinhMonComponent_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/kythuat/CauhinhChild/CauHinhMonComponent.vue */ "./resources/js/components/kythuat/CauhinhChild/CauHinhMonComponent.vue");
+/* harmony import */ var _components_kythuat_ThietBiComponent_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/kythuat/ThietBiComponent.vue */ "./resources/js/components/kythuat/ThietBiComponent.vue");
+/* harmony import */ var _components_kythuat_thietbichild_ListThietBiComponent_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/kythuat/thietbichild/ListThietBiComponent.vue */ "./resources/js/components/kythuat/thietbichild/ListThietBiComponent.vue");
+/* harmony import */ var _components_kythuat_thietbichild_AddThietBiComponent_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/kythuat/thietbichild/AddThietBiComponent.vue */ "./resources/js/components/kythuat/thietbichild/AddThietBiComponent.vue");
+/* harmony import */ var _components_giaovien_GiaoVienComponent_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/giaovien/GiaoVienComponent.vue */ "./resources/js/components/giaovien/GiaoVienComponent.vue");
+/* harmony import */ var _components_giaovu_QuanLyLichComponent_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/giaovu/QuanLyLichComponent.vue */ "./resources/js/components/giaovu/QuanLyLichComponent.vue");
+/* harmony import */ var _components_giaovu_QuanLyUserComponent_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/giaovu/QuanLyUserComponent.vue */ "./resources/js/components/giaovu/QuanLyUserComponent.vue");
+/* harmony import */ var _components_nguoidung_UserProfileComponent_vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/nguoidung/UserProfileComponent.vue */ "./resources/js/components/nguoidung/UserProfileComponent.vue");
+/* harmony import */ var _components_nguoidung_ForgotPassComponent_vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/nguoidung/ForgotPassComponent.vue */ "./resources/js/components/nguoidung/ForgotPassComponent.vue");
+/* harmony import */ var _components_error_CantDirectComponent_vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/error/CantDirectComponent.vue */ "./resources/js/components/error/CantDirectComponent.vue");
+/* harmony import */ var _components_error_AuthorErrComponent_vue__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/error/AuthorErrComponent.vue */ "./resources/js/components/error/AuthorErrComponent.vue");
+ // import store
 
  // home
 
@@ -39427,23 +39453,23 @@ function getCookie(name) {
 {
   path: '/home',
   name: 'home',
-  component: _components_home_HomeComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  component: _components_home_HomeComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
 }, {
   path: '/xem_thong_tin_lab',
-  component: _components_general_ShowLabComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+  component: _components_general_ShowLabComponent_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
 }, // ky thuat
 {
   path: '/quan_ly_lab',
-  component: _components_kythuat_QuanLyLabComponent_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+  component: _components_kythuat_QuanLyLabComponent_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
   children: [{
     path: 'danh_sach_lab',
-    component: _components_kythuat_modilabchild_ListLabComponent_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+    component: _components_kythuat_modilabchild_ListLabComponent_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
   }, {
     path: 'add_lab',
-    component: _components_kythuat_modilabchild_AddLabComponent_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
+    component: _components_kythuat_modilabchild_AddLabComponent_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
   }],
   beforeEnter: function beforeEnter(to, from, next) {
-    if (getCookie('level') == 1 || getCookie('level') == 2) {
+    if (Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])('level') == 1 || Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])('level') == 2) {
       next();
     } else {
       next('/err_author');
@@ -39451,19 +39477,19 @@ function getCookie(name) {
   }
 }, {
   path: '/quan_ly_cau_hinh',
-  component: _components_kythuat_CauHinhComponent_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
+  component: _components_kythuat_CauHinhComponent_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
   children: [{
     path: 'them_cau_hinh',
-    component: _components_kythuat_CauhinhChild_AddCauHinhComponent_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
+    component: _components_kythuat_CauhinhChild_AddCauHinhComponent_vue__WEBPACK_IMPORTED_MODULE_8__["default"]
   }, {
     path: 'modi_cau_hinh',
-    component: _components_kythuat_CauhinhChild_ModiCauHinhComponent_vue__WEBPACK_IMPORTED_MODULE_8__["default"]
+    component: _components_kythuat_CauhinhChild_ModiCauHinhComponent_vue__WEBPACK_IMPORTED_MODULE_9__["default"]
   }, {
     path: 'cau_hinh_mon',
-    component: _components_kythuat_CauhinhChild_CauHinhMonComponent_vue__WEBPACK_IMPORTED_MODULE_9__["default"]
+    component: _components_kythuat_CauhinhChild_CauHinhMonComponent_vue__WEBPACK_IMPORTED_MODULE_10__["default"]
   }],
   beforeEnter: function beforeEnter(to, from, next) {
-    if (getCookie('level') == 1 || getCookie('level') == 2) {
+    if (Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])('level') == 1 || Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])('level') == 2) {
       next();
     } else {
       next('/err_author');
@@ -39471,16 +39497,16 @@ function getCookie(name) {
   }
 }, {
   path: '/quan_ly_thiet_bi',
-  component: _components_kythuat_ThietBiComponent_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
+  component: _components_kythuat_ThietBiComponent_vue__WEBPACK_IMPORTED_MODULE_11__["default"],
   children: [{
     path: 'danh_sach_thiet_bi',
-    component: _components_kythuat_thietbichild_ListThietBiComponent_vue__WEBPACK_IMPORTED_MODULE_11__["default"]
+    component: _components_kythuat_thietbichild_ListThietBiComponent_vue__WEBPACK_IMPORTED_MODULE_12__["default"]
   }, {
     path: 'add_thiet_bi',
-    component: _components_kythuat_thietbichild_AddThietBiComponent_vue__WEBPACK_IMPORTED_MODULE_12__["default"]
+    component: _components_kythuat_thietbichild_AddThietBiComponent_vue__WEBPACK_IMPORTED_MODULE_13__["default"]
   }],
   beforeEnter: function beforeEnter(to, from, next) {
-    if (getCookie('level') == 1 || getCookie('level') == 2) {
+    if (Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])('level') == 1 || Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])('level') == 2) {
       next();
     } else {
       next('/err_author');
@@ -39489,12 +39515,12 @@ function getCookie(name) {
 }, // giao vu
 {
   path: '/xem_lich',
-  component: _components_giaovien_GiaoVienComponent_vue__WEBPACK_IMPORTED_MODULE_13__["default"],
+  component: _components_giaovien_GiaoVienComponent_vue__WEBPACK_IMPORTED_MODULE_14__["default"],
   beforeEnter: function beforeEnter(to, from, next) {
-    if (getCookie('level') == 1) {
+    if (Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])('level') == 1) {
       next();
-    } else if (getCookie('level') == 3) {
-      _store_store_js__WEBPACK_IMPORTED_MODULE_0__["default"].state.user.is_giao_vien = true;
+    } else if (Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])('level') == 3) {
+      _store_store_js__WEBPACK_IMPORTED_MODULE_1__["default"].state.user.is_giao_vien = true;
       next();
     } else {
       next('/err_author');
@@ -39503,10 +39529,10 @@ function getCookie(name) {
 }, // giao vu
 {
   path: '/quan_ly_lich',
-  component: _components_giaovu_QuanLyLichComponent_vue__WEBPACK_IMPORTED_MODULE_14__["default"],
+  component: _components_giaovu_QuanLyLichComponent_vue__WEBPACK_IMPORTED_MODULE_15__["default"],
   children: [],
   beforeEnter: function beforeEnter(to, from, next) {
-    if (getCookie('level') == 1) {
+    if (Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])('level') == 1) {
       next();
     } else {
       next('/err_author');
@@ -39514,9 +39540,9 @@ function getCookie(name) {
   }
 }, {
   path: '/quan_ly_nguoi_dung',
-  component: _components_giaovu_QuanLyUserComponent_vue__WEBPACK_IMPORTED_MODULE_15__["default"],
+  component: _components_giaovu_QuanLyUserComponent_vue__WEBPACK_IMPORTED_MODULE_16__["default"],
   beforeEnter: function beforeEnter(to, from, next) {
-    if (getCookie('level') == 1) {
+    if (Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])('level') == 1) {
       next();
     } else {
       next('/err_author');
@@ -39525,18 +39551,56 @@ function getCookie(name) {
 }, // user
 {
   path: '/profile',
-  component: _components_nguoidung_UserProfileComponent_vue__WEBPACK_IMPORTED_MODULE_16__["default"]
+  component: _components_nguoidung_UserProfileComponent_vue__WEBPACK_IMPORTED_MODULE_17__["default"]
 }, {
   path: '/forgot_password',
-  component: _components_nguoidung_ForgotPassComponent_vue__WEBPACK_IMPORTED_MODULE_17__["default"]
+  component: _components_nguoidung_ForgotPassComponent_vue__WEBPACK_IMPORTED_MODULE_18__["default"]
 }, // error
 {
   path: '/err_author',
-  component: _components_error_AuthorErrComponent_vue__WEBPACK_IMPORTED_MODULE_19__["default"]
+  component: _components_error_AuthorErrComponent_vue__WEBPACK_IMPORTED_MODULE_20__["default"]
 }, {
   path: '*',
-  component: _components_error_CantDirectComponent_vue__WEBPACK_IMPORTED_MODULE_18__["default"]
+  component: _components_error_CantDirectComponent_vue__WEBPACK_IMPORTED_MODULE_19__["default"]
 }]);
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/CauHinh.js":
+/*!***********************************************!*\
+  !*** ./resources/js/store/modules/CauHinh.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../customfunc/getCookie.js */ "./resources/js/customfunc/getCookie.js");
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: {
+    arr_cau_hinh: []
+  },
+  mutations: {},
+  actions: {
+    get_cau_hinh: function get_cau_hinh(_ref) {
+      var state = _ref.state,
+          commit = _ref.commit,
+          rootState = _ref.rootState;
+      state.arr_cau_hinh = [];
+      axios.post('http://localhost:8080/project-2/public/api/cauhinh', {
+        key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])('key'),
+        ma_loai: 1
+      }).then(function (response) {
+        console.log(response);
+        state.arr_cau_hinh = response.data.data;
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    }
+  }
+});
 
 /***/ }),
 
@@ -39659,28 +39723,29 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-// get cookie function
-function getCookie(name) {
-  var value = "; ".concat(document.cookie);
-  var parts = value.split("; ".concat(name, "="));
-  if (parts.length === 2) return parts.pop().split(';').shift();
-}
+/* harmony import */ var _customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../customfunc/getCookie.js */ "./resources/js/customfunc/getCookie.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,
   state: {
-    arr_toa: []
+    arr_tang: []
   },
-  mutations: {},
+  mutations: {
+    reset_arr_tang: function reset_arr_tang(state) {
+      state.arr_tang = [];
+    }
+  },
   actions: {
-    get_toa: function get_toa(_ref) {
+    get_tang: function get_tang(_ref, ma_toa) {
       var state = _ref.state,
           commit = _ref.commit,
           rootState = _ref.rootState;
+      state.arr_tang = [];
       axios.post('http://localhost:8080/project-2/public/api/tang', {
-        key: getCookie('key')
+        key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])('key'),
+        ma_toa: ma_toa
       }).then(function (response) {
-        console.log(response.data.data);
+        state.arr_tang = response.data.data;
       })["catch"](function (error) {
         console.error(error);
       });
@@ -39699,28 +39764,28 @@ function getCookie(name) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-// get cookie function
-function getCookie(name) {
-  var value = "; ".concat(document.cookie);
-  var parts = value.split("; ".concat(name, "="));
-  if (parts.length === 2) return parts.pop().split(';').shift();
-}
+/* harmony import */ var _customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../customfunc/getCookie.js */ "./resources/js/customfunc/getCookie.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,
   state: {
     arr_toa: []
   },
-  mutations: {},
+  mutations: {
+    reset_arr_toa: function reset_arr_toa(state) {
+      state.arr_toa = [];
+    }
+  },
   actions: {
-    get_toa: function get_toa(_ref) {
+    get_toa: function get_toa(_ref, ma_toa) {
       var state = _ref.state,
           commit = _ref.commit,
           rootState = _ref.rootState;
+      state.arr_toa = [];
       axios.post('http://localhost:8080/project-2/public/api/toa/hienthicactoa', {
-        key: getCookie('key')
+        key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])('key')
       }).then(function (response) {
-        console.log(response.data.data);
+        state.arr_toa = response.data.data;
       })["catch"](function (error) {
         console.error(error);
       });
@@ -39767,9 +39832,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_User_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/User.js */ "./resources/js/store/modules/User.js");
 /* harmony import */ var _modules_Toa_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/Toa.js */ "./resources/js/store/modules/Toa.js");
 /* harmony import */ var _modules_Tang_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/Tang.js */ "./resources/js/store/modules/Tang.js");
+/* harmony import */ var _modules_CauHinh_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/CauHinh.js */ "./resources/js/store/modules/CauHinh.js");
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
+
 
 
 
@@ -39783,7 +39850,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     lab: _modules_Lab_js__WEBPACK_IMPORTED_MODULE_4__["default"],
     user: _modules_User_js__WEBPACK_IMPORTED_MODULE_5__["default"],
     toa: _modules_Toa_js__WEBPACK_IMPORTED_MODULE_6__["default"],
-    tang: _modules_Tang_js__WEBPACK_IMPORTED_MODULE_7__["default"]
+    tang: _modules_Tang_js__WEBPACK_IMPORTED_MODULE_7__["default"],
+    cau_hinh: _modules_CauHinh_js__WEBPACK_IMPORTED_MODULE_8__["default"]
   }
 }));
 
