@@ -1,3 +1,11 @@
+// get cookie function
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
+// import store
 import store from './store/store.js';
 
 // home
@@ -56,7 +64,7 @@ export default [
             { path: 'add_lab', component: add_lab }
         ],
         beforeEnter: (to, from, next) => {
-            if (store.state.user.cap_do == 1 || store.state.user.cap_do == 2) {
+            if (getCookie('level') == 1 || getCookie('level') == 2) {
                 next();
             } else {
                 next('/err_author');
@@ -72,7 +80,7 @@ export default [
             { path: 'cau_hinh_mon', component: ch_mon }
         ],
         beforeEnter: (to, from, next) => {
-            if (store.state.user.cap_do == 1 || store.state.user.cap_do == 2) {
+            if (getCookie('level') == 1 || getCookie('level') == 2) {
                 next();
             } else {
                 next('/err_author');
@@ -87,7 +95,7 @@ export default [
             { path: 'add_thiet_bi', component: add_thiet_bi }
         ],
         beforeEnter: (to, from, next) => {
-            if (store.state.user.cap_do == 1 || store.state.user.cap_do == 2) {
+            if (getCookie('level') == 1 || getCookie('level') == 2) {
                 next();
             } else {
                 next('/err_author');
@@ -96,11 +104,45 @@ export default [
     },
 
     // giao vu
-    { path: '/xem_lich', component: lich_gv },
+    {
+        path: '/xem_lich',
+        component: lich_gv,
+        beforeEnter: (to, from, next) => {
+            if (getCookie('level') == 1) {
+                next();
+            } else if (getCookie('level') == 3) {
+                store.state.user.is_giao_vien = true;
+                next();
+            } else {
+                next('/err_author');
+            }
+        }
+    },
 
     // giao vu
-    { path: '/quan_ly_lich', component: quan_ly_lich },
-    { path: '/quan_ly_nguoi_dung', component: user },
+    {
+        path: '/quan_ly_lich',
+        component: quan_ly_lich,
+        children: [],
+        beforeEnter: (to, from, next) => {
+            if (getCookie('level') == 1) {
+                next();
+            } else {
+                next('/err_author');
+            }
+        }
+    },
+    {
+        path: '/quan_ly_nguoi_dung',
+        component: user,
+        beforeEnter: (to, from, next) => {
+            if (getCookie('level') == 1) {
+                next();
+            } else {
+                next('/err_author');
+            }
+        }
+    },
 
 
     // user

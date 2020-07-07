@@ -1,3 +1,7 @@
 export default {
-    namespaced: true
+    namespaced: true,
+    state: {
+    	user: 0,
+    	is_giao_vien: false
+    }
 }

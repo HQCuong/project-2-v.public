@@ -1,7 +1,7 @@
 <template>
     <div>
-        <router-link to="/quan_ly_thiet_bi/danh_sach_thiet_bi"><span class="btn btn-info" :class="{active:isListTools}">Danh sách thiết bị</span></router-link>
-        <router-link to="/quan_ly_thiet_bi/add_thiet_bi"><span class="btn btn-info" :class="{active:isAddTools}">Thêm thiết bị</span></router-link>
+        <router-link to="/quan_ly_thiet_bi/danh_sach_thiet_bi" class="btn btn-info" :class="{disabled:isListTools}">Danh sách thiết bị</router-link>
+        <router-link to="/quan_ly_thiet_bi/add_thiet_bi" class="btn btn-info" :class="{disabled:isAddTools}">Thêm thiết bị</router-link>
     </div>
 </template>
 <script>

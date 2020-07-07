@@ -47,6 +47,7 @@ export default {
                 .then((response) => {
                     if (response.data.success) {
                         document.cookie = `key=${response.data.data.key}`;
+                        document.cookie = `level=${response.data.data.ma_cap_do}`;
                         window.location.href = "home";
                     } else {
                         this.error = response.data.message;

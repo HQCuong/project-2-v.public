@@ -27,6 +27,7 @@ Route::group(['middleware' => ['CheckKey', 'PreventBackButton']], function () {
 
 	Route::get('/logout', function() {
 		setcookie("key", "", time() - 3600);
+		setcookie("level", "", time() - 3600);
 		return redirect()->route('login');
 	});
 

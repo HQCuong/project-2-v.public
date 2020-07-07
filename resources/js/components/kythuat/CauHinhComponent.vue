@@ -26,7 +26,6 @@ export default {
     mounted() {
         if (this.$route.path == '/quan_ly_cau_hinh') {
             this.$store.commit('content/page_title', 'Quản lý cấu hình');
-
         }
     },
     data() {

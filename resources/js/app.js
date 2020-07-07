@@ -44,12 +44,7 @@ Vue.component('sidebar-component', require('./layout/SidebarComponent.vue').defa
 Vue.component('footer-component', require('./layout/FooterComponent.vue').default);
 Vue.component('login-component', require('./components/LoginComponent.vue').default);
 
-// get cookie function
-function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-}
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -61,14 +56,5 @@ function getCookie(name) {
 const app = new Vue({
     el: '#app',
     router,
-    store,
-    created() {
-    	axios.post('api/nguoidung/kiemtrakey', {
-    	  key: getCookie('key')
-    	}).then((response) => {
-    		store.state.user.cap_do = response.data.data.cap_do;
-    	}).catch((error) => {
-    	  console.error(error);
-    	})
-    }
+    store
 });

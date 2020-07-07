@@ -1,8 +1,8 @@
 <template>
     <div>
-        <router-link to="/quan_ly_cau_hinh/them_cau_hinh"><span class="btn btn-info" :class="{active:isAddCh}">Thêm cấu hình</span></router-link>
-        <router-link to="/quan_ly_cau_hinh/modi_cau_hinh"><span class="btn btn-info" :class="{active:isModiCh}">Tùy chỉnh cấu hình</span></router-link>
-        <router-link to="/quan_ly_cau_hinh/cau_hinh_mon"><span class="btn btn-info" :class="{active:isChMon}">Tùy chỉnh cấu hình - môn</span></router-link>
+        <router-link to="/quan_ly_cau_hinh/them_cau_hinh" class="btn btn-info" :class="{disabled:isAddCh}">Thêm cấu hình</router-link>
+        <router-link to="/quan_ly_cau_hinh/modi_cau_hinh" class="btn btn-info" :class="{disabled:isModiCh}">Tùy chỉnh cấu hình</router-link>
+        <router-link to="/quan_ly_cau_hinh/cau_hinh_mon" class="btn btn-info" :class="{disabled:isChMon}">Tùy chỉnh cấu hình - môn</router-link>
     </div>
 </template>
 <script>

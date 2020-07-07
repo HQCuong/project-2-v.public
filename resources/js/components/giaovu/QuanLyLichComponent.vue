@@ -1,23 +1,33 @@
 <template>
-	<div class="container">
+    <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Ngay nghi</div>
                     <div class="card-body">
-                        I'm an component.
+                        <mainbutton></mainbutton>
                     </div>
                 </div>
             </div>
         </div>
-    </div>	
+    </div>
 </template>
-
 <script>
+import mainbutton from './quanlylichchild/ButtonComponent.vue';
+
 export default {
-
+    mounted() {
+        this.$store.commit('content/page_title', 'Quản lý lịch dạy');
+    },
+    watch: {
+        $route(to, from) {
+            this.$store.commit('content/page_title', 'Quản lý lịch dạy');
+        }
+    },
+    components: {
+        mainbutton
+    }
 }
-</script>
 
+</script>
 <style lang="css" scoped>
 </style>

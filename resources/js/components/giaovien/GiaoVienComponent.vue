@@ -5,7 +5,7 @@
                 <div class="card">
                     <div class="card-header">Xem lich</div>
                     <div class="card-body">
-                        <selectgv></selectgv>
+                        <selectgv v-if="!is_giao_vien"></selectgv>
                         <br>
                         <br>
                         <lichgv></lichgv>
@@ -26,7 +26,12 @@ export default {
     },
     data() {
         return {
-
+            
+        }
+    },  
+    computed: {
+        is_giao_vien() {
+            return this.$store.state.user.is_giao_vien;
         }
     },
     watch: {

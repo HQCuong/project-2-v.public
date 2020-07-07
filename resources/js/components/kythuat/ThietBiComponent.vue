@@ -23,7 +23,7 @@ import maininfo from './thietbichild/MainInfoComponent.vue';
 
 export default {
     mounted() {
-        if (this.$route.path == 'quan_ly_thiet_bi') {
+        if (this.$route.path == '/quan_ly_thiet_bi') {
             this.$store.commit('content/page_title', 'Quản lý thiết bị');
         }
     },
