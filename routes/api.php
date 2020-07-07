@@ -107,10 +107,14 @@ Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVuOrKiThuat']], function 
 
 //CauHinhMonController
 Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVuOrKiThuat']], function () {
-    Route::post('cauhinhmon', 'Api\CauHinhMonController@hienThiDanhSachMon')
+    Route::post('cauhinhmon', 'Api\CauHinhMonController@danhSachCauHinhCoCHM')
+        ->name('api.cauhinhmon.danhSachCauHinhCoCHM');
+    Route::post('cauhinhmon/mon', 'Api\CauHinhMonController@hienThiDanhSachMon')
         ->name('api.cauhinhmon.hienThiDanhSachMon');
     Route::post('cauhinhmon/capnhat', 'Api\CauHinhMonController@monHocDuocTheoCauHinh')
         ->name('api.cauhinhmon.monHocDuocTheoCauHinh');
+    Route::post('cauhinhmon/kiemtra', 'Api\CauHinhMonController@kiemTra')
+        ->name('api.cauhinhmon.kiemTra');
 });
 //NgàyNghỉController --Giáo Vụ + Giáo Viên
 Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVuOrGiaoVien']], function () {
