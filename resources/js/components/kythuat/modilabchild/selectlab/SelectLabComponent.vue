@@ -30,10 +30,10 @@ export default {
         }
     },
     methods: {
-        toaLabel({ten_toa, dia_chi}) {
+        toaLabel({ ten_toa, dia_chi }) {
             return `${ten_toa} - ${dia_chi}`;
         },
-        tangLabel({ten_tang}) {
+        tangLabel({ ten_tang }) {
             return `${ten_tang}`;
         }
     },
@@ -42,19 +42,24 @@ export default {
             this.tang = "";
             if (!this.toa) {
                 this.$store.commit('tang/reset_arr_tang');
-                this.$emit('show_main_view', 0);
+                this.$emit('show_table_view', 0);
                 return false;
             }
             this.$store.dispatch('tang/get_tang', this.toa.ma_toa);
         },
-
         tang() {
             if (!this.tang) {
-                this.$emit('show_main_view', 0);
+                this.$emit('show_table_view', 0);
+                // this.$store.dispatch('toa/get_toa');
                 return false
             }
-            this.$emit('show_main_view', 1);
+            this.$emit('show_table_view', 1);
         },
+        arr_toa() {
+            if (this.arr_toa.length != 0) {
+                this.toa = this.arr_toa[0];
+            }
+        }
     }
 }
 

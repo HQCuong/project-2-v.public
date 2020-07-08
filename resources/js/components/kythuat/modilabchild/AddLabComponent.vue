@@ -8,23 +8,28 @@
             <template slot="noOptions">Chưa chọn tòa</template>
         </multiselect>
         <br>
+        <br>
+        <div class="form-group">
+            <label for="insertName">Tên phòng</label>
+            <input type="text" class="form-control" id="insertName" placeholder="Nhập tên phòng" v-model="ten_lab">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="insertSeats">Số chỗ ngồi</label>
+            <input type="number" class="form-control" id="insertSeats" placeholder="Nhập số chõ ngồi" v-model="so_cho_ngoi">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="insertCpts">Số máy</label>
+            <input type="number" class="form-control" id="insertCpts" placeholder="Nhập số máy" v-model="so_may">
+        </div>
+        <br>
         <label>Chọn cấu hình</label>
         <multiselect v-model="cau_hinh" :options="arr_cau_hinh" :close-on-select="true" :show-labels="true" placeholder="Chọn cấu hình" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false" :custom-label="labelCauHinh">
         </multiselect>
         <br>
-        <form>
-            <div class="form-group">
-                <label for="insertSeats">Số chỗ ngồi</label>
-                <input type="number" class="form-control" id="insertSeats" placeholder="Nhập số chõ ngồi" v-model="so_cho_ngoi">
-            </div>
-            <br>
-            <div class="form-group">
-                <label for="insertCpts">Số máy</label>
-                <input type="number" class="form-control" id="insertCpts" placeholder="Nhập số máy" v-model="so_may">
-            </div>
-            <br>
-            <button type="submit" class="btn btn-info">Submit</button>
-        </form>
+        <br>
+        <button type="submit" class="btn btn-info">Submit</button>
     </div>
 </template>
 <script>
@@ -54,6 +59,7 @@ export default {
             tang: '',
             toa: '',
             cau_hinh: '',
+            ten_lab: '',
             so_may: 20,
             so_cho_ngoi: 20
         }
@@ -89,6 +95,11 @@ export default {
             }
             this.$store.dispatch('tang/get_tang', this.toa.ma_toa);
         },
+        arr_toa() {
+            if (this.arr_toa.length != 0) {
+                this.toa = this.arr_toa[0];
+            }
+        }
     }
 }
 

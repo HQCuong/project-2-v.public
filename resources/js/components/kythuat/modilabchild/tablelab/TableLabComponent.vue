@@ -2,7 +2,6 @@
     <div class="card">
         <div class="card-header card-header-info">
             <h4 class="card-title">Danh sách các phòng</h4>
-            <!-- <p class="card-category">New employees on 15th September, 2016</p> -->
         </div>
         <div class="card-body table-responsive">
             <table class="table table-hover">
@@ -77,6 +76,11 @@ export default {
     data() {
         return {
 
+        }
+    },
+    computed: {
+        arr_toa() {
+            return this.$store.state.toa.arr_toa;
         }
     }
 }

@@ -17,9 +17,9 @@ import add_lab from './components/kythuat/modilabchild/AddLabComponent.vue';
 import modi_lab from './components/kythuat/modilabchild/ModiLabComponent.vue';
 
 import cau_hinh from './components/kythuat/CauHinhComponent.vue';
-import add_ch from './components/kythuat/CauhinhChild/AddCauHinhComponent.vue';
-import modi_ch from './components/kythuat/CauhinhChild/ModiCauHinhComponent.vue';
-import ch_mon from './components/kythuat/CauhinhChild/CauHinhMonComponent.vue';
+import list_ch from './components/kythuat/cauhinhchild/ListCauHinhComponent.vue';
+import add_ch from './components/kythuat/cauhinhchild/AddCauHinhComponent.vue';
+import modi_ch from './components/kythuat/cauhinhchild/ModiCauHinhComponent.vue';
 
 import thiet_bi from './components/kythuat/ThietBiComponent.vue';
 import list_thiet_bi from './components/kythuat/thietbichild/ListThietBiComponent.vue';
@@ -75,9 +75,9 @@ export default [
         path: '/quan_ly_cau_hinh',
         component: cau_hinh,
         children: [
+            { path: 'list_cau_hinh', component: list_ch },
             { path: 'them_cau_hinh', component: add_ch },
-            { path: 'modi_cau_hinh', component: modi_ch },
-            { path: 'cau_hinh_mon', component: ch_mon }
+            { path: 'modi_cau_hinh', component: modi_ch }
         ],
         beforeEnter: (to, from, next) => {
             if (getCookie('level') == 1 || getCookie('level') == 2) {
@@ -124,8 +124,8 @@ export default [
         path: '/quan_ly_lich',
         component: quan_ly_lich,
         children: [
-            {path: 'add_dayoff', component: dayoff},
-            {path: 'add_work', component: add_work}
+            { path: 'add_dayoff', component: dayoff },
+            { path: 'add_work', component: add_work }
         ],
         beforeEnter: (to, from, next) => {
             if (getCookie('level') == 1) {

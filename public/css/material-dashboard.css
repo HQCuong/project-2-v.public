@@ -13631,7 +13631,7 @@ select.form-control {
 }
 
 .form-group {
-    padding-bottom: 10px;
+    padding-bottom: 20px;
     position: relative;
     margin: 8px 0 0;
 }
@@ -17724,7 +17724,7 @@ html[dir="rtl"] .form-check .form-check-sign .check:before {
 }
 
 .card .card-body .form-group {
-    margin: 8px 0 0;
+    margin: 10px 0 5px 0;
 }
 
 .card .card-header {

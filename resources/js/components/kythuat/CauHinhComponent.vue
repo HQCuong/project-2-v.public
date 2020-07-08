@@ -29,9 +29,7 @@ export default {
     },
     data() {
         return {
-            view_add_ch: true,
-            view_modi_ch: false,
-            view_ch_mon: false
+
         }
     },
     methods: {

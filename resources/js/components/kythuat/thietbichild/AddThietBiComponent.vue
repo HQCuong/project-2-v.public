@@ -14,19 +14,18 @@
             <template slot="noOptions">Chưa chọn tầng</template>
         </multiselect>
         <br>
-        <form>
-            <div class="form-group">
-                <label for="insertDevice">Thiết bị</label>
-                <input type="text" class="form-control" id="insertDevice" placeholder="Nhập tên thiết bị">
-            </div>
-            <br>
-            <div class="form-group">
-                <label for="insertNumber">Số lượng</label>
-                <input type="number" class="form-control" id="insertNumber" placeholder="Nhập số lượng">
-            </div>
-            <br>
-            <button type="submit" class="btn btn-info">Submit</button>
-        </form>
+        <br>
+        <div class="form-group">
+            <label for="insertDevice">Thiết bị</label>
+            <input type="text" class="form-control" id="insertDevice" placeholder="Nhập tên thiết bị">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="insertNumber">Số lượng</label>
+            <input type="number" class="form-control" id="insertNumber" placeholder="Nhập số lượng">
+        </div>
+        <br>
+        <button type="submit" class="btn btn-info">Submit</button>
     </div>
 </template>
 <script>
@@ -35,7 +34,7 @@ import mainform from './formaddthietbi/FormAddThietBiComponent.vue';
 
 export default {
     created() {
-      this.$store.dispatch('toa/get_toa');
+        this.$store.dispatch('toa/get_toa');
     },
     mounted() {
         this.$store.commit('content/page_title', 'Thêm thiết bị');
@@ -56,47 +55,47 @@ export default {
     },
     data() {
         return {
-          toa: '',
-          tang: '',
-          lab: '',
-          arr_lab: []
+            toa: '',
+            tang: '',
+            lab: '',
+            arr_lab: []
         }
     },
     computed: {
-      arr_toa() {
-        return this.$store.state.toa.arr_toa;
-      },
-      arr_tang() {
-        return this.$store.state.tang.arr_tang;
-      }
+        arr_toa() {
+            return this.$store.state.toa.arr_toa;
+        },
+        arr_tang() {
+            return this.$store.state.tang.arr_tang;
+        }
     },
     methods: {
-      labelToa({ten_toa, dia_chi}) {
-        return `${ten_toa} - ${dia_chi}`;
-      },
-      labelTang({ten_tang}) {
-        return `${ten_tang}`;
-      }
+        labelToa({ ten_toa, dia_chi }) {
+            return `${ten_toa} - ${dia_chi}`;
+        },
+        labelTang({ ten_tang }) {
+            return `${ten_tang}`;
+        }
     },
     watch: {
-      toa() {
-        this.tang = '';
-        this.lab = '';
-        if (!this.toa) {
-          this.$store.commit('tang/reset_arr_tang');
-          this.arr_toa = [];
-          return false;
+        toa() {
+            this.tang = '';
+            this.lab = '';
+            if (!this.toa) {
+                this.$store.commit('tang/reset_arr_tang');
+                this.arr_toa = [];
+                return false;
+            }
+            this.$store.dispatch('tang/get_tang', this.toa.ma_toa);
+        },
+        tang() {
+            this.lab = '';
+            if (!this.tang) {
+                this.arr_toa = [];
+                return false;
+            }
+            this.arr_lab = ['LAB 1', 'LAB 2'];
         }
-        this.$store.dispatch('tang/get_tang', this.toa.ma_toa);
-      },
-      tang() {
-        this.lab = '';
-        if (!this.tang) {
-          this.arr_toa = [];
-          return false;
-        }
-        this.arr_lab = ['LAB 1', 'LAB 2'];
-      }
     },
     components: {
         mainselect,

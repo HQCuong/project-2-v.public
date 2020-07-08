@@ -11,9 +11,9 @@
                     <th>Chức vụ</th>
                     <th>Tùy chỉnh</th>
                 </thead>
-                <tbody>
-                    <tr v-if="arr_user && index < 5" v-for="(user ,index) in arr_user">
-                        <td>{{user.ho_ten ? user.ho_ten : 'khong xac dinh'}}</td>
+                <tbody v-if="arr_user">
+                    <tr  v-if="index < 5" v-for="(user ,index) in arr_user" :key="user.ma_nguoi_dung">
+                        <td>{{user.ho_ten ? user.ho_ten : 'demo user'}}</td>
                         <td>{{user.email}}</td>
                         <td>{{user.ten_cap_do}}</td>
                         <td>

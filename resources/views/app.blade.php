@@ -54,8 +54,7 @@
     <script src="{{ asset('/js/app.js') }}"></script>
 
     <!-- Plugin files -->
-    <!-- Scroll bar -->
-    <script src="{{ asset('js/plugin/perfect-scrollbar.jquery.min.js') }}"></script>
+    <!-- Empty -->
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="{{ asset('/js/material-dashboard.min.js') }}"></script>
 </body>

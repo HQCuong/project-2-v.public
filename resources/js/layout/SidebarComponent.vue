@@ -1,8 +1,10 @@
 <template>
     <div class="sidebar" data-color="azure" data-background-color="white" data-image="./img/sidebar-1.jpg">
-        <div class="logo"><router-link to="/home" class="simple-text logo-normal">
+        <div class="logo">
+            <router-link to="/home" class="simple-text logo-normal">
                 HOME
-            </router-link></div>
+            </router-link>
+        </div>
         <div class="sidebar-wrapper">
             <ul class="nav navbar-nav nav-mobile-menu">
                 <li class="nav-item dropdown user-nav">
@@ -101,8 +103,8 @@ export default {
     },
     watch: {
         $route(to, from) {
-            $('.main-panel').scrollTop(0);
-
+            $(window).scrollTop(0);
+            
             $('.nav-item').removeClass('active');
             var pathname = window.location.pathname;
             var pathsidebar = '/project-2/public/' + pathname.split('/')[3];
