@@ -12,7 +12,7 @@ class NguoiDung extends Migration {
     private $mat_khau  = ['1', '1', '1', '1', '1'];
     private $email     = ['a@gmail.com', 'b@gmail.com', 'c@gmail.com', 'd@gmail.com', 'kithuat@gmail.com'];
     private $sdt       = ['0', '1', '2', '4', '6'];
-    private $ma_cap_do = ['1', '2', '1', '1', '3'];
+    private $ma_cap_do = ['1', '2', '1', '1', '2'];
     private $key       = ['0', '8', '1', '4', '3'];
     public function up() {
         Schema::create($this->name, function (Blueprint $table) {
