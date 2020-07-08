@@ -37,10 +37,10 @@ export default {
         }
     },
     methods: {
-        toaLabel({ten_toa, dia_chi}) {
+        toaLabel({ ten_toa, dia_chi }) {
             return `${ten_toa} - ${dia_chi}`;
         },
-        tangLabel({ten_tang}) {
+        tangLabel({ ten_tang }) {
             return `${ten_tang}`;
         }
     },
@@ -73,6 +73,7 @@ export default {
                 this.$emit('show_lab_info', 0);
             } else if (this.toa && this.tang) {
                 this.$emit('show_lab_info', 1);
+                this.$store.dispatch('lab/get_lich_lab');
             } else {
                 this.$emit('show_lab_info', 0);
             }

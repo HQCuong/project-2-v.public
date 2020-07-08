@@ -13417,9 +13417,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  created: function created() {
-    this.$store.dispatch('lab/get_lich_lab');
-  },
   computed: {
     events: function events() {
       return this.$store.state.lab.lich_lab;
@@ -13445,14 +13442,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     modi_calendar_button: function modi_calendar_button() {
-      if ($(window).width() < 960) {
+      if ($(window).width() < 770) {
         return 'listWeek';
       } else {
         return 'dayGridMonth, listMonth';
       }
     },
     modi_calendar_view: function modi_calendar_view() {
-      if ($(window).width() < 960) {
+      if ($(window).width() < 770) {
         return "listWeek";
       } else {
         return "dayGridMonth";
@@ -13598,6 +13595,7 @@ __webpack_require__.r(__webpack_exports__);
         this.$emit('show_lab_info', 0);
       } else if (this.toa && this.tang) {
         this.$emit('show_lab_info', 1);
+        this.$store.dispatch('lab/get_lich_lab');
       } else {
         this.$emit('show_lab_info', 0);
       }
