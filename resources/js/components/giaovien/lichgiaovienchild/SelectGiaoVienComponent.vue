@@ -15,6 +15,11 @@
 </template>
 <script>
 export default {
+    created() {
+        if(this.$store.state.user.is_giao_vien) {
+            this.arr_lop = ['BKD', 'BIT'];
+        }
+    },
     data() {
         return {
             giao_vien: '',

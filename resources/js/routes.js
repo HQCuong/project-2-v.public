@@ -14,6 +14,7 @@ import thong_tin_lab from './components/general/ShowLabComponent.vue';
 import lab from './components/kythuat/QuanLyLabComponent.vue';
 import list_lab from './components/kythuat/modilabchild/ListLabComponent.vue';
 import add_lab from './components/kythuat/modilabchild/AddLabComponent.vue';
+import modi_lab from './components/kythuat/modilabchild/ModiLabComponent.vue';
 
 import cau_hinh from './components/kythuat/CauHinhComponent.vue';
 import add_ch from './components/kythuat/CauhinhChild/AddCauHinhComponent.vue';
@@ -59,7 +60,8 @@ export default [
         component: lab,
         children: [
             { path: 'danh_sach_lab', component: list_lab },
-            { path: 'add_lab', component: add_lab }
+            { path: 'add_lab', component: add_lab },
+            { path: 'modi_lab', component: modi_lab }
         ],
         beforeEnter: (to, from, next) => {
             if (getCookie('level') == 1 || getCookie('level') == 2) {

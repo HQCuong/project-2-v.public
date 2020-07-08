@@ -9,7 +9,7 @@
                         <br>
                         <maininfo v-if="is_detail"></maininfo>
                         <br>
-                        <lichgv v-if="calendar"></lichgv>
+                        <lichgv v-if="calendar || is_giao_vien"></lichgv>
                     </div>
                 </div>
             </div>
@@ -31,6 +31,11 @@ export default {
         return {
             calendar: false,
             is_detail: false
+        }
+    },
+    computed: {
+        is_giao_vien() {
+            return this.$store.state.user.is_giao_vien;
         }
     },
     watch: {

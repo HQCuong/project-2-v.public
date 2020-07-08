@@ -8,6 +8,11 @@
             <template slot="noOptions">Chưa chọn tòa</template>
         </multiselect>
         <br>
+        <label>Chọn lab</label>
+        <multiselect v-model="lab" :options="arr_lab" :close-on-select="true" :show-labels="true" placeholder="Phòng" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false">
+            <template slot="noOptions">Chưa chọn tầng</template>
+        </multiselect>
+        <br>
         <label>Chọn cấu hình</label>
         <multiselect v-model="cau_hinh" :options="arr_cau_hinh" :close-on-select="true" :show-labels="true" placeholder="Chọn cấu hình" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false" :custom-label="labelCauHinh">
         </multiselect>
@@ -18,6 +23,7 @@
                 <label for="insertName">Tên phòng</label>
                 <input type="number" class="form-control" id="insertName" placeholder="Nhập tên phòng" v-model="ten_lab">
             </div>
+            <br>
             <div class="form-group">
                 <label for="insertSeats">Số chỗ ngồi</label>
                 <input type="number" class="form-control" id="insertSeats" placeholder="Nhập số chõ ngồi" v-model="so_cho_ngoi">
@@ -54,8 +60,10 @@ export default {
             tang: '',
             toa: '',
             ten_lab: '',
+            lab: '',
+            arr_lab: [],
             cau_hinh: '',
-            so_cho_ngoi: 20
+            so_cho_ngoi: 0
         }
     },
     computed: {
@@ -83,12 +91,34 @@ export default {
     watch: {
         toa() {
             this.tang = "";
+            this.ten_lab = "";
+            this.so_cho_ngoi = "";
+            this.cau_hinh = "";
             if (!this.toa) {
                 this.$store.commit('tang/reset_arr_tang');
                 return false;
             }
             this.$store.dispatch('tang/get_tang', this.toa.ma_toa);
         },
+
+        tang() {
+            this.lab = "";
+            if (!this.tang) {
+                this.arr_lab = [];
+                return false
+            }
+            this.arr_lab = ['lab 1', 'lab 2', 'lab 3'];
+        },
+
+        lab() {
+            if (!this.lab) {
+                this.lab = "";
+            } else if (this.toa && this.tang) {
+                this.ten_lab = "201";
+                this.so_cho_ngoi = 20;
+                this.cau_hinh = this.arr_cau_hinh[0];
+            } 
+        }
     }
 }
 

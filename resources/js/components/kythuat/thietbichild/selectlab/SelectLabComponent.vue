@@ -47,10 +47,10 @@ export default {
         ma_toa() {
             this.ma_tang = "";
             this.ma_lab = "";
-            this.$emit('show_main_view', 0);
+            this.$emit('show_table_device', 0);
             if (!this.ma_toa) {
                 this.arr_tang = [];
-                this.$emit('show_main_view', 0);
+                this.$emit('show_table_device', 0);
                 return false;
             }
             this.arr_tang = ['tang 2', 'tang 5'];
@@ -58,10 +58,10 @@ export default {
 
         ma_tang() {
             this.ma_lab = "";
-            this.$emit('show_main_view', 0);
+            this.$emit('show_table_device', 0);
             if (!this.ma_tang) {
                 this.arr_lab = [];
-                this.$emit('show_main_view', 0);
+                this.$emit('show_table_device', 0);
                 return false
             }
             this.arr_lab = ['lab 1', 'lab 2', 'lab 3'];
@@ -69,11 +69,11 @@ export default {
 
         ma_lab() {
             if (!this.ma_lab) {
-                this.$emit('show_main_view', 0);
+                this.$emit('show_table_device', 0);
             } else if (this.ma_toa && this.ma_tang) {
-                this.$emit('show_main_view', 1);
+                this.$emit('show_table_device', 1);
             } else {
-                this.$emit('show_main_view', 0);
+                this.$emit('show_table_device', 0);
             }
         }
 

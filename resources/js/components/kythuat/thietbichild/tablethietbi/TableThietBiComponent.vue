@@ -7,10 +7,10 @@
         <div class="card-body table-responsive">
             <table class="table table-hover">
                 <thead class="text-info">
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Salary</th>
-                    <th>Country</th>
+                    <th>Tên thiết bị</th>
+                    <th>Loại</th>
+                    <th>Tình trạng</th>
+                    <th>Tùy chỉnh</th>
                 </thead>
                 <tbody>
                     <tr>
@@ -24,18 +24,6 @@
                         <td>Minerva Hooper</td>
                         <td>$23,789</td>
                         <td>Curaçao</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Sage Rodriguez</td>
-                        <td>$56,142</td>
-                        <td>Netherlands</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Philip Chaney</td>
-                        <td>$38,735</td>
-                        <td>Korea, South</td>
                     </tr>
                 </tbody>
             </table>

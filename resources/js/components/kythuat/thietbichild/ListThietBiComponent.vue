@@ -1,6 +1,6 @@
 <template>
     <div>
-    	<selectlab @show_main_view="show_main_view"></selectlab>
+    	<selectlab @show_table_device="show_table_device"></selectlab>
     	<br>
         <tablethietbi v-if="show_table_tbi"></tablethietbi>
     </div>
@@ -20,7 +20,7 @@ export default {
         }
     },
     methods: {
-    	show_main_view(show) {
+    	show_table_device(show) {
     		if (show == 0) {
     			this.show_table_tbi = false;
     		} else {

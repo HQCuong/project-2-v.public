@@ -31,6 +31,11 @@
                                     power_settings_new
                                 </i>
                             </button>
+                            <button class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Tùy chỉnh thông tin">
+                                <i class="material-icons">
+                                    settings
+                                </i>
+                            </button>
                         </td>
                     </tr>
                     <tr>
@@ -44,9 +49,14 @@
                         </td>
                         <td>Hoạt động</td>
                         <td>
-                            <button class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Thay đổi tình trạng">
+                            <button class="btn btn-info" title="Thay đổi tình trạng">
                                 <i class="material-icons">
                                     power_settings_new
+                                </i>
+                            </button>
+                            <button class="btn btn-info" title="tùy chỉnh thông tin">
+                                <i class="material-icons">
+                                    settings
                                 </i>
                             </button>
                         </td>
@@ -59,7 +69,6 @@
 <script>
 export default {
     mounted() {
-        $('.btn').tooltip();
     },
     data() {
         return {

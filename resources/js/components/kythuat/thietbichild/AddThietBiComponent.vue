@@ -1,8 +1,8 @@
 <template>
 	<div>
-		<mainselect @show_main_view="show_main_view"></mainselect>
+		<mainselect></mainselect>
     <br>
-		<mainform v-if="show_form_add_device"></mainform>
+		<mainform></mainform>
 	</div>
 </template>
 
@@ -16,17 +16,10 @@ export default {
   },
   data () {
     return {
-      show_form_add_device: false
     }
   },
   methods: {
-    show_main_view(show) {
-      if (show == 0) {
-        this.show_form_add_device = false;
-      } else {
-        this.show_form_add_device = true;
-      }
-    }
+
   },
   components: {
   	mainselect,

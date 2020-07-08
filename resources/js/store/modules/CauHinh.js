@@ -17,7 +17,6 @@ export default {
     		  key: getCookie('key'),
     		  ma_loai: 1
     		}).then((response) => {
-    			console.log(response);
     		 	state.arr_cau_hinh = response.data.data;
     		}).catch((error) => {
     		  console.error(error);
