@@ -100,6 +100,10 @@ class ResponseMau {
     const ERROR_CAU_HINH_UPDATE        = 'Cấu hình bạn thêm hiện đã tồn tại';
     const ERROR_GIAO_VIEN_API          = 'Lấy thông tin Giáo Viên thất bại !';
 
+    //Cau Hinh Mon
+
+    const ERROR_CAU_HINH_MON = 'Chưa có môn học được cho cấu hình bạn chọn';
+
     //Ngay Nghi
 
     const ERROR_NGAY_NGHI_THEM = 'Ngày nghỉ đã tồn tại hoặc không hợp lệ !';

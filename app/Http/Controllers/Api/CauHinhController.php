@@ -23,7 +23,8 @@ class CauHinhController extends Controller {
                 }
             })->get();
             return ResponseMau::Store([
-                'data' => CauHinhResource::collection($cau_hinh),
+                'string' => ResponseMau::SUCCESS_GET,
+                'data'   => CauHinhResource::collection($cau_hinh),
             ]);
         } catch (Exception $e) {
             return $this->endCatchValue(R1esponseMau::ERROR_GET);

@@ -1,6 +1,78 @@
 [
   {
     "type": "POST",
+    "url": "ca",
+    "title": "1.1. Hiển thị tất cả các Ca",
+    "version": "0.1.0",
+    "name": "Hiện_thị_thông_tin_Ca",
+    "group": "Ca",
+    "description": "<p>Dùng để hiện thị thông tin Ca<br></p> <h1 class=\"display-1\">-Lưu ý: </h1>  <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">      <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button>      <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button>      <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button>  </div><br>     +Cần lấy thông tin ca nào truyền thông tin mã ca đó<br>     +Nếu lấy tất cả thì không truyền gì cả<br>",
+    "sampleRequest": [
+      {
+        "url": "ca"
+      }
+    ],
+    "examples": [
+      {
+        "title": "Truy Vấn Mẫu:",
+        "content": "{\n    \"key\" :\"1\",\n    \"ma_ca\" : \"1\"\n}",
+        "type": "php"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "key",
+            "description": "<p>Mã Key của Người Dùng.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "ma_ca",
+            "description": "<p>mã của Loại.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "data",
+            "description": "<p>Dữ liệu của Tầng.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Thành Công:",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"message\": \"Lấy dữ liệu thành công\",\n    \"data\": [\n        {\n            \"ma_ca\": 1,\n            \"gio_bat_dau\": \"08:00:00\",\n            \"gio_ket_thuc\": \"17:30:00\"\n        }\n    ]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Không Thành Công:",
+          "content": "    HTTP/1.1 200 OK\n+ Có nhiều dạng trả về không thành công như key sai,lỗi truy vấn sql\n+ Tất cả các lỗi đều có \"message\" kèm theo như ví dụ bên dưới\n{\n    \"success\": false,\n    \"message\": {\n        \"ma_ca\": \"Ca không tồn tại\"\n    },\n    \"data\": []\n}\n{\n    \"success\": false,\n    \"message\": \"Bạn không có quyền truy cập\",\n    \"data\": []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "duong_doc/ca.php",
+    "groupTitle": "Ca"
+  },
+  {
+    "type": "POST",
     "url": "cauhinh/sua",
     "title": "1.3 . Cập Nhật Thông Tin Của Một Cấu Hình",
     "version": "0.1.0",
@@ -1077,6 +1149,222 @@
   },
   {
     "type": "POST",
+    "url": "monhoc/clone",
+    "title": "1.2. Clone Mon Từ DTB VỀ Local",
+    "version": "0.1.0",
+    "name": "CLone",
+    "group": "Môn_Học",
+    "description": "<p>Sử dụng để clone môn học<br></p> <h1 class=\"display-1\">-Lưu ý: </h1>  <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">      <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button>      <!--      <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button>      <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button>      -->  </div><br>     +Chỉ chạy một lần<br>     +Clone môn dựa vào mã môn nếu không có sẽ được tạo ra<br>",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:8080/project-2/public/api/monhoc/clone"
+      }
+    ],
+    "examples": [
+      {
+        "title": "Truy Vấn Mẫu:",
+        "content": "{\n    \"key\": \"key\",\n}",
+        "type": "php"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "key",
+            "description": "<p>Mã Key của người dùng.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Báo kết quả xử lý.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "data",
+            "description": "<p>Dữ liệu sau khi xử lý.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Thành Công:",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"message\": \"Đã tạo mới 2 bản ghi và Cập nhật 1 bản ghi\",\n    \"data\": {\n        \"create\": [\n            {\n                \"ten_mon_tieng_anh\": \"Digital Businesss and E-Commerce Management\",\n                \"ten_mon_tieng_viet\": \"Quản trị thương mại điện tử\",\n                \"so_gio\": 45,\n                \"ma_kieu_thi\": 3,\n                \"ma_mon_hoc\": \"0\"\n            },\n            {\n                \"ten_mon_tieng_anh\": \"Graduation Dissertation\",\n                \"ten_mon_tieng_viet\": \"Luận văn tốt nghiệp\",\n                \"so_gio\": 100,\n                \"ma_kieu_thi\": 3,\n                \"ma_mon_hoc\": \"0\"\n            }\n        ],\n        \"update\": [\n            {\n                \"ma_mon_hoc\": \"BIT_LAW\",\n                \"changer\": {\n                    \"ten_mon_tieng_anh\": \"Business Law\",\n                    \"ten_mon_tieng_viet\": \"Luật kinh tế\"\n                }\n            }\n        ]\n    }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Không Thành Công:",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": false,\n    \"message\": \"Bạn không có quyền truy cập\",\n    \"data\": []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "duong_doc/mon_hoc.php",
+    "groupTitle": "Môn_Học"
+  },
+  {
+    "type": "POST",
+    "url": "monhoc",
+    "title": "1.1. Hiển thị tất cả các Môn Học",
+    "version": "0.1.0",
+    "name": "Hiện_thị_thông_tin_Môn_Học",
+    "group": "Môn_Học",
+    "description": "<p>Dùng để hiện thị thông tin Môn Học<br></p> <h1 class=\"display-1\">-Lưu ý: </h1>  <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">      <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button>      <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button>      <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button>  </div><br>     +Cần lấy thông tin ca nào truyền thông tin mã Môn Học đó<br>     +Nếu lấy tất cả thì không truyền gì cả<br>",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:8080/project-2/public/api/monhoc"
+      }
+    ],
+    "examples": [
+      {
+        "title": "Truy Vấn Mẫu:",
+        "content": "{\n    \"key\" :\"keyapi\"\n}",
+        "type": "php"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "key",
+            "description": "<p>Mã Key của Người Dùng.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "ma_mon_hoc",
+            "description": "<p>mã của Loại.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "data",
+            "description": "<p>Dữ liệu của Tầng.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Thành Công:",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"message\": \"Lấy dữ liệu thành công\",\n    \"data\": [\n        {\n            \"ma_mon_hoc\": \"BIT_ACC\",\n            \"ten_mon_tieng_viet\": \"Kế toán doanh nghiệp\",\n            \"ten_mon_tieng_anh\": \"Business Accounting\"\n        },\n        {\n            \"ma_mon_hoc\": \"BIT_AP\",\n            \"ten_mon_tieng_viet\": \"Lập trình nâng cao\",\n            \"ten_mon_tieng_anh\": \"Advanced Programming\"\n        }\n    ]\n}\n\n{\n    \"success\": true,\n    \"message\": \"Lấy dữ liệu thành công\",\n    \"data\": {\n        \"ma_mon_hoc\": \"BIT_ACC\",\n        \"ten_mon_tieng_viet\": \"Kế toán doanh nghiệp\",\n        \"ten_mon_tieng_anh\": \"Business Accounting\",\n        \"so_gio\": \"45\",\n        \"ma_kieu_thi\": 1\n    }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Không Thành Công:",
+          "content": "    HTTP/1.1 200 OK\n+ Có nhiều dạng trả về không thành công như key sai,lỗi truy vấn sql\n+ Tất cả các lỗi đều có \"message\" kèm theo như ví dụ bên dưới\n{\n    \"success\": false,\n    \"message\": {\n        \"ma_mon_hoc\": \"Môn học không tồn tại\"\n    },\n    \"data\": []\n}\n{\n    \"success\": false,\n    \"message\": \"Bạn không có quyền truy cập\",\n    \"data\": []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "duong_doc/mon_hoc.php",
+    "groupTitle": "Môn_Học"
+  },
+  {
+    "type": "POST",
+    "url": "monhoc/kiemtra",
+    "title": "1.3. Kiểm tra thông tin hợp lệ",
+    "version": "0.1.0",
+    "name": "Kiểm_Tra",
+    "group": "Môn_Học",
+    "description": "<p>Dùng để Kiểm tra thông tin hợp lệ<br></p> <h1 class=\"display-1\">-Lưu ý: </h1>  <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">      <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button>      <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button>      <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button>  </div><br>         +Có thể truyền 1 hay nhiều yếu tố<br>         +Sẽ chỉ trả về lỗi của yếu tố đầu tiên<br>         +Nếu trả về hợp lệ là tất cả đều hợp lệ<br>",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:8080/project-2/public/api/cauhinh/kiemtra"
+      }
+    ],
+    "examples": [
+      {
+        "title": "Truy Vấn Mẫu:",
+        "content": "{\n    \"key\" :\"1\",\n    \"ma_mon_hoc\": \"BIT_AClC\"\n}",
+        "type": "php"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "key",
+            "description": "<p>Mã Key của Người Dùng.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "ma_mon_hoc",
+            "description": "<p>Ma mon. .</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "data",
+            "description": "<p>Kết quả.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Thành Công:",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"message\": \"\",\n    \"data\": []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Không Thành Công:",
+          "content": "    HTTP/1.1 200 OK\n+ Có nhiều dạng trả về không thành công như key sai,lỗi truy vấn sql\n+ Tất cả các lỗi đều có \"message\" kèm theo như ví dụ bên dưới\n{\n    \"success\": false,\n    \"message\": {\n        \"ma_mon_hoc\": \"Môn học không tồn tại\"\n    },\n    \"data\": []\n}\n{\n    \"success\": false,\n    \"message\": \"Bạn không có quyền truy cập\",\n    \"data\": []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "duong_doc/mon_hoc.php",
+    "groupTitle": "Môn_Học"
+  },
+  {
+    "type": "POST",
     "url": "nguoidung/clone",
     "title": "2.1. Clone User Từ DTB VỀ Local",
     "version": "0.1.0",
@@ -1971,6 +2259,464 @@
     },
     "filename": "duong_doc/nguoi_dung.php",
     "groupTitle": "NguoiDung"
+  },
+  {
+    "type": "POST",
+    "url": "ngaynghi/kiemtra",
+    "title": "1.5. Kiểm tra thông tin hợp lệ",
+    "version": "0.1.0",
+    "name": "Kiểm_Tra",
+    "group": "Ngày_Nghỉ",
+    "description": "<p>Dùng để Kiểm tra thông tin hợp lệ<br></p> <h1 class=\"display-1\">-Lưu ý: </h1>  <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">      <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button>      <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button>      <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button>  </div><br>         +Có thể truyền 1 hay nhiều yếu tố<br>         +Sẽ chỉ trả về lỗi của yếu tố đầu tiên<br>         +Nếu trả về hợp lệ là tất cả đều hợp lệ<br>",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:8080/project-2/public/api/cauhinh/kiemtra"
+      }
+    ],
+    "examples": [
+      {
+        "title": "Truy Vấn Mẫu:",
+        "content": "{\n    \"key\" :\"1\",\n    \"ngay_cu\" : \"01-07-202đ0\",\n    \"ma_giao_vien_cu\" : \"1d0\",\n    \"ma_ca_cu\" : \"d3\",\n    \"tinh_trang\" :\"2d\"\n}",
+        "type": "php"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "key",
+            "description": "<p>Mã Key của Người Dùng.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "ngay_cu",
+            "description": "<p>Ngày cũ.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "ma_giao_vien_cu",
+            "description": "<p>Giáo Viên cũ.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "ngay",
+            "description": "<p>Ngày mới.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "ma_ca",
+            "description": "<p>Ca mới.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "tinh_trang",
+            "description": "<p>Tình trạng mới.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "ma_giao_vien",
+            "description": "<p>Giáo Viên Mới. .</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "data",
+            "description": "<p>Kết quả.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Thành Công:",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"message\": \"\",\n    \"data\": []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Không Thành Công:",
+          "content": "    HTTP/1.1 200 OK\n+ Có nhiều dạng trả về không thành công như key sai,lỗi truy vấn sql\n+ Tất cả các lỗi đều có \"message\" kèm theo như ví dụ bên dưới\n{\n    \"success\": false,\n    \"message\": {\n        \"ngay_cu\": \"Ngày cũ không hợp lệ\",\n        \"ma_ca_cu\": \"Ca cũ không tồn tại\",\n        \"tinh_trang\": \"Tình trạng không hợp lệ\"\n    },\n    \"data\": []\n}\n{\n    \"success\": false,\n    \"message\": \"Bạn không có quyền truy cập\",\n    \"data\": []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "duong_doc/ngay_nghi.php",
+    "groupTitle": "Ngày_Nghỉ"
+  },
+  {
+    "type": "POST",
+    "url": "ngaynghi/sua",
+    "title": "1.4. Sửa Ngày Nghỉ",
+    "version": "0.1.0",
+    "name": "Sửa_Ngày_Nghỉ",
+    "group": "Ngày_Nghỉ",
+    "description": "<p>Dùng để Sửa Ngày Nghỉ Mới<br></p> <h1 class=\"display-1\">-Lưu ý: </h1> <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\"> <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button> <!-- <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button> --> <!-- <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button> --> </div><br> +Cần truyền đầy đủ các dữ liệu cũ<br> +Hiện chưa hỗ trợ cập nhật tình trạng khi tình trang = 2<br>",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:8080/project-2/public/api/ngaynghi/them"
+      }
+    ],
+    "examples": [
+      {
+        "title": "Truy Vấn Mẫu:",
+        "content": "{\n    \"key\" :\"1\",\n    \"ngay_cu\" : \"01-07-2020\",\n    \"ma_giao_vien_cu\" : \"10\",\n    \"ma_ca_cu\" : \"3\",\n    \"tinh_trang\" :\"2\"\n}",
+        "type": "php"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "key",
+            "description": "<p>Mã Key của Người Dùng.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "ngay_cu",
+            "description": "<p>Ngày cũ.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "ma_giao_vien_cu",
+            "description": "<p>Giáo Viên cũ.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "ngay",
+            "description": "<p>Ngày mới.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "ma_ca",
+            "description": "<p>Ca mới.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "tinh_trang",
+            "description": "<p>Tình trạng mới.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "ma_giao_vien",
+            "description": "<p>Giáo Viên Mới.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "data",
+            "description": "<p>Dữ liệu Môn.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Thành Công:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"message\": \"Cập nhật thành công\",\n    \"data\": []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Không Thành Công:",
+          "content": "HTTP/1.1 200 OK\n+ Có nhiều dạng trả về không thành công như key sai,lỗi truy vấn sql\n+ Tất cả các lỗi đều có \"message\" kèm theo như ví dụ bên dưới\n{\n    \"success\": false,\n    \"message\": {\n        \"ngay\": \"Ngày không hợp lệ (ngày/tháng/năm)\"\n    },\n    \"data\": []\n}\n{\n    \"success\": false,\n    \"message\": \"Bạn không có quyền truy cập\",\n    \"data\": []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "duong_doc/ngay_nghi.php",
+    "groupTitle": "Ngày_Nghỉ"
+  },
+  {
+    "type": "POST",
+    "url": "ngaynghi/them",
+    "title": "1.3. Thêm Ngày Nghỉ",
+    "version": "0.1.0",
+    "name": "Thêm_Ngày_Nghỉ",
+    "group": "Ngày_Nghỉ",
+    "description": "<p>Dùng để Thêm Ngày Nghỉ Mới<br></p> <h1 class=\"display-1\">-Lưu ý: </h1> <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\"> <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button> <!-- <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button> --> <!-- <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button> --> </div><br> +Có thể truyền mảng ma_giao_vien với tất cả những giáo viên này nghỉ cũng ngày cùng ghi chú.<br> +Truyền thường thì chỉ giáo viên đó.<br> +Có tình trạng sẽ lấy tình trạng nếu không auto tinh_trang = 1. <br> +Có ghi_chu sẽ lấy ghi_chu nếu không auto ghi_chu = null. <br> +Hiện chưa kiểm tra logic bị thêm trùng mà chỉ sử dụng khóa.<br>",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:8080/project-2/public/api/ngaynghi/them"
+      }
+    ],
+    "examples": [
+      {
+        "title": "Truy Vấn Mẫu:",
+        "content": "{\n    \"key\" :\"1\",\n    \"ma_giao_vien\" : [\"10\",\"15\",\"20\",\"25\"],\n    \"ngay\" : \"10/07/2020\",\n    \"ghi_chu\":\"Đi chơi\",\n    \"ma_ca\" : \"1\"\n}",
+        "type": "php"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "key",
+            "description": "<p>Mã Key của Người Dùng.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "ma_cau_hinh",
+            "description": "<p>Mã cấu hình.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "ma_mon_hoc",
+            "description": "<p>Là mã môn truyền dạng mảng nếu truyền thường chỉ thu một môn.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "data",
+            "description": "<p>Dữ liệu Môn.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Thành Công:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"message\": \"Thêm ngày nghỉ thành công\",\n    \"data\": []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Không Thành Công:",
+          "content": "HTTP/1.1 200 OK\n+ Có nhiều dạng trả về không thành công như key sai,lỗi truy vấn sql\n+ Tất cả các lỗi đều có \"message\" kèm theo như ví dụ bên dưới\n{\n    \"success\": false,\n    \"message\": {\n        \"ngay\": \"Ngày không hợp lệ (ngày/tháng/năm)\"\n    },\n    \"data\": []\n}\n{\n    \"success\": false,\n    \"message\": \"Bạn không có quyền truy cập\",\n    \"data\": []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "duong_doc/ngay_nghi.php",
+    "groupTitle": "Ngày_Nghỉ"
+  },
+  {
+    "type": "POST",
+    "url": "ngaynghi/giaovien",
+    "title": "1.2. Thống kê ngày nghỉ",
+    "version": "0.1.0",
+    "name": "Thống_kê_số_buổi_nghỉ_của_tất_cả_Người_Dùng",
+    "group": "Ngày_Nghỉ",
+    "description": "<p>Dùng để trả về Số Ngày Nghỉ<br></p> <h1 class=\"display-1\">-Lưu ý: </h1> <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\"> <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button> <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button> <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button> </div><br> +Nếu là Giáo Vụ sẽ lấy đếm được ngày nghỉ của tất cả Người Dùng.<br> +Nếu là GV hoặc KT chỉ đếm được ngày nghỉ của chính mình.<br> +Giáo Vụ có thể truyền thêm ma_giao_vien thì sẽ chỉ lấy theo ma_giao_vien đó.<br> +Chỉ đếm tinh_trang = 1.<br>",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:8080/project-2/public/api/ngaynghi/giaovien"
+      }
+    ],
+    "examples": [
+      {
+        "title": "Truy Vấn Mẫu:",
+        "content": "{\n    \"key\" :\"keyapi\"\n}",
+        "type": "php"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "key",
+            "description": "<p>Mã Key của Người Dùng.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "ma_giao_vien",
+            "description": "<p>Mã của giáo viên hoặc KT.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "data",
+            "description": "<p>Dữ liệu Ngày Nghỉ.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Thành Công:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"message\": \"Lấy dữ liệu thành công\",\n    \"data\": [\n        {\n            \"ma_nguoi_dung\": 10,\n            \"ho_ten\": \"Trần Thị Dung\",\n            \"ma_cap_do\": 3,\n            \"ten_cap_do\": \"Giáo Viên\",\n            \"ngay_nghi_count\": 2,\n            \"ngay_nghi\": [\n                {\n                    \"ngay\": \"2020-07-10\",\n                    \"ma_giao_vien\": 10,\n                    \"ma_ca\": 1,\n                    \"ghi_chu\": \"Đi chơi\",\n                    \"tinh_trang\": 1\n                },\n                {\n                    \"ngay\": \"2020-07-17\",\n                    \"ma_giao_vien\": 10,\n                    \"ma_ca\": 6,\n                    \"ghi_chu\": null,\n                    \"tinh_trang\": 1\n                }\n            ]\n        },\n        {\n            \"ma_nguoi_dung\": 1,\n            \"ho_ten\": null,\n            \"ma_cap_do\": 1,\n            \"ten_cap_do\": \"Giáo Vụ\",\n            \"ngay_nghi_count\": 1,\n            \"ngay_nghi\": [\n                {\n                    \"ngay\": \"2020-07-09\",\n                    \"ma_giao_vien\": 1,\n                    \"ma_ca\": 3,\n                    \"ghi_chu\": null,\n                    \"tinh_trang\": 1\n                }\n            ]\n        }\n    ]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Không Thành Công:",
+          "content": "HTTP/1.1 200 OK\n+ Có nhiều dạng trả về không thành công như key sai,lỗi truy vấn sql\n+ Tất cả các lỗi đều có \"message\" kèm theo như ví dụ bên dưới\n{\n    \"success\": false,\n    \"message\": {\n        \"ma_giao_vien\": \"Giáo viên không tồn tại\"\n    },\n    \"data\": []\n}\n{\n    \"success\": false,\n    \"message\": \"Bạn không có quyền truy cập\",\n    \"data\": []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "duong_doc/ngay_nghi.php",
+    "groupTitle": "Ngày_Nghỉ"
+  },
+  {
+    "type": "POST",
+    "url": "ngaynghi",
+    "title": "1.1. Hiển thị tất cả Ngày Nghỉ",
+    "version": "0.1.0",
+    "name": "Tất_cả_Ngày_Nghỉ",
+    "group": "Ngày_Nghỉ",
+    "description": "<p>Dùng để trả về ngày nào có những ai nghỉ<br></p> <h1 class=\"display-1\">-Lưu ý: </h1> <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\"> <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button> <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button> <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button> </div><br> +Nếu không truyền ngày sẽ lấy tất cả các dữ liệu.<br> +Nếu có truyền ngày sẽ lấy dữ liệu ngày đó.<br> +Nếu truyền thêm tuong_lai (có biến là được) sẽ lấy dữ liệu >= hôm nay.<br> +Nếu giáo vụ được phép lấy về ngày nghỉ của tất cả Người Dùng.<br> +Nếu Giáo Vụ truyền vào ma_giao_vien sẽ lấy theo mã Giáo Viên đó không truyền sẽ lấy tất cả.<br> +Nếu GV hoặc KT chỉ lấy về được ngày nghỉ của chính mình với nhưng tiêu chí như bên trên.<br> +Tự động lấy các ngày nghỉ có tinh_trang  = 1, nếu truyền tinh_trang sẽ lấy theo tinh_trang được truyền .<br>",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:8080/project-2/public/api/ngaynghi"
+      }
+    ],
+    "examples": [
+      {
+        "title": "Truy Vấn Mẫu:",
+        "content": "{\n    \"key\" : \"keyapi\"\n}",
+        "type": "php"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "key",
+            "description": "<p>Mã Key của Người Dùng.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "ma_giao_vien",
+            "description": "<p>Mã của giáo viên hoặc KT.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "tinh_trang",
+            "description": "<p>Tình trạng của ngày nghỉ.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "tuong_lai",
+            "description": "<p>Chỉ cần có không cần Value.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "ngay",
+            "description": "<p>Ngày cần lấy dữ liệu.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "data",
+            "description": "<p>Dữ liệu Ngày Nghỉ.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Thành Công:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"message\": \"Lấy dữ liệu thành công\",\n    \"data\": [\n        {\n            \"ngay\": \"2020-07-01\",\n            \"so_nguoi_nghi\": 1,\n            \"can_bo\": [\n                {\n                    \"ngay\": \"2020-07-01\",\n                    \"ma_giao_vien\": 10,\n                    \"ma_ca\": 3,\n                    \"ghi_chu\": null,\n                    \"tinh_trang\": 1,\n                    \"nguoi_dung\": {\n                        \"ma_nguoi_dung\": 10,\n                        \"ho_ten\": \"Trần Thị Dung\",\n                        \"tai_khoan\": \"dungtt\",\n                        \"email\": \"dungtt@soict.hust.edu.vn\",\n                        \"sdt\": \"0989161528\",\n                        \"ma_cap_do\": 3\n                    },\n                    \"ca\": {\n                        \"ma_ca\": 3,\n                        \"gio_bat_dau\": \"10:00:00\",\n                        \"gio_ket_thuc\": \"12:00:00\"\n                    }\n                }\n            ]\n        }\n    ]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Không Thành Công:",
+          "content": "HTTP/1.1 200 OK\n+ Có nhiều dạng trả về không thành công như key sai,lỗi truy vấn sql\n+ Tất cả các lỗi đều có \"message\" kèm theo như ví dụ bên dưới\n{\n    \"success\": false,\n    \"message\": {\n        \"tinh_trang\": \"Tình trạng không hợp lệ\"\n    },\n    \"data\": []\n}\n{\n    \"success\": false,\n    \"message\": \"Bạn không có quyền truy cập\",\n    \"data\": []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "duong_doc/ngay_nghi.php",
+    "groupTitle": "Ngày_Nghỉ"
   },
   {
     "type": "POST",
