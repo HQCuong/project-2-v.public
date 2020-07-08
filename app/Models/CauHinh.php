@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use App\Models\CauHinhMon;
 use App\Models\Loai;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,5 +13,8 @@ class CauHinh extends Model {
     public $timestamps = false;
     public function loai() {
         return $this->hasOne(new Loai, 'ma_loai', 'ma_loai');
+    }
+    public function cauHinhMon() {
+        return $this->hasMany(new CauHinhMon, 'ma_cau_hinh', 'ma_cau_hinh');
     }
 }

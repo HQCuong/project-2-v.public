@@ -35,14 +35,14 @@ class NgayNghiRequest extends FormRequest {
     }
     public function withValidator(Validator $validator) {
         $error = $validator->messages();
-        if ($this->query->has('ngay') && !$error->has('ngay')) {
-            $this->query->add([
-                'ngay' => $this->stringToDate($this->query->get('ngay')),
+        if ($this->request->has('ngay') && !$error->has('ngay')) {
+            $this->request->add([
+                'ngay' => $this->stringToDate($this->request->get('ngay')),
             ]);
         }
-        if ($this->query->has('ngay_cu') && !$error->has('ngay_cu')) {
-            $this->query->add([
-                'ngay_cu' => $this->stringToDate($this->query->get('ngay_cu')),
+        if ($this->request->has('ngay_cu') && !$error->has('ngay_cu')) {
+            $this->request->add([
+                'ngay_cu' => $this->stringToDate($this->request->get('ngay_cu')),
             ]);
         }
     }

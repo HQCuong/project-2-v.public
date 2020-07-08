@@ -37,6 +37,7 @@ class NguoiDungResource extends JsonResource {
             $cache->ma_cap_do       = $value->ma_cap_do;
             $cache->ten_cap_do      = $value->capDo->ten_cap_do;
             $cache->ngay_nghi_count = $value->ngay_nghi_count;
+            $cache->ngay_nghi       = $value->ngayNghiTinhTrang;
             array_push($return, $cache);
         }
         return $return;

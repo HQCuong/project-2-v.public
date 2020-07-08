@@ -29,6 +29,9 @@ class MonHocController extends Controller {
             return $this->endCatch();
         }
     }
+    public function kiemTra(MonHocRequest $rq) {
+        return ResponseMau::Store([]);
+    }
     public function cloneBKACADToLocal() {
         try {
             $list = (object) $this->postApi('cacmon');

@@ -33,6 +33,9 @@ class NguoiDung extends Model {
     public function ngayNghi() {
         return $this->hasMany('App\Models\NgayNghi', 'ma_giao_vien', 'ma_nguoi_dung');
     }
+    public function ngayNghiTinhTrang() {
+        return $this->hasMany('App\Models\NgayNghi', 'ma_giao_vien', 'ma_nguoi_dung')->where('tinh_trang', 1);
+    }
     public function phanCong() {
         return $this->hasMany('App\Models\PhanCong', 'ma_nguoi_dung', 'ma_nguoi_dung');
     }
