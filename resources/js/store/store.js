@@ -4,7 +4,7 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 import content from './modules/Content.js';
-import giaovien from './modules/GiaoVien.js';
+import giao_vien from './modules/GiaoVien.js';
 import lab from './modules/Lab.js';
 import user from './modules/User.js';
 import toa from './modules/Toa.js';
@@ -14,7 +14,7 @@ import cau_hinh from './modules/CauHinh.js';
 export default new Vuex.Store({
     modules: {
         content: content,
-        giaovien: giaovien,
+        giao_vien: giao_vien,
         lab: lab,
         user: user,
         toa: toa,

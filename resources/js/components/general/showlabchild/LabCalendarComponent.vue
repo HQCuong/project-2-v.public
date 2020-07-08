@@ -16,7 +16,7 @@ export default {
     },
     computed: {
         events() {
-            return this.$store.state.lab.events;
+            return this.$store.state.lab.lich_lab;
         }
     },
     data() {

@@ -7,35 +7,49 @@
         <div class="card-body table-responsive">
             <table class="table table-hover">
                 <thead class="text-info">
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Salary</th>
-                    <th>Country</th>
+                    <th>Tên phòng</th>
+                    <th>Số Chỗ ngồi</th>
+                    <th>Số máy</th>
+                    <th>Cấu hình</th>
+                    <th>Tình trạng</th>
+                    <th>Tùy chỉnh</th>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>1</td>
-                        <td>Dakota Rice</td>
-                        <td>$36,738</td>
-                        <td>Niger</td>
+                        <td>lab201</td>
+                        <td>20</td>
+                        <td>20/25</td>
+                        <td>
+                            <p>CPU: i9-900x, VGA: GTX 1080</p>
+                            <p>Ổ cứng: 1TB SSD, Ram: 256GB DDR4</p>
+                            <p>Màn hình: APPLE Pro Display XDR</p>
+                        </td>
+                        <td>Hoạt động</td>
+                        <td>
+                            <button class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Thay đổi tình trạng">
+                                <i class="material-icons">
+                                    power_settings_new
+                                </i>
+                            </button>
+                        </td>
                     </tr>
                     <tr>
-                        <td>2</td>
-                        <td>Minerva Hooper</td>
-                        <td>$23,789</td>
-                        <td>Curaçao</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Sage Rodriguez</td>
-                        <td>$56,142</td>
-                        <td>Netherlands</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Philip Chaney</td>
-                        <td>$38,735</td>
-                        <td>Korea, South</td>
+                        <td>lab202</td>
+                        <td>20</td>
+                        <td>20/25</td>
+                        <td>
+                            <p>CPU: i9-900x, VGA: GTX 1080</p>
+                            <p>Ổ cứng: 1TB SSD, Ram: 256GB DDR4</p>
+                            <p>Màn hình: APPLE Pro Display XDR</p>
+                        </td>
+                        <td>Hoạt động</td>
+                        <td>
+                            <button class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Thay đổi tình trạng">
+                                <i class="material-icons">
+                                    power_settings_new
+                                </i>
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -44,6 +58,9 @@
 </template>
 <script>
 export default {
+    mounted() {
+        $('.btn').tooltip();
+    },
     data() {
         return {
 

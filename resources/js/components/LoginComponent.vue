@@ -7,7 +7,7 @@
                 <img :src="src_logo_login" id="icon" alt="User Icon" />
             </div>
             <!-- Login Form -->
-            <form @submit="send" action="process_login.php">
+            <form @submit="send">
                 <input type="text" id="tai_khoan" class="fadeIn second" name="user" placeholder="login" required>
                 <br>
                 <input type="password" id="mat_khau" class="fadeIn third" name="password" placeholder="password" required>

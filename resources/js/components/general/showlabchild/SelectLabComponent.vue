@@ -37,8 +37,8 @@ export default {
         }
     },
     methods: {
-        toaLabel({ten_toa}) {
-            return `${ten_toa}`;
+        toaLabel({ten_toa, dia_chi}) {
+            return `${ten_toa} - ${dia_chi}`;
         },
         tangLabel({ten_tang}) {
             return `${ten_tang}`;

@@ -5,6 +5,8 @@
                 <div class="card">
                     <div class="card-body">
                         <mainbutton></mainbutton>
+                        <br>
+                        <router-view></router-view>
                     </div>
                 </div>
             </div>

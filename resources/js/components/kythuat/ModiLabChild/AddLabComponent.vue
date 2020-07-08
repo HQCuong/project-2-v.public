@@ -16,12 +16,12 @@
         <form>
             <div class="form-group">
                 <label for="insertSeats">Số chỗ ngồi</label>
-                <input type="number" class="form-control" id="insertSeats" aria-describedby="emailHelp" placeholder="Nhập số chõ ngồi">
+                <input type="number" class="form-control" id="insertSeats" placeholder="Nhập số chõ ngồi" v-model="so_cho_ngoi">
             </div>
             <br>
             <div class="form-group">
                 <label for="insertCpts">Số máy</label>
-                <input type="number" class="form-control" id="insertCpts" aria-describedby="emailHelp" placeholder="Nhập số máy">
+                <input type="number" class="form-control" id="insertCpts" placeholder="Nhập số máy" v-model="so_may">
             </div>
             <br>
             <button type="submit" class="btn btn-info">Submit</button>
@@ -55,7 +55,9 @@ export default {
         return {
             tang: '',
             toa: '',
-            cau_hinh: ''
+            cau_hinh: '',
+            so_may: 20,
+            so_cho_ngoi: 20
         }
     },
     computed: {
@@ -70,8 +72,8 @@ export default {
         },
     },
     methods: {
-        labelToa({ ten_toa }) {
-            return `${ten_toa}`;
+        labelToa({ ten_toa, dia_chi }) {
+            return `${ten_toa} - ${dia_chi}`;
         },
         labelTang({ ten_tang }) {
             return `${ten_tang}`;

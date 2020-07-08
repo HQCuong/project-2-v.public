@@ -1,6 +1,6 @@
 import getCookie from '../../customfunc/getCookie.js';
 
-export default ({
+export default {
 	namespaced: true,
     state: {
     	arr_cau_hinh: []
@@ -25,4 +25,4 @@ export default ({
     	}
     },
 
-})
+}

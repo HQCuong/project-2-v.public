@@ -31,6 +31,9 @@ import lich_gv from './components/giaovien/GiaoVienComponent.vue';
 
 // giao vu
 import quan_ly_lich from './components/giaovu/QuanLyLichComponent.vue';
+import dayoff from './components/giaovu/quanlylichchild/DayoffComponent.vue';
+import add_work from './components/giaovu/quanlylichchild/AddWorkComponent.vue';
+
 import user from './components/giaovu/QuanLyUserComponent.vue';
 
 
@@ -118,7 +121,10 @@ export default [
     {
         path: '/quan_ly_lich',
         component: quan_ly_lich,
-        children: [],
+        children: [
+            {path: 'add_dayoff', component: dayoff},
+            {path: 'add_work', component: add_work}
+        ],
         beforeEnter: (to, from, next) => {
             if (getCookie('level') == 1) {
                 next();

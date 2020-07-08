@@ -5,10 +5,11 @@
                 <div class="card">
                     <div class="card-header">Xem lich</div>
                     <div class="card-body">
-                        <selectgv v-if="!is_giao_vien"></selectgv>
+                        <selectgv @show_main_info="show_main_info" @show_calendar="show_calendar"></selectgv>
                         <br>
+                        <maininfo v-if="is_detail"></maininfo>
                         <br>
-                        <lichgv></lichgv>
+                        <lichgv v-if="calendar"></lichgv>
                     </div>
                 </div>
             </div>
@@ -17,7 +18,9 @@
 </template>
 <script>
 import selectgv from './lichgiaovienchild/SelectGiaoVienComponent.vue';
+import maininfo from './lichgiaovienchild/MainInfoComponent.vue';
 import lichgv from './lichgiaovienchild/LichGiaoVienComponent.vue';
+
 export default {
     mounted() {
         if (this.$route.path == '/xem_lich') {
@@ -26,12 +29,8 @@ export default {
     },
     data() {
         return {
-            
-        }
-    },  
-    computed: {
-        is_giao_vien() {
-            return this.$store.state.user.is_giao_vien;
+            calendar: false,
+            is_detail: false
         }
     },
     watch: {
@@ -39,9 +38,26 @@ export default {
             this.$store.commit('content/page_title', 'Xem lịch dạy');
         }
     },
+    methods: {
+        show_main_info(show) {
+            if (show == 1) {
+                this.is_detail = true;
+            } else {
+                this.is_detail = false
+            }
+        },
+        show_calendar(show) {
+            if (show == 1) {
+                this.calendar = true;
+            } else {
+                this.calendar = false
+            }
+        }
+    },
     components: {
         lichgv,
-        selectgv
+        selectgv,
+        maininfo
     }
 }
 

@@ -7,9 +7,6 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import listPlugin from '@fullcalendar/list';
 
 export default {
-    created() {
-        this.$store.dispatch('giaovien/get_lich_gv');
-    },
     data() {
         return {
             calendarPlugins: [dayGridPlugin, listPlugin],
@@ -28,7 +25,7 @@ export default {
     },
     computed: {
         events() {
-            return this.$store.state.lich_gv;
+            return this.$store.state.giao_vien.lich_giao_vien;
         }
     },
     components: {

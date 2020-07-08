@@ -13422,7 +13422,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     events: function events() {
-      return this.$store.state.lab.events;
+      return this.$store.state.lab.lich_lab;
     }
   },
   data: function data() {
@@ -13558,8 +13558,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     toaLabel: function toaLabel(_ref) {
-      var ten_toa = _ref.ten_toa;
-      return "".concat(ten_toa);
+      var ten_toa = _ref.ten_toa,
+          dia_chi = _ref.dia_chi;
+      return "".concat(ten_toa, " - ").concat(dia_chi);
     },
     tangLabel: function tangLabel(_ref2) {
       var ten_tang = _ref2.ten_tang;
@@ -13642,7 +13643,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lichgiaovienchild_SelectGiaoVienComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lichgiaovienchild/SelectGiaoVienComponent.vue */ "./resources/js/components/giaovien/lichgiaovienchild/SelectGiaoVienComponent.vue");
-/* harmony import */ var _lichgiaovienchild_LichGiaoVienComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lichgiaovienchild/LichGiaoVienComponent.vue */ "./resources/js/components/giaovien/lichgiaovienchild/LichGiaoVienComponent.vue");
+/* harmony import */ var _lichgiaovienchild_MainInfoComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lichgiaovienchild/MainInfoComponent.vue */ "./resources/js/components/giaovien/lichgiaovienchild/MainInfoComponent.vue");
+/* harmony import */ var _lichgiaovienchild_LichGiaoVienComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./lichgiaovienchild/LichGiaoVienComponent.vue */ "./resources/js/components/giaovien/lichgiaovienchild/LichGiaoVienComponent.vue");
 //
 //
 //
@@ -13660,6 +13662,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -13669,21 +13673,36 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   data: function data() {
-    return {};
-  },
-  computed: {
-    is_giao_vien: function is_giao_vien() {
-      return this.$store.state.user.is_giao_vien;
-    }
+    return {
+      calendar: false,
+      is_detail: false
+    };
   },
   watch: {
     $route: function $route(to, from) {
       this.$store.commit('content/page_title', 'Xem lịch dạy');
     }
   },
+  methods: {
+    show_main_info: function show_main_info(show) {
+      if (show == 1) {
+        this.is_detail = true;
+      } else {
+        this.is_detail = false;
+      }
+    },
+    show_calendar: function show_calendar(show) {
+      if (show == 1) {
+        this.calendar = true;
+      } else {
+        this.calendar = false;
+      }
+    }
+  },
   components: {
-    lichgv: _lichgiaovienchild_LichGiaoVienComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    selectgv: _lichgiaovienchild_SelectGiaoVienComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    lichgv: _lichgiaovienchild_LichGiaoVienComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    selectgv: _lichgiaovienchild_SelectGiaoVienComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    maininfo: _lichgiaovienchild_MainInfoComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   }
 });
 
@@ -13708,9 +13727,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  created: function created() {
-    this.$store.dispatch('giaovien/get_lich_gv');
-  },
   data: function data() {
     return {
       calendarPlugins: [_fullcalendar_daygrid__WEBPACK_IMPORTED_MODULE_1__["default"], _fullcalendar_list__WEBPACK_IMPORTED_MODULE_2__["default"]],
@@ -13729,11 +13745,35 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     events: function events() {
-      return this.$store.state.lich_gv;
+      return this.$store.state.giao_vien.lich_giao_vien;
     }
   },
   components: {
     FullCalendar: _fullcalendar_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovien/lichgiaovienchild/MainInfoComponent.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/giaovien/lichgiaovienchild/MainInfoComponent.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {};
   }
 });
 
@@ -13754,12 +13794,51 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      ma_giao_vien: '',
-      giao_vien: ['giao vien 1', 'giao vien 2', 'giao vien 3', 'giao vien 4']
+      giao_vien: '',
+      lop: '',
+      arr_giao_vien: ['giao vien 1', 'giao vien 2', 'giao vien 3', 'giao vien 4'],
+      arr_lop: []
     };
+  },
+  computed: {
+    is_giao_vien: function is_giao_vien() {
+      return this.$store.state.user.is_giao_vien;
+    }
+  },
+  watch: {
+    giao_vien: function giao_vien() {
+      this.lop = '';
+
+      if (!this.giao_vien) {
+        this.$emit('show_calendar', 0);
+        this.arr_lop = [];
+        return false;
+      }
+
+      this.$emit('show_calendar', 1);
+      this.$store.dispatch('giao_vien/get_lich_giao_vien');
+      this.arr_lop = ['BKD', 'BIT'];
+    },
+    lop: function lop() {
+      if (!this.lop) {
+        this.$emit('show_main_info', 0);
+        return false;
+      }
+
+      this.$emit('show_main_info', 1);
+    }
   }
 });
 
@@ -13775,6 +13854,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _quanlylichchild_ButtonComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./quanlylichchild/ButtonComponent.vue */ "./resources/js/components/giaovu/quanlylichchild/ButtonComponent.vue");
+//
+//
 //
 //
 //
@@ -13845,6 +13926,128 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/AddWorkComponent.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/giaovu/quanlylichchild/AddWorkComponent.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _addworkchild_GvCalendarComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./addworkchild/GvCalendarComponent.vue */ "./resources/js/components/giaovu/quanlylichchild/addworkchild/GvCalendarComponent.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  created: function created() {
+    this.$store.dispatch('user/get_user');
+  },
+  mounted: function mounted() {
+    // change label color
+    $(".form-group").addClass("bmd-form-group");
+    $("label").addClass("bmd-label-static");
+    $(".form-group").on("click", function () {
+      $(".form-group").removeClass("is-focused");
+      $(this).addClass("is-focused");
+    }); // remove color while move out input
+
+    $("input").blur(function () {
+      $(".form-group").removeClass("is-focused");
+    });
+    this.$store.commit('content/page_title', 'Thêm ngày nghỉ');
+  },
+  data: function data() {
+    return {
+      show_calendar: false,
+      giao_vien: '',
+      ngay: '',
+      lop: '',
+      mon: '',
+      time: '',
+      arr_lop: [],
+      arr_mon: [],
+      arr_time: ['2 tiếng', '4 tiếng']
+    };
+  },
+  computed: {
+    arr_giao_vien: function arr_giao_vien() {
+      return this.$store.state.user.arr_user;
+    }
+  },
+  methods: {
+    labelGiaoVien: function labelGiaoVien(_ref) {
+      var ho_ten = _ref.ho_ten;
+      return "".concat(ho_ten);
+    },
+    preventLoad: function preventLoad(e) {
+      e.preventDefault();
+    }
+  },
+  watch: {
+    giao_vien: function giao_vien() {
+      console.log(1);
+      this.lop = "";
+      this.mon = "";
+
+      if (!this.giao_vien) {
+        this.arr_lop = [];
+        return false;
+      }
+
+      this.$store.dispatch('giao_vien/get_lich_giao_vien');
+      this.show_calendar = true;
+      this.arr_lop = ['BKD01K10', 'BIT01K10'];
+    },
+    lop: function lop() {
+      this.mon = "";
+
+      if (!this.lop) {
+        this.arr_mon = [];
+        return false;
+      }
+
+      this.arr_mon = ['PHP', 'WEB', 'CSDL'];
+    }
+  },
+  components: {
+    maincalendar: _addworkchild_GvCalendarComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/ButtonComponent.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/giaovu/quanlylichchild/ButtonComponent.vue?vue&type=script&lang=js& ***!
@@ -13868,10 +14071,10 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    if (this.$route.path == '/quan_ly_lab/add_dayoff') {
+    if (this.$route.path == '/quan_ly_lich/add_dayoff') {
       this.isDayOff = true;
       this.isAddWord = false;
-    } else if (this.$route.path == '/quan_ly_lab/add_work') {
+    } else if (this.$route.path == '/quan_ly_lich/add_work') {
       this.isAddWord = true;
       this.isDayOff = false;
     } else {
@@ -13881,10 +14084,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {
     $route: function $route(to, from) {
-      if (to.path == '/quan_ly_lab/add_dayoff') {
+      if (to.path == '/quan_ly_lich/add_dayoff') {
         this.isDayOff = true;
         this.isAddWord = false;
-      } else if (to.path == '/quan_ly_lab/add_work') {
+      } else if (to.path == '/quan_ly_lich/add_work') {
         this.isAddWord = true;
         this.isDayOff = false;
       } else {
@@ -13892,6 +14095,130 @@ __webpack_require__.r(__webpack_exports__);
         this.isAddWord = false;
       }
     }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  created: function created() {
+    this.$store.dispatch('user/get_user');
+  },
+  mounted: function mounted() {
+    // change label color
+    $(".form-group").addClass("bmd-form-group");
+    $("label").addClass("bmd-label-static");
+    $(".form-group").on("click", function () {
+      $(".form-group").removeClass("is-focused");
+      $(this).addClass("is-focused");
+    }); // remove color while move out input
+
+    $("input").blur(function () {
+      $(".form-group").removeClass("is-focused");
+    });
+    this.$store.commit('content/page_title', 'Thêm ngày nghỉ');
+  },
+  data: function data() {
+    return {
+      giao_vien: '',
+      ngay: '',
+      ca: '',
+      arr_ca: ['ca 1', 'ca 2', 'ca 3', 'ca 4']
+    };
+  },
+  computed: {
+    arr_giao_vien: function arr_giao_vien() {
+      return this.$store.state.user.arr_user;
+    }
+  },
+  methods: {
+    labelGiaoVien: function labelGiaoVien(_ref) {
+      var ho_ten = _ref.ho_ten;
+      return "".concat(ho_ten);
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/addworkchild/GvCalendarComponent.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/giaovu/quanlylichchild/addworkchild/GvCalendarComponent.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _fullcalendar_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @fullcalendar/vue */ "./node_modules/@fullcalendar/vue/main.esm.js");
+/* harmony import */ var _fullcalendar_daygrid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fullcalendar/daygrid */ "./node_modules/@fullcalendar/daygrid/main.esm.js");
+/* harmony import */ var _fullcalendar_list__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fullcalendar/list */ "./node_modules/@fullcalendar/list/main.esm.js");
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      calendarPlugins: [_fullcalendar_daygrid__WEBPACK_IMPORTED_MODULE_1__["default"], _fullcalendar_list__WEBPACK_IMPORTED_MODULE_2__["default"]],
+      eventTimeFormat: {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+      },
+      eventLimit: true,
+      headers: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth, listMonth'
+      }
+    };
+  },
+  computed: {
+    events: function events() {
+      return this.$store.state.giao_vien.lich_gv;
+    }
+  },
+  components: {
+    FullCalendar: _fullcalendar_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
 
@@ -14586,7 +14913,9 @@ __webpack_require__.r(__webpack_exports__);
     return {
       tang: '',
       toa: '',
-      cau_hinh: ''
+      cau_hinh: '',
+      so_may: 20,
+      so_cho_ngoi: 20
     };
   },
   computed: {
@@ -14602,8 +14931,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     labelToa: function labelToa(_ref) {
-      var ten_toa = _ref.ten_toa;
-      return "".concat(ten_toa);
+      var ten_toa = _ref.ten_toa,
+          dia_chi = _ref.dia_chi;
+      return "".concat(ten_toa, " - ").concat(dia_chi);
     },
     labelTang: function labelTang(_ref2) {
       var ten_tang = _ref2.ten_tang;
@@ -14813,8 +15143,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     toaLabel: function toaLabel(_ref) {
-      var ten_toa = _ref.ten_toa;
-      return "".concat(ten_toa);
+      var ten_toa = _ref.ten_toa,
+          dia_chi = _ref.dia_chi;
+      return "".concat(ten_toa, " - ").concat(dia_chi);
     },
     tangLabel: function tangLabel(_ref2) {
       var ten_tang = _ref2.ten_tang;
@@ -14899,7 +15230,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    $('.btn').tooltip();
+  },
   data: function data() {
     return {};
   }
@@ -15704,6 +16052,27 @@ exports.push([module.i, "\n.title-font[data-v-4a30cc16] {\r\n    font-size: 50px
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/addworkchild/GvCalendarComponent.vue?vue&type=style&index=0&id=fda98c7a&lang=css&scoped=true&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/giaovu/quanlylichchild/addworkchild/GvCalendarComponent.vue?vue&type=style&index=0&id=fda98c7a&lang=css&scoped=true& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+exports.i(__webpack_require__(/*! -!../../../../../../node_modules/css-loader??ref--6-1!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!@fullcalendar/core/main.css */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@fullcalendar/core/main.css"), "");
+exports.i(__webpack_require__(/*! -!../../../../../../node_modules/css-loader??ref--6-1!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!@fullcalendar/daygrid/main.css */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@fullcalendar/daygrid/main.css"), "");
+exports.i(__webpack_require__(/*! -!../../../../../../node_modules/css-loader??ref--6-1!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!@fullcalendar/list/main.css */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@fullcalendar/list/main.css"), "");
+
+// module
+exports.push([module.i, "\n.title-font[data-v-fda98c7a] {\r\n    font-size: 50px;\n}\r\n\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/lib/css-base.js":
 /*!*************************************************!*\
   !*** ./node_modules/css-loader/lib/css-base.js ***!
@@ -16267,6 +16636,36 @@ options.transform = transform
 options.insertInto = undefined;
 
 var update = __webpack_require__(/*! ../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/addworkchild/GvCalendarComponent.vue?vue&type=style&index=0&id=fda98c7a&lang=css&scoped=true&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/giaovu/quanlylichchild/addworkchild/GvCalendarComponent.vue?vue&type=style&index=0&id=fda98c7a&lang=css&scoped=true& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../../node_modules/css-loader??ref--6-1!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./GvCalendarComponent.vue?vue&type=style&index=0&id=fda98c7a&lang=css&scoped=true& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/addworkchild/GvCalendarComponent.vue?vue&type=style&index=0&id=fda98c7a&lang=css&scoped=true&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -16881,57 +17280,49 @@ var render = function() {
         })
       ]),
       _vm._v(" "),
-      _c(
-        "form",
-        { attrs: { action: "process_login.php" }, on: { submit: _vm.send } },
-        [
-          _c("input", {
-            staticClass: "fadeIn second",
-            attrs: {
-              type: "text",
-              id: "tai_khoan",
-              name: "user",
-              placeholder: "login",
-              required: ""
-            }
-          }),
-          _vm._v(" "),
-          _c("br"),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "fadeIn third",
-            attrs: {
-              type: "password",
-              id: "mat_khau",
-              name: "password",
-              placeholder: "password",
-              required: ""
-            }
-          }),
-          _vm._v(" "),
-          _c("br"),
-          _vm._v(" "),
-          _c("br"),
-          _vm._v(" "),
-          _c("p", { staticStyle: { color: "red" } }, [
-            _vm._v(_vm._s(_vm.error))
-          ]),
-          _vm._v(" "),
-          _c(
-            "button",
-            { staticClass: "btn btn-info", staticStyle: { width: "150px" } },
-            [
-              _vm.is_loading
-                ? _c("span", {
-                    staticClass: "spinner-border spinner-border-sm"
-                  })
-                : _vm._e(),
-              _vm._v(" "),
-              !_vm.is_loading ? _c("span", [_vm._v("Đăng nhập")]) : _vm._e()
-            ]
-          )
-        ]
-      ),
+      _c("form", { on: { submit: _vm.send } }, [
+        _c("input", {
+          staticClass: "fadeIn second",
+          attrs: {
+            type: "text",
+            id: "tai_khoan",
+            name: "user",
+            placeholder: "login",
+            required: ""
+          }
+        }),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "fadeIn third",
+          attrs: {
+            type: "password",
+            id: "mat_khau",
+            name: "password",
+            placeholder: "password",
+            required: ""
+          }
+        }),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c("p", { staticStyle: { color: "red" } }, [_vm._v(_vm._s(_vm.error))]),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-info", staticStyle: { width: "150px" } },
+          [
+            _vm.is_loading
+              ? _c("span", { staticClass: "spinner-border spinner-border-sm" })
+              : _vm._e(),
+            _vm._v(" "),
+            !_vm.is_loading ? _c("span", [_vm._v("Đăng nhập")]) : _vm._e()
+          ]
+        )
+      ]),
       _vm._v(" "),
       _vm._m(0)
     ])
@@ -17422,13 +17813,20 @@ var render = function() {
             "div",
             { staticClass: "card-body" },
             [
-              !_vm.is_giao_vien ? _c("selectgv") : _vm._e(),
+              _c("selectgv", {
+                on: {
+                  show_main_info: _vm.show_main_info,
+                  show_calendar: _vm.show_calendar
+                }
+              }),
               _vm._v(" "),
               _c("br"),
               _vm._v(" "),
+              _vm.is_detail ? _c("maininfo") : _vm._e(),
+              _vm._v(" "),
               _c("br"),
               _vm._v(" "),
-              _c("lichgv")
+              _vm.calendar ? _c("lichgv") : _vm._e()
             ],
             1
           )
@@ -17477,6 +17875,41 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovien/lichgiaovienchild/MainInfoComponent.vue?vue&type=template&id=6e9d4386&scoped=true&":
+/*!***********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/giaovien/lichgiaovienchild/MainInfoComponent.vue?vue&type=template&id=6e9d4386&scoped=true& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("p", [_vm._v("Số giờ đã dạy: 20 giờ")]),
+      _vm._v(" "),
+      _c("p", [_vm._v("Số giờ còn lại: 8 giờ")])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovien/lichgiaovienchild/SelectGiaoVienComponent.vue?vue&type=template&id=05037b88&scoped=true&":
 /*!*****************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/giaovien/lichgiaovienchild/SelectGiaoVienComponent.vue?vue&type=template&id=05037b88&scoped=true& ***!
@@ -17492,33 +17925,76 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("span", [_vm._v("Chọn giáo viên")]),
-      _vm._v(" "),
-      _c("multiselect", {
-        attrs: {
-          options: _vm.giao_vien,
-          "close-on-select": true,
-          "show-labels": true,
-          placeholder: "Chọn giáo viên",
-          "open-direction": "bottom",
-          deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
-          selectLabel: "Click hoặc nhấn Enter để chọn",
-          searchable: true
-        },
-        model: {
-          value: _vm.ma_giao_vien,
-          callback: function($$v) {
-            _vm.ma_giao_vien = $$v
+  return _c("div", [
+    !_vm.is_giao_vien
+      ? _c(
+          "div",
+          [
+            _c("span", [_vm._v("Giáo viên")]),
+            _vm._v(" "),
+            _c("multiselect", {
+              attrs: {
+                options: _vm.arr_giao_vien,
+                "close-on-select": true,
+                "show-labels": true,
+                placeholder: "Chọn giáo viên",
+                deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
+                selectLabel: "Click hoặc nhấn Enter để chọn",
+                searchable: true
+              },
+              model: {
+                value: _vm.giao_vien,
+                callback: function($$v) {
+                  _vm.giao_vien = $$v
+                },
+                expression: "giao_vien"
+              }
+            })
+          ],
+          1
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c(
+      "div",
+      [
+        _c("span", [_vm._v("Chọn lớp")]),
+        _vm._v(" "),
+        _c(
+          "multiselect",
+          {
+            attrs: {
+              options: _vm.arr_lop,
+              "close-on-select": true,
+              "show-labels": true,
+              placeholder: "Chọn lớp",
+              deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
+              selectLabel: "Click hoặc nhấn Enter để chọn",
+              searchable: true
+            },
+            model: {
+              value: _vm.lop,
+              callback: function($$v) {
+                _vm.lop = $$v
+              },
+              expression: "lop"
+            }
           },
-          expression: "ma_giao_vien"
-        }
-      })
-    ],
-    1
-  )
+          [
+            !_vm.is_giao_vien
+              ? _c("template", { slot: "noOptions" }, [
+                  _vm._v("Chưa chọn giáo viên")
+                ])
+              : _vm._e()
+          ],
+          2
+        )
+      ],
+      1
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -17546,7 +18022,18 @@ var render = function() {
     _c("div", { staticClass: "row justify-content-center" }, [
       _c("div", { staticClass: "col-md-12" }, [
         _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-body" }, [_c("mainbutton")], 1)
+          _c(
+            "div",
+            { staticClass: "card-body" },
+            [
+              _c("mainbutton"),
+              _vm._v(" "),
+              _c("br"),
+              _vm._v(" "),
+              _c("router-view")
+            ],
+            1
+          )
         ])
       ])
     ])
@@ -17602,6 +18089,177 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/AddWorkComponent.vue?vue&type=template&id=a01143fa&scoped=true&":
+/*!******************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/giaovu/quanlylichchild/AddWorkComponent.vue?vue&type=template&id=a01143fa&scoped=true& ***!
+  \******************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "form",
+        { on: { submit: _vm.preventLoad } },
+        [
+          _c("label", [_vm._v("Giáo viên")]),
+          _vm._v(" "),
+          _c("multiselect", {
+            attrs: {
+              placeholder: "Chọn giáo viên",
+              options: _vm.arr_giao_vien,
+              deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
+              selectLabel: "Click hoặc nhấn Enter để chọn",
+              "custom-label": _vm.labelGiaoVien
+            },
+            model: {
+              value: _vm.giao_vien,
+              callback: function($$v) {
+                _vm.giao_vien = $$v
+              },
+              expression: "giao_vien"
+            }
+          }),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c("label", [_vm._v("Lớp")]),
+          _vm._v(" "),
+          _c(
+            "multiselect",
+            {
+              attrs: {
+                placeholder: "Chọn lớp",
+                "track-by": "ma_lop",
+                options: _vm.arr_lop,
+                multiple: true,
+                taggable: true,
+                deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
+                selectLabel: "Click hoặc nhấn Enter để chọn"
+              },
+              model: {
+                value: _vm.lop,
+                callback: function($$v) {
+                  _vm.lop = $$v
+                },
+                expression: "lop"
+              }
+            },
+            [
+              _c("template", { slot: "noOptions" }, [
+                _vm._v("Chưa chọn giáo viên")
+              ])
+            ],
+            2
+          ),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c("label", [_vm._v("Môn")]),
+          _vm._v(" "),
+          _c(
+            "multiselect",
+            {
+              attrs: {
+                placeholder: "Chọn môn",
+                options: _vm.arr_mon,
+                deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
+                selectLabel: "Click hoặc nhấn Enter để chọn"
+              },
+              model: {
+                value: _vm.mon,
+                callback: function($$v) {
+                  _vm.mon = $$v
+                },
+                expression: "mon"
+              }
+            },
+            [_c("template", { slot: "noOptions" }, [_vm._v("Chưa chọn lớp")])],
+            2
+          ),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group row" }, [
+            _c("label", [_vm._v("Chọn mốc thời gian (tính từ ngày hôm nay)")]),
+            _vm._v(" "),
+            _c("div", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.ngay,
+                    expression: "ngay"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "date", id: "example-date-input" },
+                domProps: { value: _vm.ngay },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.ngay = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c("label", [_vm._v("Số giờ dạy")]),
+          _vm._v(" "),
+          _c("multiselect", {
+            attrs: {
+              placeholder: "Chọn thời gian dạy",
+              options: _vm.arr_time,
+              deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
+              selectLabel: "Click hoặc nhấn Enter để chọn"
+            },
+            model: {
+              value: _vm.time,
+              callback: function($$v) {
+                _vm.time = $$v
+              },
+              expression: "time"
+            }
+          }),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c("button", { staticClass: "btn btn-info" }, [_vm._v("Thêm")])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _vm.show_calendar ? _c("maincalendar") : _vm._e()
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/ButtonComponent.vue?vue&type=template&id=1374c3e3&scoped=true&":
 /*!*****************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/giaovu/quanlylichchild/ButtonComponent.vue?vue&type=template&id=1374c3e3&scoped=true& ***!
@@ -17625,7 +18283,7 @@ var render = function() {
         {
           staticClass: "btn btn-info",
           class: { disabled: _vm.isDayOff },
-          attrs: { to: "/quan_ly_lab/add_dayoff" }
+          attrs: { to: "/quan_ly_lich/add_dayoff" }
         },
         [_vm._v("Thêm lịch nghỉ")]
       ),
@@ -17635,13 +18293,176 @@ var render = function() {
         {
           staticClass: "btn btn-info",
           class: { disabled: _vm.isAddWord },
-          attrs: { to: "/quan_ly_lab/add_work" }
+          attrs: { to: "/quan_ly_lich/add_work" }
         },
         [_vm._v("Thêm lịch học")]
       )
     ],
     1
   )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue?vue&type=template&id=4736d462&scoped=true&":
+/*!*****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue?vue&type=template&id=4736d462&scoped=true& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "form",
+      [
+        _c("label", [_vm._v("Giáo viên")]),
+        _vm._v(" "),
+        _c("multiselect", {
+          attrs: {
+            placeholder: "Chọn giáo viên / để trống nếu chọn tất cả",
+            "track-by": "ma_nguoi_dung",
+            options: _vm.arr_giao_vien,
+            multiple: true,
+            taggable: true,
+            deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
+            selectLabel: "Click hoặc nhấn Enter để chọn",
+            "custom-label": _vm.labelGiaoVien
+          },
+          model: {
+            value: _vm.giao_vien,
+            callback: function($$v) {
+              _vm.giao_vien = $$v
+            },
+            expression: "giao_vien"
+          }
+        }),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group row" }, [
+          _c("label", [_vm._v("Chọn ngày")]),
+          _vm._v(" "),
+          _c("div", [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.ngay,
+                  expression: "ngay"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "date", id: "example-date-input" },
+              domProps: { value: _vm.ngay },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.ngay = $event.target.value
+                }
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c("label", [_vm._v("Chọn ca")]),
+        _vm._v(" "),
+        _c("multiselect", {
+          attrs: {
+            placeholder: "Chọn ca",
+            options: _vm.arr_ca,
+            deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
+            selectLabel: "Click hoặc nhấn Enter để chọn"
+          },
+          model: {
+            value: _vm.ca,
+            callback: function($$v) {
+              _vm.ca = $$v
+            },
+            expression: "ca"
+          }
+        }),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c("button", { staticClass: "btn btn-info" }, [_vm._v("Thêm")])
+      ],
+      1
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "insert_note" } }, [_vm._v("Ghi chú")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: {
+          type: "text",
+          id: "insert_note",
+          placeholder: "Ghi chú, có thể để trống"
+        }
+      })
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/addworkchild/GvCalendarComponent.vue?vue&type=template&id=fda98c7a&scoped=true&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/giaovu/quanlylichchild/addworkchild/GvCalendarComponent.vue?vue&type=template&id=fda98c7a&scoped=true& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("FullCalendar", {
+    attrs: {
+      defaultView: "dayGridMonth",
+      header: _vm.headers,
+      plugins: _vm.calendarPlugins,
+      events: _vm.events,
+      displayEventEnd: true,
+      eventTimeFormat: _vm.eventTimeFormat
+    }
+  })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -18623,55 +19444,84 @@ var render = function() {
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
-      _vm._m(0)
+      _c("form", [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "insertSeats" } }, [
+            _vm._v("Số chỗ ngồi")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.so_cho_ngoi,
+                expression: "so_cho_ngoi"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "number",
+              id: "insertSeats",
+              placeholder: "Nhập số chõ ngồi"
+            },
+            domProps: { value: _vm.so_cho_ngoi },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.so_cho_ngoi = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "insertCpts" } }, [_vm._v("Số máy")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.so_may,
+                expression: "so_may"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "number",
+              id: "insertCpts",
+              placeholder: "Nhập số máy"
+            },
+            domProps: { value: _vm.so_may },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.so_may = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-info", attrs: { type: "submit" } },
+          [_vm._v("Submit")]
+        )
+      ])
     ],
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("form", [
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "insertSeats" } }, [_vm._v("Số chỗ ngồi")]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            type: "number",
-            id: "insertSeats",
-            "aria-describedby": "emailHelp",
-            placeholder: "Nhập số chõ ngồi"
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "insertCpts" } }, [_vm._v("Số máy")]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            type: "number",
-            id: "insertCpts",
-            "aria-describedby": "emailHelp",
-            placeholder: "Nhập số máy"
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("button", { staticClass: "btn btn-info", attrs: { type: "submit" } }, [
-        _vm._v("Submit")
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -18944,54 +19794,96 @@ var staticRenderFns = [
       _c("div", { staticClass: "card-body table-responsive" }, [
         _c("table", { staticClass: "table table-hover" }, [
           _c("thead", { staticClass: "text-info" }, [
-            _c("th", [_vm._v("ID")]),
+            _c("th", [_vm._v("Tên phòng")]),
             _vm._v(" "),
-            _c("th", [_vm._v("Name")]),
+            _c("th", [_vm._v("Số Chỗ ngồi")]),
             _vm._v(" "),
-            _c("th", [_vm._v("Salary")]),
+            _c("th", [_vm._v("Số máy")]),
             _vm._v(" "),
-            _c("th", [_vm._v("Country")])
+            _c("th", [_vm._v("Cấu hình")]),
+            _vm._v(" "),
+            _c("th", [_vm._v("Tình trạng")]),
+            _vm._v(" "),
+            _c("th", [_vm._v("Tùy chỉnh")])
           ]),
           _vm._v(" "),
           _c("tbody", [
             _c("tr", [
-              _c("td", [_vm._v("1")]),
+              _c("td", [_vm._v("lab201")]),
               _vm._v(" "),
-              _c("td", [_vm._v("Dakota Rice")]),
+              _c("td", [_vm._v("20")]),
               _vm._v(" "),
-              _c("td", [_vm._v("$36,738")]),
+              _c("td", [_vm._v("20/25")]),
               _vm._v(" "),
-              _c("td", [_vm._v("Niger")])
+              _c("td", [
+                _c("p", [_vm._v("CPU: i9-900x, VGA: GTX 1080")]),
+                _vm._v(" "),
+                _c("p", [_vm._v("Ổ cứng: 1TB SSD, Ram: 256GB DDR4")]),
+                _vm._v(" "),
+                _c("p", [_vm._v("Màn hình: APPLE Pro Display XDR")])
+              ]),
+              _vm._v(" "),
+              _c("td", [_vm._v("Hoạt động")]),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-info",
+                    attrs: {
+                      "data-toggle": "tooltip",
+                      "data-placement": "top",
+                      title: "Thay đổi tình trạng"
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "material-icons" }, [
+                      _vm._v(
+                        "\n                                power_settings_new\n                            "
+                      )
+                    ])
+                  ]
+                )
+              ])
             ]),
             _vm._v(" "),
             _c("tr", [
-              _c("td", [_vm._v("2")]),
+              _c("td", [_vm._v("lab202")]),
               _vm._v(" "),
-              _c("td", [_vm._v("Minerva Hooper")]),
+              _c("td", [_vm._v("20")]),
               _vm._v(" "),
-              _c("td", [_vm._v("$23,789")]),
+              _c("td", [_vm._v("20/25")]),
               _vm._v(" "),
-              _c("td", [_vm._v("Curaçao")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", [_vm._v("3")]),
+              _c("td", [
+                _c("p", [_vm._v("CPU: i9-900x, VGA: GTX 1080")]),
+                _vm._v(" "),
+                _c("p", [_vm._v("Ổ cứng: 1TB SSD, Ram: 256GB DDR4")]),
+                _vm._v(" "),
+                _c("p", [_vm._v("Màn hình: APPLE Pro Display XDR")])
+              ]),
               _vm._v(" "),
-              _c("td", [_vm._v("Sage Rodriguez")]),
+              _c("td", [_vm._v("Hoạt động")]),
               _vm._v(" "),
-              _c("td", [_vm._v("$56,142")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Netherlands")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", [_vm._v("4")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Philip Chaney")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("$38,735")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Korea, South")])
+              _c("td", [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-info",
+                    attrs: {
+                      "data-toggle": "tooltip",
+                      "data-placement": "top",
+                      title: "Thay đổi tình trạng"
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "material-icons" }, [
+                      _vm._v(
+                        "\n                                power_settings_new\n                            "
+                      )
+                    ])
+                  ]
+                )
+              ])
             ])
           ])
         ])
@@ -37025,6 +37917,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/giaovien/lichgiaovienchild/MainInfoComponent.vue":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/giaovien/lichgiaovienchild/MainInfoComponent.vue ***!
+  \**********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _MainInfoComponent_vue_vue_type_template_id_6e9d4386_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MainInfoComponent.vue?vue&type=template&id=6e9d4386&scoped=true& */ "./resources/js/components/giaovien/lichgiaovienchild/MainInfoComponent.vue?vue&type=template&id=6e9d4386&scoped=true&");
+/* harmony import */ var _MainInfoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MainInfoComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/giaovien/lichgiaovienchild/MainInfoComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _MainInfoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _MainInfoComponent_vue_vue_type_template_id_6e9d4386_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _MainInfoComponent_vue_vue_type_template_id_6e9d4386_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "6e9d4386",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/giaovien/lichgiaovienchild/MainInfoComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/giaovien/lichgiaovienchild/MainInfoComponent.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************!*\
+  !*** ./resources/js/components/giaovien/lichgiaovienchild/MainInfoComponent.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MainInfoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./MainInfoComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovien/lichgiaovienchild/MainInfoComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MainInfoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/giaovien/lichgiaovienchild/MainInfoComponent.vue?vue&type=template&id=6e9d4386&scoped=true&":
+/*!*****************************************************************************************************************************!*\
+  !*** ./resources/js/components/giaovien/lichgiaovienchild/MainInfoComponent.vue?vue&type=template&id=6e9d4386&scoped=true& ***!
+  \*****************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MainInfoComponent_vue_vue_type_template_id_6e9d4386_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./MainInfoComponent.vue?vue&type=template&id=6e9d4386&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovien/lichgiaovienchild/MainInfoComponent.vue?vue&type=template&id=6e9d4386&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MainInfoComponent_vue_vue_type_template_id_6e9d4386_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MainInfoComponent_vue_vue_type_template_id_6e9d4386_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/giaovien/lichgiaovienchild/SelectGiaoVienComponent.vue":
 /*!****************************************************************************************!*\
   !*** ./resources/js/components/giaovien/lichgiaovienchild/SelectGiaoVienComponent.vue ***!
@@ -37232,6 +38193,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/giaovu/quanlylichchild/AddWorkComponent.vue":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/giaovu/quanlylichchild/AddWorkComponent.vue ***!
+  \*****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AddWorkComponent_vue_vue_type_template_id_a01143fa_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddWorkComponent.vue?vue&type=template&id=a01143fa&scoped=true& */ "./resources/js/components/giaovu/quanlylichchild/AddWorkComponent.vue?vue&type=template&id=a01143fa&scoped=true&");
+/* harmony import */ var _AddWorkComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AddWorkComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/giaovu/quanlylichchild/AddWorkComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AddWorkComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AddWorkComponent_vue_vue_type_template_id_a01143fa_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AddWorkComponent_vue_vue_type_template_id_a01143fa_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "a01143fa",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/giaovu/quanlylichchild/AddWorkComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/giaovu/quanlylichchild/AddWorkComponent.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/components/giaovu/quanlylichchild/AddWorkComponent.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddWorkComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AddWorkComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/AddWorkComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddWorkComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/giaovu/quanlylichchild/AddWorkComponent.vue?vue&type=template&id=a01143fa&scoped=true&":
+/*!************************************************************************************************************************!*\
+  !*** ./resources/js/components/giaovu/quanlylichchild/AddWorkComponent.vue?vue&type=template&id=a01143fa&scoped=true& ***!
+  \************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddWorkComponent_vue_vue_type_template_id_a01143fa_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AddWorkComponent.vue?vue&type=template&id=a01143fa&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/AddWorkComponent.vue?vue&type=template&id=a01143fa&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddWorkComponent_vue_vue_type_template_id_a01143fa_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddWorkComponent_vue_vue_type_template_id_a01143fa_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/giaovu/quanlylichchild/ButtonComponent.vue":
 /*!****************************************************************************!*\
   !*** ./resources/js/components/giaovu/quanlylichchild/ButtonComponent.vue ***!
@@ -37296,6 +38326,162 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_template_id_1374c3e3_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ButtonComponent_vue_vue_type_template_id_1374c3e3_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _DayoffComponent_vue_vue_type_template_id_4736d462_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DayoffComponent.vue?vue&type=template&id=4736d462&scoped=true& */ "./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue?vue&type=template&id=4736d462&scoped=true&");
+/* harmony import */ var _DayoffComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DayoffComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _DayoffComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DayoffComponent_vue_vue_type_template_id_4736d462_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _DayoffComponent_vue_vue_type_template_id_4736d462_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "4736d462",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DayoffComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./DayoffComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DayoffComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue?vue&type=template&id=4736d462&scoped=true&":
+/*!***********************************************************************************************************************!*\
+  !*** ./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue?vue&type=template&id=4736d462&scoped=true& ***!
+  \***********************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DayoffComponent_vue_vue_type_template_id_4736d462_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./DayoffComponent.vue?vue&type=template&id=4736d462&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue?vue&type=template&id=4736d462&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DayoffComponent_vue_vue_type_template_id_4736d462_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DayoffComponent_vue_vue_type_template_id_4736d462_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/giaovu/quanlylichchild/addworkchild/GvCalendarComponent.vue":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/giaovu/quanlylichchild/addworkchild/GvCalendarComponent.vue ***!
+  \*********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _GvCalendarComponent_vue_vue_type_template_id_fda98c7a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GvCalendarComponent.vue?vue&type=template&id=fda98c7a&scoped=true& */ "./resources/js/components/giaovu/quanlylichchild/addworkchild/GvCalendarComponent.vue?vue&type=template&id=fda98c7a&scoped=true&");
+/* harmony import */ var _GvCalendarComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GvCalendarComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/giaovu/quanlylichchild/addworkchild/GvCalendarComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _GvCalendarComponent_vue_vue_type_style_index_0_id_fda98c7a_lang_css_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./GvCalendarComponent.vue?vue&type=style&index=0&id=fda98c7a&lang=css&scoped=true& */ "./resources/js/components/giaovu/quanlylichchild/addworkchild/GvCalendarComponent.vue?vue&type=style&index=0&id=fda98c7a&lang=css&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _GvCalendarComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _GvCalendarComponent_vue_vue_type_template_id_fda98c7a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _GvCalendarComponent_vue_vue_type_template_id_fda98c7a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "fda98c7a",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/giaovu/quanlylichchild/addworkchild/GvCalendarComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/giaovu/quanlylichchild/addworkchild/GvCalendarComponent.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************!*\
+  !*** ./resources/js/components/giaovu/quanlylichchild/addworkchild/GvCalendarComponent.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GvCalendarComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./GvCalendarComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/addworkchild/GvCalendarComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GvCalendarComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/giaovu/quanlylichchild/addworkchild/GvCalendarComponent.vue?vue&type=style&index=0&id=fda98c7a&lang=css&scoped=true&":
+/*!******************************************************************************************************************************************************!*\
+  !*** ./resources/js/components/giaovu/quanlylichchild/addworkchild/GvCalendarComponent.vue?vue&type=style&index=0&id=fda98c7a&lang=css&scoped=true& ***!
+  \******************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_GvCalendarComponent_vue_vue_type_style_index_0_id_fda98c7a_lang_css_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/style-loader!../../../../../../node_modules/css-loader??ref--6-1!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./GvCalendarComponent.vue?vue&type=style&index=0&id=fda98c7a&lang=css&scoped=true& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/addworkchild/GvCalendarComponent.vue?vue&type=style&index=0&id=fda98c7a&lang=css&scoped=true&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_GvCalendarComponent_vue_vue_type_style_index_0_id_fda98c7a_lang_css_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_GvCalendarComponent_vue_vue_type_style_index_0_id_fda98c7a_lang_css_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_GvCalendarComponent_vue_vue_type_style_index_0_id_fda98c7a_lang_css_scoped_true___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_GvCalendarComponent_vue_vue_type_style_index_0_id_fda98c7a_lang_css_scoped_true___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_GvCalendarComponent_vue_vue_type_style_index_0_id_fda98c7a_lang_css_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/giaovu/quanlylichchild/addworkchild/GvCalendarComponent.vue?vue&type=template&id=fda98c7a&scoped=true&":
+/*!****************************************************************************************************************************************!*\
+  !*** ./resources/js/components/giaovu/quanlylichchild/addworkchild/GvCalendarComponent.vue?vue&type=template&id=fda98c7a&scoped=true& ***!
+  \****************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GvCalendarComponent_vue_vue_type_template_id_fda98c7a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./GvCalendarComponent.vue?vue&type=template&id=fda98c7a&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/addworkchild/GvCalendarComponent.vue?vue&type=template&id=fda98c7a&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GvCalendarComponent_vue_vue_type_template_id_fda98c7a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GvCalendarComponent_vue_vue_type_template_id_fda98c7a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -39415,11 +40601,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_kythuat_thietbichild_AddThietBiComponent_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/kythuat/thietbichild/AddThietBiComponent.vue */ "./resources/js/components/kythuat/thietbichild/AddThietBiComponent.vue");
 /* harmony import */ var _components_giaovien_GiaoVienComponent_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/giaovien/GiaoVienComponent.vue */ "./resources/js/components/giaovien/GiaoVienComponent.vue");
 /* harmony import */ var _components_giaovu_QuanLyLichComponent_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/giaovu/QuanLyLichComponent.vue */ "./resources/js/components/giaovu/QuanLyLichComponent.vue");
-/* harmony import */ var _components_giaovu_QuanLyUserComponent_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/giaovu/QuanLyUserComponent.vue */ "./resources/js/components/giaovu/QuanLyUserComponent.vue");
-/* harmony import */ var _components_nguoidung_UserProfileComponent_vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/nguoidung/UserProfileComponent.vue */ "./resources/js/components/nguoidung/UserProfileComponent.vue");
-/* harmony import */ var _components_nguoidung_ForgotPassComponent_vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/nguoidung/ForgotPassComponent.vue */ "./resources/js/components/nguoidung/ForgotPassComponent.vue");
-/* harmony import */ var _components_error_CantDirectComponent_vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/error/CantDirectComponent.vue */ "./resources/js/components/error/CantDirectComponent.vue");
-/* harmony import */ var _components_error_AuthorErrComponent_vue__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/error/AuthorErrComponent.vue */ "./resources/js/components/error/AuthorErrComponent.vue");
+/* harmony import */ var _components_giaovu_quanlylichchild_DayoffComponent_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/giaovu/quanlylichchild/DayoffComponent.vue */ "./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue");
+/* harmony import */ var _components_giaovu_quanlylichchild_AddWorkComponent_vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/giaovu/quanlylichchild/AddWorkComponent.vue */ "./resources/js/components/giaovu/quanlylichchild/AddWorkComponent.vue");
+/* harmony import */ var _components_giaovu_QuanLyUserComponent_vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/giaovu/QuanLyUserComponent.vue */ "./resources/js/components/giaovu/QuanLyUserComponent.vue");
+/* harmony import */ var _components_nguoidung_UserProfileComponent_vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/nguoidung/UserProfileComponent.vue */ "./resources/js/components/nguoidung/UserProfileComponent.vue");
+/* harmony import */ var _components_nguoidung_ForgotPassComponent_vue__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/nguoidung/ForgotPassComponent.vue */ "./resources/js/components/nguoidung/ForgotPassComponent.vue");
+/* harmony import */ var _components_error_CantDirectComponent_vue__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./components/error/CantDirectComponent.vue */ "./resources/js/components/error/CantDirectComponent.vue");
+/* harmony import */ var _components_error_AuthorErrComponent_vue__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./components/error/AuthorErrComponent.vue */ "./resources/js/components/error/AuthorErrComponent.vue");
  // import store
 
  // home
@@ -39440,6 +40628,8 @@ __webpack_require__.r(__webpack_exports__);
  // giao vien
 
  // giao vu
+
+
 
 
  // user
@@ -39530,7 +40720,13 @@ __webpack_require__.r(__webpack_exports__);
 {
   path: '/quan_ly_lich',
   component: _components_giaovu_QuanLyLichComponent_vue__WEBPACK_IMPORTED_MODULE_15__["default"],
-  children: [],
+  children: [{
+    path: 'add_dayoff',
+    component: _components_giaovu_quanlylichchild_DayoffComponent_vue__WEBPACK_IMPORTED_MODULE_16__["default"]
+  }, {
+    path: 'add_work',
+    component: _components_giaovu_quanlylichchild_AddWorkComponent_vue__WEBPACK_IMPORTED_MODULE_17__["default"]
+  }],
   beforeEnter: function beforeEnter(to, from, next) {
     if (Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])('level') == 1) {
       next();
@@ -39540,7 +40736,7 @@ __webpack_require__.r(__webpack_exports__);
   }
 }, {
   path: '/quan_ly_nguoi_dung',
-  component: _components_giaovu_QuanLyUserComponent_vue__WEBPACK_IMPORTED_MODULE_16__["default"],
+  component: _components_giaovu_QuanLyUserComponent_vue__WEBPACK_IMPORTED_MODULE_18__["default"],
   beforeEnter: function beforeEnter(to, from, next) {
     if (Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])('level') == 1) {
       next();
@@ -39551,17 +40747,17 @@ __webpack_require__.r(__webpack_exports__);
 }, // user
 {
   path: '/profile',
-  component: _components_nguoidung_UserProfileComponent_vue__WEBPACK_IMPORTED_MODULE_17__["default"]
+  component: _components_nguoidung_UserProfileComponent_vue__WEBPACK_IMPORTED_MODULE_19__["default"]
 }, {
   path: '/forgot_password',
-  component: _components_nguoidung_ForgotPassComponent_vue__WEBPACK_IMPORTED_MODULE_18__["default"]
+  component: _components_nguoidung_ForgotPassComponent_vue__WEBPACK_IMPORTED_MODULE_20__["default"]
 }, // error
 {
   path: '/err_author',
-  component: _components_error_AuthorErrComponent_vue__WEBPACK_IMPORTED_MODULE_20__["default"]
+  component: _components_error_AuthorErrComponent_vue__WEBPACK_IMPORTED_MODULE_22__["default"]
 }, {
   path: '*',
-  component: _components_error_CantDirectComponent_vue__WEBPACK_IMPORTED_MODULE_19__["default"]
+  component: _components_error_CantDirectComponent_vue__WEBPACK_IMPORTED_MODULE_21__["default"]
 }]);
 
 /***/ }),
@@ -39640,33 +40836,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,
   state: {
-    // mon: 'abc',
-    // lop: 'bbb',
-    events: []
+    lich_giao_vien: []
   },
   mutations: {},
   actions: {
-    get_lich_gv: function get_lich_gv(_ref) {
+    get_lich_giao_vien: function get_lich_giao_vien(_ref) {
       var state = _ref.state,
           commit = _ref.commit,
           rootState = _ref.rootState;
-      state.events = [];
-      rootState.lich_gv = [];
+      state.lich_giao_vien = [];
       var ev1 = {
         title: 'BKD01K10' + ' - ' + 'ten mon hoc',
-        start: '2020-06-03T10:00:00',
-        end: '2020-06-03T12:00:00',
+        start: '2020-07-03T10:00:00',
+        end: '2020-07-03T12:00:00',
         textColor: 'white'
       };
-      state.events.push(ev1);
+      state.lich_giao_vien.push(ev1);
       var ev2 = {
         title: 'BKD01K10' + ' - ' + 'ten mon hoc',
-        start: '2020-06-15T08:00:00',
-        end: '2020-06-15T12:00:00',
+        start: '2020-07-15T08:00:00',
+        end: '2020-07-15T12:00:00',
         textColor: 'white'
       };
-      state.events.push(ev2);
-      rootState.lich_gv = state.events;
+      state.lich_giao_vien.push(ev2);
     }
   }
 });
@@ -39685,7 +40877,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,
   state: {
-    events: []
+    lich_lab: []
   },
   mutations: {},
   actions: {
@@ -39693,21 +40885,21 @@ __webpack_require__.r(__webpack_exports__);
       var state = _ref.state,
           commit = _ref.commit,
           rootState = _ref.rootState;
-      state.events = [];
+      state.lich_lab = [];
       var ev1 = {
         title: 'BKD01K10',
-        start: '2020-06-03T10:00:00',
-        end: '2020-06-03T12:00:00',
+        start: '2020-07-03T10:00:00',
+        end: '2020-07-03T12:00:00',
         textColor: 'white'
       };
-      state.events.push(ev1);
+      state.lich_lab.push(ev1);
       var ev2 = {
         title: 'BKD01K10',
-        start: '2020-06-15T08:00:00',
-        end: '2020-06-15T12:00:00',
+        start: '2020-07-15T08:00:00',
+        end: '2020-07-15T12:00:00',
         textColor: 'white'
       };
-      state.events.push(ev2);
+      state.lich_lab.push(ev2);
     }
   }
 });
@@ -39804,11 +40996,29 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../customfunc/getCookie.js */ "./resources/js/customfunc/getCookie.js");
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,
   state: {
-    user: 0,
-    is_giao_vien: false
+    is_giao_vien: false,
+    arr_user: []
+  },
+  mutations: {},
+  actions: {
+    get_user: function get_user(_ref) {
+      var state = _ref.state,
+          commit = _ref.commit,
+          rootState = _ref.rootState;
+      state.arr_user = [];
+      axios.post('http://localhost:8080/project-2/public/api/nguoidung/danhsach', {
+        key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])('key')
+      }).then(function (response) {
+        state.arr_user = response.data.data;
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    }
   }
 });
 
@@ -39846,7 +41056,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   modules: {
     content: _modules_Content_js__WEBPACK_IMPORTED_MODULE_2__["default"],
-    giaovien: _modules_GiaoVien_js__WEBPACK_IMPORTED_MODULE_3__["default"],
+    giao_vien: _modules_GiaoVien_js__WEBPACK_IMPORTED_MODULE_3__["default"],
     lab: _modules_Lab_js__WEBPACK_IMPORTED_MODULE_4__["default"],
     user: _modules_User_js__WEBPACK_IMPORTED_MODULE_5__["default"],
     toa: _modules_Toa_js__WEBPACK_IMPORTED_MODULE_6__["default"],
