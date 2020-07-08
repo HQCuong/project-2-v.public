@@ -11,9 +11,6 @@ import listPlugin from '@fullcalendar/list';
 import hardware from './hardwareinfo/HardWareInfoComponent.vue';
 
 export default {
-    created() {
-        this.$store.dispatch('lab/get_lich_lab');
-    },
     computed: {
         events() {
             return this.$store.state.lab.lich_lab;
@@ -39,14 +36,14 @@ export default {
     },
     methods: {
         modi_calendar_button() {
-            if ($(window).width() < 960) {
+            if ($(window).width() < 770) {
                 return 'listWeek';
             } else {
                 return 'dayGridMonth, listMonth'
             }
         },
         modi_calendar_view() {
-            if ($(window).width() < 960) {
+            if ($(window).width() < 770) {
                 return "listWeek";
             } else {
                 return "dayGridMonth";
