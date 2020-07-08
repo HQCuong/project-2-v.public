@@ -4,7 +4,6 @@
             <label>Giáo viên</label>
             <multiselect v-model="giao_vien" placeholder="Chọn giáo viên / để trống nếu chọn tất cả" track-by="ma_nguoi_dung" :options="arr_giao_vien" :multiple="true" :taggable="true" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :custom-label="labelGiaoVien"></multiselect>
             <br>
-            <br>
             <div class="form-group row">
                 <label>Chọn ngày</label>
                 <div>

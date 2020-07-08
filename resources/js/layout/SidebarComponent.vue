@@ -1,8 +1,8 @@
 <template>
     <div class="sidebar" data-color="azure" data-background-color="white" data-image="./img/sidebar-1.jpg">
-        <div class="logo"><a href="home" class="simple-text logo-normal">
+        <div class="logo"><router-link to="/home" class="simple-text logo-normal">
                 HOME
-            </a></div>
+            </router-link></div>
         <div class="sidebar-wrapper">
             <ul class="nav navbar-nav nav-mobile-menu">
                 <li class="nav-item dropdown user-nav">

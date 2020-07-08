@@ -9,7 +9,6 @@
                         <br>
                         <maininfo></maininfo>
                         <br>
-                        <br>
                         <!-- main view -->
                         <router-view></router-view>
                     </div>

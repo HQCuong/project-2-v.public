@@ -20,9 +20,11 @@
                         <td>20</td>
                         <td>20/25</td>
                         <td>
-                            <p>CPU: i9-900x, VGA: GTX 1080</p>
-                            <p>Ổ cứng: 1TB SSD, Ram: 256GB DDR4</p>
-                            <p>Màn hình: APPLE Pro Display XDR</p>
+                            <small>CPU: i9-900x, VGA: GTX 1080</small>
+                            <br>
+                            <small>Ổ cứng: 1TB SSD, Ram: 256GB DDR4</small>
+                            <br>
+                            <small>Màn hình: APPLE Pro Display XDR</small>
                         </td>
                         <td>Hoạt động</td>
                         <td>
@@ -43,9 +45,11 @@
                         <td>20</td>
                         <td>20/25</td>
                         <td>
-                            <p>CPU: i9-900x, VGA: GTX 1080</p>
-                            <p>Ổ cứng: 1TB SSD, Ram: 256GB DDR4</p>
-                            <p>Màn hình: APPLE Pro Display XDR</p>
+                            <small>CPU: i9-900x, VGA: GTX 1080</small>
+                            <br>
+                            <small>Ổ cứng: 1TB SSD, Ram: 256GB DDR4</small>
+                            <br>    
+                            <small>Màn hình: APPLE Pro Display XDR</small>
                         </td>
                         <td>Hoạt động</td>
                         <td>

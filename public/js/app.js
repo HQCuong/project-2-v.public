@@ -14001,7 +14001,7 @@ __webpack_require__.r(__webpack_exports__);
     $("input").blur(function () {
       $(".form-group").removeClass("is-focused");
     });
-    this.$store.commit('content/page_title', 'Thêm ngày nghỉ');
+    this.$store.commit('content/page_title', 'Thêm lịch dạy');
   },
   data: function data() {
     return {
@@ -14124,7 +14124,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -14387,7 +14386,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _cauhinhchild_ButtonComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./cauhinhchild/ButtonComponent.vue */ "./resources/js/components/kythuat/cauhinhchild/ButtonComponent.vue");
 /* harmony import */ var _CauhinhChild_MainInfoComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CauhinhChild/MainInfoComponent.vue */ "./resources/js/components/kythuat/CauhinhChild/MainInfoComponent.vue");
-//
 //
 //
 //
@@ -14899,7 +14897,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.$store.dispatch('toa/get_toa');
@@ -15194,8 +15191,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       tang: '',
       toa: '',
-      ten_lab: '',
       lab: '',
+      ten_lab: '',
       arr_lab: [],
       cau_hinh: '',
       so_cho_ngoi: 0
@@ -15417,6 +15414,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {},
   data: function data() {
@@ -15445,16 +15446,100 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  created: function created() {
+    this.$store.dispatch('toa/get_toa');
+  },
   mounted: function mounted() {
-    this.$store.commit('content/page_title', 'Thêm thiết bị');
+    this.$store.commit('content/page_title', 'Thêm thiết bị'); // change label color
+
+    $(".form-group").addClass("bmd-form-group");
+    $("label").addClass("bmd-label-static");
+    $(".form-group").on("click", function () {
+      $(".form-group").removeClass("is-focused");
+      $(this).addClass("is-focused");
+    }); // remove color while move out input
+
+    $("input").blur(function () {
+      $(".form-group").removeClass("is-focused");
+    });
   },
   data: function data() {
-    return {};
+    return {
+      toa: '',
+      tang: '',
+      lab: '',
+      arr_lab: []
+    };
   },
-  methods: {},
+  computed: {
+    arr_toa: function arr_toa() {
+      return this.$store.state.toa.arr_toa;
+    },
+    arr_tang: function arr_tang() {
+      return this.$store.state.tang.arr_tang;
+    }
+  },
+  methods: {
+    labelToa: function labelToa(_ref) {
+      var ten_toa = _ref.ten_toa,
+          dia_chi = _ref.dia_chi;
+      return "".concat(ten_toa, " - ").concat(dia_chi);
+    },
+    labelTang: function labelTang(_ref2) {
+      var ten_tang = _ref2.ten_tang;
+      return "".concat(ten_tang);
+    }
+  },
+  watch: {
+    toa: function toa() {
+      this.tang = '';
+      this.lab = '';
+
+      if (!this.toa) {
+        this.$store.commit('tang/reset_arr_tang');
+        this.arr_toa = [];
+        return false;
+      }
+
+      this.$store.dispatch('tang/get_tang', this.toa.ma_toa);
+    },
+    tang: function tang() {
+      this.lab = '';
+
+      if (!this.tang) {
+        this.arr_toa = [];
+        return false;
+      }
+
+      this.arr_lab = ['LAB 1', 'LAB 2'];
+    }
+  },
   components: {
     mainselect: _selectlab_SelectLabComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     mainform: _formaddthietbi_FormAddThietBiComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -18290,8 +18375,6 @@ var render = function() {
                 placeholder: "Chọn lớp",
                 "track-by": "ma_lop",
                 options: _vm.arr_lop,
-                multiple: true,
-                taggable: true,
                 deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
                 selectLabel: "Click hoặc nhấn Enter để chọn"
               },
@@ -18497,8 +18580,6 @@ var render = function() {
             expression: "giao_vien"
           }
         }),
-        _vm._v(" "),
-        _c("br"),
         _vm._v(" "),
         _c("br"),
         _vm._v(" "),
@@ -18882,8 +18963,6 @@ var render = function() {
               _c("br"),
               _vm._v(" "),
               _c("maininfo"),
-              _vm._v(" "),
-              _c("br"),
               _vm._v(" "),
               _c("br"),
               _vm._v(" "),
@@ -19594,8 +19673,6 @@ var render = function() {
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
       _c("form", [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "insertSeats" } }, [
@@ -19968,8 +20045,6 @@ var render = function() {
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
       _c("form", [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "insertName" } }, [_vm._v("Tên phòng")]),
@@ -20034,6 +20109,8 @@ var render = function() {
             }
           })
         ]),
+        _vm._v(" "),
+        _c("br"),
         _vm._v(" "),
         _c(
           "button",
@@ -20185,11 +20262,15 @@ var staticRenderFns = [
               _c("td", [_vm._v("20/25")]),
               _vm._v(" "),
               _c("td", [
-                _c("p", [_vm._v("CPU: i9-900x, VGA: GTX 1080")]),
+                _c("small", [_vm._v("CPU: i9-900x, VGA: GTX 1080")]),
                 _vm._v(" "),
-                _c("p", [_vm._v("Ổ cứng: 1TB SSD, Ram: 256GB DDR4")]),
+                _c("br"),
                 _vm._v(" "),
-                _c("p", [_vm._v("Màn hình: APPLE Pro Display XDR")])
+                _c("small", [_vm._v("Ổ cứng: 1TB SSD, Ram: 256GB DDR4")]),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c("small", [_vm._v("Màn hình: APPLE Pro Display XDR")])
               ]),
               _vm._v(" "),
               _c("td", [_vm._v("Hoạt động")]),
@@ -20243,11 +20324,15 @@ var staticRenderFns = [
               _c("td", [_vm._v("20/25")]),
               _vm._v(" "),
               _c("td", [
-                _c("p", [_vm._v("CPU: i9-900x, VGA: GTX 1080")]),
+                _c("small", [_vm._v("CPU: i9-900x, VGA: GTX 1080")]),
                 _vm._v(" "),
-                _c("p", [_vm._v("Ổ cứng: 1TB SSD, Ram: 256GB DDR4")]),
+                _c("br"),
                 _vm._v(" "),
-                _c("p", [_vm._v("Màn hình: APPLE Pro Display XDR")])
+                _c("small", [_vm._v("Ổ cứng: 1TB SSD, Ram: 256GB DDR4")]),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c("small", [_vm._v("Màn hình: APPLE Pro Display XDR")])
               ]),
               _vm._v(" "),
               _c("td", [_vm._v("Hoạt động")]),
@@ -20313,11 +20398,135 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    [_c("mainselect"), _vm._v(" "), _c("br"), _vm._v(" "), _c("mainform")],
+    [
+      _c("label", [_vm._v("Chọn tòa")]),
+      _vm._v(" "),
+      _c("multiselect", {
+        attrs: {
+          options: _vm.arr_toa,
+          "close-on-select": true,
+          "show-labels": true,
+          placeholder: "Tòa",
+          deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
+          selectLabel: "Click hoặc nhấn Enter để chọn",
+          searchable: false,
+          "custom-label": _vm.labelToa
+        },
+        model: {
+          value: _vm.toa,
+          callback: function($$v) {
+            _vm.toa = $$v
+          },
+          expression: "toa"
+        }
+      }),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("label", [_vm._v("Chọn tầng")]),
+      _vm._v(" "),
+      _c(
+        "multiselect",
+        {
+          attrs: {
+            options: _vm.arr_tang,
+            "close-on-select": true,
+            "show-labels": true,
+            placeholder: "Tầng",
+            deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
+            selectLabel: "Click hoặc nhấn Enter để chọn",
+            searchable: false,
+            "custom-label": _vm.labelTang
+          },
+          model: {
+            value: _vm.tang,
+            callback: function($$v) {
+              _vm.tang = $$v
+            },
+            expression: "tang"
+          }
+        },
+        [_c("template", { slot: "noOptions" }, [_vm._v("Chưa chọn tòa")])],
+        2
+      ),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("label", [_vm._v("Chọn lab")]),
+      _vm._v(" "),
+      _c(
+        "multiselect",
+        {
+          attrs: {
+            options: _vm.arr_lab,
+            "close-on-select": true,
+            "show-labels": true,
+            placeholder: "Phòng",
+            deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
+            selectLabel: "Click hoặc nhấn Enter để chọn",
+            searchable: false
+          },
+          model: {
+            value: _vm.lab,
+            callback: function($$v) {
+              _vm.lab = $$v
+            },
+            expression: "lab"
+          }
+        },
+        [_c("template", { slot: "noOptions" }, [_vm._v("Chưa chọn tầng")])],
+        2
+      ),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _vm._m(0)
+    ],
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("form", [
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "insertDevice" } }, [_vm._v("Thiết bị")]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: {
+            type: "text",
+            id: "insertDevice",
+            placeholder: "Nhập tên thiết bị"
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "insertNumber" } }, [_vm._v("Số lượng")]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: {
+            type: "number",
+            id: "insertNumber",
+            placeholder: "Nhập số lượng"
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("button", { staticClass: "btn btn-info", attrs: { type: "submit" } }, [
+        _vm._v("Submit")
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -21064,12 +21273,23 @@ var render = function() {
       }
     },
     [
-      _vm._m(0),
+      _c(
+        "div",
+        { staticClass: "logo" },
+        [
+          _c(
+            "router-link",
+            { staticClass: "simple-text logo-normal", attrs: { to: "/home" } },
+            [_vm._v("\n            HOME\n        ")]
+          )
+        ],
+        1
+      ),
       _vm._v(" "),
       _c("div", { staticClass: "sidebar-wrapper" }, [
         _c("ul", { staticClass: "nav navbar-nav nav-mobile-menu" }, [
           _c("li", { staticClass: "nav-item dropdown user-nav" }, [
-            _vm._m(1),
+            _vm._m(0),
             _vm._v(" "),
             _c(
               "div",
@@ -21251,18 +21471,6 @@ var render = function() {
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "logo" }, [
-      _c(
-        "a",
-        { staticClass: "simple-text logo-normal", attrs: { href: "home" } },
-        [_vm._v("\n            HOME\n        ")]
-      )
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

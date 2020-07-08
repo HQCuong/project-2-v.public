@@ -12,7 +12,6 @@
         <multiselect v-model="cau_hinh" :options="arr_cau_hinh" :close-on-select="true" :show-labels="true" placeholder="Chọn cấu hình" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false" :custom-label="labelCauHinh">
         </multiselect>
         <br>
-        <br>
         <form>
             <div class="form-group">
                 <label for="insertSeats">Số chỗ ngồi</label>
@@ -42,7 +41,6 @@ export default {
             $(".form-group").removeClass("is-focused");
             $(this).addClass("is-focused");
         });
-
 
         // remove color while move out input
         $("input").blur(function() {

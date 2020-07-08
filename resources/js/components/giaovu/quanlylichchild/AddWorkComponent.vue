@@ -5,7 +5,7 @@
             <multiselect v-model="giao_vien" placeholder="Chọn giáo viên" :options="arr_giao_vien" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :custom-label="labelGiaoVien"></multiselect>
             <br>
             <label>Lớp</label>
-            <multiselect v-model="lop" placeholder="Chọn lớp" track-by="ma_lop" :options="arr_lop" :multiple="true" :taggable="true" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn">
+            <multiselect v-model="lop" placeholder="Chọn lớp" track-by="ma_lop" :options="arr_lop" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn">
                 <template slot="noOptions">Chưa chọn giáo viên</template>
             </multiselect>
             <br>
@@ -52,7 +52,7 @@ export default {
             $(".form-group").removeClass("is-focused");
         });
 
-        this.$store.commit('content/page_title', 'Thêm ngày nghỉ');
+        this.$store.commit('content/page_title', 'Thêm lịch dạy');
     },
     data() {
         return {

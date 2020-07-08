@@ -31,6 +31,12 @@ Route::group(['middleware' => ['CheckKey', 'PreventBackButton']], function () {
 		return redirect()->route('login');
 	});
 
+	Route::get('{any}/logout', function() {
+		setcookie("key", "", time() - 3600);
+		setcookie("level", "", time() - 3600);
+		return redirect()->route('login');
+	})->where('any', '.*');
+
 	// vue-router
 	Route::get('{any}', function () {
     return view('app');
