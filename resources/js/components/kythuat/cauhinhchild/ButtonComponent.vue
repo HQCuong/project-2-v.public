@@ -15,15 +15,15 @@ export default {
         }
     },
     mounted() {
-        if (this.$route.path == '/quan_ly_cau_hinh/list_cau_hinh') {
-            this.isListCh = true;
+        if (this.$route.path.includes('/list_cau_hinh')) {
+            this.isListCh = true
             this.isAddCh = false;
             this.isModiCh = false;
-        } else if (this.$route.path == '/quan_ly_cau_hinh/them_cau_hinh') {
+        } else if (this.$route.path.includes('/them_cau_hinh')) {
             this.isListCh = false;
             this.isAddCh = true;
             this.isModiCh = false;
-        } else if (this.$route.path == '/quan_ly_cau_hinh/modi_cau_hinh') {
+        } else if (this.$route.path.includes('/modi_cau_hinh')) {
             this.isListCh = false;
             this.isAddCh = false;
             this.isModiCh = true;
@@ -35,15 +35,15 @@ export default {
     },
     watch: {
         $route(to, from) {
-            if (to.path == '/quan_ly_cau_hinh/list_cau_hinh') {
+            if (to.path.includes('/list_cau_hinh')) {
                 this.isListCh = true;
                 this.isAddCh = false;
                 this.isModiCh = false;
-            } else if (to.path == '/quan_ly_cau_hinh/them_cau_hinh') {
+            } else if (to.path.includes('/them_cau_hinh')) {
                 this.isListCh = false;
                 this.isAddCh = true;
                 this.isModiCh = false;
-            } else if (to.path == '/quan_ly_cau_hinh/modi_cau_hinh') {
+            } else if (to.path.includes('/modi_cau_hinh')) {
                 this.isListCh = false;
                 this.isAddCh = false;
                 this.isModiCh = true;

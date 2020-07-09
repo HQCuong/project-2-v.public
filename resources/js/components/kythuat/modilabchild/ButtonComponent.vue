@@ -15,15 +15,15 @@ export default {
         }
     },
     mounted() {
-        if (this.$route.path == '/quan_ly_lab/danh_sach_lab') {
+        if (this.$route.path.includes('danh_sach_lab')) {
             this.isListLab = true;
             this.isAddLab = false;
             this.isModiLab = false
-        } else if (this.$route.path == '/quan_ly_lab/add_lab') {
+        } else if (this.$route.path.includes('add_lab')) {
             this.isAddLab = true;
             this.isListLab = false;
             this.isModiLab = false;
-        } else if (this.$route.path == '/quan_ly_lab/modi_lab') {
+        } else if (this.$route.path.includes('modi_lab')) {
             this.isListLab = false;
             this.isAddLab = false;
             this.isModiLab = true;
@@ -37,15 +37,15 @@ export default {
     },
     watch: {
         $route(to, from) {
-            if (to.path == '/quan_ly_lab/danh_sach_lab') {
+            if (to.path.includes('danh_sach_lab')) {
                 this.isListLab = true;
                 this.isAddLab = false;
                 this.isModiLab = false
-            } else if (to.path == '/quan_ly_lab/add_lab') {
+            } else if (to.path.includes('add_lab')) {
                 this.isAddLab = true;
                 this.isListLab = false;
                 this.isModiLab = false;
-            } else if (this.$route.path == '/quan_ly_lab/modi_lab') {
+            } else if (to.path.includes('modi_lab')) {
                 this.isListLab = false;
                 this.isAddLab = false;
                 this.isModiLab = true;

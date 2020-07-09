@@ -36,9 +36,11 @@ import dayoff from './components/giaovu/quanlylichchild/DayoffComponent.vue';
 import add_work from './components/giaovu/quanlylichchild/AddWorkComponent.vue';
 
 import user from './components/giaovu/QuanLyUserComponent.vue';
+import list_user from './components/giaovu/userchild/ListUserComponent.vue';
+import modi_user_info from './components/giaovu/userchild/ModiInfoUserComponent.vue';
 
 
-// user
+// user-general
 import user_info from './components/nguoidung/UserProfileComponent.vue';
 import forgot_password from './components/nguoidung/ForgotPassComponent.vue';
 
@@ -61,7 +63,8 @@ export default [
         children: [
             { path: 'danh_sach_lab', component: list_lab },
             { path: 'add_lab', component: add_lab },
-            { path: 'modi_lab', component: modi_lab }
+            { path: 'modi_lab', component: modi_lab },
+            { path: 'modi_lab/:ma_lab', component: modi_lab }
         ],
         beforeEnter: (to, from, next) => {
             if (getCookie('level') == 1 || getCookie('level') == 2) {
@@ -136,8 +139,13 @@ export default [
         }
     },
     {
-        path: '/quan_ly_nguoi_dung',
+        path: '/quan_ly_user',
         component: user,
+        children: [
+            { path: 'list_user', component: list_user },
+            { path: 'modi_user_info', component: modi_user_info },
+            { path: 'modi_user_info/:ma_nguoi_dung', component: modi_user_info }
+        ],
         beforeEnter: (to, from, next) => {
             if (getCookie('level') == 1) {
                 next();

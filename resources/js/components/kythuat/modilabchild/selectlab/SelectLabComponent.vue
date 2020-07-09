@@ -50,9 +50,10 @@ export default {
         tang() {
             if (!this.tang) {
                 this.$emit('show_table_view', 0);
-                // this.$store.dispatch('toa/get_toa');
+                // this.$store.commit('lab/reset_arr_lab');
                 return false
             }
+            // this.$store.commit('lab/get_lab');
             this.$emit('show_table_view', 1);
         },
         arr_toa() {

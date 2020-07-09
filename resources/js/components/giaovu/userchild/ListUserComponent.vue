@@ -3,30 +3,21 @@
         <div class="card-header card-header-info">
             <h4 class="card-title">Danh sách người dùng</h4>
         </div>
+        <br>
         <div class="card-body table-responsive">
-            <table class="table table-hover">
-                <thead class="text-info">
-                    <th>Tên</th>
-                    <th>Địa chỉ email</th>
-                    <th>Chức vụ</th>
-                    <th>Tùy chỉnh</th>
-                </thead>
-                <tbody v-if="arr_user">
-                    <tr  v-if="index < 5" v-for="(user ,index) in arr_user" :key="user.ma_nguoi_dung">
-                        <td>{{user.ho_ten ? user.ho_ten : 'demo user'}}</td>
-                        <td>{{user.email}}</td>
-                        <td>{{user.ten_cap_do}}</td>
-                        <td>
-                            <button class="btn btn-info" title="tùy chỉnh thông tin">
-                                <i class="material-icons">
-                                    settings
-                                </i>
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <vue-good-table :columns="columns" :rows="arr_user" :search-options="{enabled: true}" :pagination-options="{enabled: true}">
+                <template slot="table-row" slot-scope="props">
+                    <span v-if="props.column.field == 'ma_nguoi_dung'">
+                        <router-link class="btn btn-info" :to="{path: `/quan_ly_user/modi_user_info/${props.row.ma_nguoi_dung}`}" title="Tùy chỉnh">
+                            <i class="material-icons">
+                                settings
+                            </i>
+                        </router-link>
+                    </span>
+                </template>
+            </vue-good-table>
         </div>
+    </div>
     </div>
 </template>
 <script>
@@ -34,14 +25,42 @@ export default {
     created() {
         this.$store.dispatch('user/get_user');
     },
+    mounted() {
+        this.$store.commit('content/page_title', 'Danh sách người dùng');
+    },
     data() {
         return {
-
+            columns: [{
+                    label: 'Tên người dùng',
+                    field: this.fomratNullName
+                },
+                {
+                    label: 'Email',
+                    field: 'email'
+                },
+                {
+                    label: 'Cấp độ',
+                    field: 'ten_cap_do'
+                },
+                {
+                    label: 'Tùy chỉnh',
+                    field: 'ma_nguoi_dung'
+                }
+            ]
         }
     },
     computed: {
         arr_user() {
             return this.$store.state.user.arr_user;
+        }
+    },
+    methods: {
+        fomratNullName(row) {
+            if (row.ho_ten) {
+                return row.ho_ten;
+            } else {
+                return "Demo user";
+            }
         }
     }
 }

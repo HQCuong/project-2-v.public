@@ -1,5 +1,5 @@
 <template>
-    <div class="sidebar" data-color="azure" data-background-color="white" data-image="./img/sidebar-1.jpg">
+    <div class="sidebar" data-color="azure" data-background-color="white">
         <div class="logo">
             <router-link to="/home" class="simple-text logo-normal">
                 HOME
@@ -60,7 +60,7 @@
                     </router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link class="nav-link" to="/quan_ly_nguoi_dung">
+                    <router-link class="nav-link" to="/quan_ly_user">
                         <i class="material-icons">account_circle</i>
                         <p>Quản lý người dùng</p>
                     </router-link>
