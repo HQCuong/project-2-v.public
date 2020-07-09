@@ -10,6 +10,8 @@ import user from './modules/User.js';
 import toa from './modules/Toa.js';
 import tang from './modules/Tang.js';
 import cau_hinh from './modules/CauHinh.js';
+import mon from './modules/Mon.js';
+import ca from './modules/Ca.js';
 
 export default new Vuex.Store({
     modules: {
@@ -19,6 +21,8 @@ export default new Vuex.Store({
         user: user,
         toa: toa,
         tang: tang,
-        cau_hinh: cau_hinh
+        cau_hinh: cau_hinh,
+        mon: mon,
+        ca: ca
     }
 })

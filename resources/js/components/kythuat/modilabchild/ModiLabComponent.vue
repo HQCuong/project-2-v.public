@@ -13,23 +13,23 @@
             <template slot="noOptions">Chưa chọn tầng</template>
         </multiselect>
         <br>
+        <br>
+        <div class="form-group">
+            <label for="insertName">Tên phòng</label>
+            <input type="number" class="form-control" id="insertName" placeholder="Nhập tên phòng" v-model="ten_lab">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="insertSeats">Số chỗ ngồi</label>
+            <input type="number" class="form-control" id="insertSeats" placeholder="Nhập số chõ ngồi" v-model="so_cho_ngoi">
+        </div>
+        <br>
         <label>Chọn cấu hình</label>
         <multiselect v-model="cau_hinh" :options="arr_cau_hinh" :close-on-select="true" :show-labels="true" placeholder="Chọn cấu hình" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false" :custom-label="labelCauHinh">
         </multiselect>
         <br>
-        <form>
-            <div class="form-group">
-                <label for="insertName">Tên phòng</label>
-                <input type="number" class="form-control" id="insertName" placeholder="Nhập tên phòng" v-model="ten_lab">
-            </div>
-            <br>
-            <div class="form-group">
-                <label for="insertSeats">Số chỗ ngồi</label>
-                <input type="number" class="form-control" id="insertSeats" placeholder="Nhập số chõ ngồi" v-model="so_cho_ngoi">
-            </div>
-            <br>
-            <button type="submit" class="btn btn-info">Submit</button>
-        </form>
+        <br>
+        <button type="submit" class="btn btn-info">Submit</button>
     </div>
 </template>
 <script>
@@ -90,6 +90,7 @@ export default {
     watch: {
         toa() {
             this.tang = "";
+            this.lab = "";
             this.ten_lab = "";
             this.so_cho_ngoi = "";
             this.cau_hinh = "";
@@ -99,24 +100,34 @@ export default {
             }
             this.$store.dispatch('tang/get_tang', this.toa.ma_toa);
         },
-
         tang() {
             this.lab = "";
+            this.ten_lab = "";
+            this.so_cho_ngoi = "";
+            this.cau_hinh = "";
             if (!this.tang) {
                 this.arr_lab = [];
+                // this.$store.commit('toa/reset_arr_toa');
                 return false
             }
             this.arr_lab = ['lab 1', 'lab 2', 'lab 3'];
         },
-
         lab() {
             if (!this.lab) {
-                this.lab = "";
+                this.ten_lab = "";
+                this.so_cho_ngoi = "";
+                this.cau_hinh = "";
             } else if (this.toa && this.tang) {
                 this.ten_lab = "201";
                 this.so_cho_ngoi = 20;
                 this.cau_hinh = this.arr_cau_hinh[0];
-            } 
+                // this.$store.commit('toa/get_info_toa', this.lab.ma_phong);
+            }
+        },
+        arr_toa() {
+            if (this.arr_toa.length != 0) {
+                this.toa = this.arr_toa[0];
+            }
         }
     }
 }

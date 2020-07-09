@@ -56,7 +56,6 @@ export default {
             }
             this.$store.dispatch('tang/get_tang', this.toa.ma_toa);
         },
-
         tang() {
             this.lab = "";
             this.$emit('show_lab_info', 0);
@@ -67,7 +66,6 @@ export default {
             }
             this.arr_lab = ['lab 1', 'lab 2', 'lab 3'];
         },
-
         lab() {
             if (!this.lab) {
                 this.$emit('show_lab_info', 0);
@@ -77,8 +75,12 @@ export default {
             } else {
                 this.$emit('show_lab_info', 0);
             }
+        },
+        arr_toa() {
+            if (this.arr_toa.length != 0) {
+                this.toa = this.arr_toa[0];
+            }
         }
-
     }
 }
 

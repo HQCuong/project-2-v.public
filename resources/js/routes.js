@@ -17,9 +17,9 @@ import add_lab from './components/kythuat/modilabchild/AddLabComponent.vue';
 import modi_lab from './components/kythuat/modilabchild/ModiLabComponent.vue';
 
 import cau_hinh from './components/kythuat/CauHinhComponent.vue';
-import add_ch from './components/kythuat/CauhinhChild/AddCauHinhComponent.vue';
-import modi_ch from './components/kythuat/CauhinhChild/ModiCauHinhComponent.vue';
-import ch_mon from './components/kythuat/CauhinhChild/CauHinhMonComponent.vue';
+import list_ch from './components/kythuat/cauhinhchild/ListCauHinhComponent.vue';
+import add_ch from './components/kythuat/cauhinhchild/AddCauHinhComponent.vue';
+import modi_ch from './components/kythuat/cauhinhchild/ModiCauHinhComponent.vue';
 
 import thiet_bi from './components/kythuat/ThietBiComponent.vue';
 import list_thiet_bi from './components/kythuat/thietbichild/ListThietBiComponent.vue';
@@ -36,9 +36,11 @@ import dayoff from './components/giaovu/quanlylichchild/DayoffComponent.vue';
 import add_work from './components/giaovu/quanlylichchild/AddWorkComponent.vue';
 
 import user from './components/giaovu/QuanLyUserComponent.vue';
+import list_user from './components/giaovu/userchild/ListUserComponent.vue';
+import modi_user_info from './components/giaovu/userchild/ModiInfoUserComponent.vue';
 
 
-// user
+// user-general
 import user_info from './components/nguoidung/UserProfileComponent.vue';
 import forgot_password from './components/nguoidung/ForgotPassComponent.vue';
 
@@ -61,7 +63,8 @@ export default [
         children: [
             { path: 'danh_sach_lab', component: list_lab },
             { path: 'add_lab', component: add_lab },
-            { path: 'modi_lab', component: modi_lab }
+            { path: 'modi_lab', component: modi_lab },
+            { path: 'modi_lab/:ma_lab', component: modi_lab }
         ],
         beforeEnter: (to, from, next) => {
             if (getCookie('level') == 1 || getCookie('level') == 2) {
@@ -75,9 +78,9 @@ export default [
         path: '/quan_ly_cau_hinh',
         component: cau_hinh,
         children: [
+            { path: 'list_cau_hinh', component: list_ch },
             { path: 'them_cau_hinh', component: add_ch },
-            { path: 'modi_cau_hinh', component: modi_ch },
-            { path: 'cau_hinh_mon', component: ch_mon }
+            { path: 'modi_cau_hinh', component: modi_ch }
         ],
         beforeEnter: (to, from, next) => {
             if (getCookie('level') == 1 || getCookie('level') == 2) {
@@ -124,8 +127,8 @@ export default [
         path: '/quan_ly_lich',
         component: quan_ly_lich,
         children: [
-            {path: 'add_dayoff', component: dayoff},
-            {path: 'add_work', component: add_work}
+            { path: 'add_dayoff', component: dayoff },
+            { path: 'add_work', component: add_work }
         ],
         beforeEnter: (to, from, next) => {
             if (getCookie('level') == 1) {
@@ -136,8 +139,13 @@ export default [
         }
     },
     {
-        path: '/quan_ly_nguoi_dung',
+        path: '/quan_ly_user',
         component: user,
+        children: [
+            { path: 'list_user', component: list_user },
+            { path: 'modi_user_info', component: modi_user_info },
+            { path: 'modi_user_info/:ma_nguoi_dung', component: modi_user_info }
+        ],
         beforeEnter: (to, from, next) => {
             if (getCookie('level') == 1) {
                 next();

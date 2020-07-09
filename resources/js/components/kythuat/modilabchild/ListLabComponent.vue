@@ -1,6 +1,6 @@
 <template>
     <div>
-        <selectlab @show_main_view="show_table_lab"></selectlab>
+        <selectlab @show_table_view="show_table_lab"></selectlab>
         <tablelab v-if="table_lab"></tablelab>
     </div>
 </template>
