@@ -18225,7 +18225,7 @@ var render = function() {
           options: _vm.arr_toa,
           "close-on-select": true,
           "show-labels": true,
-          placeholder: "Tòa",
+          placeholder: "Chọn tòa",
           deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
           selectLabel: "Click hoặc nhấn Enter để chọn",
           searchable: false,
@@ -18251,7 +18251,7 @@ var render = function() {
             options: _vm.arr_tang,
             "close-on-select": true,
             "show-labels": true,
-            placeholder: "Tầng",
+            placeholder: "Chọn tầng",
             deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
             selectLabel: "Click hoặc nhấn Enter để chọn",
             searchable: false,
@@ -18280,7 +18280,7 @@ var render = function() {
             options: _vm.arr_lab,
             "close-on-select": true,
             "show-labels": true,
-            placeholder: "Phòng",
+            placeholder: "Chọn phòng",
             deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
             selectLabel: "Click hoặc nhấn Enter để chọn",
             searchable: false
@@ -19329,11 +19329,7 @@ var render = function() {
           }
         ],
         staticClass: "form-control",
-        attrs: {
-          type: "email",
-          id: "insertEmail",
-          placeholder: _vm.current_email ? _vm.current_email : "Email"
-        },
+        attrs: { type: "email", id: "insertEmail", placeholder: "Email" },
         domProps: { value: _vm.email },
         on: {
           input: function($event) {
@@ -19363,11 +19359,7 @@ var render = function() {
           }
         ],
         staticClass: "form-control",
-        attrs: {
-          type: "text",
-          id: "insertAccount",
-          placeholder: _vm.current_account ? _vm.current_account : "Tài khoản"
-        },
+        attrs: { type: "text", id: "insertAccount", placeholder: "Tài khoản" },
         domProps: { value: _vm.account },
         on: {
           input: function($event) {
@@ -19397,11 +19389,7 @@ var render = function() {
           }
         ],
         staticClass: "form-control",
-        attrs: {
-          type: "text",
-          id: "insertSDT",
-          placeholder: _vm.current_sdt ? _vm.current_sdt : "sdt"
-        },
+        attrs: { type: "text", id: "insertSDT", placeholder: "Số điện thoại" },
         domProps: { value: _vm.sdt },
         on: {
           input: function($event) {
@@ -20922,7 +20910,7 @@ var render = function() {
           options: _vm.arr_toa,
           "close-on-select": true,
           "show-labels": true,
-          placeholder: "Tòa",
+          placeholder: "Chọn tòa",
           deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
           selectLabel: "Click hoặc nhấn Enter để chọn",
           searchable: false,
@@ -20948,7 +20936,7 @@ var render = function() {
             options: _vm.arr_tang,
             "close-on-select": true,
             "show-labels": true,
-            placeholder: "Tầng",
+            placeholder: "Chọn tầng",
             deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
             selectLabel: "Click hoặc nhấn Enter để chọn",
             searchable: false,
@@ -21975,7 +21963,11 @@ var render = function() {
     "div",
     {
       staticClass: "sidebar",
-      attrs: { "data-color": "azure", "data-background-color": "white" }
+      attrs: {
+        "data-color": "azure",
+        "data-background-color": "white",
+        "data-image": "./img/sidebar-1.jpg"
+      }
     },
     [
       _c(

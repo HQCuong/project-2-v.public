@@ -8,17 +8,17 @@
         <br>
         <div class="form-group">
             <label for="insertEmail">Nhập email</label>
-            <input type="email" class="form-control" id="insertEmail" :placeholder="current_email ? current_email :  'Email'" v-model="email">
+            <input type="email" class="form-control" id="insertEmail" placeholder="Email" v-model="email">
         </div>
         <br>
         <div class="form-group">
             <label for="insertAccount">Nhập tài khoản</label>
-            <input type="text" class="form-control" id="insertAccount" :placeholder="current_account ? current_account : 'Tài khoản'" v-model="account">
+            <input type="text" class="form-control" id="insertAccount" placeholder="Tài khoản" v-model="account">
         </div>
         <br>
         <div class="form-group">
             <label for="insertSDT">Nhập số điện thoại</label>
-            <input type="text" class="form-control" id="insertSDT" :placeholder="current_sdt ? current_sdt : 'sdt'" v-model="sdt">
+            <input type="text" class="form-control" id="insertSDT" placeholder="Số điện thoại" v-model="sdt">
         </div>
         <br>
         <div class="form-group">
@@ -89,7 +89,7 @@ export default {
         userLabel({ ho_ten, email }) {
             return `${ho_ten} - ${email}`;
         }
-    }
+    }  
 }
 
 </script>
