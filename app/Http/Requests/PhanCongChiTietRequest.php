@@ -17,10 +17,11 @@ class PhanCongChiTietRequest extends FormRequest {
     }
     public function attributes() {
         return [
-            'ma_phan_cong' => 'Phân công',
-            'thu'          => 'Thứ',
-            'ma_ca'        => 'Ca học',
-            'ma_phong'     => 'Phòng học',
+            'ma_phan_cong'       => 'Phân công',
+            'thu'                => 'Thứ',
+            'ma_ca'              => 'Ca học',
+            'ma_phong'           => 'Phòng học',
+            'phan_cong_chi_tiet' => 'Phân công chi tiết',
         ];
     }
 }

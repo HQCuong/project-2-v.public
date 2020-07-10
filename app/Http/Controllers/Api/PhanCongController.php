@@ -16,23 +16,27 @@ class PhanCongController extends Controller {
     public function phanCongWithTtGv(PhanCongRequest $rq) {
         try {
             $phan_cong = PhanCong::where(function ($query) use ($rq) {
+                if ($rq->get('cap_do') == 1) {
+                    if ($rq->has('ma_giao_vien')) {
+                        $query->where('ma_nguoi_dung', $rq->get('ma_giao_vien'));
+                    }
+                } else {
+                    $query->where('ma_nguoi_dung', $rq->get('ma_nguoi_dung'));
+                }
+                if ($rq->has('ma_phan_cong')) {
+                    $query->where('ma_phan_cong', $rq->get('ma_phan_cong'));
+                } else {
+                    if ($rq->has('ma_mon_hoc')) {
+                        $query->where('ma_mon_hoc', $rq->ma_mon_hoc);
+                    }
+                    if ($rq->has('ma_lop')) {
+                        $query->where('ma_lop', $rq->ma_lop);
+                    }
+                }
                 if ($rq->has('tinh_trang')) {
                     $query->where('tinh_trang', $rq->get('tinh_trang'));
                 } else {
                     $query->whereIn('tinh_trang', [0, 1]);
-                }
-                if ($rq->get('cap_do') == 3) {
-                    $query->where('ma_nguoi_dung', $rq->get('ma_nguoi_dung'));
-                } else {
-                    if ($rq->has('ma_giao_vien')) {
-                        $query->where('ma_nguoi_dung', $rq->get('ma_giao_vien'));
-                    }
-                }
-                if ($rq->has('ma_mon_hoc')) {
-                    $query->where('ma_mon_hoc', $rq->ma_mon_hoc);
-                }
-                if ($rq->has('ma_lop')) {
-                    $query->where('ma_lop', $rq->ma_lop);
                 }
             })
                 ->orderBy('tinh_trang', 'ASC')
@@ -44,6 +48,9 @@ class PhanCongController extends Controller {
         } catch (Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_GET);
         }
+    }
+    public function kiemTra(PhanCongRequest $rq) {
+        return ResponseMau::Store([]);
     }
     public function cloneBKACADToLocal() {
         try {
