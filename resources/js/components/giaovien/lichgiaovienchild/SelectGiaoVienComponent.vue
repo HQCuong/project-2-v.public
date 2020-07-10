@@ -6,7 +6,7 @@
         </div>
         <br>
         <div>
-            <span>Chọn lớp</span>
+            <span>Lớp</span>
             <multiselect v-model="lop" :options="arr_lop" :close-on-select="true" :show-labels="true" placeholder="Chọn lớp" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="true">
                 <template v-if="!is_giao_vien" slot="noOptions">Chưa chọn giáo viên</template>
             </multiselect>

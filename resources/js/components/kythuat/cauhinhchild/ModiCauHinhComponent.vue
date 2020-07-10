@@ -1,6 +1,6 @@
 <template>
     <div>
-        <label>Chọn cấu hình</label>
+        <label>Cấu hình</label>
         <multiselect v-model="cau_hinh" :options="arr_cau_hinh" :close-on-select="true" :show-labels="true" placeholder="Chọn cấu hình" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="true" :custom-label="labelCauHinh">
         </multiselect>
         <br>

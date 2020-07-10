@@ -10,30 +10,32 @@ export default {
     },
 
     mutations: {
-
+        reset_user_info(state) {
+            state.user_info = {};
+        }
     },
 
     actions: {
-    	get_user({state, commit ,rootState}) {
-    		state.arr_user = [];
-    		axios.post('http://localhost:8080/project-2/public/api/nguoidung/danhsach', {
-    		  key: getCookie('key')
-    		}).then((response) => {
-    		  state.arr_user = response.data.data;
-    		}).catch((error) => {
-    		  console.error(error);
-    		})
-    	},
-        get_user_info({state, commit, rootState}, ma_nguoi_dung) {
+        get_user({ state, commit, rootState }) {
+            state.user_info = {};
+            state.arr_user = [];
+            axios.post('http://localhost:8080/project-2/public/api/nguoidung/danhsach', {
+                key: getCookie('key')
+            }).then((response) => {
+                state.arr_user = response.data.data;
+            }).catch((error) => {
+                console.error(error);
+            })
+        },
+        get_user_info({ state, commit, rootState }, ma_nguoi_dung) {
             state.user_info = {};
             axios.post('http://localhost:8080/project-2/public/api/nguoidung/thongtin', {
-              key: getCookie('key'),
-              ma: ma_nguoi_dung
+                key: getCookie('key'),
+                ma: ma_nguoi_dung
             }).then((response) => {
                 state.user_info = response.data.data;
-                console.log(state.user_info);
             }).catch((error) => {
-              console.error(error);
+                console.error(error);
             })
         }
     },

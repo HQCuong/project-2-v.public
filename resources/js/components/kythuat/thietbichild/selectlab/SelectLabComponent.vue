@@ -1,14 +1,14 @@
 <template>
     <div>
-        <label>Chọn tòa</label>
+        <label>Tòa</label>
         <multiselect v-model="ma_toa" :options="arr_toa" :close-on-select="true" :show-labels="true" placeholder="Tòa" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false"></multiselect>
         <br>
-        <label>Chọn tầng</label>
+        <label>Tầng</label>
         <multiselect v-model="ma_tang" :options="arr_tang" :close-on-select="true" :show-labels="true" placeholder="Tầng" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false">
             <template slot="noOptions">Chưa chọn tòa</template>
         </multiselect>
         <br>
-        <label>Chọn lab</label>
+        <label>Lab</label>
         <multiselect v-model="ma_lab" :options="arr_lab" :close-on-select="true" :show-labels="true" placeholder="Phòng" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false">
             <template slot="noOptions">Chưa chọn tầng</template>
         </multiselect>

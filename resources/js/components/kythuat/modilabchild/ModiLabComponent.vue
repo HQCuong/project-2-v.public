@@ -1,14 +1,14 @@
 <template>
     <div>
-        <label>Chọn tòa</label>
+        <label>Tòa</label>
         <multiselect v-model="toa" :options="arr_toa" :close-on-select="true" :show-labels="true" placeholder="Tòa" :custom-label="labelToa" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false"></multiselect>
         <br>
-        <label>Chọn tầng</label>
+        <label>Tầng</label>
         <multiselect v-model="tang" :options="arr_tang" :close-on-select="true" :show-labels="true" placeholder="Tầng" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false" :custom-label="labelTang">
             <template slot="noOptions">Chưa chọn tòa</template>
         </multiselect>
         <br>
-        <label>Chọn lab</label>
+        <label>Lab</label>
         <multiselect v-model="lab" :options="arr_lab" :close-on-select="true" :show-labels="true" placeholder="Phòng" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false">
             <template slot="noOptions">Chưa chọn tầng</template>
         </multiselect>
@@ -24,7 +24,7 @@
             <input type="number" class="form-control" id="insertSeats" placeholder="Nhập số chõ ngồi" v-model="so_cho_ngoi">
         </div>
         <br>
-        <label>Chọn cấu hình</label>
+        <label>Cấu hình</label>
         <multiselect v-model="cau_hinh" :options="arr_cau_hinh" :close-on-select="true" :show-labels="true" placeholder="Chọn cấu hình" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="false" :custom-label="labelCauHinh">
         </multiselect>
         <br>
