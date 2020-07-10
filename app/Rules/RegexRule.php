@@ -61,6 +61,7 @@ class RegexRule {
     const REGEX_PHAN_CONG_MA_MON_HOC    = ['exists:mon_hoc,ma_mon_hoc'];
     const REGEX_PHAN_CONG_MA_PHAN_CONG  = ['exists:phan_cong,ma_phan_cong'];
     const REGEX_PHAN_CONG_MA_NGUOI_DUNG = ['nullable', 'exists:nguoi_dung,ma_nguoi_dung'];
+    const REGEX_PHAN_CONG_TINH_TRANG    = ['regex:/^[0,1,2]$/'];
     //Global
     const REGEX_THU                  = ['regex:/^[2-8]$/'];
     const REGEX_EXISTS_MA_CA         = ['exists:ca,ma_ca'];

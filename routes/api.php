@@ -163,6 +163,8 @@ Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVu']], function () {
 Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVuOrGiaoVien']], function () {
     Route::post('phancong', 'Api\PhanCongController@phanCongWithTtGv')
         ->name('api.phancong.phanCongWithTtGv');
+    Route::post('phancong/kiemtra', 'Api\PhanCongController@kiemTra')
+        ->name('api.phancong.kiemTra');
 });
 //CallAPIController
 Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVuOrGiaoVien']], function () {
@@ -173,11 +175,17 @@ Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVuOrGiaoVien']], function
 });
 
 //PhanCongChiTiet Controller
-Route::group(['middleware' => ['CheckLogin']], function () {
+Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVuOrGiaoVien']], function () {
     Route::post('phancongchitiet', 'Api\PhanCongChiTietController@hienThi')
         ->name('api.phancongchitiet.hienThi');
-    Route::post('phancongchitiet/tao', 'Api\PhanCongChiTietController@taoPcct')
-        ->name('api.phancongchitiet.taoPcct');
-    Route::post('phancongchitiet/dexuatlichmoi', 'Api\PhanCongChiTietController@deXuatPcct')
+    Route::post('phancongchitiet/kiemtra', 'Api\PhanCongChiTietController@kiemTra')
+        ->name('api.phancongchitiet.kiemTra');
+});
+Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVu']], function () {
+    Route::any('phancongchitiet/dexuat', 'Api\PhanCongChiTietController@deXuatPcct')
         ->name('api.phancongchitiet.deXuatPcct');
+    Route::any('phancongchitiet/tao', 'Api\PhanCongChiTietController@taoPcct')
+        ->name('api.phancongchitiet.taoPcct');
+    Route::any('phancongchitiet/xoa', 'Api\PhanCongChiTietController@xoaPCCT')
+        ->name('api.phancongchitiet.xoaPCCT');
 });

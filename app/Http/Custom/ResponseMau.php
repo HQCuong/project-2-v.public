@@ -17,6 +17,7 @@ class ResponseMau {
     const SUCCESS_GET            = 'Lấy dữ liệu thành công';
     const SUCCESS_UPDATE         = 'Cập nhật thành công';
     const SUCCESS_CREATE         = 'Tạo thành công';
+    const SUCCESS_DELETE         = 'Xóa thành công';
     const SUCCESS_NO_DATA_UPDATE = 'Không có dữ liệu nào mới để thay đổi';
     ///success return
     const SUCCESS_USER_CREATE         = 'Tạo tài khoản thành công';
@@ -44,6 +45,7 @@ class ResponseMau {
     const ERROR_UPDATE         = 'Cập nhật dữ liệu thất bại';
     const ERROR_KEY            = 'Bạn không có quyền truy cập';
     const ERROR_CREATE         = 'Tạo thất bại hay kiểm tra lại dữ liệu';
+    const ERROR_DELETE         = 'Xóa thất bại hay kiểm tra lại dữ liệu';
 
     const ERROR_USER_NAME               = ':attribute cần từ 4-20 kí tự và không có kí tự đặc biệt';
     const ERROR_USER_PASSWORD_ILLEGAL   = ':attribute cần từ 5-32 kí tự và không bao gồm kí tự đặc biệt';
@@ -109,6 +111,13 @@ class ResponseMau {
     const ERROR_NGAY_NGHI_THEM = 'Ngày nghỉ đã tồn tại hoặc không hợp lệ !';
     const ERROR_NGAY_NGHI_SUA  = 'Ngày nghỉ không tồn tại hoặc không hợp lệ !';
     const ERROR_NGAY_NGHI_XOA  = 'Ngày nghỉ không tồn tại hoặc không hợp lệ !';
+
+    ///PhanCongChiTiet
+    const ERROR_PCCT_PHAN_CONG    = 'Phân công bạn chọn không tồn tại hoặc chưa có giáo viên cho phân công này!';
+    const ERROR_PCCT_SO_SINH_VIEN = 'Không thể lấy số sinh viên của lớp hãy thử lại hoặc liên hệ kĩ thuật !';
+    const ERROR_PCCT_KHONG_CO_DX  = 'Không có lịch trống phù hợp cho lựa chọn của bạn !';
+    const ERROR_PCCT_ADD_PCCT     = 'Bạn hãy chọn phân công theo dữ liệu được đề xuất ! ';
+
     public function __construct() {
         $this->success = true;
         $this->message = '';

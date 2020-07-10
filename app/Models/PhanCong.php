@@ -22,7 +22,7 @@ class PhanCong extends Model {
     );
     public $timestamps = false;
     public function phanCongChiTiet() {
-        return $this->hasMany('App\Models\PhanCongChiTiet', 'ma_phan_cong', 'ma_phan_cong');
+        return $this->hasMany('App\Models\PhanCongChiTiet', 'ma_phan_cong', 'ma_phan_cong')->orderBy('thu', 'ASC');
     }
     public function nguoiDung() {
         return $this->hasOne('App\Models\NguoiDung', 'ma_nguoi_dung', 'ma_nguoi_dung');
