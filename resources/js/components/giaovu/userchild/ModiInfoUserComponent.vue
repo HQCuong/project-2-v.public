@@ -7,28 +7,29 @@
         <br>
         <br>
         <div class="form-group">
-            <label for="insertEmail">Nhập email</label>
-            <input type="email" class="form-control" id="insertEmail" placeholder="Email" v-model="email">
+            <label for="insertEmail">Email</label>
+            <input type="email" class="form-control" id="insertEmail" placeholder="Nhập email" v-model="current_email">
         </div>
         <br>
         <div class="form-group">
-            <label for="insertAccount">Nhập tài khoản</label>
-            <input type="text" class="form-control" id="insertAccount" placeholder="Tài khoản" v-model="account">
+            <label for="insertAccount">Tài khoản</label>
+            <input type="text" class="form-control" id="insertAccount" placeholder="Nhập tài khoản" v-model="current_account">
         </div>
         <br>
         <div class="form-group">
-            <label for="insertSDT">Nhập số điện thoại</label>
-            <input type="text" class="form-control" id="insertSDT" placeholder="Số điện thoại" v-model="sdt">
+            <label for="insertSDT">Số điện thoại</label>
+            <input type="text" class="form-control" id="insertSDT" placeholder="Nhập số điện thoại" v-model="current_sdt">
         </div>
         <br>
         <div class="form-group">
-            <label for="insertPass">Nhập Mật khẩu</label>
+            <label for="insertPass">Mật khẩu</label>
             <input type="password" class="form-control" id="insertPass" placeholder="Mật khẩu mới" v-model="password">
         </div>
         <br>
         <div class="form-group">
             <label for="confirmPass">Nhập lại mật khẩu</label>
-            <input type="password" class="form-control" id="confirmPass" placeholder="Nhập lại mật khẩu" v-model="password">
+            <input type="password" class="form-control" id="confirmPass" placeholder="Nhập lại mật khẩu" v-model="repassword">
+            <span v-if="err_repass" style="color:red">Mật khẩu nhập lại phải trùng với mật khẩu</span>
         </div>
         <br>
         <button class="btn btn-info">Submit</button>
@@ -61,35 +62,66 @@ export default {
     },
     data() {
         return {
-            user: '',
+            user: {},
             email: '',
             account: '',
             sdt: '',
-            password: ''
+            password: '',
+            repassword: '',
+            err_repass: false
         }
     },
     computed: {
-        user_info() {
-            return this.$store.state.user.user_info;
-        },
         arr_user() {
             return this.$store.state.user.arr_user;
         },
-        current_email() {
-            return this.user_info.email;
+        // current_user: {
+        //     get() {
+        //         return this.$store.state.user.user_info.ma_nguoi_dung ? this.$store.state.user.user_info : this.user;
+        //     },
+        //     set(val) {
+        //         return this.user = val;
+        //     }
+        // },
+        current_email: {
+            get() {
+                return this.$store.state.user.user_info.email;
+            },
+            set(val) {
+                this.email = val;
+            }
         },
-        current_account() {
-            return this.user_info.tai_khoan;
+        current_account: {
+            get() {
+                return this.$store.state.user.user_info.tai_khoan;
+            },
+            set(val) {
+                this.tai_khoan = val;
+            }
         },
-        current_sdt() {
-            return this.user_info.sdt;
+        current_sdt: {
+            get() {
+                return this.$store.state.user.user_info.sdt;
+            },
+            set(val) {
+                this.sdt = val;
+            }
         }
     },
     methods: {
         userLabel({ ho_ten, email }) {
             return `${ho_ten} - ${email}`;
+        },
+    },
+    watch: {
+        repassword() {
+            if (this.repassword != this.password) {
+                this.err_repass = true;
+            } else {
+                this.err_repass = false;
+            }
         }
-    }  
+    }
 }
 
 </script>

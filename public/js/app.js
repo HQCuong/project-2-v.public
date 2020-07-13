@@ -14497,6 +14497,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     if (this.$route.params.ma_nguoi_dung) {
@@ -14521,28 +14522,50 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      user: '',
+      user: {},
       email: '',
       account: '',
       sdt: '',
-      password: ''
+      password: '',
+      repassword: '',
+      err_repass: false
     };
   },
   computed: {
-    user_info: function user_info() {
-      return this.$store.state.user.user_info;
-    },
     arr_user: function arr_user() {
       return this.$store.state.user.arr_user;
     },
-    current_email: function current_email() {
-      return this.user_info.email;
+    // current_user: {
+    //     get() {
+    //         return this.$store.state.user.user_info.ma_nguoi_dung ? this.$store.state.user.user_info : this.user;
+    //     },
+    //     set(val) {
+    //         return this.user = val;
+    //     }
+    // },
+    current_email: {
+      get: function get() {
+        return this.$store.state.user.user_info.email;
+      },
+      set: function set(val) {
+        this.email = val;
+      }
     },
-    current_account: function current_account() {
-      return this.user_info.tai_khoan;
+    current_account: {
+      get: function get() {
+        return this.$store.state.user.user_info.tai_khoan;
+      },
+      set: function set(val) {
+        this.tai_khoan = val;
+      }
     },
-    current_sdt: function current_sdt() {
-      return this.user_info.sdt;
+    current_sdt: {
+      get: function get() {
+        return this.$store.state.user.user_info.sdt;
+      },
+      set: function set(val) {
+        this.sdt = val;
+      }
     }
   },
   methods: {
@@ -14550,6 +14573,15 @@ __webpack_require__.r(__webpack_exports__);
       var ho_ten = _ref.ho_ten,
           email = _ref.email;
       return "".concat(ho_ten, " - ").concat(email);
+    }
+  },
+  watch: {
+    repassword: function repassword() {
+      if (this.repassword != this.password) {
+        this.err_repass = true;
+      } else {
+        this.err_repass = false;
+      }
     }
   }
 });
@@ -19317,26 +19349,26 @@ var render = function() {
     _c("br"),
     _vm._v(" "),
     _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "insertEmail" } }, [_vm._v("Nhập email")]),
+      _c("label", { attrs: { for: "insertEmail" } }, [_vm._v("Email")]),
       _vm._v(" "),
       _c("input", {
         directives: [
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.email,
-            expression: "email"
+            value: _vm.current_email,
+            expression: "current_email"
           }
         ],
         staticClass: "form-control",
-        attrs: { type: "email", id: "insertEmail", placeholder: "Email" },
-        domProps: { value: _vm.email },
+        attrs: { type: "email", id: "insertEmail", placeholder: "Nhập email" },
+        domProps: { value: _vm.current_email },
         on: {
           input: function($event) {
             if ($event.target.composing) {
               return
             }
-            _vm.email = $event.target.value
+            _vm.current_email = $event.target.value
           }
         }
       })
@@ -19345,28 +19377,30 @@ var render = function() {
     _c("br"),
     _vm._v(" "),
     _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "insertAccount" } }, [
-        _vm._v("Nhập tài khoản")
-      ]),
+      _c("label", { attrs: { for: "insertAccount" } }, [_vm._v("Tài khoản")]),
       _vm._v(" "),
       _c("input", {
         directives: [
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.account,
-            expression: "account"
+            value: _vm.current_account,
+            expression: "current_account"
           }
         ],
         staticClass: "form-control",
-        attrs: { type: "text", id: "insertAccount", placeholder: "Tài khoản" },
-        domProps: { value: _vm.account },
+        attrs: {
+          type: "text",
+          id: "insertAccount",
+          placeholder: "Nhập tài khoản"
+        },
+        domProps: { value: _vm.current_account },
         on: {
           input: function($event) {
             if ($event.target.composing) {
               return
             }
-            _vm.account = $event.target.value
+            _vm.current_account = $event.target.value
           }
         }
       })
@@ -19375,28 +19409,30 @@ var render = function() {
     _c("br"),
     _vm._v(" "),
     _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "insertSDT" } }, [
-        _vm._v("Nhập số điện thoại")
-      ]),
+      _c("label", { attrs: { for: "insertSDT" } }, [_vm._v("Số điện thoại")]),
       _vm._v(" "),
       _c("input", {
         directives: [
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.sdt,
-            expression: "sdt"
+            value: _vm.current_sdt,
+            expression: "current_sdt"
           }
         ],
         staticClass: "form-control",
-        attrs: { type: "text", id: "insertSDT", placeholder: "Số điện thoại" },
-        domProps: { value: _vm.sdt },
+        attrs: {
+          type: "text",
+          id: "insertSDT",
+          placeholder: "Nhập số điện thoại"
+        },
+        domProps: { value: _vm.current_sdt },
         on: {
           input: function($event) {
             if ($event.target.composing) {
               return
             }
-            _vm.sdt = $event.target.value
+            _vm.current_sdt = $event.target.value
           }
         }
       })
@@ -19405,7 +19441,7 @@ var render = function() {
     _c("br"),
     _vm._v(" "),
     _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "insertPass" } }, [_vm._v("Nhập Mật khẩu")]),
+      _c("label", { attrs: { for: "insertPass" } }, [_vm._v("Mật khẩu")]),
       _vm._v(" "),
       _c("input", {
         directives: [
@@ -19446,8 +19482,8 @@ var render = function() {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.password,
-            expression: "password"
+            value: _vm.repassword,
+            expression: "repassword"
           }
         ],
         staticClass: "form-control",
@@ -19456,16 +19492,22 @@ var render = function() {
           id: "confirmPass",
           placeholder: "Nhập lại mật khẩu"
         },
-        domProps: { value: _vm.password },
+        domProps: { value: _vm.repassword },
         on: {
           input: function($event) {
             if ($event.target.composing) {
               return
             }
-            _vm.password = $event.target.value
+            _vm.repassword = $event.target.value
           }
         }
-      })
+      }),
+      _vm._v(" "),
+      _vm.err_repass
+        ? _c("span", { staticStyle: { color: "red" } }, [
+            _vm._v("Mật khẩu nhập lại phải trùng với mật khẩu")
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
     _c("br"),
@@ -20331,7 +20373,7 @@ var render = function() {
           options: _vm.arr_toa,
           "close-on-select": true,
           "show-labels": true,
-          placeholder: "Tòa",
+          placeholder: "Chọn tòa",
           "custom-label": _vm.labelToa,
           deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
           selectLabel: "Click hoặc nhấn Enter để chọn",
@@ -20357,7 +20399,7 @@ var render = function() {
             options: _vm.arr_tang,
             "close-on-select": true,
             "show-labels": true,
-            placeholder: "Tầng",
+            placeholder: "Chọn tầng",
             deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
             selectLabel: "Click hoặc nhấn Enter để chọn",
             searchable: false,
@@ -20705,7 +20747,7 @@ var render = function() {
           options: _vm.arr_toa,
           "close-on-select": true,
           "show-labels": true,
-          placeholder: "Tòa",
+          placeholder: "Chọn tòa",
           "custom-label": _vm.labelToa,
           deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
           selectLabel: "Click hoặc nhấn Enter để chọn",
@@ -20731,7 +20773,7 @@ var render = function() {
             options: _vm.arr_tang,
             "close-on-select": true,
             "show-labels": true,
-            placeholder: "Tầng",
+            placeholder: "Chọn tầng",
             deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
             selectLabel: "Click hoặc nhấn Enter để chọn",
             searchable: false,
@@ -20760,7 +20802,7 @@ var render = function() {
             options: _vm.arr_lab,
             "close-on-select": true,
             "show-labels": true,
-            placeholder: "Phòng",
+            placeholder: "Chọn phòng",
             deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
             selectLabel: "Click hoặc nhấn Enter để chọn",
             searchable: false
