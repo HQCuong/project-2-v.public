@@ -6,7 +6,11 @@ export default {
     state: {
         is_giao_vien: false,
         arr_user: [],
-        user_info: {}
+        user_info: {},
+
+        // validate err
+        err_validate_detail: {},
+        err_validate_global: ''
     },
 
     mutations: {
@@ -39,27 +43,41 @@ export default {
             })
         },
         modi_user_info({ state, commit, rootState }, user) {
-            var body_obj = {
+            state.err_validate_global = '';
+            state.err_validate_detail = {};
+
+            for (var m in user) {
+                if (!user[m]) {
+                    delete user[m];
+                }
+
+                if (user[m] === state.user_info[m]) {
+                    delete user[m];
+                }
+            }
+
+            console.log(user);
+
+            axios.post(`http://localhost:8080/project-2/public/api/nguoidung/capnhatthongtin/${user.ma_nguoi_dung}`, {
                 key: getCookie('key'),
-                email: user.email,
-                tai_khoan: user.tai_khoan,
-                sdt: user.sdt,
-                password: user.password
-            }
-
-            var x = Object.keys(body_obj);
-
-            for(var each of x) {
-                console.log(body_obj.each);
-            }
-
-            // axios.post(`http://localhost:8080/project-2/public/api/nguoidung/capnhatthongtin/${user.ma_nguoi_dung}`, {
-            //   body_obj
-            // }).then((response) => {
-            //     console.log(response);
-            // }).catch((error) => {
-            //   console.error(error);
-            // })
+                ...user
+            }).then((response) => {
+                console.log(response);
+                if (response.data.success) {
+                    state.err_validate_global = '';
+                    state.err_validate_detail = {};
+                    this.dispatch('user/get_user_info', user.ma_nguoi_dung);
+                } else {
+                    if (typeof response.data.message === 'string') {
+                        state.err_validate_global = response.data.message
+                    } else {
+                        state.err_validate_detail = response.data.message;
+                        console.log(state.err_validate);
+                    }
+                }
+            }).catch((error) => {
+                console.error(error);
+            })
         }
     },
 

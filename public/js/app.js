@@ -14500,6 +14500,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     if (this.$route.params.ma_nguoi_dung) {
@@ -14558,7 +14562,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.$store.state.user.user_info.tai_khoan;
       },
       set: function set(val) {
-        this.tai_khoan = val;
+        this.account = val;
       }
     },
     current_sdt: {
@@ -14568,6 +14572,12 @@ __webpack_require__.r(__webpack_exports__);
       set: function set(val) {
         this.sdt = val;
       }
+    },
+    err_validate_detail: function err_validate_detail() {
+      return this.$store.state.user.err_validate_detail;
+    },
+    err_validate_global: function err_validate_global() {
+      return this.$store.state.user.err_validate_global;
     }
   },
   methods: {
@@ -14581,9 +14591,9 @@ __webpack_require__.r(__webpack_exports__);
       this.$store.dispatch('user/modi_user_info', {
         ma_nguoi_dung: this.$route.params.ma_nguoi_dung,
         email: this.email,
-        account: this.account,
+        tai_khoan: this.tai_khoan,
         sdt: this.sdt,
-        password: this.password
+        mat_khau: $.MD5(this.password)
       });
     }
   },
@@ -19372,6 +19382,12 @@ var render = function() {
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
+      _vm.err_validate_global
+        ? _c("span", { staticClass: "text-danger" }, [
+            _vm._v(_vm._s(_vm.err_validate_global))
+          ])
+        : _vm._e(),
+      _vm._v(" "),
       _c("div", { staticClass: "form-group" }, [
         _c("label", { attrs: { for: "insertEmail" } }, [_vm._v("Email")]),
         _vm._v(" "),
@@ -19399,7 +19415,13 @@ var render = function() {
               _vm.current_email = $event.target.value
             }
           }
-        })
+        }),
+        _vm._v(" "),
+        _vm.err_validate_detail.email
+          ? _c("span", { staticClass: "text-danger" }, [
+              _vm._v(_vm._s(_vm.err_validate_detail.email))
+            ])
+          : _vm._e()
       ]),
       _vm._v(" "),
       _c("br"),
@@ -19431,7 +19453,13 @@ var render = function() {
               _vm.current_account = $event.target.value
             }
           }
-        })
+        }),
+        _vm._v(" "),
+        _vm.err_validate_detail.tai_khoan
+          ? _c("span", { staticClass: "text-danger" }, [
+              _vm._v(_vm._s(_vm.err_validate_detail.tai_khoan))
+            ])
+          : _vm._e()
       ]),
       _vm._v(" "),
       _c("br"),
@@ -19463,7 +19491,13 @@ var render = function() {
               _vm.current_sdt = $event.target.value
             }
           }
-        })
+        }),
+        _vm._v(" "),
+        _vm.err_validate_detail.sdt
+          ? _c("span", { staticClass: "text-danger" }, [
+              _vm._v(_vm._s(_vm.err_validate_detail.sdt))
+            ])
+          : _vm._e()
       ]),
       _vm._v(" "),
       _c("br"),
@@ -19532,7 +19566,7 @@ var render = function() {
         }),
         _vm._v(" "),
         _vm.err_repass
-          ? _c("span", { staticStyle: { color: "red" } }, [
+          ? _c("span", { staticClass: "text-danger" }, [
               _vm._v("Mật khẩu nhập lại phải trùng với mật khẩu")
             ])
           : _vm._e()
@@ -47628,13 +47662,22 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../customfunc/getCookie.js */ "./resources/js/customfunc/getCookie.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,
   state: {
     is_giao_vien: false,
     arr_user: [],
-    user_info: {}
+    user_info: {},
+    // validate err
+    err_validate_detail: {},
+    err_validate_global: ''
   },
   mutations: {
     reset_user_info: function reset_user_info(state) {
@@ -47671,29 +47714,46 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     modi_user_info: function modi_user_info(_ref3, user) {
+      var _this = this;
+
       var state = _ref3.state,
           commit = _ref3.commit,
           rootState = _ref3.rootState;
-      var body_obj = {
-        key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])('key'),
-        email: user.email,
-        tai_khoan: user.tai_khoan,
-        sdt: user.sdt,
-        password: user.password
-      };
-      var x = Object.keys(body_obj);
+      state.err_validate_global = '';
+      state.err_validate_detail = {};
 
-      for (var _i = 0, _x = x; _i < _x.length; _i++) {
-        var each = _x[_i];
-        console.log(body_obj.each);
-      } // axios.post(`http://localhost:8080/project-2/public/api/nguoidung/capnhatthongtin/${user.ma_nguoi_dung}`, {
-      //   body_obj
-      // }).then((response) => {
-      //     console.log(response);
-      // }).catch((error) => {
-      //   console.error(error);
-      // })
+      for (var m in user) {
+        if (!user[m]) {
+          delete user[m];
+        }
 
+        if (user[m] === state.user_info[m]) {
+          delete user[m];
+        }
+      }
+
+      console.log(user);
+      axios.post("http://localhost:8080/project-2/public/api/nguoidung/capnhatthongtin/".concat(user.ma_nguoi_dung), _objectSpread({
+        key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])('key')
+      }, user)).then(function (response) {
+        console.log(response);
+
+        if (response.data.success) {
+          state.err_validate_global = '';
+          state.err_validate_detail = {};
+
+          _this.dispatch('user/get_user_info', user.ma_nguoi_dung);
+        } else {
+          if (typeof response.data.message === 'string') {
+            state.err_validate_global = response.data.message;
+          } else {
+            state.err_validate_detail = response.data.message;
+            console.log(state.err_validate);
+          }
+        }
+      })["catch"](function (error) {
+        console.error(error);
+      });
     }
   }
 });

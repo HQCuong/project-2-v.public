@@ -7,19 +7,23 @@
             </div>
             <br>
             <br>
+            <span v-if="err_validate_global" class="text-danger">{{err_validate_global}}</span>
             <div class="form-group">
                 <label for="insertEmail">Email</label>
                 <input type="email" class="form-control" id="insertEmail" placeholder="Nhập email" v-model="current_email">
+                <span v-if="err_validate_detail.email" class="text-danger">{{err_validate_detail.email}}</span>
             </div>
             <br>
             <div class="form-group">
                 <label for="insertAccount">Tài khoản</label>
                 <input type="text" class="form-control" id="insertAccount" placeholder="Nhập tài khoản" v-model="current_account">
+                <span v-if="err_validate_detail.tai_khoan" class="text-danger">{{err_validate_detail.tai_khoan}}</span>
             </div>
             <br>
             <div class="form-group">
                 <label for="insertSDT">Số điện thoại</label>
                 <input type="text" class="form-control" id="insertSDT" placeholder="Nhập số điện thoại" v-model="current_sdt">
+                <span v-if="err_validate_detail.sdt" class="text-danger">{{err_validate_detail.sdt}}</span>
             </div>
             <br>
             <div class="form-group">
@@ -30,7 +34,7 @@
             <div class="form-group">
                 <label for="confirmPass">Nhập lại mật khẩu</label>
                 <input type="password" class="form-control" id="confirmPass" placeholder="Nhập lại mật khẩu" v-model="repassword">
-                <span v-if="err_repass" style="color:red">Mật khẩu nhập lại phải trùng với mật khẩu</span>
+                <span v-if="err_repass" class="text-danger">Mật khẩu nhập lại phải trùng với mật khẩu</span>
             </div>
             <br>
             <button class="btn btn-info">Submit</button>
@@ -98,7 +102,7 @@ export default {
                 return this.$store.state.user.user_info.tai_khoan;
             },
             set(val) {
-                this.tai_khoan = val;
+                this.account = val;
             }
         },
         current_sdt: {
@@ -108,6 +112,12 @@ export default {
             set(val) {
                 this.sdt = val;
             }
+        },
+        err_validate_detail() {
+            return this.$store.state.user.err_validate_detail;
+        },
+        err_validate_global() {
+            return this.$store.state.user.err_validate_global;
         }
     },
     methods: {
@@ -119,10 +129,11 @@ export default {
             this.$store.dispatch('user/modi_user_info', {
                 ma_nguoi_dung: this.$route.params.ma_nguoi_dung,
                 email: this.email,
-                account: this.account,
+                tai_khoan: this.tai_khoan,
                 sdt: this.sdt,
-                password: this.password
+                mat_khau: $.MD5(this.password)
             });
+
         }
     },
     watch: {
