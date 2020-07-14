@@ -7,7 +7,7 @@
                 <img :src="src_logo_login" id="icon" alt="User Icon" />
             </div>
             <!-- Login Form -->
-            <form @submit="send">
+            <form @submit="process_login">
                 <input type="text" id="tai_khoan" class="fadeIn second" name="user" placeholder="login" required>
                 <br>
                 <input type="password" id="mat_khau" class="fadeIn third" name="password" placeholder="password" required>
@@ -37,7 +37,7 @@ export default {
         }
     },
     methods: {
-        send(e) {
+        process_login(e) {
             e.preventDefault();
             this.is_loading = true;
             var tai_khoan = $("#tai_khoan").val();

@@ -13238,7 +13238,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    send: function send(e) {
+    process_login: function process_login(e) {
       var _this = this;
 
       e.preventDefault();
@@ -14498,6 +14498,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     if (this.$route.params.ma_nguoi_dung) {
@@ -14522,7 +14524,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      user: {},
+      user: '',
       email: '',
       account: '',
       sdt: '',
@@ -14535,14 +14537,14 @@ __webpack_require__.r(__webpack_exports__);
     arr_user: function arr_user() {
       return this.$store.state.user.arr_user;
     },
-    // current_user: {
-    //     get() {
-    //         return this.$store.state.user.user_info.ma_nguoi_dung ? this.$store.state.user.user_info : this.user;
-    //     },
-    //     set(val) {
-    //         return this.user = val;
-    //     }
-    // },
+    current_user: {
+      get: function get() {
+        return this.$store.state.user.user_info.ma_nguoi_dung ? this.$store.state.user.user_info : this.user;
+      },
+      set: function set(val) {
+        this.user = val;
+      }
+    },
     current_email: {
       get: function get() {
         return this.$store.state.user.user_info.email;
@@ -14573,15 +14575,36 @@ __webpack_require__.r(__webpack_exports__);
       var ho_ten = _ref.ho_ten,
           email = _ref.email;
       return "".concat(ho_ten, " - ").concat(email);
+    },
+    process_info_user: function process_info_user(e) {
+      e.preventDefault();
+      this.$store.dispatch('user/modi_user_info', {
+        ma_nguoi_dung: this.$route.params.ma_nguoi_dung,
+        email: this.email,
+        account: this.account,
+        sdt: this.sdt,
+        password: this.password
+      });
     }
   },
   watch: {
+    password: function password() {
+      if (!this.repassword) {
+        this.err_repass = false;
+      }
+    },
     repassword: function repassword() {
-      if (this.repassword != this.password) {
+      if (!this.repassword) {
+        this.err_repass = false;
+      } else if (this.repassword != this.password) {
         this.err_repass = true;
       } else {
         this.err_repass = false;
       }
+    },
+    user: function user() {
+      this.$router.push("/quan_ly_user/modi_user_info/".concat(this.user.ma_nguoi_dung));
+      this.$store.dispatch('user/get_user_info', this.$route.params.ma_nguoi_dung);
     }
   }
 });
@@ -17872,7 +17895,7 @@ var render = function() {
         })
       ]),
       _vm._v(" "),
-      _c("form", { on: { submit: _vm.send } }, [
+      _c("form", { on: { submit: _vm.process_login } }, [
         _c("input", {
           staticClass: "fadeIn second",
           attrs: {
@@ -19316,203 +19339,209 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c(
-      "div",
-      [
-        _c("label", [_vm._v("Người dùng")]),
-        _vm._v(" "),
-        _c("multiselect", {
-          attrs: {
-            options: _vm.arr_user,
-            "close-on-select": true,
-            "show-labels": true,
-            placeholder: "Chọn người dùng",
-            deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
-            selectLabel: "Click hoặc nhấn Enter để chọn",
-            searchable: true,
-            "custom-label": _vm.userLabel
-          },
-          model: {
-            value: _vm.user,
-            callback: function($$v) {
-              _vm.user = $$v
+    _c("form", { on: { submit: _vm.process_info_user } }, [
+      _c(
+        "div",
+        [
+          _c("label", [_vm._v("Người dùng")]),
+          _vm._v(" "),
+          _c("multiselect", {
+            attrs: {
+              options: _vm.arr_user,
+              "close-on-select": true,
+              "show-labels": true,
+              placeholder: "Chọn người dùng",
+              deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
+              selectLabel: "Click hoặc nhấn Enter để chọn",
+              searchable: true,
+              "custom-label": _vm.userLabel
             },
-            expression: "user"
+            model: {
+              value: _vm.current_user,
+              callback: function($$v) {
+                _vm.current_user = $$v
+              },
+              expression: "current_user"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "insertEmail" } }, [_vm._v("Email")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.current_email,
+              expression: "current_email"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            type: "email",
+            id: "insertEmail",
+            placeholder: "Nhập email"
+          },
+          domProps: { value: _vm.current_email },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.current_email = $event.target.value
+            }
           }
         })
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c("br"),
-    _vm._v(" "),
-    _c("br"),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "insertEmail" } }, [_vm._v("Email")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.current_email,
-            expression: "current_email"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "email", id: "insertEmail", placeholder: "Nhập email" },
-        domProps: { value: _vm.current_email },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.current_email = $event.target.value
-          }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("br"),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "insertAccount" } }, [_vm._v("Tài khoản")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.current_account,
-            expression: "current_account"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: {
-          type: "text",
-          id: "insertAccount",
-          placeholder: "Nhập tài khoản"
-        },
-        domProps: { value: _vm.current_account },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.current_account = $event.target.value
-          }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("br"),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "insertSDT" } }, [_vm._v("Số điện thoại")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.current_sdt,
-            expression: "current_sdt"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: {
-          type: "text",
-          id: "insertSDT",
-          placeholder: "Nhập số điện thoại"
-        },
-        domProps: { value: _vm.current_sdt },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.current_sdt = $event.target.value
-          }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("br"),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "insertPass" } }, [_vm._v("Mật khẩu")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.password,
-            expression: "password"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: {
-          type: "password",
-          id: "insertPass",
-          placeholder: "Mật khẩu mới"
-        },
-        domProps: { value: _vm.password },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.password = $event.target.value
-          }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("br"),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "confirmPass" } }, [
-        _vm._v("Nhập lại mật khẩu")
       ]),
       _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.repassword,
-            expression: "repassword"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: {
-          type: "password",
-          id: "confirmPass",
-          placeholder: "Nhập lại mật khẩu"
-        },
-        domProps: { value: _vm.repassword },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.repassword = $event.target.value
-          }
-        }
-      }),
+      _c("br"),
       _vm._v(" "),
-      _vm.err_repass
-        ? _c("span", { staticStyle: { color: "red" } }, [
-            _vm._v("Mật khẩu nhập lại phải trùng với mật khẩu")
-          ])
-        : _vm._e()
-    ]),
-    _vm._v(" "),
-    _c("br"),
-    _vm._v(" "),
-    _c("button", { staticClass: "btn btn-info" }, [_vm._v("Submit")])
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "insertAccount" } }, [_vm._v("Tài khoản")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.current_account,
+              expression: "current_account"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            type: "text",
+            id: "insertAccount",
+            placeholder: "Nhập tài khoản"
+          },
+          domProps: { value: _vm.current_account },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.current_account = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "insertSDT" } }, [_vm._v("Số điện thoại")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.current_sdt,
+              expression: "current_sdt"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            type: "text",
+            id: "insertSDT",
+            placeholder: "Nhập số điện thoại"
+          },
+          domProps: { value: _vm.current_sdt },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.current_sdt = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "insertPass" } }, [_vm._v("Mật khẩu")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.password,
+              expression: "password"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            type: "password",
+            id: "insertPass",
+            placeholder: "Mật khẩu mới"
+          },
+          domProps: { value: _vm.password },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.password = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "confirmPass" } }, [
+          _vm._v("Nhập lại mật khẩu")
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.repassword,
+              expression: "repassword"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            type: "password",
+            id: "confirmPass",
+            placeholder: "Nhập lại mật khẩu"
+          },
+          domProps: { value: _vm.repassword },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.repassword = $event.target.value
+            }
+          }
+        }),
+        _vm._v(" "),
+        _vm.err_repass
+          ? _c("span", { staticStyle: { color: "red" } }, [
+              _vm._v("Mật khẩu nhập lại phải trùng với mật khẩu")
+            ])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("button", { staticClass: "btn btn-info" }, [_vm._v("Submit")])
+    ])
   ])
 }
 var staticRenderFns = []
@@ -47640,6 +47669,31 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.error(error);
       });
+    },
+    modi_user_info: function modi_user_info(_ref3, user) {
+      var state = _ref3.state,
+          commit = _ref3.commit,
+          rootState = _ref3.rootState;
+      var body_obj = {
+        key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])('key'),
+        email: user.email,
+        tai_khoan: user.tai_khoan,
+        sdt: user.sdt,
+        password: user.password
+      };
+      var x = Object.keys(body_obj);
+
+      for (var _i = 0, _x = x; _i < _x.length; _i++) {
+        var each = _x[_i];
+        console.log(body_obj.each);
+      } // axios.post(`http://localhost:8080/project-2/public/api/nguoidung/capnhatthongtin/${user.ma_nguoi_dung}`, {
+      //   body_obj
+      // }).then((response) => {
+      //     console.log(response);
+      // }).catch((error) => {
+      //   console.error(error);
+      // })
+
     }
   }
 });

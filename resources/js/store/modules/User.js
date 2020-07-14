@@ -37,6 +37,29 @@ export default {
             }).catch((error) => {
                 console.error(error);
             })
+        },
+        modi_user_info({ state, commit, rootState }, user) {
+            var body_obj = {
+                key: getCookie('key'),
+                email: user.email,
+                tai_khoan: user.tai_khoan,
+                sdt: user.sdt,
+                password: user.password
+            }
+
+            var x = Object.keys(body_obj);
+
+            for(var each of x) {
+                console.log(body_obj.each);
+            }
+
+            // axios.post(`http://localhost:8080/project-2/public/api/nguoidung/capnhatthongtin/${user.ma_nguoi_dung}`, {
+            //   body_obj
+            // }).then((response) => {
+            //     console.log(response);
+            // }).catch((error) => {
+            //   console.error(error);
+            // })
         }
     },
 
