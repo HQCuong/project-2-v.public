@@ -51,13 +51,11 @@ export default {
                     delete user[m];
                 }
 
-                if (user[m] === state.user_info[m]) {
+                if (user[m] === state.user_info[m] && m !== 'ma_nguoi_dung') {
                     delete user[m];
                 }
             }
-
-            console.log(user);
-
+            
             axios.post(`http://localhost:8080/project-2/public/api/nguoidung/capnhatthongtin/${user.ma_nguoi_dung}`, {
                 key: getCookie('key'),
                 ...user
@@ -67,12 +65,13 @@ export default {
                     state.err_validate_global = '';
                     state.err_validate_detail = {};
                     this.dispatch('user/get_user_info', user.ma_nguoi_dung);
+                    user = { ma_nguoi_dung: user.ma_nguoi_dung };
                 } else {
+                    state.user_info = Object.assign(state.user_info, user);
                     if (typeof response.data.message === 'string') {
                         state.err_validate_global = response.data.message
                     } else {
                         state.err_validate_detail = response.data.message;
-                        console.log(state.err_validate);
                     }
                 }
             }).catch((error) => {

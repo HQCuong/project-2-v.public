@@ -14591,10 +14591,12 @@ __webpack_require__.r(__webpack_exports__);
       this.$store.dispatch('user/modi_user_info', {
         ma_nguoi_dung: this.$route.params.ma_nguoi_dung,
         email: this.email,
-        tai_khoan: this.tai_khoan,
+        tai_khoan: this.account,
         sdt: this.sdt,
-        mat_khau: $.MD5(this.password)
+        mat_khau: this.password ? $.MD5(this.password) : ''
       });
+      this.password = '';
+      this.repassword = '';
     }
   },
   watch: {
@@ -47727,12 +47729,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           delete user[m];
         }
 
-        if (user[m] === state.user_info[m]) {
+        if (user[m] === state.user_info[m] && m !== 'ma_nguoi_dung') {
           delete user[m];
         }
       }
 
-      console.log(user);
       axios.post("http://localhost:8080/project-2/public/api/nguoidung/capnhatthongtin/".concat(user.ma_nguoi_dung), _objectSpread({
         key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])('key')
       }, user)).then(function (response) {
@@ -47743,12 +47744,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           state.err_validate_detail = {};
 
           _this.dispatch('user/get_user_info', user.ma_nguoi_dung);
+
+          user = {
+            ma_nguoi_dung: user.ma_nguoi_dung
+          };
         } else {
+          state.user_info = Object.assign(state.user_info, user);
+
           if (typeof response.data.message === 'string') {
             state.err_validate_global = response.data.message;
           } else {
             state.err_validate_detail = response.data.message;
-            console.log(state.err_validate);
           }
         }
       })["catch"](function (error) {

@@ -129,11 +129,13 @@ export default {
             this.$store.dispatch('user/modi_user_info', {
                 ma_nguoi_dung: this.$route.params.ma_nguoi_dung,
                 email: this.email,
-                tai_khoan: this.tai_khoan,
+                tai_khoan: this.account,
                 sdt: this.sdt,
-                mat_khau: $.MD5(this.password)
+                mat_khau: this.password ? $.MD5(this.password) : ''
             });
 
+            this.password = '';
+            this.repassword = '';
         }
     },
     watch: {
