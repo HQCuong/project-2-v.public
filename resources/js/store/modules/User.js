@@ -55,7 +55,7 @@ export default {
                     delete user[m];
                 }
             }
-            
+
             axios.post(`http://localhost:8080/project-2/public/api/nguoidung/capnhatthongtin/${user.ma_nguoi_dung}`, {
                 key: getCookie('key'),
                 ...user
