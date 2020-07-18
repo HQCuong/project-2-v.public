@@ -16302,7 +16302,114 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  created: function created() {
+    this.$store.dispatch('user/get_self_info');
+  },
+  mounted: function mounted() {
+    // change label color
+    $(".form-group").addClass("bmd-form-group");
+    $("label").addClass("bmd-label-static");
+    $(".form-group").on("click", function () {
+      $(".form-group").removeClass("is-focused");
+      $(this).addClass("is-focused");
+    }); // remove color while move out input
+
+    $("input").blur(function () {
+      $(".form-group").removeClass("is-focused");
+    });
+    this.$store.commit('content/page_title', 'Thông tin người dùng');
+  },
+  data: function data() {
+    return {
+      email: '',
+      account: '',
+      sdt: '',
+      currnet_password: '',
+      new_password: '',
+      re_password: '',
+      err_repass: false
+    };
+  },
+  computed: {
+    current_email: {
+      get: function get() {
+        return this.$store.state.user.self_info.email;
+      },
+      set: function set(val) {
+        this.email = val;
+      }
+    },
+    current_account: {
+      get: function get() {
+        return this.$store.state.user.self_info.tai_khoan;
+      },
+      set: function set(val) {
+        this.account = val;
+      }
+    },
+    current_sdt: {
+      get: function get() {
+        return this.$store.state.user.self_info.sdt;
+      },
+      set: function set(val) {
+        this.sdt = val;
+      }
+    }
+  },
+  watch: {
+    new_password: function new_password() {
+      if (!this.re_password) {
+        this.err_pass = false;
+      }
+    },
+    re_password: function re_password() {
+      if (!this.re_password) {
+        this.err_repass = false;
+      } else if (this.re_password != this.new_password) {
+        this.err_repass = true;
+      } else {
+        this.err_repass = false;
+      }
+    }
+  }
+});
 
 /***/ }),
 
@@ -16505,7 +16612,7 @@ __webpack_require__.r(__webpack_exports__);
     $('.dropdown-menu').on('click', function () {
       $('.user-nav').addClass('active');
     });
-    $('.dropdown-item, .nav-link:not(.nav-control), .current_user_nav').on('click', function () {
+    $('.dropdown-item, .nav-link:not(.nav-control), .current_user_nav, .logo').on('click', function () {
       if ($(window).width() < 992) {
         $('.close-layer').trigger('click');
       }
@@ -21803,27 +21910,232 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-8" }, [
+        _c("div", { staticClass: "card" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c("form", [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "insertEmail" } }, [
+                  _vm._v("Email")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.current_email,
+                      expression: "current_email"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "email",
+                    id: "insertEmail",
+                    placeholder: "Nhập email"
+                  },
+                  domProps: { value: _vm.current_email },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.current_email = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("br"),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "insertAccount" } }, [
+                  _vm._v("Tài khoản")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.current_account,
+                      expression: "current_account"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "insertAccount",
+                    placeholder: "Nhập tài khoản"
+                  },
+                  domProps: { value: _vm.current_account },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.current_account = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("br"),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "insertSDT" } }, [
+                  _vm._v("Số điện thoại")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.current_sdt,
+                      expression: "current_sdt"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "insertSDT",
+                    placeholder: "Nhập số điện thoại"
+                  },
+                  domProps: { value: _vm.current_sdt },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.current_sdt = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("br"),
+              _vm._v(" "),
+              _vm._m(1),
+              _vm._v(" "),
+              _c("br"),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "insertPass" } }, [
+                  _vm._v("Mật khẩu mới")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.new_password,
+                      expression: "new_password"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "password",
+                    id: "insertPass",
+                    placeholder: "Nhập mật khẩu mới"
+                  },
+                  domProps: { value: _vm.new_password },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.new_password = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("br"),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "confirmPass" } }, [
+                  _vm._v("Nhập lại mật khẩu mới")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.re_password,
+                      expression: "re_password"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "password",
+                    id: "confirmPass",
+                    placeholder: "Nhập lại mật khẩu"
+                  },
+                  domProps: { value: _vm.re_password },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.re_password = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.err_repass
+                  ? _c("span", { staticClass: "text-danger" }, [
+                      _vm._v("Mật khẩu nhập lại phải trùng với mật khẩu")
+                    ])
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("br"),
+              _vm._v(" "),
+              _c("button", { staticClass: "btn btn-info" }, [_vm._v("Submit")])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("Component user")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v("\n                    I'm a component.\n                ")
-            ])
-          ])
-        ])
-      ])
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h3", [_c("b", [_vm._v("Your profile")])]),
+      _vm._v(" "),
+      _c("p", [_c("b", [_vm._v("Họ tên")])])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "currentPass" } }, [
+        _vm._v("Mật khẩu hiện tại")
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: {
+          type: "password",
+          id: "currentPass",
+          placeholder: "Nhập mật khẩu hiện tại"
+        }
+      })
     ])
   }
 ]
@@ -38519,7 +38831,8 @@ __webpack_require__.r(__webpack_exports__);
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('multiselect', vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a); // Axios
 
-window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js"); // Vue-router
+window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+axios.defaults.baseURL = 'http://localhost:8080/project-2/public/'; // Vue-router
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]);
@@ -47677,6 +47990,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     is_giao_vien: false,
     arr_user: [],
     user_info: {},
+    self_info: {},
     // validate err
     err_validate_detail: {},
     err_validate_global: ''
@@ -47693,7 +48007,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           rootState = _ref.rootState;
       state.user_info = {};
       state.arr_user = [];
-      axios.post('http://localhost:8080/project-2/public/api/nguoidung/danhsach', {
+      axios.post('api/nguoidung/danhsach', {
         key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])('key')
       }).then(function (response) {
         state.arr_user = response.data.data;
@@ -47706,7 +48020,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           commit = _ref2.commit,
           rootState = _ref2.rootState;
       state.user_info = {};
-      axios.post('http://localhost:8080/project-2/public/api/nguoidung/thongtin', {
+      axios.post('api/nguoidung/thongtin', {
         key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])('key'),
         ma: ma_nguoi_dung
       }).then(function (response) {
@@ -47715,12 +48029,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         console.error(error);
       });
     },
-    modi_user_info: function modi_user_info(_ref3, user) {
-      var _this = this;
-
+    get_self_info: function get_self_info(_ref3) {
       var state = _ref3.state,
           commit = _ref3.commit,
           rootState = _ref3.rootState;
+      state.self_user = {};
+      axios.post('api/nguoidung/thongtin', {
+        key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])('key')
+      }).then(function (response) {
+        state.self_info = response.data.data;
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    },
+    modi_user_info: function modi_user_info(_ref4, user) {
+      var _this = this;
+
+      var state = _ref4.state,
+          commit = _ref4.commit,
+          rootState = _ref4.rootState;
       state.err_validate_global = '';
       state.err_validate_detail = {};
 
@@ -47734,7 +48061,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       }
 
-      axios.post("http://localhost:8080/project-2/public/api/nguoidung/capnhatthongtin/".concat(user.ma_nguoi_dung), _objectSpread({
+      axios.post("api/nguoidung/capnhatthongtin/".concat(user.ma_nguoi_dung), _objectSpread({
         key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])('key')
       }, user)).then(function (response) {
         console.log(response);

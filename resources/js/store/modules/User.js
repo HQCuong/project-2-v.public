@@ -7,7 +7,7 @@ export default {
         is_giao_vien: false,
         arr_user: [],
         user_info: {},
-
+        self_info: {},
         // validate err
         err_validate_detail: {},
         err_validate_global: ''
@@ -23,7 +23,7 @@ export default {
         get_user({ state, commit, rootState }) {
             state.user_info = {};
             state.arr_user = [];
-            axios.post('http://localhost:8080/project-2/public/api/nguoidung/danhsach', {
+            axios.post('api/nguoidung/danhsach', {
                 key: getCookie('key')
             }).then((response) => {
                 state.arr_user = response.data.data;
@@ -31,9 +31,10 @@ export default {
                 console.error(error);
             })
         },
+
         get_user_info({ state, commit, rootState }, ma_nguoi_dung) {
             state.user_info = {};
-            axios.post('http://localhost:8080/project-2/public/api/nguoidung/thongtin', {
+            axios.post('api/nguoidung/thongtin', {
                 key: getCookie('key'),
                 ma: ma_nguoi_dung
             }).then((response) => {
@@ -42,6 +43,18 @@ export default {
                 console.error(error);
             })
         },
+
+        get_self_info({ state, commit, rootState }) {
+            state.self_user = {};
+            axios.post('api/nguoidung/thongtin', {
+                key: getCookie('key'),
+            }).then((response) => {
+                state.self_info = response.data.data;
+            }).catch((error) => {
+                console.error(error);
+            })
+        },
+        
         modi_user_info({ state, commit, rootState }, user) {
             state.err_validate_global = '';
             state.err_validate_detail = {};
@@ -56,7 +69,7 @@ export default {
                 }
             }
 
-            axios.post(`http://localhost:8080/project-2/public/api/nguoidung/capnhatthongtin/${user.ma_nguoi_dung}`, {
+            axios.post(`api/nguoidung/capnhatthongtin/${user.ma_nguoi_dung}`, {
                 key: getCookie('key'),
                 ...user
             }).then((response) => {

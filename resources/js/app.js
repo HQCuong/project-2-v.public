@@ -12,6 +12,7 @@ Vue.component('multiselect', Multiselect);
 
 // Axios
 window.axios = require('axios');
+axios.defaults.baseURL = 'http://localhost:8080/project-2/public/';
 
 // Vue-router
 import VueRouter from 'vue-router';

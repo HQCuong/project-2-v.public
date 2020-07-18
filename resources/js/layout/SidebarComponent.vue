@@ -95,7 +95,7 @@ export default {
             $('.user-nav').addClass('active');
         })
 
-        $('.dropdown-item, .nav-link:not(.nav-control), .current_user_nav').on('click', function() {
+        $('.dropdown-item, .nav-link:not(.nav-control), .current_user_nav, .logo').on('click', function() {
             if ($(window).width() < 992) {
                 $('.close-layer').trigger('click');
             }
