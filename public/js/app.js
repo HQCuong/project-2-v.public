@@ -14356,27 +14356,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
-    this.$store.dispatch('user/get_user');
+    this.$store.dispatch("user/get_user");
   },
   mounted: function mounted() {
-    this.$store.commit('content/page_title', 'Danh sách người dùng');
+    this.$store.commit("content/page_title", "Danh sách người dùng");
   },
   data: function data() {
     return {
       columns: [{
-        label: 'Tên người dùng',
+        label: "Tên người dùng",
         field: this.fomratNullName
       }, {
-        label: 'Email',
-        field: 'email'
+        label: "Email",
+        field: "email"
       }, {
-        label: 'Cấp độ',
-        field: 'ten_cap_do'
+        label: "Cấp độ",
+        field: "ten_cap_do"
       }, {
-        label: 'Tùy chỉnh',
-        field: 'ma_nguoi_dung'
+        label: "Tùy chỉnh",
+        field: "ma_nguoi_dung"
       }]
     };
   },
@@ -19313,9 +19319,7 @@ var render = function() {
                             },
                             [
                               _c("i", { staticClass: "material-icons" }, [
-                                _vm._v(
-                                  "\n                            settings\n                        "
-                                )
+                                _vm._v("settings")
                               ])
                             ]
                           )
