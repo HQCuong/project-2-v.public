@@ -7,8 +7,11 @@
                 </div>
             </div>
             <div class="card-body">
-                <h4 class="card-title"><b>Bạn không có quyền truy cập</b></h4>
-                nhấn vào <router-link :to="{name: 'home'}">đây</router-link> để trở về trang chủ hoặc thực hiện yêu cầu khác.
+                <h4 class="card-title">
+                    <b>Bạn không có quyền truy cập</b>
+                </h4>
+                nhấn vào <router-link :to="{ name: 'home' }">đây</router-link>để
+                trở về trang chủ hoặc thực hiện yêu cầu khác.
             </div>
         </div>
     </div>
@@ -16,15 +19,11 @@
 <script>
 export default {
     mounted() {
-        this.$store.commit('content/page_title', '');
+        this.$store.commit("content/page_title", "");
     },
     data() {
-        return {
-
-        }
+        return {};
     }
-}
-
+};
 </script>
-<style lang="css" scoped>
-</style>
+<style lang="css" scoped></style>

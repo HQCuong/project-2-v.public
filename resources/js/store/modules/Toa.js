@@ -1,4 +1,4 @@
-import getCookie from '../../customfunc/getCookie.js';
+import getCookie from "../../customfunc/getCookie.js";
 
 export default {
     namespaced: true,
@@ -11,15 +11,18 @@ export default {
         }
     },
     actions: {
-        get_toa({state, commit, rootState}, ma_toa) {
+        get_toa({ state, commit, rootState }, ma_toa) {
             state.arr_toa = [];
-        	axios.post('http://localhost:8080/project-2/public/api/toa/hienthicactoa', {
-        	  key: getCookie('key')
-        	}).then((response) => {
-                state.arr_toa = response.data.data;
-        	}).catch((error) => {
-        	  console.error(error);
-        	});
+            axios
+                .post("api/toa/hienthicactoa", {
+                    key: getCookie("key")
+                })
+                .then(response => {
+                    state.arr_toa = response.data.data;
+                })
+                .catch(error => {
+                    console.error(error);
+                });
         }
     }
-}
+};

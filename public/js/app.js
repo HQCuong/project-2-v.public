@@ -13288,9 +13288,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
-    this.$store.commit('content/page_title', '');
+    this.$store.commit("content/page_title", "");
   },
   data: function data() {
     return {};
@@ -14362,6 +14365,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.$store.dispatch("user/get_user");
@@ -14510,13 +14514,65 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     if (this.$route.params.ma_nguoi_dung) {
-      this.$store.dispatch('user/get_user_info', this.$route.params.ma_nguoi_dung);
+      this.$store.dispatch("user/get_user_info", this.$route.params.ma_nguoi_dung);
     }
 
-    this.$store.dispatch('user/get_user');
+    this.$store.dispatch("user/get_user");
   },
   mounted: function mounted() {
     // change label color
@@ -14530,16 +14586,16 @@ __webpack_require__.r(__webpack_exports__);
     $("input").blur(function () {
       $(".form-group").removeClass("is-focused");
     });
-    this.$store.commit('content/page_title', 'Tùy chỉnh thông tin người dùng');
+    this.$store.commit("content/page_title", "Tùy chỉnh thông tin người dùng");
   },
   data: function data() {
     return {
-      user: '',
-      email: '',
-      account: '',
-      sdt: '',
-      password: '',
-      repassword: '',
+      user: "",
+      email: "",
+      account: "",
+      sdt: "",
+      password: "",
+      repassword: "",
       err_repass: false
     };
   },
@@ -14594,15 +14650,15 @@ __webpack_require__.r(__webpack_exports__);
     },
     process_info_user: function process_info_user(e) {
       e.preventDefault();
-      this.$store.dispatch('user/modi_user_info', {
+      this.$store.dispatch("user/modi_user_info", {
         ma_nguoi_dung: this.$route.params.ma_nguoi_dung,
         email: this.email,
         tai_khoan: this.account,
         sdt: this.sdt,
-        mat_khau: this.password ? $.MD5(this.password) : ''
+        mat_khau: this.password ? $.MD5(this.password) : ""
       });
-      this.password = '';
-      this.repassword = '';
+      this.password = "";
+      this.repassword = "";
     }
   },
   watch: {
@@ -14622,7 +14678,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     user: function user() {
       this.$router.push("/quan_ly_user/modi_user_info/".concat(this.user.ma_nguoi_dung));
-      this.$store.dispatch('user/get_user_info', this.$route.params.ma_nguoi_dung);
+      this.$store.dispatch("user/get_user_info", this.$route.params.ma_nguoi_dung);
     }
   }
 });
@@ -16344,9 +16400,67 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
-    this.$store.dispatch('user/get_self_info');
+    this.$store.dispatch("user/get_self_info");
   },
   mounted: function mounted() {
     // change label color
@@ -16360,20 +16474,23 @@ __webpack_require__.r(__webpack_exports__);
     $("input").blur(function () {
       $(".form-group").removeClass("is-focused");
     });
-    this.$store.commit('content/page_title', 'Thông tin người dùng');
+    this.$store.commit("content/page_title", "Thông tin người dùng");
   },
   data: function data() {
     return {
-      email: '',
-      account: '',
-      sdt: '',
-      currnet_password: '',
-      new_password: '',
-      re_password: '',
+      email: "",
+      account: "",
+      sdt: "",
+      currnet_password: "",
+      new_password: "",
+      re_password: "",
       err_repass: false
     };
   },
   computed: {
+    current_name: function current_name() {
+      return this.$store.state.user.self_info.ho_ten;
+    },
     current_email: {
       get: function get() {
         return this.$store.state.user.self_info.email;
@@ -16397,6 +16514,23 @@ __webpack_require__.r(__webpack_exports__);
       set: function set(val) {
         this.sdt = val;
       }
+    },
+    err_validate_detail: function err_validate_detail() {
+      return this.$store.state.user.err_validate_detail;
+    },
+    err_validate_global: function err_validate_global() {
+      return this.$store.state.user.err_validate_global;
+    }
+  },
+  methods: {
+    process_user_info: function process_user_info(e) {
+      e.preventDefault();
+      this.$store.dispatch("user/modi_self_info", {
+        ma_nguoi_dung: this.$store.state.user.self_info.ma_nguoi_dung,
+        email: this.email,
+        tai_khoan: this.account,
+        sdt: this.sdt
+      });
     }
   },
   watch: {
@@ -18114,7 +18248,9 @@ var render = function() {
           _c("router-link", { attrs: { to: { name: "home" } } }, [
             _vm._v("đây")
           ]),
-          _vm._v(" để trở về trang chủ hoặc thực hiện yêu cầu khác.\n        ")
+          _vm._v(
+            "để\n            trở về trang chủ hoặc thực hiện yêu cầu khác.\n        "
+          )
         ],
         1
       )
@@ -21918,12 +22054,22 @@ var render = function() {
     _c("div", { staticClass: "row justify-content-center" }, [
       _c("div", { staticClass: "col-md-8" }, [
         _c("div", { staticClass: "card" }, [
-          _vm._m(0),
+          _c("div", { staticClass: "card-header" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("p", [_c("b", [_vm._v(_vm._s(_vm.current_name))])])
+          ]),
           _vm._v(" "),
           _c("hr"),
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
-            _c("form", [
+            _c("form", { on: { submit: _vm.process_user_info } }, [
+              _vm.err_validate_global
+                ? _c("span", { staticClass: "text-danger" }, [
+                    _vm._v(_vm._s(_vm.err_validate_global))
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
               _c("div", { staticClass: "form-group" }, [
                 _c("label", { attrs: { for: "insertEmail" } }, [
                   _vm._v("Email")
@@ -21953,7 +22099,13 @@ var render = function() {
                       _vm.current_email = $event.target.value
                     }
                   }
-                })
+                }),
+                _vm._v(" "),
+                _vm.err_validate_detail.email
+                  ? _c("span", { staticClass: "text-danger" }, [
+                      _vm._v(_vm._s(_vm.err_validate_detail.email))
+                    ])
+                  : _vm._e()
               ]),
               _vm._v(" "),
               _c("br"),
@@ -21987,7 +22139,13 @@ var render = function() {
                       _vm.current_account = $event.target.value
                     }
                   }
-                })
+                }),
+                _vm._v(" "),
+                _vm.err_validate_detail.tai_khoan
+                  ? _c("span", { staticClass: "text-danger" }, [
+                      _vm._v(_vm._s(_vm.err_validate_detail.tai_khoan))
+                    ])
+                  : _vm._e()
               ]),
               _vm._v(" "),
               _c("br"),
@@ -22021,7 +22179,13 @@ var render = function() {
                       _vm.current_sdt = $event.target.value
                     }
                   }
-                })
+                }),
+                _vm._v(" "),
+                _vm.err_validate_detail.sdt
+                  ? _c("span", { staticClass: "text-danger" }, [
+                      _vm._v(_vm._s(_vm.err_validate_detail.sdt))
+                    ])
+                  : _vm._e()
               ]),
               _vm._v(" "),
               _c("br"),
@@ -22097,7 +22261,9 @@ var render = function() {
                 _vm._v(" "),
                 _vm.err_repass
                   ? _c("span", { staticClass: "text-danger" }, [
-                      _vm._v("Mật khẩu nhập lại phải trùng với mật khẩu")
+                      _vm._v(
+                        "\n                                Mật khẩu nhập lại phải trùng với mật\n                                khẩu\n                            "
+                      )
                     ])
                   : _vm._e()
               ]),
@@ -22117,11 +22283,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h3", [_c("b", [_vm._v("Your profile")])]),
-      _vm._v(" "),
-      _c("p", [_c("b", [_vm._v("Họ tên")])])
-    ])
+    return _c("h3", [_c("b", [_vm._v("Your profile")])])
   },
   function() {
     var _vm = this
@@ -38833,18 +38995,18 @@ __webpack_require__.r(__webpack_exports__);
  // Vue-multiselect
 
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('multiselect', vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a); // Axios
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("multiselect", vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a); // Axios
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-axios.defaults.baseURL = 'http://localhost:8080/project-2/public/'; // Vue-router
+axios.defaults.baseURL = "http://localhost:8080/project-2/public/"; // Vue-router
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]);
 
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]({
-  base: 'project-2/public',
+  base: "project-2/public",
   routes: _routes_js__WEBPACK_IMPORTED_MODULE_3__["default"],
-  mode: 'history'
+  mode: "history"
 }); // Vuex
 
  // Vue good table
@@ -38862,10 +39024,10 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(_plugins_vue_good_table_dist_vue_
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('navbar-component', __webpack_require__(/*! ./layout/NavbarComponent.vue */ "./resources/js/layout/NavbarComponent.vue")["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('sidebar-component', __webpack_require__(/*! ./layout/SidebarComponent.vue */ "./resources/js/layout/SidebarComponent.vue")["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('footer-component', __webpack_require__(/*! ./layout/FooterComponent.vue */ "./resources/js/layout/FooterComponent.vue")["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('login-component', __webpack_require__(/*! ./components/LoginComponent.vue */ "./resources/js/components/LoginComponent.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("navbar-component", __webpack_require__(/*! ./layout/NavbarComponent.vue */ "./resources/js/layout/NavbarComponent.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("sidebar-component", __webpack_require__(/*! ./layout/SidebarComponent.vue */ "./resources/js/layout/SidebarComponent.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("footer-component", __webpack_require__(/*! ./layout/FooterComponent.vue */ "./resources/js/layout/FooterComponent.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("login-component", __webpack_require__(/*! ./components/LoginComponent.vue */ "./resources/js/components/LoginComponent.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -38873,7 +39035,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('login-component', __webpac
  */
 
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
-  el: '#app',
+  el: "#app",
   router: router,
   store: _store_store_js__WEBPACK_IMPORTED_MODULE_4__["default"]
 });
@@ -47730,8 +47892,8 @@ __webpack_require__.r(__webpack_exports__);
           commit = _ref.commit,
           rootState = _ref.rootState;
       state.arr_cau_hinh = [];
-      axios.post('http://localhost:8080/project-2/public/api/cauhinh', {
-        key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])('key'),
+      axios.post("api/cauhinh", {
+        key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("key"),
         ma_loai: 1
       }).then(function (response) {
         state.arr_cau_hinh = response.data.data;
@@ -47917,8 +48079,8 @@ __webpack_require__.r(__webpack_exports__);
           commit = _ref.commit,
           rootState = _ref.rootState;
       state.arr_tang = [];
-      axios.post('http://localhost:8080/project-2/public/api/tang', {
-        key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])('key'),
+      axios.post("api/tang", {
+        key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("key"),
         ma_toa: ma_toa
       }).then(function (response) {
         state.arr_tang = response.data.data;
@@ -47958,8 +48120,8 @@ __webpack_require__.r(__webpack_exports__);
           commit = _ref.commit,
           rootState = _ref.rootState;
       state.arr_toa = [];
-      axios.post('http://localhost:8080/project-2/public/api/toa/hienthicactoa', {
-        key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])('key')
+      axios.post("api/toa/hienthicactoa", {
+        key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("key")
       }).then(function (response) {
         state.arr_toa = response.data.data;
       })["catch"](function (error) {
@@ -47997,7 +48159,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     self_info: {},
     // validate err
     err_validate_detail: {},
-    err_validate_global: ''
+    err_validate_global: ""
   },
   mutations: {
     reset_user_info: function reset_user_info(state) {
@@ -48011,10 +48173,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           rootState = _ref.rootState;
       state.user_info = {};
       state.arr_user = [];
-      axios.post('api/nguoidung/danhsach', {
-        key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])('key')
-      }).then(function (response) {
-        state.arr_user = response.data.data;
+      axios.post("api/nguoidung/danhsach", {
+        key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("key")
+      }).then(function (res) {
+        state.arr_user = res.data.data;
       })["catch"](function (error) {
         console.error(error);
       });
@@ -48024,35 +48186,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           commit = _ref2.commit,
           rootState = _ref2.rootState;
       state.user_info = {};
-      axios.post('api/nguoidung/thongtin', {
-        key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])('key'),
+      axios.post("api/nguoidung/thongtin", {
+        key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("key"),
         ma: ma_nguoi_dung
-      }).then(function (response) {
-        state.user_info = response.data.data;
+      }).then(function (res) {
+        state.user_info = res.data.data;
       })["catch"](function (error) {
         console.error(error);
       });
     },
-    get_self_info: function get_self_info(_ref3) {
+    modi_user_info: function modi_user_info(_ref3, user) {
+      var _this = this;
+
       var state = _ref3.state,
           commit = _ref3.commit,
           rootState = _ref3.rootState;
-      state.self_user = {};
-      axios.post('api/nguoidung/thongtin', {
-        key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])('key')
-      }).then(function (response) {
-        state.self_info = response.data.data;
-      })["catch"](function (error) {
-        console.error(error);
-      });
-    },
-    modi_user_info: function modi_user_info(_ref4, user) {
-      var _this = this;
-
-      var state = _ref4.state,
-          commit = _ref4.commit,
-          rootState = _ref4.rootState;
-      state.err_validate_global = '';
+      state.err_validate_global = "";
       state.err_validate_detail = {};
 
       for (var m in user) {
@@ -48060,21 +48209,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           delete user[m];
         }
 
-        if (user[m] === state.user_info[m] && m !== 'ma_nguoi_dung') {
+        if (user[m] === state.user_info[m] && m !== "ma_nguoi_dung") {
           delete user[m];
         }
       }
 
       axios.post("api/nguoidung/capnhatthongtin/".concat(user.ma_nguoi_dung), _objectSpread({
-        key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])('key')
-      }, user)).then(function (response) {
-        console.log(response);
+        key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("key")
+      }, user)).then(function (res) {
+        console.log(res);
 
-        if (response.data.success) {
-          state.err_validate_global = '';
+        if (res.data.success) {
+          state.err_validate_global = "";
           state.err_validate_detail = {};
 
-          _this.dispatch('user/get_user_info', user.ma_nguoi_dung);
+          _this.dispatch("user/get_user_info", user.ma_nguoi_dung);
 
           user = {
             ma_nguoi_dung: user.ma_nguoi_dung
@@ -48082,14 +48231,66 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         } else {
           state.user_info = Object.assign(state.user_info, user);
 
-          if (typeof response.data.message === 'string') {
-            state.err_validate_global = response.data.message;
+          if (typeof res.data.message === "string") {
+            state.err_validate_global = res.data.message;
           } else {
-            state.err_validate_detail = response.data.message;
+            state.err_validate_detail = res.data.message;
           }
         }
       })["catch"](function (error) {
         console.error(error);
+      });
+    },
+    get_self_info: function get_self_info(_ref4) {
+      var state = _ref4.state,
+          commit = _ref4.commit,
+          rootState = _ref4.rootState;
+      state.self_user = {};
+      axios.post("api/nguoidung/thongtin", {
+        key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("key")
+      }).then(function (res) {
+        state.self_info = res.data.data;
+        console.log(state.self_info);
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    },
+    modi_self_info: function modi_self_info(_ref5, user) {
+      var state = _ref5.state,
+          commit = _ref5.commit,
+          rootState = _ref5.rootState;
+      state.err_validate_global = "";
+      state.err_validate_detail = {};
+
+      for (var m in user) {
+        if (!user[m]) {
+          delete user[m];
+        }
+
+        if (user[m] === state.self_info[m] && m !== "ma_nguoi_dung") {
+          delete user[m];
+        }
+      }
+
+      console.log(user);
+      axios.post("api/nguoidung/capnhatthongtin/".concat(user.ma_nguoi_dung), _objectSpread({
+        key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("key")
+      }, user)).then(function (res) {
+        if (res.data.success) {
+          state.err_validate_global = "";
+          state.err_validate_detail = {};
+          window.location.href = "logout";
+        } else {
+          state.self_info = Object.assign(state.self_info, user);
+
+          if (typeof res.data.message === "string") {
+            state.err_validate_global = res.data.message;
+          } else {
+            state.err_validate_detail = res.data.message;
+          }
+        }
+      })["catch"](function (err) {
+        console.error(err);
       });
     }
   }

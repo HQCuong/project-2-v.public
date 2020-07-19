@@ -1,4 +1,4 @@
-import getCookie from '../../customfunc/getCookie.js';
+import getCookie from "../../customfunc/getCookie.js";
 
 export default {
     namespaced: true,
@@ -11,16 +11,19 @@ export default {
         }
     },
     actions: {
-        get_tang({state, commit, rootState}, ma_toa) {
+        get_tang({ state, commit, rootState }, ma_toa) {
             state.arr_tang = [];
-        	axios.post('http://localhost:8080/project-2/public/api/tang', {
-        	  key: getCookie('key'),
-              ma_toa: ma_toa
-        	}).then((response) => {
-        		state.arr_tang = response.data.data;
-        	}).catch((error) => {
-        	  console.error(error);
-        	});
+            axios
+                .post("api/tang", {
+                    key: getCookie("key"),
+                    ma_toa: ma_toa
+                })
+                .then(response => {
+                    state.arr_tang = response.data.data;
+                })
+                .catch(error => {
+                    console.error(error);
+                });
         }
     }
-}
+};

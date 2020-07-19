@@ -4,36 +4,35 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-import Vue from 'vue';
+import Vue from "vue";
 
 // Vue-multiselect
-import Multiselect from 'vue-multiselect'
-Vue.component('multiselect', Multiselect);
+import Multiselect from "vue-multiselect";
+Vue.component("multiselect", Multiselect);
 
 // Axios
-window.axios = require('axios');
-axios.defaults.baseURL = 'http://localhost:8080/project-2/public/';
+window.axios = require("axios");
+axios.defaults.baseURL = "http://localhost:8080/project-2/public/";
 
 // Vue-router
-import VueRouter from 'vue-router';
+import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
-import routes from './routes.js';
+import routes from "./routes.js";
 
 const router = new VueRouter({
-    base: 'project-2/public',
+    base: "project-2/public",
     routes,
-    mode: 'history'
-})
+    mode: "history"
+});
 
 // Vuex
-import store from './store/store.js';
+import store from "./store/store.js";
 
 // Vue good table
-import VueGoodTablePlugin from './plugins/vue-good-table/dist/vue-good-table.js';
-import './plugins/vue-good-table/dist/vue-good-table.css';
+import VueGoodTablePlugin from "./plugins/vue-good-table/dist/vue-good-table.js";
+import "./plugins/vue-good-table/dist/vue-good-table.css";
 Vue.use(VueGoodTablePlugin);
-
 
 /**
  * The following block of code may be used to automatically register your
@@ -46,12 +45,22 @@ Vue.use(VueGoodTablePlugin);
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('navbar-component', require('./layout/NavbarComponent.vue').default);
-Vue.component('sidebar-component', require('./layout/SidebarComponent.vue').default);
-Vue.component('footer-component', require('./layout/FooterComponent.vue').default);
-Vue.component('login-component', require('./components/LoginComponent.vue').default);
-
-
+Vue.component(
+    "navbar-component",
+    require("./layout/NavbarComponent.vue").default
+);
+Vue.component(
+    "sidebar-component",
+    require("./layout/SidebarComponent.vue").default
+);
+Vue.component(
+    "footer-component",
+    require("./layout/FooterComponent.vue").default
+);
+Vue.component(
+    "login-component",
+    require("./components/LoginComponent.vue").default
+);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -59,9 +68,8 @@ Vue.component('login-component', require('./components/LoginComponent.vue').defa
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-
 const app = new Vue({
-    el: '#app',
+    el: "#app",
     router,
     store
 });
