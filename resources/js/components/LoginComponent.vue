@@ -8,17 +8,30 @@
             </div>
             <!-- Login Form -->
             <form @submit="process_login">
-                <input type="text" id="tai_khoan" class="fadeIn second" name="user" placeholder="login" required>
-                <br>
-                <input type="password" id="mat_khau" class="fadeIn third" name="password" placeholder="password" required>
-                <br>
-                <br>
+                <input
+                    type="text"
+                    id="tai_khoan"
+                    class="fadeIn second"
+                    name="user"
+                    placeholder="login"
+                    required
+                />
+                <br />
+                <input
+                    type="password"
+                    id="mat_khau"
+                    class="fadeIn third"
+                    name="password"
+                    placeholder="password"
+                    required
+                />
+                <br />
+                <br />
                 <p style="color: red">{{error}}</p>
                 <button class="btn btn-info" style="width: 150px;">
                     <span v-if="is_loading" class="spinner-border spinner-border-sm"></span>
                     <span v-if="!is_loading">Đăng nhập</span>
                 </button>
-                
             </form>
             <!-- Remind Passowrd -->
             <div id="formFooter">
@@ -27,14 +40,15 @@
         </div>
     </div>
 </template>
+
 <script>
 export default {
     data() {
         return {
-            error: '',
-            src_logo_login: 'img/logo_login.png',
+            error: "",
+            src_logo_login: "img/logo_login.png",
             is_loading: false
-        }
+        };
     },
     methods: {
         process_login(e) {
@@ -43,8 +57,9 @@ export default {
             var tai_khoan = $("#tai_khoan").val();
             var mat_khau = $.MD5($("#mat_khau").val());
             var request = `api/dangnhap/${tai_khoan}/${mat_khau}`;
-            axios.post(request)
-                .then((response) => {
+            axios
+                .post(request)
+                .then(response => {
                     if (response.data.success) {
                         document.cookie = `key=${response.data.data.key}`;
                         document.cookie = `level=${response.data.data.ma_cap_do}`;
@@ -53,29 +68,29 @@ export default {
                         this.error = response.data.message;
                         this.is_loading = false;
                     }
-                }).catch((error) => {
-                    console.error(error);
                 })
+                .catch(error => {
+                    console.error(error);
+                });
         }
     }
-}
-
+};
 </script>
 <style lang="css" scoped>
 html {
-    background-color: #56baed
+    background-color: #56baed;
 }
 
 body {
     font-family: Poppins, sans-serif;
-    height: 100vh
+    height: 100vh;
 }
 
 a {
     color: #92badd;
     display: inline-block;
     text-decoration: none;
-    font-weight: 400
+    font-weight: 400;
 }
 
 h2 {
@@ -85,7 +100,7 @@ h2 {
     text-transform: uppercase;
     display: inline-block;
     margin: 40px 8px 10px 8px;
-    color: #ccc
+    color: #ccc;
 }
 
 .wrapper {
@@ -95,7 +110,7 @@ h2 {
     justify-content: center;
     width: 100%;
     min-height: 100%;
-    padding: 20px
+    padding: 20px;
 }
 
 #formContent {
@@ -107,9 +122,9 @@ h2 {
     max-width: 450px;
     position: relative;
     padding: 0;
-    -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, .3);
-    box-shadow: 0 30px 60px 0 rgba(0, 0, 0, .3);
-    text-align: center
+    -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+    text-align: center;
 }
 
 #formFooter {
@@ -118,21 +133,21 @@ h2 {
     padding: 25px;
     text-align: center;
     -webkit-border-radius: 0 0 10px 10px;
-    border-radius: 0 0 10px 10px
+    border-radius: 0 0 10px 10px;
 }
 
 h2.inactive {
-    color: #ccc
+    color: #ccc;
 }
 
 h2.active {
     color: #0d0d0d;
-    border-bottom: 2px solid #5fbae9
+    border-bottom: 2px solid #5fbae9;
 }
 
-input[type=button],
-input[type=reset],
-input[type=submit] {
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
     background-color: #56baed;
     border: none;
     color: #fff;
@@ -142,35 +157,35 @@ input[type=submit] {
     display: inline-block;
     text-transform: uppercase;
     font-size: 13px;
-    -webkit-box-shadow: 0 10px 30px 0 rgba(95, 186, 233, .4);
-    box-shadow: 0 10px 30px 0 rgba(95, 186, 233, .4);
+    -webkit-box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
+    box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
     -webkit-border-radius: 5px 5px 5px 5px;
     border-radius: 5px 5px 5px 5px;
     margin: 5px 20px 40px 20px;
-    -webkit-transition: all .3s ease-in-out;
-    -moz-transition: all .3s ease-in-out;
-    -ms-transition: all .3s ease-in-out;
-    -o-transition: all .3s ease-in-out;
-    transition: all .3s ease-in-out
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 
-input[type=button]:hover,
-input[type=reset]:hover,
-input[type=submit]:hover {
-    background-color: #39ace7
+input[type="button"]:hover,
+input[type="reset"]:hover,
+input[type="submit"]:hover {
+    background-color: #39ace7;
 }
 
-input[type=button]:active,
-input[type=reset]:active,
-input[type=submit]:active {
-    -moz-transform: scale(.95);
-    -webkit-transform: scale(.95);
-    -o-transform: scale(.95);
-    -ms-transform: scale(.95);
-    transform: scale(.95)
+input[type="button"]:active,
+input[type="reset"]:active,
+input[type="submit"]:active {
+    -moz-transform: scale(0.95);
+    -webkit-transform: scale(0.95);
+    -o-transform: scale(0.95);
+    -ms-transform: scale(0.95);
+    transform: scale(0.95);
 }
 
-input[type=text] {
+input[type="text"] {
     background-color: #f6f6f6;
     border: none;
     color: #0d0d0d;
@@ -182,25 +197,25 @@ input[type=text] {
     margin: 5px;
     width: 85%;
     border: 2px solid #f6f6f6;
-    -webkit-transition: all .5s ease-in-out;
-    -moz-transition: all .5s ease-in-out;
-    -ms-transition: all .5s ease-in-out;
-    -o-transition: all .5s ease-in-out;
-    transition: all .5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
     -webkit-border-radius: 5px 5px 5px 5px;
-    border-radius: 5px 5px 5px 5px
+    border-radius: 5px 5px 5px 5px;
 }
 
-input[type=text]:focus {
+input[type="text"]:focus {
     background-color: #fff;
-    border-bottom: 2px solid #5fbae9
+    border-bottom: 2px solid #5fbae9;
 }
 
-input[type=text]:placeholder {
-    color: #ccc
+input[type="text"]:placeholder {
+    color: #ccc;
 }
 
-input[type=password] {
+input[type="password"] {
     background-color: #f6f6f6;
     border: none;
     color: #0d0d0d;
@@ -212,22 +227,22 @@ input[type=password] {
     margin: 5px;
     width: 85%;
     border: 2px solid #f6f6f6;
-    -webkit-transition: all .5s ease-in-out;
-    -moz-transition: all .5s ease-in-out;
-    -ms-transition: all .5s ease-in-out;
-    -o-transition: all .5s ease-in-out;
-    transition: all .5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
     -webkit-border-radius: 5px 5px 5px 5px;
-    border-radius: 5px 5px 5px 5px
+    border-radius: 5px 5px 5px 5px;
 }
 
-input[type=password]:focus {
+input[type="password"]:focus {
     background-color: #fff;
-    border-bottom: 2px solid #5fbae9
+    border-bottom: 2px solid #5fbae9;
 }
 
-input[type=password]:placeholder {
-    color: #ccc
+input[type="password"]:placeholder {
+    color: #ccc;
 }
 
 .fadeInDown {
@@ -236,20 +251,20 @@ input[type=password]:placeholder {
     -webkit-animation-duration: 1s;
     animation-duration: 1s;
     -webkit-animation-fill-mode: both;
-    animation-fill-mode: both
+    animation-fill-mode: both;
 }
 
 @-webkit-keyframes fadeInDown {
     0% {
         opacity: 0;
         -webkit-transform: translate3d(0, -100%, 0);
-        transform: translate3d(0, -100%, 0)
+        transform: translate3d(0, -100%, 0);
     }
 
     100% {
         opacity: 1;
         -webkit-transform: none;
-        transform: none
+        transform: none;
     }
 }
 
@@ -257,43 +272,43 @@ input[type=password]:placeholder {
     0% {
         opacity: 0;
         -webkit-transform: translate3d(0, -100%, 0);
-        transform: translate3d(0, -100%, 0)
+        transform: translate3d(0, -100%, 0);
     }
 
     100% {
         opacity: 1;
         -webkit-transform: none;
-        transform: none
+        transform: none;
     }
 }
 
 @-webkit-keyframes fadeIn {
     from {
-        opacity: 0
+        opacity: 0;
     }
 
     to {
-        opacity: 1
+        opacity: 1;
     }
 }
 
 @-moz-keyframes fadeIn {
     from {
-        opacity: 0
+        opacity: 0;
     }
 
     to {
-        opacity: 1
+        opacity: 1;
     }
 }
 
 @keyframes fadeIn {
     from {
-        opacity: 0
+        opacity: 0;
     }
 
     to {
-        opacity: 1
+        opacity: 1;
     }
 }
 
@@ -307,31 +322,31 @@ input[type=password]:placeholder {
     animation-fill-mode: forwards;
     -webkit-animation-duration: 1s;
     -moz-animation-duration: 1s;
-    animation-duration: 1s
+    animation-duration: 1s;
 }
 
 .fadeIn.first {
-    -webkit-animation-delay: .4s;
-    -moz-animation-delay: .4s;
-    animation-delay: .4s
+    -webkit-animation-delay: 0.4s;
+    -moz-animation-delay: 0.4s;
+    animation-delay: 0.4s;
 }
 
 .fadeIn.second {
-    -webkit-animation-delay: .6s;
-    -moz-animation-delay: .6s;
-    animation-delay: .6s
+    -webkit-animation-delay: 0.6s;
+    -moz-animation-delay: 0.6s;
+    animation-delay: 0.6s;
 }
 
 .fadeIn.third {
-    -webkit-animation-delay: .8s;
-    -moz-animation-delay: .8s;
-    animation-delay: .8s
+    -webkit-animation-delay: 0.8s;
+    -moz-animation-delay: 0.8s;
+    animation-delay: 0.8s;
 }
 
 .fadeIn.fourth {
     -webkit-animation-delay: 1s;
     -moz-animation-delay: 1s;
-    animation-delay: 1s
+    animation-delay: 1s;
 }
 
 .underlineHover:after {
@@ -342,24 +357,23 @@ input[type=password]:placeholder {
     height: 2px;
     background-color: #56baed;
     content: "";
-    transition: width .2s
+    transition: width 0.2s;
 }
 
 .underlineHover:hover {
-    color: #0d0d0d
+    color: #0d0d0d;
 }
 
 .underlineHover:hover:after {
-    width: 100%
+    width: 100%;
 }
 
 :focus {
-    outline: 0
+    outline: 0;
 }
 
 #icon {
     width: 50%;
-    height: 200px
+    height: 200px;
 }
-
 </style>
