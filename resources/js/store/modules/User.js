@@ -5,8 +5,11 @@ export default {
     state: {
         is_giao_vien: false,
         arr_user: [],
+        // display user on form
         user_info: {},
         self_info: {},
+        // store user
+        store_user: {},
         // validate err
         err_validate_detail: {},
         err_validate_global: ""
@@ -36,6 +39,7 @@ export default {
 
         get_user_info({ state, commit, rootState }, ma_nguoi_dung) {
             state.user_info = {};
+            state.store_user = {};
             axios
                 .post("api/nguoidung/thongtin", {
                     key: getCookie("key"),
@@ -43,6 +47,7 @@ export default {
                 })
                 .then(res => {
                     state.user_info = res.data.data;
+                    state.store_user = res.data.data;
                 })
                 .catch(error => {
                     console.error(error);
@@ -53,15 +58,21 @@ export default {
             state.err_validate_global = "";
             state.err_validate_detail = {};
 
+            console.log(user);
+            console.log(state.store_user);
+
             for (var m in user) {
                 if (!user[m]) {
                     delete user[m];
                 }
 
-                if (user[m] === state.user_info[m] && m !== "ma_nguoi_dung") {
+                if (user[m] === state.store_user[m] && m !== "ma_nguoi_dung") {
                     delete user[m];
                 }
             }
+
+            console.log(user);
+            console.log(state.store_user);
 
             axios
                 .post(`api/nguoidung/capnhatthongtin/${user.ma_nguoi_dung}`, {
@@ -69,7 +80,7 @@ export default {
                     ...user
                 })
                 .then(res => {
-                    console.log(res);
+                    // console.log(res);
                     if (res.data.success) {
                         state.err_validate_global = "";
                         state.err_validate_detail = {};
@@ -91,6 +102,7 @@ export default {
 
         get_self_info({ state, commit, rootState }) {
             state.self_user = {};
+            state.store_user = {};
             axios
                 .post("api/nguoidung/thongtin", {
                     key: getCookie("key")

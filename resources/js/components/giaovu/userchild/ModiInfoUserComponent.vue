@@ -17,9 +17,11 @@
             </div>
             <br />
             <br />
-            <span v-if="err_validate_global" class="text-danger">{{
+            <span v-if="err_validate_global" class="text-danger">
+                {{
                 err_validate_global
-            }}</span>
+                }}
+            </span>
             <div class="form-group">
                 <label for="insertEmail">Email</label>
                 <input
@@ -29,9 +31,11 @@
                     placeholder="Nhập email"
                     v-model="current_email"
                 />
-                <span v-if="err_validate_detail.email" class="text-danger">{{
+                <span v-if="err_validate_detail.email" class="text-danger">
+                    {{
                     err_validate_detail.email
-                }}</span>
+                    }}
+                </span>
             </div>
             <br />
             <div class="form-group">
@@ -46,8 +50,7 @@
                 <span
                     v-if="err_validate_detail.tai_khoan"
                     class="text-danger"
-                    >{{ err_validate_detail.tai_khoan }}</span
-                >
+                >{{ err_validate_detail.tai_khoan }}</span>
             </div>
             <br />
             <div class="form-group">
@@ -59,9 +62,7 @@
                     placeholder="Nhập số điện thoại"
                     v-model="current_sdt"
                 />
-                <span v-if="err_validate_detail.sdt" class="text-danger">{{
-                    err_validate_detail.sdt
-                }}</span>
+                <span v-if="err_validate_detail.sdt" class="text-danger">{{err_validate_detail.sdt}}</span>
             </div>
             <br />
             <div class="form-group">
@@ -84,9 +85,10 @@
                     placeholder="Nhập lại mật khẩu"
                     v-model="repassword"
                 />
-                <span v-if="err_repass" class="text-danger"
-                    >Mật khẩu nhập lại phải trùng với mật khẩu</span
-                >
+                <span
+                    v-if="err_repass"
+                    class="text-danger"
+                >Mật khẩu nhập lại phải trùng với mật khẩu</span>
             </div>
             <br />
             <button class="btn btn-info">Submit</button>

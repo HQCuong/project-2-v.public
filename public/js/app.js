@@ -14580,6 +14580,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     if (this.$route.params.ma_nguoi_dung) {
@@ -19647,7 +19649,9 @@ var render = function() {
       _vm._v(" "),
       _vm.err_validate_global
         ? _c("span", { staticClass: "text-danger" }, [
-            _vm._v(_vm._s(_vm.err_validate_global))
+            _vm._v(
+              "\n            " + _vm._s(_vm.err_validate_global) + "\n        "
+            )
           ])
         : _vm._e(),
       _vm._v(" "),
@@ -19682,7 +19686,11 @@ var render = function() {
         _vm._v(" "),
         _vm.err_validate_detail.email
           ? _c("span", { staticClass: "text-danger" }, [
-              _vm._v(_vm._s(_vm.err_validate_detail.email))
+              _vm._v(
+                "\n                " +
+                  _vm._s(_vm.err_validate_detail.email) +
+                  "\n            "
+              )
             ])
           : _vm._e()
       ]),
@@ -48169,8 +48177,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   state: {
     is_giao_vien: false,
     arr_user: [],
+    // display user on form
     user_info: {},
     self_info: {},
+    // store user
+    store_user: {},
     // validate err
     err_validate_detail: {},
     err_validate_global: ""
@@ -48200,11 +48211,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           commit = _ref2.commit,
           rootState = _ref2.rootState;
       state.user_info = {};
+      state.store_user = {};
       axios.post("api/nguoidung/thongtin", {
         key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("key"),
         ma: ma_nguoi_dung
       }).then(function (res) {
         state.user_info = res.data.data;
+        state.store_user = res.data.data;
       })["catch"](function (error) {
         console.error(error);
       });
@@ -48217,22 +48230,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           rootState = _ref3.rootState;
       state.err_validate_global = "";
       state.err_validate_detail = {};
+      console.log(user);
+      console.log(state.store_user);
 
       for (var m in user) {
         if (!user[m]) {
           delete user[m];
         }
 
-        if (user[m] === state.user_info[m] && m !== "ma_nguoi_dung") {
+        if (user[m] === state.store_user[m] && m !== "ma_nguoi_dung") {
           delete user[m];
         }
       }
 
+      console.log(user);
+      console.log(state.store_user);
       axios.post("api/nguoidung/capnhatthongtin/".concat(user.ma_nguoi_dung), _objectSpread({
         key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("key")
       }, user)).then(function (res) {
-        console.log(res);
-
+        // console.log(res);
         if (res.data.success) {
           state.err_validate_global = "";
           state.err_validate_detail = {};
@@ -48260,6 +48276,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           commit = _ref4.commit,
           rootState = _ref4.rootState;
       state.self_user = {};
+      state.store_user = {};
       axios.post("api/nguoidung/thongtin", {
         key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("key")
       }).then(function (res) {
