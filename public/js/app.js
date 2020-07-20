@@ -13973,13 +13973,13 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
-    if (this.$route.path == '/quan_ly_user') {
-      this.$store.commit('content/page_title', 'Quản lý người dùng');
+    if (this.$route.path == "/quan_ly_user") {
+      this.$store.commit("content/page_title", "Quản lý người dùng");
     }
   },
   watch: {
     $route: function $route(to, from) {
-      this.$store.commit('content/page_title', 'Quản lý người dùng');
+      this.$store.commit("content/page_title", "Quản lý người dùng");
     }
   },
   components: {
