@@ -14588,6 +14588,7 @@ __webpack_require__.r(__webpack_exports__);
       this.$store.dispatch("user/get_user_info", this.$route.params.ma_nguoi_dung);
     }
 
+    this.$store.commit("user/reset_err");
     this.$store.dispatch("user/get_user");
   },
   mounted: function mounted() {
@@ -14693,6 +14694,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     user: function user() {
+      this.$store.commit("user/reset_err");
       this.$router.push("/quan_ly_user/modi_user_info/".concat(this.user.ma_nguoi_dung));
       this.$store.dispatch("user/get_user_info", this.$route.params.ma_nguoi_dung);
     }
@@ -16477,6 +16479,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.$store.dispatch("user/get_self_info");
+    this.$store.commit("user/reset_err");
   },
   mounted: function mounted() {
     // change label color
@@ -48189,6 +48192,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   mutations: {
     reset_user_info: function reset_user_info(state) {
       state.user_info = {};
+      state.store_user = {};
+    },
+    reset_err: function reset_err(state) {
+      state.err_validate_detail = {};
+      state.err_validate_global = "";
     }
   },
   actions: {
@@ -48196,7 +48204,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var state = _ref.state,
           commit = _ref.commit,
           rootState = _ref.rootState;
-      state.user_info = {};
       state.arr_user = [];
       axios.post("api/nguoidung/danhsach", {
         key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("key")
@@ -48210,14 +48217,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var state = _ref2.state,
           commit = _ref2.commit,
           rootState = _ref2.rootState;
-      state.user_info = {};
-      state.store_user = {};
+      this.commit("user/reset_user_info");
       axios.post("api/nguoidung/thongtin", {
         key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("key"),
         ma: ma_nguoi_dung
       }).then(function (res) {
         state.user_info = res.data.data;
-        state.store_user = res.data.data;
+        Object.assign(state.store_user, state.user_info);
       })["catch"](function (error) {
         console.error(error);
       });
@@ -48228,8 +48234,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var state = _ref3.state,
           commit = _ref3.commit,
           rootState = _ref3.rootState;
-      state.err_validate_global = "";
-      state.err_validate_detail = {};
+      this.commit("user/reset_err");
 
       for (var m in user) {
         if (!user[m]) {
@@ -48241,13 +48246,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       }
 
-      console.log(user);
       axios.post("api/nguoidung/capnhatthongtin/".concat(user.ma_nguoi_dung), _objectSpread({
         key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("key")
       }, user)).then(function (res) {
         if (res.data.success) {
-          state.err_validate_global = "";
-          state.err_validate_detail = {};
+          _this.commit("user/reset_err");
 
           _this.dispatch("user/get_user_info", user.ma_nguoi_dung);
 
@@ -48255,11 +48258,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             ma_nguoi_dung: user.ma_nguoi_dung
           };
         } else {
-          state.user_info = Object.assign(state.user_info, user);
-
           if (typeof res.data.message === "string") {
+            Object.assign(state.user_info, state.store_user);
             state.err_validate_global = res.data.message;
           } else {
+            Object.assign(state.user_info, user);
             state.err_validate_detail = res.data.message;
           }
         }
@@ -48271,28 +48274,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var state = _ref4.state,
           commit = _ref4.commit,
           rootState = _ref4.rootState;
-      state.self_user = {};
+      this.commit("user/reset_user_info");
       axios.post("api/nguoidung/thongtin", {
         key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("key")
       }).then(function (res) {
         state.self_info = res.data.data;
+        Object.assign(state.store_user, state.self_info);
       })["catch"](function (error) {
         console.error(error);
       });
     },
     modi_self_info: function modi_self_info(_ref5, user) {
+      var _this2 = this;
+
       var state = _ref5.state,
           commit = _ref5.commit,
           rootState = _ref5.rootState;
-      state.err_validate_global = "";
-      state.err_validate_detail = {};
+      this.commit("user/reset_err");
 
       for (var m in user) {
         if (!user[m]) {
           delete user[m];
         }
 
-        if (user[m] == state.self_info[m] && m != "ma_nguoi_dung") {
+        if (user[m] == state.store_user[m] && m != "ma_nguoi_dung") {
           delete user[m];
         }
       }
@@ -48301,15 +48306,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("key")
       }, user)).then(function (res) {
         if (res.data.success) {
-          state.err_validate_global = "";
-          state.err_validate_detail = {};
+          _this2.commit("user/reset_err");
+
           window.location.href = "logout";
         } else {
-          state.self_info = Object.assign(state.self_info, user);
-
           if (typeof res.data.message === "string") {
+            state.self_info = Object.assign(state.self_info, state.store_user);
             state.err_validate_global = res.data.message;
           } else {
+            state.self_info = Object.assign(state.self_info, user);
             state.err_validate_detail = res.data.message;
           }
         }

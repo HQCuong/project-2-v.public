@@ -105,6 +105,8 @@ export default {
             );
         }
 
+        this.$store.commit("user/reset_err");
+
         this.$store.dispatch("user/get_user");
     },
     mounted() {
@@ -217,6 +219,7 @@ export default {
             }
         },
         user() {
+            this.$store.commit("user/reset_err");
             this.$router.push(
                 `/quan_ly_user/modi_user_info/${this.user.ma_nguoi_dung}`
             );

@@ -111,6 +111,7 @@
 export default {
     created() {
         this.$store.dispatch("user/get_self_info");
+        this.$store.commit("user/reset_err");
     },
     mounted() {
         // change label color

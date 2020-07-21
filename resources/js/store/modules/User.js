@@ -18,12 +18,16 @@ export default {
     mutations: {
         reset_user_info(state) {
             state.user_info = {};
+            state.store_user = {};
+        },
+        reset_err(state) {
+            state.err_validate_detail = {};
+            state.err_validate_global = "";
         }
     },
 
     actions: {
         get_user({ state, commit, rootState }) {
-            state.user_info = {};
             state.arr_user = [];
             axios
                 .post("api/nguoidung/danhsach", {
@@ -38,8 +42,7 @@ export default {
         },
 
         get_user_info({ state, commit, rootState }, ma_nguoi_dung) {
-            state.user_info = {};
-            state.store_user = {};
+            this.commit("user/reset_user_info");
             axios
                 .post("api/nguoidung/thongtin", {
                     key: getCookie("key"),
@@ -47,7 +50,7 @@ export default {
                 })
                 .then(res => {
                     state.user_info = res.data.data;
-                    state.store_user = res.data.data;
+                    Object.assign(state.store_user, state.user_info);
                 })
                 .catch(error => {
                     console.error(error);
@@ -55,8 +58,7 @@ export default {
         },
 
         modi_user_info({ state, commit, rootState }, user) {
-            state.err_validate_global = "";
-            state.err_validate_detail = {};
+            this.commit("user/reset_err");
 
             for (var m in user) {
                 if (!user[m]) {
@@ -75,15 +77,15 @@ export default {
                 })
                 .then(res => {
                     if (res.data.success) {
-                        state.err_validate_global = "";
-                        state.err_validate_detail = {};
+                        this.commit("user/reset_err");
                         this.dispatch("user/get_user_info", user.ma_nguoi_dung);
                         user = { ma_nguoi_dung: user.ma_nguoi_dung };
                     } else {
-                        state.user_info = Object.assign(state.user_info, user);
                         if (typeof res.data.message === "string") {
+                            Object.assign(state.user_info, state.store_user);
                             state.err_validate_global = res.data.message;
                         } else {
+                            Object.assign(state.user_info, user);
                             state.err_validate_detail = res.data.message;
                         }
                     }
@@ -94,13 +96,14 @@ export default {
         },
 
         get_self_info({ state, commit, rootState }) {
-            state.self_user = {};
+            this.commit("user/reset_user_info");
             axios
                 .post("api/nguoidung/thongtin", {
                     key: getCookie("key")
                 })
                 .then(res => {
                     state.self_info = res.data.data;
+                    Object.assign(state.store_user, state.self_info);
                 })
                 .catch(error => {
                     console.error(error);
@@ -108,15 +111,14 @@ export default {
         },
 
         modi_self_info({ state, commit, rootState }, user) {
-            state.err_validate_global = "";
-            state.err_validate_detail = {};
+            this.commit("user/reset_err");
 
             for (var m in user) {
                 if (!user[m]) {
                     delete user[m];
                 }
 
-                if (user[m] == state.self_info[m] && m != "ma_nguoi_dung") {
+                if (user[m] == state.store_user[m] && m != "ma_nguoi_dung") {
                     delete user[m];
                 }
             }
@@ -128,14 +130,20 @@ export default {
                 })
                 .then(res => {
                     if (res.data.success) {
-                        state.err_validate_global = "";
-                        state.err_validate_detail = {};
+                        this.commit("user/reset_err");
                         window.location.href = "logout";
                     } else {
-                        state.self_info = Object.assign(state.self_info, user);
                         if (typeof res.data.message === "string") {
+                            state.self_info = Object.assign(
+                                state.self_info,
+                                state.store_user
+                            );
                             state.err_validate_global = res.data.message;
                         } else {
+                            state.self_info = Object.assign(
+                                state.self_info,
+                                user
+                            );
                             state.err_validate_detail = res.data.message;
                         }
                     }
