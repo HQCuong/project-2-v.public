@@ -1,4 +1,5 @@
 import getCookie from "../../customfunc/getCookie.js";
+import Vue from "vue";
 
 export default {
     namespaced: true,
@@ -80,6 +81,12 @@ export default {
                         this.commit("user/reset_err");
                         this.dispatch("user/get_user_info", user.ma_nguoi_dung);
                         user = { ma_nguoi_dung: user.ma_nguoi_dung };
+                        Vue.notify({
+                            group: "modi_success",
+                            title: "Thành công",
+                            text: res.data.message,
+                            duration: 2000
+                        });
                     } else {
                         if (typeof res.data.message === "string") {
                             Object.assign(state.user_info, state.store_user);
@@ -131,6 +138,9 @@ export default {
                 .then(res => {
                     if (res.data.success) {
                         this.commit("user/reset_err");
+                        alert(
+                            "Đổi thông tin thành công, vui lòng đăng nhập lại."
+                        );
                         window.location.href = "logout";
                     } else {
                         if (typeof res.data.message === "string") {

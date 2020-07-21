@@ -93,6 +93,7 @@
             <br />
             <button class="btn btn-info">Submit</button>
         </form>
+        <notifications group="modi_success" />
     </div>
 </template>
 <script>

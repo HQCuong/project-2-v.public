@@ -34,6 +34,10 @@ import VueGoodTablePlugin from "./plugins/vue-good-table/dist/vue-good-table.js"
 import "./plugins/vue-good-table/dist/vue-good-table.css";
 Vue.use(VueGoodTablePlugin);
 
+// Vue nofify
+import Notifications from "./plugins/vue-notification-master/dist/index.js";
+Vue.use(Notifications);
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
