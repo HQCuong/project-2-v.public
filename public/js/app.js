@@ -48230,25 +48230,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           rootState = _ref3.rootState;
       state.err_validate_global = "";
       state.err_validate_detail = {};
-      console.log(user);
-      console.log(state.store_user);
 
       for (var m in user) {
         if (!user[m]) {
           delete user[m];
         }
 
-        if (user[m] === state.store_user[m] && m !== "ma_nguoi_dung") {
+        if (user[m] == state.store_user[m] && m != "ma_nguoi_dung") {
           delete user[m];
         }
       }
 
       console.log(user);
-      console.log(state.store_user);
       axios.post("api/nguoidung/capnhatthongtin/".concat(user.ma_nguoi_dung), _objectSpread({
         key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("key")
       }, user)).then(function (res) {
-        // console.log(res);
         if (res.data.success) {
           state.err_validate_global = "";
           state.err_validate_detail = {};
@@ -48276,12 +48272,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           commit = _ref4.commit,
           rootState = _ref4.rootState;
       state.self_user = {};
-      state.store_user = {};
       axios.post("api/nguoidung/thongtin", {
         key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("key")
       }).then(function (res) {
         state.self_info = res.data.data;
-        console.log(state.self_info);
       })["catch"](function (error) {
         console.error(error);
       });
@@ -48298,12 +48292,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           delete user[m];
         }
 
-        if (user[m] === state.self_info[m] && m !== "ma_nguoi_dung") {
+        if (user[m] == state.self_info[m] && m != "ma_nguoi_dung") {
           delete user[m];
         }
       }
 
-      console.log(user);
       axios.post("api/nguoidung/capnhatthongtin/".concat(user.ma_nguoi_dung), _objectSpread({
         key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("key")
       }, user)).then(function (res) {

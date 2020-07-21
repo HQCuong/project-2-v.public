@@ -58,21 +58,15 @@ export default {
             state.err_validate_global = "";
             state.err_validate_detail = {};
 
-            console.log(user);
-            console.log(state.store_user);
-
             for (var m in user) {
                 if (!user[m]) {
                     delete user[m];
                 }
 
-                if (user[m] === state.store_user[m] && m !== "ma_nguoi_dung") {
+                if (user[m] == state.store_user[m] && m != "ma_nguoi_dung") {
                     delete user[m];
                 }
             }
-
-            console.log(user);
-            console.log(state.store_user);
 
             axios
                 .post(`api/nguoidung/capnhatthongtin/${user.ma_nguoi_dung}`, {
@@ -80,7 +74,6 @@ export default {
                     ...user
                 })
                 .then(res => {
-                    // console.log(res);
                     if (res.data.success) {
                         state.err_validate_global = "";
                         state.err_validate_detail = {};
@@ -102,14 +95,12 @@ export default {
 
         get_self_info({ state, commit, rootState }) {
             state.self_user = {};
-            state.store_user = {};
             axios
                 .post("api/nguoidung/thongtin", {
                     key: getCookie("key")
                 })
                 .then(res => {
                     state.self_info = res.data.data;
-                    console.log(state.self_info);
                 })
                 .catch(error => {
                     console.error(error);
@@ -125,12 +116,10 @@ export default {
                     delete user[m];
                 }
 
-                if (user[m] === state.self_info[m] && m !== "ma_nguoi_dung") {
+                if (user[m] == state.self_info[m] && m != "ma_nguoi_dung") {
                     delete user[m];
                 }
             }
-
-            console.log(user);
 
             axios
                 .post(`api/nguoidung/capnhatthongtin/${user.ma_nguoi_dung}`, {

@@ -206,6 +206,7 @@ export default {
                 this.err_repass = false;
             }
         },
+
         repassword() {
             if (!this.repassword) {
                 this.err_repass = false;
