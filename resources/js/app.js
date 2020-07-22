@@ -30,12 +30,12 @@ const router = new VueRouter({
 import store from "./store/store.js";
 
 // Vue good table
-import VueGoodTablePlugin from "./plugins/vue-good-table/dist/vue-good-table.js";
-import "./plugins/vue-good-table/dist/vue-good-table.css";
+import VueGoodTablePlugin from "vue-good-table";
+import "vue-good-table/dist/vue-good-table.css";
 Vue.use(VueGoodTablePlugin);
 
 // Vue nofify
-import Notifications from "./plugins/vue-notification-master/dist/index.js";
+import Notifications from "vue-notification";
 Vue.use(Notifications);
 
 /**
