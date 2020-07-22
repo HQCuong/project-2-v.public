@@ -1,17 +1,10 @@
-<template>
+n<template>
     <div>
         <hardware></hardware>
-        <FullCalendar
-            :defaultView="defaultView"
-            :header="headers"
-            :plugins="calendarPlugins"
-            :events="events"
-            :displayEventEnd="true"
-            :eventTimeFormat="eventTimeFormat"
-            :textColor="textcolor"
-        />
+        <FullCalendar :opstions="calendar_options" />
     </div>
 </template>
+
 <script>
 import FullCalendar from "@fullcalendar/vue";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -26,19 +19,20 @@ export default {
     },
     data() {
         return {
-            textcolor: "white",
-            calendarPlugins: [dayGridPlugin, listPlugin],
-            eventTimeFormat: {
-                hour: "2-digit",
-                minute: "2-digit",
-                hour12: false
-            },
-            defaultView: this.modi_calendar_view(),
-            eventLimit: true,
-            headers: {
-                left: "prev,next today",
-                center: "title",
-                right: this.modi_calendar_button()
+            calendar_options: {
+                textcolor: "white",
+                plugins: [dayGridPlugin, listPlugin],
+                eventTimeFormat: {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    hour12: false
+                },
+                initialView: this.modi_calendar_view(),
+                headersToolbar: {
+                    left: "prev,next today",
+                    center: "title",
+                    right: this.modi_calendar_button()
+                }
             }
         };
     },
