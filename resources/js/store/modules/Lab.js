@@ -9,21 +9,21 @@ export default {
             state.lich_lab = [];
 
             var ev1 = {
-                title: 'BKD01K10',
-                start: '2020-07-03T10:00:00',
-                end: '2020-07-03T12:00:00',
-                textColor: 'white'
-            }
+                title: "BKD01K10",
+                start: "2020-07-03" + "T10:00:00",
+                // end: "2020-07-03T12:00:00",
+                textColor: "white"
+            };
 
             state.lich_lab.push(ev1);
 
             var ev2 = {
-                title: 'BKD01K10',
-                start: '2020-07-15T08:00:00',
-                end: '2020-07-15T12:00:00',
-                textColor: 'white'
-            }
+                title: "BKD01K10",
+                start: "2020-07-15T08:00:00",
+                // end: "2020-07-15T12:00:00",
+                textColor: "white"
+            };
             state.lich_lab.push(ev2);
-        },
+        }
     }
-}
+};

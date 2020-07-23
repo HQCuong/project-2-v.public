@@ -1,7 +1,7 @@
-n<template>
+<template>
     <div>
         <hardware></hardware>
-        <FullCalendar :opstions="calendar_options" />
+        <FullCalendar :options="calendar_options"/>
     </div>
 </template>
 
@@ -12,28 +12,24 @@ import listPlugin from "@fullcalendar/list";
 import hardware from "./hardwareinfo/HardWareInfoComponent.vue";
 
 export default {
-    computed: {
-        events() {
-            return this.$store.state.lab.lich_lab;
-        }
-    },
     data() {
         return {
             calendar_options: {
-                textcolor: "white",
                 plugins: [dayGridPlugin, listPlugin],
                 eventTimeFormat: {
                     hour: "2-digit",
                     minute: "2-digit",
-                    hour12: false
+                    hour12: false,
                 },
+                events: this.$store.state.lab.lich_lab,
                 initialView: this.modi_calendar_view(),
-                headersToolbar: {
+                initialView: "dayGridMonth",
+                headerToolbar: {
                     left: "prev,next today",
                     center: "title",
-                    right: this.modi_calendar_button()
-                }
-            }
+                    right: this.modi_calendar_button(),
+                },
+            },
         };
     },
     methods: {
@@ -41,7 +37,7 @@ export default {
             if ($(window).width() < 770) {
                 return "listWeek";
             } else {
-                return "dayGridMonth, listMonth";
+                return "dayGridMonth,listMonth";
             }
         },
         modi_calendar_view() {
@@ -50,12 +46,12 @@ export default {
             } else {
                 return "dayGridMonth";
             }
-        }
+        },
     },
     components: {
         FullCalendar,
-        hardware
-    }
+        hardware,
+    },
 };
 </script>
 <style lang="css" scoped>
