@@ -1,16 +1,22 @@
-import getCookie from '../../customfunc/getCookie.js';
+import getCookie from "../../customfunc/getCookie.js";
 
-export default{
-  state: {
+export default {
+    state: {},
 
-  },
+    mutations: {},
 
-  mutations:{
-
-  },
-
-  actions: {
-
-  },
-
-}
+    actions: {
+        get_ca({ state, commit, rootState }) {
+            axios
+                .post("api/ca", {
+                    key: getCookie("key")
+                })
+                .then(res => {
+                    console.log(res);
+                })
+                .catch(err => {
+                    console.error(err);
+                });
+        }
+    }
+};

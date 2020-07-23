@@ -40,27 +40,27 @@ export default {
             columns: [
                 {
                     label: "Tên người dùng",
-                    field: this.fomratNullName
+                    field: this.fomratNullName,
                 },
                 {
                     label: "Email",
-                    field: "email"
+                    field: "email",
                 },
                 {
                     label: "Cấp độ",
-                    field: "ten_cap_do"
+                    field: "ten_cap_do",
                 },
                 {
                     label: "Tùy chỉnh",
-                    field: "ma_nguoi_dung"
-                }
-            ]
+                    field: "ma_nguoi_dung",
+                },
+            ],
         };
     },
     computed: {
         arr_user() {
             return this.$store.state.user.arr_user;
-        }
+        },
     },
     methods: {
         fomratNullName(row) {
@@ -69,8 +69,8 @@ export default {
             } else {
                 return "Demo user";
             }
-        }
-    }
+        },
+    },
 };
 </script>
 <style lang="css" scoped>
