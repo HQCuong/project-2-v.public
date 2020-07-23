@@ -17,8 +17,8 @@ export default {
                 .post("api/toa/hienthicactoa", {
                     key: getCookie("key")
                 })
-                .then(response => {
-                    state.arr_toa = response.data.data;
+                .then(res => {
+                    state.arr_toa = res.data.data;
                 })
                 .catch(error => {
                     console.error(error);

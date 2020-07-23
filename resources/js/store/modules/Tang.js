@@ -18,8 +18,8 @@ export default {
                     key: getCookie("key"),
                     ma_toa: ma_toa
                 })
-                .then(response => {
-                    state.arr_tang = response.data.data;
+                .then(res => {
+                    state.arr_tang = res.data.data;
                 })
                 .catch(error => {
                     console.error(error);

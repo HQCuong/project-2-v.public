@@ -3,12 +3,11 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Xem lich</div>
                     <div class="card-body">
                         <selectgv @show_main_info="show_main_info" @show_calendar="show_calendar"></selectgv>
-                        <br>
+                        <br />
                         <maininfo v-if="is_detail"></maininfo>
-                        <br>
+                        <br />
                         <lichgv v-if="calendar || is_giao_vien"></lichgv>
                     </div>
                 </div>
@@ -17,21 +16,21 @@
     </div>
 </template>
 <script>
-import selectgv from './lichgiaovienchild/SelectGiaoVienComponent.vue';
-import maininfo from './lichgiaovienchild/MainInfoComponent.vue';
-import lichgv from './lichgiaovienchild/LichGiaoVienComponent.vue';
+import selectgv from "./lichgiaovienchild/SelectGiaoVienComponent.vue";
+import maininfo from "./lichgiaovienchild/MainInfoComponent.vue";
+import lichgv from "./lichgiaovienchild/LichGiaoVienComponent.vue";
 
 export default {
     mounted() {
-        if (this.$route.path == '/xem_lich') {
-            this.$store.commit('content/page_title', 'Xem lịch dạy');
+        if (this.$route.path == "/xem_lich") {
+            this.$store.commit("content/page_title", "Xem lịch làm việc");
         }
     },
     data() {
         return {
             calendar: false,
             is_detail: false
-        }
+        };
     },
     computed: {
         is_giao_vien() {
@@ -40,7 +39,7 @@ export default {
     },
     watch: {
         $route(to, from) {
-            this.$store.commit('content/page_title', 'Xem lịch dạy');
+            this.$store.commit("content/page_title", "Xem lịch làm việc");
         }
     },
     methods: {
@@ -48,14 +47,14 @@ export default {
             if (show == 1) {
                 this.is_detail = true;
             } else {
-                this.is_detail = false
+                this.is_detail = false;
             }
         },
         show_calendar(show) {
             if (show == 1) {
                 this.calendar = true;
             } else {
-                this.calendar = false
+                this.calendar = false;
             }
         }
     },
@@ -64,8 +63,7 @@ export default {
         selectgv,
         maininfo
     }
-}
-
+};
 </script>
 <style lang="css" scoped>
 </style>

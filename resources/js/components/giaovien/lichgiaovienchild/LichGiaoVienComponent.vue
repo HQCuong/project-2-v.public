@@ -1,12 +1,5 @@
 <template>
-    <FullCalendar
-        defaultView="dayGridMonth"
-        :header="headers"
-        :plugins="calendarPlugins"
-        :events="events"
-        :displayEventEnd="true"
-        :eventTimeFormat="eventTimeFormat"
-    />
+    <FullCalendar :options="calendar_options" />
 </template>
 <script>
 import FullCalendar from "@fullcalendar/vue";
@@ -21,19 +14,41 @@ export default {
     },
     data() {
         return {
-            calendarPlugins: [dayGridPlugin, listPlugin],
-            eventTimeFormat: {
-                hour: "2-digit",
-                minute: "2-digit",
-                hour12: false
-            },
-            eventLimit: true,
-            headers: {
-                left: "prev,next today",
-                center: "title",
-                right: "dayGridMonth, listMonth"
+            calendar_options: {
+                plugins: [dayGridPlugin, listPlugin],
+                eventTimeFormat: {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    hour12: false
+                },
+                displayEventEnd: true,
+                events: this.$store.getters["giao_vien/get_lich_giao_vien"],
+                eventDisplay: "block",
+                initialView: this.modi_calendar_view(),
+                initialView: "dayGridMonth",
+                headerToolbar: {
+                    left: "prev,next today",
+                    center: "title",
+                    right: this.modi_calendar_button()
+                }
             }
         };
+    },
+    methods: {
+        modi_calendar_button() {
+            if ($(window).width() < 770) {
+                return "listWeek";
+            } else {
+                return "dayGridMonth,listMonth";
+            }
+        },
+        modi_calendar_view() {
+            if ($(window).width() < 770) {
+                return "listWeek";
+            } else {
+                return "dayGridMonth";
+            }
+        }
     },
     computed: {
         events() {
@@ -48,8 +63,4 @@ export default {
 <style lang="css" scoped>
 @import "~@fullcalendar/daygrid/main.css";
 @import "~@fullcalendar/list/main.css";
-
-.title-font {
-    font-size: 50px;
-}
 </style>

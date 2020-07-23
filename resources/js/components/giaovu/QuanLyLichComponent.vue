@@ -5,7 +5,7 @@
                 <div class="card">
                     <div class="card-body">
                         <mainbutton></mainbutton>
-                        <br>
+                        <br />
                         <router-view></router-view>
                     </div>
                 </div>
@@ -14,22 +14,21 @@
     </div>
 </template>
 <script>
-import mainbutton from './quanlylichchild/ButtonComponent.vue';
+import mainbutton from "./quanlylichchild/ButtonComponent.vue";
 
 export default {
     mounted() {
-        this.$store.commit('content/page_title', 'Quản lý lịch dạy');
+        this.$store.commit("content/page_title", "Quản lý lịch làm việc");
     },
     watch: {
         $route(to, from) {
-            this.$store.commit('content/page_title', 'Quản lý lịch dạy');
+            this.$store.commit("content/page_title", "Quản lý lịch làm việc");
         }
     },
     components: {
         mainbutton
     }
-}
-
+};
 </script>
 <style lang="css" scoped>
 </style>

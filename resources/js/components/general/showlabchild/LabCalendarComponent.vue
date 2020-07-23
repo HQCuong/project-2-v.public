@@ -1,7 +1,7 @@
 <template>
     <div>
         <hardware></hardware>
-        <FullCalendar :options="calendar_options"/>
+        <FullCalendar :options="calendar_options" />
     </div>
 </template>
 
@@ -19,17 +19,19 @@ export default {
                 eventTimeFormat: {
                     hour: "2-digit",
                     minute: "2-digit",
-                    hour12: false,
+                    hour12: false
                 },
-                events: this.$store.state.lab.lich_lab,
+                displayEventEnd: true,
+                events: this.$store.getters["lab/get_lich_lab"],
+                eventDisplay: "block",
                 initialView: this.modi_calendar_view(),
                 initialView: "dayGridMonth",
                 headerToolbar: {
                     left: "prev,next today",
                     center: "title",
-                    right: this.modi_calendar_button(),
-                },
-            },
+                    right: this.modi_calendar_button()
+                }
+            }
         };
     },
     methods: {
@@ -46,12 +48,12 @@ export default {
             } else {
                 return "dayGridMonth";
             }
-        },
+        }
     },
     components: {
         FullCalendar,
-        hardware,
-    },
+        hardware
+    }
 };
 </script>
 <style lang="css" scoped>
