@@ -5,19 +5,19 @@
             :rows="de_xuat_phan_cong"
             :search-options="{enabled: true}"
             :pagination-options="{enabled: true}"
-            :select-options="{ enabled: true, selectionText: 'đã chọn',   clearSelectionText: 'xóa'}"
+            :select-options="{ enabled: true, selectionText: 'đã chọn', clearSelectionText: 'xóa'}"
             @on-selected-rows-change="selectionChanged"
         >
             <div slot="selected-row-actions">
                 <button type="submit" class="btn btn-info">Phân công</button>
             </div>
         </vue-good-table>
-        <br />
     </form>
 </template>
 
 <script>
 export default {
+    props: ["ma_phan_cong", "so_gio"],
     data() {
         return {
             columns: [
@@ -40,6 +40,7 @@ export default {
                 },
             ],
             arr_phan_cong_ct: [],
+            selected_rows: [],
         };
     },
     computed: {
@@ -50,9 +51,23 @@ export default {
     methods: {
         add_phan_cong(e) {
             e.preventDefault();
+            this.arr_phan_cong_ct = [];
+            for (var i = 0; i < this.selected_rows.length; i++) {
+                var obj = {};
+                obj.ma_phong = this.selected_rows[i].ma_phong;
+                obj.thu = this.selected_rows[i].thu;
+                obj.ma_ca = this.selected_rows[i].ma_ca;
+                this.arr_phan_cong_ct.push(obj);
+            }
+            this.$store.dispatch("phan_cong/add_de_xuat_phan_cong", {
+                ma_phan_cong: this.ma_phan_cong,
+                so_gio: this.so_gio,
+                phan_cong_chi_tiet: this.arr_phan_cong_ct,
+            });
+            this.$emit("reset_form");
         },
         selectionChanged(row) {
-            this.arr_phan_cong_ct = row.selectedRows;
+            this.selected_rows = row.selectedRows;
         },
     },
 };

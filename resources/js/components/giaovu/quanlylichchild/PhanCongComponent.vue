@@ -29,7 +29,13 @@
         </multiselect>
         <br />
         <span class="text-danger" v-if="err_de_xuat">{{err_de_xuat}}</span>
-        <maintable v-if="table_phan_cong"></maintable>
+        <maintable
+            :ma_phan_cong="phan_cong.ma_phan_cong"
+            :so_gio="so_gio.value"
+            v-if="table_phan_cong"
+            @reset_form="reset_form"
+        ></maintable>
+        <notifications group="add_phan_cong_ct_success" />
     </div>
 </template>
 
@@ -64,11 +70,16 @@ export default {
         },
     },
     methods: {
-        phanCongLabel({ ma_lop, ma_nguoi_dung }) {
-            return `${ma_nguoi_dung} - ${ma_lop}`;
+        phanCongLabel({ ma_lop, ma_nguoi_dung, ma_mon_hoc }) {
+            return `${ma_nguoi_dung} - ${ma_lop} - ${ma_mon_hoc}`;
         },
         gioLabel({ title }) {
             return `${title}`;
+        },
+        reset_form() {
+            this.table_phan_cong = false;
+            this.phan_cong = "";
+            this.so_gio = "";
         },
     },
     watch: {
@@ -97,6 +108,8 @@ export default {
                     ma_phan_cong: this.phan_cong.ma_phan_cong,
                     so_gio: this.so_gio.value,
                 });
+            } else {
+                this.table_phan_cong = false;
             }
         },
         de_xuat_phan_cong() {
