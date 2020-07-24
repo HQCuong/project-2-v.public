@@ -58,7 +58,7 @@
     </div>
 </template>
 <script>
-import maintable from "./addworkchild/TableDeXuatComponent.vue";
+import maintable from "./themlichchild/TableThemLichComponent";
 
 export default {
     created() {

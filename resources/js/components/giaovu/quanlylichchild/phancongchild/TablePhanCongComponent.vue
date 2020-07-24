@@ -59,12 +59,13 @@ export default {
                 obj.ma_ca = this.selected_rows[i].ma_ca;
                 this.arr_phan_cong_ct.push(obj);
             }
-            this.$store.dispatch("phan_cong/add_de_xuat_phan_cong", {
-                ma_phan_cong: this.ma_phan_cong,
-                so_gio: this.so_gio,
-                phan_cong_chi_tiet: this.arr_phan_cong_ct,
-            });
-            this.$emit("reset_form");
+            this.$store
+                .dispatch("phan_cong/add_de_xuat_phan_cong", {
+                    ma_phan_cong: this.ma_phan_cong,
+                    so_gio: this.so_gio,
+                    phan_cong_chi_tiet: this.arr_phan_cong_ct,
+                })
+                .then(this.$emit("reset_form"));
         },
         selectionChanged(row) {
             this.selected_rows = row.selectedRows;

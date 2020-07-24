@@ -37,6 +37,7 @@ export default {
                     ...phan_cong_info
                 })
                 .then(res => {
+                    console.log(res.data.data);
                     if (res.data.success) {
                         this.commit("phan_cong/reset_err");
                         state.de_xuat_phan_cong = res.data.data;

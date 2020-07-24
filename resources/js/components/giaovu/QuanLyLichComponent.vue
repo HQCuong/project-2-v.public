@@ -23,11 +23,11 @@ export default {
     watch: {
         $route(to, from) {
             this.$store.commit("content/page_title", "Quản lý lịch làm việc");
-        }
+        },
     },
     components: {
-        mainbutton
-    }
+        mainbutton,
+    },
 };
 </script>
 <style lang="css" scoped>
