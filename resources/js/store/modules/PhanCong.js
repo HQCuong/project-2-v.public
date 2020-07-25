@@ -1,4 +1,5 @@
 import getCookie from "../../customfunc/getCookie.js";
+import groupCollection from "../../customfunc/groupCollection.js";
 import Vue from "vue";
 
 export default {
@@ -37,10 +38,10 @@ export default {
                     ...phan_cong_info
                 })
                 .then(res => {
-                    console.log(res.data.data);
                     if (res.data.success) {
+                        res = groupCollection(res.data.data, "thu");
                         this.commit("phan_cong/reset_err");
-                        state.de_xuat_phan_cong = res.data.data;
+                        state.de_xuat_phan_cong = res;
                     } else {
                         state.err_de_xuat = res.data.message;
                     }

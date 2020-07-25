@@ -4,8 +4,8 @@
             :columns="columns"
             :rows="de_xuat_phan_cong"
             :search-options="{enabled: true}"
-            :pagination-options="{enabled: true}"
-            :select-options="{ enabled: true, selectionText: 'đã chọn', clearSelectionText: 'xóa'}"
+            :select-options="{ enabled: true, selectionText: 'bản ghi , đã chọn', clearSelectionText: 'xóa'}"
+            :group-options="{ enabled: true, collapsable: true}"
             @on-selected-rows-change="selectionChanged"
         >
             <div slot="selected-row-actions">
@@ -21,11 +21,6 @@ export default {
     data() {
         return {
             columns: [
-                {
-                    label: "Thứ",
-                    field: "thu",
-                    type: "number",
-                },
                 {
                     label: "Giờ bắt đầu",
                     field: "gio_bat_dau",
@@ -59,13 +54,18 @@ export default {
                 obj.ma_ca = this.selected_rows[i].ma_ca;
                 this.arr_phan_cong_ct.push(obj);
             }
-            this.$store
-                .dispatch("phan_cong/add_de_xuat_phan_cong", {
-                    ma_phan_cong: this.ma_phan_cong,
-                    so_gio: this.so_gio,
-                    phan_cong_chi_tiet: this.arr_phan_cong_ct,
-                })
-                .then(this.$emit("reset_form"));
+            if (this.arr_phan_cong_ct.length > 4) {
+                alert("Không thể chọn quá 4 phân công");
+                this.arr_phan_cong_ct = [];
+            } else {
+                this.$store
+                    .dispatch("phan_cong/add_de_xuat_phan_cong", {
+                        ma_phan_cong: this.ma_phan_cong,
+                        so_gio: this.so_gio,
+                        phan_cong_chi_tiet: this.arr_phan_cong_ct,
+                    })
+                    .then(this.$emit("reset_form"));
+            }
         },
         selectionChanged(row) {
             this.selected_rows = row.selectedRows;
@@ -73,6 +73,5 @@ export default {
     },
 };
 </script>
-
 <style>
 </style>

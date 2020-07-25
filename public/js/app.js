@@ -16713,10 +16713,6 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       columns: [{
-        label: "Thứ",
-        field: "thu",
-        type: "number"
-      }, {
         label: "Giờ bắt đầu",
         field: "gio_bat_dau"
       }, {
@@ -16748,11 +16744,16 @@ __webpack_require__.r(__webpack_exports__);
         this.arr_phan_cong_ct.push(obj);
       }
 
-      this.$store.dispatch("phan_cong/add_de_xuat_phan_cong", {
-        ma_phan_cong: this.ma_phan_cong,
-        so_gio: this.so_gio,
-        phan_cong_chi_tiet: this.arr_phan_cong_ct
-      }).then(this.$emit("reset_form"));
+      if (this.arr_phan_cong_ct.length > 4) {
+        alert("Không thể chọn quá 4 phân công");
+        this.arr_phan_cong_ct = [];
+      } else {
+        this.$store.dispatch("phan_cong/add_de_xuat_phan_cong", {
+          ma_phan_cong: this.ma_phan_cong,
+          so_gio: this.so_gio,
+          phan_cong_chi_tiet: this.arr_phan_cong_ct
+        }).then(this.$emit("reset_form"));
+      }
     },
     selectionChanged: function selectionChanged(row) {
       this.selected_rows = row.selectedRows;
@@ -16892,6 +16893,10 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         label: "Email",
         field: "email"
+      }, {
+        label: "SĐT",
+        field: "sdt",
+        sortable: false
       }, {
         label: "Cấp độ",
         field: "ten_cap_do"
@@ -37062,12 +37067,12 @@ var render = function() {
             columns: _vm.columns,
             rows: _vm.de_xuat_phan_cong,
             "search-options": { enabled: true },
-            "pagination-options": { enabled: true },
             "select-options": {
               enabled: true,
-              selectionText: "đã chọn",
+              selectionText: "bản ghi , đã chọn",
               clearSelectionText: "xóa"
-            }
+            },
+            "group-options": { enabled: true, collapsable: true }
           },
           on: { "on-selected-rows-change": _vm.selectionChanged }
         },
@@ -59547,14 +59552,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!*************************************************************************************************!*\
   !*** ./resources/js/components/giaovu/quanlylichchild/phancongchild/TablePhanCongComponent.vue ***!
   \*************************************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _TablePhanCongComponent_vue_vue_type_template_id_6ccae9da___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TablePhanCongComponent.vue?vue&type=template&id=6ccae9da& */ "./resources/js/components/giaovu/quanlylichchild/phancongchild/TablePhanCongComponent.vue?vue&type=template&id=6ccae9da&");
 /* harmony import */ var _TablePhanCongComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TablePhanCongComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/giaovu/quanlylichchild/phancongchild/TablePhanCongComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _TablePhanCongComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _TablePhanCongComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -59584,7 +59590,7 @@ component.options.__file = "resources/js/components/giaovu/quanlylichchild/phanc
 /*!**************************************************************************************************************************!*\
   !*** ./resources/js/components/giaovu/quanlylichchild/phancongchild/TablePhanCongComponent.vue?vue&type=script&lang=js& ***!
   \**************************************************************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -61770,6 +61776,87 @@ function getCookie(name) {
 
 /***/ }),
 
+/***/ "./resources/js/customfunc/groupCollection.js":
+/*!****************************************************!*\
+  !*** ./resources/js/customfunc/groupCollection.js ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return groupCollection; });
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function groupCollection(arr, prop) {
+  var arr_key = [];
+  var result_arr = [];
+
+  var _iterator = _createForOfIteratorHelper(arr),
+      _step;
+
+  try {
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+      var e = _step.value;
+
+      // if dành cho thứ nếu không dùng có thể bỏ
+      if (e[prop] != 8) {
+        arr_key.push(e[prop]);
+      }
+    }
+  } catch (err) {
+    _iterator.e(err);
+  } finally {
+    _iterator.f();
+  }
+
+  arr_key = _toConsumableArray(new Set(arr_key));
+
+  for (var i = 0; i < arr_key.length; i++) {
+    var child_obj = {
+      children: [],
+      mode: "span" // mode span chỉ dành cho phân công chi tiết, có thể bỏ
+
+    };
+    child_obj.label = "Thứ " + arr_key[i]; // lavel chỉ dành cho phân công chi tiết, có thể bỏ
+
+    var _iterator2 = _createForOfIteratorHelper(arr),
+        _step2;
+
+    try {
+      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        e = _step2.value;
+
+        if (e[prop] == arr_key[i]) {
+          child_obj.children.push(e);
+        }
+      }
+    } catch (err) {
+      _iterator2.e(err);
+    } finally {
+      _iterator2.f();
+    }
+
+    result_arr.push(child_obj);
+  }
+
+  return result_arr;
+}
+
+/***/ }),
+
 /***/ "./resources/js/layout/FooterComponent.vue":
 /*!*************************************************!*\
   !*** ./resources/js/layout/FooterComponent.vue ***!
@@ -62440,13 +62527,15 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../customfunc/getCookie.js */ "./resources/js/customfunc/getCookie.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _customfunc_groupCollection_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../customfunc/groupCollection.js */ "./resources/js/customfunc/groupCollection.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_2__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -62487,12 +62576,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       axios.post("api/phancongchitiet/dexuat", _objectSpread({
         key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("key")
       }, phan_cong_info)).then(function (res) {
-        console.log(res.data.data);
-
         if (res.data.success) {
+          res = Object(_customfunc_groupCollection_js__WEBPACK_IMPORTED_MODULE_1__["default"])(res.data.data, "thu");
+
           _this.commit("phan_cong/reset_err");
 
-          state.de_xuat_phan_cong = res.data.data;
+          state.de_xuat_phan_cong = res;
         } else {
           state.err_de_xuat = res.data.message;
         }
@@ -62508,7 +62597,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("key")
       }, phan_cong_ct)).then(function (res) {
         if (res.data.success) {
-          vue__WEBPACK_IMPORTED_MODULE_1___default.a.notify({
+          vue__WEBPACK_IMPORTED_MODULE_2___default.a.notify({
             group: "add_phan_cong_ct_success",
             title: "Thành công",
             text: res.data.message,

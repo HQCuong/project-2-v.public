@@ -47,6 +47,11 @@ export default {
                     field: "email",
                 },
                 {
+                    label: "SĐT",
+                    field: "sdt",
+                    sortable: false,
+                },
+                {
                     label: "Cấp độ",
                     field: "ten_cap_do",
                 },
