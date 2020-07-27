@@ -1,5 +1,5 @@
 <template>
-    <div>table lich lam phu hop</div>
+    <div>table de xuát</div>
 </template>
 
 <script>

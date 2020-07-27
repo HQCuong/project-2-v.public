@@ -16246,59 +16246,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _themlichchild_TableThemLichComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./themlichchild/TableThemLichComponent */ "./resources/js/components/giaovu/quanlylichchild/themlichchild/TableThemLichComponent.vue");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var _addworkchild_AddWorkTableComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./addworkchild/AddWorkTableComponent */ "./resources/js/components/giaovu/quanlylichchild/addworkchild/AddWorkTableComponent.vue");
 //
 //
 //
@@ -16308,79 +16256,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  created: function created() {
-    this.$store.dispatch("user/get_user");
-  },
-  mounted: function mounted() {
-    // change label color
-    $(".form-group").addClass("bmd-form-group");
-    $("label").addClass("bmd-label-static");
-    $(".form-group").on("click", function () {
-      $(".form-group").removeClass("is-focused");
-      $(this).addClass("is-focused");
-    }); // remove color while move out input
-
-    $("input").blur(function () {
-      $(".form-group").removeClass("is-focused");
-    });
-    this.$store.commit("content/page_title", "Thêm lịch dạy");
-  },
-  data: function data() {
-    return {
-      show_table: false,
-      giao_vien: "",
-      ngay: "",
-      lop: "",
-      mon: "",
-      time: "",
-      arr_lop: [],
-      arr_mon: [],
-      arr_time: ["2 tiếng", "4 tiếng"]
-    };
-  },
-  computed: {
-    arr_giao_vien: function arr_giao_vien() {
-      return this.$store.state.user.arr_user;
-    }
-  },
-  methods: {
-    labelGiaoVien: function labelGiaoVien(_ref) {
-      var ho_ten = _ref.ho_ten;
-      return "".concat(ho_ten);
-    },
-    preventLoad: function preventLoad(e) {
-      e.preventDefault(); // this.$store.dispatch('get_phan_cong_phu_hop');
-
-      this.show_table = true;
-    }
-  },
-  watch: {
-    giao_vien: function giao_vien() {
-      this.lop = "";
-      this.mon = "";
-
-      if (!this.giao_vien) {
-        this.arr_lop = [];
-        return false;
-      } // this.$store.dispatch('get_lop_by_gv');
-
-
-      this.arr_lop = ["BKD01K10", "BIT01K10"];
-    },
-    lop: function lop() {
-      this.mon = "";
-
-      if (!this.lop) {
-        this.arr_mon = [];
-        return false;
-      } // this.$store.dispatch('get_mon_by_lop_gv');
-
-
-      this.arr_mon = ["PHP", "WEB", "CSDL"];
-    }
-  },
   components: {
-    maintable: _themlichchild_TableThemLichComponent__WEBPACK_IMPORTED_MODULE_0__["default"]
+    maintable: _addworkchild_AddWorkTableComponent__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
 
@@ -16481,65 +16358,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  created: function created() {
-    this.$store.dispatch('user/get_user');
-  },
-  mounted: function mounted() {
-    // change label color
-    $(".form-group").addClass("bmd-form-group");
-    $("label").addClass("bmd-label-static");
-    $(".form-group").on("click", function () {
-      $(".form-group").removeClass("is-focused");
-      $(this).addClass("is-focused");
-    }); // remove color while move out input
-
-    $("input").blur(function () {
-      $(".form-group").removeClass("is-focused");
-    });
-    this.$store.commit('content/page_title', 'Thêm ngày nghỉ');
-  },
-  data: function data() {
-    return {
-      giao_vien: '',
-      ngay: '',
-      ca: '',
-      arr_ca: ['ca 1', 'ca 2', 'ca 3', 'ca 4']
-    };
-  },
-  computed: {
-    arr_giao_vien: function arr_giao_vien() {
-      return this.$store.state.user.arr_user;
-    }
-  },
-  methods: {
-    labelGiaoVien: function labelGiaoVien(_ref) {
-      var ho_ten = _ref.ho_ten;
-      return "".concat(ho_ten);
-    }
-  }
-});
+/* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
 
@@ -16682,6 +16501,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/addworkchild/AddWorkTableComponent.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/giaovu/quanlylichchild/addworkchild/AddWorkTableComponent.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/phancongchild/TablePhanCongComponent.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/giaovu/quanlylichchild/phancongchild/TablePhanCongComponent.vue?vue&type=script&lang=js& ***!
@@ -16760,23 +16596,6 @@ __webpack_require__.r(__webpack_exports__);
     }
   }
 });
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/themlichchild/TableThemLichComponent.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/giaovu/quanlylichchild/themlichchild/TableThemLichComponent.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
 
@@ -19354,7 +19173,7 @@ exports = module.exports = __webpack_require__(/*! ../../css-loader/lib/css-base
 
 
 // module
-exports.push([module.i, "\r\n:root {\r\n  --fc-daygrid-event-dot-width: 8px;\r\n}\r\n.fc .fc-popover {\r\n    position: fixed;\r\n    top: 0; /* for when not positioned yet */\r\n    box-shadow: 0 2px 6px rgba(0,0,0,.15);\r\n  }\r\n.fc .fc-popover-header {\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    padding: 3px 4px;\r\n  }\r\n.fc .fc-popover-title {\r\n    margin: 0 2px;\r\n  }\r\n.fc .fc-popover-close {\r\n    cursor: pointer;\r\n    opacity: 0.65;\r\n    font-size: 1.1em;\r\n  }\r\n.fc-theme-standard .fc-popover {\r\n    border: 1px solid #ddd;\r\n    border: 1px solid var(--fc-border-color, #ddd);\r\n    background: #fff;\r\n    background: var(--fc-page-bg-color, #fff);\r\n  }\r\n.fc-theme-standard .fc-popover-header {\r\n    background: rgba(208, 208, 208, 0.3);\r\n    background: var(--fc-neutral-bg-color, rgba(208, 208, 208, 0.3));\r\n  }\r\n/* help things clear margins of inner content */\r\n.fc-daygrid-day-frame,\r\n.fc-daygrid-day-events,\r\n.fc-daygrid-event-harness { /* for event top/bottom margins */\r\n}\r\n.fc-daygrid-day-frame:before, .fc-daygrid-day-events:before, .fc-daygrid-event-harness:before {\r\n  content: \"\";\r\n  clear: both;\r\n  display: table; }\r\n.fc-daygrid-day-frame:after, .fc-daygrid-day-events:after, .fc-daygrid-event-harness:after {\r\n  content: \"\";\r\n  clear: both;\r\n  display: table; }\r\n.fc .fc-daygrid-body { /* a <div> that wraps the table */\r\n    position: relative;\r\n    z-index: 1; /* container inner z-index's because <tr>s can't do it */\r\n  }\r\n.fc .fc-daygrid-day.fc-day-today {\r\n      background-color: rgba(255, 220, 40, 0.15);\r\n      background-color: var(--fc-today-bg-color, rgba(255, 220, 40, 0.15));\r\n    }\r\n.fc .fc-daygrid-day-frame {\r\n    position: relative;\r\n    min-height: 100%; /* seems to work better than `height` because sets height after rows/cells naturally do it */\r\n  }\r\n.fc {\r\n\r\n  /* cell top */\r\n\r\n}\r\n.fc .fc-daygrid-day-top {\r\n    position: relative;\r\n    z-index: 4;\r\n    display: flex;\r\n    flex-direction: row-reverse;\r\n  }\r\n.fc .fc-day-other .fc-daygrid-day-top {\r\n    opacity: 0.3;\r\n  }\r\n.fc {\r\n\r\n  /* day number (within cell top) */\r\n\r\n}\r\n.fc .fc-daygrid-day-number {\r\n    padding: 4px;\r\n  }\r\n.fc {\r\n\r\n  /* event container */\r\n\r\n}\r\n.fc .fc-daygrid-day-events {\r\n    margin-top: 1px; /* needs to be margin, not padding, so that available cell height can be computed */\r\n  }\r\n.fc {\r\n\r\n  /* positioning for balanced vs natural */\r\n\r\n}\r\n.fc .fc-daygrid-body-balanced .fc-daygrid-day-events {\r\n      position: absolute;\r\n      left: 0;\r\n      right: 0;\r\n    }\r\n.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {\r\n      position: relative; /* for containing abs positioned event harnesses */\r\n      min-height: 2em; /* in addition to being a min-height during natural height, equalizes the heights a little bit */\r\n    }\r\n.fc .fc-daygrid-body-natural { /* can coexist with -unbalanced */\r\n  }\r\n.fc .fc-daygrid-body-natural .fc-daygrid-day-events {\r\n      margin-bottom: 1em;\r\n    }\r\n.fc {\r\n\r\n  /* event harness */\r\n\r\n}\r\n.fc .fc-daygrid-event-harness {\r\n    position: relative;\r\n  }\r\n.fc .fc-daygrid-event-harness-abs {\r\n    position: absolute;\r\n    top: 0; /* fallback coords for when cannot yet be computed */\r\n    left: 0; /* */\r\n    right: 0; /* */\r\n  }\r\n.fc .fc-daygrid-bg-harness {\r\n    position: absolute;\r\n    top: 0;\r\n    bottom: 0;\r\n  }\r\n.fc {\r\n\r\n  /* bg content */\r\n\r\n}\r\n.fc .fc-daygrid-day-bg .fc-non-business { z-index: 1 }\r\n.fc .fc-daygrid-day-bg .fc-bg-event { z-index: 2 }\r\n.fc .fc-daygrid-day-bg .fc-highlight { z-index: 3 }\r\n.fc {\r\n\r\n  /* events */\r\n\r\n}\r\n.fc .fc-daygrid-event {\r\n    z-index: 6;\r\n    margin-top: 1px;\r\n  }\r\n.fc .fc-daygrid-event.fc-event-mirror {\r\n    z-index: 7;\r\n  }\r\n.fc {\r\n\r\n  /* cell bottom (within day-events) */\r\n\r\n}\r\n.fc .fc-daygrid-day-bottom {\r\n    position: relative;\r\n    z-index: 4;\r\n    font-size: .85em;\r\n    margin: 2px 3px 0;\r\n  }\r\n.fc .fc-daygrid-more-link {\r\n    cursor: pointer;\r\n  }\r\n.fc {\r\n\r\n  /* week number (within frame) */\r\n\r\n}\r\n.fc .fc-daygrid-week-number {\r\n    position: absolute;\r\n    z-index: 5;\r\n    top: 0;\r\n    padding: 2px;\r\n    min-width: 1.5em;\r\n    text-align: center;\r\n    background-color: rgba(208, 208, 208, 0.3);\r\n    background-color: var(--fc-neutral-bg-color, rgba(208, 208, 208, 0.3));\r\n    color: #808080;\r\n    color: var(--fc-neutral-text-color, #808080);\r\n  }\r\n.fc {\r\n\r\n  /* popover */\r\n\r\n}\r\n.fc .fc-more-popover {\r\n    z-index: 8;\r\n  }\r\n.fc .fc-more-popover .fc-popover-body {\r\n    min-width: 220px;\r\n    padding: 10px;\r\n  }\r\n.fc-direction-ltr .fc-daygrid-event.fc-event-start,\r\n.fc-direction-rtl .fc-daygrid-event.fc-event-end {\r\n  margin-left: 2px;\r\n}\r\n.fc-direction-ltr .fc-daygrid-event.fc-event-end,\r\n.fc-direction-rtl .fc-daygrid-event.fc-event-start {\r\n  margin-right: 2px;\r\n}\r\n.fc-direction-ltr .fc-daygrid-week-number {\r\n    left: 0;\r\n    border-radius: 0 0 3px 0;\r\n  }\r\n.fc-direction-rtl .fc-daygrid-week-number {\r\n    right: 0;\r\n    border-radius: 0 0 0 3px;\r\n  }\r\n.fc-liquid-hack .fc-daygrid-day-frame {\r\n    position: static; /* will cause inner absolute stuff to expand to <td> */\r\n  }\r\n.fc-daygrid-event { /* make root-level, because will be dragged-and-dropped outside of a component root */\r\n  position: relative; /* for z-indexes assigned later */\r\n  white-space: nowrap;\r\n  border-radius: 3px; /* dot event needs this to when selected */\r\n  font-size: .85em;\r\n  font-size: var(--fc-small-font-size, .85em);\r\n}\r\n/* --- the rectangle (\"block\") style of event --- */\r\n.fc-daygrid-block-event .fc-event-time {\r\n    font-weight: bold;\r\n  }\r\n.fc-daygrid-block-event .fc-event-time,\r\n  .fc-daygrid-block-event .fc-event-title {\r\n    padding: 1px;\r\n  }\r\n/* --- the dot style of event --- */\r\n.fc-daygrid-dot-event {\r\n  display: block;\r\n  padding: 2px 0;\r\n  overflow: hidden\r\n\r\n}\r\n.fc-daygrid-dot-event .fc-event-title {\r\n    font-weight: bold;\r\n  }\r\n.fc-daygrid-dot-event .fc-event-time,\r\n  .fc-daygrid-dot-event .fc-event-title {\r\n    display: inline-block; /* better than inline, for sitting next to dot */\r\n  }\r\n.fc-daygrid-dot-event:hover,\r\n  .fc-daygrid-dot-event.fc-event-mirror {\r\n    background: rgba(0, 0, 0, 0.1);\r\n  }\r\n.fc-daygrid-event-dot { /* the actual dot */\r\n  display: inline-block;\r\n  margin: 0 4px;\r\n  box-sizing: content-box;\r\n  width: 0;\r\n  height: 0;\r\n  border: 4px solid #3788d8;\r\n  border: calc(var(--fc-daygrid-event-dot-width, 8px) / 2) solid var(--fc-event-border-color, #3788d8);\r\n  border-radius: 4px;\r\n  border-radius: calc(var(--fc-daygrid-event-dot-width, 8px) / 2);\r\n}\r\n/* --- spacing between time and title --- */\r\n.fc-direction-ltr .fc-daygrid-event .fc-event-time {\r\n    margin-right: 3px;\r\n  }\r\n.fc-direction-rtl .fc-daygrid-event .fc-event-time {\r\n    margin-left: 3px;\r\n  }\r\n\r\n/* --- Custom setting --- */\r\n.fc-event-main-frame {\r\n  flex-direction: column;\r\n  line-height: normal;\r\n}\r\n\r\n.fc-event-title {\r\n  white-space: normal;\r\n}\r\n\r\n\r\n", ""]);
+exports.push([module.i, "\r\n:root {\r\n  --fc-daygrid-event-dot-width: 8px;\r\n}\r\n.fc .fc-popover {\r\n    position: fixed;\r\n    top: 0; /* for when not positioned yet */\r\n    box-shadow: 0 2px 6px rgba(0,0,0,.15);\r\n  }\r\n.fc .fc-popover-header {\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    padding: 3px 4px;\r\n  }\r\n.fc .fc-popover-title {\r\n    margin: 0 2px;\r\n  }\r\n.fc .fc-popover-close {\r\n    cursor: pointer;\r\n    opacity: 0.65;\r\n    font-size: 1.1em;\r\n  }\r\n.fc-theme-standard .fc-popover {\r\n    border: 1px solid #ddd;\r\n    border: 1px solid var(--fc-border-color, #ddd);\r\n    background: #fff;\r\n    background: var(--fc-page-bg-color, #fff);\r\n  }\r\n.fc-theme-standard .fc-popover-header {\r\n    background: rgba(208, 208, 208, 0.3);\r\n    background: var(--fc-neutral-bg-color, rgba(208, 208, 208, 0.3));\r\n  }\r\n/* help things clear margins of inner content */\r\n.fc-daygrid-day-frame,\r\n.fc-daygrid-day-events,\r\n.fc-daygrid-event-harness { /* for event top/bottom margins */\r\n}\r\n.fc-daygrid-day-frame:before, .fc-daygrid-day-events:before, .fc-daygrid-event-harness:before {\r\n  content: \"\";\r\n  clear: both;\r\n  display: table; }\r\n.fc-daygrid-day-frame:after, .fc-daygrid-day-events:after, .fc-daygrid-event-harness:after {\r\n  content: \"\";\r\n  clear: both;\r\n  display: table; }\r\n.fc .fc-daygrid-body { /* a <div> that wraps the table */\r\n    position: relative;\r\n    z-index: 1; /* container inner z-index's because <tr>s can't do it */\r\n  }\r\n.fc .fc-daygrid-day.fc-day-today {\r\n      background-color: rgba(255, 220, 40, 0.15);\r\n      background-color: var(--fc-today-bg-color, rgba(255, 220, 40, 0.15));\r\n    }\r\n.fc .fc-daygrid-day-frame {\r\n    position: relative;\r\n    min-height: 100%; /* seems to work better than `height` because sets height after rows/cells naturally do it */\r\n  }\r\n.fc {\r\n\r\n  /* cell top */\r\n\r\n}\r\n.fc .fc-daygrid-day-top {\r\n    position: relative;\r\n    z-index: 4;\r\n    display: flex;\r\n    flex-direction: row-reverse;\r\n  }\r\n.fc .fc-day-other .fc-daygrid-day-top {\r\n    opacity: 0.3;\r\n  }\r\n.fc {\r\n\r\n  /* day number (within cell top) */\r\n\r\n}\r\n.fc .fc-daygrid-day-number {\r\n    padding: 4px;\r\n  }\r\n.fc {\r\n\r\n  /* event container */\r\n\r\n}\r\n.fc .fc-daygrid-day-events {\r\n    margin-top: 1px; /* needs to be margin, not padding, so that available cell height can be computed */\r\n  }\r\n.fc {\r\n\r\n  /* positioning for balanced vs natural */\r\n\r\n}\r\n.fc .fc-daygrid-body-balanced .fc-daygrid-day-events {\r\n      position: absolute;\r\n      left: 0;\r\n      right: 0;\r\n    }\r\n.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {\r\n      position: relative; /* for containing abs positioned event harnesses */\r\n      min-height: 2em; /* in addition to being a min-height during natural height, equalizes the heights a little bit */\r\n    }\r\n.fc .fc-daygrid-body-natural { /* can coexist with -unbalanced */\r\n  }\r\n.fc .fc-daygrid-body-natural .fc-daygrid-day-events {\r\n      margin-bottom: 1em;\r\n    }\r\n.fc {\r\n\r\n  /* event harness */\r\n\r\n}\r\n.fc .fc-daygrid-event-harness {\r\n    position: relative;\r\n  }\r\n.fc .fc-daygrid-event-harness-abs {\r\n    position: absolute;\r\n    top: 0; /* fallback coords for when cannot yet be computed */\r\n    left: 0; /* */\r\n    right: 0; /* */\r\n  }\r\n.fc .fc-daygrid-bg-harness {\r\n    position: absolute;\r\n    top: 0;\r\n    bottom: 0;\r\n  }\r\n.fc {\r\n\r\n  /* bg content */\r\n\r\n}\r\n.fc .fc-daygrid-day-bg .fc-non-business { z-index: 1 }\r\n.fc .fc-daygrid-day-bg .fc-bg-event { z-index: 2 }\r\n.fc .fc-daygrid-day-bg .fc-highlight { z-index: 3 }\r\n.fc {\r\n\r\n  /* events */\r\n\r\n}\r\n.fc .fc-daygrid-event {\r\n    z-index: 6;\r\n    margin-top: 1px;\r\n  }\r\n.fc .fc-daygrid-event.fc-event-mirror {\r\n    z-index: 7;\r\n  }\r\n.fc {\r\n\r\n  /* cell bottom (within day-events) */\r\n\r\n}\r\n.fc .fc-daygrid-day-bottom {\r\n    position: relative;\r\n    z-index: 4;\r\n    font-size: .85em;\r\n    margin: 2px 3px 0;\r\n  }\r\n.fc .fc-daygrid-more-link {\r\n    cursor: pointer;\r\n  }\r\n.fc {\r\n\r\n  /* week number (within frame) */\r\n\r\n}\r\n.fc .fc-daygrid-week-number {\r\n    position: absolute;\r\n    z-index: 5;\r\n    top: 0;\r\n    padding: 2px;\r\n    min-width: 1.5em;\r\n    text-align: center;\r\n    background-color: rgba(208, 208, 208, 0.3);\r\n    background-color: var(--fc-neutral-bg-color, rgba(208, 208, 208, 0.3));\r\n    color: #808080;\r\n    color: var(--fc-neutral-text-color, #808080);\r\n  }\r\n.fc {\r\n\r\n  /* popover */\r\n\r\n}\r\n.fc .fc-more-popover {\r\n    z-index: 8;\r\n  }\r\n.fc .fc-more-popover .fc-popover-body {\r\n    min-width: 220px;\r\n    padding: 10px;\r\n  }\r\n.fc-direction-ltr .fc-daygrid-event.fc-event-start,\r\n.fc-direction-rtl .fc-daygrid-event.fc-event-end {\r\n  margin-left: 2px;\r\n}\r\n.fc-direction-ltr .fc-daygrid-event.fc-event-end,\r\n.fc-direction-rtl .fc-daygrid-event.fc-event-start {\r\n  margin-right: 2px;\r\n}\r\n.fc-direction-ltr .fc-daygrid-week-number {\r\n    left: 0;\r\n    border-radius: 0 0 3px 0;\r\n  }\r\n.fc-direction-rtl .fc-daygrid-week-number {\r\n    right: 0;\r\n    border-radius: 0 0 0 3px;\r\n  }\r\n.fc-liquid-hack .fc-daygrid-day-frame {\r\n    position: static; /* will cause inner absolute stuff to expand to <td> */\r\n  }\r\n.fc-daygrid-event { /* make root-level, because will be dragged-and-dropped outside of a component root */\r\n  position: relative; /* for z-indexes assigned later */\r\n  white-space: nowrap;\r\n  border-radius: 3px; /* dot event needs this to when selected */\r\n  font-size: .85em;\r\n  font-size: var(--fc-small-font-size, .85em);\r\n}\r\n/* --- the rectangle (\"block\") style of event --- */\r\n.fc-daygrid-block-event .fc-event-time {\r\n    font-weight: bold;\r\n  }\r\n.fc-daygrid-block-event .fc-event-time,\r\n  .fc-daygrid-block-event .fc-event-title {\r\n    padding: 1px;\r\n  }\r\n/* --- the dot style of event --- */\r\n.fc-daygrid-dot-event {\r\n  display: block;\r\n  padding: 2px 0;\r\n  overflow: hidden\r\n\r\n}\r\n.fc-daygrid-dot-event .fc-event-title {\r\n    font-weight: bold;\r\n  }\r\n.fc-daygrid-dot-event .fc-event-time,\r\n  .fc-daygrid-dot-event .fc-event-title {\r\n    display: inline-block; /* better than inline, for sitting next to dot */\r\n  }\r\n.fc-daygrid-dot-event:hover,\r\n  .fc-daygrid-dot-event.fc-event-mirror {\r\n    background: rgba(0, 0, 0, 0.1);\r\n  }\r\n.fc-daygrid-event-dot { /* the actual dot */\r\n  display: inline-block;\r\n  margin: 0 4px;\r\n  box-sizing: content-box;\r\n  width: 0;\r\n  height: 0;\r\n  border: 4px solid #3788d8;\r\n  border: calc(var(--fc-daygrid-event-dot-width, 8px) / 2) solid var(--fc-event-border-color, #3788d8);\r\n  border-radius: 4px;\r\n  border-radius: calc(var(--fc-daygrid-event-dot-width, 8px) / 2);\r\n}\r\n/* --- spacing between time and title --- */\r\n.fc-direction-ltr .fc-daygrid-event .fc-event-time {\r\n    margin-right: 3px;\r\n  }\r\n.fc-direction-rtl .fc-daygrid-event .fc-event-time {\r\n    margin-left: 3px;\r\n  }\r\n\r\n/* --- Custom setting --- */\r\n.fc-event-main-frame {\r\n  flex-direction: column;\r\n  line-height: normal;\r\n}\r\n\r\n.fc-event-title {\r\n  white-space: normal;\r\n  font-weight: bold;\r\n}\r\n\r\n\r\n", ""]);
 
 // exports
 
@@ -19411,7 +19230,7 @@ exports = module.exports = __webpack_require__(/*! ../../css-loader/lib/css-base
 
 
 // module
-exports.push([module.i, "\n:root {\r\n  --fc-daygrid-event-dot-width: 8px;\n}\n.fc .fc-popover {\r\n    position: fixed;\r\n    top: 0; /* for when not positioned yet */\r\n    box-shadow: 0 2px 6px rgba(0,0,0,.15);\n}\n.fc .fc-popover-header {\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    padding: 3px 4px;\n}\n.fc .fc-popover-title {\r\n    margin: 0 2px;\n}\n.fc .fc-popover-close {\r\n    cursor: pointer;\r\n    opacity: 0.65;\r\n    font-size: 1.1em;\n}\n.fc-theme-standard .fc-popover {\r\n    border: 1px solid #ddd;\r\n    border: 1px solid var(--fc-border-color, #ddd);\r\n    background: #fff;\r\n    background: var(--fc-page-bg-color, #fff);\n}\n.fc-theme-standard .fc-popover-header {\r\n    background: rgba(208, 208, 208, 0.3);\r\n    background: var(--fc-neutral-bg-color, rgba(208, 208, 208, 0.3));\n}\r\n/* help things clear margins of inner content */\n.fc-daygrid-day-frame,\r\n.fc-daygrid-day-events,\r\n.fc-daygrid-event-harness { /* for event top/bottom margins */\n}\n.fc-daygrid-day-frame:before, .fc-daygrid-day-events:before, .fc-daygrid-event-harness:before {\r\n  content: \"\";\r\n  clear: both;\r\n  display: table;\n}\n.fc-daygrid-day-frame:after, .fc-daygrid-day-events:after, .fc-daygrid-event-harness:after {\r\n  content: \"\";\r\n  clear: both;\r\n  display: table;\n}\n.fc .fc-daygrid-body { /* a <div> that wraps the table */\r\n    position: relative;\r\n    z-index: 1; /* container inner z-index's because <tr>s can't do it */\n}\n.fc .fc-daygrid-day.fc-day-today {\r\n      background-color: rgba(255, 220, 40, 0.15);\r\n      background-color: var(--fc-today-bg-color, rgba(255, 220, 40, 0.15));\n}\n.fc .fc-daygrid-day-frame {\r\n    position: relative;\r\n    min-height: 100%; /* seems to work better than `height` because sets height after rows/cells naturally do it */\n}\n.fc {\r\n\r\n  /* cell top */\n}\n.fc .fc-daygrid-day-top {\r\n    position: relative;\r\n    z-index: 4;\r\n    display: flex;\r\n    flex-direction: row-reverse;\n}\n.fc .fc-day-other .fc-daygrid-day-top {\r\n    opacity: 0.3;\n}\n.fc {\r\n\r\n  /* day number (within cell top) */\n}\n.fc .fc-daygrid-day-number {\r\n    padding: 4px;\n}\n.fc {\r\n\r\n  /* event container */\n}\n.fc .fc-daygrid-day-events {\r\n    margin-top: 1px; /* needs to be margin, not padding, so that available cell height can be computed */\n}\n.fc {\r\n\r\n  /* positioning for balanced vs natural */\n}\n.fc .fc-daygrid-body-balanced .fc-daygrid-day-events {\r\n      position: absolute;\r\n      left: 0;\r\n      right: 0;\n}\n.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {\r\n      position: relative; /* for containing abs positioned event harnesses */\r\n      min-height: 2em; /* in addition to being a min-height during natural height, equalizes the heights a little bit */\n}\n.fc .fc-daygrid-body-natural { /* can coexist with -unbalanced */\n}\n.fc .fc-daygrid-body-natural .fc-daygrid-day-events {\r\n      margin-bottom: 1em;\n}\n.fc {\r\n\r\n  /* event harness */\n}\n.fc .fc-daygrid-event-harness {\r\n    position: relative;\n}\n.fc .fc-daygrid-event-harness-abs {\r\n    position: absolute;\r\n    top: 0; /* fallback coords for when cannot yet be computed */\r\n    left: 0; /* */\r\n    right: 0; /* */\n}\n.fc .fc-daygrid-bg-harness {\r\n    position: absolute;\r\n    top: 0;\r\n    bottom: 0;\n}\n.fc {\r\n\r\n  /* bg content */\n}\n.fc .fc-daygrid-day-bg .fc-non-business { z-index: 1\n}\n.fc .fc-daygrid-day-bg .fc-bg-event { z-index: 2\n}\n.fc .fc-daygrid-day-bg .fc-highlight { z-index: 3\n}\n.fc {\r\n\r\n  /* events */\n}\n.fc .fc-daygrid-event {\r\n    z-index: 6;\r\n    margin-top: 1px;\n}\n.fc .fc-daygrid-event.fc-event-mirror {\r\n    z-index: 7;\n}\n.fc {\r\n\r\n  /* cell bottom (within day-events) */\n}\n.fc .fc-daygrid-day-bottom {\r\n    position: relative;\r\n    z-index: 4;\r\n    font-size: .85em;\r\n    margin: 2px 3px 0;\n}\n.fc .fc-daygrid-more-link {\r\n    cursor: pointer;\n}\n.fc {\r\n\r\n  /* week number (within frame) */\n}\n.fc .fc-daygrid-week-number {\r\n    position: absolute;\r\n    z-index: 5;\r\n    top: 0;\r\n    padding: 2px;\r\n    min-width: 1.5em;\r\n    text-align: center;\r\n    background-color: rgba(208, 208, 208, 0.3);\r\n    background-color: var(--fc-neutral-bg-color, rgba(208, 208, 208, 0.3));\r\n    color: #808080;\r\n    color: var(--fc-neutral-text-color, #808080);\n}\n.fc {\r\n\r\n  /* popover */\n}\n.fc .fc-more-popover {\r\n    z-index: 8;\n}\n.fc .fc-more-popover .fc-popover-body {\r\n    min-width: 220px;\r\n    padding: 10px;\n}\n.fc-direction-ltr .fc-daygrid-event.fc-event-start,\r\n.fc-direction-rtl .fc-daygrid-event.fc-event-end {\r\n  margin-left: 2px;\n}\n.fc-direction-ltr .fc-daygrid-event.fc-event-end,\r\n.fc-direction-rtl .fc-daygrid-event.fc-event-start {\r\n  margin-right: 2px;\n}\n.fc-direction-ltr .fc-daygrid-week-number {\r\n    left: 0;\r\n    border-radius: 0 0 3px 0;\n}\n.fc-direction-rtl .fc-daygrid-week-number {\r\n    right: 0;\r\n    border-radius: 0 0 0 3px;\n}\n.fc-liquid-hack .fc-daygrid-day-frame {\r\n    position: static; /* will cause inner absolute stuff to expand to <td> */\n}\n.fc-daygrid-event { /* make root-level, because will be dragged-and-dropped outside of a component root */\r\n  position: relative; /* for z-indexes assigned later */\r\n  white-space: nowrap;\r\n  border-radius: 3px; /* dot event needs this to when selected */\r\n  font-size: .85em;\r\n  font-size: var(--fc-small-font-size, .85em);\n}\r\n/* --- the rectangle (\"block\") style of event --- */\n.fc-daygrid-block-event .fc-event-time {\r\n    font-weight: bold;\n}\n.fc-daygrid-block-event .fc-event-time,\r\n  .fc-daygrid-block-event .fc-event-title {\r\n    padding: 1px;\n}\r\n/* --- the dot style of event --- */\n.fc-daygrid-dot-event {\r\n  display: block;\r\n  padding: 2px 0;\r\n  overflow: hidden\n}\n.fc-daygrid-dot-event .fc-event-title {\r\n    font-weight: bold;\n}\n.fc-daygrid-dot-event .fc-event-time,\r\n  .fc-daygrid-dot-event .fc-event-title {\r\n    display: inline-block; /* better than inline, for sitting next to dot */\n}\n.fc-daygrid-dot-event:hover,\r\n  .fc-daygrid-dot-event.fc-event-mirror {\r\n    background: rgba(0, 0, 0, 0.1);\n}\n.fc-daygrid-event-dot { /* the actual dot */\r\n  display: inline-block;\r\n  margin: 0 4px;\r\n  box-sizing: content-box;\r\n  width: 0;\r\n  height: 0;\r\n  border: 4px solid #3788d8;\r\n  border: calc(var(--fc-daygrid-event-dot-width, 8px) / 2) solid var(--fc-event-border-color, #3788d8);\r\n  border-radius: 4px;\r\n  border-radius: calc(var(--fc-daygrid-event-dot-width, 8px) / 2);\n}\r\n/* --- spacing between time and title --- */\n.fc-direction-ltr .fc-daygrid-event .fc-event-time {\r\n    margin-right: 3px;\n}\n.fc-direction-rtl .fc-daygrid-event .fc-event-time {\r\n    margin-left: 3px;\n}\r\n\r\n/* --- Custom setting --- */\n.fc-event-main-frame {\r\n  flex-direction: column;\r\n  line-height: normal;\n}\n.fc-event-title {\r\n  white-space: normal;\n}\r\n\r\n\r\n", ""]);
+exports.push([module.i, "\n:root {\r\n  --fc-daygrid-event-dot-width: 8px;\n}\n.fc .fc-popover {\r\n    position: fixed;\r\n    top: 0; /* for when not positioned yet */\r\n    box-shadow: 0 2px 6px rgba(0,0,0,.15);\n}\n.fc .fc-popover-header {\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    padding: 3px 4px;\n}\n.fc .fc-popover-title {\r\n    margin: 0 2px;\n}\n.fc .fc-popover-close {\r\n    cursor: pointer;\r\n    opacity: 0.65;\r\n    font-size: 1.1em;\n}\n.fc-theme-standard .fc-popover {\r\n    border: 1px solid #ddd;\r\n    border: 1px solid var(--fc-border-color, #ddd);\r\n    background: #fff;\r\n    background: var(--fc-page-bg-color, #fff);\n}\n.fc-theme-standard .fc-popover-header {\r\n    background: rgba(208, 208, 208, 0.3);\r\n    background: var(--fc-neutral-bg-color, rgba(208, 208, 208, 0.3));\n}\r\n/* help things clear margins of inner content */\n.fc-daygrid-day-frame,\r\n.fc-daygrid-day-events,\r\n.fc-daygrid-event-harness { /* for event top/bottom margins */\n}\n.fc-daygrid-day-frame:before, .fc-daygrid-day-events:before, .fc-daygrid-event-harness:before {\r\n  content: \"\";\r\n  clear: both;\r\n  display: table;\n}\n.fc-daygrid-day-frame:after, .fc-daygrid-day-events:after, .fc-daygrid-event-harness:after {\r\n  content: \"\";\r\n  clear: both;\r\n  display: table;\n}\n.fc .fc-daygrid-body { /* a <div> that wraps the table */\r\n    position: relative;\r\n    z-index: 1; /* container inner z-index's because <tr>s can't do it */\n}\n.fc .fc-daygrid-day.fc-day-today {\r\n      background-color: rgba(255, 220, 40, 0.15);\r\n      background-color: var(--fc-today-bg-color, rgba(255, 220, 40, 0.15));\n}\n.fc .fc-daygrid-day-frame {\r\n    position: relative;\r\n    min-height: 100%; /* seems to work better than `height` because sets height after rows/cells naturally do it */\n}\n.fc {\r\n\r\n  /* cell top */\n}\n.fc .fc-daygrid-day-top {\r\n    position: relative;\r\n    z-index: 4;\r\n    display: flex;\r\n    flex-direction: row-reverse;\n}\n.fc .fc-day-other .fc-daygrid-day-top {\r\n    opacity: 0.3;\n}\n.fc {\r\n\r\n  /* day number (within cell top) */\n}\n.fc .fc-daygrid-day-number {\r\n    padding: 4px;\n}\n.fc {\r\n\r\n  /* event container */\n}\n.fc .fc-daygrid-day-events {\r\n    margin-top: 1px; /* needs to be margin, not padding, so that available cell height can be computed */\n}\n.fc {\r\n\r\n  /* positioning for balanced vs natural */\n}\n.fc .fc-daygrid-body-balanced .fc-daygrid-day-events {\r\n      position: absolute;\r\n      left: 0;\r\n      right: 0;\n}\n.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {\r\n      position: relative; /* for containing abs positioned event harnesses */\r\n      min-height: 2em; /* in addition to being a min-height during natural height, equalizes the heights a little bit */\n}\n.fc .fc-daygrid-body-natural { /* can coexist with -unbalanced */\n}\n.fc .fc-daygrid-body-natural .fc-daygrid-day-events {\r\n      margin-bottom: 1em;\n}\n.fc {\r\n\r\n  /* event harness */\n}\n.fc .fc-daygrid-event-harness {\r\n    position: relative;\n}\n.fc .fc-daygrid-event-harness-abs {\r\n    position: absolute;\r\n    top: 0; /* fallback coords for when cannot yet be computed */\r\n    left: 0; /* */\r\n    right: 0; /* */\n}\n.fc .fc-daygrid-bg-harness {\r\n    position: absolute;\r\n    top: 0;\r\n    bottom: 0;\n}\n.fc {\r\n\r\n  /* bg content */\n}\n.fc .fc-daygrid-day-bg .fc-non-business { z-index: 1\n}\n.fc .fc-daygrid-day-bg .fc-bg-event { z-index: 2\n}\n.fc .fc-daygrid-day-bg .fc-highlight { z-index: 3\n}\n.fc {\r\n\r\n  /* events */\n}\n.fc .fc-daygrid-event {\r\n    z-index: 6;\r\n    margin-top: 1px;\n}\n.fc .fc-daygrid-event.fc-event-mirror {\r\n    z-index: 7;\n}\n.fc {\r\n\r\n  /* cell bottom (within day-events) */\n}\n.fc .fc-daygrid-day-bottom {\r\n    position: relative;\r\n    z-index: 4;\r\n    font-size: .85em;\r\n    margin: 2px 3px 0;\n}\n.fc .fc-daygrid-more-link {\r\n    cursor: pointer;\n}\n.fc {\r\n\r\n  /* week number (within frame) */\n}\n.fc .fc-daygrid-week-number {\r\n    position: absolute;\r\n    z-index: 5;\r\n    top: 0;\r\n    padding: 2px;\r\n    min-width: 1.5em;\r\n    text-align: center;\r\n    background-color: rgba(208, 208, 208, 0.3);\r\n    background-color: var(--fc-neutral-bg-color, rgba(208, 208, 208, 0.3));\r\n    color: #808080;\r\n    color: var(--fc-neutral-text-color, #808080);\n}\n.fc {\r\n\r\n  /* popover */\n}\n.fc .fc-more-popover {\r\n    z-index: 8;\n}\n.fc .fc-more-popover .fc-popover-body {\r\n    min-width: 220px;\r\n    padding: 10px;\n}\n.fc-direction-ltr .fc-daygrid-event.fc-event-start,\r\n.fc-direction-rtl .fc-daygrid-event.fc-event-end {\r\n  margin-left: 2px;\n}\n.fc-direction-ltr .fc-daygrid-event.fc-event-end,\r\n.fc-direction-rtl .fc-daygrid-event.fc-event-start {\r\n  margin-right: 2px;\n}\n.fc-direction-ltr .fc-daygrid-week-number {\r\n    left: 0;\r\n    border-radius: 0 0 3px 0;\n}\n.fc-direction-rtl .fc-daygrid-week-number {\r\n    right: 0;\r\n    border-radius: 0 0 0 3px;\n}\n.fc-liquid-hack .fc-daygrid-day-frame {\r\n    position: static; /* will cause inner absolute stuff to expand to <td> */\n}\n.fc-daygrid-event { /* make root-level, because will be dragged-and-dropped outside of a component root */\r\n  position: relative; /* for z-indexes assigned later */\r\n  white-space: nowrap;\r\n  border-radius: 3px; /* dot event needs this to when selected */\r\n  font-size: .85em;\r\n  font-size: var(--fc-small-font-size, .85em);\n}\r\n/* --- the rectangle (\"block\") style of event --- */\n.fc-daygrid-block-event .fc-event-time {\r\n    font-weight: bold;\n}\n.fc-daygrid-block-event .fc-event-time,\r\n  .fc-daygrid-block-event .fc-event-title {\r\n    padding: 1px;\n}\r\n/* --- the dot style of event --- */\n.fc-daygrid-dot-event {\r\n  display: block;\r\n  padding: 2px 0;\r\n  overflow: hidden\n}\n.fc-daygrid-dot-event .fc-event-title {\r\n    font-weight: bold;\n}\n.fc-daygrid-dot-event .fc-event-time,\r\n  .fc-daygrid-dot-event .fc-event-title {\r\n    display: inline-block; /* better than inline, for sitting next to dot */\n}\n.fc-daygrid-dot-event:hover,\r\n  .fc-daygrid-dot-event.fc-event-mirror {\r\n    background: rgba(0, 0, 0, 0.1);\n}\n.fc-daygrid-event-dot { /* the actual dot */\r\n  display: inline-block;\r\n  margin: 0 4px;\r\n  box-sizing: content-box;\r\n  width: 0;\r\n  height: 0;\r\n  border: 4px solid #3788d8;\r\n  border: calc(var(--fc-daygrid-event-dot-width, 8px) / 2) solid var(--fc-event-border-color, #3788d8);\r\n  border-radius: 4px;\r\n  border-radius: calc(var(--fc-daygrid-event-dot-width, 8px) / 2);\n}\r\n/* --- spacing between time and title --- */\n.fc-direction-ltr .fc-daygrid-event .fc-event-time {\r\n    margin-right: 3px;\n}\n.fc-direction-rtl .fc-daygrid-event .fc-event-time {\r\n    margin-left: 3px;\n}\r\n\r\n/* --- Custom setting --- */\n.fc-event-main-frame {\r\n  flex-direction: column;\r\n  line-height: normal;\n}\n.fc-event-title {\r\n  white-space: normal;\r\n  font-weight: bold;\n}\r\n\r\n\r\n", ""]);
 
 // exports
 
@@ -36581,10 +36400,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/AddWorkComponent.vue?vue&type=template&id=a01143fa&scoped=true&":
-/*!******************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/giaovu/quanlylichchild/AddWorkComponent.vue?vue&type=template&id=a01143fa&scoped=true& ***!
-  \******************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/AddWorkComponent.vue?vue&type=template&id=a01143fa&":
+/*!******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/giaovu/quanlylichchild/AddWorkComponent.vue?vue&type=template&id=a01143fa& ***!
+  \******************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -36598,148 +36417,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    [
-      _c(
-        "form",
-        { on: { submit: _vm.preventLoad } },
-        [
-          _c("label", [_vm._v("Giáo viên")]),
-          _vm._v(" "),
-          _c("multiselect", {
-            attrs: {
-              placeholder: "Chọn giáo viên",
-              options: _vm.arr_giao_vien,
-              deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
-              selectLabel: "Click hoặc nhấn Enter để chọn",
-              "custom-label": _vm.labelGiaoVien
-            },
-            model: {
-              value: _vm.giao_vien,
-              callback: function($$v) {
-                _vm.giao_vien = $$v
-              },
-              expression: "giao_vien"
-            }
-          }),
-          _vm._v(" "),
-          _c("br"),
-          _vm._v(" "),
-          _c("label", [_vm._v("Lớp")]),
-          _vm._v(" "),
-          _c(
-            "multiselect",
-            {
-              attrs: {
-                placeholder: "Chọn lớp",
-                "track-by": "ma_lop",
-                options: _vm.arr_lop,
-                deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
-                selectLabel: "Click hoặc nhấn Enter để chọn"
-              },
-              model: {
-                value: _vm.lop,
-                callback: function($$v) {
-                  _vm.lop = $$v
-                },
-                expression: "lop"
-              }
-            },
-            [
-              _c("template", { slot: "noOptions" }, [
-                _vm._v("Chưa chọn giáo viên")
-              ])
-            ],
-            2
-          ),
-          _vm._v(" "),
-          _c("br"),
-          _vm._v(" "),
-          _c("label", [_vm._v("Môn")]),
-          _vm._v(" "),
-          _c(
-            "multiselect",
-            {
-              attrs: {
-                placeholder: "Chọn môn",
-                options: _vm.arr_mon,
-                deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
-                selectLabel: "Click hoặc nhấn Enter để chọn"
-              },
-              model: {
-                value: _vm.mon,
-                callback: function($$v) {
-                  _vm.mon = $$v
-                },
-                expression: "mon"
-              }
-            },
-            [_c("template", { slot: "noOptions" }, [_vm._v("Chưa chọn lớp")])],
-            2
-          ),
-          _vm._v(" "),
-          _c("br"),
-          _vm._v(" "),
-          _c("br"),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group row" }, [
-            _c("label", [_vm._v("Chọn mốc thời gian (tính từ ngày hôm nay)")]),
-            _vm._v(" "),
-            _c("div", [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.ngay,
-                    expression: "ngay"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "date", id: "example-date-input" },
-                domProps: { value: _vm.ngay },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.ngay = $event.target.value
-                  }
-                }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("br"),
-          _vm._v(" "),
-          _c("label", [_vm._v("Số giờ dạy")]),
-          _vm._v(" "),
-          _c("multiselect", {
-            attrs: {
-              placeholder: "Chọn thời gian dạy",
-              options: _vm.arr_time,
-              deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
-              selectLabel: "Click hoặc nhấn Enter để chọn"
-            },
-            model: {
-              value: _vm.time,
-              callback: function($$v) {
-                _vm.time = $$v
-              },
-              expression: "time"
-            }
-          }),
-          _vm._v(" "),
-          _c("br"),
-          _vm._v(" "),
-          _c("button", { staticClass: "btn btn-info" }, [_vm._v("Thêm")])
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _vm.show_table ? _c("maintable") : _vm._e()
-    ],
+    [_c("p", [_vm._v("Thêm lịch làm việc")]), _vm._v(" "), _c("maintable")],
     1
   )
 }
@@ -36808,10 +36486,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue?vue&type=template&id=4736d462&scoped=true&":
-/*!*****************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue?vue&type=template&id=4736d462&scoped=true& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue?vue&type=template&id=4736d462&":
+/*!*****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue?vue&type=template&id=4736d462& ***!
+  \*****************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -36823,115 +36501,14 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "form",
-      [
-        _c("label", [_vm._v("Giáo viên")]),
-        _vm._v(" "),
-        _c("multiselect", {
-          attrs: {
-            placeholder: "Chọn giáo viên / để trống nếu chọn tất cả",
-            "track-by": "ma_nguoi_dung",
-            options: _vm.arr_giao_vien,
-            multiple: true,
-            taggable: true,
-            deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
-            selectLabel: "Click hoặc nhấn Enter để chọn",
-            "custom-label": _vm.labelGiaoVien
-          },
-          model: {
-            value: _vm.giao_vien,
-            callback: function($$v) {
-              _vm.giao_vien = $$v
-            },
-            expression: "giao_vien"
-          }
-        }),
-        _vm._v(" "),
-        _c("br"),
-        _vm._v(" "),
-        _c("br"),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", [_vm._v("Chọn ngày")]),
-          _vm._v(" "),
-          _c("div", [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.ngay,
-                  expression: "ngay"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "date" },
-              domProps: { value: _vm.ngay },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.ngay = $event.target.value
-                }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("br"),
-        _vm._v(" "),
-        _c("label", [_vm._v("Chọn ca")]),
-        _vm._v(" "),
-        _c("multiselect", {
-          attrs: {
-            placeholder: "Chọn ca",
-            options: _vm.arr_ca,
-            deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
-            selectLabel: "Click hoặc nhấn Enter để chọn"
-          },
-          model: {
-            value: _vm.ca,
-            callback: function($$v) {
-              _vm.ca = $$v
-            },
-            expression: "ca"
-          }
-        }),
-        _vm._v(" "),
-        _c("br"),
-        _vm._v(" "),
-        _c("br"),
-        _vm._v(" "),
-        _vm._m(0),
-        _vm._v(" "),
-        _c("br"),
-        _vm._v(" "),
-        _c("button", { staticClass: "btn btn-info" }, [_vm._v("Thêm")])
-      ],
-      1
-    )
-  ])
+  return _vm._m(0)
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "insert_note" } }, [_vm._v("Ghi chú")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: {
-          type: "text",
-          id: "insert_note",
-          placeholder: "Ghi chú, có thể để trống"
-        }
-      })
-    ])
+    return _c("div", [_c("p", [_vm._v("Thêm lịch nghỉ")])])
   }
 ]
 render._withStripped = true
@@ -37041,6 +36618,30 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/addworkchild/AddWorkTableComponent.vue?vue&type=template&id=77964dd8&":
+/*!************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/giaovu/quanlylichchild/addworkchild/AddWorkTableComponent.vue?vue&type=template&id=77964dd8& ***!
+  \************************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [_vm._v("table de xuát")])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/phancongchild/TablePhanCongComponent.vue?vue&type=template&id=6ccae9da&":
 /*!**************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/giaovu/quanlylichchild/phancongchild/TablePhanCongComponent.vue?vue&type=template&id=6ccae9da& ***!
@@ -37096,30 +36697,6 @@ var render = function() {
     ],
     1
   )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/themlichchild/TableThemLichComponent.vue?vue&type=template&id=0805334c&":
-/*!**************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/giaovu/quanlylichchild/themlichchild/TableThemLichComponent.vue?vue&type=template&id=0805334c& ***!
-  \**************************************************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("table lich lam phu hop")])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -59281,7 +58858,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _AddWorkComponent_vue_vue_type_template_id_a01143fa_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddWorkComponent.vue?vue&type=template&id=a01143fa&scoped=true& */ "./resources/js/components/giaovu/quanlylichchild/AddWorkComponent.vue?vue&type=template&id=a01143fa&scoped=true&");
+/* harmony import */ var _AddWorkComponent_vue_vue_type_template_id_a01143fa___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddWorkComponent.vue?vue&type=template&id=a01143fa& */ "./resources/js/components/giaovu/quanlylichchild/AddWorkComponent.vue?vue&type=template&id=a01143fa&");
 /* harmony import */ var _AddWorkComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AddWorkComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/giaovu/quanlylichchild/AddWorkComponent.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
@@ -59293,11 +58870,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _AddWorkComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _AddWorkComponent_vue_vue_type_template_id_a01143fa_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _AddWorkComponent_vue_vue_type_template_id_a01143fa_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _AddWorkComponent_vue_vue_type_template_id_a01143fa___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AddWorkComponent_vue_vue_type_template_id_a01143fa___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "a01143fa",
+  null,
   null
   
 )
@@ -59323,19 +58900,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/giaovu/quanlylichchild/AddWorkComponent.vue?vue&type=template&id=a01143fa&scoped=true&":
-/*!************************************************************************************************************************!*\
-  !*** ./resources/js/components/giaovu/quanlylichchild/AddWorkComponent.vue?vue&type=template&id=a01143fa&scoped=true& ***!
-  \************************************************************************************************************************/
+/***/ "./resources/js/components/giaovu/quanlylichchild/AddWorkComponent.vue?vue&type=template&id=a01143fa&":
+/*!************************************************************************************************************!*\
+  !*** ./resources/js/components/giaovu/quanlylichchild/AddWorkComponent.vue?vue&type=template&id=a01143fa& ***!
+  \************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddWorkComponent_vue_vue_type_template_id_a01143fa_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AddWorkComponent.vue?vue&type=template&id=a01143fa&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/AddWorkComponent.vue?vue&type=template&id=a01143fa&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddWorkComponent_vue_vue_type_template_id_a01143fa_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddWorkComponent_vue_vue_type_template_id_a01143fa___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AddWorkComponent.vue?vue&type=template&id=a01143fa& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/AddWorkComponent.vue?vue&type=template&id=a01143fa&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddWorkComponent_vue_vue_type_template_id_a01143fa___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddWorkComponent_vue_vue_type_template_id_a01143fa_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddWorkComponent_vue_vue_type_template_id_a01143fa___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -59419,7 +58996,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _DayoffComponent_vue_vue_type_template_id_4736d462_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DayoffComponent.vue?vue&type=template&id=4736d462&scoped=true& */ "./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue?vue&type=template&id=4736d462&scoped=true&");
+/* harmony import */ var _DayoffComponent_vue_vue_type_template_id_4736d462___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DayoffComponent.vue?vue&type=template&id=4736d462& */ "./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue?vue&type=template&id=4736d462&");
 /* harmony import */ var _DayoffComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DayoffComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
@@ -59431,11 +59008,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _DayoffComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _DayoffComponent_vue_vue_type_template_id_4736d462_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _DayoffComponent_vue_vue_type_template_id_4736d462_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _DayoffComponent_vue_vue_type_template_id_4736d462___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _DayoffComponent_vue_vue_type_template_id_4736d462___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "4736d462",
+  null,
   null
   
 )
@@ -59461,19 +59038,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue?vue&type=template&id=4736d462&scoped=true&":
-/*!***********************************************************************************************************************!*\
-  !*** ./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue?vue&type=template&id=4736d462&scoped=true& ***!
-  \***********************************************************************************************************************/
+/***/ "./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue?vue&type=template&id=4736d462&":
+/*!***********************************************************************************************************!*\
+  !*** ./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue?vue&type=template&id=4736d462& ***!
+  \***********************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DayoffComponent_vue_vue_type_template_id_4736d462_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./DayoffComponent.vue?vue&type=template&id=4736d462&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue?vue&type=template&id=4736d462&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DayoffComponent_vue_vue_type_template_id_4736d462_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DayoffComponent_vue_vue_type_template_id_4736d462___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./DayoffComponent.vue?vue&type=template&id=4736d462& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue?vue&type=template&id=4736d462&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DayoffComponent_vue_vue_type_template_id_4736d462___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DayoffComponent_vue_vue_type_template_id_4736d462_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DayoffComponent_vue_vue_type_template_id_4736d462___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -59548,19 +59125,87 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/giaovu/quanlylichchild/addworkchild/AddWorkTableComponent.vue":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/giaovu/quanlylichchild/addworkchild/AddWorkTableComponent.vue ***!
+  \***********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AddWorkTableComponent_vue_vue_type_template_id_77964dd8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddWorkTableComponent.vue?vue&type=template&id=77964dd8& */ "./resources/js/components/giaovu/quanlylichchild/addworkchild/AddWorkTableComponent.vue?vue&type=template&id=77964dd8&");
+/* harmony import */ var _AddWorkTableComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AddWorkTableComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/giaovu/quanlylichchild/addworkchild/AddWorkTableComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AddWorkTableComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AddWorkTableComponent_vue_vue_type_template_id_77964dd8___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AddWorkTableComponent_vue_vue_type_template_id_77964dd8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/giaovu/quanlylichchild/addworkchild/AddWorkTableComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/giaovu/quanlylichchild/addworkchild/AddWorkTableComponent.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************!*\
+  !*** ./resources/js/components/giaovu/quanlylichchild/addworkchild/AddWorkTableComponent.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddWorkTableComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./AddWorkTableComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/addworkchild/AddWorkTableComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddWorkTableComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/giaovu/quanlylichchild/addworkchild/AddWorkTableComponent.vue?vue&type=template&id=77964dd8&":
+/*!******************************************************************************************************************************!*\
+  !*** ./resources/js/components/giaovu/quanlylichchild/addworkchild/AddWorkTableComponent.vue?vue&type=template&id=77964dd8& ***!
+  \******************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddWorkTableComponent_vue_vue_type_template_id_77964dd8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./AddWorkTableComponent.vue?vue&type=template&id=77964dd8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/addworkchild/AddWorkTableComponent.vue?vue&type=template&id=77964dd8&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddWorkTableComponent_vue_vue_type_template_id_77964dd8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddWorkTableComponent_vue_vue_type_template_id_77964dd8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/giaovu/quanlylichchild/phancongchild/TablePhanCongComponent.vue":
 /*!*************************************************************************************************!*\
   !*** ./resources/js/components/giaovu/quanlylichchild/phancongchild/TablePhanCongComponent.vue ***!
   \*************************************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _TablePhanCongComponent_vue_vue_type_template_id_6ccae9da___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TablePhanCongComponent.vue?vue&type=template&id=6ccae9da& */ "./resources/js/components/giaovu/quanlylichchild/phancongchild/TablePhanCongComponent.vue?vue&type=template&id=6ccae9da&");
 /* harmony import */ var _TablePhanCongComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TablePhanCongComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/giaovu/quanlylichchild/phancongchild/TablePhanCongComponent.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _TablePhanCongComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _TablePhanCongComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -59590,7 +59235,7 @@ component.options.__file = "resources/js/components/giaovu/quanlylichchild/phanc
 /*!**************************************************************************************************************************!*\
   !*** ./resources/js/components/giaovu/quanlylichchild/phancongchild/TablePhanCongComponent.vue?vue&type=script&lang=js& ***!
   \**************************************************************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -59613,75 +59258,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TablePhanCongComponent_vue_vue_type_template_id_6ccae9da___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TablePhanCongComponent_vue_vue_type_template_id_6ccae9da___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/giaovu/quanlylichchild/themlichchild/TableThemLichComponent.vue":
-/*!*************************************************************************************************!*\
-  !*** ./resources/js/components/giaovu/quanlylichchild/themlichchild/TableThemLichComponent.vue ***!
-  \*************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _TableThemLichComponent_vue_vue_type_template_id_0805334c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TableThemLichComponent.vue?vue&type=template&id=0805334c& */ "./resources/js/components/giaovu/quanlylichchild/themlichchild/TableThemLichComponent.vue?vue&type=template&id=0805334c&");
-/* harmony import */ var _TableThemLichComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TableThemLichComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/giaovu/quanlylichchild/themlichchild/TableThemLichComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _TableThemLichComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _TableThemLichComponent_vue_vue_type_template_id_0805334c___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _TableThemLichComponent_vue_vue_type_template_id_0805334c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/giaovu/quanlylichchild/themlichchild/TableThemLichComponent.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/giaovu/quanlylichchild/themlichchild/TableThemLichComponent.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************************************************!*\
-  !*** ./resources/js/components/giaovu/quanlylichchild/themlichchild/TableThemLichComponent.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TableThemLichComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./TableThemLichComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/themlichchild/TableThemLichComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TableThemLichComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/giaovu/quanlylichchild/themlichchild/TableThemLichComponent.vue?vue&type=template&id=0805334c&":
-/*!********************************************************************************************************************************!*\
-  !*** ./resources/js/components/giaovu/quanlylichchild/themlichchild/TableThemLichComponent.vue?vue&type=template&id=0805334c& ***!
-  \********************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TableThemLichComponent_vue_vue_type_template_id_0805334c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./TableThemLichComponent.vue?vue&type=template&id=0805334c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/themlichchild/TableThemLichComponent.vue?vue&type=template&id=0805334c&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TableThemLichComponent_vue_vue_type_template_id_0805334c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TableThemLichComponent_vue_vue_type_template_id_0805334c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
