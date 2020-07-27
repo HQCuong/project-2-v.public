@@ -16,4 +16,8 @@ class MonHoc extends Model {
         'ma_kieu_thi'        => null,
     );
     public $timestamps = false;
+
+    public function nguoiDungBoMon() {
+        return $this->hasMany('App\Models\NguoiDungBoMon', 'ma_mon_hoc', 'ma_mon_hoc');
+    }
 }

@@ -26,4 +26,15 @@ class CaController extends Controller {
             return $this->endCatchValue(ResponseMau::ERROR_GET);
         }
     }
+    public function caReservedNgayNghi() {
+        try {
+            $ca = Ca::whereIn('ma_ca', [2, 3, 5, 6])->get();
+            return ResponseMau::Store([
+                'string' => ResponseMau::SUCCESS_GET,
+                'data'   => CaResource::collection($ca),
+            ]);
+        } catch (Exception $e) {
+            return $this->endCatchValue(ResponseMau::ERROR_GET);
+        }
+    }
 }

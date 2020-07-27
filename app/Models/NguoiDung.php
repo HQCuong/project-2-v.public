@@ -39,4 +39,7 @@ class NguoiDung extends Model {
     public function phanCong() {
         return $this->hasMany('App\Models\PhanCong', 'ma_nguoi_dung', 'ma_nguoi_dung');
     }
+    public function nguoiDungBoMon() {
+        return $this->hasMany('App\Models\NguoiDungBoMon', 'ma_nguoi_dung', 'ma_nguoi_dung');
+    }
 }

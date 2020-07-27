@@ -44,15 +44,21 @@ class CauHinhMonController extends Controller {
     }
     public function monHocDuocTheoCauHinh(CauHinhMonRequest $rq) {
         try {
-            $cau_hinh_mon = CauHinhMon::where('ma_cau_hinh', $rq->get('ma_cau_hinh'))->delete();
-            $data         = [];
-            if (is_array($rq->get('ma_mon_hoc'))) {
-                for ($i = 0; $i < count($rq->get('ma_mon_hoc')); $i++) {
-                    $cache = [
-                        'ma_cau_hinh' => $rq->get('ma_cau_hinh'),
-                        'ma_mon_hoc'  => $rq->get('ma_mon_hoc')[$i],
-                    ];
-                    array_push($data, $cache);
+            $create = 0;
+            $delete = 0;
+            $exists = 0;
+            $data   = (object) ['create' => [], 'update' => []];
+            if (is_array($rq->ma_mon_hoc)) {
+                foreach ($rq->ma_mon_hoc as $key => $ma_mon_hoc) {
+                    $cau_hinh_mon = CauHinhMon::firstOrCreate([
+                        'ma_mon_hoc'  => $ma_mon_hoc,
+                        'ma_cau_hinh' => $rq->ma_cau_hinh,
+                    ]);
+                    if ($cau_hinh_mon->wasRecentlyCreated) {
+
+                    } else {
+
+                    }
                 }
             } else {
                 $cache = [
@@ -61,11 +67,11 @@ class CauHinhMonController extends Controller {
                 ];
                 array_push($data, $cache);
             }
-            CauHinhMon::insert($data);
             return ResponseMau::Store([
                 'string' => ResponseMau::SUCCESS_UPDATE,
             ]);
         } catch (Exception $e) {
+            dd($e);
             return $this->endCatchValue(ResponseMau::ERROR_UPDATE);
         }
     }

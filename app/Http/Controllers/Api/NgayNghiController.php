@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\NgayNghiRequest;
-use App\Http\Resources\NgayNghiResource;
 use App\Http\Resources\NguoiDungResource;
+use App\Models\Ca;
 use App\Models\NgayNghi;
 use App\Models\NguoiDung;
+use DB;
 use Exception;
 use Illuminate\Http\Request;
 use ResponseMau;
@@ -17,8 +18,7 @@ class NgayNghiController extends Controller {
     public function hienThiTatCa(NgayNghiRequest $rq) {
         $rq = new Request($rq->request->all());
         try {
-            $data = [];
-            $ngay = NgayNghi::where(function ($query) use ($rq) {
+            $ngay_nghi = NgayNghi::where(function ($query) use ($rq) {
                 if ($rq->has('ngay')) {
                     $query->where('ngay', $rq->ngay);
                 } else {
@@ -43,40 +43,36 @@ class NgayNghiController extends Controller {
                         $query->where('tinh_trang', 1);
                     }
                 })
-                ->select('ngay')
-                ->distinct()
                 ->orderBy('ngay', 'ASC')
+                ->with('nguoiDung')
                 ->get();
-            $dem = 0;
-            foreach ($ngay as $key => $value) {
-                $can_bo = NgayNghi::where('ngay', $value->ngay)
-                    ->where(function ($query) use ($rq) {
-                        if ($rq->cap_do != 1) {
-                            $query->where('ma_giao_vien', $rq->ma_nguoi_dung);
-                        } else {
-                            if ($rq->has('ma_giao_vien')) {
-                                $query->where('ma_giao_vien', $rq->ma_giao_vien);
-                            }
-                        }
-                    })
-                    ->where(function ($query) use ($rq) {
+            $nhom_ngay = collect($ngay_nghi)->groupBy('ngay')->transform(function ($item) use ($rq) {
+                $data = [];
+                foreach ($item as $key => $value) {
+                    array_push($data, $value->only(['ngay', 'tinh_trang', 'ma_giao_vien', 'nguoidung']));
+                }
+                $data = array_unique($data, SORT_REGULAR);
+                $temp = [];
+                foreach ($data as $key => $value) {
+                    $value = (object) $value;
+                    $ca    = Ca::whereHas('ngayNghi', function ($query) use ($value, $rq) {
+                        $query->where('ngay_nghi.ngay', $value->ngay);
+                        $query->where('ngay_nghi.ma_giao_vien', $value->ma_giao_vien);
                         if ($rq->has('tinh_trang')) {
-                            $query->where('tinh_trang', $rq->tinh_trang);
+                            $query->where('ngay_nghi.tinh_trang', $rq->tinh_trang);
                         } else {
-                            $query->where('tinh_trang', 1);
+                            $query->where('ngay_nghi.tinh_trang', 1);
                         }
-                    })
-                    ->with('nguoiDung', 'ca')
-                    ->get();
-                $re                = (object) [];
-                $re->ngay          = $value->ngay;
-                $re->so_nguoi_nghi = $can_bo->count();
-                $re->can_bo        = $can_bo;
-                array_push($data, $re);
-            }
+                    })->get();
+                    $value->ca = $ca;
+                    $value     = collect($value)->only(['tinh_trang', 'nguoidung', 'ca']);
+                    array_push($temp, $value);
+                }
+                return $temp;
+            });
             return ResponseMau::Store([
                 'string' => ResponseMau::SUCCESS_GET,
-                'data'   => NgayNghiResource::collection($data),
+                'data'   => $nhom_ngay,
             ]);
         } catch (Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_GET);
@@ -86,7 +82,8 @@ class NgayNghiController extends Controller {
         $rq = new Request($rq->request->all());
         try {
             $ngay_nghi = NguoiDung::withCount(['ngayNghi' => function ($query) {
-                $query->where('tinh_trang', 1);
+                $query->where('ngay_nghi.tinh_trang', 1);
+                $query->select(DB::raw('count(DISTINCT(ngay))'));
             }])
                 ->where(function ($query) use ($rq) {
                     if ($rq->cap_do != 1) {
@@ -104,27 +101,69 @@ class NgayNghiController extends Controller {
                 'data'   => (new NguoiDungResource($ngay_nghi))->withNgayNghi(),
             ]);
         } catch (Exception $e) {
-            dd($e->getMessage());
             return $this->endCatchValue(ResponseMau::ERROR_GET);
         }
     }
     public function themNgayNghi(NgayNghiRequest $rq) {
         $rq = new Request($rq->request->all());
         try {
-            $data = [];
-            if (is_array($rq->get('ma_giao_vien'))) {
-                for ($i = 0; $i < count($rq->get('ma_giao_vien')); $i++) {
-                    array_push($data, $this->arrayInsert($rq, $rq->get('ma_giao_vien')[$i]));
+            if (!$rq->has('ma_giao_vien')) {
+                return $this->endCatchValue(ResponseMau::ERROR_CREATE);
+            }
+            $create = 0;
+            $exists = 0;
+            $update = 0;
+            $data   = (object) ['create' => [], 'exists' => [], 'update' => []];
+            if (in_array('0', $rq->ma_giao_vien)) {
+                if (count($rq->ma_giao_vien) > 1) {
+                    return $this->endCatchValue(ResponseMau::ERROR_NGAY_NGHI_TOAN_TRUONG);
+                }
+                foreach ($rq->ma_ca as $k_ca => $ma_ca) {
+                    $ngay_nghi = NgayNghi::firstOrCreate([
+                        'ngay'         => $rq->ngay,
+                        'ma_giao_vien' => 0,
+                        'ma_ca'        => $ma_ca,
+                    ], $this->arrayInsert($rq, 0, $ma_ca));
+                    if ($ngay_nghi->wasRecentlyCreated) {
+                        $create++;
+                    } else {
+                        if ($ngay_nghi->tinh_trang == 2) {
+                            $ngay_nghi->tinh_trang = 1;
+                            $ngay_nghi->save();
+                            $update++;
+                        } else {
+                            $exists++;
+                        }
+                    }
                 }
             } else {
-                array_push($rq, $rq->ma_giao_vien);
+                foreach ($rq->ma_giao_vien as $key => $ma_giao_vien) {
+                    foreach ($rq->ma_ca as $k_ca => $ma_ca) {
+                        $ngay_nghi = NgayNghi::whereIn('ma_giao_vien', [0, $ma_giao_vien])
+                            ->firstOrCreate([
+                                'ngay'  => $rq->ngay,
+                                'ma_ca' => $ma_ca,
+                            ], $this->arrayInsert($rq, $ma_giao_vien, $ma_ca));
+                        if ($ngay_nghi->wasRecentlyCreated) {
+                            $create++;
+                        } else {
+                            if ($ngay_nghi->tinh_trang == 2) {
+                                $ngay_nghi->tinh_trang = 1;
+                                $ngay_nghi->save();
+                                $update++;
+                            } else {
+                                $exists++;
+                            }
+                        }
+                    }
+                }
             }
-            NgayNghi::insert($data);
             return ResponseMau::Store([
-                'string' => ResponseMau::SUCCESS_NGAY_NGHI_THEM,
+                'string' => "Đã tạo mới $create bản ghi , Tồn tại $exists bản ghi,Đã Cập Nhật tình trạng $update bản ghi",
+                'data'   => $data,
             ]);
         } catch (Exception $e) {
-            return $this->endCatchValue(ResponseMau::ERROR_NGAY_NGHI_THEM);
+            return $this->endCatchValue(ResponseMau::ERROR_CREATE);
         }
     }
     public function suaNgayNghi(NgayNghiRequest $rq) {
@@ -133,7 +172,6 @@ class NgayNghiController extends Controller {
             $ngay_nghi = NgayNghi::where('ngay', $rq->ngay_cu)
                 ->where('ma_ca', $rq->ma_ca_cu)
                 ->where('ma_giao_vien', $rq->ma_giao_vien_cu)
-                ->where('tinh_trang', 1)
                 ->update($rq->only((new NgayNghi)->getFillable()));
             if ($ngay_nghi) {
                 return ResponseMau::Store([
@@ -143,16 +181,17 @@ class NgayNghiController extends Controller {
                 return $this->endCatchValue(ResponseMau::ERROR_NGAY_NGHI_SUA);
             }
         } catch (Exception $e) {
+            return $this->error($e);
             return $this->endCatchValue(ResponseMau::ERROR_NGAY_NGHI_SUA);
         }
     }
     public function kiemTra(NgayNghiRequest $rq) {
         return ResponseMau::Store([]);
     }
-    public function arrayInsert($rq, $ma_giao_vien) {
+    public function arrayInsert($rq, $ma_giao_vien, $ma_ca) {
         $array = [
             'ngay'         => $rq->ngay,
-            'ma_ca'        => $rq->ma_ca,
+            'ma_ca'        => $ma_ca,
             'ma_giao_vien' => $ma_giao_vien,
         ];
         if ($rq->has('tinh_trang')) {

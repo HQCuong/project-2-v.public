@@ -22,12 +22,12 @@ class PhanCongChiTiet extends Model {
 
     public $timestamps = false;
     public function phanCong() {
-        return $this->hasOne('App\Models\PhanCong', 'ma_phan_cong', 'ma_phan_cong');
+        return $this->belongsTo('App\Models\PhanCong', 'ma_phan_cong', 'ma_phan_cong');
     }
     public function phong() {
-        return $this->hasOne('App\Models\Phong', 'ma_phong', 'ma_phong');
+        return $this->belongsTo('App\Models\Phong', 'ma_phong', 'ma_phong');
     }
     public function ca() {
-        return $this->hasOne('App\Models\Ca', 'ma_ca', 'ma_ca');
+        return $this->belongsTo('App\Models\Ca', 'ma_ca', 'ma_ca');
     }
 }

@@ -79,7 +79,7 @@ class QueryRaw {
 			CROSS JOIN (
 			SELECT thiet_bi_phong.ma_phong FROM thiet_bi_phong
 			INNER JOIN cau_hinh ON cau_hinh.ma_cau_hinh = thiet_bi_phong.ma_cau_hinh AND cau_hinh.ma_loai = 1
-			INNER JOIN cau_hinh_mon ON cau_hinh.ma_cau_hinh = thiet_bi_phong.ma_cau_hinh AND cau_hinh_mon.ma_mon_hoc = '$phan_cong->ma_mon_hoc'
+			INNER JOIN cau_hinh_mon ON cau_hinh_mon.ma_cau_hinh = thiet_bi_phong.ma_cau_hinh AND cau_hinh_mon.ma_mon_hoc = '$phan_cong->ma_mon_hoc'
 			GROUP BY thiet_bi_phong.ma_phong
 			) as c_ma_phong
 			WHERE ca.ma_ca !=1
@@ -170,7 +170,7 @@ class QueryRaw {
 			INNER JOIN (
 			SELECT thiet_bi_phong.ma_phong FROM thiet_bi_phong
 			INNER JOIN cau_hinh ON cau_hinh.ma_cau_hinh = thiet_bi_phong.ma_cau_hinh AND cau_hinh.ma_loai = 1
-			INNER JOIN cau_hinh_mon ON cau_hinh.ma_cau_hinh = thiet_bi_phong.ma_cau_hinh AND cau_hinh_mon.ma_mon_hoc = '$phan_cong->ma_mon_hoc'
+			INNER JOIN cau_hinh_mon ON cau_hinh_mon.ma_cau_hinh = thiet_bi_phong.ma_cau_hinh AND cau_hinh_mon.ma_mon_hoc = '$phan_cong->ma_mon_hoc'
 			GROUP BY thiet_bi_phong.ma_phong
 			) as tb_hoc_duoc
 			ON tb_hoc_duoc.ma_phong = phan_cong_chi_tiet.ma_phong

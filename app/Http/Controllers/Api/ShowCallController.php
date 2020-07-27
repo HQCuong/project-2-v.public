@@ -46,13 +46,15 @@ class ShowCallController extends Controller {
     public function lopCheck($ma_lop) {
         try {
             $this->setBody(['ma_lop' => $ma_lop]);
-            $list = (object) $this->postApi('lop/kiemtra');
+            $list = (object) $this->postApi('kiemtra');
             if (empty($list->success) || $list->success == false) {
-                return $this->endCatch();
+                $list = (object) ['success' => false];
+                return $list;
             }
             return $list;
         } catch (Exception $e) {
-            return $this->endCatch();
+            $list = (object) ['success' => false];
+            return $list;
         }
     }
     public function soSinhVien($ma_lop) {
@@ -65,6 +67,32 @@ class ShowCallController extends Controller {
             return $list->data[0]['tong_sinh_vien'];
         } catch (Exception $e) {
             return $this->endCatch();
+        }
+    }
+    public function checkOnCu($cac_lop, $ma_mon_hoc) {
+        $this->setBody([
+            'cac_lop'    => $cac_lop,
+            'ma_mon_hoc' => $ma_mon_hoc,
+        ]);
+        $list = (object) $this->postApi('lichsudaday');
+        if (empty($list->success) || $list->success == false) {
+            return false;
+        }
+        return $list->data;
+    }
+    public function gioDaDay($cac_lop, $ma_mon_hoc) {
+        try {
+            $this->setBody([
+                'cac_lop'    => $cac_lop,
+                'ma_mon_hoc' => $ma_mon_hoc,
+            ]);
+            $list = (object) $this->postApi('giodaday');
+            if (empty($list->success) || $list->success == false) {
+                return false;
+            }
+            return $list->data[0]['gio_da_day'];
+        } catch (Exception $e) {
+            return false;
         }
     }
 }

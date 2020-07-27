@@ -45,12 +45,10 @@ class RegexRule {
 
     //Cấu Hình Môn
 
-    const REGEX_CAU_HINH_MON_MA_MON_HOC = ['exists:mon_hoc,ma_mon_hoc'];
-
     //Ngay nghi
 
-    const REGEX_NGAY                 = ['regex:/^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]|(?:Jan|Mar|May|Jul|Aug|Oct|Dec)))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2]|(?:Jan|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec))\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)(?:0?2|(?:Feb))\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9]|(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep))|(?:1[0-2]|(?:Oct|Nov|Dec)))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/'];
-    const REGEX_MA_CA                = ['exists:ca,ma_ca'];
+    const REGEX_NGAY                 = ['regex:/^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]|(?:Jan|Mar|May|Jul|Aug|Oct|Dec)))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2]|(?:Jan|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec))\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)(?:0?2|(?:Feb))\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9]|(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep))|(?:1[0-2]|(?:Oct|Nov|Dec)))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/', 'after_or_equal:today'];
+    const REGEX_NGAY_NGHI_MA_CA      = ['regex:/^[2,3,5,6]$/', 'distinct'];
     const REGEX_GHI_CHU              = ['regex:/^\w[a-zA-Z0-9ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹêếềễệ\ \_\.]{0,500}$/'];
     const REGEX_NGAY_NGHI_TINH_TRANG = ['regex:/^[1,2]$/'];
 
@@ -72,6 +70,10 @@ class RegexRule {
     const REGEX_EXISTS_MA_TINH_TRANG = ['exists:tinh_trang,ma_tinh_trang'];
     const REGEX_EXISTS_MA_LOAI       = ['exists:loai,ma_loai'];
     const REGEX_EXISTS_MA_CAU_HINH   = ['exists:cau_hinh,ma_cau_hinh'];
-
-    const REGEX_TEN_LIMIT_100 = ['nullable', 'regex:/^\w[a-zA-Z0-9ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹêếềễệ\ \_\.]{0,100}$/'];
+    const REGEX_EXISTS_MA_MON_HOC    = ['exists:mon_hoc,ma_mon_hoc'];
+    const REGEX_GIO_BAT_DAU          = ['regex:/^(?:[01]\d|2[0-3]):(?:[0-5]\d):(?:[0-5]\d)$/', 'exists:ca,gio_bat_dau'];
+    const REGEX_GIO_KET_THUC         = ['regex:/^(?:[01]\d|2[0-3]):(?:[0-5]\d):(?:[0-5]\d)$/', 'exists:ca,gio_ket_thuc', 'after:gio_bat_dau'];
+    const REGEX_SO_GIO               = ['regex:/^[2,4]$/'];
+    const REGEX_ARRAY_MIN_1          = ['array', 'min:1'];
+    const REGEX_TEN_LIMIT_100        = ['nullable', 'regex:/^\w[a-zA-Z0-9ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹêếềễệ\ \_\.]{0,100}$/'];
 }

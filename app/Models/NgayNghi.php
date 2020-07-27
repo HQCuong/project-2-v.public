@@ -22,7 +22,6 @@ class NgayNghi extends Model {
     protected $attributes = array(
         'ghi_chu'    => null,
         'tinh_trang' => 1,
-        'ma_ca'      => 1,
     );
     public $timestamps   = false;
     public $incrementing = false;

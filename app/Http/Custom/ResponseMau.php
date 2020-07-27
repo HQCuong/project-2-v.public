@@ -8,9 +8,14 @@ use Illuminate\Http\Response;
 class ResponseMau {
     private $success, $message, $data;
     ///VAL
-    const RES_KHONG_HOP_LE  = ':attribute không hợp lệ';
-    const RES_KHONG_TON_TAI = ':attribute không tồn tại';
-    const RES_DA_TON_TAI    = ':attribute đã tồn tại';
+    const RES_KHONG_HOP_LE   = ':attribute không hợp lệ';
+    const RES_KHONG_TON_TAI  = ':attribute không tồn tại';
+    const RES_DA_TON_TAI     = ':attribute đã tồn tại';
+    const RES_PHAI_SAU       = ':attribute phải sau :date';
+    const RES_TRUNG_LAP      = ':attribute có dữ liệu bị trùng xin kiểm tra lại';
+    const RES_ARRAY          = ':attribute phải là dạng mảng';
+    const RES_ARRAY_MIN      = ':attribute phải có tối thiểu :min dữ liệu';
+    const RES_AFTER_OR_EQUAL = ':attribute phải là ngày hôm nay hoặc trong tương lai';
 
     //end Val
     const SUCCESS_DONE_DATA      = 'Lấy dữ liệu thành công';
@@ -108,15 +113,20 @@ class ResponseMau {
 
     //Ngay Nghi
 
-    const ERROR_NGAY_NGHI_THEM = 'Ngày nghỉ đã tồn tại hoặc không hợp lệ !';
-    const ERROR_NGAY_NGHI_SUA  = 'Ngày nghỉ không tồn tại hoặc không hợp lệ !';
-    const ERROR_NGAY_NGHI_XOA  = 'Ngày nghỉ không tồn tại hoặc không hợp lệ !';
-
+    const ERROR_NGAY_NGHI_THEM        = 'Ngày nghỉ đã tồn tại hoặc không hợp lệ !';
+    const ERROR_NGAY_NGHI_SUA         = 'Ngày nghỉ không tồn tại , không hợp lệ hoặc không có thay đổi gì cả!';
+    const ERROR_NGAY_NGHI_XOA         = 'Ngày nghỉ không tồn tại hoặc không hợp lệ !';
+    const ERROR_NGAY_NGHI_TAT_CA      = 'Cả trường nghỉ vào ngày bạn đang chọn !';
+    const ERROR_NGAY_NGHI_SUA_QK      = 'Bạn chỉ có thể sửa ngày nghỉ trong hôm nay và tương lai !';
+    const ERROR_NGAY_NGHI_TOAN_TRUONG = 'Bạn không thể thêm ngày nghỉ cho cả trường và giáo viên một lần !';
     ///PhanCongChiTiet
     const ERROR_PCCT_PHAN_CONG    = 'Phân công bạn chọn không tồn tại hoặc chưa có giáo viên cho phân công này!';
     const ERROR_PCCT_SO_SINH_VIEN = 'Không thể lấy số sinh viên của lớp hãy thử lại hoặc liên hệ kĩ thuật !';
     const ERROR_PCCT_KHONG_CO_DX  = 'Không có lịch trống phù hợp cho lựa chọn của bạn !';
     const ERROR_PCCT_ADD_PCCT     = 'Bạn hãy chọn phân công theo dữ liệu được đề xuất ! ';
+
+    ///lichhoc
+    const ERROR_PCCT_NOT_FOUND = 'Không có phân công chi tiết để thực hiện tính toán !';
 
     public function __construct() {
         $this->success = true;

@@ -11,25 +11,33 @@ class NgayNghiRequest extends FormRequest {
     use Traits\ListError;
     public function rules() {
         return [
-            'ma_giao_vien'    => new MaGiaoVienRule(),
-            'ngay'            => RegexRule::REGEX_NGAY,
-            'ma_ca'           => RegexRule::REGEX_MA_CA,
-            'ghi_chu'         => RegexRule::REGEX_GHI_CHU,
+            'ma_giao_vien'    => RegexRule::REGEX_ARRAY_MIN_1,
+            'ma_giao_vien.*'  => new MaGiaoVienRule(),
             'ma_giao_vien_cu' => new MaGiaoVienRule(),
             'ngay_cu'         => RegexRule::REGEX_NGAY,
-            'ma_ca_cu'        => RegexRule::REGEX_MA_CA,
+            'ngay'            => RegexRule::REGEX_NGAY,
+            'gio_bat_dau'     => RegexRule::REGEX_GIO_BAT_DAU,
+            'gio_ket_thuc'    => RegexRule::REGEX_GIO_KET_THUC,
+            'ma_ca'           => RegexRule::REGEX_ARRAY_MIN_1,
+            'ma_ca_cu'        => RegexRule::REGEX_NGAY_NGHI_MA_CA,
+            'ma_ca.*'         => RegexRule::REGEX_NGAY_NGHI_MA_CA,
+            'ghi_chu'         => RegexRule::REGEX_GHI_CHU,
             'tinh_trang'      => RegexRule::REGEX_NGAY_NGHI_TINH_TRANG,
         ];
     }
     public function attributes() {
         return [
             'ma_giao_vien'    => 'Giáo viên',
+            'ma_giao_vien_cu' => 'Giáo viên',
+            'ma_giao_vien.*'  => 'Giáo viên',
             'ngay'            => 'Ngày',
+            'ngay_cu'         => 'Ngày',
+            'gio_bat_dau'     => 'Giờ bắt đầu',
+            'gio_ket_thuc'    => 'Giờ kết thúc',
             'ma_ca'           => 'Ca',
+            'ma_ca_cu'        => 'Ca',
+            'ma_ca.*'         => 'Ca',
             'ghi_chu'         => 'Ghi chú',
-            'ma_giao_vien_cu' => 'Giáo viên cũ',
-            'ngay_cu'         => 'Ngày cũ',
-            'ma_ca_cu'        => 'Ca cũ',
             'tinh_trang'      => 'Tình trạng',
         ];
     }
@@ -43,6 +51,16 @@ class NgayNghiRequest extends FormRequest {
         if ($this->request->has('ngay_cu') && !$error->has('ngay_cu')) {
             $this->request->add([
                 'ngay_cu' => $this->stringToDate($this->request->get('ngay_cu')),
+            ]);
+            if ($this->request->has('ma_giao_vien') && is_array($this->request->get('ma_giao_vien'))) {
+                $this->request->add([
+                    'ma_giao_vien' => $this->request->get('ma_giao_vien')[0],
+                ]);
+            }
+        }
+        if ($this->request->has('ma_giao_vien') && is_array($this->request->get('ma_giao_vien'))) {
+            $this->request->add([
+                'ma_giao_vien' => array_unique($this->request->get('ma_giao_vien')),
             ]);
         }
     }

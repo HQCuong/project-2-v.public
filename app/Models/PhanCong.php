@@ -25,7 +25,10 @@ class PhanCong extends Model {
         return $this->hasMany('App\Models\PhanCongChiTiet', 'ma_phan_cong', 'ma_phan_cong')->orderBy('thu', 'ASC');
     }
     public function nguoiDung() {
-        return $this->hasOne('App\Models\NguoiDung', 'ma_nguoi_dung', 'ma_nguoi_dung');
+        return $this->belongsTo('App\Models\NguoiDung', 'ma_nguoi_dung', 'ma_nguoi_dung');
+    }
+    public function monHoc() {
+        return $this->belongsTo('App\Models\MonHoc', 'ma_mon_hoc', 'ma_mon_hoc');
     }
     public function tinhTrang() {
         switch ($this->tinh_trang) {

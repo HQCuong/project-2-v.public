@@ -10,7 +10,7 @@ class CauHinhMonRequest extends FormRequest {
     use Traits\ListError;
     public function rules() {
         return [
-            'ma_mon_hoc'  => RegexRule::REGEX_CAU_HINH_MON_MA_MON_HOC,
+            'ma_mon_hoc'  => RegexRule::REGEX_EXISTS_MA_MON_HOC,
             'ma_cau_hinh' => new MaCauHinhWithMaLoai(),
         ];
     }
