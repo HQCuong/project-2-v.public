@@ -16291,6 +16291,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -36446,6 +36448,8 @@ var render = function() {
   return _c(
     "div",
     [
+      _c("button", { staticClass: "btn btn-info" }, [_vm._v("Xem lịch nghỉ")]),
+      _vm._v(" "),
       _c(
         "router-link",
         {
@@ -36465,6 +36469,8 @@ var render = function() {
         },
         [_vm._v("Thêm lịch dạy")]
       ),
+      _vm._v(" "),
+      _c("button", { staticClass: "btn btn-info" }, [_vm._v("Xem phân công")]),
       _vm._v(" "),
       _c(
         "router-link",

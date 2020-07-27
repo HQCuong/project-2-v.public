@@ -1,5 +1,6 @@
 <template>
     <div>
+        <button class="btn btn-info">Xem lịch nghỉ</button>
         <router-link
             to="/quan_ly_lich/add_dayoff"
             class="btn btn-info"
@@ -10,6 +11,7 @@
             class="btn btn-info"
             :class="{disabled:isAddWord}"
         >Thêm lịch dạy</router-link>
+        <button class="btn btn-info">Xem phân công</button>
         <router-link
             to="/quan_ly_lich/phan_cong"
             class="btn btn-info"
@@ -23,7 +25,7 @@ export default {
         return {
             isDayOff: false,
             isAddWord: false,
-            isPcong: false
+            isPcong: false,
         };
     },
     mounted() {
@@ -64,8 +66,8 @@ export default {
                 this.isDayOff = false;
                 this.isPcong = false;
             }
-        }
-    }
+        },
+    },
 };
 </script>
 <style lang="css" scoped>
