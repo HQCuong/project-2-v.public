@@ -1,74 +1,75 @@
 <template>
     <div>
         <div v-if="!is_giao_vien">
-            <span>Giáo viên</span>
-            <multiselect v-model="giao_vien" :options="arr_user" :close-on-select="true" :show-labels="true" placeholder="Chọn giáo viên" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="true" :custom-label="labelGiaoVien"></multiselect>
+            <label>Chọn phân công</label>
+            <multiselect
+                v-model="phan_cong"
+                :options="arr_phan_cong"
+                :close-on-select="true"
+                :show-labels="true"
+                placeholder="Chọn giáo viên"
+                deselectLabel="Click hoặc nhấn Enter để bỏ chọn"
+                selectLabel="Click hoặc nhấn Enter để chọn"
+                :searchable="true"
+                :custom-label="labelPhanCong"
+            ></multiselect>
         </div>
-        <br>
         <div>
-            <span>Lớp</span>
-            <multiselect v-model="lop" :options="arr_lop" :close-on-select="true" :show-labels="true" placeholder="Chọn lớp" deselectLabel="Click hoặc nhấn Enter để bỏ chọn" selectLabel="Click hoặc nhấn Enter để chọn" :searchable="true">
-                <template v-if="!is_giao_vien" slot="noOptions">Chưa chọn giáo viên</template>
-            </multiselect>
+            <br />
+            <maininfo v-if="show_maininfo"></maininfo>
+            <br />
+            <calendar v-if="show_calendard"></calendar>
         </div>
     </div>
 </template>
 <script>
+import maininfo from "./MainInfoComponent";
+import calendar from "./LichGiaoVienComponent";
+
 export default {
     created() {
         if (this.$store.state.user.is_giao_vien) {
-            this.arr_lop = ['BKD', 'BIT'];
+            // this.arr_lop = ["BKD", "BIT"];
         }
 
         if (!this.$store.state.user.is_giao_vien) {
-            this.$store.dispatch('user/get_user');
+            this.$store.dispatch("phan_cong/get_phan_cong");
         }
     },
     data() {
         return {
-            giao_vien: '',
-            lop: '',
-            arr_lop: []
-        }
+            phan_cong: "",
+            show_maininfo: false,
+            show_calendar: false,
+        };
     },
     computed: {
         is_giao_vien() {
             return this.$store.state.user.is_giao_vien;
         },
-        arr_user() {
-            return this.$store.state.user.arr_user;
-        }
+        arr_phan_cong() {
+            return this.$store.state.phan_cong.arr_phan_cong;
+        },
     },
     watch: {
-        giao_vien() {
-            this.lop = '';
-            if (!this.giao_vien) {
-                this.$emit('show_calendar', 0);
-                this.arr_lop = [];
-                return false;
+        phan_cong() {
+            if (this.phan_cong) {
+                console.log(1);
+            } else {
+                console.log(2);
             }
-            this.$store.dispatch('giao_vien/get_lich_giao_vien');
-            this.$emit('show_calendar', 1);
-            this.arr_lop = ['BKD', 'BIT'];
         },
-        lop() {
-            if (!this.lop) {
-                this.$emit('show_main_info', 0);
-                return false;
-            }
-            this.$emit('show_main_info', 1);
-        }
     },
     methods: {
-        labelGiaoVien({ ho_ten, email }) {
-            if (!ho_ten) {
-                return `demo user-${email}`;
-            }
-            return `${ho_ten}-${email}`;
-        }
-    }
-}
-
+        labelPhanCong({ ma_nguoi_dung, ma_lop, ma_mon_hoc }) {
+            return `${ma_nguoi_dung}-${ma_lop}-${ma_mon_hoc}`;
+        },
+    },
+    components: {
+        maininfo,
+        calendar,
+    },
+};
 </script>
 <style lang="css" scoped>
 </style>

@@ -29,7 +29,8 @@ import lich_gv from "./components/giaovien/GiaoVienComponent.vue";
 
 // giao vu
 import quan_ly_lich from "./components/giaovu/QuanLyLichComponent.vue";
-import dayoff from "./components/giaovu/quanlylichchild/DayoffComponent.vue";
+import list_dayoff from "./components/giaovu/quanlylichchild/ListDayoffComponent.vue";
+import adddayoff from "./components/giaovu/quanlylichchild/AddDayoffComponent.vue";
 import add_work from "./components/giaovu/quanlylichchild/AddWorkComponent.vue";
 import phan_cong from "./components/giaovu/quanlylichchild/PhanCongComponent.vue";
 
@@ -122,7 +123,8 @@ export default [
         path: "/quan_ly_lich",
         component: quan_ly_lich,
         children: [
-            { path: "add_dayoff", component: dayoff },
+            { path: "xem_lich_nghi", component: list_dayoff },
+            { path: "add_dayoff", component: adddayoff },
             { path: "add_work", component: add_work },
             { path: "phan_cong", component: phan_cong }
         ],

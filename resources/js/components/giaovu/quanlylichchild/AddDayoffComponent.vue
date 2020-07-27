@@ -5,7 +5,11 @@
 </template>
 
 <script>
-export default {};
+export default {
+    mounted() {
+        this.$store.commit("content/page_title", "Thêm lịch nghỉ");
+    },
+};
 </script>
 
 <style>

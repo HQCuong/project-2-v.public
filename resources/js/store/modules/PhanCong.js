@@ -7,6 +7,7 @@ export default {
     state: {
         arr_phan_cong: [],
         de_xuat_phan_cong: [],
+        arr_phan_cong_chi_tiet: [],
         // err res
         err_de_xuat: ""
     },
@@ -24,6 +25,25 @@ export default {
                 })
                 .then(res => {
                     state.arr_phan_cong = res.data.data;
+                })
+                .catch(err => {
+                    console.error(err);
+                });
+        },
+
+        get_phan_cong_chi_tiet({ state, commit, rootState }, ma_phan_cong) {
+            state.arr_phan_cong_chi_tiet = [];
+            axios
+                .post(`api/phancongchitiet`, {
+                    key: getCookie("key"),
+                    ma_phan_cong: ma_phan_cong
+                })
+                .then(res => {
+                    console.log(res);
+                    if (res.data.message) {
+                        state.arr_phan_cong_chi_tiet =
+                            res.data.data.phan_cong_ct;
+                    }
                 })
                 .catch(err => {
                     console.error(err);

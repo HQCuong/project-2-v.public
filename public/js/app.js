@@ -16064,6 +16064,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _MainInfoComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MainInfoComponent */ "./resources/js/components/giaovien/lichgiaovienchild/MainInfoComponent.vue");
+/* harmony import */ var _LichGiaoVienComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LichGiaoVienComponent */ "./resources/js/components/giaovien/lichgiaovienchild/LichGiaoVienComponent.vue");
 //
 //
 //
@@ -16079,65 +16081,61 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
-    if (this.$store.state.user.is_giao_vien) {
-      this.arr_lop = ['BKD', 'BIT'];
+    if (this.$store.state.user.is_giao_vien) {// this.arr_lop = ["BKD", "BIT"];
     }
 
     if (!this.$store.state.user.is_giao_vien) {
-      this.$store.dispatch('user/get_user');
+      this.$store.dispatch("phan_cong/get_phan_cong");
     }
   },
   data: function data() {
     return {
-      giao_vien: '',
-      lop: '',
-      arr_lop: []
+      phan_cong: "",
+      show_maininfo: false,
+      show_calendar: false
     };
   },
   computed: {
     is_giao_vien: function is_giao_vien() {
       return this.$store.state.user.is_giao_vien;
     },
-    arr_user: function arr_user() {
-      return this.$store.state.user.arr_user;
+    arr_phan_cong: function arr_phan_cong() {
+      return this.$store.state.phan_cong.arr_phan_cong;
     }
   },
   watch: {
-    giao_vien: function giao_vien() {
-      this.lop = '';
-
-      if (!this.giao_vien) {
-        this.$emit('show_calendar', 0);
-        this.arr_lop = [];
-        return false;
+    phan_cong: function phan_cong() {
+      if (this.phan_cong) {
+        console.log(1);
+      } else {
+        console.log(2);
       }
-
-      this.$store.dispatch('giao_vien/get_lich_giao_vien');
-      this.$emit('show_calendar', 1);
-      this.arr_lop = ['BKD', 'BIT'];
-    },
-    lop: function lop() {
-      if (!this.lop) {
-        this.$emit('show_main_info', 0);
-        return false;
-      }
-
-      this.$emit('show_main_info', 1);
     }
   },
   methods: {
-    labelGiaoVien: function labelGiaoVien(_ref) {
-      var ho_ten = _ref.ho_ten,
-          email = _ref.email;
-
-      if (!ho_ten) {
-        return "demo user-".concat(email);
-      }
-
-      return "".concat(ho_ten, "-").concat(email);
+    labelPhanCong: function labelPhanCong(_ref) {
+      var ma_nguoi_dung = _ref.ma_nguoi_dung,
+          ma_lop = _ref.ma_lop,
+          ma_mon_hoc = _ref.ma_mon_hoc;
+      return "".concat(ma_nguoi_dung, "-").concat(ma_lop, "-").concat(ma_mon_hoc);
     }
+  },
+  components: {
+    maininfo: _MainInfoComponent__WEBPACK_IMPORTED_MODULE_0__["default"],
+    calendar: _LichGiaoVienComponent__WEBPACK_IMPORTED_MODULE_1__["default"]
   }
 });
 
@@ -16237,6 +16235,29 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/AddDayoffComponent.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/giaovu/quanlylichchild/AddDayoffComponent.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    this.$store.commit("content/page_title", "Thêm lịch nghỉ");
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/AddWorkComponent.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/giaovu/quanlylichchild/AddWorkComponent.vue?vue&type=script&lang=js& ***!
@@ -16256,6 +16277,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    this.$store.commit("content/page_title", "Thêm lịch làm việc");
+  },
   components: {
     maintable: _addworkchild_AddWorkTableComponent__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
@@ -16293,62 +16317,70 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       isDayOff: false,
-      isAddWord: false,
-      isPcong: false
+      isAddWork: false,
+      isPcong: false,
+      isListDayOff: false
     };
   },
   mounted: function mounted() {
     if (this.$route.path.includes("add_dayoff")) {
+      this.reset_btn_class();
       this.isDayOff = true;
-      this.isAddWord = false;
-      this.isPcong = false;
     } else if (this.$route.path.includes("add_work")) {
-      this.isAddWord = true;
-      this.isDayOff = false;
-      this.isPcong = false;
+      this.reset_btn_class();
+      this.isAddWork = true;
     } else if (this.$route.path.includes("phan_cong")) {
-      this.isAddWord = false;
-      this.isDayOff = false;
+      this.reset_btn_class();
       this.isPcong = true;
+    } else if (this.$route.path.includes("xem_lich_nghi")) {
+      this.reset_btn_class();
+      this.isListDayOff = true;
     } else {
-      this.isAddWord = false;
-      this.isDayOff = false;
-      this.isPcong = false;
+      this.reset_btn_class();
     }
   },
   watch: {
     $route: function $route(to, from) {
       if (to.path.includes("add_dayoff")) {
+        this.reset_btn_class();
         this.isDayOff = true;
-        this.isAddWord = false;
-        this.isPcong = false;
       } else if (to.path.includes("add_work")) {
-        this.isAddWord = true;
-        this.isDayOff = false;
-        this.isPcong = false;
+        this.reset_btn_class();
+        this.isAddWork = true;
       } else if (to.path.includes("phan_cong")) {
-        this.isAddWord = false;
-        this.isDayOff = false;
+        this.reset_btn_class();
         this.isPcong = true;
+      } else if (to.path.includes("xem_lich_nghi")) {
+        this.reset_btn_class();
+        this.isListDayOff = true;
       } else {
-        this.isAddWord = false;
-        this.isDayOff = false;
-        this.isPcong = false;
+        this.reset_btn_class();
       }
+    }
+  },
+  methods: {
+    reset_btn_class: function reset_btn_class() {
+      this.isListDayOff = false;
+      this.isAddWork = false;
+      this.isDayOff = false;
+      this.isPcong = false;
     }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/ListDayoffComponent.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/giaovu/quanlylichchild/ListDayoffComponent.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -16358,9 +16390,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    this.$store.commit("content/page_title", "Xem lịch nghỉ");
+  }
+});
 
 /***/ }),
 
@@ -36238,25 +36272,25 @@ var render = function() {
       ? _c(
           "div",
           [
-            _c("span", [_vm._v("Giáo viên")]),
+            _c("label", [_vm._v("Chọn phân công")]),
             _vm._v(" "),
             _c("multiselect", {
               attrs: {
-                options: _vm.arr_user,
+                options: _vm.arr_phan_cong,
                 "close-on-select": true,
                 "show-labels": true,
                 placeholder: "Chọn giáo viên",
                 deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
                 selectLabel: "Click hoặc nhấn Enter để chọn",
                 searchable: true,
-                "custom-label": _vm.labelGiaoVien
+                "custom-label": _vm.labelPhanCong
               },
               model: {
-                value: _vm.giao_vien,
+                value: _vm.phan_cong,
                 callback: function($$v) {
-                  _vm.giao_vien = $$v
+                  _vm.phan_cong = $$v
                 },
-                expression: "giao_vien"
+                expression: "phan_cong"
               }
             })
           ],
@@ -36264,42 +36298,16 @@ var render = function() {
         )
       : _vm._e(),
     _vm._v(" "),
-    _c("br"),
-    _vm._v(" "),
     _c(
       "div",
       [
-        _c("span", [_vm._v("Lớp")]),
+        _c("br"),
         _vm._v(" "),
-        _c(
-          "multiselect",
-          {
-            attrs: {
-              options: _vm.arr_lop,
-              "close-on-select": true,
-              "show-labels": true,
-              placeholder: "Chọn lớp",
-              deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
-              selectLabel: "Click hoặc nhấn Enter để chọn",
-              searchable: true
-            },
-            model: {
-              value: _vm.lop,
-              callback: function($$v) {
-                _vm.lop = $$v
-              },
-              expression: "lop"
-            }
-          },
-          [
-            !_vm.is_giao_vien
-              ? _c("template", { slot: "noOptions" }, [
-                  _vm._v("Chưa chọn giáo viên")
-                ])
-              : _vm._e()
-          ],
-          2
-        )
+        _vm.show_maininfo ? _c("maininfo") : _vm._e(),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _vm.show_calendard ? _c("calendar") : _vm._e()
       ],
       1
     )
@@ -36402,6 +36410,37 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/AddDayoffComponent.vue?vue&type=template&id=52d9e841&":
+/*!********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/giaovu/quanlylichchild/AddDayoffComponent.vue?vue&type=template&id=52d9e841& ***!
+  \********************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [_c("p", [_vm._v("Thêm lịch nghỉ")])])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/AddWorkComponent.vue?vue&type=template&id=a01143fa&":
 /*!******************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/giaovu/quanlylichchild/AddWorkComponent.vue?vue&type=template&id=a01143fa& ***!
@@ -36448,7 +36487,15 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("button", { staticClass: "btn btn-info" }, [_vm._v("Xem lịch nghỉ")]),
+      _c(
+        "router-link",
+        {
+          staticClass: "btn btn-info",
+          class: { disabled: _vm.isListDayOff },
+          attrs: { to: "/quan_ly_lich/xem_lich_nghi" }
+        },
+        [_vm._v("Xem lịch nghỉ")]
+      ),
       _vm._v(" "),
       _c(
         "router-link",
@@ -36464,13 +36511,11 @@ var render = function() {
         "router-link",
         {
           staticClass: "btn btn-info",
-          class: { disabled: _vm.isAddWord },
+          class: { disabled: _vm.isAddWork },
           attrs: { to: "/quan_ly_lich/add_work" }
         },
         [_vm._v("Thêm lịch dạy")]
       ),
-      _vm._v(" "),
-      _c("button", { staticClass: "btn btn-info" }, [_vm._v("Xem phân công")]),
       _vm._v(" "),
       _c(
         "router-link",
@@ -36492,10 +36537,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue?vue&type=template&id=4736d462&":
-/*!*****************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue?vue&type=template&id=4736d462& ***!
-  \*****************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/ListDayoffComponent.vue?vue&type=template&id=40ce6a38&":
+/*!*********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/giaovu/quanlylichchild/ListDayoffComponent.vue?vue&type=template&id=40ce6a38& ***!
+  \*********************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -36507,16 +36552,9 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [_vm._v("danh sach ngay nghi")])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [_c("p", [_vm._v("Thêm lịch nghỉ")])])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -58855,6 +58893,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/giaovu/quanlylichchild/AddDayoffComponent.vue":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/giaovu/quanlylichchild/AddDayoffComponent.vue ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AddDayoffComponent_vue_vue_type_template_id_52d9e841___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddDayoffComponent.vue?vue&type=template&id=52d9e841& */ "./resources/js/components/giaovu/quanlylichchild/AddDayoffComponent.vue?vue&type=template&id=52d9e841&");
+/* harmony import */ var _AddDayoffComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AddDayoffComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/giaovu/quanlylichchild/AddDayoffComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AddDayoffComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AddDayoffComponent_vue_vue_type_template_id_52d9e841___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AddDayoffComponent_vue_vue_type_template_id_52d9e841___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/giaovu/quanlylichchild/AddDayoffComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/giaovu/quanlylichchild/AddDayoffComponent.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************!*\
+  !*** ./resources/js/components/giaovu/quanlylichchild/AddDayoffComponent.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddDayoffComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AddDayoffComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/AddDayoffComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddDayoffComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/giaovu/quanlylichchild/AddDayoffComponent.vue?vue&type=template&id=52d9e841&":
+/*!**************************************************************************************************************!*\
+  !*** ./resources/js/components/giaovu/quanlylichchild/AddDayoffComponent.vue?vue&type=template&id=52d9e841& ***!
+  \**************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddDayoffComponent_vue_vue_type_template_id_52d9e841___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AddDayoffComponent.vue?vue&type=template&id=52d9e841& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/AddDayoffComponent.vue?vue&type=template&id=52d9e841&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddDayoffComponent_vue_vue_type_template_id_52d9e841___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddDayoffComponent_vue_vue_type_template_id_52d9e841___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/giaovu/quanlylichchild/AddWorkComponent.vue":
 /*!*****************************************************************************!*\
   !*** ./resources/js/components/giaovu/quanlylichchild/AddWorkComponent.vue ***!
@@ -58993,17 +59100,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue":
-/*!****************************************************************************!*\
-  !*** ./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue ***!
-  \****************************************************************************/
+/***/ "./resources/js/components/giaovu/quanlylichchild/ListDayoffComponent.vue":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/giaovu/quanlylichchild/ListDayoffComponent.vue ***!
+  \********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _DayoffComponent_vue_vue_type_template_id_4736d462___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DayoffComponent.vue?vue&type=template&id=4736d462& */ "./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue?vue&type=template&id=4736d462&");
-/* harmony import */ var _DayoffComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DayoffComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _ListDayoffComponent_vue_vue_type_template_id_40ce6a38___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ListDayoffComponent.vue?vue&type=template&id=40ce6a38& */ "./resources/js/components/giaovu/quanlylichchild/ListDayoffComponent.vue?vue&type=template&id=40ce6a38&");
+/* harmony import */ var _ListDayoffComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ListDayoffComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/giaovu/quanlylichchild/ListDayoffComponent.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -59013,9 +59120,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _DayoffComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _DayoffComponent_vue_vue_type_template_id_4736d462___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _DayoffComponent_vue_vue_type_template_id_4736d462___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _ListDayoffComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ListDayoffComponent_vue_vue_type_template_id_40ce6a38___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ListDayoffComponent_vue_vue_type_template_id_40ce6a38___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -59025,38 +59132,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue"
+component.options.__file = "resources/js/components/giaovu/quanlylichchild/ListDayoffComponent.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************************!*\
-  !*** ./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************************/
+/***/ "./resources/js/components/giaovu/quanlylichchild/ListDayoffComponent.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************!*\
+  !*** ./resources/js/components/giaovu/quanlylichchild/ListDayoffComponent.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DayoffComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./DayoffComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DayoffComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ListDayoffComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ListDayoffComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/ListDayoffComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ListDayoffComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue?vue&type=template&id=4736d462&":
-/*!***********************************************************************************************************!*\
-  !*** ./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue?vue&type=template&id=4736d462& ***!
-  \***********************************************************************************************************/
+/***/ "./resources/js/components/giaovu/quanlylichchild/ListDayoffComponent.vue?vue&type=template&id=40ce6a38&":
+/*!***************************************************************************************************************!*\
+  !*** ./resources/js/components/giaovu/quanlylichchild/ListDayoffComponent.vue?vue&type=template&id=40ce6a38& ***!
+  \***************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DayoffComponent_vue_vue_type_template_id_4736d462___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./DayoffComponent.vue?vue&type=template&id=4736d462& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue?vue&type=template&id=4736d462&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DayoffComponent_vue_vue_type_template_id_4736d462___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListDayoffComponent_vue_vue_type_template_id_40ce6a38___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ListDayoffComponent.vue?vue&type=template&id=40ce6a38& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/giaovu/quanlylichchild/ListDayoffComponent.vue?vue&type=template&id=40ce6a38&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListDayoffComponent_vue_vue_type_template_id_40ce6a38___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DayoffComponent_vue_vue_type_template_id_4736d462___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListDayoffComponent_vue_vue_type_template_id_40ce6a38___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -61672,16 +61779,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_kythuat_thietbichild_AddThietBiComponent_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/kythuat/thietbichild/AddThietBiComponent.vue */ "./resources/js/components/kythuat/thietbichild/AddThietBiComponent.vue");
 /* harmony import */ var _components_giaovien_GiaoVienComponent_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/giaovien/GiaoVienComponent.vue */ "./resources/js/components/giaovien/GiaoVienComponent.vue");
 /* harmony import */ var _components_giaovu_QuanLyLichComponent_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/giaovu/QuanLyLichComponent.vue */ "./resources/js/components/giaovu/QuanLyLichComponent.vue");
-/* harmony import */ var _components_giaovu_quanlylichchild_DayoffComponent_vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/giaovu/quanlylichchild/DayoffComponent.vue */ "./resources/js/components/giaovu/quanlylichchild/DayoffComponent.vue");
-/* harmony import */ var _components_giaovu_quanlylichchild_AddWorkComponent_vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/giaovu/quanlylichchild/AddWorkComponent.vue */ "./resources/js/components/giaovu/quanlylichchild/AddWorkComponent.vue");
-/* harmony import */ var _components_giaovu_quanlylichchild_PhanCongComponent_vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/giaovu/quanlylichchild/PhanCongComponent.vue */ "./resources/js/components/giaovu/quanlylichchild/PhanCongComponent.vue");
-/* harmony import */ var _components_giaovu_QuanLyUserComponent_vue__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/giaovu/QuanLyUserComponent.vue */ "./resources/js/components/giaovu/QuanLyUserComponent.vue");
-/* harmony import */ var _components_giaovu_userchild_ListUserComponent_vue__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./components/giaovu/userchild/ListUserComponent.vue */ "./resources/js/components/giaovu/userchild/ListUserComponent.vue");
-/* harmony import */ var _components_giaovu_userchild_ModiInfoUserComponent_vue__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./components/giaovu/userchild/ModiInfoUserComponent.vue */ "./resources/js/components/giaovu/userchild/ModiInfoUserComponent.vue");
-/* harmony import */ var _components_nguoidung_UserProfileComponent_vue__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./components/nguoidung/UserProfileComponent.vue */ "./resources/js/components/nguoidung/UserProfileComponent.vue");
-/* harmony import */ var _components_nguoidung_ForgotPassComponent_vue__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./components/nguoidung/ForgotPassComponent.vue */ "./resources/js/components/nguoidung/ForgotPassComponent.vue");
-/* harmony import */ var _components_error_CantDirectComponent_vue__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./components/error/CantDirectComponent.vue */ "./resources/js/components/error/CantDirectComponent.vue");
-/* harmony import */ var _components_error_AuthorErrComponent_vue__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./components/error/AuthorErrComponent.vue */ "./resources/js/components/error/AuthorErrComponent.vue");
+/* harmony import */ var _components_giaovu_quanlylichchild_ListDayoffComponent_vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/giaovu/quanlylichchild/ListDayoffComponent.vue */ "./resources/js/components/giaovu/quanlylichchild/ListDayoffComponent.vue");
+/* harmony import */ var _components_giaovu_quanlylichchild_AddDayoffComponent_vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/giaovu/quanlylichchild/AddDayoffComponent.vue */ "./resources/js/components/giaovu/quanlylichchild/AddDayoffComponent.vue");
+/* harmony import */ var _components_giaovu_quanlylichchild_AddWorkComponent_vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/giaovu/quanlylichchild/AddWorkComponent.vue */ "./resources/js/components/giaovu/quanlylichchild/AddWorkComponent.vue");
+/* harmony import */ var _components_giaovu_quanlylichchild_PhanCongComponent_vue__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/giaovu/quanlylichchild/PhanCongComponent.vue */ "./resources/js/components/giaovu/quanlylichchild/PhanCongComponent.vue");
+/* harmony import */ var _components_giaovu_QuanLyUserComponent_vue__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./components/giaovu/QuanLyUserComponent.vue */ "./resources/js/components/giaovu/QuanLyUserComponent.vue");
+/* harmony import */ var _components_giaovu_userchild_ListUserComponent_vue__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./components/giaovu/userchild/ListUserComponent.vue */ "./resources/js/components/giaovu/userchild/ListUserComponent.vue");
+/* harmony import */ var _components_giaovu_userchild_ModiInfoUserComponent_vue__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./components/giaovu/userchild/ModiInfoUserComponent.vue */ "./resources/js/components/giaovu/userchild/ModiInfoUserComponent.vue");
+/* harmony import */ var _components_nguoidung_UserProfileComponent_vue__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./components/nguoidung/UserProfileComponent.vue */ "./resources/js/components/nguoidung/UserProfileComponent.vue");
+/* harmony import */ var _components_nguoidung_ForgotPassComponent_vue__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./components/nguoidung/ForgotPassComponent.vue */ "./resources/js/components/nguoidung/ForgotPassComponent.vue");
+/* harmony import */ var _components_error_CantDirectComponent_vue__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./components/error/CantDirectComponent.vue */ "./resources/js/components/error/CantDirectComponent.vue");
+/* harmony import */ var _components_error_AuthorErrComponent_vue__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./components/error/AuthorErrComponent.vue */ "./resources/js/components/error/AuthorErrComponent.vue");
  // import store
 
  // home
@@ -61703,6 +61811,7 @@ __webpack_require__.r(__webpack_exports__);
  // giao vien
 
  // giao vu
+
 
 
 
@@ -61805,14 +61914,17 @@ __webpack_require__.r(__webpack_exports__);
   path: "/quan_ly_lich",
   component: _components_giaovu_QuanLyLichComponent_vue__WEBPACK_IMPORTED_MODULE_16__["default"],
   children: [{
+    path: "xem_lich_nghi",
+    component: _components_giaovu_quanlylichchild_ListDayoffComponent_vue__WEBPACK_IMPORTED_MODULE_17__["default"]
+  }, {
     path: "add_dayoff",
-    component: _components_giaovu_quanlylichchild_DayoffComponent_vue__WEBPACK_IMPORTED_MODULE_17__["default"]
+    component: _components_giaovu_quanlylichchild_AddDayoffComponent_vue__WEBPACK_IMPORTED_MODULE_18__["default"]
   }, {
     path: "add_work",
-    component: _components_giaovu_quanlylichchild_AddWorkComponent_vue__WEBPACK_IMPORTED_MODULE_18__["default"]
+    component: _components_giaovu_quanlylichchild_AddWorkComponent_vue__WEBPACK_IMPORTED_MODULE_19__["default"]
   }, {
     path: "phan_cong",
-    component: _components_giaovu_quanlylichchild_PhanCongComponent_vue__WEBPACK_IMPORTED_MODULE_19__["default"]
+    component: _components_giaovu_quanlylichchild_PhanCongComponent_vue__WEBPACK_IMPORTED_MODULE_20__["default"]
   }],
   beforeEnter: function beforeEnter(to, from, next) {
     if (Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("level") == 1) {
@@ -61823,16 +61935,16 @@ __webpack_require__.r(__webpack_exports__);
   }
 }, {
   path: "/quan_ly_user",
-  component: _components_giaovu_QuanLyUserComponent_vue__WEBPACK_IMPORTED_MODULE_20__["default"],
+  component: _components_giaovu_QuanLyUserComponent_vue__WEBPACK_IMPORTED_MODULE_21__["default"],
   children: [{
     path: "list_user",
-    component: _components_giaovu_userchild_ListUserComponent_vue__WEBPACK_IMPORTED_MODULE_21__["default"]
+    component: _components_giaovu_userchild_ListUserComponent_vue__WEBPACK_IMPORTED_MODULE_22__["default"]
   }, {
     path: "modi_user_info",
-    component: _components_giaovu_userchild_ModiInfoUserComponent_vue__WEBPACK_IMPORTED_MODULE_22__["default"]
+    component: _components_giaovu_userchild_ModiInfoUserComponent_vue__WEBPACK_IMPORTED_MODULE_23__["default"]
   }, {
     path: "modi_user_info/:ma_nguoi_dung",
-    component: _components_giaovu_userchild_ModiInfoUserComponent_vue__WEBPACK_IMPORTED_MODULE_22__["default"]
+    component: _components_giaovu_userchild_ModiInfoUserComponent_vue__WEBPACK_IMPORTED_MODULE_23__["default"]
   }],
   beforeEnter: function beforeEnter(to, from, next) {
     if (Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("level") == 1) {
@@ -61844,17 +61956,17 @@ __webpack_require__.r(__webpack_exports__);
 }, // user
 {
   path: "/profile",
-  component: _components_nguoidung_UserProfileComponent_vue__WEBPACK_IMPORTED_MODULE_23__["default"]
+  component: _components_nguoidung_UserProfileComponent_vue__WEBPACK_IMPORTED_MODULE_24__["default"]
 }, {
   path: "/forgot_password",
-  component: _components_nguoidung_ForgotPassComponent_vue__WEBPACK_IMPORTED_MODULE_24__["default"]
+  component: _components_nguoidung_ForgotPassComponent_vue__WEBPACK_IMPORTED_MODULE_25__["default"]
 }, // error
 {
   path: "/err_author",
-  component: _components_error_AuthorErrComponent_vue__WEBPACK_IMPORTED_MODULE_26__["default"]
+  component: _components_error_AuthorErrComponent_vue__WEBPACK_IMPORTED_MODULE_27__["default"]
 }, {
   path: "*",
-  component: _components_error_CantDirectComponent_vue__WEBPACK_IMPORTED_MODULE_25__["default"]
+  component: _components_error_CantDirectComponent_vue__WEBPACK_IMPORTED_MODULE_26__["default"]
 }]);
 
 /***/ }),
@@ -62126,6 +62238,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   state: {
     arr_phan_cong: [],
     de_xuat_phan_cong: [],
+    arr_phan_cong_chi_tiet: [],
     // err res
     err_de_xuat: ""
   },
@@ -62148,12 +62261,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         console.error(err);
       });
     },
-    get_de_xuat_phan_cong: function get_de_xuat_phan_cong(_ref2, phan_cong_info) {
-      var _this = this;
-
+    get_phan_cong_chi_tiet: function get_phan_cong_chi_tiet(_ref2, ma_phan_cong) {
       var state = _ref2.state,
           commit = _ref2.commit,
           rootState = _ref2.rootState;
+      state.arr_phan_cong_chi_tiet = [];
+      axios.post("api/phancongchitiet", {
+        key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("key"),
+        ma_phan_cong: ma_phan_cong
+      }).then(function (res) {
+        console.log(res);
+
+        if (res.data.message) {
+          state.arr_phan_cong_chi_tiet = res.data.data.phan_cong_ct;
+        }
+      })["catch"](function (err) {
+        console.error(err);
+      });
+    },
+    get_de_xuat_phan_cong: function get_de_xuat_phan_cong(_ref3, phan_cong_info) {
+      var _this = this;
+
+      var state = _ref3.state,
+          commit = _ref3.commit,
+          rootState = _ref3.rootState;
       state.de_xuat_phan_cong = [];
       axios.post("api/phancongchitiet/dexuat", _objectSpread({
         key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("key")
@@ -62171,10 +62302,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         console.error(err);
       });
     },
-    add_de_xuat_phan_cong: function add_de_xuat_phan_cong(_ref3, phan_cong_ct) {
-      var state = _ref3.state,
-          commit = _ref3.commit,
-          rootState = _ref3.rootState;
+    add_de_xuat_phan_cong: function add_de_xuat_phan_cong(_ref4, phan_cong_ct) {
+      var state = _ref4.state,
+          commit = _ref4.commit,
+          rootState = _ref4.rootState;
       axios.post("api/phancongchitiet/tao", _objectSpread({
         key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("key")
       }, phan_cong_ct)).then(function (res) {
