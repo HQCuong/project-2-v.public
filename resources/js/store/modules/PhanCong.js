@@ -8,7 +8,6 @@ export default {
         arr_phan_cong: [],
         de_xuat_phan_cong: [],
         arr_phan_cong_chi_tiet: [],
-        arr_lop_by_phan_cong: [],
         // err res
         err_de_xuat: ""
     },
@@ -89,22 +88,6 @@ export default {
                     } else {
                         state.err_de_xuat = res.data.message;
                     }
-                })
-                .catch(err => {
-                    console.error(err);
-                });
-        },
-
-        get_lop_by_phan_cong({ state, commit, rootState }, ma_giao_vien) {
-            console.log(ma_giao_vien);
-            state.arr_lop_by_phan_cong = [];
-            axios
-                .post(`api/phancong`, {
-                    key: getCookie("key"),
-                    ma_giao_vien: ma_giao_vien
-                })
-                .then(res => {
-                    console.log(res);
                 })
                 .catch(err => {
                     console.error(err);

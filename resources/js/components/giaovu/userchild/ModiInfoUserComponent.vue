@@ -114,13 +114,13 @@ export default {
         // change label color
         $(".form-group").addClass("bmd-form-group");
         $("label").addClass("bmd-label-static");
-        $(".form-group").on("click", function() {
+        $(".form-group").on("click", function () {
             $(".form-group").removeClass("is-focused");
             $(this).addClass("is-focused");
         });
 
         // remove color while move out input
-        $("input").blur(function() {
+        $("input").blur(function () {
             $(".form-group").removeClass("is-focused");
         });
 
@@ -137,7 +137,7 @@ export default {
             sdt: "",
             password: "",
             repassword: "",
-            err_repass: false
+            err_repass: false,
         };
     },
     computed: {
@@ -152,7 +152,7 @@ export default {
             },
             set(val) {
                 this.user = val;
-            }
+            },
         },
         current_email: {
             get() {
@@ -160,7 +160,7 @@ export default {
             },
             set(val) {
                 this.email = val;
-            }
+            },
         },
         current_account: {
             get() {
@@ -168,7 +168,7 @@ export default {
             },
             set(val) {
                 this.account = val;
-            }
+            },
         },
         current_sdt: {
             get() {
@@ -176,14 +176,14 @@ export default {
             },
             set(val) {
                 this.sdt = val;
-            }
+            },
         },
         err_validate_detail() {
             return this.$store.state.user.err_validate_detail;
         },
         err_validate_global() {
             return this.$store.state.user.err_validate_global;
-        }
+        },
     },
     methods: {
         userLabel({ ho_ten, email }) {
@@ -196,12 +196,12 @@ export default {
                 email: this.email,
                 tai_khoan: this.account,
                 sdt: this.sdt,
-                mat_khau: this.password ? $.MD5(this.password) : ""
+                mat_khau: this.password ? $.MD5(this.password) : "",
             });
 
             this.password = "";
             this.repassword = "";
-        }
+        },
     },
     watch: {
         password() {
@@ -219,6 +219,7 @@ export default {
                 this.err_repass = false;
             }
         },
+
         user() {
             this.$store.commit("user/reset_err");
             this.$router.push(
@@ -228,8 +229,8 @@ export default {
                 "user/get_user_info",
                 this.$route.params.ma_nguoi_dung
             );
-        }
-    }
+        },
+    },
 };
 </script>
 <style lang="css" scoped></style>

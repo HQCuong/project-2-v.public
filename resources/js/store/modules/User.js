@@ -15,7 +15,6 @@ export default {
         err_validate_detail: {},
         err_validate_global: ""
     },
-
     mutations: {
         reset_user_info(state) {
             state.user_info = {};

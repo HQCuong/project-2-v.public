@@ -29,6 +29,7 @@
         </multiselect>
         <br />
         <span class="text-danger" v-if="err_de_xuat">{{err_de_xuat}}</span>
+        <span v-if="!err_de_xuat && loading">Đang tải...</span>
         <maintable
             :ma_phan_cong="phan_cong.ma_phan_cong"
             :so_gio="so_gio.value"
@@ -56,6 +57,7 @@ export default {
             phan_cong: "",
             so_gio: "",
             arr_gio_day: [],
+            loading: false,
         };
     },
     computed: {
@@ -104,16 +106,19 @@ export default {
         },
         so_gio() {
             if (this.so_gio) {
-                this.$store.dispatch("phan_cong/get_de_xuat_phan_cong", {
-                    ma_phan_cong: this.phan_cong.ma_phan_cong,
-                    so_gio: this.so_gio.value,
-                });
+                this.$store
+                    .dispatch("phan_cong/get_de_xuat_phan_cong", {
+                        ma_phan_cong: this.phan_cong.ma_phan_cong,
+                        so_gio: this.so_gio.value,
+                    })
+                    .then((this.loading = true));
             } else {
                 this.table_phan_cong = false;
             }
         },
         de_xuat_phan_cong() {
             if (this.de_xuat_phan_cong.length != 0) {
+                this.loading = false;
                 this.table_phan_cong = true;
             } else {
                 this.table_phan_cong = false;

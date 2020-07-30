@@ -3,7 +3,7 @@
         <label>Chọn phân công</label>
         <multiselect
             v-model="giao_vien"
-            :options="arr_user"
+            :options="arr_gv"
             :close-on-select="true"
             :show-labels="true"
             placeholder="Chọn giáo viên"
@@ -23,9 +23,11 @@
             deselectLabel="Click hoặc nhấn Enter để bỏ chọn"
             selectLabel="Click hoặc nhấn Enter để chọn"
             :searchable="true"
-            :custom-label="labelLop"
+            :custom-label="classLabel"
         >
-            <template slot="noOptions">Chưa chọn giáo viên</template>
+            <template
+                slot="noOptions"
+            >Chưa chọn giáo viên hoặc giáo viên đã chọn chưa được phân công</template>
         </multiselect>
     </div>
 </template>
@@ -38,30 +40,47 @@ export default {
 
         if (!this.$store.state.user.is_giao_vien) {
             this.$store.dispatch("user/get_user");
+            this.$store.dispatch("phan_cong/get_phan_cong");
         }
     },
     data() {
         return {
-            phan_cong: "",
             lop: "",
             giao_vien: "",
         };
     },
     computed: {
-        arr_user() {
-            return this.$store.state.user.arr_user;
+        arr_gv() {
+            return this.$store.state.user.arr_user.filter((each) => {
+                return each.ma_cap_do == 3;
+            });
         },
         arr_lop() {
-            return this.$store.state.phan_cong.arr_lop_by_phan_cong;
+            if (this.giao_vien) {
+                return this.$store.state.phan_cong.arr_phan_cong.filter(
+                    (each) => {
+                        return (
+                            each.ma_nguoi_dung == this.giao_vien.ma_nguoi_dung
+                        );
+                    }
+                );
+            } else {
+                return [];
+            }
         },
     },
     watch: {
         giao_vien() {
-            if (this.giao_vien) {
-                this.$store.dispatch(
-                    "phan_cong/get_lop_by_phan_cong",
-                    this.giao_vien.ma_nguoi_dung
-                );
+            if (!this.giao_vien) {
+                this.$emit("show_main_view", 0);
+                this.lop = "";
+            }
+        },
+        lop() {
+            if (this.lop) {
+                this.$emit("show_main_view", 1);
+            } else {
+                this.$emit("show_main_view", 0);
             }
         },
     },
@@ -69,8 +88,8 @@ export default {
         labelUser({ ho_ten, email }) {
             return `${ho_ten} - ${email}`;
         },
-        labelLop({ ten_lop }) {
-            return `${ten_lop}`;
+        classLabel({ ma_lop }) {
+            return `${ma_lop}`;
         },
     },
 };

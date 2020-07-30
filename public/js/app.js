@@ -15905,10 +15905,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -15923,8 +15919,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      calendar: false,
-      is_detail: false
+      main_view: false
     };
   },
   computed: {
@@ -15938,18 +15933,11 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    show_main_info: function show_main_info(show) {
+    show_main_view: function show_main_view(show) {
       if (show == 1) {
-        this.is_detail = true;
+        this.main_view = true;
       } else {
-        this.is_detail = false;
-      }
-    },
-    show_calendar: function show_calendar(show) {
-      if (show == 1) {
-        this.calendar = true;
-      } else {
-        this.calendar = false;
+        this.main_view = false;
       }
     }
   },
@@ -16102,6 +16090,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     if (this.$store.state.user.is_giao_vien) {//dispatch get danh sach lop
@@ -16109,27 +16099,45 @@ __webpack_require__.r(__webpack_exports__);
 
     if (!this.$store.state.user.is_giao_vien) {
       this.$store.dispatch("user/get_user");
+      this.$store.dispatch("phan_cong/get_phan_cong");
     }
   },
   data: function data() {
     return {
-      phan_cong: "",
       lop: "",
       giao_vien: ""
     };
   },
   computed: {
-    arr_user: function arr_user() {
-      return this.$store.state.user.arr_user;
+    arr_gv: function arr_gv() {
+      return this.$store.state.user.arr_user.filter(function (each) {
+        return each.ma_cap_do == 3;
+      });
     },
     arr_lop: function arr_lop() {
-      return this.$store.state.phan_cong.arr_lop_by_phan_cong;
+      var _this = this;
+
+      if (this.giao_vien) {
+        return this.$store.state.phan_cong.arr_phan_cong.filter(function (each) {
+          return each.ma_nguoi_dung == _this.giao_vien.ma_nguoi_dung;
+        });
+      } else {
+        return [];
+      }
     }
   },
   watch: {
     giao_vien: function giao_vien() {
-      if (this.giao_vien) {
-        this.$store.dispatch("phan_cong/get_lop_by_phan_cong", this.giao_vien.ma_nguoi_dung);
+      if (!this.giao_vien) {
+        this.$emit("show_main_view", 0);
+        this.lop = "";
+      }
+    },
+    lop: function lop() {
+      if (this.lop) {
+        this.$emit("show_main_view", 1);
+      } else {
+        this.$emit("show_main_view", 0);
       }
     }
   },
@@ -16139,9 +16147,9 @@ __webpack_require__.r(__webpack_exports__);
           email = _ref.email;
       return "".concat(ho_ten, " - ").concat(email);
     },
-    labelLop: function labelLop(_ref2) {
-      var ten_lop = _ref2.ten_lop;
-      return "".concat(ten_lop);
+    classLabel: function classLabel(_ref2) {
+      var ma_lop = _ref2.ma_lop;
+      return "".concat(ma_lop);
     }
   }
 });
@@ -16456,6 +16464,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
@@ -16470,7 +16479,8 @@ __webpack_require__.r(__webpack_exports__);
       table_phan_cong: false,
       phan_cong: "",
       so_gio: "",
-      arr_gio_day: []
+      arr_gio_day: [],
+      loading: false
     };
   },
   computed: {
@@ -16524,13 +16534,14 @@ __webpack_require__.r(__webpack_exports__);
         this.$store.dispatch("phan_cong/get_de_xuat_phan_cong", {
           ma_phan_cong: this.phan_cong.ma_phan_cong,
           so_gio: this.so_gio.value
-        });
+        }).then(this.loading = true);
       } else {
         this.table_phan_cong = false;
       }
     },
     de_xuat_phan_cong: function de_xuat_phan_cong() {
       if (this.de_xuat_phan_cong.length != 0) {
+        this.loading = false;
         this.table_phan_cong = true;
       } else {
         this.table_phan_cong = false;
@@ -36176,21 +36187,16 @@ var render = function() {
             { staticClass: "card-body" },
             [
               !_vm.is_giao_vien
-                ? _c("selectgv", {
-                    on: {
-                      show_main_info: _vm.show_main_info,
-                      show_calendar: _vm.show_calendar
-                    }
-                  })
+                ? _c("selectgv", { on: { show_main_view: _vm.show_main_view } })
                 : _vm._e(),
               _vm._v(" "),
               _c("br"),
               _vm._v(" "),
-              _vm.is_detail ? _c("maininfo") : _vm._e(),
+              _vm.main_view ? _c("maininfo") : _vm._e(),
               _vm._v(" "),
               _c("br"),
               _vm._v(" "),
-              _vm.calendar || _vm.is_giao_vien ? _c("lichgv") : _vm._e()
+              _vm.main_view || _vm.is_giao_vien ? _c("lichgv") : _vm._e()
             ],
             1
           )
@@ -36287,7 +36293,7 @@ var render = function() {
       _vm._v(" "),
       _c("multiselect", {
         attrs: {
-          options: _vm.arr_user,
+          options: _vm.arr_gv,
           "close-on-select": true,
           "show-labels": true,
           placeholder: "Chọn giáo viên",
@@ -36320,7 +36326,7 @@ var render = function() {
             deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
             selectLabel: "Click hoặc nhấn Enter để chọn",
             searchable: true,
-            "custom-label": _vm.labelLop
+            "custom-label": _vm.classLabel
           },
           model: {
             value: _vm.lop,
@@ -36331,7 +36337,11 @@ var render = function() {
           }
         },
         [
-          _c("template", { slot: "noOptions" }, [_vm._v("Chưa chọn giáo viên")])
+          _c("template", { slot: "noOptions" }, [
+            _vm._v(
+              "Chưa chọn giáo viên hoặc giáo viên đã chọn chưa được phân công"
+            )
+          ])
         ],
         2
       )
@@ -36664,6 +36674,10 @@ var render = function() {
         ? _c("span", { staticClass: "text-danger" }, [
             _vm._v(_vm._s(_vm.err_de_xuat))
           ])
+        : _vm._e(),
+      _vm._v(" "),
+      !_vm.err_de_xuat && _vm.loading
+        ? _c("span", [_vm._v("Đang tải...")])
         : _vm._e(),
       _vm._v(" "),
       _vm.table_phan_cong
@@ -62221,7 +62235,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     arr_phan_cong: [],
     de_xuat_phan_cong: [],
     arr_phan_cong_chi_tiet: [],
-    arr_lop_by_phan_cong: [],
     // err res
     err_de_xuat: ""
   },
@@ -62302,21 +62315,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         } else {
           state.err_de_xuat = res.data.message;
         }
-      })["catch"](function (err) {
-        console.error(err);
-      });
-    },
-    get_lop_by_phan_cong: function get_lop_by_phan_cong(_ref5, ma_giao_vien) {
-      var state = _ref5.state,
-          commit = _ref5.commit,
-          rootState = _ref5.rootState;
-      console.log(ma_giao_vien);
-      state.arr_lop_by_phan_cong = [];
-      axios.post("api/phancong", {
-        key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("key"),
-        ma_giao_vien: ma_giao_vien
-      }).then(function (res) {
-        console.log(res);
       })["catch"](function (err) {
         console.error(err);
       });

@@ -4,15 +4,11 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <selectgv
-                            @show_main_info="show_main_info"
-                            @show_calendar="show_calendar"
-                            v-if="!is_giao_vien"
-                        ></selectgv>
+                        <selectgv @show_main_view="show_main_view" v-if="!is_giao_vien"></selectgv>
                         <br />
-                        <maininfo v-if="is_detail"></maininfo>
+                        <maininfo v-if="main_view"></maininfo>
                         <br />
-                        <lichgv v-if="calendar || is_giao_vien"></lichgv>
+                        <lichgv v-if="main_view || is_giao_vien"></lichgv>
                     </div>
                 </div>
             </div>
@@ -35,8 +31,7 @@ export default {
     },
     data() {
         return {
-            calendar: false,
-            is_detail: false,
+            main_view: false,
         };
     },
     computed: {
@@ -50,18 +45,11 @@ export default {
         },
     },
     methods: {
-        show_main_info(show) {
+        show_main_view(show) {
             if (show == 1) {
-                this.is_detail = true;
+                this.main_view = true;
             } else {
-                this.is_detail = false;
-            }
-        },
-        show_calendar(show) {
-            if (show == 1) {
-                this.calendar = true;
-            } else {
-                this.calendar = false;
+                this.main_view = false;
             }
         },
     },
