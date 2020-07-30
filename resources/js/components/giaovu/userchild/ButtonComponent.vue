@@ -16,36 +16,40 @@
 export default {
     mounted() {
         if (this.$route.path.includes("/list_user")) {
+            this.reset_btn_class();
             this.isList = true;
-            this.isModi = false;
         } else if (this.$route.path.includes("/modi_user_info")) {
-            this.isList = false;
+            this.reset_btn_class();
             this.isModi = true;
         } else {
-            this.isList = false;
-            this.isModi = false;
+            this.reset_btn_class();
         }
     },
     data() {
         return {
             isList: false,
-            isModi: false
+            isModi: false,
         };
     },
     watch: {
         $route(to, from) {
             if (to.path.includes("/list_user")) {
+                this.reset_btn_class();
                 this.isList = true;
-                this.isModi = false;
             } else if (to.path.includes("/modi_user_info")) {
-                this.isList = false;
+                this.reset_btn_class();
                 this.isModi = true;
             } else {
-                this.isList = false;
-                this.isModi = false;
+                this.reset_btn_class();
             }
-        }
-    }
+        },
+    },
+    methods: {
+        reset_btn_class() {
+            this.isList = false;
+            this.isModi = false;
+        },
+    },
 };
 </script>
 <style lang="css" scoped>

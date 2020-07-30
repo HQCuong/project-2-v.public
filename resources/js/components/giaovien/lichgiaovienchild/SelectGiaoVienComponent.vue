@@ -1,73 +1,77 @@
 <template>
     <div>
-        <div v-if="!is_giao_vien">
-            <label>Chọn phân công</label>
-            <multiselect
-                v-model="phan_cong"
-                :options="arr_phan_cong"
-                :close-on-select="true"
-                :show-labels="true"
-                placeholder="Chọn giáo viên"
-                deselectLabel="Click hoặc nhấn Enter để bỏ chọn"
-                selectLabel="Click hoặc nhấn Enter để chọn"
-                :searchable="true"
-                :custom-label="labelPhanCong"
-            ></multiselect>
-        </div>
-        <div>
-            <br />
-            <maininfo v-if="show_maininfo"></maininfo>
-            <br />
-            <calendar v-if="show_calendard"></calendar>
-        </div>
+        <label>Chọn phân công</label>
+        <multiselect
+            v-model="giao_vien"
+            :options="arr_user"
+            :close-on-select="true"
+            :show-labels="true"
+            placeholder="Chọn giáo viên"
+            deselectLabel="Click hoặc nhấn Enter để bỏ chọn"
+            selectLabel="Click hoặc nhấn Enter để chọn"
+            :searchable="true"
+            :custom-label="labelUser"
+        ></multiselect>
+        <br />
+        <label>Chọn lớp</label>
+        <multiselect
+            v-model="lop"
+            :options="arr_lop"
+            :close-on-select="true"
+            :show-labels="true"
+            placeholder="Chọn lớp"
+            deselectLabel="Click hoặc nhấn Enter để bỏ chọn"
+            selectLabel="Click hoặc nhấn Enter để chọn"
+            :searchable="true"
+            :custom-label="labelLop"
+        >
+            <template slot="noOptions">Chưa chọn giáo viên</template>
+        </multiselect>
     </div>
 </template>
 <script>
-import maininfo from "./MainInfoComponent";
-import calendar from "./LichGiaoVienComponent";
-
 export default {
     created() {
         if (this.$store.state.user.is_giao_vien) {
-            // this.arr_lop = ["BKD", "BIT"];
+            //dispatch get danh sach lop
         }
 
         if (!this.$store.state.user.is_giao_vien) {
-            this.$store.dispatch("phan_cong/get_phan_cong");
+            this.$store.dispatch("user/get_user");
         }
     },
     data() {
         return {
             phan_cong: "",
-            show_maininfo: false,
-            show_calendar: false,
+            lop: "",
+            giao_vien: "",
         };
     },
     computed: {
-        is_giao_vien() {
-            return this.$store.state.user.is_giao_vien;
+        arr_user() {
+            return this.$store.state.user.arr_user;
         },
-        arr_phan_cong() {
-            return this.$store.state.phan_cong.arr_phan_cong;
+        arr_lop() {
+            return this.$store.state.phan_cong.arr_lop_by_phan_cong;
         },
     },
     watch: {
-        phan_cong() {
-            if (this.phan_cong) {
-                console.log(1);
-            } else {
-                console.log(2);
+        giao_vien() {
+            if (this.giao_vien) {
+                this.$store.dispatch(
+                    "phan_cong/get_lop_by_phan_cong",
+                    this.giao_vien.ma_nguoi_dung
+                );
             }
         },
     },
     methods: {
-        labelPhanCong({ ma_nguoi_dung, ma_lop, ma_mon_hoc }) {
-            return `${ma_nguoi_dung}-${ma_lop}-${ma_mon_hoc}`;
+        labelUser({ ho_ten, email }) {
+            return `${ho_ten} - ${email}`;
         },
-    },
-    components: {
-        maininfo,
-        calendar,
+        labelLop({ ten_lop }) {
+            return `${ten_lop}`;
+        },
     },
 };
 </script>

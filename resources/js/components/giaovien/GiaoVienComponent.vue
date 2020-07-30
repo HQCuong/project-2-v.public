@@ -4,7 +4,11 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <selectgv @show_main_info="show_main_info" @show_calendar="show_calendar"></selectgv>
+                        <selectgv
+                            @show_main_info="show_main_info"
+                            @show_calendar="show_calendar"
+                            v-if="!is_giao_vien"
+                        ></selectgv>
                         <br />
                         <maininfo v-if="is_detail"></maininfo>
                         <br />
@@ -22,6 +26,9 @@ import lichgv from "./lichgiaovienchild/LichGiaoVienComponent.vue";
 
 export default {
     mounted() {
+        if (this.$store.state.phan_cong) {
+            // get_phan_cong;
+        }
         if (this.$route.path == "/xem_lich") {
             this.$store.commit("content/page_title", "Xem lịch làm việc");
         }
@@ -29,18 +36,18 @@ export default {
     data() {
         return {
             calendar: false,
-            is_detail: false
+            is_detail: false,
         };
     },
     computed: {
         is_giao_vien() {
             return this.$store.state.user.is_giao_vien;
-        }
+        },
     },
     watch: {
         $route(to, from) {
             this.$store.commit("content/page_title", "Xem lịch làm việc");
-        }
+        },
     },
     methods: {
         show_main_info(show) {
@@ -56,13 +63,13 @@ export default {
             } else {
                 this.calendar = false;
             }
-        }
+        },
     },
     components: {
         lichgv,
         selectgv,
-        maininfo
-    }
+        maininfo,
+    },
 };
 </script>
 <style lang="css" scoped>

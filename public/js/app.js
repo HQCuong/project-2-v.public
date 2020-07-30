@@ -15905,11 +15905,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
+    if (this.$store.state.phan_cong) {// get_phan_cong;
+    }
+
     if (this.$route.path == "/xem_lich") {
       this.$store.commit("content/page_title", "Xem lịch làm việc");
     }
@@ -16064,8 +16071,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _MainInfoComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MainInfoComponent */ "./resources/js/components/giaovien/lichgiaovienchild/MainInfoComponent.vue");
-/* harmony import */ var _LichGiaoVienComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LichGiaoVienComponent */ "./resources/js/components/giaovien/lichgiaovienchild/LichGiaoVienComponent.vue");
 //
 //
 //
@@ -16090,52 +16095,54 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
-
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
-    if (this.$store.state.user.is_giao_vien) {// this.arr_lop = ["BKD", "BIT"];
+    if (this.$store.state.user.is_giao_vien) {//dispatch get danh sach lop
     }
 
     if (!this.$store.state.user.is_giao_vien) {
-      this.$store.dispatch("phan_cong/get_phan_cong");
+      this.$store.dispatch("user/get_user");
     }
   },
   data: function data() {
     return {
       phan_cong: "",
-      show_maininfo: false,
-      show_calendar: false
+      lop: "",
+      giao_vien: ""
     };
   },
   computed: {
-    is_giao_vien: function is_giao_vien() {
-      return this.$store.state.user.is_giao_vien;
+    arr_user: function arr_user() {
+      return this.$store.state.user.arr_user;
     },
-    arr_phan_cong: function arr_phan_cong() {
-      return this.$store.state.phan_cong.arr_phan_cong;
+    arr_lop: function arr_lop() {
+      return this.$store.state.phan_cong.arr_lop_by_phan_cong;
     }
   },
   watch: {
-    phan_cong: function phan_cong() {
-      if (this.phan_cong) {
-        console.log(1);
-      } else {
-        console.log(2);
+    giao_vien: function giao_vien() {
+      if (this.giao_vien) {
+        this.$store.dispatch("phan_cong/get_lop_by_phan_cong", this.giao_vien.ma_nguoi_dung);
       }
     }
   },
   methods: {
-    labelPhanCong: function labelPhanCong(_ref) {
-      var ma_nguoi_dung = _ref.ma_nguoi_dung,
-          ma_lop = _ref.ma_lop,
-          ma_mon_hoc = _ref.ma_mon_hoc;
-      return "".concat(ma_nguoi_dung, "-").concat(ma_lop, "-").concat(ma_mon_hoc);
+    labelUser: function labelUser(_ref) {
+      var ho_ten = _ref.ho_ten,
+          email = _ref.email;
+      return "".concat(ho_ten, " - ").concat(email);
+    },
+    labelLop: function labelLop(_ref2) {
+      var ten_lop = _ref2.ten_lop;
+      return "".concat(ten_lop);
     }
-  },
-  components: {
-    maininfo: _MainInfoComponent__WEBPACK_IMPORTED_MODULE_0__["default"],
-    calendar: _LichGiaoVienComponent__WEBPACK_IMPORTED_MODULE_1__["default"]
   }
 });
 
@@ -16661,14 +16668,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     if (this.$route.path.includes("/list_user")) {
+      this.reset_btn_class();
       this.isList = true;
-      this.isModi = false;
     } else if (this.$route.path.includes("/modi_user_info")) {
-      this.isList = false;
+      this.reset_btn_class();
       this.isModi = true;
     } else {
-      this.isList = false;
-      this.isModi = false;
+      this.reset_btn_class();
     }
   },
   data: function data() {
@@ -16680,15 +16686,20 @@ __webpack_require__.r(__webpack_exports__);
   watch: {
     $route: function $route(to, from) {
       if (to.path.includes("/list_user")) {
+        this.reset_btn_class();
         this.isList = true;
-        this.isModi = false;
       } else if (to.path.includes("/modi_user_info")) {
-        this.isList = false;
+        this.reset_btn_class();
         this.isModi = true;
       } else {
-        this.isList = false;
-        this.isModi = false;
+        this.reset_btn_class();
       }
+    }
+  },
+  methods: {
+    reset_btn_class: function reset_btn_class() {
+      this.isList = false;
+      this.isModi = false;
     }
   }
 });
@@ -36164,12 +36175,14 @@ var render = function() {
             "div",
             { staticClass: "card-body" },
             [
-              _c("selectgv", {
-                on: {
-                  show_main_info: _vm.show_main_info,
-                  show_calendar: _vm.show_calendar
-                }
-              }),
+              !_vm.is_giao_vien
+                ? _c("selectgv", {
+                    on: {
+                      show_main_info: _vm.show_main_info,
+                      show_calendar: _vm.show_calendar
+                    }
+                  })
+                : _vm._e(),
               _vm._v(" "),
               _c("br"),
               _vm._v(" "),
@@ -36267,51 +36280,64 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    !_vm.is_giao_vien
-      ? _c(
-          "div",
-          [
-            _c("label", [_vm._v("Chọn phân công")]),
-            _vm._v(" "),
-            _c("multiselect", {
-              attrs: {
-                options: _vm.arr_phan_cong,
-                "close-on-select": true,
-                "show-labels": true,
-                placeholder: "Chọn giáo viên",
-                deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
-                selectLabel: "Click hoặc nhấn Enter để chọn",
-                searchable: true,
-                "custom-label": _vm.labelPhanCong
-              },
-              model: {
-                value: _vm.phan_cong,
-                callback: function($$v) {
-                  _vm.phan_cong = $$v
-                },
-                expression: "phan_cong"
-              }
-            })
-          ],
-          1
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _c(
-      "div",
-      [
-        _c("br"),
-        _vm._v(" "),
-        _vm.show_maininfo ? _c("maininfo") : _vm._e(),
-        _vm._v(" "),
-        _c("br"),
-        _vm._v(" "),
-        _vm.show_calendard ? _c("calendar") : _vm._e()
-      ],
-      1
-    )
-  ])
+  return _c(
+    "div",
+    [
+      _c("label", [_vm._v("Chọn phân công")]),
+      _vm._v(" "),
+      _c("multiselect", {
+        attrs: {
+          options: _vm.arr_user,
+          "close-on-select": true,
+          "show-labels": true,
+          placeholder: "Chọn giáo viên",
+          deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
+          selectLabel: "Click hoặc nhấn Enter để chọn",
+          searchable: true,
+          "custom-label": _vm.labelUser
+        },
+        model: {
+          value: _vm.giao_vien,
+          callback: function($$v) {
+            _vm.giao_vien = $$v
+          },
+          expression: "giao_vien"
+        }
+      }),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("label", [_vm._v("Chọn lớp")]),
+      _vm._v(" "),
+      _c(
+        "multiselect",
+        {
+          attrs: {
+            options: _vm.arr_lop,
+            "close-on-select": true,
+            "show-labels": true,
+            placeholder: "Chọn lớp",
+            deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
+            selectLabel: "Click hoặc nhấn Enter để chọn",
+            searchable: true,
+            "custom-label": _vm.labelLop
+          },
+          model: {
+            value: _vm.lop,
+            callback: function($$v) {
+              _vm.lop = $$v
+            },
+            expression: "lop"
+          }
+        },
+        [
+          _c("template", { slot: "noOptions" }, [_vm._v("Chưa chọn giáo viên")])
+        ],
+        2
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -62064,50 +62090,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/store/modules/GiaoVien.js":
-/*!************************************************!*\
-  !*** ./resources/js/store/modules/GiaoVien.js ***!
-  \************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ({
-  namespaced: true,
-  state: {
-    lich_giao_vien: []
-  },
-  getters: {
-    get_lich_giao_vien: function get_lich_giao_vien(state) {
-      return state.lich_giao_vien;
-    }
-  },
-  mutations: {},
-  actions: {
-    get_lich_giao_vien: function get_lich_giao_vien(_ref) {
-      var state = _ref.state,
-          commit = _ref.commit,
-          rootState = _ref.rootState;
-      state.lich_giao_vien = [];
-      var ev1 = {
-        title: "BKD01K10" + " - " + "ten mon hoc",
-        start: "2020-07-03" + "T10:00:00",
-        end: "2020-07-03" + "T12:00:00"
-      };
-      state.lich_giao_vien.push(ev1);
-      var ev2 = {
-        title: "BKD01K10" + " - " + "ten mon hoc",
-        start: "2020-07-15" + "T08:00:00",
-        end: "2020-07-15" + "T12:00:00"
-      };
-      state.lich_giao_vien.push(ev2);
-    }
-  }
-});
-
-/***/ }),
-
 /***/ "./resources/js/store/modules/Lab.js":
 /*!*******************************************!*\
   !*** ./resources/js/store/modules/Lab.js ***!
@@ -62239,6 +62221,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     arr_phan_cong: [],
     de_xuat_phan_cong: [],
     arr_phan_cong_chi_tiet: [],
+    arr_lop_by_phan_cong: [],
     // err res
     err_de_xuat: ""
   },
@@ -62319,6 +62302,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         } else {
           state.err_de_xuat = res.data.message;
         }
+      })["catch"](function (err) {
+        console.error(err);
+      });
+    },
+    get_lop_by_phan_cong: function get_lop_by_phan_cong(_ref5, ma_giao_vien) {
+      var state = _ref5.state,
+          commit = _ref5.commit,
+          rootState = _ref5.rootState;
+      console.log(ma_giao_vien);
+      state.arr_lop_by_phan_cong = [];
+      axios.post("api/phancong", {
+        key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("key"),
+        ma_giao_vien: ma_giao_vien
+      }).then(function (res) {
+        console.log(res);
       })["catch"](function (err) {
         console.error(err);
       });
@@ -62603,14 +62601,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_Ca_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/Ca.js */ "./resources/js/store/modules/Ca.js");
 /* harmony import */ var _modules_CauHinh_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/CauHinh.js */ "./resources/js/store/modules/CauHinh.js");
 /* harmony import */ var _modules_Content_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/Content.js */ "./resources/js/store/modules/Content.js");
-/* harmony import */ var _modules_GiaoVien_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/GiaoVien.js */ "./resources/js/store/modules/GiaoVien.js");
-/* harmony import */ var _modules_Lab_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/Lab.js */ "./resources/js/store/modules/Lab.js");
-/* harmony import */ var _modules_Mon_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/Mon.js */ "./resources/js/store/modules/Mon.js");
-/* harmony import */ var _modules_Ngaynghi__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/Ngaynghi */ "./resources/js/store/modules/Ngaynghi.js");
-/* harmony import */ var _modules_PhanCong_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/PhanCong.js */ "./resources/js/store/modules/PhanCong.js");
-/* harmony import */ var _modules_Tang_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/Tang.js */ "./resources/js/store/modules/Tang.js");
-/* harmony import */ var _modules_Toa_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./modules/Toa.js */ "./resources/js/store/modules/Toa.js");
-/* harmony import */ var _modules_User_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./modules/User.js */ "./resources/js/store/modules/User.js");
+/* harmony import */ var _modules_Lab_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/Lab.js */ "./resources/js/store/modules/Lab.js");
+/* harmony import */ var _modules_Mon_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/Mon.js */ "./resources/js/store/modules/Mon.js");
+/* harmony import */ var _modules_Ngaynghi_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/Ngaynghi.js */ "./resources/js/store/modules/Ngaynghi.js");
+/* harmony import */ var _modules_PhanCong_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/PhanCong.js */ "./resources/js/store/modules/PhanCong.js");
+/* harmony import */ var _modules_Tang_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/Tang.js */ "./resources/js/store/modules/Tang.js");
+/* harmony import */ var _modules_Toa_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/Toa.js */ "./resources/js/store/modules/Toa.js");
+/* harmony import */ var _modules_User_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./modules/User.js */ "./resources/js/store/modules/User.js");
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
@@ -62624,19 +62621,18 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 
 
 
-
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   modules: {
     content: _modules_Content_js__WEBPACK_IMPORTED_MODULE_4__["default"],
-    giao_vien: _modules_GiaoVien_js__WEBPACK_IMPORTED_MODULE_5__["default"],
-    lab: _modules_Lab_js__WEBPACK_IMPORTED_MODULE_6__["default"],
-    user: _modules_User_js__WEBPACK_IMPORTED_MODULE_12__["default"],
-    toa: _modules_Toa_js__WEBPACK_IMPORTED_MODULE_11__["default"],
-    tang: _modules_Tang_js__WEBPACK_IMPORTED_MODULE_10__["default"],
+    lab: _modules_Lab_js__WEBPACK_IMPORTED_MODULE_5__["default"],
+    user: _modules_User_js__WEBPACK_IMPORTED_MODULE_11__["default"],
+    toa: _modules_Toa_js__WEBPACK_IMPORTED_MODULE_10__["default"],
+    tang: _modules_Tang_js__WEBPACK_IMPORTED_MODULE_9__["default"],
     cau_hinh: _modules_CauHinh_js__WEBPACK_IMPORTED_MODULE_3__["default"],
-    mon: _modules_Mon_js__WEBPACK_IMPORTED_MODULE_7__["default"],
+    mon: _modules_Mon_js__WEBPACK_IMPORTED_MODULE_6__["default"],
     ca: _modules_Ca_js__WEBPACK_IMPORTED_MODULE_2__["default"],
-    phan_cong: _modules_PhanCong_js__WEBPACK_IMPORTED_MODULE_9__["default"]
+    ngay_nghi: _modules_Ngaynghi_js__WEBPACK_IMPORTED_MODULE_7__["default"],
+    phan_cong: _modules_PhanCong_js__WEBPACK_IMPORTED_MODULE_8__["default"]
   }
 }));
 
