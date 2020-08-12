@@ -10,6 +10,7 @@
                 :rows="arr_user"
                 :search-options="{enabled: true}"
                 :pagination-options="{enabled: true}"
+                styleClass="vgt-table striped"
             >
                 <template slot="table-row" slot-scope="props">
                     <span v-if="props.column.field == 'ma_nguoi_dung'">
@@ -41,23 +42,33 @@ export default {
                 {
                     label: "Tên người dùng",
                     field: this.fomratNullName,
+                    thClass: "text-info",
+                    tdClass: "font-weight-bold",
                 },
                 {
                     label: "Email",
                     field: "email",
+                    thClass: "text-info",
+                    tdClass: "font-weight-bold",
                 },
                 {
                     label: "SĐT",
                     field: "sdt",
                     sortable: false,
+                    thClass: "text-info",
+                    tdClass: "font-weight-bold",
                 },
                 {
                     label: "Cấp độ",
                     field: "ten_cap_do",
+                    thClass: "text-info",
+                    tdClass: "font-weight-bold",
                 },
                 {
                     label: "Tùy chỉnh",
                     field: "ma_nguoi_dung",
+                    thClass: "text-info",
+                    tdClass: "font-weight-bold",
                 },
             ],
         };

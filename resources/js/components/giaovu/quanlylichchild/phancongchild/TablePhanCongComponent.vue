@@ -59,7 +59,7 @@ export default {
                 this.arr_phan_cong_ct = [];
             } else {
                 this.$store
-                    .dispatch("phan_cong/add_de_xuat_phan_cong", {
+                    .dispatch("phan_cong/add_phan_cong_chi_tiet", {
                         ma_phan_cong: this.ma_phan_cong,
                         so_gio: this.so_gio,
                         phan_cong_chi_tiet: this.arr_phan_cong_ct,

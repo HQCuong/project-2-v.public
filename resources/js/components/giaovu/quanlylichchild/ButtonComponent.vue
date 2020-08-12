@@ -16,6 +16,11 @@
             :class="{disabled:isAddWork}"
         >Thêm lịch dạy</router-link>
         <router-link
+            to="/quan_ly_lich/xem_phan_cong"
+            class="btn btn-info"
+            :class="{disabled: isListPcong}"
+        >Xem phân công</router-link>
+        <router-link
             to="/quan_ly_lich/phan_cong"
             class="btn btn-info"
             :class="{disabled:isPcong}"
@@ -29,6 +34,7 @@ export default {
             isDayOff: false,
             isAddWork: false,
             isPcong: false,
+            isListPcong: false,
             isListDayOff: false,
         };
     },
@@ -39,6 +45,9 @@ export default {
         } else if (this.$route.path.includes("add_work")) {
             this.reset_btn_class();
             this.isAddWork = true;
+        } else if (this.$route.path.includes("xem_phan_cong")) {
+            this.reset_btn_class();
+            this.isListPcong = true;
         } else if (this.$route.path.includes("phan_cong")) {
             this.reset_btn_class();
             this.isPcong = true;
@@ -57,6 +66,9 @@ export default {
             } else if (to.path.includes("add_work")) {
                 this.reset_btn_class();
                 this.isAddWork = true;
+            } else if (to.path.includes("xem_phan_cong")) {
+                this.reset_btn_class();
+                this.isListPcong = true;
             } else if (to.path.includes("phan_cong")) {
                 this.reset_btn_class();
                 this.isPcong = true;
@@ -73,6 +85,7 @@ export default {
             this.isListDayOff = false;
             this.isAddWork = false;
             this.isDayOff = false;
+            this.isListPcong = false;
             this.isPcong = false;
         },
     },

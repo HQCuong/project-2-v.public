@@ -7,22 +7,22 @@ import store from "./store/store.js";
 import home from "./components/home/HomeComponent.vue";
 
 // general
-import thong_tin_lab from "./components/general/ShowLabComponent.vue";
+import thong_tin_lab from "./components/general/Lab.vue";
 
 // ky thuat
-import lab from "./components/kythuat/QuanLyLabComponent.vue";
-import list_lab from "./components/kythuat/modilabchild/ListLabComponent.vue";
-import add_lab from "./components/kythuat/modilabchild/AddLabComponent.vue";
-import modi_lab from "./components/kythuat/modilabchild/ModiLabComponent.vue";
+import lab from "./components/kythuat/Lab.vue";
+import danh_sach_lab from "./components/kythuat/components/lab/DanhSachLab.vue";
+import them_lab from "./components/kythuat/components/lab/ThemLab.vue";
+import update_lab from "./components/kythuat/components/lab/UpdateLab.vue";
 
-import cau_hinh from "./components/kythuat/CauHinhComponent.vue";
-import list_ch from "./components/kythuat/cauhinhchild/ListCauHinhComponent.vue";
-import add_ch from "./components/kythuat/cauhinhchild/AddCauHinhComponent.vue";
-import modi_ch from "./components/kythuat/cauhinhchild/ModiCauHinhComponent.vue";
+import cau_hinh from "./components/kythuat/CauHinh.vue";
+import danh_sach_cau_hinh from "./components/kythuat/components/cauhinh/DanhSachCauHinh.vue";
+import them_cau_hinh from "./components/kythuat/components/cauhinh/ThemCauHinh.vue";
+import update_cau_hinh from "./components/kythuat/components/cauhinh/UpdateCauHinh.vue";
 
-import thiet_bi from "./components/kythuat/ThietBiComponent.vue";
-import list_thiet_bi from "./components/kythuat/thietbichild/ListThietBiComponent.vue";
-import add_thiet_bi from "./components/kythuat/thietbichild/AddThietBiComponent.vue";
+import thiet_bi from "./components/kythuat/ThietBi.vue";
+import danh_sach_thiet_bi from "./components/kythuat/components/thietbi/DanhSachThietBi.vue";
+import them_thiet_bi from "./components/kythuat/components/thietbi/ThemThietBiComponent.vue";
 
 // giao vien
 import lich_gv from "./components/giaovien/GiaoVienComponent.vue";
@@ -32,6 +32,7 @@ import quan_ly_lich from "./components/giaovu/QuanLyLichComponent.vue";
 import list_dayoff from "./components/giaovu/quanlylichchild/ListDayoffComponent.vue";
 import adddayoff from "./components/giaovu/quanlylichchild/AddDayoffComponent.vue";
 import add_work from "./components/giaovu/quanlylichchild/AddWorkComponent.vue";
+import xem_phan_cong from "./components/giaovu/quanlylichchild/ListPhanCongComponent.vue";
 import phan_cong from "./components/giaovu/quanlylichchild/PhanCongComponent.vue";
 
 import user from "./components/giaovu/QuanLyUserComponent.vue";
@@ -57,10 +58,10 @@ export default [
         path: "/quan_ly_lab",
         component: lab,
         children: [
-            { path: "danh_sach_lab", component: list_lab },
-            { path: "add_lab", component: add_lab },
-            { path: "modi_lab", component: modi_lab },
-            { path: "modi_lab/:ma_lab", component: modi_lab }
+            { path: "danh_sach_lab", component: danh_sach_lab },
+            { path: "them_lab", component: them_lab },
+            { path: "update_lab", component: update_lab },
+            { path: "modi_lab/:ma_lab", component: update_lab }
         ],
         beforeEnter: (to, from, next) => {
             if (getCookie("level") == 1 || getCookie("level") == 2) {
@@ -74,9 +75,9 @@ export default [
         path: "/quan_ly_cau_hinh",
         component: cau_hinh,
         children: [
-            { path: "list_cau_hinh", component: list_ch },
-            { path: "them_cau_hinh", component: add_ch },
-            { path: "modi_cau_hinh", component: modi_ch }
+            { path: "danh_sach_cau_hinh", component: danh_sach_cau_hinh },
+            { path: "them_cau_hinh", component: them_cau_hinh },
+            { path: "update_cau_hinh", component: update_cau_hinh }
         ],
         beforeEnter: (to, from, next) => {
             if (getCookie("level") == 1 || getCookie("level") == 2) {
@@ -90,8 +91,8 @@ export default [
         path: "/quan_ly_thiet_bi",
         component: thiet_bi,
         children: [
-            { path: "danh_sach_thiet_bi", component: list_thiet_bi },
-            { path: "add_thiet_bi", component: add_thiet_bi }
+            { path: "danh_sach_thiet_bi", component: danh_sach_thiet_bi },
+            { path: "them_thiet_bi", component: them_thiet_bi }
         ],
         beforeEnter: (to, from, next) => {
             if (getCookie("level") == 1 || getCookie("level") == 2) {
@@ -102,7 +103,7 @@ export default [
         }
     },
 
-    // giao vu
+    // giao vien
     {
         path: "/xem_lich",
         component: lich_gv,
@@ -126,6 +127,7 @@ export default [
             { path: "xem_lich_nghi", component: list_dayoff },
             { path: "add_dayoff", component: adddayoff },
             { path: "add_work", component: add_work },
+            { path: "xem_phan_cong", component: xem_phan_cong },
             { path: "phan_cong", component: phan_cong }
         ],
         beforeEnter: (to, from, next) => {

@@ -42,7 +42,7 @@ export default {
                     console.log(res);
                     if (res.data.message) {
                         state.arr_phan_cong_chi_tiet =
-                            res.data.data.phan_cong_ct;
+                            res.data.data.phan_cong_chi_tiet;
                     }
                 })
                 .catch(err => {
@@ -71,7 +71,7 @@ export default {
                 });
         },
 
-        add_de_xuat_phan_cong({ state, commit, rootState }, phan_cong_ct) {
+        add_phan_cong_chi_tiet({ state, commit, rootState }, phan_cong_ct) {
             axios
                 .post(`api/phancongchitiet/tao`, {
                     key: getCookie("key"),
@@ -83,7 +83,8 @@ export default {
                             group: "add_phan_cong_ct_success",
                             title: "Thành công",
                             text: res.data.message,
-                            duration: 2000
+                            duration: 2000,
+                            speed: 100
                         });
                     } else {
                         state.err_de_xuat = res.data.message;
