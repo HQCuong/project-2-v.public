@@ -3,28 +3,14 @@
         <div class="card-header card-header-info">
             <h4 class="card-title">Danh sách cấu hình</h4>
         </div>
+        <br />
         <div class="card-body table-responsive">
-            <table class="table table-hover">
-                <thead class="text-info">
-                    <th>Thông số</th>
-                    <th>Tùy chỉnh</th>
-                </thead>
-                <tbody v-if="arr_cau_hinh">
-                    <tr v-for="cau_hinh in arr_cau_hinh" :key="cau_hinh.ma_cau_hinh">
-                        <td>{{cau_hinh.mo_ta}}</td>
-                        <td>
-                            <button
-                                class="btn btn-info"
-                                data-toggle="tooltip"
-                                data-placement="top"
-                                title="Tùy chỉnh thông tin"
-                            >
-                                <i class="material-icons">settings</i>
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <vue-good-table
+                :columns="columns"
+                :search-options="{enabled: true}"
+                :rows="arr_cau_hinh"
+                styleClass="vgt-table"
+            ></vue-good-table>
         </div>
     </div>
 </template>
@@ -37,7 +23,22 @@ export default {
         this.$store.commit("content/page_title", "Danh sách cấu hình");
     },
     data() {
-        return {};
+        return {
+            columns: [
+                {
+                    label: "Cấu hình",
+                    field: "mo_ta",
+                    thClass: "text-info",
+                    tdClass: "font-weight-bold",
+                },
+                {
+                    label: "Tên loại",
+                    field: "ten_loai",
+                    thClass: "text-info",
+                    tdClass: "font-weight-bold",
+                },
+            ],
+        };
     },
     computed: {
         arr_cau_hinh() {

@@ -7,6 +7,7 @@
             :select-options="{ enabled: true, selectionText: 'bản ghi , đã chọn', clearSelectionText: 'xóa'}"
             :group-options="{ enabled: true, collapsable: true}"
             @on-selected-rows-change="selectionChanged"
+            styleClass="vgt-table"
         >
             <div slot="selected-row-actions">
                 <button type="submit" class="btn btn-info">Phân công</button>
@@ -24,14 +25,20 @@ export default {
                 {
                     label: "Giờ bắt đầu",
                     field: "gio_bat_dau",
+                    thClass: "text-info",
+                    tdClass: "font-weight-bold",
                 },
                 {
                     label: "Giờ kết thức",
                     field: "gio_ket_thuc",
+                    thClass: "text-info",
+                    tdClass: "font-weight-bold",
                 },
                 {
                     label: "Tên phòng",
                     field: "ten_phong",
+                    thClass: "text-info",
+                    tdClass: "font-weight-bold",
                 },
             ],
             arr_phan_cong_ct: [],

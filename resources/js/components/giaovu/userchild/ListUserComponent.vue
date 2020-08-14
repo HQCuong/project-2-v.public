@@ -10,7 +10,7 @@
                 :rows="arr_user"
                 :search-options="{enabled: true}"
                 :pagination-options="{enabled: true}"
-                styleClass="vgt-table striped"
+                styleClass="vgt-table"
             >
                 <template slot="table-row" slot-scope="props">
                     <span v-if="props.column.field == 'ma_nguoi_dung'">
@@ -67,6 +67,7 @@ export default {
                 {
                     label: "Tùy chỉnh",
                     field: "ma_nguoi_dung",
+                    sortable: false,
                     thClass: "text-info",
                     tdClass: "font-weight-bold",
                 },
