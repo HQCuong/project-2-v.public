@@ -61,10 +61,7 @@ Vue.component(
     "footer-component",
     require("./layout/FooterComponent.vue").default
 );
-Vue.component(
-    "login-component",
-    require("./components/LoginComponent.vue").default
-);
+Vue.component("login-component", require("./views/LoginComponent.vue").default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

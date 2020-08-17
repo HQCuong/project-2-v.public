@@ -4,48 +4,48 @@ import getCookie from "./customfunc/getCookie.js";
 import store from "./store/store.js";
 
 // home
-import home from "./components/home/HomeComponent.vue";
+import home from "./views/home/HomeComponent.vue";
 
 // general
-import thong_tin_lab from "./components/general/Lab.vue";
+import thong_tin_lab from "./views/general/Lab.vue";
 
 // ky thuat
-import lab from "./components/kythuat/Lab.vue";
-import danh_sach_lab from "./components/kythuat/components/lab/DanhSachLab.vue";
-import them_lab from "./components/kythuat/components/lab/ThemLab.vue";
-import update_lab from "./components/kythuat/components/lab/UpdateLab.vue";
+import lab from "./views/kythuat/Lab.vue";
+import danh_sach_lab from "./views/kythuat/components/lab/DanhSachLab.vue";
+import them_lab from "./views/kythuat/components/lab/ThemLab.vue";
+import update_lab from "./views/kythuat/components/lab/UpdateLab.vue";
 
-import cau_hinh from "./components/kythuat/CauHinh.vue";
-import danh_sach_cau_hinh from "./components/kythuat/components/cauhinh/DanhSachCauHinh.vue";
-import them_cau_hinh from "./components/kythuat/components/cauhinh/ThemCauHinh.vue";
-import update_cau_hinh from "./components/kythuat/components/cauhinh/UpdateCauHinh.vue";
+import cau_hinh from "./views/kythuat/CauHinh.vue";
+import danh_sach_cau_hinh from "./views/kythuat/components/cauhinh/DanhSachCauHinh.vue";
+import them_cau_hinh from "./views/kythuat/components/cauhinh/ThemCauHinh.vue";
+import update_cau_hinh from "./views/kythuat/components/cauhinh/UpdateCauHinh.vue";
 
-import thiet_bi from "./components/kythuat/ThietBi.vue";
-import danh_sach_thiet_bi from "./components/kythuat/components/thietbi/DanhSachThietBi.vue";
-import them_thiet_bi from "./components/kythuat/components/thietbi/ThemThietBiComponent.vue";
+import thiet_bi from "./views/kythuat/ThietBi.vue";
+import danh_sach_thiet_bi from "./views/kythuat/components/thietbi/DanhSachThietBi.vue";
+import them_thiet_bi from "./views/kythuat/components/thietbi/ThemThietBiComponent.vue";
 
 // giao vien
-import lich_gv from "./components/giaovien/GiaoVienComponent.vue";
+import lich_gv from "./views/giaovien/GiaoVienComponent.vue";
 
 // giao vu
-import quan_ly_lich from "./components/giaovu/QuanLyLichComponent.vue";
-import list_dayoff from "./components/giaovu/quanlylichchild/ListDayoffComponent.vue";
-import adddayoff from "./components/giaovu/quanlylichchild/AddDayoffComponent.vue";
-import add_work from "./components/giaovu/quanlylichchild/AddWorkComponent.vue";
-import xem_phan_cong from "./components/giaovu/quanlylichchild/ListPhanCongComponent.vue";
-import phan_cong from "./components/giaovu/quanlylichchild/PhanCongComponent.vue";
+import quan_ly_lich from "./views/giaovu/QuanLyLichComponent.vue";
+import list_dayoff from "./views/giaovu/quanlylichchild/ListDayoffComponent.vue";
+import adddayoff from "./views/giaovu/quanlylichchild/AddDayoffComponent.vue";
+import add_work from "./views/giaovu/quanlylichchild/AddWorkComponent.vue";
+import xem_phan_cong from "./views/giaovu/quanlylichchild/ListPhanCongComponent.vue";
+import phan_cong from "./views/giaovu/quanlylichchild/PhanCongComponent.vue";
 
-import user from "./components/giaovu/QuanLyUserComponent.vue";
-import list_user from "./components/giaovu/userchild/ListUserComponent.vue";
-import modi_user_info from "./components/giaovu/userchild/ModiInfoUserComponent.vue";
+import user from "./views/giaovu/QuanLyUserComponent.vue";
+import list_user from "./views/giaovu/userchild/ListUserComponent.vue";
+import modi_user_info from "./views/giaovu/userchild/ModiInfoUserComponent.vue";
 
 // user-general
-import user_info from "./components/nguoidung/UserProfileComponent.vue";
-import forgot_password from "./components/nguoidung/ForgotPassComponent.vue";
+import user_info from "./views/nguoidung/UserProfileComponent.vue";
+import forgot_password from "./views/nguoidung/ForgotPassComponent.vue";
 
 // error
-import error_url from "./components/error/CantDirectComponent.vue";
-import error_author from "./components/error/AuthorErrComponent.vue";
+import error_url from "./views/error/CantDirectComponent.vue";
+import error_author from "./views/error/AuthorErrComponent.vue";
 
 export default [
     // general

@@ -17,7 +17,7 @@ export default function groupCollection(arr, prop) {
             mode: "span" // mode span chỉ dành cho phân công chi tiết, có thể bỏ
         };
 
-        child_obj.label = "Thứ " + arr_key[i]; // lavel chỉ dành cho phân công chi tiết, có thể bỏ
+        child_obj.label = "Thứ " + arr_key[i]; // label chỉ dành cho phân công chi tiết, có thể bỏ
 
         for (e of arr) {
             if (e[prop] == arr_key[i]) {
