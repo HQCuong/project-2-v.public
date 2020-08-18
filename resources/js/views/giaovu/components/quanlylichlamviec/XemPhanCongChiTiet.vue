@@ -12,6 +12,12 @@ import selectPhanCong from "./select/SelectPhanCong";
 import tablePhanCongChiTiet from "./table/TablePhanCongChiTiet";
 
 export default {
+    mounted() {
+        return this.$store.commit(
+            "content/page_title",
+            "Xem phân công thi tiết"
+        );
+    },
     data() {
         return {
             show_table: false,

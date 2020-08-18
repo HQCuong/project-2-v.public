@@ -8,6 +8,8 @@ export default {
         arr_phan_cong: [],
         arr_de_xuat_phan_cong_ct: [],
         arr_phan_cong_ct: [],
+        // reset select
+        reset_select: false,
         // err res
         err_de_xuat: ""
     },
@@ -17,6 +19,12 @@ export default {
         },
         reset_arr_de_xuat_phan_cong_ct(state) {
             state.arr_de_xuat_phan_cong_ct = [];
+        },
+        reset_select(state) {
+            state.reset_select = true;
+        },
+        set_select(state) {
+            state.reset_select = false;
         }
     },
     actions: {
@@ -54,6 +62,7 @@ export default {
         },
 
         get_de_xuat_phan_cong_ct({ state, commit, rootState }, phan_cong_info) {
+            this.commit("phan_cong/set_select");
             state.arr_de_xuat_phan_cong_ct = [];
             axios
                 .post(`api/phancongchitiet/dexuat`, {
@@ -89,6 +98,9 @@ export default {
                             text: res.data.message,
                             duration: 1500
                         });
+                        this.commit(
+                            "phan_cong/reset_arr_de_xuat_phan_cong_ct"
+                        ).then(this.commit("phan_cong/reset_select"));
                     } else {
                         state.err_de_xuat = res.data.message
                             ? res.data.message.phan_cong_chi_tiet

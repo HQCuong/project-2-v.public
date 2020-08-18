@@ -181,7 +181,7 @@ export default {
     methods: {
         process_user_info(e) {
             e.preventDefault();
-            this.$store.dispatch("user/modi_self_info", {
+            this.$store.dispatch("user/update_self_info", {
                 ma_nguoi_dung: this.$store.state.user.self_info.ma_nguoi_dung,
                 email: this.email,
                 tai_khoan: this.account,

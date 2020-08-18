@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import userTable from "./table/UserTable";
+import userTable from "./table/TableUser";
 
 export default {
     components: {

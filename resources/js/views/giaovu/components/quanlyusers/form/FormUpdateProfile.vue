@@ -93,7 +93,6 @@
             <br />
             <button class="btn btn-info">Submit</button>
         </form>
-        <notifications group="modi_success" />
     </div>
 </template>
 <script>
@@ -191,7 +190,7 @@ export default {
         },
         process_info_user(e) {
             e.preventDefault();
-            this.$store.dispatch("user/modi_user_info", {
+            this.$store.dispatch("user/update_user_info", {
                 ma_nguoi_dung: this.$route.params.ma_nguoi_dung,
                 email: this.email,
                 tai_khoan: this.account,
@@ -223,7 +222,7 @@ export default {
         user() {
             this.$store.commit("user/reset_err");
             this.$router.push(
-                `/quan_ly_user/modi_user_info/${this.user.ma_nguoi_dung}`
+                `/quan_ly_user/update_thong_tin_user/${this.user.ma_nguoi_dung}`
             );
             this.$store.dispatch(
                 "user/get_user_info",

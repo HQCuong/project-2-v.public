@@ -57,7 +57,7 @@ export default {
                 });
         },
 
-        modi_user_info({ state, commit, rootState }, user) {
+        update_user_info({ state, commit, rootState }, user) {
             this.commit("user/reset_err");
 
             for (var m in user) {
@@ -81,10 +81,10 @@ export default {
                         this.dispatch("user/get_user_info", user.ma_nguoi_dung);
                         user = { ma_nguoi_dung: user.ma_nguoi_dung };
                         Vue.notify({
-                            group: "modi_success",
+                            group: "update_success",
                             title: "Thành công",
                             text: res.data.message,
-                            duration: 2000
+                            duration: 1500
                         });
                     } else {
                         if (typeof res.data.message === "string") {
@@ -116,7 +116,7 @@ export default {
                 });
         },
 
-        modi_self_info({ state, commit, rootState }, user) {
+        update_self_info({ state, commit, rootState }, user) {
             this.commit("user/reset_err");
 
             for (var m in user) {

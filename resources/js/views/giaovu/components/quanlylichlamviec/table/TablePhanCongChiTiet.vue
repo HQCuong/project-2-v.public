@@ -1,37 +1,29 @@
 <template>
-    <form @submit="add_phan_cong">
+    <div>
         <vue-good-table
             :columns="columns"
-            :rows="arr_de_xuat_phan_cong_ct"
+            :rows="arr_phan_cong_ct"
             :search-options="{enabled: true}"
-            :select-options="{ enabled: true, selectionText: 'bản ghi , đã chọn', clearSelectionText: 'xóa'}"
-            :group-options="{ enabled: true, collapsable: true}"
-            @on-selected-rows-change="selectionChanged"
             styleClass="vgt-table"
         >
-            <div slot="selected-row-actions">
-                <button type="submit" class="btn btn-info">Phân công</button>
+            <div slot="emptystate">
+                <span
+                    class="font-weight-bold"
+                >Giáo viên và lớp chưa được xếp lịch đối với phân công đã chọn</span>
             </div>
         </vue-good-table>
-        <notifications group="add_phan_cong_ct" />
-    </form>
+    </div>
 </template>
 
 <script>
 export default {
-    props: ["ma_phan_cong"],
     data() {
         return {
             columns: [
                 {
-                    label: "Giờ bắt đầu",
-                    field: "gio_bat_dau",
-                    thClass: "text-info",
-                    tdClass: "font-weight-bold",
-                },
-                {
-                    label: "Giờ kết thức",
-                    field: "gio_ket_thuc",
+                    label: "Thứ",
+                    field: "thu",
+                    type: "number",
                     thClass: "text-info",
                     tdClass: "font-weight-bold",
                 },
@@ -41,49 +33,28 @@ export default {
                     thClass: "text-info",
                     tdClass: "font-weight-bold",
                 },
+                {
+                    label: "Giờ bắt đầu",
+                    field: "gio_bat_dau",
+                    thClass: "text-info",
+                    tdClass: "font-weight-bold",
+                },
+                {
+                    label: "Giờ kết thúc",
+                    field: "gio_ket_thuc",
+                    thClass: "text-info",
+                    tdClass: "font-weight-bold",
+                },
             ],
-            arr_add_phan_cong_ct: [],
-            selected_rows: [],
         };
     },
     computed: {
-        arr_de_xuat_phan_cong_ct() {
-            return this.$store.state.phan_cong.arr_de_xuat_phan_cong_ct;
-        },
-    },
-    methods: {
-        add_phan_cong(e) {
-            e.preventDefault();
-            this.arr_add_phan_cong_ct = [];
-            for (var i = 0; i < this.selected_rows.length; i++) {
-                var obj = {};
-                obj.ma_phong = this.selected_rows[i].ma_phong;
-                obj.thu = this.selected_rows[i].thu;
-                obj.ma_ca = this.selected_rows[i].ma_ca;
-                this.arr_add_phan_cong_ct.push(obj);
-            }
-            if (this.arr_add_phan_cong_ct.length > 4) {
-                this.$notify({
-                    group: "add_phan_cong_ct",
-                    type: "error",
-                    title: "Thất bại",
-                    text: "Không thể chọn quá 4 phân công!",
-                    duration: 1500,
-                });
-                this.arr_add_phan_cong_ct = [];
-                return false;
-            } else {
-                this.$store.dispatch("phan_cong/add_phan_cong_chi_tiet", {
-                    ma_phan_cong: this.ma_phan_cong,
-                    phan_cong_chi_tiet: this.arr_add_phan_cong_ct,
-                });
-            }
-        },
-        selectionChanged(row) {
-            this.selected_rows = row.selectedRows;
+        arr_phan_cong_ct() {
+            return this.$store.state.phan_cong.arr_phan_cong_ct;
         },
     },
 };
 </script>
+
 <style>
 </style>

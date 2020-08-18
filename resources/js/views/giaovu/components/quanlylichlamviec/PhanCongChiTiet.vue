@@ -1,18 +1,23 @@
 <template>
     <div>
         <label>Phân công</label>
-        <selectPhanCongChiTiet @emit_ma_phan_cong="pass_ma_phan_cong"></selectPhanCongChiTiet>
+        <selectPhanCongChiTiet @emit_data="pass_data" @show_loading="show_loading"></selectPhanCongChiTiet>
         <br />
         <span class="text-danger" v-if="err_de_xuat">{{err_de_xuat}}</span>
-        <span v-if="!err_de_xuat && show_loading">Đang tải...</span>
-        <tablePhanCongChiTiet v-if="table_phan_cong_ct" :ma_phan_cong="ma_phan_cong"></tablePhanCongChiTiet>
+        <span v-if="!err_de_xuat && loading">Đang tải...</span>
+        <tableDeXuatPhanCongChiTiet
+            v-if="table_phan_cong_ct"
+            :ma_phan_cong="ma_phan_cong"
+            :so_gio="so_gio"
+            :arr_de_xuat_phan_cong_ct="arr_de_xuat_phan_cong_ct"
+        ></tableDeXuatPhanCongChiTiet>
         <notifications group="add_phan_cong_ct" />
     </div>
 </template>
 
 <script>
 import selectPhanCongChiTiet from "./select/SelectPhanCongChiTiet";
-import tablePhanCongChiTiet from "./table/TablePhanCongChiTiet.vue";
+import tableDeXuatPhanCongChiTiet from "./table/TableDeXuatPhanCongChiTiet";
 
 export default {
     mounted() {
@@ -21,8 +26,9 @@ export default {
     data() {
         return {
             table_phan_cong_ct: false,
-            show_loading: false,
+            loading: false,
             ma_phan_cong: "",
+            so_gio: "",
         };
     },
     computed: {
@@ -34,13 +40,22 @@ export default {
         },
     },
     methods: {
-        pass_ma_phan_cong(ma_phan_cong) {
+        pass_data(ma_phan_cong, so_gio) {
             this.ma_phan_cong = ma_phan_cong;
+            this.so_gio = so_gio;
+        },
+        show_loading(show) {
+            if (show == 1) {
+                this.loading = true;
+            } else {
+                this.loading = false;
+            }
         },
     },
     watch: {
         arr_de_xuat_phan_cong_ct() {
             if (this.arr_de_xuat_phan_cong_ct.length != 0) {
+                this.loading = false;
                 this.table_phan_cong_ct = true;
             } else {
                 this.table_phan_cong_ct = false;
@@ -48,7 +63,7 @@ export default {
         },
     },
     components: {
-        tablePhanCongChiTiet,
+        tableDeXuatPhanCongChiTiet,
         selectPhanCongChiTiet,
     },
 };

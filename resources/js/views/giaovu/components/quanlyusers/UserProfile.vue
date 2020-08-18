@@ -1,5 +1,8 @@
 <template>
-    <formUpdateProfile></formUpdateProfile>
+    <div>
+        <formUpdateProfile></formUpdateProfile>
+        <notifications group="modi_success" />
+    </div>
 </template>
 
 <script>

@@ -53,6 +53,9 @@ export default {
         arr_phan_cong() {
             return this.$store.state.phan_cong.arr_phan_cong;
         },
+        reset_select() {
+            return this.$store.state.phan_cong.reset_select;
+        },
     },
     methods: {
         phanCongLabel({ ma_lop, ma_nguoi_dung, ma_mon_hoc }) {
@@ -71,13 +74,16 @@ export default {
                         ma_phan_cong: this.phan_cong.ma_phan_cong,
                         so_gio: this.so_gio.value,
                     })
+                    .then(this.$emit("show_loading", 1))
                     .then(
                         this.$emit(
-                            "emit_ma_phan_cong",
-                            this.phan_cong.ma_phan_cong
+                            "emit_data",
+                            this.phan_cong.ma_phan_cong,
+                            this.so_gio.value
                         )
                     );
             } else {
+                this.$emit("show_loading", 0);
                 this.$store.commit("phan_cong/reset_arr_de_xuat_phan_cong_ct");
             }
         },
@@ -89,14 +95,27 @@ export default {
                         ma_phan_cong: this.phan_cong.ma_phan_cong,
                         so_gio: this.so_gio.value,
                     })
+                    .then(this.$emit("show_loading", 1))
                     .then(
                         this.$emit(
-                            "emit_ma_phan_cong",
-                            this.phan_cong.ma_phan_cong
+                            "emit_data",
+                            this.phan_cong.ma_phan_cong,
+                            this.so_gio.value
                         )
                     );
             } else {
+                this.$emit("show_loading", 0);
                 this.$store.commit("phan_cong/reset_arr_de_xuat_phan_cong_ct");
+            }
+        },
+        reset_select() {
+            if (this.reset_select == false) {
+                return true;
+            } else {
+                setTimeout(() => {
+                    this.so_gio = "";
+                    this.phan_cong = "";
+                }, 500);
             }
         },
     },
