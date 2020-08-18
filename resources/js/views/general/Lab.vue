@@ -16,8 +16,8 @@
     </div>
 </template>
 <script>
-import selectlab from "./components/Select.vue";
-import lichSuDung from "./components/Lich.vue";
+import selectlab from "./components/SelectLab.vue";
+import lichSuDung from "./components/LichSuDung.vue";
 import thongKe from "./components/ThongKe.vue";
 
 export default {

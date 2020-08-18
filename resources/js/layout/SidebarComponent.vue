@@ -60,13 +60,13 @@
                     </router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link class="nav-link" to="/xem_lich">
+                    <router-link class="nav-link" to="/lich_lam_viec">
                         <i class="material-icons">date_range</i>
                         <p>Xem lịch làm việc</p>
                     </router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link class="nav-link" to="/quan_ly_lich">
+                    <router-link class="nav-link" to="/quan_ly_lich_lam_viec">
                         <i class="material-icons">event_available</i>
                         <p>Quản lý lịch làm việc</p>
                     </router-link>
@@ -101,20 +101,18 @@ export default {
                 .addClass("active");
         }
 
-        $(".sidebar .nav-link:not(.nav-control)").on("click", function() {
+        $(".sidebar .nav-link:not(.nav-control)").on("click", function () {
             $(".nav-item").removeClass("active");
-            $(this)
-                .parent()
-                .addClass("active");
+            $(this).parent().addClass("active");
         });
 
-        $(".dropdown-menu").on("click", function() {
+        $(".dropdown-menu").on("click", function () {
             $(".user-nav").addClass("active");
         });
 
         $(
             ".dropdown-item, .nav-link:not(.nav-control), .current_user_nav, .logo"
-        ).on("click", function() {
+        ).on("click", function () {
             if ($(window).width() < 992) {
                 $(".close-layer").trigger("click");
             }
@@ -138,26 +136,24 @@ export default {
                     .addClass("active");
             }
 
-            $(".sidebar .nav-link:not(.nav-control)").on("click", function() {
+            $(".sidebar .nav-link:not(.nav-control)").on("click", function () {
                 $(".nav-item").removeClass("active");
-                $(this)
-                    .parent()
-                    .addClass("active");
+                $(this).parent().addClass("active");
             });
 
-            $(".dropdown-menu").on("click", function() {
+            $(".dropdown-menu").on("click", function () {
                 $(".user-nav").addClass("active");
             });
 
             $(
                 ".dropdown-item, .nav-link:not(.nav-control), .current_user_nav"
-            ).on("click", function() {
+            ).on("click", function () {
                 if ($(window).width() < 992) {
                     $(".close-layer").trigger("click");
                 }
             });
-        }
-    }
+        },
+    },
 };
 </script>
 <style lang="css" scoped>

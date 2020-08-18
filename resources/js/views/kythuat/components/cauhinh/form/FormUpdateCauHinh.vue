@@ -54,6 +54,7 @@
             :options="arr_mon"
             :close-on-select="true"
             :show-labels="true"
+            track-by="ma_mon_hoc"
             placeholder="Chọn môn phù hợp với cấu hình trên"
             deselectLabel="Click hoặc nhấn Enter để bỏ chọn"
             selectLabel="Click hoặc nhấn Enter để chọn"

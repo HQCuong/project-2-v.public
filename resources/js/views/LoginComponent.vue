@@ -47,7 +47,7 @@ export default {
         return {
             error: "",
             src_logo_login: "img/logo_login.png",
-            is_loading: false
+            is_loading: false,
         };
     },
     methods: {
@@ -59,7 +59,7 @@ export default {
             var request = `api/dangnhap/${tai_khoan}/${mat_khau}`;
             axios
                 .post(request)
-                .then(response => {
+                .then((response) => {
                     if (response.data.success) {
                         document.cookie = `key=${response.data.data.key}`;
                         document.cookie = `level=${response.data.data.ma_cap_do}`;
@@ -69,11 +69,11 @@ export default {
                         this.is_loading = false;
                     }
                 })
-                .catch(error => {
+                .catch((error) => {
                     console.error(error);
                 });
-        }
-    }
+        },
+    },
 };
 </script>
 <style lang="css" scoped>

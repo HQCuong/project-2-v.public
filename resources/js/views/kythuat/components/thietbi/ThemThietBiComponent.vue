@@ -7,7 +7,7 @@
     </div>
 </template>
 <script>
-import selectLab from "./select/SelectLab.vue";
+import selectLab from "./select/SelectThietBi.vue";
 import formInsert from "./form/FormInsertThietBi.vue";
 
 export default {
