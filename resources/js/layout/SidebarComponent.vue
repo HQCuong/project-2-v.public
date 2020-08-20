@@ -152,6 +152,9 @@ export default {
                     $(".close-layer").trigger("click");
                 }
             });
+
+            // remove tooltip
+            $(".tooltip-inner").remove();
         },
     },
 };

@@ -7,7 +7,7 @@
             <vue-good-table
                 @on-selected-rows-change="selectionChanged"
                 :columns="columns"
-                :rows="rows"
+                :rows="arr_thiet_bi"
                 :search-options="{enabled: true}"
                 :pagination-options="{enabled: true}"
                 :select-options="{
@@ -62,9 +62,7 @@
 import formSelectedRows from "../form/FormSelectedRows";
 
 export default {
-    mounted() {
-        $(".btn").tooltip();
-    },
+    props: ["arr_thiet_bi"],
     data() {
         return {
             columns: [
@@ -94,24 +92,18 @@ export default {
                     tdClass: "font-weight-bold",
                 },
             ],
-            rows: [
-                {
-                    ma_thiet_bi: 1,
-                    ten_thiet_bi: "thiết bị 1",
-                    cau_hinh: "cấu hình 1",
-                    tinh_trang: "Hoạt động",
-                },
-                {
-                    ma_thiet_bi: 2,
-                    ten_thiet_bi: "thiết bị 2",
-                    cau_hinh: "cấu hình 2",
-                    tinh_trang: "bảo trì",
-                },
-            ],
         };
     },
     methods: {
         selectionChanged(row) {},
+    },
+    watch: {
+        arr_thiet_bi() {
+            $(document).ready(function () {
+                $(".btn").tooltip();
+                $(".tooltip-inner").remove();
+            });
+        },
     },
     components: {
         formSelectedRows,

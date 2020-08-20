@@ -95,7 +95,6 @@ export default {
                     $(".btn").tooltip({
                         trigger: "hover",
                     });
-
                     $(".tooltip-inner").remove();
                 });
             }

@@ -15637,7 +15637,9 @@ __webpack_require__.r(__webpack_exports__);
         if ($(window).width() < 992) {
           $(".close-layer").trigger("click");
         }
-      });
+      }); // remove tooltip
+
+      $(".tooltip-inner").remove();
     }
   }
 });
@@ -15845,7 +15847,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     lich_su_dung: function lich_su_dung() {
-      return this.$store.getters["lab/get_lich_su_dung_lab"];
+      return this.$store.state.lab.lich_su_dung;
     }
   },
   methods: {},
@@ -15919,12 +15921,12 @@ __webpack_require__.r(__webpack_exports__);
       if ($(window).width() < 770) {
         return "listWeek";
       } else {
-        return "dayGridMonth,listMonth";
+        return "dayGridMonth,listDay";
       }
     },
     modi_calendar_view: function modi_calendar_view() {
       if ($(window).width() < 770) {
-        return "listWeek";
+        return "listDay";
       } else {
         return "dayGridMonth";
       }
@@ -15947,6 +15949,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -16024,11 +16027,14 @@ __webpack_require__.r(__webpack_exports__);
     tangLabel: function tangLabel(_ref2) {
       var ten_tang = _ref2.ten_tang;
       return "".concat(ten_tang);
+    },
+    labLabel: function labLabel(_ref3) {
+      var ten_phong = _ref3.ten_phong;
+      return "".concat(ten_phong);
     }
   },
   watch: {
     toa: function toa() {
-      this.$store.commit("lab/reset_lich_su_dung");
       this.tang = "";
       this.lab = "";
 
@@ -16040,7 +16046,6 @@ __webpack_require__.r(__webpack_exports__);
       this.$store.dispatch("tang/get_tang", this.toa.ma_toa);
     },
     tang: function tang() {
-      this.$store.commit("lab/reset_lich_su_dung");
       this.lab = "";
 
       if (!this.tang) {
@@ -16174,8 +16179,10 @@ __webpack_require__.r(__webpack_exports__);
       // phan cong
       this.$store.dispatch("user/get_all_user");
       this.$store.dispatch("phan_cong/get_phan_cong");
-    } else {// neu la giao vien get phan cong theo ma
-      // this.$store.dispatch("phan_cong/get_phan_cong");
+    } else {
+      // neu la giao vien get phan cong theo ma
+      this.$store.dispatch("user/get_self_info");
+      this.$store.dispatch("phan_cong/get_phan_cong");
     }
   },
   mounted: function mounted() {
@@ -16185,28 +16192,30 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      lich_lam_viec: false
+      show_lich_lam_viec: false
     };
   },
   computed: {
     is_giao_vien: function is_giao_vien() {
       return this.$store.state.user.is_giao_vien;
+    },
+    lich_lam_viec: function lich_lam_viec() {
+      return this.$store.state.giao_vien.lich_lam_viec;
     }
   },
   watch: {
     $route: function $route(to, from) {
       this.$store.commit("content/page_title", "Xem lịch làm việc");
-    }
-  },
-  methods: {
-    show_lich_lam_viec: function show_lich_lam_viec(show) {
-      if (show == 1) {
-        this.lich_lam_viec = true;
+    },
+    lich_lam_viec: function lich_lam_viec() {
+      if (this.lich_lam_viec.length != 0) {
+        this.show_lich_lam_viec = true;
       } else {
-        this.lich_lam_viec = false;
+        this.show_lich_lam_viec = false;
       }
     }
   },
+  methods: {},
   components: {
     lichLamViec: _components_LichLamViec_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     selectGiaovien: _components_SelectGiaoVien_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
@@ -16239,6 +16248,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["lich_lam_viec"],
   data: function data() {
     return {
       calendar_options: {
@@ -16249,7 +16259,7 @@ __webpack_require__.r(__webpack_exports__);
           hour12: false
         },
         displayEventEnd: true,
-        events: this.$store.getters["giao_vien/get_lich_giao_vien"],
+        events: this.lich_lam_viec,
         eventDisplay: "block",
         initialView: this.modi_calendar_view(),
         headerToolbar: {
@@ -16265,7 +16275,7 @@ __webpack_require__.r(__webpack_exports__);
       if ($(window).width() < 770) {
         return "listWeek";
       } else {
-        return "dayGridMonth,listMonth";
+        return "dayGridMonth,listWeek";
       }
     },
     modi_calendar_view: function modi_calendar_view() {
@@ -16274,11 +16284,6 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         return "dayGridMonth";
       }
-    }
-  },
-  computed: {
-    events: function events() {
-      return this.$store.state.giao_vien.lich_giao_vien;
     }
   },
   components: {
@@ -16331,7 +16336,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["is_giao_vien"],
   data: function data() {
     return {
       lop: "",
@@ -16340,9 +16348,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     arr_gv: function arr_gv() {
-      return this.$store.state.user.arr_user.filter(function (each) {
-        return each.ma_cap_do == 3;
-      });
+      if (!this.is_giao_vien) {
+        return this.$store.state.user.arr_user.filter(function (each) {
+          return each.ma_cap_do == 3;
+        });
+      } else {
+        return [this.$store.state.user.self_info];
+      }
     },
     arr_lop: function arr_lop() {
       var _this = this;
@@ -16359,15 +16371,20 @@ __webpack_require__.r(__webpack_exports__);
   watch: {
     giao_vien: function giao_vien() {
       if (!this.giao_vien) {
-        this.$emit("show_lich_lam_viec", 0);
+        this.$store.commit("giao_vien/reset_lich_lam_viec");
         this.lop = "";
       }
     },
     lop: function lop() {
       if (this.lop) {
-        this.$emit("show_lich_lam_viec", 1);
+        this.$store.dispatch("giao_vien/get_lich_lam_viec", this.giao_vien.ma_nguoi_dung);
       } else {
-        this.$emit("show_lich_lam_viec", 0);
+        this.$store.commit("giao_vien/reset_lich_lam_viec");
+      }
+    },
+    arr_gv: function arr_gv() {
+      if (this.arr_gv.length == 1) {
+        this.giao_vien = this.arr_gv;
       }
     }
   },
@@ -17692,8 +17709,8 @@ __webpack_require__.r(__webpack_exports__);
       if (this.arr_user.length != 0) {
         $(document).ready(function () {
           $(".btn").tooltip();
+          $(".tooltip-inner").remove();
         });
-        $(".tooltip-inner").remove();
       }
     }
   }
@@ -18552,16 +18569,20 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.$store.commit("content/page_title", "Danh sách phòng");
   },
+  computed: {
+    arr_lab: function arr_lab() {
+      return this.$store.state.lab.arr_lab;
+    }
+  },
   data: function data() {
     return {
       table_lab: false
     };
   },
-  methods: {
-    show_table_lab: function show_table_lab(map_lab) {
-      var isShowMap = map_lab == 1;
-
-      if (isShowMap) {
+  methods: {},
+  watch: {
+    arr_lab: function arr_lab() {
+      if (this.arr_lab.length != 0) {
         this.table_lab = true;
       } else {
         this.table_lab = false;
@@ -19106,7 +19127,6 @@ __webpack_require__.r(__webpack_exports__);
 
       if (!this.toa) {
         this.$store.commit("tang/reset_arr_tang");
-        this.$emit("show_table_view", 0);
         return false;
       }
 
@@ -19114,13 +19134,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     tang: function tang() {
       if (!this.tang) {
-        this.$emit("show_table_view", 0); // this.$store.commit('lab/reset_arr_lab');
-
+        this.$store.commit("lab/reset_arr_lab");
         return false;
-      } // this.$store.commit('lab/get_lab');
+      }
 
-
-      this.$emit("show_table_view", 1);
+      this.$store.dispatch("lab/get_lab", this.tang.ma_tang);
     },
     arr_toa: function arr_toa() {
       if (this.arr_toa.length != 0) {
@@ -19180,9 +19198,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    $(".btn").tooltip();
-  },
+  props: ["arr_lab"],
   data: function data() {
     return {
       columns: [{
@@ -19219,44 +19235,17 @@ __webpack_require__.r(__webpack_exports__);
         sortable: false,
         thClass: "text-info",
         tdClass: "font-weight-bold"
-      }],
-      arr_lab: [{
-        ma_phong: 1,
-        ten_phong: "lab 201",
-        cho_ngoi: 25,
-        may: 25,
-        cau_hinh: "cau_hinh 1",
-        tinh_trang: "Hoạt động"
-      }, {
-        ma_phong: 2,
-        ten_phong: "lab 202",
-        cho_ngoi: 25,
-        may: 25,
-        cau_hinh: "cau_hinh 2",
-        tinh_trang: "Hoạt động"
-      }, {
-        ma_phong: 3,
-        ten_phong: "lab 203",
-        cho_ngoi: 30,
-        may: 30,
-        cau_hinh: "cau_hinh 2",
-        tinh_trang: "Hoạt động"
-      }, {
-        ma_phong: 4,
-        ten_phong: "lab 204",
-        cho_ngoi: 20,
-        may: 15,
-        cau_hinh: "cau_hinh 2",
-        tinh_trang: "Bảo trì"
       }]
     };
   },
-  computed: {// arr_lab() {
-    //     return this.$store.state('lab/arr_lab');
-    // }
-  },
-  methods: {},
-  watch: {}
+  watch: {
+    arr_lab: function arr_lab() {
+      $(document).ready(function () {
+        $(".btn").tooltip();
+        $(".tooltip-inner").remove();
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -19346,17 +19335,22 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.$store.commit("content/page_title", "Danh sách thiết bị");
   },
+  computed: {
+    arr_thiet_bi: function arr_thiet_bi() {
+      return this.$store.state.thiet_bi.arr_thiet_bi;
+    }
+  },
   data: function data() {
     return {
       show_table_tbi: false
     };
   },
-  methods: {
-    show_table_device: function show_table_device(show) {
-      if (show == 0) {
-        this.show_table_tbi = false;
-      } else {
+  watch: {
+    arr_thiet_bi: function arr_thiet_bi() {
+      if (this.arr_thiet_bi.length != 0) {
         this.show_table_tbi = true;
+      } else {
+        this.show_table_tbi = false;
       }
     }
   },
@@ -19379,7 +19373,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _select_SelectThietBi_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./select/SelectThietBi.vue */ "./resources/js/views/kythuat/components/thietbi/select/SelectThietBi.vue");
 /* harmony import */ var _form_FormInsertThietBi_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./form/FormInsertThietBi.vue */ "./resources/js/views/kythuat/components/thietbi/form/FormInsertThietBi.vue");
-//
 //
 //
 //
@@ -19588,6 +19581,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.$store.dispatch("toa/get_toa");
@@ -19596,8 +19590,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       toa: "",
       tang: "",
-      lab: "",
-      arr_lab: []
+      lab: ""
     };
   },
   computed: {
@@ -19606,6 +19599,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     arr_tang: function arr_tang() {
       return this.$store.state.tang.arr_tang;
+    },
+    arr_lab: function arr_lab() {
+      return this.$store.state.lab.arr_lab;
     }
   },
   methods: {
@@ -19617,17 +19613,19 @@ __webpack_require__.r(__webpack_exports__);
     tangLabel: function tangLabel(_ref2) {
       var ten_tang = _ref2.ten_tang;
       return "".concat(ten_tang);
+    },
+    labLabel: function labLabel(_ref3) {
+      var ten_phong = _ref3.ten_phong;
+      return "".concat(ten_phong);
     }
   },
   watch: {
     toa: function toa() {
       this.tang = "";
       this.lab = "";
-      this.$emit("show_table_device", 0);
 
       if (!this.toa) {
         this.$store.commit("tang/reset_arr_tang");
-        this.$emit("show_table_device", 0);
         return false;
       }
 
@@ -19635,24 +19633,19 @@ __webpack_require__.r(__webpack_exports__);
     },
     tang: function tang() {
       this.lab = "";
-      this.$emit("show_table_device", 0);
 
       if (!this.tang) {
-        this.arr_lab = [];
-        this.$emit("show_table_device", 0);
+        this.$store.commit("lab/reset_arr_lab");
         return false;
       }
 
-      this.arr_lab = ["lab 1", "lab 2", "lab 3"];
+      this.$store.dispatch("lab/get_lab", this.tang.ma_tang);
     },
     lab: function lab() {
       if (!this.lab) {
-        this.$emit("show_table_device", 0);
+        this.$store.commit("thiet_bi/reset_arr_thiet_bi");
       } else if (this.toa && this.tang) {
-        this.$emit("show_table_device", 1);
-        this.$store.dispatch("lab/get_lich_lab");
-      } else {
-        this.$emit("show_table_device", 0);
+        this.$store.dispatch("thiet_bi/get_thiet_bi");
       }
     },
     arr_toa: function arr_toa() {
@@ -19737,9 +19730,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    $(".btn").tooltip();
-  },
+  props: ["arr_thiet_bi"],
   data: function data() {
     return {
       columns: [{
@@ -19763,22 +19754,19 @@ __webpack_require__.r(__webpack_exports__);
         sortable: false,
         thClass: "text-info",
         tdClass: "font-weight-bold"
-      }],
-      rows: [{
-        ma_thiet_bi: 1,
-        ten_thiet_bi: "thiết bị 1",
-        cau_hinh: "cấu hình 1",
-        tinh_trang: "Hoạt động"
-      }, {
-        ma_thiet_bi: 2,
-        ten_thiet_bi: "thiết bị 2",
-        cau_hinh: "cấu hình 2",
-        tinh_trang: "bảo trì"
       }]
     };
   },
   methods: {
     selectionChanged: function selectionChanged(row) {}
+  },
+  watch: {
+    arr_thiet_bi: function arr_thiet_bi() {
+      $(document).ready(function () {
+        $(".btn").tooltip();
+        $(".tooltip-inner").remove();
+      });
+    }
   },
   components: {
     formSelectedRows: _form_FormSelectedRows__WEBPACK_IMPORTED_MODULE_0__["default"]
@@ -54462,7 +54450,8 @@ var render = function() {
             placeholder: "Chọn phòng",
             deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
             selectLabel: "Click hoặc nhấn Enter để chọn",
-            searchable: false
+            searchable: false,
+            "custom-label": _vm.labLabel
           },
           model: {
             value: _vm.lab,
@@ -54625,16 +54614,16 @@ var render = function() {
             "div",
             { staticClass: "card-body" },
             [
-              !_vm.is_giao_vien
-                ? _c("selectGiaovien", {
-                    on: { show_lich_lam_viec: _vm.show_lich_lam_viec }
-                  })
-                : _vm._e(),
+              _c("selectGiaovien", {
+                attrs: { is_giao_vien: _vm.is_giao_vien }
+              }),
               _vm._v(" "),
               _c("br"),
               _vm._v(" "),
-              _vm.lich_lam_viec || _vm.is_giao_vien
-                ? _c("lichLamViec")
+              _vm.show_lich_lam_viec || _vm.is_giao_vien
+                ? _c("lichLamViec", {
+                    attrs: { lich_lam_viec: _vm.lich_lam_viec }
+                  })
                 : _vm._e()
             ],
             1
@@ -54701,27 +54690,35 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("label", [_vm._v("Chọn phân công")]),
-      _vm._v(" "),
-      _c("multiselect", {
-        attrs: {
-          options: _vm.arr_gv,
-          "close-on-select": true,
-          "show-labels": true,
-          placeholder: "Chọn giáo viên",
-          deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
-          selectLabel: "Click hoặc nhấn Enter để chọn",
-          searchable: true,
-          "custom-label": _vm.labelUser
-        },
-        model: {
-          value: _vm.giao_vien,
-          callback: function($$v) {
-            _vm.giao_vien = $$v
-          },
-          expression: "giao_vien"
-        }
-      }),
+      !_vm.is_giao_vien
+        ? _c(
+            "div",
+            [
+              _c("label", [_vm._v("Chọn phân công")]),
+              _vm._v(" "),
+              _c("multiselect", {
+                attrs: {
+                  options: _vm.arr_gv,
+                  "close-on-select": true,
+                  "show-labels": true,
+                  placeholder: "Chọn giáo viên",
+                  deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
+                  selectLabel: "Click hoặc nhấn Enter để chọn",
+                  searchable: true,
+                  "custom-label": _vm.labelUser
+                },
+                model: {
+                  value: _vm.giao_vien,
+                  callback: function($$v) {
+                    _vm.giao_vien = $$v
+                  },
+                  expression: "giao_vien"
+                }
+              })
+            ],
+            1
+          )
+        : _vm._e(),
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
@@ -56933,9 +56930,11 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("selectLab", { on: { show_table_view: _vm.show_table_lab } }),
+      _c("selectLab"),
       _vm._v(" "),
-      _vm.table_lab ? _c("labTable") : _vm._e()
+      _vm.table_lab
+        ? _c("labTable", { attrs: { arr_lab: _vm.arr_lab } })
+        : _vm._e()
     ],
     1
   )
@@ -57738,11 +57737,13 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("selectLab", { on: { show_table_device: _vm.show_table_device } }),
+      _c("selectLab"),
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
-      _vm.show_table_tbi ? _c("tablethietbi") : _vm._e()
+      _vm.show_table_tbi
+        ? _c("tablethietbi", { attrs: { arr_thiet_bi: _vm.arr_thiet_bi } })
+        : _vm._e()
     ],
     1
   )
@@ -57771,15 +57772,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    [
-      _c("selectLab"),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("formInsert")
-    ],
+    [_c("selectLab"), _vm._v(" "), _c("br"), _vm._v(" "), _c("formInsert")],
     1
   )
 }
@@ -58114,7 +58107,8 @@ var render = function() {
             placeholder: "Chọn phòng",
             deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
             selectLabel: "Click hoặc nhấn Enter để chọn",
-            searchable: false
+            searchable: false,
+            "custom-label": _vm.labLabel
           },
           model: {
             value: _vm.lab,
@@ -58167,7 +58161,7 @@ var render = function() {
           {
             attrs: {
               columns: _vm.columns,
-              rows: _vm.rows,
+              rows: _vm.arr_thiet_bi,
               "search-options": { enabled: true },
               "pagination-options": { enabled: true },
               "select-options": {
@@ -76968,6 +76962,56 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/store/modules/GiaoVien.js":
+/*!************************************************!*\
+  !*** ./resources/js/store/modules/GiaoVien.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../customfunc/getCookie.js */ "./resources/js/customfunc/getCookie.js");
+/* harmony import */ var _customfunc_groupCollection_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../customfunc/groupCollection.js */ "./resources/js/customfunc/groupCollection.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: {
+    lich_lam_viec: []
+  },
+  mutations: {
+    reset_lich_lam_viec: function reset_lich_lam_viec(state) {
+      state.lich_lam_viec = [];
+    }
+  },
+  actions: {
+    get_lich_lam_viec: function get_lich_lam_viec(_ref, ma_giao_vien) {
+      var state = _ref.state,
+          commit = _ref.commit,
+          rootState = _ref.rootState;
+      state.lich_lam_viec = [];
+      var ev1 = {
+        title: "WEB",
+        start: "2020-08-03" + "T10:00:00",
+        end: "2020-08-03" + "T12:00:00"
+      };
+      state.lich_lam_viec.push(ev1);
+      var ev2 = {
+        title: "SQL1",
+        start: "2020-08-15" + "T08:00:00",
+        end: "2020-08-15" + "T12:00:00"
+      };
+      state.lich_lam_viec.push(ev2);
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/store/modules/Lab.js":
 /*!*******************************************!*\
   !*** ./resources/js/store/modules/Lab.js ***!
@@ -76986,11 +77030,6 @@ __webpack_require__.r(__webpack_exports__);
     lich_su_dung: [],
     arr_lab: []
   },
-  getters: {
-    get_lich_su_dung_lab: function get_lich_su_dung_lab(state) {
-      return state.lich_su_dung;
-    }
-  },
   mutations: {
     reset_lich_su_dung: function reset_lich_su_dung(state) {
       state.lich_su_dung = [];
@@ -77005,7 +77044,35 @@ __webpack_require__.r(__webpack_exports__);
           commit = _ref.commit,
           rootState = _ref.rootState;
       state.arr_lab = [];
-      state.arr_lab = ["lab 1", "lab 2", "lab 3"];
+      state.arr_lab = [{
+        ma_phong: 1,
+        ten_phong: "lab 201",
+        cho_ngoi: 25,
+        may: 25,
+        cau_hinh: "cau_hinh 1",
+        tinh_trang: "Hoạt động"
+      }, {
+        ma_phong: 2,
+        ten_phong: "lab 202",
+        cho_ngoi: 25,
+        may: 25,
+        cau_hinh: "cau_hinh 2",
+        tinh_trang: "Hoạt động"
+      }, {
+        ma_phong: 3,
+        ten_phong: "lab 203",
+        cho_ngoi: 30,
+        may: 30,
+        cau_hinh: "cau_hinh 2",
+        tinh_trang: "Hoạt động"
+      }, {
+        ma_phong: 4,
+        ten_phong: "lab 204",
+        cho_ngoi: 20,
+        may: 15,
+        cau_hinh: "cau_hinh 2",
+        tinh_trang: "Bảo trì"
+      }];
     },
     get_lich_su_dung: function get_lich_su_dung(_ref2) {
       var state = _ref2.state,
@@ -77277,6 +77344,50 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/store/modules/ThietBi.js":
+/*!***********************************************!*\
+  !*** ./resources/js/store/modules/ThietBi.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../customfunc/getCookie.js */ "./resources/js/customfunc/getCookie.js");
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: {
+    arr_thiet_bi: []
+  },
+  mutations: {
+    reset_arr_thiet_bi: function reset_arr_thiet_bi(state) {
+      state.arr_thiet_bi = [];
+    }
+  },
+  actions: {
+    get_thiet_bi: function get_thiet_bi(_ref) {
+      var state = _ref.state,
+          commit = _ref.commit,
+          rootState = _ref.rootState;
+      state.arr_thiet_bi = [];
+      state.arr_thiet_bi = [{
+        ma_thiet_bi: 1,
+        ten_thiet_bi: "thiết bị 1",
+        cau_hinh: "cấu hình 1",
+        tinh_trang: "Hoạt động"
+      }, {
+        ma_thiet_bi: 2,
+        ten_thiet_bi: "thiết bị 2",
+        cau_hinh: "cấu hình 2",
+        tinh_trang: "bảo trì"
+      }];
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/store/modules/Toa.js":
 /*!*******************************************!*\
   !*** ./resources/js/store/modules/Toa.js ***!
@@ -77514,9 +77625,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_Tang_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/Tang.js */ "./resources/js/store/modules/Tang.js");
 /* harmony import */ var _modules_Toa_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/Toa.js */ "./resources/js/store/modules/Toa.js");
 /* harmony import */ var _modules_User_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./modules/User.js */ "./resources/js/store/modules/User.js");
+/* harmony import */ var _modules_GiaoVien__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./modules/GiaoVien */ "./resources/js/store/modules/GiaoVien.js");
+/* harmony import */ var _modules_ThietBi__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./modules/ThietBi */ "./resources/js/store/modules/ThietBi.js");
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
+
+
 
 
 
@@ -77538,7 +77653,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     mon: _modules_Mon_js__WEBPACK_IMPORTED_MODULE_6__["default"],
     ca: _modules_Ca_js__WEBPACK_IMPORTED_MODULE_2__["default"],
     ngay_nghi: _modules_Ngaynghi_js__WEBPACK_IMPORTED_MODULE_7__["default"],
-    phan_cong: _modules_PhanCong_js__WEBPACK_IMPORTED_MODULE_8__["default"]
+    phan_cong: _modules_PhanCong_js__WEBPACK_IMPORTED_MODULE_8__["default"],
+    giao_vien: _modules_GiaoVien__WEBPACK_IMPORTED_MODULE_12__["default"],
+    thiet_bi: _modules_ThietBi__WEBPACK_IMPORTED_MODULE_13__["default"]
   }
 }));
 

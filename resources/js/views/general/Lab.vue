@@ -29,7 +29,7 @@ export default {
     },
     computed: {
         lich_su_dung() {
-            return this.$store.getters["lab/get_lich_su_dung_lab"];
+            return this.$store.state.lab.lich_su_dung;
         },
     },
     methods: {},

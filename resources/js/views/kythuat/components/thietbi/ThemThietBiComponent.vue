@@ -2,7 +2,6 @@
     <div>
         <selectLab></selectLab>
         <br />
-        <br />
         <formInsert></formInsert>
     </div>
 </template>

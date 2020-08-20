@@ -4,12 +4,12 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <selectGiaovien
-                            @show_lich_lam_viec="show_lich_lam_viec"
-                            v-if="!is_giao_vien"
-                        ></selectGiaovien>
+                        <selectGiaovien :is_giao_vien="is_giao_vien"></selectGiaovien>
                         <br />
-                        <lichLamViec v-if="lich_lam_viec || is_giao_vien"></lichLamViec>
+                        <lichLamViec
+                            v-if="show_lich_lam_viec || is_giao_vien"
+                            :lich_lam_viec="lich_lam_viec"
+                        ></lichLamViec>
                     </div>
                 </div>
             </div>
@@ -28,7 +28,8 @@ export default {
             this.$store.dispatch("phan_cong/get_phan_cong");
         } else {
             // neu la giao vien get phan cong theo ma
-            // this.$store.dispatch("phan_cong/get_phan_cong");
+            this.$store.dispatch("user/get_self_info");
+            this.$store.dispatch("phan_cong/get_phan_cong");
         }
     },
     mounted() {
@@ -38,28 +39,30 @@ export default {
     },
     data() {
         return {
-            lich_lam_viec: false,
+            show_lich_lam_viec: false,
         };
     },
     computed: {
         is_giao_vien() {
             return this.$store.state.user.is_giao_vien;
         },
+        lich_lam_viec() {
+            return this.$store.state.giao_vien.lich_lam_viec;
+        },
     },
     watch: {
         $route(to, from) {
             this.$store.commit("content/page_title", "Xem lịch làm việc");
         },
-    },
-    methods: {
-        show_lich_lam_viec(show) {
-            if (show == 1) {
-                this.lich_lam_viec = true;
+        lich_lam_viec() {
+            if (this.lich_lam_viec.length != 0) {
+                this.show_lich_lam_viec = true;
             } else {
-                this.lich_lam_viec = false;
+                this.show_lich_lam_viec = false;
             }
         },
     },
+    methods: {},
     components: {
         lichLamViec,
         selectGiaovien,

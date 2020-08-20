@@ -13,6 +13,8 @@ import phan_cong from "./modules/PhanCong.js";
 import tang from "./modules/Tang.js";
 import toa from "./modules/Toa.js";
 import user from "./modules/User.js";
+import giao_vien from "./modules/GiaoVien";
+import thiet_bi from "./modules/ThietBi";
 
 export default new Vuex.Store({
     modules: {
@@ -25,6 +27,8 @@ export default new Vuex.Store({
         mon: mon,
         ca: ca,
         ngay_nghi: ngay_nghi,
-        phan_cong: phan_cong
+        phan_cong: phan_cong,
+        giao_vien: giao_vien,
+        thiet_bi: thiet_bi
     }
 });

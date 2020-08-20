@@ -39,12 +39,12 @@ export default {
             if ($(window).width() < 770) {
                 return "listWeek";
             } else {
-                return "dayGridMonth,listMonth";
+                return "dayGridMonth,listDay";
             }
         },
         modi_calendar_view() {
             if ($(window).width() < 770) {
-                return "listWeek";
+                return "listDay";
             } else {
                 return "dayGridMonth";
             }

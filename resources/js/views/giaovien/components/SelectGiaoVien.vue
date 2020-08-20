@@ -1,17 +1,19 @@
 <template>
     <div>
-        <label>Chọn phân công</label>
-        <multiselect
-            v-model="giao_vien"
-            :options="arr_gv"
-            :close-on-select="true"
-            :show-labels="true"
-            placeholder="Chọn giáo viên"
-            deselectLabel="Click hoặc nhấn Enter để bỏ chọn"
-            selectLabel="Click hoặc nhấn Enter để chọn"
-            :searchable="true"
-            :custom-label="labelUser"
-        ></multiselect>
+        <div v-if="!is_giao_vien">
+            <label>Chọn phân công</label>
+            <multiselect
+                v-model="giao_vien"
+                :options="arr_gv"
+                :close-on-select="true"
+                :show-labels="true"
+                placeholder="Chọn giáo viên"
+                deselectLabel="Click hoặc nhấn Enter để bỏ chọn"
+                selectLabel="Click hoặc nhấn Enter để chọn"
+                :searchable="true"
+                :custom-label="labelUser"
+            ></multiselect>
+        </div>
         <br />
         <label>Chọn lớp</label>
         <multiselect
@@ -33,6 +35,7 @@
 </template>
 <script>
 export default {
+    props: ["is_giao_vien"],
     data() {
         return {
             lop: "",
@@ -41,9 +44,13 @@ export default {
     },
     computed: {
         arr_gv() {
-            return this.$store.state.user.arr_user.filter((each) => {
-                return each.ma_cap_do == 3;
-            });
+            if (!this.is_giao_vien) {
+                return this.$store.state.user.arr_user.filter((each) => {
+                    return each.ma_cap_do == 3;
+                });
+            } else {
+                return [this.$store.state.user.self_info];
+            }
         },
         arr_lop() {
             if (this.giao_vien) {
@@ -62,15 +69,23 @@ export default {
     watch: {
         giao_vien() {
             if (!this.giao_vien) {
-                this.$emit("show_lich_lam_viec", 0);
+                this.$store.commit("giao_vien/reset_lich_lam_viec");
                 this.lop = "";
             }
         },
         lop() {
             if (this.lop) {
-                this.$emit("show_lich_lam_viec", 1);
+                this.$store.dispatch(
+                    "giao_vien/get_lich_lam_viec",
+                    this.giao_vien.ma_nguoi_dung
+                );
             } else {
-                this.$emit("show_lich_lam_viec", 0);
+                this.$store.commit("giao_vien/reset_lich_lam_viec");
+            }
+        },
+        arr_gv() {
+            if (this.arr_gv.length == 1) {
+                this.giao_vien = this.arr_gv;
             }
         },
     },

@@ -38,6 +38,7 @@
             deselectLabel="Click hoặc nhấn Enter để bỏ chọn"
             selectLabel="Click hoặc nhấn Enter để chọn"
             :searchable="false"
+            :custom-label="labLabel"
         >
             <template slot="noOptions">Chưa chọn tầng</template>
         </multiselect>
@@ -54,7 +55,6 @@ export default {
             toa: "",
             tang: "",
             lab: "",
-            arr_lab: [],
         };
     },
     computed: {
@@ -64,6 +64,9 @@ export default {
         arr_tang() {
             return this.$store.state.tang.arr_tang;
         },
+        arr_lab() {
+            return this.$store.state.lab.arr_lab;
+        },
     },
     methods: {
         toaLabel({ ten_toa, dia_chi }) {
@@ -72,37 +75,33 @@ export default {
         tangLabel({ ten_tang }) {
             return `${ten_tang}`;
         },
+        labLabel({ ten_phong }) {
+            return `${ten_phong}`;
+        },
     },
     watch: {
         toa() {
             this.tang = "";
             this.lab = "";
-            this.$emit("show_table_device", 0);
             if (!this.toa) {
                 this.$store.commit("tang/reset_arr_tang");
-                this.$emit("show_table_device", 0);
                 return false;
             }
             this.$store.dispatch("tang/get_tang", this.toa.ma_toa);
         },
         tang() {
             this.lab = "";
-            this.$emit("show_table_device", 0);
             if (!this.tang) {
-                this.arr_lab = [];
-                this.$emit("show_table_device", 0);
+                this.$store.commit("lab/reset_arr_lab");
                 return false;
             }
-            this.arr_lab = ["lab 1", "lab 2", "lab 3"];
+            this.$store.dispatch("lab/get_lab", this.tang.ma_tang);
         },
         lab() {
             if (!this.lab) {
-                this.$emit("show_table_device", 0);
+                this.$store.commit("thiet_bi/reset_arr_thiet_bi");
             } else if (this.toa && this.tang) {
-                this.$emit("show_table_device", 1);
-                this.$store.dispatch("lab/get_lich_lab");
-            } else {
-                this.$emit("show_table_device", 0);
+                this.$store.dispatch("thiet_bi/get_thiet_bi");
             }
         },
         arr_toa() {

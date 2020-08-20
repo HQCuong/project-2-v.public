@@ -38,6 +38,7 @@
             deselectLabel="Click hoặc nhấn Enter để bỏ chọn"
             selectLabel="Click hoặc nhấn Enter để chọn"
             :searchable="false"
+            :custom-label="labLabel"
         >
             <template slot="noOptions">Chưa chọn tầng</template>
         </multiselect>
@@ -74,10 +75,12 @@ export default {
         tangLabel({ ten_tang }) {
             return `${ten_tang}`;
         },
+        labLabel({ ten_phong }) {
+            return `${ten_phong}`;
+        },
     },
     watch: {
         toa() {
-            this.$store.commit("lab/reset_lich_su_dung");
             this.tang = "";
             this.lab = "";
             if (!this.toa) {
@@ -87,7 +90,6 @@ export default {
             this.$store.dispatch("tang/get_tang", this.toa.ma_toa);
         },
         tang() {
-            this.$store.commit("lab/reset_lich_su_dung");
             this.lab = "";
             if (!this.tang) {
                 this.$store.commit("lab/reset_arr_lab");

@@ -11,6 +11,7 @@ import listPlugin from "@fullcalendar/list";
 import thongKe from "./thongke/ThongKe";
 
 export default {
+    props: ["lich_lam_viec"],
     data() {
         return {
             calendar_options: {
@@ -21,7 +22,7 @@ export default {
                     hour12: false,
                 },
                 displayEventEnd: true,
-                events: this.$store.getters["giao_vien/get_lich_giao_vien"],
+                events: this.lich_lam_viec,
                 eventDisplay: "block",
                 initialView: this.modi_calendar_view(),
                 headerToolbar: {
@@ -37,7 +38,7 @@ export default {
             if ($(window).width() < 770) {
                 return "listWeek";
             } else {
-                return "dayGridMonth,listMonth";
+                return "dayGridMonth,listWeek";
             }
         },
         modi_calendar_view() {
@@ -46,11 +47,6 @@ export default {
             } else {
                 return "dayGridMonth";
             }
-        },
-    },
-    computed: {
-        events() {
-            return this.$store.state.giao_vien.lich_giao_vien;
         },
     },
     components: {

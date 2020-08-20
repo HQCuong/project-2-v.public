@@ -95,9 +95,8 @@ export default {
             if (this.arr_user.length != 0) {
                 $(document).ready(function () {
                     $(".btn").tooltip();
+                    $(".tooltip-inner").remove();
                 });
-
-                $(".tooltip-inner").remove();
             }
         },
     },

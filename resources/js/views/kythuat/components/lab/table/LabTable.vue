@@ -38,9 +38,7 @@
 </template>
 <script>
 export default {
-    mounted() {
-        $(".btn").tooltip();
-    },
+    props: ["arr_lab"],
     data() {
         return {
             columns: [
@@ -85,49 +83,16 @@ export default {
                     tdClass: "font-weight-bold",
                 },
             ],
-            arr_lab: [
-                {
-                    ma_phong: 1,
-                    ten_phong: "lab 201",
-                    cho_ngoi: 25,
-                    may: 25,
-                    cau_hinh: "cau_hinh 1",
-                    tinh_trang: "Hoạt động",
-                },
-                {
-                    ma_phong: 2,
-                    ten_phong: "lab 202",
-                    cho_ngoi: 25,
-                    may: 25,
-                    cau_hinh: "cau_hinh 2",
-                    tinh_trang: "Hoạt động",
-                },
-                {
-                    ma_phong: 3,
-                    ten_phong: "lab 203",
-                    cho_ngoi: 30,
-                    may: 30,
-                    cau_hinh: "cau_hinh 2",
-                    tinh_trang: "Hoạt động",
-                },
-                {
-                    ma_phong: 4,
-                    ten_phong: "lab 204",
-                    cho_ngoi: 20,
-                    may: 15,
-                    cau_hinh: "cau_hinh 2",
-                    tinh_trang: "Bảo trì",
-                },
-            ],
         };
     },
-    computed: {
-        // arr_lab() {
-        //     return this.$store.state('lab/arr_lab');
-        // }
+    watch: {
+        arr_lab() {
+            $(document).ready(function () {
+                $(".btn").tooltip();
+                $(".tooltip-inner").remove();
+            });
+        },
     },
-    methods: {},
-    watch: {},
 };
 </script>
 <style lang="css" scoped>

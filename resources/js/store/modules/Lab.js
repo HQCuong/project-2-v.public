@@ -6,11 +6,6 @@ export default {
         lich_su_dung: [],
         arr_lab: []
     },
-    getters: {
-        get_lich_su_dung_lab(state) {
-            return state.lich_su_dung;
-        }
-    },
     mutations: {
         reset_lich_su_dung(state) {
             state.lich_su_dung = [];
@@ -22,7 +17,40 @@ export default {
     actions: {
         get_lab({ state, commit, rootState }, ma_tang) {
             state.arr_lab = [];
-            state.arr_lab = ["lab 1", "lab 2", "lab 3"];
+            state.arr_lab = [
+                {
+                    ma_phong: 1,
+                    ten_phong: "lab 201",
+                    cho_ngoi: 25,
+                    may: 25,
+                    cau_hinh: "cau_hinh 1",
+                    tinh_trang: "Hoạt động"
+                },
+                {
+                    ma_phong: 2,
+                    ten_phong: "lab 202",
+                    cho_ngoi: 25,
+                    may: 25,
+                    cau_hinh: "cau_hinh 2",
+                    tinh_trang: "Hoạt động"
+                },
+                {
+                    ma_phong: 3,
+                    ten_phong: "lab 203",
+                    cho_ngoi: 30,
+                    may: 30,
+                    cau_hinh: "cau_hinh 2",
+                    tinh_trang: "Hoạt động"
+                },
+                {
+                    ma_phong: 4,
+                    ten_phong: "lab 204",
+                    cho_ngoi: 20,
+                    may: 15,
+                    cau_hinh: "cau_hinh 2",
+                    tinh_trang: "Bảo trì"
+                }
+            ];
         },
         get_lich_su_dung({ state, commit, rootState }) {
             state.lich_su_dung = [];

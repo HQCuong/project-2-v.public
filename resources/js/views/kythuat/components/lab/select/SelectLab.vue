@@ -62,19 +62,16 @@ export default {
             this.tang = "";
             if (!this.toa) {
                 this.$store.commit("tang/reset_arr_tang");
-                this.$emit("show_table_view", 0);
                 return false;
             }
             this.$store.dispatch("tang/get_tang", this.toa.ma_toa);
         },
         tang() {
             if (!this.tang) {
-                this.$emit("show_table_view", 0);
-                // this.$store.commit('lab/reset_arr_lab');
+                this.$store.commit("lab/reset_arr_lab");
                 return false;
             }
-            // this.$store.commit('lab/get_lab');
-            this.$emit("show_table_view", 1);
+            this.$store.dispatch("lab/get_lab", this.tang.ma_tang);
         },
         arr_toa() {
             if (this.arr_toa.length != 0) {
