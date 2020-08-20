@@ -11,11 +11,6 @@ import listPlugin from "@fullcalendar/list";
 import thongKe from "./thongke/ThongKe";
 
 export default {
-    created() {
-        if (this.$store.state.user.is_giao_vien) {
-            this.$store.dispatch("giao_vien/get_lich_giao_vien");
-        }
-    },
     data() {
         return {
             calendar_options: {

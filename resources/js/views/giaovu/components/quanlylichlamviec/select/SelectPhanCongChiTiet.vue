@@ -53,7 +53,7 @@ export default {
         arr_phan_cong() {
             return this.$store.state.phan_cong.arr_phan_cong;
         },
-        reset_select() {
+        select() {
             return this.$store.state.phan_cong.reset_select;
         },
     },
@@ -108,14 +108,12 @@ export default {
                 this.$store.commit("phan_cong/reset_arr_de_xuat_phan_cong_ct");
             }
         },
-        reset_select() {
-            if (this.reset_select == false) {
-                return true;
+        select() {
+            if (this.select == true) {
+                this.so_gio = false;
+                this.phan_cong = false;
             } else {
-                setTimeout(() => {
-                    this.so_gio = "";
-                    this.phan_cong = "";
-                }, 500);
+                return true;
             }
         },
     },

@@ -33,16 +33,6 @@
 </template>
 <script>
 export default {
-    created() {
-        if (this.$store.state.user.is_giao_vien) {
-            //get danh sach lop theo giao vien
-        }
-
-        if (!this.$store.state.user.is_giao_vien) {
-            this.$store.dispatch("user/get_user");
-            this.$store.dispatch("phan_cong/get_phan_cong");
-        }
-    },
     data() {
         return {
             lop: "",
@@ -72,15 +62,15 @@ export default {
     watch: {
         giao_vien() {
             if (!this.giao_vien) {
-                this.$emit("show_main_view", 0);
+                this.$emit("show_lich_lam_viec", 0);
                 this.lop = "";
             }
         },
         lop() {
             if (this.lop) {
-                this.$emit("show_main_view", 1);
+                this.$emit("show_lich_lam_viec", 1);
             } else {
-                this.$emit("show_main_view", 0);
+                this.$emit("show_lich_lam_viec", 0);
             }
         },
     },

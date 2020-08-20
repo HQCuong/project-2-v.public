@@ -40,7 +40,13 @@ export default {
                         "phan_cong/get_phan_cong_chi_tiet",
                         this.phan_cong.ma_phan_cong
                     )
-                    .then(this.$emit("show_table_phan_cong_ct", 1));
+                    .then(
+                        this.$emit(
+                            "show_table_phan_cong_ct",
+                            1,
+                            this.phan_cong.ma_phan_cong
+                        )
+                    );
             } else {
                 this.$emit("show_table_phan_cong_ct", 0);
             }

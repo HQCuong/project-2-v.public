@@ -54,7 +54,6 @@ export default {
             toa: "",
             tang: "",
             lab: "",
-            arr_lab: [],
         };
     },
     computed: {
@@ -63,6 +62,9 @@ export default {
         },
         arr_tang() {
             return this.$store.state.tang.arr_tang;
+        },
+        arr_lab() {
+            return this.$store.state.lab.arr_lab;
         },
     },
     methods: {
@@ -75,34 +77,30 @@ export default {
     },
     watch: {
         toa() {
+            this.$store.commit("lab/reset_lich_su_dung");
             this.tang = "";
             this.lab = "";
-            this.$emit("show_lab_info", 0);
             if (!this.toa) {
                 this.$store.commit("tang/reset_arr_tang");
-                this.$emit("show_lab_info", 0);
                 return false;
             }
             this.$store.dispatch("tang/get_tang", this.toa.ma_toa);
         },
         tang() {
+            this.$store.commit("lab/reset_lich_su_dung");
             this.lab = "";
-            this.$emit("show_lab_info", 0);
             if (!this.tang) {
-                this.arr_lab = [];
-                this.$emit("show_lab_info", 0);
+                this.$store.commit("lab/reset_arr_lab");
                 return false;
             }
-            this.arr_lab = ["lab 1", "lab 2", "lab 3"];
+            this.$store.dispatch("lab/get_lab", this.tang.ma_tang);
         },
         lab() {
             if (!this.lab) {
-                this.$emit("show_lab_info", 0);
+                this.$store.commit("lab/reset_lich_su_dung");
+                return false;
             } else if (this.toa && this.tang) {
-                this.$emit("show_lab_info", 1);
-                this.$store.dispatch("lab/get_lich_lab");
-            } else {
-                this.$emit("show_lab_info", 0);
+                this.$store.dispatch("lab/get_lich_su_dung");
             }
         },
         arr_toa() {

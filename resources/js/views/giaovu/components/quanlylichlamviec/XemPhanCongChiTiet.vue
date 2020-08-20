@@ -3,7 +3,8 @@
         <label>Phân công</label>
         <selectPhanCong @show_table_phan_cong_ct="show_table_phan_cong_ct"></selectPhanCong>
         <br />
-        <tablePhanCongChiTiet v-if="show_table"></tablePhanCongChiTiet>
+        <tablePhanCongChiTiet v-if="show_table" :ma_phan_cong="ma_phan_cong"></tablePhanCongChiTiet>
+        <notifications group="delete_phan_cong_ct" />
     </div>
 </template>
 
@@ -21,10 +22,12 @@ export default {
     data() {
         return {
             show_table: false,
+            ma_phan_cong: "",
         };
     },
     methods: {
-        show_table_phan_cong_ct(show) {
+        show_table_phan_cong_ct(show, ma_phan_cong) {
+            this.ma_phan_cong = ma_phan_cong;
             if (show == 1) {
                 this.show_table = true;
             } else {

@@ -5,10 +5,8 @@
                 <div class="card">
                     <div class="card-body">
                         <thongKe></thongKe>
-                        <selectlab @show_lab_info="show_lab_info"></selectlab>
-                        <div v-if="show_lab_calendar">
-                            <lichSuDung></lichSuDung>
-                        </div>
+                        <selectlab></selectlab>
+                        <lichSuDung v-if="show_lab_calendar" :lich_su_dung="lich_su_dung"></lichSuDung>
                     </div>
                 </div>
             </div>
@@ -29,12 +27,18 @@ export default {
             show_lab_calendar: false,
         };
     },
-    methods: {
-        show_lab_info(show_lab_calendar) {
-            if (show_lab_calendar == 0) {
-                this.show_lab_calendar = false;
-            } else {
+    computed: {
+        lich_su_dung() {
+            return this.$store.getters["lab/get_lich_su_dung_lab"];
+        },
+    },
+    methods: {},
+    watch: {
+        lich_su_dung() {
+            if (this.lich_su_dung.length != 0) {
                 this.show_lab_calendar = true;
+            } else {
+                this.show_lab_calendar = false;
             }
         },
     },

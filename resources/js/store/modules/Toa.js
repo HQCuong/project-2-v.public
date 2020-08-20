@@ -5,11 +5,7 @@ export default {
     state: {
         arr_toa: []
     },
-    mutations: {
-        reset_arr_toa(state) {
-            state.arr_toa = [];
-        }
-    },
+    mutations: {},
     actions: {
         get_toa({ state, commit, rootState }, ma_toa) {
             state.arr_toa = [];

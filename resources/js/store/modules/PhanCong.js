@@ -8,7 +8,6 @@ export default {
         arr_phan_cong: [],
         arr_de_xuat_phan_cong_ct: [],
         arr_phan_cong_ct: [],
-        // reset select
         reset_select: false,
         // err res
         err_de_xuat: ""
@@ -50,7 +49,6 @@ export default {
                     ma_phan_cong: ma_phan_cong
                 })
                 .then(res => {
-                    console.log(res);
                     if (res.data.message) {
                         state.arr_phan_cong_ct =
                             res.data.data.phan_cong_chi_tiet;
@@ -62,7 +60,6 @@ export default {
         },
 
         get_de_xuat_phan_cong_ct({ state, commit, rootState }, phan_cong_info) {
-            this.commit("phan_cong/set_select");
             state.arr_de_xuat_phan_cong_ct = [];
             axios
                 .post(`api/phancongchitiet/dexuat`, {
@@ -72,7 +69,7 @@ export default {
                 .then(res => {
                     if (res.data.success) {
                         res = groupCollection(res.data.data, "thu");
-                        this.commit("phan_cong/reset_err");
+                        commit("reset_err");
                         state.arr_de_xuat_phan_cong_ct = res;
                     } else {
                         state.err_de_xuat = res.data.message;
@@ -98,13 +95,36 @@ export default {
                             text: res.data.message,
                             duration: 1500
                         });
-                        this.commit(
-                            "phan_cong/reset_arr_de_xuat_phan_cong_ct"
-                        ).then(this.commit("phan_cong/reset_select"));
+                        commit("reset_arr_de_xuat_phan_cong_ct");
                     } else {
                         state.err_de_xuat = res.data.message
                             ? res.data.message.phan_cong_chi_tiet
                             : res.data.message;
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                });
+        },
+
+        delete_phan_cong_chi_tiet({ state, commit, rootState }, data) {
+            axios
+                .post("api/phancongchitiet/xoa", {
+                    key: getCookie("key"),
+                    ma_phan_cong: data.ma_phan_cong,
+                    thu: data.user_input.thu,
+                    ma_ca: data.user_input.ma_ca,
+                    ma_phong: data.user_input.ma_phong
+                })
+                .then(res => {
+                    if (res.data.message) {
+                        Vue.notify({
+                            group: "delete_phan_cong_ct",
+                            type: "success",
+                            title: "Thành công",
+                            text: res.data.message,
+                            duration: 1500
+                        });
                     }
                 })
                 .catch(err => {

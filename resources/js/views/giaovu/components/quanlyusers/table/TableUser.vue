@@ -17,7 +17,9 @@
                         <router-link
                             class="btn btn-info"
                             :to="{path: `/quan_ly_user/update_thong_tin_user/${props.row.ma_nguoi_dung}`}"
-                            title="Tùy chỉnh"
+                            title="Tùy thông tin người dùng"
+                            data-toggle="tooltip"
+                            data-placement="top"
                         >
                             <i class="material-icons">settings</i>
                         </router-link>
@@ -31,7 +33,7 @@
 <script>
 export default {
     created() {
-        this.$store.dispatch("user/get_user");
+        this.$store.dispatch("user/get_all_user");
     },
     mounted() {
         this.$store.commit("content/page_title", "Danh sách người dùng");
@@ -85,6 +87,17 @@ export default {
                 return row.ho_ten;
             } else {
                 return "Demo user";
+            }
+        },
+    },
+    watch: {
+        arr_user() {
+            if (this.arr_user.length != 0) {
+                $(document).ready(function () {
+                    $(".btn").tooltip();
+                });
+
+                $(".tooltip-inner").remove();
             }
         },
     },

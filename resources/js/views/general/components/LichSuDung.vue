@@ -12,6 +12,7 @@ import listPlugin from "@fullcalendar/list";
 import thongtin from "./info/ThongTinLab";
 
 export default {
+    props: ["lich_su_dung"],
     data() {
         return {
             calendar_options: {
@@ -22,7 +23,7 @@ export default {
                     hour12: false,
                 },
                 displayEventEnd: true,
-                events: this.$store.getters["lab/get_lich_lab"],
+                events: this.lich_su_dung,
                 eventDisplay: "block",
                 initialView: this.modi_calendar_view(),
                 headerToolbar: {

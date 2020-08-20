@@ -78,7 +78,7 @@ export default {
                     tdClass: "font-weight-bold",
                 },
                 {
-                    label: "Options",
+                    label: "Tùy chỉnh",
                     field: "ma_phong",
                     sortable: false,
                     thClass: "text-info",

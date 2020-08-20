@@ -72,7 +72,7 @@
                     class="form-control"
                     id="insertPass"
                     placeholder="Mật khẩu mới"
-                    v-model="password"
+                    v-model="new_password"
                 />
             </div>
             <br />
@@ -83,7 +83,7 @@
                     class="form-control"
                     id="confirmPass"
                     placeholder="Nhập lại mật khẩu"
-                    v-model="repassword"
+                    v-model="re_password"
                 />
                 <span
                     v-if="err_repass"
@@ -107,7 +107,7 @@ export default {
 
         this.$store.commit("user/reset_err");
 
-        this.$store.dispatch("user/get_user");
+        this.$store.dispatch("user/get_all_user");
     },
     mounted() {
         // change label color
@@ -134,8 +134,8 @@ export default {
             email: "",
             account: "",
             sdt: "",
-            password: "",
-            repassword: "",
+            new_password: "",
+            re_password: "",
             err_repass: false,
         };
     },
@@ -195,24 +195,26 @@ export default {
                 email: this.email,
                 tai_khoan: this.account,
                 sdt: this.sdt,
-                mat_khau: this.password ? $.MD5(this.password) : "",
+                mat_khau: this.new_password ? $.MD5(this.new_password) : "",
             });
 
-            this.password = "";
-            this.repassword = "";
+            this.new_password = "";
+            this.re_password = "";
         },
     },
     watch: {
-        password() {
-            if (!this.repassword) {
+        new_password() {
+            if (!this.re_password || this.re_password == this.new_password) {
                 this.err_repass = false;
+            } else {
+                this.err_repass = true;
             }
         },
 
-        repassword() {
-            if (!this.repassword) {
+        re_password() {
+            if (!this.re_password) {
                 this.err_repass = false;
-            } else if (this.repassword != this.password) {
+            } else if (this.re_password != this.new_password) {
                 this.err_repass = true;
             } else {
                 this.err_repass = false;
@@ -232,4 +234,4 @@ export default {
     },
 };
 </script>
-<style lang="css" scoped></style>
+<style lang="css"></style>

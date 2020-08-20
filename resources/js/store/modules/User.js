@@ -27,7 +27,7 @@ export default {
     },
 
     actions: {
-        get_user({ state, commit, rootState }) {
+        get_all_user({ state, commit, rootState }) {
             state.arr_user = [];
             axios
                 .post("api/nguoidung/danhsach", {
