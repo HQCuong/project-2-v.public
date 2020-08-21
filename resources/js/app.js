@@ -10,6 +10,10 @@ import Vue from "vue";
 import Multiselect from "vue-multiselect";
 Vue.component("multiselect", Multiselect);
 
+// v-calendar
+import VCalendar from "v-calendar";
+Vue.use(VCalendar);
+
 // Axios
 window.axios = require("axios");
 axios.defaults.baseURL = "http://localhost:8080/project-2/public/";

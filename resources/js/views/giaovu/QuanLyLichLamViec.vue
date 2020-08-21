@@ -18,7 +18,9 @@ import dirButton from "./components/quanlylichlamviec/Button";
 
 export default {
     mounted() {
-        this.$store.commit("content/page_title", "Quản lý lịch làm việc");
+        if (this.$route.path == "/quan_lich_lam_viec") {
+            this.$store.commit("content/page_title", "Quản lý lịch làm việc");
+        }
     },
     watch: {
         $route(to, from) {

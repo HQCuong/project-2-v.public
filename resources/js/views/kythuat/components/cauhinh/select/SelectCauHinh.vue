@@ -33,12 +33,12 @@ export default {
     watch: {
         cau_hinh() {
             if (this.cau_hinh) {
-                this.$emit("show_form", 1);
-                this.$store.dispatch("mon/get_mon");
+                this.$store.dispatch(
+                    "cau_hinh/get_thong_tin_cau_hinh",
+                    this.cau_hinh.ma_cau_hinh
+                );
             } else {
-                this.$emit("show_form", 0);
-                this.$store.commit("mon/reset_mon");
-                this.show_form_modi = false;
+                this.$store.commit("cau_hinh/reset_thong_tin_cau_hinh");
             }
         },
     },

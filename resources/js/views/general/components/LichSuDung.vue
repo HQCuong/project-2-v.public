@@ -1,6 +1,7 @@
 <template>
     <div>
         <thongtin></thongtin>
+        <br />
         <FullCalendar :options="calendar_options" />
     </div>
 </template>

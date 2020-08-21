@@ -1,7 +1,11 @@
 import getCookie from "../../customfunc/getCookie.js";
 
 export default {
-    state: {},
+    namespaced: true,
+
+    state: {
+        arr_ca: []
+    },
 
     mutations: {},
 
@@ -12,7 +16,10 @@ export default {
                     key: getCookie("key")
                 })
                 .then(res => {
-                    console.log(res);
+                    if (res.data.message) {
+                        console.log(res);
+                        state.arr_ca = res.data.data;
+                    }
                 })
                 .catch(err => {
                     console.error(err);

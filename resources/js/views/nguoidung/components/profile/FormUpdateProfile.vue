@@ -126,8 +126,6 @@ export default {
         $("input").blur(function () {
             $(".form-group").removeClass("is-focused");
         });
-
-        this.$store.commit("content/page_title", "Thông tin người dùng");
     },
     data() {
         return {

@@ -1,6 +1,5 @@
 <template>
     <div>
-        <label>Phân công</label>
         <selectPhanCong @show_table_phan_cong_ct="show_table_phan_cong_ct"></selectPhanCong>
         <br />
         <tablePhanCongChiTiet v-if="show_table" :ma_phan_cong="ma_phan_cong"></tablePhanCongChiTiet>

@@ -42,7 +42,6 @@
         >
             <template slot="noOptions">Chưa chọn tầng</template>
         </multiselect>
-        <br />
     </div>
 </template>
 <script>

@@ -35,9 +35,6 @@ export default {
     created() {
         this.$store.dispatch("user/get_all_user");
     },
-    mounted() {
-        this.$store.commit("content/page_title", "Danh sách người dùng");
-    },
     data() {
         return {
             columns: [

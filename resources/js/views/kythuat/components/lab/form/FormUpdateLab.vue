@@ -101,8 +101,6 @@ export default {
         $("input").blur(function () {
             $(".form-group").removeClass("is-focused");
         });
-
-        this.$store.commit("content/page_title", "Thêm lab");
     },
     data() {
         return {

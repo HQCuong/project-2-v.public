@@ -1,15 +1,18 @@
 <template>
-    <multiselect
-        v-model="phan_cong"
-        :options="arr_phan_cong"
-        :close-on-select="true"
-        :show-labels="true"
-        placeholder="Chọn phân công"
-        deselectLabel="Click hoặc nhấn Enter để bỏ chọn"
-        selectLabel="Click hoặc nhấn Enter để chọn"
-        :searchable="true"
-        :custom-label="labelPcong"
-    ></multiselect>
+    <div>
+        <label>Phân công</label>
+        <multiselect
+            v-model="phan_cong"
+            :options="arr_phan_cong"
+            :close-on-select="true"
+            :show-labels="true"
+            placeholder="Chọn phân công"
+            deselectLabel="Click hoặc nhấn Enter để bỏ chọn"
+            selectLabel="Click hoặc nhấn Enter để chọn"
+            :searchable="true"
+            :custom-label="labelPcong"
+        ></multiselect>
+    </div>
 </template>
 
 <script>

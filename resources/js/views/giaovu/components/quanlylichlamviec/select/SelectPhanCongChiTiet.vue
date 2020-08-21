@@ -1,5 +1,6 @@
 <template>
     <div>
+        <label>Phân công</label>
         <multiselect
             v-model="phan_cong"
             :options="arr_phan_cong"

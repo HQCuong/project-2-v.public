@@ -18,9 +18,7 @@ export default {
     created() {
         this.$store.dispatch("cau_hinh/get_cau_hinh");
     },
-    mounted() {
-        this.$store.commit("content/page_title", "Danh sách cấu hình");
-    },
+
     data() {
         return {
             columns: [

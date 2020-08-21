@@ -23,6 +23,7 @@
         "@fullcalendar/daygrid": "^5.1.0",
         "@fullcalendar/list": "^5.1.0",
         "@fullcalendar/vue": "^5.1.0",
+        "v-calendar": "^1.0.8",
         "vue": "^2.6.11",
         "vue-good-table": "^2.19.5",
         "vue-multiselect": "^2.1.6",

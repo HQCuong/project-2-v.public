@@ -6,6 +6,9 @@
 import formUpdateProfile from "./components/profile/FormUpdateProfile";
 
 export default {
+    mounted() {
+        this.$store.commit("content/page_title", "Thông tin người dùng");
+    },
     components: {
         formUpdateProfile,
     },

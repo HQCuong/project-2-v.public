@@ -1,6 +1,6 @@
 <template>
     <div>
-        <selectCauHinh @show_form="show_form"></selectCauHinh>
+        <selectCauHinh></selectCauHinh>
         <br />
         <br />
         <!-- form modi -->
@@ -15,6 +15,11 @@ export default {
     mounted() {
         this.$store.commit("content/page_title", "Tùy chỉnh cấu hình");
     },
+    computed: {
+        thong_tin_cau_hinh() {
+            return this.$store.state.cau_hinh.thong_tin_cau_hinh;
+        },
+    },
     data() {
         return {
             show_form_modi: false,
@@ -24,12 +29,12 @@ export default {
         formUpdate,
         selectCauHinh,
     },
-    methods: {
-        show_form(show) {
-            if (show == 1) {
-                this.show_form_modi = 1;
+    watch: {
+        thong_tin_cau_hinh() {
+            if (this.thong_tin_cau_hinh.data) {
+                this.show_form_modi = true;
             } else {
-                this.show_form_modi = 0;
+                this.show_form_modi = false;
             }
         },
     },

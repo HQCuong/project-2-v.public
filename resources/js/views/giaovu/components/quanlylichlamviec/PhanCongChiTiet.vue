@@ -1,6 +1,5 @@
 <template>
     <div>
-        <label>Phân công</label>
         <selectPhanCongChiTiet @emit_data="pass_data" @show_loading="show_loading"></selectPhanCongChiTiet>
         <br />
         <span class="text-danger" v-if="err_de_xuat">{{err_de_xuat}}</span>

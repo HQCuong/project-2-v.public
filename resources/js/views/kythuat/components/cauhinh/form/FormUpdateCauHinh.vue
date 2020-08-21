@@ -51,7 +51,7 @@
         <label>Những môn có thể học</label>
         <multiselect
             v-model="mon"
-            :options="arr_mon"
+            :options="arr_mon_by_cau_hinh"
             :close-on-select="true"
             :show-labels="true"
             track-by="ma_mon_hoc"
@@ -93,8 +93,8 @@ export default {
         };
     },
     computed: {
-        arr_mon() {
-            return this.$store.state.mon.arr_mon;
+        arr_mon_by_cau_hinh() {
+            return [this.$store.state.cau_hinh.thong_tin_cau_hinh];
         },
     },
     methods: {
