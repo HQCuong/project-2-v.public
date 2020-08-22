@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CauHinhMonRequest;
 use App\Http\Resources\CauHinhMonResource;
 use App\Models\CauHinhMon;
+use DB;
 use Exception;
 use ResponseMau;
 
@@ -44,34 +45,43 @@ class CauHinhMonController extends Controller {
     }
     public function monHocDuocTheoCauHinh(CauHinhMonRequest $rq) {
         try {
-            $create = 0;
-            $delete = 0;
-            $exists = 0;
-            $data   = (object) ['create' => [], 'update' => []];
-            if (is_array($rq->ma_mon_hoc)) {
-                foreach ($rq->ma_mon_hoc as $key => $ma_mon_hoc) {
-                    $cau_hinh_mon = CauHinhMon::firstOrCreate([
-                        'ma_mon_hoc'  => $ma_mon_hoc,
-                        'ma_cau_hinh' => $rq->ma_cau_hinh,
-                    ]);
-                    if ($cau_hinh_mon->wasRecentlyCreated) {
-
-                    } else {
-
-                    }
-                }
-            } else {
-                $cache = [
-                    'ma_cau_hinh' => $rq->get('ma_cau_hinh'),
-                    'ma_mon_hoc'  => $rq->get('ma_mon_hoc'),
-                ];
-                array_push($data, $cache);
+            $data = DB::select(DB::raw("SELECT DISTINCT phan_cong.ma_mon_hoc
+                FROM phong as p
+                INNER JOIN phan_cong_chi_tiet on p.ma_phong = phan_cong_chi_tiet.ma_phong
+                INNER JOIN phan_cong on phan_cong.ma_phan_cong = phan_cong_chi_tiet.ma_phan_cong
+                WHERE p.ma_phong IN (SELECT DISTINCT ma_phong FROM phan_cong_chi_tiet)
+                HAVING (
+                SELECT thiet_bi_phong.ma_cau_hinh FROM `thiet_bi_phong`
+                    INNER JOIN cau_hinh ON cau_hinh.ma_cau_hinh = thiet_bi_phong.ma_cau_hinh AND cau_hinh.ma_loai = 1
+                    WHERE ma_phong = p.ma_phong
+                    GROUP BY ma_cau_hinh
+                    ORDER BY COUNT(*) DESC
+                    LIMIT 1
+                ) = $rq->ma_cau_hinh"));
+            $array_ma_mon_hoc = [];
+            foreach ($data as $key => $value) {
+                array_push($array_ma_mon_hoc, $value->ma_mon_hoc);
             }
-            return ResponseMau::Store([
-                'string' => ResponseMau::SUCCESS_UPDATE,
-            ]);
+            $cau_hinh_mon = CauHinhMon::where('ma_cau_hinh', $rq->ma_cau_hinh)
+                ->whereNotIn('ma_mon_hoc', $array_ma_mon_hoc)
+                ->delete();
+            $data = [];
+            if (is_array($rq->get('ma_mon_hoc'))) {
+                $array_ma_mon_hoc_moi = array_diff(array_unique($rq->ma_mon_hoc), $array_ma_mon_hoc);
+                foreach ($array_ma_mon_hoc_moi as $key => $ma_mon_hoc) {
+                    $cache = [
+                        'ma_cau_hinh' => $rq->get('ma_cau_hinh'),
+                        'ma_mon_hoc'  => $ma_mon_hoc,
+                    ];
+                    array_push($data, $cache);
+                }
+                CauHinhMon::insert($data);
+                return ResponseMau::Store([
+                    'string' => ResponseMau::SUCCESS_UPDATE,
+                ]);
+            }
+            return $this->endCatchValue(ResponseMau::ERROR_UPDATE);
         } catch (Exception $e) {
-            dd($e);
             return $this->endCatchValue(ResponseMau::ERROR_UPDATE);
         }
     }

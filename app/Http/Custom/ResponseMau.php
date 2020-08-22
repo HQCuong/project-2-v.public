@@ -51,6 +51,7 @@ class ResponseMau {
     const ERROR_KEY            = 'Bạn không có quyền truy cập';
     const ERROR_CREATE         = 'Tạo thất bại hay kiểm tra lại dữ liệu';
     const ERROR_DELETE         = 'Xóa thất bại hay kiểm tra lại dữ liệu';
+    const ERROR_PROPOSED       = 'Dữ liệu bạn nhập không hợp lệ,không có bất kì đề xuất nào cả';
 
     const ERROR_USER_NAME               = ':attribute cần từ 4-20 kí tự và không có kí tự đặc biệt';
     const ERROR_USER_PASSWORD_ILLEGAL   = ':attribute cần từ 5-32 kí tự và không bao gồm kí tự đặc biệt';
@@ -79,11 +80,10 @@ class ResponseMau {
     const ERROR_TANG_UPDATE_INFO = 'Thông tin không thay đổi hoặc không tồn tại Tầng';
     //const ERROR_TANG_CREATE      = 'Tao tầng thất bại hãy kiểm tra lại các dữ liệu';
     //Phong
-    const ERROR_PHONG_CREATE     = 'Tao phòng thất bại hãy kiểm tra lại các dữ liệu';
-    const ERROR_PHONG_DELETE     = 'Xóa phòng thất bại';
-    const ERROR_PHONG_MA_PHONG   = 'Mã phòng không hợp lệ !';
-    const ERROR_PHONG_TEN_PHONG  = 'Tên phòng không hợp lệ (4-20 kí tự và không có kí tự đặc biệt)';
-    const ERROR_PHONG_TINH_TRANG = 'Mã tình trạng không hợp lệ';
+    const ERROR_PHONG_DELETE      = 'Xóa phòng thất bại, Phòng yêu cầu xóa có thể đang được phân công sử dụng hoặc thiết bị chưa được chuyển đi ';
+    const ERROR_PHONG_TEN_PHONG   = 'Tên phòng không hợp lệ (4-20 kí tự và không có kí tự đặc biệt)';
+    const ERROR_PHONG_TINH_TRANG  = 'Mã tình trạng không hợp lệ';
+    const ERROR_PHONG_SO_CHO_NGOI = 'Số chỗ ngồi phải từ 0 đến 99';
 
     //Loai
     const ERROR_LOAI_MA_LOAI  = 'Mã Loại không tồn tại !';
@@ -127,6 +127,13 @@ class ResponseMau {
 
     ///lichhoc
     const ERROR_PCCT_NOT_FOUND = 'Không có phân công chi tiết để thực hiện tính toán !';
+
+    ///lichdaybosung
+
+    const ERROR_LICH_DAY_BO_SUNG_DELETE        = 'Bạn không thể xóa lịch dạy bổ sung trong quá khứ';
+    const ERROR_LICH_DAY_BO_SUNG_CREATE_UPDATE = 'Lịch dạy bổ sung đã tồn tại , đã cập nhật lại trạng thái';
+    const ERROR_LICH_DAY_BO_SUNG_SO_GIO        = ':attribute chỉ có thể là 2 hoặc 4';
+    const ERROR_LICH_DAY_BO_SUNG_SO_NGAY       = ':attribute chỉ từ 1 đến 29';
 
     public function __construct() {
         $this->success = true;

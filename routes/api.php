@@ -64,18 +64,19 @@ Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVu']], function () {
 
 //PhongController--Giáo Vụ
 Route::group(['middleware' => 'CheckLogin'], function () {
-    Route::any('phong/getphong', 'Api\PhongController@getPhongTheoTang')
-        ->name('api.tang.getPhongTheoTang');
-    Route::any('phong/create', 'Api\PhongController@taoPhong')
-        ->name('api.tang.create');
-    Route::any('phong/delete', 'Api\PhongController@xoaPhong')
-        ->name('api.tang.delete');
-    Route::any('phong/show/info', 'Api\PhongController@hienThiPhong')
-        ->name('api.tang.hienThiPhong');
-    Route::any('phong/edit', 'Api\PhongController@edit')
-        ->name('api.tang.edit');
+    Route::any('phong', 'Api\PhongController@getPhongTheoTang')
+        ->name('api.phong.getPhongTheoTang');
+    Route::any('phong/kiemtra', 'Api\PhongController@kiemTra')
+        ->name('api.phong.kiemTra');
 });
-
+Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVu']], function () {
+    Route::any('phong/taohoaccapnhat', 'Api\PhongController@taoHoacCapNhatPhong')
+        ->name('api.phong.taoHoacCapNhatPhong');
+    Route::any('phong/xoa', 'Api\PhongController@xoaPhong')
+        ->name('api.phong.delete');
+    Route::any('phong/chitiet', 'Api\PhongController@hienThiPhong')
+        ->name('api.phong.hienThiPhong');
+});
 //LoaiController
 //--Giáo Vụ
 Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVu']], function () {
@@ -212,12 +213,16 @@ Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVuOrGiaoVien']], function
         ->name('api.lichdaybosung.hienThi');
     Route::any('lichdaybosung/dexuat', 'Api\LichDayBoSungController@deXuatLich')
         ->name('api.lichdaybosung.deXuatLich');
+    Route::any('lichdaybosung/kiemtra', 'Api\LichDayBoSungController@kiemTra')
+        ->name('api.lichdaybosung.kiemTra');
+});
+Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVu']], function () {
     Route::any('lichdaybosung/them', 'Api\LichDayBoSungController@themLich')
         ->name('api.lichdaybosung.themLich');
     Route::any('lichdaybosung/sua', 'Api\LichDayBoSungController@suaLich')
         ->name('api.lichdaybosung.suaLich');
-    Route::any('lichdaybosung/kiemtra', 'Api\LichDayBoSungController@kiemTra')
-        ->name('api.lichdaybosung.kiemTra');
+    Route::any('lichdaybosung/xoa', 'Api\LichDayBoSungController@xoaLich')
+        ->name('api.lichdaybosung.xoaLich');
 });
 //LichHoc Controller
 Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVuOrGiaoVien']], function () {

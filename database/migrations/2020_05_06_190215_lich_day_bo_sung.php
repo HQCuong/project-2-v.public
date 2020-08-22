@@ -20,12 +20,12 @@ class LichDayBoSung extends Migration {
             $table->string('ma_mon_hoc', 10);
             $table->integer('ma_ca')->unsigned();
             $table->integer('ma_phong')->unsigned();
-            $table->text('ghi_chu');
+            $table->text('ghi_chu')->nullable();
             $table->integer('tinh_trang')->default(1);
             $table->foreign('ma_nguoi_dung')->references('ma_nguoi_dung')->on('nguoi_dung');
             $table->foreign('ma_mon_hoc')->references('ma_mon_hoc')->on('mon_hoc');
             $table->foreign('ma_ca')->references('ma_ca')->on('ca');
-            $table->foreign('ma_phong')->references('ma_phong')->on('phong');
+            // $table->foreign('ma_phong')->references('ma_phong')->on('phong');
         });
     }
 

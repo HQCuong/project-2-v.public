@@ -21,7 +21,7 @@ class InsertValue extends Migration {
 ('2020-07-17', 10, 6, NULL, 1),
 ('2020-07-29', 5, 3, NULL, 1)"));
         //pccc
-        //         DB::select(DB::raw("INSERT INTO `phan_cong_chi_tiet` (`ma_phan_cong`, `thu`, `ma_ca`, `ma_phong`) VALUES
+        // DB::select(DB::raw("INSERT INTO `phan_cong_chi_tiet` (`ma_phan_cong`, `thu`, `ma_ca`, `ma_phong`) VALUES
         // (17, 2, 3, 4),
         // (257, 2, 4, 3),
         // (329, 5, 3, 3),

@@ -24,6 +24,7 @@ class NguoiDung extends Model {
     protected $hidden = [
         'key',
         'mat_khau',
+        'ma_cap_do',
     ];
     public $timestamps = false;
 

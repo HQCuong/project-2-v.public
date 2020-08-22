@@ -4,72 +4,97 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PhongRequest;
-use App\Http\Resources\Phong as PhongResource;
-use App\Models\LichSuChiTiet;
+use App\Http\Resources\PhongResource;
 use App\Models\Phong;
-use Illuminate\Http\Request;
 use ResponseMau;
 
 class PhongController extends Controller {
-	public function getPhongTheoTang(PhongRequest $rq) {
-		try {
-			$phong = Phong::where('ma_tang', $rq->get('ma_tang'))
-				->get();
-			return ResponseMau::Store([
-				'data' => PhongResource::collection($phong),
-			]);
-		} catch (\Illuminate\Database\QueryException $e) {
-			return ResponseMau::Store([
-				'string' => ResponseMau::ERROR_NOT_DETERMINED,
-				'bool' => false,
-			]);
-		}
-	}
-	public function taoPhong(PhongRequest $rq) {
-		try {
-			$phong = Phong::create($rq->all());
-			return ResponseMau::Store([
-				'string' => ResponseMau::SUCCESS_PHONG_CREATE,
-			]);
-		} catch (\Illuminate\Database\QueryException $e) {
-			return ResponseMau::Store([
-				'string' => ResponseMau::ERROR_PHONG_CREATE,
-				'bool' => false,
-				'data' =>$e,
-			]);
-		}
-	}
-	public function xoaPhong(PhongRequest $rq) {
-		try {
-			$phong = Phong::find($rq->get('ma_phong'))->delete();
-			return ResponseMau::Store([
-				'string' => ResponseMau::SUCCESS_PHONG_DELETE,
-			]);
-		} catch (\Illuminate\Database\QueryException $e) {
-			return ResponseMau::Store([
-				'string' => ResponseMau::ERROR_PHONG_DELETE,
-				'bool' => false,
-			]);
-		}
-	}
-	public function hienThiPhong(PhongRequest $rq) {
-		try {
-			$phong = Phong::find($rq->get('ma_phong'));
-			$phong_value =
-				dd($phong);
-		} catch (\Illuminate\Database\QueryException $e) {
+    use Traits\ReturnError;
+    public function getPhongTheoTang(PhongRequest $rq) {
+        try {
+            $phong = Phong::where(function ($query) use ($rq) {
+                if ($rq->has('ma_tang')) {
+                    $query->where('ma_tang', $rq->ma_tang);
+                } else {
+                    $query->where('ma_phong', $rq->ma_phong);
+                }
+            })
+                ->get();
+            return ResponseMau::Store([
+                'string' => ResponseMau::SUCCESS_GET,
+                'data'   => PhongResource::collection($phong),
+            ]);
+        } catch (Exception $e) {
+            return $this->endCatchValue(ResponseMau::ERROR_GET);
+        }
+    }
+    public function taoHoacCapNhatPhong(PhongRequest $rq) {
+        try {
+            $phong = Phong::updateOrCreate(
+                [
+                    'ma_phong' => $rq->ma_phong,
+                ],
+                $rq->only((new Phong)->getFillable())
+            );
+            if ($phong->wasRecentlyCreated) {
+                return ResponseMau::Store([
+                    'string' => ResponseMau::SUCCESS_CREATE,
+                    'data'   => new PhongResource($phong),
+                ]);
+            } else {
+                if (count($phong->getChanges()) != 0) {
+                    return ResponseMau::Store([
+                        'string' => ResponseMau::SUCCESS_UPDATE,
+                        'data'   => new PhongResource($phong),
+                    ]);
+                } else {
+                    return ResponseMau::Store([
+                        'string' => ResponseMau::SUCCESS_NO_DATA_UPDATE,
+                        'data'   => new PhongResource($phong),
+                    ]);
+                }
+            }
+            return $this->endCatch();
+        } catch (Exception $e) {
+            return $this->endCatch();
+        }
+    }
+    public function xoaPhong(PhongRequest $rq) {
+        try {
+            if ($rq->has('ma_phong')) {
+                $phong = Phong::where('ma_phong', $rq->ma_phong)
+                    ->whereDoesntHave('phanCongChiTiet', function ($query) {
+                        $query->whereHas('phanCong', function ($q) {
+                            $q->where('tinh_trang', 0);
+                        });
+                    })
+                    ->whereDoesntHave('lichDayBoSung', function ($query) {
+                        $query->where('tinh_trang', 1);
+                        $query->where('ngay', '>=', date("Y-m-d"));
+                    })
+                    ->whereDoesntHave('thietBiPhong')
+                    ->delete();
+                if ($phong) {
+                    return ResponseMau::Store([
+                        'string' => ResponseMau::SUCCESS_DELETE,
+                    ]);
+                }
+                return $this->endCatchValue(ResponseMau::ERROR_PHONG_DELETE);
+            }
+            return $this->endCatchValue(ResponseMau::ERROR_DELETE);
+        } catch (Exception $e) {
+            return $this->endCatchValue(ResponseMau::ERROR_DELETE);
+        }
+    }
+    public function hienThiPhong(PhongRequest $rq) {
+        try {
+            $phong = Phong::find($rq->ma_phong);
+            dd((new PhongResource($phong))->motPhong());
+        } catch (Exception $e) {
 
-		}
-	}
-	public function edit(Request $request) {
-		$ls = LichSuChiTiet::where('ma_lich_su', '2')
-			->where('ma_thiet_bi', '1')
-			->update(['ma_kieu' => 1]);
-	}
-	public function update(Request $request, Phong $phong) {
-		//
-	}
-	public function destroy(Phong $phong) {
-		//
-	}
+        }
+    }
+    public function kiemTra(PhongRequest $rq) {
+        return ResponseMau::Store([]);
+    }
 }
