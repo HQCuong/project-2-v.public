@@ -11,28 +11,32 @@ class LichDayBoSungRequest extends FormRequest {
     use Traits\ListError;
     public function rules() {
         return [
-            'ngay'         => RegexRule::REGEX_NGAY,
-            'ma_ca'        => RegexRule::REGEX_EXISTS_MA_CA,
-            'ma_phong'     => RegexRule::REGEX_EXISTS_MA_PHONG,
-            'ma_giao_vien' => RegexRule::REGEX_EXISTS_MA_NGUOI_DUNG,
-            'ma_lop'       => new MaLopRule(),
-            'ghi_chu'      => RegexRule::REGEX_GHI_CHU,
-            'tinh_trang'   => RegexRule::REGEX_NGAY_NGHI_TINH_TRANG,
-            'ma_mon_hoc'   => RegexRule::REGEX_EXISTS_MA_MON_HOC,
-            'so_gio'       => RegexRule::REGEX_SO_GIO,
+            'ngay'                => RegexRule::REGEX_NGAY,
+            'ma_ca'               => RegexRule::REGEX_EXISTS_MA_CA,
+            'ma_phong'            => RegexRule::REGEX_EXISTS_MA_PHONG,
+            'ma_giao_vien'        => RegexRule::REGEX_EXISTS_MA_NGUOI_DUNG,
+            'ma_lich_day_bo_sung' => RegexRule::REGEX_EXISTS_MA_LICH_DAY_BO_SUNG,
+            'ma_lop'              => new MaLopRule(),
+            'ghi_chu'             => RegexRule::REGEX_GHI_CHU,
+            'tinh_trang'          => RegexRule::REGEX_NGAY_NGHI_TINH_TRANG,
+            'ma_mon_hoc'          => RegexRule::REGEX_EXISTS_MA_MON_HOC,
+            'so_gio'              => RegexRule::REGEX_SO_GIO,
+            'so_ngay'             => RegexRule::REGEX_SO_NGAY,
         ];
     }
     public function attributes() {
         return [
-            'ngay'         => 'Ngày',
-            'ma_ca'        => 'Ca',
-            'ma_phong'     => 'Phòng',
-            'ma_giao_vien' => 'Giáo viên',
-            'ma_lop'       => 'Lớp',
-            'ghi_chu'      => 'Ghi chú',
-            'tinh_trang'   => 'Tình trạng',
-            'ma_mon_hoc'   => 'Môn học',
-            'so_gio'       => 'Số giờ học',
+            'ngay'                => 'Ngày',
+            'ma_ca'               => 'Ca',
+            'ma_phong'            => 'Phòng',
+            'ma_giao_vien'        => 'Giáo viên',
+            'ma_lich_day_bo_sung' => 'Lịch dạy bổ sung',
+            'ma_lop'              => 'Lớp',
+            'ghi_chu'             => 'Ghi chú',
+            'tinh_trang'          => 'Tình trạng',
+            'ma_mon_hoc'          => 'Môn học',
+            'so_gio'              => 'Số giờ học',
+            'so_ngay'             => 'Số ngày',
         ];
     }
     public function withValidator(Validator $validator) {

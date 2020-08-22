@@ -25,10 +25,8 @@ class RegexRule {
     const REGEX_TANG_MA_TANG    = ['exists:tang,ma_tang'];
     const REGEX_TANG_TINH_TRANG = ['exists:tinh_trang,ma_tinh_trang'];
 
-    const REGEX_PHONG_MA_PHONG    = ['exists:phong,ma_phong'];
-    const REGEX_PHONG_TINH_TRANG  = ['exists:tinh_trang,ma_tinh_trang'];
     const REGEX_PHONG_NAME        = ['regex:/^\w[a-zA-Z0-9ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹêếềễệ\ \_\.]{5,19}$/'];
-    const REGEX_PHONG_SO_CHO_NGOI = ['regex:/^[1-9][0-9]?$/'];
+    const REGEX_PHONG_SO_CHO_NGOI = ['regex:/^[0-9][0-9]?$/'];
     ///Loai
     const REGEX_LOAI_MA_LOAI  = ['exists:loai,ma_loai'];
     const REGEX_LOAI_TEN_LOAI = ['regex:/^[a-zA-z0-9\_]{5,100}$/', 'unique:loai,ten_loai'];
@@ -61,19 +59,22 @@ class RegexRule {
     const REGEX_PHAN_CONG_MA_NGUOI_DUNG = ['nullable', 'exists:nguoi_dung,ma_nguoi_dung'];
     const REGEX_PHAN_CONG_TINH_TRANG    = ['regex:/^[0,1,2]$/'];
     //Global
-    const REGEX_THU                  = ['regex:/^[2-8]$/'];
-    const REGEX_EXISTS_MA_CA         = ['exists:ca,ma_ca'];
-    const REGEX_EXISTS_MA_PHONG      = ['exists:phong,ma_phong'];
-    const REGEX_EXISTS_MA_PHAN_CONG  = ['exists:phan_cong,ma_phan_cong'];
-    const REGEX_EXISTS_MA_NGUOI_DUNG = ['exists:nguoi_dung,ma_nguoi_dung'];
-    const REGEX_EXISTS_MA_TOA        = ['exists:toa,ma_toa'];
-    const REGEX_EXISTS_MA_TINH_TRANG = ['exists:tinh_trang,ma_tinh_trang'];
-    const REGEX_EXISTS_MA_LOAI       = ['exists:loai,ma_loai'];
-    const REGEX_EXISTS_MA_CAU_HINH   = ['exists:cau_hinh,ma_cau_hinh'];
-    const REGEX_EXISTS_MA_MON_HOC    = ['exists:mon_hoc,ma_mon_hoc'];
-    const REGEX_GIO_BAT_DAU          = ['regex:/^(?:[01]\d|2[0-3]):(?:[0-5]\d):(?:[0-5]\d)$/', 'exists:ca,gio_bat_dau'];
-    const REGEX_GIO_KET_THUC         = ['regex:/^(?:[01]\d|2[0-3]):(?:[0-5]\d):(?:[0-5]\d)$/', 'exists:ca,gio_ket_thuc', 'after:gio_bat_dau'];
-    const REGEX_SO_GIO               = ['regex:/^[2,4]$/'];
-    const REGEX_ARRAY_MIN_1          = ['array', 'min:1'];
-    const REGEX_TEN_LIMIT_100        = ['nullable', 'regex:/^\w[a-zA-Z0-9ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹêếềễệ\ \_\.]{0,100}$/'];
+    const REGEX_THU                        = ['regex:/^[2-8]$/'];
+    const REGEX_EXISTS_MA_CA               = ['exists:ca,ma_ca'];
+    const REGEX_EXISTS_MA_PHONG            = ['exists:phong,ma_phong'];
+    const REGEX_EXISTS_MA_PHAN_CONG        = ['exists:phan_cong,ma_phan_cong'];
+    const REGEX_EXISTS_MA_NGUOI_DUNG       = ['exists:nguoi_dung,ma_nguoi_dung'];
+    const REGEX_EXISTS_MA_TANG             = ['exists:tang,ma_tang'];
+    const REGEX_EXISTS_MA_TOA              = ['exists:toa,ma_toa'];
+    const REGEX_EXISTS_MA_TINH_TRANG       = ['exists:tinh_trang,ma_tinh_trang'];
+    const REGEX_EXISTS_MA_LOAI             = ['exists:loai,ma_loai'];
+    const REGEX_EXISTS_MA_CAU_HINH         = ['exists:cau_hinh,ma_cau_hinh'];
+    const REGEX_EXISTS_MA_MON_HOC          = ['exists:mon_hoc,ma_mon_hoc'];
+    const REGEX_EXISTS_MA_LICH_DAY_BO_SUNG = ['exists:lich_day_bo_sung,ma_lich_day_bo_sung'];
+    const REGEX_GIO_BAT_DAU                = ['regex:/^(?:[01]\d|2[0-3]):(?:[0-5]\d):(?:[0-5]\d)$/', 'exists:ca,gio_bat_dau'];
+    const REGEX_GIO_KET_THUC               = ['regex:/^(?:[01]\d|2[0-3]):(?:[0-5]\d):(?:[0-5]\d)$/', 'exists:ca,gio_ket_thuc', 'after:gio_bat_dau'];
+    const REGEX_SO_GIO                     = ['regex:/^[2,4]$/'];
+    const REGEX_SO_NGAY                    = ['regex:/^[1-2][0-9]|[1-9]$/'];
+    const REGEX_ARRAY_MIN_1                = ['array', 'min:1'];
+    const REGEX_TEN_LIMIT_100              = ['nullable', 'regex:/^\w[a-zA-Z0-9ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹêếềễệ\ \_\.]{0,100}$/'];
 }

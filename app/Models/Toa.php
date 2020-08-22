@@ -16,4 +16,7 @@ class Toa extends Model {
     public function tinhTrang() {
         return $this->hasOne('App\Models\TinhTrang', 'ma_tinh_trang', 'ma_tinh_trang');
     }
+    public function tangs() {
+        return $this->morphMany('App\Models\Tang', 'tangs');
+    }
 }

@@ -17,4 +17,7 @@ class CauHinh extends Model {
     public function cauHinhMon() {
         return $this->hasMany(new CauHinhMon, 'ma_cau_hinh', 'ma_cau_hinh');
     }
+    public function thietBiPhong() {
+        return $this->hasOne('App\Models\ThietBiPhong', 'ma_cau_hinh', 'ma_cau_hinh');
+    }
 }

@@ -19,7 +19,7 @@ class PhanCongChiTiet extends Migration {
             $table->integer('ma_phong')->unsigned();
             $table->foreign('ma_phan_cong')->references('ma_phan_cong')->on('phan_cong');
             $table->foreign('ma_ca')->references('ma_ca')->on('ca');
-            $table->foreign('ma_phong')->references('ma_phong')->on('phong');
+            // $table->foreign('ma_phong')->references('ma_phong')->on('phong');
             $table->primary(['ma_phan_cong', 'ma_ca', 'ma_phong', 'thu']);
         });
     }

@@ -18,9 +18,9 @@ class CauHinhMon extends Model {
 
     public $timestamps = false;
     public function monHoc() {
-        return $this->hasOne('App\Models\MonHoc', 'ma_mon_hoc', 'ma_mon_hoc');
+        return $this->belongsTo('App\Models\MonHoc', 'ma_mon_hoc', 'ma_mon_hoc');
     }
     public function cauHinh() {
-        return $this->hasOne('App\Models\CauHinh', 'ma_cau_hinh', 'ma_cau_hinh');
+        return $this->belongsTo('App\Models\CauHinh', 'ma_cau_hinh', 'ma_cau_hinh');
     }
 }
