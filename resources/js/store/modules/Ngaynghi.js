@@ -1,4 +1,5 @@
 import getCookie from "../../customfunc/getCookie.js";
+import formatNgayNghi from "../../customfunc/formatNgayNghi";
 
 export default {
     namespaced: true,
@@ -20,7 +21,8 @@ export default {
                 })
                 .then(res => {
                     if (res.data.message) {
-                        state.arr_ngay_nghi = res.data.data;
+                        state.arr_ngay_nghi = formatNgayNghi(res.data.data);
+                        console.log(state.arr_ngay_nghi);
                     }
                 })
                 .catch(err => {

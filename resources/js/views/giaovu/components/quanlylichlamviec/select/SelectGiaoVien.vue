@@ -40,7 +40,7 @@ export default {
             if (this.user) {
                 //get lich theo user
             } else {
-                this.$store.state.dispatch("ngay_nghi/get_ngay_nghi");
+                this.$store.dispatch("ngay_nghi/get_ngay_nghi");
             }
         },
     },

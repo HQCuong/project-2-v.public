@@ -17018,7 +17018,7 @@ __webpack_require__.r(__webpack_exports__);
     user: function user() {
       if (this.user) {//get lich theo user
       } else {
-        this.$store.state.dispatch("ngay_nghi/get_ngay_nghi");
+        this.$store.dispatch("ngay_nghi/get_ngay_nghi");
       }
     }
   }
@@ -77022,6 +77022,38 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
 
 /***/ }),
 
+/***/ "./resources/js/customfunc/formatNgayNghi.js":
+/*!***************************************************!*\
+  !*** ./resources/js/customfunc/formatNgayNghi.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return formatNgayNghi; });
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
+
+function formatNgayNghi(obj) {
+  var arr_ngay_nghi = [];
+
+  for (var each in obj) {
+    var clone_obj = {
+      mode: "span",
+      label: each,
+      html: false
+    }; // console.log(obj[each]);
+
+    clone_obj.children = obj[each];
+    arr_ngay_nghi.push(clone_obj);
+  }
+
+  return arr_ngay_nghi;
+}
+
+/***/ }),
+
 /***/ "./resources/js/customfunc/getCookie.js":
 /*!**********************************************!*\
   !*** ./resources/js/customfunc/getCookie.js ***!
@@ -77578,7 +77610,6 @@ __webpack_require__.r(__webpack_exports__);
         key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("key")
       }).then(function (res) {
         if (res.data.message) {
-          console.log(res);
           state.arr_ca = res.data.data;
         }
       })["catch"](function (err) {
@@ -77850,6 +77881,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../customfunc/getCookie.js */ "./resources/js/customfunc/getCookie.js");
+/* harmony import */ var _customfunc_formatNgayNghi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../customfunc/formatNgayNghi */ "./resources/js/customfunc/formatNgayNghi.js");
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,
@@ -77870,7 +77903,8 @@ __webpack_require__.r(__webpack_exports__);
         key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("key")
       }).then(function (res) {
         if (res.data.message) {
-          state.arr_ngay_nghi = res.data.data;
+          state.arr_ngay_nghi = Object(_customfunc_formatNgayNghi__WEBPACK_IMPORTED_MODULE_1__["default"])(res.data.data);
+          console.log(state.arr_ngay_nghi);
         }
       })["catch"](function (err) {
         console.error(err);

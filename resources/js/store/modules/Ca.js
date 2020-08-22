@@ -17,7 +17,6 @@ export default {
                 })
                 .then(res => {
                     if (res.data.message) {
-                        console.log(res);
                         state.arr_ca = res.data.data;
                     }
                 })
