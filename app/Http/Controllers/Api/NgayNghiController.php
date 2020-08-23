@@ -16,8 +16,10 @@ use ResponseMau;
 class NgayNghiController extends Controller {
     use Traits\ReturnError;
     public function hienThiTatCa(NgayNghiRequest $rq) {
+        // dd($rq->request->all());
         $rq = new Request($rq->request->all());
         try {
+            // dd($rq->ngay);
             $ngay_nghi = NgayNghi::where(function ($query) use ($rq) {
                 if ($rq->has('ngay')) {
                     $query->where('ngay', $rq->ngay);
@@ -63,7 +65,18 @@ class NgayNghiController extends Controller {
                         } else {
                             $query->where('ngay_nghi.tinh_trang', 1);
                         }
-                    })->get();
+                    })
+                        ->with(['ngayNghi' => function ($query) use ($value, $rq) {
+                            $query->where('ngay_nghi.ngay', $value->ngay);
+                            $query->where('ngay_nghi.ma_giao_vien', $value->ma_giao_vien);
+                            if ($rq->has('tinh_trang')) {
+                                $query->where('ngay_nghi.tinh_trang', $rq->tinh_trang);
+                            } else {
+                                $query->where('ngay_nghi.tinh_trang', 1);
+                            }
+                            $query->select('ma_ca', 'ghi_chu');
+                        }])
+                        ->get();
                     $value->ca = $ca;
                     $value     = collect($value)->only(['tinh_trang', 'nguoidung', 'ca']);
                     array_push($temp, $value);
