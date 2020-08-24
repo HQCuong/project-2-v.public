@@ -21,9 +21,6 @@ class Tang extends Model {
         return $this->belongsto('App\Models\TinhTrang', 'ma_tinh_trang');
     }
     public function phong() {
-        return $this->hasOne('App\Models\Phong', 'ma_tang', 'ma_tang');
-    }
-    public function phongs() {
-        return $this->morphMany('App\Models\Phong', 'phongtable');
+        return $this->hasMany('App\Models\Phong', 'ma_tang', 'ma_tang');
     }
 }

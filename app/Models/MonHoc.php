@@ -20,4 +20,7 @@ class MonHoc extends Model {
     public function nguoiDungBoMon() {
         return $this->hasMany('App\Models\NguoiDungBoMon', 'ma_mon_hoc', 'ma_mon_hoc');
     }
+    public function phanCong() {
+        return $this->hasMany('App\Models\PhanCong', 'ma_mon_hoc', 'ma_mon_hoc');
+    }
 }

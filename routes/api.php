@@ -202,10 +202,10 @@ Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVuOrGiaoVien']], function
     //     ->name('api.nguoidungbomon.cloneWithPhanCong');
 });
 Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVu']], function () {
-    Route::any('nguoidungbomon/them', 'Api\NguoiDungBoMonController@themOrSua')
-        ->name('api.nguoidungbomon.themNguoiDungBoMon');
-    Route::any('nguoidungbomon/sua', 'Api\NguoiDungBoMonController@themOrSua')
-        ->name('api.nguoidungbomon.suaNguoiDungBoMon');
+    Route::any('nguoidungbomon/themhoacsua', 'Api\NguoiDungBoMonController@themHoacSua')
+        ->name('api.nguoidungbomon.themHoacSua');
+    Route::any('nguoidungbomon/thongke', 'Api\NguoiDungBoMonController@giaoVienSoMon')
+        ->name('api.nguoidungbomon.giaoVienSoMon');
 });
 //LichDayBoSungController
 Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVuOrGiaoVien']], function () {
