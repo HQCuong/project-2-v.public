@@ -14,6 +14,15 @@ Vue.component("multiselect", Multiselect);
 import VCalendar from "v-calendar";
 Vue.use(VCalendar);
 
+// tooltip
+import Tooltip from "vue-directive-tooltip";
+import "vue-directive-tooltip/dist/vueDirectiveTooltip.css";
+Vue.use(Tooltip, {
+    delay: 0,
+    triggers: ["hover", "focus"],
+    offset: 5
+});
+
 // Axios
 window.axios = require("axios");
 axios.defaults.baseURL = "http://localhost:8080/project-2/public/";

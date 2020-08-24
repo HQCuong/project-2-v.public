@@ -2,6 +2,7 @@
     <div>
         <thongKeLichNghi></thongKeLichNghi>
         <selectGiaoVien v-if="!is_giao_vien"></selectGiaoVien>
+        <br />
         <tableLichNghi v-if="show_table_ngay_nghi" :arr_ngay_nghi="arr_ngay_nghi"></tableLichNghi>
     </div>
 </template>

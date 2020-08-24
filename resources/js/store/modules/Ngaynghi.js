@@ -22,8 +22,21 @@ export default {
                 .then(res => {
                     if (res.data.message) {
                         state.arr_ngay_nghi = formatNgayNghi(res.data.data);
-                        console.log(state.arr_ngay_nghi);
                     }
+                })
+                .catch(err => {
+                    console.error(err);
+                });
+        },
+        add_ngay_nghi({ state, commit, rootState }, user_input) {
+            console.log(user_input);
+            axios
+                .post(`api/ngaynghi/them`, {
+                    key: getCookie("key"),
+                    ...user_input
+                })
+                .then(res => {
+                    console.log(res);
                 })
                 .catch(err => {
                     console.error(err);

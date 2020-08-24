@@ -1,30 +1,28 @@
 <template>
-    <div>
-        <vue-good-table
-            :columns="columns"
-            :rows="arr_phan_cong_ct"
-            :search-options="{enabled: true}"
-            styleClass="vgt-table"
-        >
-            <template slot="table-row" slot-scope="props">
-                <span v-if="props.column.field == 'ma_ca'">
-                    <button
-                        class="btn btn-info"
-                        data-toggle="tooltip"
-                        data-placement="top"
-                        title="Xóa phân công"
-                        @click="test(props.row)"
-                    >
-                        <i class="material-icons">delete</i>
-                    </button>
-                </span>
-            </template>
-            <div slot="emptystate">
-                <span
-                    class="font-weight-bold"
-                >Giáo viên và lớp chưa được xếp lịch đối với phân công đã chọn</span>
-            </div>
-        </vue-good-table>
+    <div class="card">
+        <div class="card-header card-header-info">
+            <h4 class="card-title">Bảng phân công chi tiết</h4>
+        </div>
+        <div class="card-body table-responsive">
+            <vue-good-table
+                :columns="columns"
+                :rows="arr_phan_cong_ct"
+                :search-options="{enabled: true}"
+                styleClass="vgt-table"
+            >
+                <template slot="table-row" slot-scope="props">
+                    <span v-if="props.column.field == 'ma_ca'">
+                        <button
+                            class="btn btn-info"
+                            @click="delete_pc_ct(props.row)"
+                            v-tooltip.top="'Xóa'"
+                        >
+                            <i class="material-icons">delete</i>
+                        </button>
+                    </span>
+                </template>
+            </vue-good-table>
+        </div>
     </div>
 </template>
 
@@ -66,6 +64,7 @@ export default {
                 },
             ],
             selected_rows: [],
+            button_tooltip: "abc",
         };
     },
     computed: {
@@ -74,34 +73,15 @@ export default {
         },
     },
     methods: {
-        test(row) {
-            this.$store
-                .dispatch("phan_cong/delete_phan_cong_chi_tiet", {
-                    user_input: row,
-                    ma_phan_cong: this.ma_phan_cong,
-                })
-                .then(
-                    this.$store.dispatch(
-                        "phan_cong/get_phan_cong_chi_tiet",
-                        this.ma_phan_cong
-                    )
-                );
-        },
-    },
-    watch: {
-        arr_phan_cong_ct() {
-            if (this.arr_phan_cong_ct.length != 0) {
-                $(document).ready(function () {
-                    $(".btn").tooltip({
-                        trigger: "hover",
-                    });
-                    $(".tooltip-inner").remove();
-                });
-            }
+        delete_pc_ct(row) {
+            this.$store.dispatch("phan_cong/delete_phan_cong_chi_tiet", {
+                user_input: row,
+                ma_phan_cong: this.ma_phan_cong,
+            });
         },
     },
 };
 </script>
 
-<style>
+<style scoped>
 </style>

@@ -24,6 +24,19 @@ export default {
         },
         set_select(state) {
             state.reset_select = false;
+        },
+        delete_arr_phan_cong_ct(state, filter_data) {
+            for (let i = 0; i < state.arr_phan_cong_ct.length; i++) {
+                if (
+                    state.arr_phan_cong_ct[i].thu ==
+                        filter_data.user_input.thu &&
+                    state.arr_phan_cong_ct[i].ma_ca ==
+                        filter_data.user_input.ma_ca
+                ) {
+                    state.arr_phan_cong_ct.splice(i, 1);
+                    return;
+                }
+            }
         }
     },
     actions: {
@@ -127,6 +140,7 @@ export default {
                         });
                     }
                 })
+                .then(commit("delete_arr_phan_cong_ct", data))
                 .catch(err => {
                     console.error(err);
                 });
