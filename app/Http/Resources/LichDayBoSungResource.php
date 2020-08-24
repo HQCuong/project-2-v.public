@@ -32,4 +32,21 @@ class LichDayBoSungResource extends JsonResource {
             break;
         }
     }
+    public function onlyPreview() {
+        $data = [];
+        foreach ($this->resource as $key => $value) {
+            $cache = [
+                'ma_lich_day_bo_sung' => $value->ma_lich_day_bo_sung,
+                'ngay'                => $value->ngay,
+                'ma_lop'              => $value->ma_lop,
+                'nguoi_dung'          => $value->nguoiDung,
+                'ma_mon_hoc'          => $value->ma_mon_hoc,
+                'ca'                  => $value->ca,
+                'phong'               => $value->phong,
+                'ghi_chu'             => $value->ghi_chu,
+            ];
+            array_push($data, $cache);
+        }
+        return $data;
+    }
 }

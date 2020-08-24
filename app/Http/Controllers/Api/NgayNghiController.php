@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\NgayNghiRequest;
+use App\Http\Resources\LichDayBoSungResource;
 use App\Http\Resources\NguoiDungResource;
 use App\Models\Ca;
+use App\Models\LichDayBoSung;
 use App\Models\NgayNghi;
 use App\Models\NguoiDung;
 use DB;
@@ -63,7 +65,18 @@ class NgayNghiController extends Controller {
                         } else {
                             $query->where('ngay_nghi.tinh_trang', 1);
                         }
-                    })->get();
+                    })
+                        ->with(['ngayNghi' => function ($query) use ($value, $rq) {
+                            $query->where('ngay_nghi.ngay', $value->ngay);
+                            $query->where('ngay_nghi.ma_giao_vien', $value->ma_giao_vien);
+                            if ($rq->has('tinh_trang')) {
+                                $query->where('ngay_nghi.tinh_trang', $rq->tinh_trang);
+                            } else {
+                                $query->where('ngay_nghi.tinh_trang', 1);
+                            }
+                            $query->select('ma_ca', 'ghi_chu');
+                        }])
+                        ->get();
                     $value->ca = $ca;
                     $value     = collect($value)->only(['tinh_trang', 'nguoidung', 'ca']);
                     array_push($temp, $value);
@@ -113,7 +126,7 @@ class NgayNghiController extends Controller {
             $create = 0;
             $exists = 0;
             $update = 0;
-            $data   = (object) ['create' => [], 'exists' => [], 'update' => []];
+            $data   = (object) ['create' => [], 'exists' => [], 'update' => [], 'lich_day_bo_sung' => []];
             if (in_array('0', $rq->ma_giao_vien)) {
                 if (count($rq->ma_giao_vien) > 1) {
                     return $this->endCatchValue(ResponseMau::ERROR_NGAY_NGHI_TOAN_TRUONG);
@@ -136,6 +149,11 @@ class NgayNghiController extends Controller {
                         }
                     }
                 }
+                $lich_day_bo_sung = LichDayBoSung::where('ngay', $rq->ngay)
+                    ->whereIn('ma_ca', $this->arrayMaCaConvent($rq->ma_ca))
+                    ->where('tinh_trang', 1);
+                $data->lich_day_bo_sung = (new LichDayBoSungResource($lich_day_bo_sung->get()))->onlyPreview();
+                $lich_day_bo_sung       = $lich_day_bo_sung->update(['tinh_trang' => 2]);
             } else {
                 foreach ($rq->ma_giao_vien as $key => $ma_giao_vien) {
                     foreach ($rq->ma_ca as $k_ca => $ma_ca) {
@@ -157,12 +175,44 @@ class NgayNghiController extends Controller {
                         }
                     }
                 }
+                $lich_day_bo_sung = LichDayBoSung::where('ngay', $rq->ngay)
+                    ->whereIn('ma_ca', $this->arrayMaCaConvent($rq->ma_ca))
+                    ->whereIn('ma_nguoi_dung', $rq->ma_giao_vien)
+                    ->where('tinh_trang', 1);
+                $data->lich_day_bo_sung = (new LichDayBoSungResource($lich_day_bo_sung->get()))->onlyPreview();
+                $lich_day_bo_sung       = $lich_day_bo_sung->update(['tinh_trang' => 2]);
+            }
+            $string = '';
+            if ($create != 0) {
+                $string .= "Đã tạo mới $create ngày nghỉ";
+            }
+            if ($exists != 0) {
+                if (!empty($string)) {
+                    $string .= ", ";
+                }
+                $string .= "Tồn tại $exists ngày nghỉ";
+            }
+            if ($update != 0) {
+                if (!empty($string)) {
+                    $string .= ", ";
+                }
+                $string .= "Đã Cập Nhật tình trạng $update ngày nghỉ";
+            }
+            if ($lich_day_bo_sung != 0) {
+                if (!empty($string)) {
+                    $string .= ", ";
+                }
+                $string .= "Đã cập nhật hủy bỏ $lich_day_bo_sung Lịch Dạy Bổ Sung";
+            }
+            if (empty($string)) {
+                $string = ResponseMau::SUCCESS_NO_DATA_UPDATE;
             }
             return ResponseMau::Store([
-                'string' => "Đã tạo mới $create bản ghi , Tồn tại $exists bản ghi,Đã Cập Nhật tình trạng $update bản ghi",
+                'string' => $string,
                 'data'   => $data,
             ]);
         } catch (Exception $e) {
+            dd($e);
             return $this->endCatchValue(ResponseMau::ERROR_CREATE);
         }
     }
@@ -201,5 +251,15 @@ class NgayNghiController extends Controller {
             $array = array_merge($array, ['ghi_chu' => $rq->ghi_chu]);
         }
         return $array;
+    }
+    public function arrayMaCaConvent($ma_ca) {
+        $array_return = [];
+        if (in_array(2, $ma_ca) || in_array(3, $ma_ca)) {
+            array_push($array_return, 4);
+        }
+        if (in_array(5, $ma_ca) || in_array(6, $ma_ca)) {
+            array_push($array_return, 7);
+        }
+        return array_merge($array_return, $ma_ca);
     }
 }

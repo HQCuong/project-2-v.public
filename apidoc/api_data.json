@@ -3016,7 +3016,7 @@
     "version": "0.1.0",
     "name": "Thêm_Ngày_Nghỉ",
     "group": "Ngày_Nghỉ",
-    "description": "<p>Dùng để Thêm Ngày Nghỉ Mới<br></p> <h1 class=\"display-1\">-Lưu ý: </h1> <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\"> <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button> <!-- <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button> --> <!-- <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button> --> </div><br> +Có thể truyền mảng ma_giao_vien với tất cả những giáo viên này nghỉ cũng ngày cùng ghi chú.<br> +Truyền thường thì chỉ giáo viên đó.<br> +Có tình trạng sẽ lấy tình trạng nếu không auto tinh_trang = 1. <br> +Có ghi_chu sẽ lấy ghi_chu nếu không auto ghi_chu = null. <br> +Hiện chưa kiểm tra logic bị thêm trùng mà chỉ sử dụng khóa.<br>",
+    "description": "<p>Dùng để Thêm Ngày Nghỉ Mới<br></p> <h1 class=\"display-1\">-Lưu ý: </h1> <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\"> <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button> <!-- <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button> --> <!-- <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button> --> </div><br> +Có thể truyền mảng ma_giao_vien với tất cả những giáo viên này nghỉ cũng ngày cùng ghi chú.<br> +Truyền thường thì chỉ giáo viên đó.<br> +Có tình trạng sẽ lấy tình trạng nếu không auto tinh_trang = 1. <br> +Có ghi_chu sẽ lấy ghi_chu nếu không auto ghi_chu = null. <br> +Nếu ngày nghỉ đó tồn tại lịch dạy bổ sung sẽ tự hủy lịch dạy bổ sung đó.<br>",
     "sampleRequest": [
       {
         "url": "http://localhost:8080/project-2/public/api/ngaynghi/them"
@@ -3025,7 +3025,7 @@
     "examples": [
       {
         "title": "Truy Vấn Mẫu:",
-        "content": "{\n    \"key\" :\"1\",\n    \"ma_giao_vien\" : [\"10\",\"15\",\"20\",\"25\"],\n    \"ngay\" : \"10/07/2020\",\n    \"ghi_chu\":\"Đi chơi\",\n    \"ma_ca\" : \"1\"\n}",
+        "content": "{\n    \"key\": 1,\n    \"ngay\": \"29-08-2020\",\n    \"ma_giao_vien\" : [0],\n    \"ma_ca\":[2,5]\n}",
         "type": "php"
       }
     ],
@@ -3071,7 +3071,7 @@
       "examples": [
         {
           "title": "Thành Công:",
-          "content": "HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"message\": \"Thêm ngày nghỉ thành công\",\n    \"data\": []\n}",
+          "content": "HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"message\": \"Tồn tại 2 ngày nghỉ, Đã cập nhật hủy bỏ 1 Lịch Dạy Bổ Sung\",\n    \"data\": {\n        \"create\": [],\n        \"exists\": [],\n        \"update\": [],\n        \"lich_day_bo_sung\": [\n            {\n                \"ma_lich_day_bo_sung\": 2,\n                \"ngay\": \"2020-08-29\",\n                \"ma_lop\": \"BIT01K10\",\n                \"nguoi_dung\": {\n                    \"ma_nguoi_dung\": 6,\n                    \"ho_ten\": \"Lê Thị Hương Liên\",\n                    \"tai_khoan\": \"yuki.lien85\",\n                    \"email\": \"yuki.lien85@gmail.com\",\n                    \"sdt\": \"0989186985\"\n                },\n                \"ma_mon_hoc\": \"BIT_ECOM1\",\n                \"ca\": {\n                    \"ma_ca\": 2,\n                    \"gio_bat_dau\": \"08:00:00\",\n                    \"gio_ket_thuc\": \"10:00:00\"\n                },\n                \"phong\": {\n                    \"ma_phong\": 5,\n                    \"ten_phong\": \"Lab 5\",\n                    \"so_cho_ngoi\": 35,\n                    \"ma_tang\": 4,\n                    \"ma_tinh_trang\": 1,\n                    \"ghi_chu\": \"\"\n                },\n                \"ghi_chu\": \"\"\n            }\n        ]\n    }\n}",
           "type": "json"
         }
       ]
@@ -3236,7 +3236,7 @@
       "examples": [
         {
           "title": "Thành Công:",
-          "content": "HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"message\": \"Lấy dữ liệu thành công\",\n    \"data\": [\n        {\n            \"ngay\": \"2020-07-01\",\n            \"so_nguoi_nghi\": 1,\n            \"can_bo\": [\n                {\n                    \"ngay\": \"2020-07-01\",\n                    \"ma_giao_vien\": 10,\n                    \"ma_ca\": 3,\n                    \"ghi_chu\": null,\n                    \"tinh_trang\": 1,\n                    \"nguoi_dung\": {\n                        \"ma_nguoi_dung\": 10,\n                        \"ho_ten\": \"Trần Thị Dung\",\n                        \"tai_khoan\": \"dungtt\",\n                        \"email\": \"dungtt@soict.hust.edu.vn\",\n                        \"sdt\": \"0989161528\",\n                        \"ma_cap_do\": 3\n                    },\n                    \"ca\": {\n                        \"ma_ca\": 3,\n                        \"gio_bat_dau\": \"10:00:00\",\n                        \"gio_ket_thuc\": \"12:00:00\"\n                    }\n                }\n            ]\n        }\n    ]\n}",
+          "content": "HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"message\": \"Lấy dữ liệu thành công\",\n    \"data\": {\n        \"2020-08-29\": [\n            {\n                \"tinh_trang\": 1,\n                \"nguoidung\": {\n                    \"ma_nguoi_dung\": 5,\n                    \"ho_ten\": null,\n                    \"tai_khoan\": \"kithuat\",\n                    \"email\": \"kithuat@gmail.com\",\n                    \"sdt\": \"6\"\n                },\n                \"ca\": [\n                    {\n                        \"ma_ca\": 3,\n                        \"gio_bat_dau\": \"10:00:00\",\n                        \"gio_ket_thuc\": \"12:00:00\",\n                        \"ngay_nghi\": [\n                            {\n                                \"ma_ca\": 3,\n                                \"ghi_chu\": \"thích nghỉ\"\n                            }\n                        ]\n                    },\n                    {\n                        \"ma_ca\": 5,\n                        \"gio_bat_dau\": \"13:30:00\",\n                        \"gio_ket_thuc\": \"15:30:00\",\n                        \"ngay_nghi\": [\n                            {\n                                \"ma_ca\": 5,\n                                \"ghi_chu\": null\n                            }\n                        ]\n                    },\n                    {\n                        \"ma_ca\": 6,\n                        \"gio_bat_dau\": \"15:30:00\",\n                        \"gio_ket_thuc\": \"17:30:00\",\n                        \"ngay_nghi\": [\n                            {\n                                \"ma_ca\": 6,\n                                \"ghi_chu\": \"nghi ddi choiwi\"\n                            }\n                        ]\n                    }\n                ]\n            }\n        ]\n    }\n}",
           "type": "json"
         }
       ]
