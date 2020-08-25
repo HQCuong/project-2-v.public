@@ -111,8 +111,8 @@ export default {
         },
         select() {
             if (this.select == true) {
-                this.so_gio = false;
-                this.phan_cong = false;
+                this.so_gio = "";
+                this.phan_cong = "";
             } else {
                 return true;
             }

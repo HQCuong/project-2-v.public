@@ -40,6 +40,7 @@
                 :multiple="true"
                 :taggable="true"
                 track-by="ma_ca"
+                @input="filter_select"
             ></multiselect>
             <br />
             <br />
@@ -51,6 +52,7 @@
                     placeholder="Nhập ghi chú (có thể để trống)"
                     v-model="ghi_chu"
                 />
+                <span v-if="err_note" class="text-danger">{{err_note}}</span>
             </div>
             <br />
             <button class="btn btn-info">Thêm</button>
@@ -63,6 +65,7 @@ export default {
     created() {
         this.$store.dispatch("user/get_all_user");
         this.$store.dispatch("ca/get_ca");
+        this.$store.commit("ngay_nghi/refresh_err");
     },
     mounted() {
         // change label color
@@ -85,6 +88,9 @@ export default {
         arr_ca() {
             return this.$store.state.ca.arr_ca;
         },
+        err_note() {
+            return this.$store.state.ngay_nghi.err_note;
+        },
     },
     data() {
         return {
@@ -95,34 +101,84 @@ export default {
         };
     },
     methods: {
+        filter_select(val) {
+            if (val.length != 0) {
+                if (val[0].ma_ca == 1 && val.length == 1) {
+                    this.ca = val[0];
+                } else if (val[0].ma_ca == 1 && val.length > 1) {
+                    this.ca = val[1];
+                } else if (val[val.length - 1].ma_ca == 1) {
+                    this.ca = val[val.length - 1];
+                } else if (
+                    val[0].ma_ca == 4 &&
+                    val.length > 1 &&
+                    (val[1].ma_ca == 2 || val[1].ma_ca == 3)
+                ) {
+                    this.ca = val[1];
+                } else if (
+                    val[val.length - 1].ma_ca == 4 &&
+                    (val[0].ma_ca == 2 || val[0].ma_ca == 3)
+                ) {
+                    this.ca = val[val.length - 1];
+                } else if (
+                    val[0].ma_ca == 7 &&
+                    val.length > 1 &&
+                    (val[1].ma_ca == 2 || val[1].ma_ca == 3)
+                ) {
+                    this.ca = val[1];
+                } else if (
+                    val[val.length - 1].ma_ca == 7 &&
+                    (val[0].ma_ca == 5 || val[0].ma_ca == 6)
+                ) {
+                    this.ca = val[val.length - 1];
+                }
+            }
+        },
         userLabel({ ho_ten, email }) {
             return `${ho_ten} - ${email}`;
         },
         caLabel({ ma_ca, gio_bat_dau, gio_ket_thuc }) {
-            return `${ma_ca} - ${gio_bat_dau} - ${gio_ket_thuc}`;
+            if (ma_ca == 1) {
+                return "Cả ngày";
+            } else if (ma_ca == 4) {
+                return "Sáng";
+            } else if (ma_ca == 7) {
+                return "Chiều";
+            }
+            return `Ca ${ma_ca} - ${gio_bat_dau} - ${gio_ket_thuc}`;
         },
         add_ngay_nghi(e) {
             e.preventDefault();
-            this.$store.dispatch("ngay_nghi/add_ngay_nghi", {
+            var user_input = {
                 ngay: this.ngay_nghi
                     ? this.ngay_nghi.getDate() +
-                      "/" +
+                      "-" +
                       (this.ngay_nghi.getMonth() + 1) +
-                      "/" +
+                      "-" +
                       this.ngay_nghi.getFullYear()
                     : "",
                 ma_giao_vien: this.user
                     ? this.user.map((each) => {
                           return each.ma_nguoi_dung;
                       })
-                    : 0,
-                ghi_chu: this.ghi_chu,
-                ma_ca: this.ca
+                    : [0],
+                ma_ca: Array.isArray(this.ca)
                     ? this.ca.map((each) => {
                           return each.ma_ca;
                       })
+                    : this.ca
+                    ? [this.ca.ma_ca]
                     : "",
-            });
+            };
+            if (this.ghi_chu) {
+                user_input.ghi_chu = this.ghi_chu;
+            }
+            this.$store.dispatch("ngay_nghi/add_ngay_nghi", user_input);
+        },
+    },
+    watch: {
+        ca() {
+            console.log(this.ca);
         },
     },
 };
@@ -130,3 +186,4 @@ export default {
 
 <style>
 </style>
+

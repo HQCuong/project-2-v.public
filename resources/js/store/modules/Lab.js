@@ -1,4 +1,4 @@
-import { cloneDeep } from "lodash";
+import getCookie from "../../customfunc/getCookie";
 
 export default {
     namespaced: true,
@@ -51,6 +51,16 @@ export default {
                     tinh_trang: "Bảo trì"
                 }
             ];
+            axios
+                .post(`api/phong`, {
+                    key: getCookie("key")
+                })
+                .then(res => {
+                    console.log(res);
+                })
+                .catch(err => {
+                    console.error(err);
+                });
         },
         get_lich_su_dung({ state, commit, rootState }) {
             state.lich_su_dung = [];

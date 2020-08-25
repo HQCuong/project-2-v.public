@@ -1,9 +1,12 @@
 <template>
     <div>
-        <selectPhanCong @show_table_phan_cong_ct="show_table_phan_cong_ct"></selectPhanCong>
+        <selectPhanCong @emit_data="pass_data"></selectPhanCong>
         <br />
-        <tablePhanCongChiTiet v-if="show_table" :ma_phan_cong="ma_phan_cong"></tablePhanCongChiTiet>
-        <notifications group="delete_phan_cong_ct" />
+        <tablePhanCongChiTiet
+            v-if="show_table"
+            :ma_phan_cong="ma_phan_cong"
+            :arr_phan_cong_ct="arr_phan_cong_ct"
+        ></tablePhanCongChiTiet>
     </div>
 </template>
 
@@ -13,10 +16,12 @@ import tablePhanCongChiTiet from "./table/TablePhanCongChiTiet";
 
 export default {
     mounted() {
-        return this.$store.commit(
-            "content/page_title",
-            "Xem phân công thi tiết"
-        );
+        this.$store.commit("content/page_title", "Xem phân công thi tiết");
+    },
+    computed: {
+        arr_phan_cong_ct() {
+            return this.$store.state.phan_cong.arr_phan_cong_ct;
+        },
     },
     data() {
         return {
@@ -25,9 +30,13 @@ export default {
         };
     },
     methods: {
-        show_table_phan_cong_ct(show, ma_phan_cong) {
+        pass_data(ma_phan_cong) {
             this.ma_phan_cong = ma_phan_cong;
-            if (show == 1) {
+        },
+    },
+    watch: {
+        arr_phan_cong_ct() {
+            if (this.arr_phan_cong_ct.length != 0) {
                 this.show_table = true;
             } else {
                 this.show_table = false;

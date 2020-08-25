@@ -54,6 +54,7 @@
                 </ul>
             </div>
         </div>
+        <notifications group="nofi" />
     </nav>
 </template>
 <script>

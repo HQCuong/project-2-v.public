@@ -38,7 +38,10 @@ export default {
     watch: {
         user() {
             if (this.user) {
-                //get lich theo user
+                this.$store.dispatch(
+                    "ngay_nghi/get_ngay_nghi_gv",
+                    this.user.ma_nguoi_dung
+                );
             } else {
                 this.$store.dispatch("ngay_nghi/get_ngay_nghi");
             }

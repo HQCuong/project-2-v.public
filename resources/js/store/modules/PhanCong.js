@@ -37,6 +37,9 @@ export default {
                     return;
                 }
             }
+        },
+        reset_arr_phan_cong_ct(state) {
+            state.arr_phan_cong_ct = [];
         }
     },
     actions: {
@@ -102,7 +105,7 @@ export default {
                 .then(res => {
                     if (res.data.success) {
                         Vue.notify({
-                            group: "add_phan_cong_ct",
+                            group: "nofi",
                             type: "success",
                             title: "Thành công",
                             text: res.data.message,
@@ -132,7 +135,7 @@ export default {
                 .then(res => {
                     if (res.data.message) {
                         Vue.notify({
-                            group: "delete_phan_cong_ct",
+                            group: "nofi",
                             type: "success",
                             title: "Thành công",
                             text: res.data.message,

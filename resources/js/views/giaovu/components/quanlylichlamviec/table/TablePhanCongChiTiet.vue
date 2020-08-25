@@ -28,7 +28,7 @@
 
 <script>
 export default {
-    props: ["ma_phan_cong"],
+    props: ["ma_phan_cong", "arr_phan_cong_ct"],
     data() {
         return {
             columns: [
@@ -64,13 +64,7 @@ export default {
                 },
             ],
             selected_rows: [],
-            button_tooltip: "abc",
         };
-    },
-    computed: {
-        arr_phan_cong_ct() {
-            return this.$store.state.phan_cong.arr_phan_cong_ct;
-        },
     },
     methods: {
         delete_pc_ct(row) {

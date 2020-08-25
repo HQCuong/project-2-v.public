@@ -1,5 +1,5 @@
 <template>
-    <form @submit="add_phan_cong">
+    <form @submit="add_phan_cong_ct">
         <vue-good-table
             :columns="columns"
             :rows="arr_de_xuat_phan_cong_ct"
@@ -13,7 +13,6 @@
                 <button type="submit" class="btn btn-info">Phân công</button>
             </div>
         </vue-good-table>
-        <notifications group="add_phan_cong_ct" />
     </form>
 </template>
 
@@ -47,7 +46,7 @@ export default {
         };
     },
     methods: {
-        add_phan_cong(e) {
+        add_phan_cong_ct(e) {
             e.preventDefault();
             this.arr_add_phan_cong_ct = [];
             for (var i = 0; i < this.selected_rows.length; i++) {
@@ -59,7 +58,7 @@ export default {
             }
             if (this.arr_add_phan_cong_ct.length > 4) {
                 this.$notify({
-                    group: "add_phan_cong_ct",
+                    group: "nofi",
                     type: "error",
                     title: "Thất bại",
                     text: "Không thể chọn quá 4 phân công!",
@@ -74,12 +73,7 @@ export default {
                         so_gio: this.so_gio,
                         phan_cong_chi_tiet: this.arr_add_phan_cong_ct,
                     })
-                    .then(
-                        setTimeout(() => {
-                            this.$store.commit("phan_cong/reset_select");
-                        }, 1000)
-                    )
-                    .then(this.$store.commit("phan_cong/set_select"));
+                    .then(this.$store.commit("phan_cong/reset_select"));
             }
         },
         selectionChanged(row) {

@@ -37,7 +37,7 @@ export default {
             if (this.arr_ngay_nghi.length != 0) {
                 this.show_table_ngay_nghi = true;
             } else {
-                this.arr_ngay_nghi = false;
+                this.show_table_ngay_nghi = false;
             }
         },
     },

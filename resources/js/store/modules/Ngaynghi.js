@@ -1,15 +1,26 @@
 import getCookie from "../../customfunc/getCookie.js";
 import formatNgayNghi from "../../customfunc/formatNgayNghi";
+import Vue from "vue";
 
 export default {
     namespaced: true,
     state: {
-        arr_ngay_nghi: []
+        arr_ngay_nghi: [],
+        err_note: ""
     },
 
     mutations: {
         reset_arr_ngay_nghi(state) {
             state.arr_ngay_nghi = [];
+        },
+        refresh_arr_ngay_nghi(state, user_input) {
+            console.log(1);
+            state.arr_ngay_nghi = state.arr_ngay_nghi.filter(each => {
+                return each.btn != user_input.btn;
+            });
+        },
+        refresh_err(state) {
+            state.err_note = "";
         }
     },
 
@@ -20,7 +31,7 @@ export default {
                     key: getCookie("key")
                 })
                 .then(res => {
-                    if (res.data.message) {
+                    if (res.data.success) {
                         state.arr_ngay_nghi = formatNgayNghi(res.data.data);
                     }
                 })
@@ -28,15 +39,72 @@ export default {
                     console.error(err);
                 });
         },
+        get_ngay_nghi_gv({ state, commit, rootState }, ma_gv) {
+            state.arr_ngay_nghi = [];
+            axios
+                .post(`api/ngaynghi`, {
+                    key: getCookie("key"),
+                    ma_giao_vien: [ma_gv]
+                })
+                .then(res => {
+                    state.arr_ngay_nghi = formatNgayNghi(res.data.data);
+                })
+                .catch(err => {
+                    console.error(err);
+                });
+        },
         add_ngay_nghi({ state, commit, rootState }, user_input) {
-            console.log(user_input);
             axios
                 .post(`api/ngaynghi/them`, {
                     key: getCookie("key"),
                     ...user_input
                 })
                 .then(res => {
-                    console.log(res);
+                    if (res.data.success) {
+                        if (res.data.message == "Tồn tại 1 ngày nghỉ") {
+                            Vue.notify({
+                                group: "nofi",
+                                type: "error",
+                                title: "Thất bại",
+                                text: "Đã " + res.data.message
+                            });
+                        } else {
+                            Vue.notify({
+                                group: "nofi",
+                                title: "Thành công",
+                                text: res.data.message
+                            });
+                        }
+                    } else {
+                        state.err_note = res.data.message.ghi_chu;
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                });
+        },
+        delete_ngay_nghi({ state, commit, rootState }, user_input) {
+            axios
+                .post(`api/ngaynghi/sua`, {
+                    key: getCookie("key"),
+                    ...user_input[0]
+                })
+                .then(res => {
+                    if (res.data.success) {
+                        Vue.notify({
+                            group: "nofi",
+                            title: "Thành công",
+                            text: res.data.message
+                        });
+                        commit("refresh_arr_ngay_nghi", user_input[1]);
+                    } else {
+                        Vue.notify({
+                            group: "nofi",
+                            type: "error",
+                            title: "Thất bại",
+                            text: "Không thể xóa ngày nghỉ trước ngày hôm nay"
+                        });
+                    }
                 })
                 .catch(err => {
                     console.error(err);

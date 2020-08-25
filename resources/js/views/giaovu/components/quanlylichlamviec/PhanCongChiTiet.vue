@@ -10,7 +10,6 @@
             :so_gio="so_gio"
             :arr_de_xuat_phan_cong_ct="arr_de_xuat_phan_cong_ct"
         ></tableDeXuatPhanCongChiTiet>
-        <notifications group="add_phan_cong_ct" />
     </div>
 </template>
 

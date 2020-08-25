@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-if="!is_giao_vien">
-            <label>Chọn phân công</label>
+            <label>Chọn giáo viên</label>
             <multiselect
                 v-model="giao_vien"
                 :options="arr_gv"
