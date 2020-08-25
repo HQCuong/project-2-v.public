@@ -13,7 +13,7 @@ class PhanCongResource extends JsonResource {
             'ma_mon_hoc'     => $this->ma_mon_hoc,
             'ma_tinh_trang'  => $this->tinh_trang,
             'ten_tinh_trang' => $this->tinhTrang(),
-            'nguoi_dung'     => $this->nguoiDung,
+            'nguoidung'      => $this->nguoidung,
         ];
     }
 }
