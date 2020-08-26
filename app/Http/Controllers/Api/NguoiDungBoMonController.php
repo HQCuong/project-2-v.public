@@ -70,7 +70,9 @@ class NguoiDungBoMonController extends Controller {
     }
     public function themHoacSua(NguoiDungBoMonRequest $rq) {
         try {
-            foreach ($rq->ma_giao_vien as $key => $ma_giao_vien) {
+            $data   = (object) ['create' => [], 'exists' => []];
+            $insert = [];
+            foreach (array_unique($rq->ma_giao_vien) as $key => $ma_giao_vien) {
                 $nguoi_dung_bo_mon = NguoiDungBoMon::where('ma_nguoi_dung', $ma_giao_vien)
                     ->whereDoesntHave('monHoc', function ($query) use ($ma_giao_vien) {
                         $query->whereHas('phanCong', function ($q) use ($ma_giao_vien) {
@@ -81,31 +83,27 @@ class NguoiDungBoMonController extends Controller {
                     ->delete();
                 $array_mon_hoc = NguoiDungBoMon::where('ma_nguoi_dung', $ma_giao_vien)
                     ->whereIn('ma_mon_hoc', $rq->ma_mon_hoc)
-                    ->select('ma_mon_hoc')
-                    ->get()
-                    ->toArray();
-                $array_mon_hoc = array_map($array_mon_hoc, function ($value) {
-                    dd($value);
-                });
-                $array_mon_hoc = array_diff($rq->ma_mon_hoc, $array_mon_hoc);
-                dd($array_mon_hoc);
-            }
-            $data = [];
-            foreach ($rq->ma_mon_hoc as $key_m => $ma_mon_hoc) {
-                foreach ($rq->ma_giao_vien as $key_n => $ma_nguoi_dung) {
+                    ->get();
+                $list_mon_hoc = [];
+                foreach ($array_mon_hoc as $key => $value) {
+                    array_push($data->exists, $value->toArray());
+                    array_push($list_mon_hoc, $value->ma_mon_hoc);
+                }
+                $array_mon_hoc = array_diff(array_unique($rq->ma_mon_hoc), $list_mon_hoc);
+                foreach ($array_mon_hoc as $key => $ma_mon_hoc) {
                     $cache = [
-                        'ma_nguoi_dung' => $ma_nguoi_dung,
+                        'ma_nguoi_dung' => $ma_giao_vien,
                         'ma_mon_hoc'    => $ma_mon_hoc,
                     ];
-                    array_push($data, $cache);
+                    array_push($data->create, $cache);
                 }
             }
-            NguoiDungBoMon::insert($data);
+            NguoiDungBoMon::insert($data->create);
             return ResponseMau::Store([
-                'string' => ResponseMau::SUCCESS_UPDATE,
+                'string' => "Cập nhật thành công , Các môn đang được phân công sẽ tự động được chọn",
+                'data'   => $data,
             ]);
         } catch (\Exception $e) {
-            dd($e);
             return $this->endCatchValue(ResponseMau::ERROR_UPDATE);
         }
     }

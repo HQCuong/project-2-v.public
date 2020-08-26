@@ -39,6 +39,7 @@ class PhanCongController extends Controller {
                     $query->whereIn('tinh_trang', [0, 1]);
                 }
             })
+                ->with('nguoiDung')
                 ->orderBy('tinh_trang', 'ASC')
                 ->get();
             return ResponseMau::Store([
