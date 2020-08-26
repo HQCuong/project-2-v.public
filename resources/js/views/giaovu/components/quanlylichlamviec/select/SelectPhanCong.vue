@@ -43,8 +43,11 @@ export default {
                         "phan_cong/get_phan_cong_chi_tiet",
                         this.phan_cong.ma_phan_cong
                     )
-                    .then(this.$emit("emit_data", this.phan_cong.ma_phan_cong));
+                    .then(
+                        this.$emit("emit_data", 1, this.phan_cong.ma_phan_cong)
+                    );
             } else {
+                this.$emit("emit_data", 0);
                 this.$store.commit("phan_cong/reset_arr_phan_cong_ct");
             }
         },

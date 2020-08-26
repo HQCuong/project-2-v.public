@@ -21,6 +21,10 @@
                         </button>
                     </span>
                 </template>
+                <div
+                    slot="emptystate"
+                    class="font-weight-bold"
+                >Chưa có lịch dạy cho thời khóa biểu trên</div>
             </vue-good-table>
         </div>
     </div>
@@ -28,7 +32,12 @@
 
 <script>
 export default {
-    props: ["ma_phan_cong", "arr_phan_cong_ct"],
+    props: ["ma_phan_cong"],
+    computed: {
+        arr_phan_cong_ct() {
+            return this.$store.state.phan_cong.arr_phan_cong_ct;
+        },
+    },
     data() {
         return {
             columns: [

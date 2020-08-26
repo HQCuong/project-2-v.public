@@ -1,9 +1,9 @@
 <template>
     <div>
         <thongKeLichNghi></thongKeLichNghi>
-        <selectGiaoVien v-if="!is_giao_vien"></selectGiaoVien>
+        <selectGiaoVien></selectGiaoVien>
         <br />
-        <tableLichNghi v-if="show_table_ngay_nghi" :arr_ngay_nghi="arr_ngay_nghi"></tableLichNghi>
+        <tableLichNghi></tableLichNghi>
     </div>
 </template>
 
@@ -19,27 +19,8 @@ export default {
     mounted() {
         this.$store.commit("content/page_title", "Xem lịch nghỉ");
     },
-    computed: {
-        arr_ngay_nghi() {
-            return this.$store.state.ngay_nghi.arr_ngay_nghi;
-        },
-        is_giao_vien() {
-            return this.$store.state.user.is_giao_vien;
-        },
-    },
     data() {
-        return {
-            show_table_ngay_nghi: false,
-        };
-    },
-    watch: {
-        arr_ngay_nghi() {
-            if (this.arr_ngay_nghi.length != 0) {
-                this.show_table_ngay_nghi = true;
-            } else {
-                this.show_table_ngay_nghi = false;
-            }
-        },
+        return {};
     },
     components: {
         thongKeLichNghi,

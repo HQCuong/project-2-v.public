@@ -22,9 +22,6 @@ export default {
         reset_select(state) {
             state.reset_select = true;
         },
-        set_select(state) {
-            state.reset_select = false;
-        },
         delete_arr_phan_cong_ct(state, filter_data) {
             for (let i = 0; i < state.arr_phan_cong_ct.length; i++) {
                 if (
@@ -112,6 +109,7 @@ export default {
                             duration: 1500
                         });
                         commit("reset_arr_de_xuat_phan_cong_ct");
+                        commit("reset_select");
                     } else {
                         state.err_de_xuat = res.data.message
                             ? res.data.message.phan_cong_chi_tiet

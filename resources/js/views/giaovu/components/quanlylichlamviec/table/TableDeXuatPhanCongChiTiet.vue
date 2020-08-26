@@ -67,13 +67,11 @@ export default {
                 this.arr_add_phan_cong_ct = [];
                 return false;
             } else {
-                this.$store
-                    .dispatch("phan_cong/add_phan_cong_chi_tiet", {
-                        ma_phan_cong: this.ma_phan_cong,
-                        so_gio: this.so_gio,
-                        phan_cong_chi_tiet: this.arr_add_phan_cong_ct,
-                    })
-                    .then(this.$store.commit("phan_cong/reset_select"));
+                this.$store.dispatch("phan_cong/add_phan_cong_chi_tiet", {
+                    ma_phan_cong: this.ma_phan_cong,
+                    so_gio: this.so_gio,
+                    phan_cong_chi_tiet: this.arr_add_phan_cong_ct,
+                });
             }
         },
         selectionChanged(row) {

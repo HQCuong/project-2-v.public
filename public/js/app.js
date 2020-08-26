@@ -16771,27 +16771,8 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.$store.commit("content/page_title", "Xem lịch nghỉ");
   },
-  computed: {
-    arr_ngay_nghi: function arr_ngay_nghi() {
-      return this.$store.state.ngay_nghi.arr_ngay_nghi;
-    },
-    is_giao_vien: function is_giao_vien() {
-      return this.$store.state.user.is_giao_vien;
-    }
-  },
   data: function data() {
-    return {
-      show_table_ngay_nghi: false
-    };
-  },
-  watch: {
-    arr_ngay_nghi: function arr_ngay_nghi() {
-      if (this.arr_ngay_nghi.length != 0) {
-        this.show_table_ngay_nghi = true;
-      } else {
-        this.show_table_ngay_nghi = false;
-      }
-    }
+    return {};
   },
   components: {
     thongKeLichNghi: _thongke_ThongKeLichNghi__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -16821,20 +16802,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     this.$store.commit("content/page_title", "Xem phân công thi tiết");
-  },
-  computed: {
-    arr_phan_cong_ct: function arr_phan_cong_ct() {
-      return this.$store.state.phan_cong.arr_phan_cong_ct;
-    }
   },
   data: function data() {
     return {
@@ -16843,13 +16815,10 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    pass_data: function pass_data(ma_phan_cong) {
+    pass_data: function pass_data(show, ma_phan_cong) {
       this.ma_phan_cong = ma_phan_cong;
-    }
-  },
-  watch: {
-    arr_phan_cong_ct: function arr_phan_cong_ct() {
-      if (this.arr_phan_cong_ct.length != 0) {
+
+      if (show == 1) {
         this.show_table = true;
       } else {
         this.show_table = false;
@@ -17171,8 +17140,9 @@ __webpack_require__.r(__webpack_exports__);
   watch: {
     phan_cong: function phan_cong() {
       if (this.phan_cong) {
-        this.$store.dispatch("phan_cong/get_phan_cong_chi_tiet", this.phan_cong.ma_phan_cong).then(this.$emit("emit_data", this.phan_cong.ma_phan_cong));
+        this.$store.dispatch("phan_cong/get_phan_cong_chi_tiet", this.phan_cong.ma_phan_cong).then(this.$emit("emit_data", 1, this.phan_cong.ma_phan_cong));
       } else {
+        this.$emit("emit_data", 0);
         this.$store.commit("phan_cong/reset_arr_phan_cong_ct");
       }
     }
@@ -17394,7 +17364,7 @@ __webpack_require__.r(__webpack_exports__);
           ma_phan_cong: this.ma_phan_cong,
           so_gio: this.so_gio,
           phan_cong_chi_tiet: this.arr_add_phan_cong_ct
-        }).then(this.$store.commit("phan_cong/reset_select"));
+        });
       }
     },
     selectionChanged: function selectionChanged(row) {
@@ -17443,8 +17413,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["arr_ngay_nghi"],
+  computed: {
+    arr_ngay_nghi: function arr_ngay_nghi() {
+      return this.$store.state.ngay_nghi.arr_ngay_nghi;
+    }
+  },
   data: function data() {
     return {
       columns: [{
@@ -17565,8 +17540,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["ma_phan_cong", "arr_phan_cong_ct"],
+  props: ["ma_phan_cong"],
+  computed: {
+    arr_phan_cong_ct: function arr_phan_cong_ct() {
+      return this.$store.state.phan_cong.arr_phan_cong_ct;
+    }
+  },
   data: function data() {
     return {
       columns: [{
@@ -45759,13 +45743,11 @@ var render = function() {
     [
       _c("thongKeLichNghi"),
       _vm._v(" "),
-      !_vm.is_giao_vien ? _c("selectGiaoVien") : _vm._e(),
+      _c("selectGiaoVien"),
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
-      _vm.show_table_ngay_nghi
-        ? _c("tableLichNghi", { attrs: { arr_ngay_nghi: _vm.arr_ngay_nghi } })
-        : _vm._e()
+      _c("tableLichNghi")
     ],
     1
   )
@@ -45801,10 +45783,7 @@ var render = function() {
       _vm._v(" "),
       _vm.show_table
         ? _c("tablePhanCongChiTiet", {
-            attrs: {
-              ma_phan_cong: _vm.ma_phan_cong,
-              arr_phan_cong_ct: _vm.arr_phan_cong_ct
-            }
+            attrs: { ma_phan_cong: _vm.ma_phan_cong }
           })
         : _vm._e()
     ],
@@ -46285,53 +46264,68 @@ var render = function() {
       "div",
       { staticClass: "card-body table-responsive" },
       [
-        _c("vue-good-table", {
-          attrs: {
-            columns: _vm.columns,
-            rows: _vm.arr_ngay_nghi,
-            "search-options": { enabled: true },
-            styleClass: "vgt-table striped",
-            "pagination-options": { enabled: true }
-          },
-          scopedSlots: _vm._u([
-            {
-              key: "table-row",
-              fn: function(props) {
-                return [
-                  props.column.field == "btn"
-                    ? _c("span", [
-                        _c(
-                          "button",
-                          {
-                            directives: [
-                              {
-                                name: "tooltip",
-                                rawName: "v-tooltip.top",
-                                value: "Xóa",
-                                expression: "'Xóa'",
-                                modifiers: { top: true }
+        _c(
+          "vue-good-table",
+          {
+            attrs: {
+              columns: _vm.columns,
+              rows: _vm.arr_ngay_nghi,
+              "search-options": { enabled: true },
+              styleClass: "vgt-table striped",
+              "pagination-options": { enabled: true }
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "table-row",
+                fn: function(props) {
+                  return [
+                    props.column.field == "btn"
+                      ? _c("span", [
+                          _c(
+                            "button",
+                            {
+                              directives: [
+                                {
+                                  name: "tooltip",
+                                  rawName: "v-tooltip.top",
+                                  value: "Xóa",
+                                  expression: "'Xóa'",
+                                  modifiers: { top: true }
+                                }
+                              ],
+                              staticClass: "btn btn-info",
+                              on: {
+                                click: function($event) {
+                                  return _vm.delete_day_off(props.row)
+                                }
                               }
-                            ],
-                            staticClass: "btn btn-info",
-                            on: {
-                              click: function($event) {
-                                return _vm.delete_day_off(props.row)
-                              }
-                            }
-                          },
-                          [
-                            _c("i", { staticClass: "material-icons" }, [
-                              _vm._v("delete")
-                            ])
-                          ]
-                        )
-                      ])
-                    : _vm._e()
-                ]
+                            },
+                            [
+                              _c("i", { staticClass: "material-icons" }, [
+                                _vm._v("delete")
+                              ])
+                            ]
+                          )
+                        ])
+                      : _vm._e()
+                  ]
+                }
               }
-            }
-          ])
-        })
+            ])
+          },
+          [
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "font-weight-bold",
+                attrs: { slot: "emptystate" },
+                slot: "emptystate"
+              },
+              [_vm._v("Giáo viên chưa có lịch nghỉ")]
+            )
+          ]
+        )
       ],
       1
     )
@@ -46375,52 +46369,67 @@ var render = function() {
       "div",
       { staticClass: "card-body table-responsive" },
       [
-        _c("vue-good-table", {
-          attrs: {
-            columns: _vm.columns,
-            rows: _vm.arr_phan_cong_ct,
-            "search-options": { enabled: true },
-            styleClass: "vgt-table"
-          },
-          scopedSlots: _vm._u([
-            {
-              key: "table-row",
-              fn: function(props) {
-                return [
-                  props.column.field == "ma_ca"
-                    ? _c("span", [
-                        _c(
-                          "button",
-                          {
-                            directives: [
-                              {
-                                name: "tooltip",
-                                rawName: "v-tooltip.top",
-                                value: "Xóa",
-                                expression: "'Xóa'",
-                                modifiers: { top: true }
+        _c(
+          "vue-good-table",
+          {
+            attrs: {
+              columns: _vm.columns,
+              rows: _vm.arr_phan_cong_ct,
+              "search-options": { enabled: true },
+              styleClass: "vgt-table"
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "table-row",
+                fn: function(props) {
+                  return [
+                    props.column.field == "ma_ca"
+                      ? _c("span", [
+                          _c(
+                            "button",
+                            {
+                              directives: [
+                                {
+                                  name: "tooltip",
+                                  rawName: "v-tooltip.top",
+                                  value: "Xóa",
+                                  expression: "'Xóa'",
+                                  modifiers: { top: true }
+                                }
+                              ],
+                              staticClass: "btn btn-info",
+                              on: {
+                                click: function($event) {
+                                  return _vm.delete_pc_ct(props.row)
+                                }
                               }
-                            ],
-                            staticClass: "btn btn-info",
-                            on: {
-                              click: function($event) {
-                                return _vm.delete_pc_ct(props.row)
-                              }
-                            }
-                          },
-                          [
-                            _c("i", { staticClass: "material-icons" }, [
-                              _vm._v("delete")
-                            ])
-                          ]
-                        )
-                      ])
-                    : _vm._e()
-                ]
+                            },
+                            [
+                              _c("i", { staticClass: "material-icons" }, [
+                                _vm._v("delete")
+                              ])
+                            ]
+                          )
+                        ])
+                      : _vm._e()
+                  ]
+                }
               }
-            }
-          ])
-        })
+            ])
+          },
+          [
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "font-weight-bold",
+                attrs: { slot: "emptystate" },
+                slot: "emptystate"
+              },
+              [_vm._v("Chưa có lịch dạy cho thời khóa biểu trên")]
+            )
+          ]
+        )
       ],
       1
     )
@@ -68467,9 +68476,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     reset_select: function reset_select(state) {
       state.reset_select = true;
     },
-    set_select: function set_select(state) {
-      state.reset_select = false;
-    },
     delete_arr_phan_cong_ct: function delete_arr_phan_cong_ct(state, filter_data) {
       for (var i = 0; i < state.arr_phan_cong_ct.length; i++) {
         if (state.arr_phan_cong_ct[i].thu == filter_data.user_input.thu && state.arr_phan_cong_ct[i].ma_ca == filter_data.user_input.ma_ca) {
@@ -68547,6 +68553,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             duration: 1500
           });
           commit("reset_arr_de_xuat_phan_cong_ct");
+          commit("reset_select");
         } else {
           state.err_de_xuat = res.data.message ? res.data.message.phan_cong_chi_tiet : res.data.message;
         }

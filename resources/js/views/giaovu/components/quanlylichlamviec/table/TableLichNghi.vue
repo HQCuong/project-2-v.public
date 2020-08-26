@@ -22,6 +22,7 @@
                         </button>
                     </span>
                 </template>
+                <div slot="emptystate" class="font-weight-bold">Giáo viên chưa có lịch nghỉ</div>
             </vue-good-table>
         </div>
     </div>
@@ -29,7 +30,11 @@
 
 <script>
 export default {
-    props: ["arr_ngay_nghi"],
+    computed: {
+        arr_ngay_nghi() {
+            return this.$store.state.ngay_nghi.arr_ngay_nghi;
+        },
+    },
     data() {
         return {
             columns: [
