@@ -7,7 +7,9 @@ export default {
     state: {
         arr_ngay_nghi: [],
         err_note: "",
-        reset_form: false
+        reset_form: false,
+        thong_ke_ngay_nghi: "",
+        thong_ke_by_gv: ""
     },
 
     mutations: {
@@ -114,6 +116,8 @@ export default {
                 .catch(err => {
                     console.error(err);
                 });
-        }
+        },
+        get_thong_ke_by_gv({ state, commit, rootState }) {},
+        get_thong_ke({ state, commit, rootState }) {}
     }
 };

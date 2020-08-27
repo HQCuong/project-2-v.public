@@ -115,6 +115,9 @@ export default {
         err_form() {
             return this.$store.state.cau_hinh.err_form;
         },
+        reset_form() {
+            return this.$store.state.cau_hinh.reset_form;
+        },
     },
     methods: {
         labelMon({ ma_mon_hoc, ten_mon_tieng_viet }) {
@@ -130,7 +133,26 @@ export default {
                 o_cung: this.hard_drive,
                 vga: this.vga,
             };
-            this.$store.dispatch("cau_hinh/add_cau_hinh", user_input);
+            this.$store.dispatch("cau_hinh/add_cau_hinh", [
+                user_input,
+                this.mon
+                    ? this.mon.map((each) => {
+                          return each.ma_mon_hoc;
+                      })
+                    : "",
+            ]);
+        },
+    },
+    watch: {
+        reset_form() {
+            if (this.reset_form) {
+                this.main = "";
+                this.cpu = "";
+                this.ram = "";
+                this.vga = "";
+                this.hard_drive = "";
+                this.mon = "";
+            }
         },
     },
 };

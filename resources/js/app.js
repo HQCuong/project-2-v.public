@@ -36,7 +36,22 @@ import routes from "./routes.js";
 const router = new VueRouter({
     base: "project-2/public",
     routes,
-    mode: "history"
+    mode: "history",
+    scrollBehavior(to, from, savedPosition) {
+        if (to.params.ma_cau_hinh) {
+            document.getElementById("form_update_cau_hinh").scrollIntoView({
+                behavior: "smooth",
+                block: "end",
+                inline: "nearest"
+            });
+        } else if (to.params.ma_nguoi_dung) {
+            document.getElementById("form_update_profile").scrollIntoView({
+                behavior: "smooth",
+                block: "end",
+                inline: "nearest"
+            });
+        }
+    }
 });
 
 // Vuex

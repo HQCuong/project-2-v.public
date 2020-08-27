@@ -1,13 +1,13 @@
-export default function formatNgayNghi(obj) {
+export default function formatNgayNghi(arr) {
     var arr_ngay_nghi = [];
-    for (const each in obj) {
-        for (let i = 0; i < obj[each].length; i++) {
+    for (const each in arr) {
+        for (let i = 0; i < arr[each].length; i++) {
             var clone_obj = {
                 date: each,
-                ...obj[each][i],
+                ...arr[each][i],
                 btn:
                     each +
-                    obj[each][i].ca[0].ma_ca +
+                    arr[each][i].ca[0].ma_ca +
                     Math.floor(Math.random() * 10000)
             };
             arr_ngay_nghi.push(clone_obj);

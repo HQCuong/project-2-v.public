@@ -23,7 +23,7 @@
                         </button>
                         <router-link
                             class="btn btn-info"
-                            :to="{path: `/quan_ly_lab/modi_lab/${props.row.ma_phong}`}"
+                            :to="{path: `/quan_ly_lab/update_lab/${props.row.ma_phong}`}"
                             title="Thay đổi tình trạng"
                             data-toggle="tooltip"
                             data-placement="top"

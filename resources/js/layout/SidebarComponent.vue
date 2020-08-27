@@ -53,12 +53,12 @@
                         <p>Quản lý cấu hình</p>
                     </router-link>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <router-link class="nav-link" to="/quan_ly_thiet_bi">
                         <i class="material-icons">laptop</i>
                         <p>Quản lý thiết bị</p>
                     </router-link>
-                </li>
+                </li>-->
                 <li class="nav-item">
                     <router-link class="nav-link" to="/lich_lam_viec">
                         <i class="material-icons">date_range</i>

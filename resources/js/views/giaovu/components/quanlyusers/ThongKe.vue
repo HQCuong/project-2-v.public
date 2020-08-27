@@ -6,8 +6,8 @@
                     <div class="card-icon">
                         <i class="material-icons">content_copy</i>
                     </div>
-                    <p class="card-category">Tổng só người dùng</p>
-                    <h3 class="card-title">49/50</h3>
+                    <p class="card-category font-weight-bold">Tổng só người dùng</p>
+                    <h3 class="card-title">{{tong_user}}</h3>
                 </div>
             </div>
         </div>
@@ -17,8 +17,8 @@
                     <div class="card-icon">
                         <i class="material-icons">content_copy</i>
                     </div>
-                    <p class="card-category">Kỹ thuật</p>
-                    <h3 class="card-title">49/50</h3>
+                    <p class="card-category font-weight-bold">Kỹ thuật</p>
+                    <h3 class="card-title">{{ky_thuat.length}}</h3>
                 </div>
             </div>
         </div>
@@ -28,8 +28,8 @@
                     <div class="card-icon">
                         <i class="material-icons">content_copy</i>
                     </div>
-                    <p class="card-category">Giáo viên</p>
-                    <h3 class="card-title">49/50</h3>
+                    <p class="card-category font-weight-bold">Giáo viên</p>
+                    <h3 class="card-title">{{giao_vien.length}}</h3>
                 </div>
             </div>
         </div>
@@ -37,13 +37,28 @@
 </template>
 <script>
 export default {
+    created() {
+        this.$store.dispatch("user/get_all_user");
+    },
+    computed: {
+        tong_user() {
+            return this.$store.state.user.arr_user.length;
+        },
+        ky_thuat() {
+            return this.$store.state.user.arr_user.filter(
+                (each) => each.ma_cap_do == 2
+            );
+        },
+        giao_vien() {
+            return this.$store.state.user.arr_user.filter(
+                (each) => each.ma_cap_do == 3
+            );
+        },
+    },
     data() {
-        return {
-
-        }
-    }
-}
-
+        return {};
+    },
+};
 </script>
 <style lang="css" scoped>
 </style>

@@ -30,7 +30,6 @@ export default {
     data() {
         return {};
     },
-    methods: {},
     watch: {
         $route(to, from) {
             this.$store.commit("content/page_title", "Quản lý cấu hình");

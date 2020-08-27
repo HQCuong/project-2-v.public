@@ -61,7 +61,7 @@ export default [
             { path: "danh_sach_lab", component: danh_sach_lab },
             { path: "them_lab", component: them_lab },
             { path: "update_lab", component: update_lab },
-            { path: "modi_lab/:ma_lab", component: update_lab }
+            { path: "update_lab/:ma_lab", component: update_lab }
         ],
         beforeEnter: (to, from, next) => {
             if (getCookie("level") == 1 || getCookie("level") == 2) {
@@ -77,7 +77,8 @@ export default [
         children: [
             { path: "danh_sach_cau_hinh", component: danh_sach_cau_hinh },
             { path: "them_cau_hinh", component: them_cau_hinh },
-            { path: "update_cau_hinh", component: update_cau_hinh }
+            { path: "update_cau_hinh", component: update_cau_hinh },
+            { path: "update_cau_hinh/:ma_cau_hinh", component: update_cau_hinh }
         ],
         beforeEnter: (to, from, next) => {
             if (getCookie("level") == 1 || getCookie("level") == 2) {

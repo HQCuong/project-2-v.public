@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form @submit="process_info_user">
+        <form @submit="process_info_user" id="form_update_profile">
             <div>
                 <label>Người dùng</label>
                 <multiselect
@@ -103,6 +103,8 @@ export default {
                 "user/get_user_info",
                 this.$route.params.ma_nguoi_dung
             );
+        } else {
+            this.$store.commit("user/reset_user_info");
         }
 
         this.$store.commit("user/reset_err");
@@ -140,9 +142,10 @@ export default {
         },
         current_user: {
             get() {
-                return this.$store.state.user.user_info.ma_nguoi_dung
-                    ? this.$store.state.user.user_info
-                    : this.user;
+                return this.$store.state.user.arr_user.filter(
+                    (each) =>
+                        each.ma_nguoi_dung == this.$route.params.ma_nguoi_dung
+                );
             },
             set(val) {
                 this.user = val;
@@ -217,14 +220,19 @@ export default {
         },
 
         user() {
-            this.$store.commit("user/reset_err");
-            this.$router.push(
-                `/quan_ly_user/update_thong_tin_user/${this.user.ma_nguoi_dung}`
-            );
-            this.$store.dispatch(
-                "user/get_user_info",
-                this.$route.params.ma_nguoi_dung
-            );
+            if (this.user) {
+                this.$store.commit("user/reset_err");
+                this.$router.push(
+                    `/quan_ly_user/update_thong_tin_user/${this.user.ma_nguoi_dung}`
+                );
+                this.$store.dispatch(
+                    "user/get_user_info",
+                    this.$route.params.ma_nguoi_dung
+                );
+            } else {
+                this.$router.push(`/quan_ly_user/update_thong_tin_user`);
+                this.$store.commit("user/reset_user_info");
+            }
         },
     },
 };

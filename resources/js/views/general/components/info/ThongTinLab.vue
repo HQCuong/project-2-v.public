@@ -1,14 +1,22 @@
 <template>
     <div>
         <br />
-        <p>Số chỗ ngồi: 25</p>
-        <p>Số máy: 20/25</p>
-        <p>Những môn có thể học: PHP, PHP2, PTS</p>
+        <p class="font-weight-bold">Số chỗ ngồi: {{so_cho_ngoi}}</p>
+        <p class="font-weight-bold">Những môn có thể học: PHP, PHP2, PTS</p>
+        <p class="font-weight-bold">Tình trạng: {{tinh_trang}}</p>
     </div>
 </template>
 
 <script>
 export default {
+    computed: {
+        so_cho_ngoi() {
+            return this.$store.state.lab.info_lab.so_cho_ngoi;
+        },
+        tinh_trang() {
+            return this.$store.state.lab.info_lab.tinh_trang.ten_tinh_trang;
+        },
+    },
     data() {
         return {};
     },

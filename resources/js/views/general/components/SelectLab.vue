@@ -102,7 +102,8 @@ export default {
                 this.$store.commit("lab/reset_lich_su_dung");
                 return false;
             } else if (this.toa && this.tang) {
-                this.$store.dispatch("lab/get_lich_su_dung");
+                this.$store.dispatch("lab/get_info_lab", this.lab.ma_phong);
+                this.$store.dispatch("lab/get_lich_su_dung", this.lab.ma_phong);
             }
         },
         arr_toa() {

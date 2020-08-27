@@ -3,12 +3,16 @@ import getCookie from "../../customfunc/getCookie.js";
 export default {
     namespaced: true,
     state: {
-        arr_mon: []
+        arr_mon: [],
+        arr_mon_by_cau_hinh: []
     },
 
     mutations: {
         reset_arr_mon(state) {
             state.arr_mon = [];
+        },
+        reset_arr_mon_by_cau_hinh(state) {
+            state.arr_mon_by_cau_hinh = [];
         }
     },
 
@@ -26,6 +30,23 @@ export default {
                     console.error(error);
                 });
         },
-        get_mon_by_cau_hinh({ state, commit, rootState }) {}
+        get_mon_by_cau_hinh({ state, commit, rootState }, ma_cau_hinh) {
+            state.arr_mon_by_cau_hinh = [];
+            axios
+                .post(`api/cauhinhmon/mon`, {
+                    key: getCookie("key"),
+                    ma_cau_hinh: ma_cau_hinh
+                })
+                .then(res => {
+                    var result = res.data.data.list_mon;
+                    for (const each in result) {
+                        delete result[each].ma_cau_hinh;
+                    }
+                    state.arr_mon_by_cau_hinh = result;
+                })
+                .catch(err => {
+                    console.error(err);
+                });
+        }
     }
 };
