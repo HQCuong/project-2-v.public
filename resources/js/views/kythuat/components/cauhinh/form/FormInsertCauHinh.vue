@@ -1,15 +1,27 @@
 <template>
-    <form>
+    <form @submit="add_cau_hinh">
+        <div class="form-group">
+            <label for="insert_main">Main</label>
+            <input
+                type="text"
+                class="form-control"
+                id="insert_main"
+                placeholder="Nhập Main"
+                v-model="main"
+            />
+            <span class="text-danger">{{err_form.main}}</span>
+        </div>
+        <br />
         <div class="form-group">
             <label for="insert_cpu">CPU</label>
             <input
                 type="text"
                 class="form-control"
                 id="insert_cpu"
-                aria-describedby="emailHelp"
                 placeholder="Nhập CPU"
                 v-model="cpu"
             />
+            <span class="text-danger">{{err_form.cpu}}</span>
         </div>
         <br />
         <div class="form-group">
@@ -18,10 +30,10 @@
                 type="text"
                 class="form-control"
                 id="insert_ram"
-                aria-describedby="emailHelp"
                 placeholder="Nhập Ram"
                 v-model="ram"
             />
+            <span class="text-danger">{{err_form.ram}}</span>
         </div>
         <br />
         <div class="form-group">
@@ -30,10 +42,10 @@
                 type="text"
                 class="form-control"
                 id="insert_hardrive"
-                aria-describedby="emailHelp"
                 placeholder="Nhập ổ cứng"
                 v-model="hard_drive"
             />
+            <span class="text-danger">{{err_form.o_cung}}</span>
         </div>
         <br />
         <div class="form-group">
@@ -42,10 +54,10 @@
                 type="text"
                 class="form-control"
                 id="insert_vga"
-                aria-describedby="emailHelp"
                 placeholder="Nhập card đồ họa"
                 v-model="vga"
             />
+            <span class="text-danger">{{err_form.vga}}</span>
         </div>
         <br />
         <label>Những môn có thể học</label>
@@ -88,6 +100,7 @@ export default {
     },
     data() {
         return {
+            main: "",
             cpu: "",
             ram: "",
             vga: "",
@@ -99,10 +112,25 @@ export default {
         arr_mon() {
             return this.$store.state.mon.arr_mon;
         },
+        err_form() {
+            return this.$store.state.cau_hinh.err_form;
+        },
     },
     methods: {
         labelMon({ ma_mon_hoc, ten_mon_tieng_viet }) {
             return `${ma_mon_hoc} - ${ten_mon_tieng_viet}`;
+        },
+        add_cau_hinh(e) {
+            e.preventDefault();
+            var user_input = {
+                ma_loai: 1,
+                cpu: this.cpu,
+                ram: this.ram,
+                main: this.main,
+                o_cung: this.hard_drive,
+                vga: this.vga,
+            };
+            this.$store.dispatch("cau_hinh/add_cau_hinh", user_input);
         },
     },
 };

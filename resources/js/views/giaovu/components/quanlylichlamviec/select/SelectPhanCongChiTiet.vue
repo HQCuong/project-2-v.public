@@ -59,8 +59,8 @@ export default {
         },
     },
     methods: {
-        phanCongLabel({ ma_lop, ma_nguoi_dung, ma_mon_hoc }) {
-            return `${ma_nguoi_dung} - ${ma_lop} - ${ma_mon_hoc}`;
+        phanCongLabel({ ho_ten, ma_lop, ma_mon_hoc }) {
+            return `${ho_ten} - ${ma_lop} - ${ma_mon_hoc}`;
         },
         gioLabel({ title }) {
             return `${title}`;

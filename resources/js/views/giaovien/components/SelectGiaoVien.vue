@@ -57,7 +57,9 @@ export default {
                 return this.$store.state.phan_cong.arr_phan_cong.filter(
                     (each) => {
                         return (
-                            each.ma_nguoi_dung == this.giao_vien.ma_nguoi_dung
+                            each.nguoidung &&
+                            each.nguoidung.ma_nguoi_dung ==
+                                this.giao_vien.ma_nguoi_dung
                         );
                     }
                 );

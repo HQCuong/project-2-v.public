@@ -47,7 +47,16 @@ export default {
                     key: getCookie("key")
                 })
                 .then(res => {
-                    state.arr_phan_cong = res.data.data;
+                    var result = res.data.data;
+                    for (const each in result) {
+                        var clone_obj = {
+                            ...result[each],
+                            ho_ten: result[each].nguoidung
+                                ? result[each].nguoidung.ho_ten
+                                : "demo"
+                        };
+                        state.arr_phan_cong.push(clone_obj);
+                    }
                 })
                 .catch(err => {
                     console.error(err);

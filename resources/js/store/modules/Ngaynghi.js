@@ -6,7 +6,8 @@ export default {
     namespaced: true,
     state: {
         arr_ngay_nghi: [],
-        err_note: ""
+        err_note: "",
+        reset_form: false
     },
 
     mutations: {
@@ -54,6 +55,7 @@ export default {
                 });
         },
         add_ngay_nghi({ state, commit, rootState }, user_input) {
+            state.reset_form = false;
             axios
                 .post(`api/ngaynghi/them`, {
                     key: getCookie("key"),
@@ -68,15 +70,18 @@ export default {
                                 title: "Thất bại",
                                 text: "Đã " + res.data.message
                             });
+                            state.reset_form = false;
                         } else {
                             Vue.notify({
                                 group: "nofi",
                                 title: "Thành công",
                                 text: res.data.message
                             });
+                            state.reset_form = true;
                         }
                     } else {
                         state.err_note = res.data.message.ghi_chu;
+                        state.reset_form = false;
                     }
                 })
                 .catch(err => {

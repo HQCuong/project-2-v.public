@@ -31,8 +31,8 @@ export default {
         },
     },
     methods: {
-        labelPcong({ ma_nguoi_dung, ma_lop, ma_mon_hoc }) {
-            return `${ma_nguoi_dung} - ${ma_lop} - ${ma_mon_hoc}`;
+        labelPcong({ ho_ten, ma_lop, ma_mon_hoc }) {
+            return `${ho_ten} - ${ma_lop} - ${ma_mon_hoc}`;
         },
     },
     watch: {

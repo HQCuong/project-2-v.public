@@ -25,6 +25,7 @@ export default {
                 .catch(error => {
                     console.error(error);
                 });
-        }
+        },
+        get_mon_by_cau_hinh({ state, commit, rootState }) {}
     }
 };

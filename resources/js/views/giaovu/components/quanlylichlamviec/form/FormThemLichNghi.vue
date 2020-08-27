@@ -91,6 +91,9 @@ export default {
         err_note() {
             return this.$store.state.ngay_nghi.err_note;
         },
+        reset_form() {
+            return this.$store.state.ngay_nghi.reset_form;
+        },
     },
     data() {
         return {
@@ -177,8 +180,13 @@ export default {
         },
     },
     watch: {
-        ca() {
-            console.log(this.ca);
+        reset_form() {
+            if (this.reset_form) {
+                this.ngay_nghi = "";
+                this.user = "";
+                this.ca = "";
+                this.ghi_chu = "";
+            }
         },
     },
 };
