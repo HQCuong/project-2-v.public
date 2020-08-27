@@ -80,6 +80,17 @@ class ShowCallController extends Controller {
         }
         return $list->data;
     }
+    public function checkOnCuArray($phan_cong) {
+        $this->setBody([
+            'phan_cong' => $phan_cong,
+        ]);
+        $list = (object) $this->postApi('lichsudaday');
+        // dd($list);
+        if (empty($list->success) || $list->success == false) {
+            return false;
+        }
+        return $list->data;
+    }
     public function gioDaDay($cac_lop, $ma_mon_hoc) {
         try {
             $this->setBody([

@@ -225,9 +225,15 @@ Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVu']], function () {
         ->name('api.lichdaybosung.xoaLich');
 });
 //LichHoc Controller
+Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVu']], function () {
+    Route::any('lichhoc/lichphong', 'Api\LichHocController@lichPhong')
+        ->name('api.lichhoc.lichPhong');
+});
 Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVuOrGiaoVien']], function () {
-    Route::any('lichhoc', 'Api\LichHocController@lichCuHocCuaLop')
-        ->name('api.lichhoc.lichCuHocCuaLop');
+    Route::any('lichhoc/giaovien', 'Api\LichHocController@lichDayCuaGiaoVien')
+        ->name('api.lichhoc.lichDayCuaGiaoVien');
+    Route::any('lichhoc/dukienketthuc', 'Api\LichHocController@lichDuKienKetThuc')
+        ->name('api.lichhoc.lichDuKienKetThuc');
     Route::any('lichhoc/bosungdexuat', 'Api\LichHocController@lichDayBoSungDeXuat')
         ->name('api.lichhoc.lichDayBoSungDeXuat');
 });

@@ -1684,6 +1684,229 @@ define({ "api": [
   },
   {
     "type": "POST",
+    "url": "lichhoc/dukienketthuc",
+    "title": "1.2. Dự kiến kết thúc một Phân Công",
+    "version": "0.1.0",
+    "name": "Dự_Kiến_Kết_Thúc",
+    "group": "Lịch_Học",
+    "description": "<p>Dự kiến kết thúc một Phân Công<br></p> <h1 class=\"display-1\">-Lưu ý: </h1>  <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">      <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button>      <!-- <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button> -->      <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button>  </div><br>     +Nếu giáo vụ được kiểm tra ở tất cả các phân công chưa kết thúc<br>     +Nếu giáo viên chỉ xem được phân công của chính mình<br>     +ngay_nghi = true là nghỉ = false là lịch <br>",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:8080/project-2/public/api/lichhoc/dukienketthuc"
+      }
+    ],
+    "examples": [
+      {
+        "title": "Truy Vấn Mẫu:",
+        "content": "{\n    \"key\": \"1\",\n    \"ma_phan_cong\": 426\n}",
+        "type": "php"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "key",
+            "description": "<p>Mã Key của người dùng.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "ma_phan_cong",
+            "description": "<p>Mã phân công.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Báo kết quả xử lý.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "data",
+            "description": "<p>Dữ liệu sau khi xử lý.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Thành Công:",
+          "content": "    HTTP/1.1 200 OK\ncó nhiều messgae : Đã hoàn thành lịch dạy vào ngày 20-08-2020 hoặc Dự kiến kết thúc vào ngày 01-09-2020 còn cả các message khác nữa\n{\n    \"success\": true,\n    \"message\": \"Dự kiến kết thúc vào ngày 01-09-2020\",\n    \"data\": {\n        \"ma_lop\": \"BKD01K10\",\n        \"ma_mon_hoc\": \"BKA_WEB\",\n        \"giao_vien\": {\n            \"ma_nguoi_dung\": 32,\n            \"ho_ten\": \"Nguyễn Nam Long\",\n            \"tai_khoan\": \"long.nn\",\n            \"email\": \"long.nn@bkacad.edu.vn\",\n            \"sdt\": \"0378050602\"\n        },\n        \"lich_day\": [\n            {\n                \"ngay\": \"2020-07-10\",\n                \"gio_bat_dau\": \"13:30:00\",\n                \"gio_ket_thuc\": \"15:30:00\",\n                \"phong\": null\n            },\n        ]\n    }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Không Thành Công:",
+          "content": "    HTTP/1.1 200 OK\n+ Có nhiều dạng trả về không thành công như key sai,lỗi truy vấn sql\n+ Tất cả các lỗi đều có \"message\" kèm theo như ví dụ bên dưới\n{\n    \"success\": false,\n    \"message\": {\n        \"ma_giao_vien\": \"Người dùng không tồn tại\"\n    },\n    \"data\": []\n}\n{\n    \"success\": false,\n    \"message\": \"Bạn không có quyền truy cập\",\n    \"data\": []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "duong_doc/lich_hoc.php",
+    "groupTitle": "Lịch_Học"
+  },
+  {
+    "type": "POST",
+    "url": "lichhoc/giaovien",
+    "title": "1.1. Lịch Dạy Của Giáo Viên",
+    "version": "0.1.0",
+    "name": "Hiện_thị_lịch_dạy_của_Giáo_Viên",
+    "group": "Lịch_Học",
+    "description": "<p>Hiện thị lịch dạy của Giáo Viên<br></p> <h1 class=\"display-1\">-Lưu ý: </h1>  <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">      <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button>      <!-- <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button> -->      <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button>  </div><br>     +Cần lấy thôn tin của mã giáo viên nào truyền vào mã giáo viên đó.<br>     +Có thể không truyền gì nếu lấy thông tin của chính mình<br>     +ngay_nghi = true là nghỉ = false là lịch <br>",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:8080/project-2/public/api/lichhoc/giaovien"
+      }
+    ],
+    "examples": [
+      {
+        "title": "Truy Vấn Mẫu:",
+        "content": "{\n    \"key\": \"1\",\n    \"ma_giao_vien\": 6\n}",
+        "type": "php"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "key",
+            "description": "<p>Mã Key của Người Dùng.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "ma_giao_vien",
+            "description": "<p>mã của Giáo Viên.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "data",
+            "description": "<p>Dữ liệu của Tầng.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Thành Công:",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"message\": \"Lấy dữ liệu thành công\",\n    \"data\": {\n        \"2020-07-11\": [\n            {\n                \"ngay\": \"2020-07-11\",\n                \"gio_bat_dau\": \"13:30:00\",\n                \"gio_ket_thuc\": \"15:30:00\",\n                \"phong\": null,\n                \"ma_lop\": \"BKD01K10\",\n                \"ma_mon_hoc\": \"BKA_ESE\",\n                \"so_gio\": \"2.0000\",\n                \"nghi\": false\n            }\n        ],\n    }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Không Thành Công:",
+          "content": "    HTTP/1.1 200 OK\n+ Có nhiều dạng trả về không thành công như key sai,lỗi truy vấn sql\n+ Tất cả các lỗi đều có \"message\" kèm theo như ví dụ bên dưới\n{\n    \"success\": false,\n    \"message\": {\n        \"ma_giao_vien\": \"Người dùng không tồn tại\"\n    },\n    \"data\": []\n}\n{\n    \"success\": false,\n    \"message\": \"Bạn không có quyền truy cập\",\n    \"data\": []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "duong_doc/lich_hoc.php",
+    "groupTitle": "Lịch_Học"
+  },
+  {
+    "type": "POST",
+    "url": "lichhoc/lichphong",
+    "title": "1.3. Lấy ra lịch hoạt động của một phòng nào đó",
+    "version": "0.1.0",
+    "name": "Lịch_Hoạt_Động_Phòng",
+    "group": "Lịch_Học",
+    "description": "<p>Lịch Hoạt Động Phòng<br></p> <h1 class=\"display-1\">-Lưu ý: </h1>  <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">      <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button>      <!-- <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button> -->      <!-- <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button> -->  </div><br>         +Cần truyền vào mã phòng<br>         +Sẽ trả thêm ngày nghỉ nếu ngày đó cả trường nghỉ<br>         +ngay_nghi = true là nghỉ = false là lịch <br>",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:8080/project-2/public/api/lichhoc/lichphong"
+      }
+    ],
+    "examples": [
+      {
+        "title": "Truy Vấn Mẫu:",
+        "content": "{\n    \"key\": \"1\",\n    \"ma_phong\": 2\n}",
+        "type": "php"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "key",
+            "description": "<p>Mã Key của Người Dùng.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "ma_phong",
+            "description": "<p>Ma Phòng.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "data",
+            "description": "<p>Kết quả.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Thành Công:",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"message\": \"Lấy dữ liệu thành công\",\n    \"data\": {\n        \"2020-08-29\": [\n            {\n                \"ngay\": \"2020-08-29\",\n                \"gio_bat_dau\": \"08:00:00\",\n                \"gio_ket_thuc\": \"10:00:00\",\n                \"ma_lop\": \"BIT01K10\",\n                \"ma_mon_hoc\": \"BIT_ECOM1\",\n                \"ma_nguoi_dung\": 6,\n                \"ho_ten\": \"Lê Thị Hương Liên\",\n                \"so_gio\": \"2.0000\",\n                \"hoat_dong\": \"Bất Thường\",\n                \"nghi\": false\n            }\n        ],\n    }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Không Thành Công:",
+          "content": "    HTTP/1.1 200 OK\n+ Có nhiều dạng trả về không thành công như key sai,lỗi truy vấn sql\n+ Tất cả các lỗi đều có \"message\" kèm theo như ví dụ bên dưới\n{\n    \"success\": false,\n    \"message\": {\n        \"ma_phong\": \"Phòng không tồn tại\"\n    },\n    \"data\": []\n}\n{\n    \"success\": false,\n    \"message\": \"Bạn không có quyền truy cập\",\n    \"data\": []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "duong_doc/lich_hoc.php",
+    "groupTitle": "Lịch_Học"
+  },
+  {
+    "type": "POST",
     "url": "monhoc/clone",
     "title": "1.2. Clone Mon Từ DTB VỀ Local",
     "version": "0.1.0",
