@@ -14,12 +14,14 @@ class InsertValue extends Migration {
 ('2020-07-01', 10, 3, NULL, 2),
 ('2020-07-09', 1, 3, NULL, 1),
 ('2020-07-09', 6, 4, NULL, 1),
-('2020-07-10', 10, 1, 'Đi chơi', 1),
-('2020-07-10', 15, 1, 'Đi chơi', 1),
-('2020-07-10', 20, 1, 'Đi chơi', 1),
-('2020-07-10', 25, 1, 'Đi chơi', 1),
+('2020-07-10', 10, 2, 'Đi chơi', 1),
+('2020-07-10', 15, 5, 'Đi chơi', 1),
+('2020-07-10', 20, 6, 'Đi chơi', 1),
+('2020-07-10', 25, 5, 'Đi chơi', 1),
 ('2020-07-17', 10, 6, NULL, 1),
 ('2020-07-29', 5, 3, NULL, 1)"));
+        DB::select(DB::raw("UPDATE `ngay_nghi` SET ngay_nghi.ngay = DATE_ADD(ngay_nghi.ngay, INTERVAL 2 MONTH)"));
+        // DB::select(DB::raw("UPDATE `ngay_nghi` SET ngay_nghi.ngay = DATE_ADD(ngay_nghi.ngay, INTERVAL 20 DAY)"));
         //pccc
         // DB::select(DB::raw("INSERT INTO `phan_cong_chi_tiet` (`ma_phan_cong`, `thu`, `ma_ca`, `ma_phong`) VALUES
         // (17, 2, 3, 4),
