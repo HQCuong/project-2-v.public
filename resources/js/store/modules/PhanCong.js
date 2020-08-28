@@ -40,12 +40,16 @@ export default {
         }
     },
     actions: {
-        get_phan_cong({ state, commit, rootState }) {
+        get_phan_cong({ state, commit, rootState }, ma_giao_vien) {
             state.arr_phan_cong = [];
+            var obj = {
+                key: getCookie("key")
+            };
+            if (ma_giao_vien) {
+                obj.ma_giao_vien = ma_giao_vien;
+            }
             axios
-                .post(`api/phancong`, {
-                    key: getCookie("key")
-                })
+                .post(`api/phancong`, obj)
                 .then(res => {
                     var result = res.data.data;
                     for (const each in result) {

@@ -1,5 +1,5 @@
 import getCookie from "../../customfunc/getCookie";
-import formatEventsLab from "../../customfunc/formatEventsLab";
+import formatEventsLab from "../../customfunc/formatEvents";
 
 export default {
     namespaced: true,

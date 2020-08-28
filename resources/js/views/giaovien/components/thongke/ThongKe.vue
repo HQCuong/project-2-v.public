@@ -1,18 +1,20 @@
 <template>
-	<div>
-		<p>Số giờ đã dạy: 20 giờ</p>
-		<p>Số giờ còn lại: 8 giờ</p>
-	</div>
+    <div>
+        <p>{{lich_ket_thuc}}</p>
+    </div>
 </template>
 
 <script>
 export default {
-  data () {
-    return {
-
-    }
-  }
-}
+    computed: {
+        lich_ket_thuc() {
+            return this.$store.state.giao_vien.lich_ket_thuc;
+        },
+    },
+    data() {
+        return {};
+    },
+};
 </script>
 
 <style lang="css" scoped>

@@ -1,5 +1,16 @@
-export default function formatEventsLab(arr) {
+export default function formatEvents(arr, phan_cong) {
     var result_arr = [];
+
+    if (phan_cong) {
+        for (const each in arr) {
+            var clone_obj = {};
+            clone_obj.start = arr[each].ngay + `T${arr[each].gio_bat_dau}`;
+            clone_obj.end = arr[each].ngay + `T${arr[each].gio_ket_thuc}`;
+            result_arr.push(clone_obj);
+        }
+        return result_arr;
+    }
+
     for (const each in arr) {
         for (let i = 0; i < arr[each].length; i++) {
             var clone_obj = {};

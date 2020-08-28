@@ -15,13 +15,13 @@
             ></multiselect>
         </div>
         <br />
-        <label>Chọn lớp</label>
+        <label>Chọn phân công</label>
         <multiselect
-            v-model="lop"
-            :options="arr_lop"
+            v-model="phan_cong"
+            :options="arr_phan_cong"
             :close-on-select="true"
             :show-labels="true"
-            placeholder="Chọn lớp"
+            placeholder="Chọn phân công"
             deselectLabel="Click hoặc nhấn Enter để bỏ chọn"
             selectLabel="Click hoặc nhấn Enter để chọn"
             :searchable="true"
@@ -38,7 +38,7 @@ export default {
     props: ["is_giao_vien"],
     data() {
         return {
-            lop: "",
+            phan_cong: "",
             giao_vien: "",
         };
     },
@@ -52,42 +52,47 @@ export default {
                 return [this.$store.state.user.self_info];
             }
         },
-        arr_lop() {
-            if (this.giao_vien) {
-                return this.$store.state.phan_cong.arr_phan_cong.filter(
-                    (each) => {
-                        return (
-                            each.nguoidung &&
-                            each.nguoidung.ma_nguoi_dung ==
-                                this.giao_vien.ma_nguoi_dung
-                        );
-                    }
-                );
-            } else {
-                return [];
-            }
+        arr_phan_cong() {
+            return !this.is_giao_vien
+                ? this.$store.state.phan_cong.arr_phan_cong
+                : this.$store.state.phan_cong.arr_phan_cong.filter(
+                      (each) =>
+                          each.ma_nguoi_dung == this.giao_vien.ma_nguoi_dung
+                  );
         },
     },
     watch: {
         giao_vien() {
+            this.phan_cong = "";
             if (!this.giao_vien) {
                 this.$store.commit("giao_vien/reset_lich_lam_viec");
-                this.lop = "";
-            }
-        },
-        lop() {
-            if (this.lop) {
+            } else {
+                this.$store.dispatch(
+                    "phan_cong/get_phan_cong",
+                    this.giao_vien.ma_nguoi_dung
+                );
                 this.$store.dispatch(
                     "giao_vien/get_lich_lam_viec",
                     this.giao_vien.ma_nguoi_dung
                 );
+            }
+        },
+        phan_cong() {
+            if (this.phan_cong) {
+                this.$store.dispatch(
+                    "giao_vien/get_lich_lam_viec_by_phan_cong",
+                    this.phan_cong.ma_phan_cong
+                );
             } else {
-                this.$store.commit("giao_vien/reset_lich_lam_viec");
+                this.$store.dispatch(
+                    "giao_vien/get_lich_lam_viec",
+                    this.giao_vien.ma_nguoi_dung
+                );
             }
         },
         arr_gv() {
             if (this.arr_gv.length == 1) {
-                this.giao_vien = this.arr_gv;
+                this.giao_vien = this.arr_gv[0];
             }
         },
     },
@@ -95,8 +100,8 @@ export default {
         labelUser({ ho_ten, email }) {
             return `${ho_ten} - ${email}`;
         },
-        classLabel({ ma_lop }) {
-            return `${ma_lop}`;
+        classLabel({ ma_lop, ma_mon_hoc }) {
+            return `${ma_lop} - ${ma_mon_hoc}`;
         },
     },
 };

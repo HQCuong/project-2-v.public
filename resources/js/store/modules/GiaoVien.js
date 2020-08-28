@@ -1,11 +1,12 @@
 import getCookie from "../../customfunc/getCookie.js";
-import groupCollection from "../../customfunc/groupCollection.js";
 import Vue from "vue";
+import formatEvents from "../../customfunc/formatEvents";
 
 export default {
     namespaced: true,
     state: {
-        lich_lam_viec: []
+        lich_lam_viec: [],
+        lich_ket_thuc: ""
     },
     mutations: {
         reset_lich_lam_viec(state) {
@@ -15,21 +16,44 @@ export default {
     actions: {
         get_lich_lam_viec({ state, commit, rootState }, ma_giao_vien) {
             state.lich_lam_viec = [];
-
-            var ev1 = {
-                title: "WEB",
-                start: "2020-08-03" + "T10:00:00",
-                end: "2020-08-03" + "T12:00:00"
+            state.lich_ket_thuc = "";
+            var obj = {
+                key: getCookie("key")
             };
-
-            state.lich_lam_viec.push(ev1);
-
-            var ev2 = {
-                title: "SQL1",
-                start: "2020-08-15" + "T08:00:00",
-                end: "2020-08-15" + "T12:00:00"
-            };
-            state.lich_lam_viec.push(ev2);
+            if (ma_giao_vien) {
+                obj.ma_giao_vien = ma_giao_vien;
+            }
+            axios
+                .post(`api/lichhoc/giaovien`, obj)
+                .then(res => {
+                    state.lich_lam_viec = formatEvents(res.data.data);
+                })
+                .catch(err => {
+                    console.error(err);
+                });
+        },
+        get_lich_lam_viec_by_phan_cong(
+            { state, commit, rootState },
+            ma_phan_cong
+        ) {
+            state.lich_lam_viec = [];
+            state.lich_ket_thuc = "";
+            axios
+                .post(`api/lichhoc/dukienketthuc`, {
+                    key: getCookie("key"),
+                    ma_phan_cong: ma_phan_cong
+                })
+                .then(res => {
+                    console.log(res);
+                    state.lich_ket_thuc = res.data.message;
+                    state.lich_lam_viec = formatEvents(
+                        res.data.data.lich_day,
+                        true
+                    );
+                })
+                .catch(err => {
+                    console.error(err);
+                });
         }
     }
 };

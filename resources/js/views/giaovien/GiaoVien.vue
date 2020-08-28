@@ -6,10 +6,8 @@
                     <div class="card-body">
                         <selectGiaovien :is_giao_vien="is_giao_vien"></selectGiaovien>
                         <br />
-                        <lichLamViec
-                            v-if="show_lich_lam_viec || is_giao_vien"
-                            :lich_lam_viec="lich_lam_viec"
-                        ></lichLamViec>
+                        <span v-if="lich_lam_viec.length == 0">{{empty_message}}</span>
+                        <lichLamViec v-if="show_lich_lam_viec" :lich_lam_viec="lich_lam_viec"></lichLamViec>
                     </div>
                 </div>
             </div>
@@ -25,11 +23,9 @@ export default {
         if (!this.$store.state.user.is_giao_vien) {
             // phan cong
             this.$store.dispatch("user/get_all_user");
-            this.$store.dispatch("phan_cong/get_phan_cong");
         } else {
             // neu la giao vien get phan cong theo ma
             this.$store.dispatch("user/get_self_info");
-            this.$store.dispatch("phan_cong/get_phan_cong");
         }
     },
     mounted() {
@@ -48,6 +44,9 @@ export default {
         },
         lich_lam_viec() {
             return this.$store.state.giao_vien.lich_lam_viec;
+        },
+        empty_message() {
+            return this.$store.state.giao_vien.lich_ket_thuc;
         },
     },
     watch: {

@@ -8,7 +8,7 @@ export default {
         arr_ngay_nghi: [],
         err_note: "",
         reset_form: false,
-        thong_ke_ngay_nghi: "",
+        thong_ke_ngay_nghi: 0,
         thong_ke_by_gv: ""
     },
 
@@ -35,6 +35,19 @@ export default {
                 })
                 .then(res => {
                     if (res.data.success) {
+                        var today = new Date();
+                        var dd = String(today.getDate()).padStart(2, "0");
+                        var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+                        var yyyy = today.getFullYear();
+
+                        today = yyyy + "-" + mm + "-" + dd;
+
+                        for (const each in res.data.data) {
+                            if (each == today) {
+                                state.thong_ke_ngay_nghi =
+                                    res.data.data[each].length;
+                            }
+                        }
                         state.arr_ngay_nghi = formatNgayNghi(res.data.data);
                     }
                 })

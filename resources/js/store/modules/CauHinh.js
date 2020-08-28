@@ -1,7 +1,6 @@
 import getCookie from "../../customfunc/getCookie.js";
 import formatCauHinh from "../../customfunc/formatCauHinh";
 import Vue from "vue";
-import { get } from "lodash";
 
 export default {
     namespaced: true,
@@ -10,8 +9,7 @@ export default {
         thong_tin_cau_hinh: {},
         cau_hinh_da_co_mon: "",
         sum_cau_hinh: "",
-        err_form: {},
-        reset_form: false
+        err_form: {}
     },
 
     mutations: {
@@ -63,7 +61,6 @@ export default {
                 });
         },
         add_cau_hinh({ state, commit, dispatch, rootState }, user_input) {
-            state.reset_form = false;
             state.err_form = [];
             axios
                 .post(`api/cauhinh/them`, {
@@ -85,10 +82,8 @@ export default {
                             title: "Thành công",
                             text: res.data.message
                         });
-                        state.reset_form = true;
                     } else {
                         state.err_form = res.data.message;
-                        state.reset_form = false;
                     }
                 })
                 .catch(err => {
@@ -96,6 +91,7 @@ export default {
                 });
         },
         add_mon_to_cau_hinh({ state, commit, rootState }, data) {
+            console.log(data);
             axios
                 .post(`api/cauhinhmon/capnhat`, {
                     ...data

@@ -7,7 +7,7 @@
                         <i class="material-icons">content_copy</i>
                     </div>
                     <p class="card-category">Số giáo viên nghỉ trong ngày</p>
-                    <h3 class="card-title">49/50</h3>
+                    <h3 class="card-title">{{gv_nghi_trong_ngay}}</h3>
                 </div>
             </div>
         </div>
@@ -15,7 +15,11 @@
 </template>
 <script>
 export default {
-    created() {},
+    computed: {
+        gv_nghi_trong_ngay() {
+            return this.$store.state.ngay_nghi.thong_ke_ngay_nghi;
+        },
+    },
     data() {
         return {};
     },

@@ -16180,8 +16180,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -16189,11 +16187,9 @@ __webpack_require__.r(__webpack_exports__);
     if (!this.$store.state.user.is_giao_vien) {
       // phan cong
       this.$store.dispatch("user/get_all_user");
-      this.$store.dispatch("phan_cong/get_phan_cong");
     } else {
       // neu la giao vien get phan cong theo ma
       this.$store.dispatch("user/get_self_info");
-      this.$store.dispatch("phan_cong/get_phan_cong");
     }
   },
   mounted: function mounted() {
@@ -16212,6 +16208,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     lich_lam_viec: function lich_lam_viec() {
       return this.$store.state.giao_vien.lich_lam_viec;
+    },
+    empty_message: function empty_message() {
+      return this.$store.state.giao_vien.lich_ket_thuc;
     }
   },
   watch: {
@@ -16354,7 +16353,7 @@ __webpack_require__.r(__webpack_exports__);
   props: ["is_giao_vien"],
   data: function data() {
     return {
-      lop: "",
+      phan_cong: "",
       giao_vien: ""
     };
   },
@@ -16368,35 +16367,35 @@ __webpack_require__.r(__webpack_exports__);
         return [this.$store.state.user.self_info];
       }
     },
-    arr_lop: function arr_lop() {
+    arr_phan_cong: function arr_phan_cong() {
       var _this = this;
 
-      if (this.giao_vien) {
-        return this.$store.state.phan_cong.arr_phan_cong.filter(function (each) {
-          return each.nguoidung && each.nguoidung.ma_nguoi_dung == _this.giao_vien.ma_nguoi_dung;
-        });
-      } else {
-        return [];
-      }
+      return !this.is_giao_vien ? this.$store.state.phan_cong.arr_phan_cong : this.$store.state.phan_cong.arr_phan_cong.filter(function (each) {
+        return each.ma_nguoi_dung == _this.giao_vien.ma_nguoi_dung;
+      });
     }
   },
   watch: {
     giao_vien: function giao_vien() {
+      this.phan_cong = "";
+
       if (!this.giao_vien) {
         this.$store.commit("giao_vien/reset_lich_lam_viec");
-        this.lop = "";
+      } else {
+        this.$store.dispatch("phan_cong/get_phan_cong", this.giao_vien.ma_nguoi_dung);
+        this.$store.dispatch("giao_vien/get_lich_lam_viec", this.giao_vien.ma_nguoi_dung);
       }
     },
-    lop: function lop() {
-      if (this.lop) {
-        this.$store.dispatch("giao_vien/get_lich_lam_viec", this.giao_vien.ma_nguoi_dung);
+    phan_cong: function phan_cong() {
+      if (this.phan_cong) {
+        this.$store.dispatch("giao_vien/get_lich_lam_viec_by_phan_cong", this.phan_cong.ma_phan_cong);
       } else {
-        this.$store.commit("giao_vien/reset_lich_lam_viec");
+        this.$store.dispatch("giao_vien/get_lich_lam_viec", this.giao_vien.ma_nguoi_dung);
       }
     },
     arr_gv: function arr_gv() {
       if (this.arr_gv.length == 1) {
-        this.giao_vien = this.arr_gv;
+        this.giao_vien = this.arr_gv[0];
       }
     }
   },
@@ -16407,8 +16406,9 @@ __webpack_require__.r(__webpack_exports__);
       return "".concat(ho_ten, " - ").concat(email);
     },
     classLabel: function classLabel(_ref2) {
-      var ma_lop = _ref2.ma_lop;
-      return "".concat(ma_lop);
+      var ma_lop = _ref2.ma_lop,
+          ma_mon_hoc = _ref2.ma_mon_hoc;
+      return "".concat(ma_lop, " - ").concat(ma_mon_hoc);
     }
   }
 });
@@ -16430,8 +16430,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  computed: {
+    lich_ket_thuc: function lich_ket_thuc() {
+      return this.$store.state.giao_vien.lich_ket_thuc;
+    }
+  },
   data: function data() {
     return {};
   }
@@ -17664,7 +17668,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  created: function created() {},
+  computed: {
+    gv_nghi_trong_ngay: function gv_nghi_trong_ngay() {
+      return this.$store.state.ngay_nghi.thong_ke_ngay_nghi;
+    }
+  },
   data: function data() {
     return {};
   }
@@ -62618,7 +62626,11 @@ var render = function() {
               _vm._v(" "),
               _c("br"),
               _vm._v(" "),
-              _vm.show_lich_lam_viec || _vm.is_giao_vien
+              _vm.lich_lam_viec.length == 0
+                ? _c("span", [_vm._v(_vm._s(_vm.empty_message))])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.show_lich_lam_viec
                 ? _c("lichLamViec", {
                     attrs: { lich_lam_viec: _vm.lich_lam_viec }
                   })
@@ -62722,27 +62734,27 @@ var render = function() {
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
-      _c("label", [_vm._v("Chọn lớp")]),
+      _c("label", [_vm._v("Chọn phân công")]),
       _vm._v(" "),
       _c(
         "multiselect",
         {
           attrs: {
-            options: _vm.arr_lop,
+            options: _vm.arr_phan_cong,
             "close-on-select": true,
             "show-labels": true,
-            placeholder: "Chọn lớp",
+            placeholder: "Chọn phân công",
             deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
             selectLabel: "Click hoặc nhấn Enter để chọn",
             searchable: true,
             "custom-label": _vm.classLabel
           },
           model: {
-            value: _vm.lop,
+            value: _vm.phan_cong,
             callback: function($$v) {
-              _vm.lop = $$v
+              _vm.phan_cong = $$v
             },
-            expression: "lop"
+            expression: "phan_cong"
           }
         },
         [
@@ -62780,20 +62792,9 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [_c("p", [_vm._v(_vm._s(_vm.lich_ket_thuc))])])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("p", [_vm._v("Số giờ đã dạy: 20 giờ")]),
-      _vm._v(" "),
-      _c("p", [_vm._v("Số giờ còn lại: 8 giờ")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -63815,35 +63816,35 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "main-info-container row" }, [
+    _c("div", { staticClass: "col-lg-4 col-md-6 col-sm-6" }, [
+      _c("div", { staticClass: "card card-stats" }, [
+        _c(
+          "div",
+          { staticClass: "card-header card-header-info card-header-icon" },
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("p", { staticClass: "card-category" }, [
+              _vm._v("Số giáo viên nghỉ trong ngày")
+            ]),
+            _vm._v(" "),
+            _c("h3", { staticClass: "card-title" }, [
+              _vm._v(_vm._s(_vm.gv_nghi_trong_ngay))
+            ])
+          ]
+        )
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "main-info-container row" }, [
-      _c("div", { staticClass: "col-lg-4 col-md-6 col-sm-6" }, [
-        _c("div", { staticClass: "card card-stats" }, [
-          _c(
-            "div",
-            { staticClass: "card-header card-header-info card-header-icon" },
-            [
-              _c("div", { staticClass: "card-icon" }, [
-                _c("i", { staticClass: "material-icons" }, [
-                  _vm._v("content_copy")
-                ])
-              ]),
-              _vm._v(" "),
-              _c("p", { staticClass: "card-category" }, [
-                _vm._v("Số giáo viên nghỉ trong ngày")
-              ]),
-              _vm._v(" "),
-              _c("h3", { staticClass: "card-title" }, [_vm._v("49/50")])
-            ]
-          )
-        ])
-      ])
+    return _c("div", { staticClass: "card-icon" }, [
+      _c("i", { staticClass: "material-icons" }, [_vm._v("content_copy")])
     ])
   }
 ]
@@ -85055,25 +85056,36 @@ function formatNgayNghi(arr) {
 
 /***/ }),
 
-/***/ "./resources/js/customfunc/formatEventsLab.js":
-/*!****************************************************!*\
-  !*** ./resources/js/customfunc/formatEventsLab.js ***!
-  \****************************************************/
+/***/ "./resources/js/customfunc/formatEvents.js":
+/*!*************************************************!*\
+  !*** ./resources/js/customfunc/formatEvents.js ***!
+  \*************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return formatEventsLab; });
-function formatEventsLab(arr) {
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return formatEvents; });
+function formatEvents(arr, phan_cong) {
   var result_arr = [];
 
-  for (var each in arr) {
-    for (var i = 0; i < arr[each].length; i++) {
+  if (phan_cong) {
+    for (var each in arr) {
       var clone_obj = {};
-      clone_obj.start = arr[each][i].ngay + "T".concat(arr[each][i].gio_bat_dau);
-      clone_obj.end = arr[each][i].ngay + "T".concat(arr[each][i].gio_ket_thuc);
-      clone_obj.title = !arr[each][i].ma_lop ? "".concat(arr[each][i].hoat_dong) : "".concat(arr[each][i].ma_lop, " - ").concat(arr[each][i].ma_mon_hoc);
+      clone_obj.start = arr[each].ngay + "T".concat(arr[each].gio_bat_dau);
+      clone_obj.end = arr[each].ngay + "T".concat(arr[each].gio_ket_thuc);
+      result_arr.push(clone_obj);
+    }
+
+    return result_arr;
+  }
+
+  for (var _each in arr) {
+    for (var i = 0; i < arr[_each].length; i++) {
+      var clone_obj = {};
+      clone_obj.start = arr[_each][i].ngay + "T".concat(arr[_each][i].gio_bat_dau);
+      clone_obj.end = arr[_each][i].ngay + "T".concat(arr[_each][i].gio_ket_thuc);
+      clone_obj.title = !arr[_each][i].ma_lop ? "".concat(arr[_each][i].hoat_dong) : "".concat(arr[_each][i].ma_lop, " - ").concat(arr[_each][i].ma_mon_hoc);
       result_arr.push(clone_obj);
     }
   }
@@ -85702,14 +85714,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _customfunc_formatCauHinh__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../customfunc/formatCauHinh */ "./resources/js/customfunc/formatCauHinh.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_3__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -85721,8 +85730,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     thong_tin_cau_hinh: {},
     cau_hinh_da_co_mon: "",
     sum_cau_hinh: "",
-    err_form: {},
-    reset_form: false
+    err_form: {}
   },
   mutations: {
     reset_thong_tin_cau_hinh: function reset_thong_tin_cau_hinh(state) {
@@ -85776,7 +85784,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           commit = _ref4.commit,
           dispatch = _ref4.dispatch,
           rootState = _ref4.rootState;
-      state.reset_form = false;
       state.err_form = [];
       axios.post("api/cauhinh/them", _objectSpread({
         key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("key")
@@ -85796,10 +85803,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             title: "Thành công",
             text: res.data.message
           });
-          state.reset_form = true;
         } else {
           state.err_form = res.data.message;
-          state.reset_form = false;
         }
       })["catch"](function (err) {
         console.error(err);
@@ -85809,6 +85814,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var state = _ref5.state,
           commit = _ref5.commit,
           rootState = _ref5.rootState;
+      console.log(data);
       axios.post("api/cauhinhmon/capnhat", _objectSpread({}, data)).then(function (res) {
         if (res.data.success && data.nofi) {
           vue__WEBPACK_IMPORTED_MODULE_2___default.a.notify({
@@ -85900,16 +85906,17 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../customfunc/getCookie.js */ "./resources/js/customfunc/getCookie.js");
-/* harmony import */ var _customfunc_groupCollection_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../customfunc/groupCollection.js */ "./resources/js/customfunc/groupCollection.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _customfunc_formatEvents__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../customfunc/formatEvents */ "./resources/js/customfunc/formatEvents.js");
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,
   state: {
-    lich_lam_viec: []
+    lich_lam_viec: [],
+    lich_ket_thuc: ""
   },
   mutations: {
     reset_lich_lam_viec: function reset_lich_lam_viec(state) {
@@ -85922,18 +85929,37 @@ __webpack_require__.r(__webpack_exports__);
           commit = _ref.commit,
           rootState = _ref.rootState;
       state.lich_lam_viec = [];
-      var ev1 = {
-        title: "WEB",
-        start: "2020-08-03" + "T10:00:00",
-        end: "2020-08-03" + "T12:00:00"
+      state.lich_ket_thuc = "";
+      var obj = {
+        key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("key")
       };
-      state.lich_lam_viec.push(ev1);
-      var ev2 = {
-        title: "SQL1",
-        start: "2020-08-15" + "T08:00:00",
-        end: "2020-08-15" + "T12:00:00"
-      };
-      state.lich_lam_viec.push(ev2);
+
+      if (ma_giao_vien) {
+        obj.ma_giao_vien = ma_giao_vien;
+      }
+
+      axios.post("api/lichhoc/giaovien", obj).then(function (res) {
+        state.lich_lam_viec = Object(_customfunc_formatEvents__WEBPACK_IMPORTED_MODULE_2__["default"])(res.data.data);
+      })["catch"](function (err) {
+        console.error(err);
+      });
+    },
+    get_lich_lam_viec_by_phan_cong: function get_lich_lam_viec_by_phan_cong(_ref2, ma_phan_cong) {
+      var state = _ref2.state,
+          commit = _ref2.commit,
+          rootState = _ref2.rootState;
+      state.lich_lam_viec = [];
+      state.lich_ket_thuc = "";
+      axios.post("api/lichhoc/dukienketthuc", {
+        key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("key"),
+        ma_phan_cong: ma_phan_cong
+      }).then(function (res) {
+        console.log(res);
+        state.lich_ket_thuc = res.data.message;
+        state.lich_lam_viec = Object(_customfunc_formatEvents__WEBPACK_IMPORTED_MODULE_2__["default"])(res.data.data.lich_day, true);
+      })["catch"](function (err) {
+        console.error(err);
+      });
     }
   }
 });
@@ -85950,7 +85976,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _customfunc_getCookie__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../customfunc/getCookie */ "./resources/js/customfunc/getCookie.js");
-/* harmony import */ var _customfunc_formatEventsLab__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../customfunc/formatEventsLab */ "./resources/js/customfunc/formatEventsLab.js");
+/* harmony import */ var _customfunc_formatEvents__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../customfunc/formatEvents */ "./resources/js/customfunc/formatEvents.js");
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -86006,7 +86032,7 @@ __webpack_require__.r(__webpack_exports__);
         key: Object(_customfunc_getCookie__WEBPACK_IMPORTED_MODULE_0__["default"])("key"),
         ma_phong: ma_phong
       }).then(function (res) {
-        state.lich_su_dung = Object(_customfunc_formatEventsLab__WEBPACK_IMPORTED_MODULE_1__["default"])(res.data.data);
+        state.lich_su_dung = Object(_customfunc_formatEvents__WEBPACK_IMPORTED_MODULE_1__["default"])(res.data.data);
       })["catch"](function (err) {
         console.error(err);
       });
@@ -86108,7 +86134,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     arr_ngay_nghi: [],
     err_note: "",
     reset_form: false,
-    thong_ke_ngay_nghi: "",
+    thong_ke_ngay_nghi: 0,
     thong_ke_by_gv: ""
   },
   mutations: {
@@ -86134,6 +86160,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("key")
       }).then(function (res) {
         if (res.data.success) {
+          var today = new Date();
+          var dd = String(today.getDate()).padStart(2, "0");
+          var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+
+          var yyyy = today.getFullYear();
+          today = yyyy + "-" + mm + "-" + dd;
+
+          for (var each in res.data.data) {
+            if (each == today) {
+              state.thong_ke_ngay_nghi = res.data.data[each].length;
+            }
+          }
+
           state.arr_ngay_nghi = Object(_customfunc_formatNgayNghi__WEBPACK_IMPORTED_MODULE_1__["default"])(res.data.data);
         }
       })["catch"](function (err) {
@@ -86283,14 +86322,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   actions: {
-    get_phan_cong: function get_phan_cong(_ref) {
+    get_phan_cong: function get_phan_cong(_ref, ma_giao_vien) {
       var state = _ref.state,
           commit = _ref.commit,
           rootState = _ref.rootState;
       state.arr_phan_cong = [];
-      axios.post("api/phancong", {
+      var obj = {
         key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("key")
-      }).then(function (res) {
+      };
+
+      if (ma_giao_vien) {
+        obj.ma_giao_vien = ma_giao_vien;
+      }
+
+      axios.post("api/phancong", obj).then(function (res) {
         var result = res.data.data;
 
         for (var each in result) {
