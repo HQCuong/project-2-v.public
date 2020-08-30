@@ -16,6 +16,9 @@ export default {
         reset_err(state) {
             state.err_de_xuat = "";
         },
+        reset_arr_phan_cong(state) {
+            state.arr_phan_cong = [];
+        },
         reset_arr_de_xuat_phan_cong_ct(state) {
             state.arr_de_xuat_phan_cong_ct = [];
         },

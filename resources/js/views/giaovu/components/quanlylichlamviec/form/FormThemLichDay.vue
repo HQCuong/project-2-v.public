@@ -1,11 +1,17 @@
 <template>
     <div>
-        <p>form them lich day</p>
+        <selectGiaoVien></selectGiaoVien>
     </div>
 </template>
 
 <script>
-export default {};
+import selectGiaoVien from "../select/SelectDeXuat";
+
+export default {
+    components: {
+        selectGiaoVien,
+    },
+};
 </script>
 
 <style>

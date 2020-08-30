@@ -130,7 +130,6 @@ export default {
                     console.error(err);
                 });
         },
-        get_thong_ke_by_gv({ state, commit, rootState }) {},
         get_thong_ke({ state, commit, rootState }) {}
     }
 };

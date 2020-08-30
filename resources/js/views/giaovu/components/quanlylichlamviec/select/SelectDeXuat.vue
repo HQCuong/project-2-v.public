@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="!is_giao_vien">
+        <div>
             <label>Chọn giáo viên</label>
             <multiselect
                 v-model="giao_vien"
@@ -35,7 +35,9 @@
 </template>
 <script>
 export default {
-    props: ["is_giao_vien"],
+    created() {
+        this.$store.dispatch("user/get_all_user");
+    },
     data() {
         return {
             phan_cong: "",
@@ -44,13 +46,9 @@ export default {
     },
     computed: {
         arr_gv() {
-            if (!this.is_giao_vien) {
-                return this.$store.state.user.arr_user.filter((each) => {
-                    return each.ma_cap_do == 3;
-                });
-            } else {
-                return [this.$store.state.user.self_info];
-            }
+            return this.$store.state.user.arr_user.filter((each) => {
+                return each.ma_cap_do == 3;
+            });
         },
         arr_phan_cong() {
             return this.$store.state.phan_cong.arr_phan_cong.filter((each) => {
@@ -63,37 +61,15 @@ export default {
     },
     watch: {
         giao_vien() {
-            this.phan_cong = "";
+            console.log(this.giao_vien);
             if (!this.giao_vien) {
-                this.$store.commit("giao_vien/reset_lich_lam_viec");
+                this.phan_cong = "";
                 this.$store.commit("phan_cong/reset_arr_phan_cong");
             } else {
                 this.$store.dispatch(
                     "phan_cong/get_phan_cong",
                     this.giao_vien.ma_nguoi_dung
                 );
-                this.$store.dispatch(
-                    "giao_vien/get_lich_lam_viec",
-                    this.giao_vien.ma_nguoi_dung
-                );
-            }
-        },
-        phan_cong() {
-            if (this.phan_cong) {
-                this.$store.dispatch(
-                    "giao_vien/get_lich_lam_viec_by_phan_cong",
-                    this.phan_cong.ma_phan_cong
-                );
-            } else {
-                this.$store.dispatch(
-                    "giao_vien/get_lich_lam_viec",
-                    this.giao_vien.ma_nguoi_dung
-                );
-            }
-        },
-        arr_gv() {
-            if (this.arr_gv.length == 1) {
-                this.giao_vien = this.arr_gv[0];
             }
         },
     },

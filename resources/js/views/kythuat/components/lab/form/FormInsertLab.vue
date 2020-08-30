@@ -51,17 +51,6 @@
             />
         </div>
         <br />
-        <div class="form-group">
-            <label for="insertCpts">Số máy</label>
-            <input
-                type="number"
-                class="form-control"
-                id="insertCpts"
-                placeholder="Nhập số máy"
-                v-model="so_may"
-            />
-        </div>
-        <br />
         <label>Cấu hình</label>
         <multiselect
             v-model="cau_hinh"
@@ -106,7 +95,6 @@ export default {
             toa: "",
             cau_hinh: "",
             ten_lab: "",
-            so_may: 20,
             so_cho_ngoi: 20,
         };
     },
