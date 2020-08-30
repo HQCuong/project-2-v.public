@@ -24,7 +24,7 @@ class PhongController extends Controller {
                 'string' => ResponseMau::SUCCESS_GET,
                 'data'   => PhongResource::collection($phong),
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_GET);
         }
     }
@@ -55,7 +55,7 @@ class PhongController extends Controller {
                 }
             }
             return $this->endCatch();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatch();
         }
     }
@@ -82,7 +82,7 @@ class PhongController extends Controller {
                 return $this->endCatchValue(ResponseMau::ERROR_PHONG_DELETE);
             }
             return $this->endCatchValue(ResponseMau::ERROR_DELETE);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_DELETE);
         }
     }
@@ -90,7 +90,7 @@ class PhongController extends Controller {
         try {
             $phong = Phong::find($rq->ma_phong);
             dd((new PhongResource($phong))->motPhong());
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
 
         }
     }

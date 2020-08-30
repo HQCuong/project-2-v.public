@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Arr;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class LichHocResource extends JsonResource {
@@ -56,6 +57,29 @@ class LichHocResource extends JsonResource {
             }
         }, $this->resource);
         $data = collect($data)->sortBy('ngay')->groupBy('ngay');
+        return $data->toArray();
+    }
+    public function phongTrong() {
+        $data = array_map(function ($item) {
+            $item = (object) $item;
+            try {
+                return [
+                    'ngay'         => $item->ngay,
+                    'ma_phong'     => $item->ma_phong,
+                    'ten_phong'    => $item->ten_phong,
+                    'ma_ca'        => $item->ma_ca,
+                    'gio_bat_dau'  => $item->gio_bat_dau,
+                    'gio_ket_thuc' => $item->gio_ket_thuc,
+                ];
+            } catch (\Exception $e) {
+                return (array) $item;
+            }
+        }, $this->resource);
+        $data = collect($data)->sortBy('ngay')->groupBy('ngay')->map(function ($item) {
+            return array_values(Arr::sort($item, function ($value) {
+                return $value['ma_phong'];
+            }));
+        });
         return $data->toArray();
     }
 }

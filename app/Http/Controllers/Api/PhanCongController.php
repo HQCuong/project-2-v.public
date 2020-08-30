@@ -46,7 +46,7 @@ class PhanCongController extends Controller {
                 'string' => ResponseMau::SUCCESS_GET,
                 'data'   => PhancongResource::collection($phan_cong),
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_GET);
         }
     }
@@ -87,7 +87,7 @@ class PhanCongController extends Controller {
                             'tinh_trang'    => $value->tinh_trang,
                         ]
                     );
-                } catch (Exception $e) {
+                } catch (\Exception $e) {
                     return $this->endCatch();
                 }
                 if (count($flight->getChanges()) > 0) {
@@ -108,7 +108,7 @@ class PhanCongController extends Controller {
                 'string' => "Đã tạo mới " . $create . " bản ghi và Cập nhật " . $update . " bản ghi",
                 'data'   => $data,
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatch();
         }
     }

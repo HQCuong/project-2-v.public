@@ -22,7 +22,7 @@ class CauHinhMonController extends Controller {
                 'data'   => (new CauHinhMonResource($cau_hinh_mon))->cauHinhCoMonHoc(),
                 'string' => ResponseMau::SUCCESS_GET,
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_GET);
         }
     }
@@ -39,7 +39,7 @@ class CauHinhMonController extends Controller {
                 'data'   => $return_data,
                 'string' => ResponseMau::SUCCESS_GET,
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_GET);
         }
     }
@@ -81,7 +81,7 @@ class CauHinhMonController extends Controller {
                 ]);
             }
             return $this->endCatchValue(ResponseMau::ERROR_UPDATE);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_UPDATE);
         }
     }

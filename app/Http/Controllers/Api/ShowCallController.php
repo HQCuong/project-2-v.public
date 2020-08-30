@@ -22,7 +22,7 @@ class ShowCallController extends Controller {
                 'string' => ResponseMau::SUCCESS_GET,
                 'data'   => $list->data,
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_GET);
         }
     }
@@ -39,7 +39,7 @@ class ShowCallController extends Controller {
                 'string' => ResponseMau::SUCCESS_GET,
                 'data'   => $list->data,
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_GET);
         }
     }
@@ -52,7 +52,7 @@ class ShowCallController extends Controller {
                 return $list;
             }
             return $list;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $list = (object) ['success' => false];
             return $list;
         }
@@ -65,7 +65,7 @@ class ShowCallController extends Controller {
                 return $this->endCatch();
             }
             return $list->data[0]['tong_sinh_vien'];
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatch();
         }
     }
@@ -102,7 +102,7 @@ class ShowCallController extends Controller {
                 return false;
             }
             return $list->data[0]['gio_da_day'];
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return false;
         }
     }

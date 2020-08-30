@@ -19,6 +19,8 @@ class InsertLichDayBoSung extends Migration {
         (6, '2020-08-29', 'BIT01K10', 38, 'BIT_ACC', 5, 3, '', 1),
         (7, '2020-08-29', 'BIT01K10', 15, 'BIT_ACC', 7, 5, '', 1)"
         ));
+
+        DB::select(DB::raw("UPDATE `lich_day_bo_sung` SET lich_day_bo_sung.ngay = DATE_ADD(lich_day_bo_sung.ngay, INTERVAL 15 DAY)"));
     }
 
     /**

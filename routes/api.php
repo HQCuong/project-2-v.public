@@ -236,4 +236,6 @@ Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVuOrGiaoVien']], function
         ->name('api.lichhoc.lichDuKienKetThuc');
     Route::any('lichhoc/bosungdexuat', 'Api\LichHocController@lichDayBoSungDeXuat')
         ->name('api.lichhoc.lichDayBoSungDeXuat');
+    Route::any('lichhoc/lichtrong', 'Api\LichHocController@lichPhongTrong')
+        ->name('api.lichhoc.lichPhongTrong');
 });

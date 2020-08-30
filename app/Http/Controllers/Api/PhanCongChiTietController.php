@@ -29,7 +29,7 @@ class PhanCongChiTietController extends Controller {
                 'string' => ResponseMau::SUCCESS_GET,
                 'data'   => (new PhanCongChiTietResource($phan_cong_ct))->toOne(),
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_GET);
         }
     }
@@ -57,7 +57,7 @@ class PhanCongChiTietController extends Controller {
                     'data'   => (new PhanCongChiTietResource($result))->deXuat(),
                 ]);
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_GET);
         }
     }
@@ -70,7 +70,7 @@ class PhanCongChiTietController extends Controller {
                     'data'   => $rq->phan_cong_chi_tiet,
                 ]);
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_CREATE);
         }
     }
@@ -95,7 +95,7 @@ class PhanCongChiTietController extends Controller {
             } else {
                 return $this->endCatchValue(ResponseMau::ERROR_DELETE);
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_DELETE);
         }
     }
