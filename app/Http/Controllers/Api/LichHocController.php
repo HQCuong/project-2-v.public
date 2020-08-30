@@ -161,10 +161,10 @@ class LichHocController extends Controller {
                     array_push($array_return, $co_dinh);
                 }
             }
-            $array_return       = collect($array_return)->sortBy('ngay')->groupBy('ngay')->toArray();
-            $lich_phong_convent = collect($lich_phong_convent)->sortBy('ngay')->groupBy('ngay')->toArray();
-            $array_co_dinh      = collect($array_co_dinh)->sortBy('ngay')->groupBy('ngay')->toArray();
-            dd($array_return, $lich_phong_convent, $array_co_dinh);
+            // $array_return       = collect($array_return)->sortBy('ngay')->groupBy('ngay')->toArray();
+            // $lich_phong_convent = collect($lich_phong_convent)->sortBy('ngay')->groupBy('ngay')->toArray();
+            // $array_co_dinh      = collect($array_co_dinh)->sortBy('ngay')->groupBy('ngay')->toArray();
+            // dd($array_return, $lich_phong_convent, $array_co_dinh);
             return ResponseMau::Store([
                 'string' => ResponseMau::SUCCESS_GET,
                 'data'   => (new LichHocResource($array_return))->phongTrong(),
