@@ -21,7 +21,7 @@ class LoaiController extends Controller {
             return ResponseMau::Store([
                 'data' => LoaiResource::collection($loai),
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_GET);
         }
     }
@@ -32,7 +32,7 @@ class LoaiController extends Controller {
                 'string' => ResponseMau::SUCCESS_UPDATE,
                 'data'   => new LoaiResource(Loai::find($rq->ma_loai)),
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_UPDATE);
         }
     }public function themLoai(LoaiRequest $rq) {
@@ -42,7 +42,7 @@ class LoaiController extends Controller {
                 'string' => ResponseMau::SUCCESS_CREATE,
                 'data'   => new LoaiResource($loai),
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_CREATE);
         }
     }

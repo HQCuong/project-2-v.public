@@ -64,7 +64,7 @@ class NguoiDungBoMonController extends Controller {
                 'string' => ResponseMau::SUCCESS_GET,
                 'data'   => $nguoi_dung_bo_mon,
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_GET);
         }
     }
@@ -118,7 +118,7 @@ class NguoiDungBoMonController extends Controller {
                 ->get();
             $a = NguoiDungBoMon::insert($phan_cong->toArray());
             return true;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return false;
         }
     }

@@ -44,7 +44,7 @@ class LichDayBoSungController extends Controller {
                 'string' => ResponseMau::SUCCESS_GET,
                 'data'   => LichDayBoSungResource::collection($lich_day_bo_sung),
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_GET);
         }
     }
@@ -73,7 +73,7 @@ class LichDayBoSungController extends Controller {
                 'string' => ResponseMau::SUCCESS_GET,
                 'data'   => $data,
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_GET);
         }
     }
@@ -126,7 +126,7 @@ class LichDayBoSungController extends Controller {
                 }
             }
             return $this->endCatchValue(ResponseMau::ERROR_PROPOSED);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_CREATE);
         }
     }
@@ -145,7 +145,7 @@ class LichDayBoSungController extends Controller {
                 return $this->endCatchValue(ResponseMau::ERROR_DELETE);
             }
             return $this->endCatchValue(ResponseMau::ERROR_LICH_DAY_BO_SUNG_DELETE);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_DELETE);
         }
     }

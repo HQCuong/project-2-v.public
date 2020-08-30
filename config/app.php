@@ -230,6 +230,8 @@ return [
         'ResponseMau'  => App\Http\Custom\ResponseMau::class,
         'RegexValue'   => App\Http\Custom\RegexValue::class,
         'RegexRule'    => App\Rules\RegexRule::class,
+        'Arr'          => Illuminate\Support\Arr::class,
+        'Str'          => Illuminate\Support\Str::class,
     ],
 
 ];

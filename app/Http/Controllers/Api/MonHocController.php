@@ -25,7 +25,7 @@ class MonHocController extends Controller {
                 'data'   => $data,
                 'string' => ResponseMau::SUCCESS_DONE_DATA,
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatch();
         }
     }
@@ -66,7 +66,7 @@ class MonHocController extends Controller {
                 'string' => "Đã tạo mới " . $create . " bản ghi và Cập nhật " . $update . " bản ghi",
                 'data'   => $data,
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatch();
         }
     }

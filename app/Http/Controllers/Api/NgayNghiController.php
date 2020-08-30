@@ -87,7 +87,7 @@ class NgayNghiController extends Controller {
                 'string' => ResponseMau::SUCCESS_GET,
                 'data'   => $nhom_ngay,
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_GET);
         }
     }
@@ -113,7 +113,7 @@ class NgayNghiController extends Controller {
                 'string' => ResponseMau::SUCCESS_GET,
                 'data'   => (new NguoiDungResource($ngay_nghi))->withNgayNghi(),
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_GET);
         }
     }
@@ -211,7 +211,7 @@ class NgayNghiController extends Controller {
                 'string' => $string,
                 'data'   => $data,
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             dd($e);
             return $this->endCatchValue(ResponseMau::ERROR_CREATE);
         }
@@ -230,7 +230,7 @@ class NgayNghiController extends Controller {
             } else {
                 return $this->endCatchValue(ResponseMau::ERROR_NGAY_NGHI_SUA);
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->error($e);
             return $this->endCatchValue(ResponseMau::ERROR_NGAY_NGHI_SUA);
         }

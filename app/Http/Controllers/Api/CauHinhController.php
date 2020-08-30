@@ -26,7 +26,7 @@ class CauHinhController extends Controller {
                 'string' => ResponseMau::SUCCESS_GET,
                 'data'   => CauHinhResource::collection($cau_hinh),
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatchValue(R1esponseMau::ERROR_GET);
         }
     }
@@ -43,7 +43,7 @@ class CauHinhController extends Controller {
             } else {
                 return $this->endCatchValue(ResponseMau::ERROR_CAU_HINH_CASE);
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_GET);
         }
     }
@@ -69,7 +69,7 @@ class CauHinhController extends Controller {
                 'string' => ResponseMau::SUCCESS_CREATE,
                 'data'   => new CauHinhResource($cau_hinh),
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_CAU_HINH_TAO);
         }
     }
@@ -95,7 +95,7 @@ class CauHinhController extends Controller {
                 'string' => ResponseMau::SUCCESS_UPDATE,
                 'data'   => new CauHinhResource($cau_hinh),
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_UPDATE);
         }
     }
@@ -104,7 +104,7 @@ class CauHinhController extends Controller {
             return new CauHinhResource(
                 CauHinh::find($ma_cau_hinh)
             );
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return "null";
         }
     }

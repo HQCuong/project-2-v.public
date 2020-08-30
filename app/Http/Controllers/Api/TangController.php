@@ -31,7 +31,7 @@ class TangController extends Controller {
                 'string' => ResponseMau::SUCCESS_GET,
                 'data'   => TangResource::collection($tang),
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_GET);
         }
     }
@@ -42,7 +42,7 @@ class TangController extends Controller {
                 'string' => ResponseMau::SUCCESS_CREATE,
                 'data'   => new TangResource($tang),
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_CREATE);
         }
     }
@@ -59,7 +59,7 @@ class TangController extends Controller {
             } else {
                 return $this->endCatchValue(ResponseMau::ERROR_TANG_UPDATE_INFO);
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_UPDATE);
         }
     }

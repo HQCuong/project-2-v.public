@@ -22,7 +22,7 @@ class CaController extends Controller {
                 'string' => ResponseMau::SUCCESS_GET,
                 'data'   => CaResource::collection($ca),
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_GET);
         }
     }
@@ -33,7 +33,7 @@ class CaController extends Controller {
                 'string' => ResponseMau::SUCCESS_GET,
                 'data'   => CaResource::collection($ca),
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_GET);
         }
     }

@@ -22,7 +22,7 @@ class ToaController extends Controller {
                 'string' => ResponseMau::SUCCESS_GET,
                 'data'   => ToaResource::collection($toa),
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_GET);
         }
     }
@@ -42,7 +42,7 @@ class ToaController extends Controller {
             } else {
                 return $this->endCatchValue(ResponseMau::ERROR_TOA_MA_TOA);
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_UPDATE);
         }
     }

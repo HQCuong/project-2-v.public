@@ -46,7 +46,7 @@ class NguoiDungController extends Controller {
                 'string' => ResponseMau::SUCCESS_USER_CREATE,
                 'data'   => new NguoiDungResource($user),
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatch();
         }
     }
@@ -65,7 +65,7 @@ class NguoiDungController extends Controller {
             } else {
                 return $this->endCatchValue(ResponseMau::ERROR_USER_LOGIN);
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatch();
         }
     }
@@ -77,7 +77,7 @@ class NguoiDungController extends Controller {
             return ResponseMau::Store([
                 'string' => ResponseMau::SUCCESS_USER_LOGOUT,
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatch();
         }
     }
@@ -98,7 +98,7 @@ class NguoiDungController extends Controller {
             } else {
                 return $this->endCatchValue(ResponseMau::ERROR_USER_PASS_OLD);
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_USER_CHANGEPASSWORD);
         }
     }
@@ -152,7 +152,7 @@ class NguoiDungController extends Controller {
             } else {
                 return $this->endCatchValue(ResponseMau::ERROR_USER_KHONG_CO_THAY_DOI);
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatch();
         }
     }
@@ -169,7 +169,7 @@ class NguoiDungController extends Controller {
                 'string' => ResponseMau::SUCCESS_GET,
                 'data'   => NguoiDungResource::collection($user),
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_GET);
         }
     }
@@ -180,7 +180,7 @@ class NguoiDungController extends Controller {
                 'string' => ResponseMau::SUCCESS_GET,
                 'data'   => NguoiDungResource::Collection($user),
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatchValue(ResponseMau::ERROR_GET);
         }
     }
@@ -207,7 +207,7 @@ class NguoiDungController extends Controller {
                 'string' => ResponseMau::SUCCESS_GET,
                 'data'   => new NguoiDungResource($nguoi_dung),
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             dd($e->getMessage());
             return $this->endCatchValue(ResponseMau::ERROR_GET);
         }
@@ -245,7 +245,7 @@ class NguoiDungController extends Controller {
                     $user                      = NguoiDung::create($validatedData);
                     $create++;
                     array_push($data->create, new NguoiDungResource($user));
-                } catch (Exception $e) {
+                } catch (\Exception $e) {
                     try {
                         $validatedData = $value->validate([
                             'ho_ten'    => RegexRule::REGEX_HO_TEN_C,
@@ -285,7 +285,7 @@ class NguoiDungController extends Controller {
                                 'changer' => $changer];
                             array_push($data->update, $arr);
                         }
-                    } catch (Exception $e) {
+                    } catch (\Exception $e) {
                     }
                 }
             }
@@ -293,7 +293,7 @@ class NguoiDungController extends Controller {
                 'string' => "Đã tạo mới " . $create . " bản ghi và Cập nhật " . $update . " bản ghi",
                 'data'   => $data,
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->endCatch();
         }
     }
