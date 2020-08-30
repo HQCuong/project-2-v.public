@@ -124,7 +124,7 @@ class LichHocController extends Controller {
             $lich_phong = array_merge($lich_phong, $ngay_nghi);
             $lich_phong = array_values(Arr::where($lich_phong, function ($item_lich_phong, $key) use ($hom_nay, $so_ngay, $so_gio) {
                 $item_lich_phong = (object) $item_lich_phong;
-                if ($item_lich_phong->ngay >= $hom_nay && $item_lich_phong->ngay <= date('Y-m-d', strtotime($hom_nay . "+$so_ngay days"))) {
+                if ($item_lich_phong->ngay >= $hom_nay && $item_lich_phong->ngay < date('Y-m-d', strtotime($hom_nay . "+$so_ngay days"))) {
                     return $item_lich_phong;
                 }
             }));
@@ -153,7 +153,6 @@ class LichHocController extends Controller {
             });
             $array_return       = [];
             $lich_phong_convent = array_unique($lich_phong_convent, SORT_REGULAR);
-            // dd($array_co_dinh, $lich_phong_convent);
             foreach ($array_co_dinh as $key => $co_dinh) {
                 $array_ss = ['ngay' => $co_dinh->ngay, 'ma_phong' => $co_dinh->ma_phong, 'ma_ca' => $co_dinh->ma_ca];
                 if (in_array($array_ss, $lich_phong_convent)) {
@@ -162,7 +161,10 @@ class LichHocController extends Controller {
                     array_push($array_return, $co_dinh);
                 }
             }
-            // dd($array_return, $lich_phong_convent, $array_co_dinh);
+            $array_return       = collect($array_return)->sortBy('ngay')->groupBy('ngay')->toArray();
+            $lich_phong_convent = collect($lich_phong_convent)->sortBy('ngay')->groupBy('ngay')->toArray();
+            $array_co_dinh      = collect($array_co_dinh)->sortBy('ngay')->groupBy('ngay')->toArray();
+            dd($array_return, $lich_phong_convent, $array_co_dinh);
             return ResponseMau::Store([
                 'string' => ResponseMau::SUCCESS_GET,
                 'data'   => (new LichHocResource($array_return))->phongTrong(),
@@ -560,8 +562,8 @@ class LichHocController extends Controller {
     }
     public function getArrayNgayXuLy($so_ngay, $ngay) {
         for ($i = 0; $i < $so_ngay; $i++) {
-            $ngay               = date('Y-m-d', strtotime($ngay . "+1 days"));
             $array_ngay_xu_ly[] = $ngay;
+            $ngay               = date('Y-m-d', strtotime($ngay . "+1 days"));
         }
         return $array_ngay_xu_ly;
     }
