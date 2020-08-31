@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import formThemLichDay from "./form/FormThemLichDay";
+import formThemLichDay from "./form/formDeXuat";
 import tableDeXuat from "./table/TableDeXuatLichDay";
 
 export default {

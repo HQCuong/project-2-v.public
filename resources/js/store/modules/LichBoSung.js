@@ -9,6 +9,7 @@ export default {
 
     actions: {
         get_de_xuat({ state, commit, rootState }, user_input) {
+            console.log(user_input);
             axios
                 .post(`api/lichdaybosung/dexuat`, {
                     key: getCookie("key")

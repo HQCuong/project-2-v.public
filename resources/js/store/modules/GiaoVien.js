@@ -44,7 +44,6 @@ export default {
                     ma_phan_cong: ma_phan_cong
                 })
                 .then(res => {
-                    console.log(res);
                     state.lich_ket_thuc = res.data.message;
                     state.lich_lam_viec = formatEvents(
                         res.data.data.lich_day,

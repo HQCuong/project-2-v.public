@@ -31,6 +31,19 @@
                 slot="noOptions"
             >Chưa chọn giáo viên hoặc giáo viên đã chọn chưa được phân công</template>
         </multiselect>
+        <br />
+        <label>Số giờ dạy</label>
+        <multiselect
+            v-model="so_gio"
+            :options="arr_gio_day"
+            :close-on-select="true"
+            :show-labels="true"
+            placeholder="Chọn số giờ dạy"
+            deselectLabel="Click hoặc nhấn Enter để bỏ chọn"
+            selectLabel="Click hoặc nhấn Enter để chọn"
+            :searchable="false"
+            :custom-label="gioLabel"
+        ></multiselect>
     </div>
 </template>
 <script>
@@ -42,6 +55,17 @@ export default {
         return {
             phan_cong: "",
             giao_vien: "",
+            so_gio: "",
+            arr_gio_day: [
+                {
+                    value: 2,
+                    title: "2 giờ",
+                },
+                {
+                    value: 4,
+                    title: "4 giờ",
+                },
+            ],
         };
     },
     computed: {
@@ -61,7 +85,6 @@ export default {
     },
     watch: {
         giao_vien() {
-            console.log(this.giao_vien);
             if (!this.giao_vien) {
                 this.phan_cong = "";
                 this.$store.commit("phan_cong/reset_arr_phan_cong");
@@ -72,6 +95,12 @@ export default {
                 );
             }
         },
+        phan_cong() {
+            if (!this.phan_cong) {
+            } else {
+                console.log(this.phan_cong);
+            }
+        },
     },
     methods: {
         labelUser({ ho_ten, email }) {
@@ -79,6 +108,9 @@ export default {
         },
         classLabel({ ma_lop, ma_mon_hoc }) {
             return `${ma_lop} - ${ma_mon_hoc}`;
+        },
+        gioLabel({ title }) {
+            return `${title}`;
         },
     },
 };
