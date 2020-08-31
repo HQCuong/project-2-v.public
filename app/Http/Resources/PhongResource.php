@@ -13,9 +13,13 @@ class PhongResource extends JsonResource {
             'ma_tang'     => $this->ma_tang,
             'ghi_chu'     => $this->ghi_chu,
             'tinh_trang'  => $this->tinhTrang,
+            'cau_hinh'    => $this->getCauHinh($this->thietBiPhong),
         ];
     }
-    public function motPhong() {
-        // dd($this->ma_phong);
+    public function getCauHinh($thiet_bi_phong) {
+        foreach ($thiet_bi_phong as $key => $thiet_bi) {
+            return $thiet_bi->cauHinh;
+        }
+        return NULL;
     }
 }

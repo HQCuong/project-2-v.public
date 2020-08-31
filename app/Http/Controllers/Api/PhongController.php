@@ -19,12 +19,21 @@ class PhongController extends Controller {
                     $query->where('ma_phong', $rq->ma_phong);
                 }
             })
+                ->with(['thietBiPhong' => function ($query) {
+                    $query->with(['cauHinh' => function ($q) {
+                        $q->where('ma_loai', 1);
+                        $q->select('ma_cau_hinh', 'mo_ta');
+                    }]);
+                    $query->select('ma_phong', 'ma_cau_hinh');
+                }])
                 ->get();
+            // return $phong;
             return ResponseMau::Store([
                 'string' => ResponseMau::SUCCESS_GET,
                 'data'   => PhongResource::collection($phong),
             ]);
         } catch (\Exception $e) {
+            dd($e);
             return $this->endCatchValue(ResponseMau::ERROR_GET);
         }
     }
