@@ -1,5 +1,3 @@
-import { cloneDeep } from "lodash";
-
 export default function formatNgayNghi(arr) {
     var arr_cau_hinh = [];
     for (const each in arr) {

@@ -1,5 +1,6 @@
 import getCookie from "../../customfunc/getCookie.js";
 import formatNgayNghi from "../../customfunc/formatNgayNghi";
+import getCurrentDate from "../../customfunc/getCurrentDate";
 import Vue from "vue";
 
 export default {
@@ -35,15 +36,8 @@ export default {
                 })
                 .then(res => {
                     if (res.data.success) {
-                        var today = new Date();
-                        var dd = String(today.getDate()).padStart(2, "0");
-                        var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
-                        var yyyy = today.getFullYear();
-
-                        today = yyyy + "-" + mm + "-" + dd;
-
                         for (const each in res.data.data) {
-                            if (each == today) {
+                            if (each == getCurrentDate("date")) {
                                 state.thong_ke_ngay_nghi =
                                     res.data.data[each].length;
                             }

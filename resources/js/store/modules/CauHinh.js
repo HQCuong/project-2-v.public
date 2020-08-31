@@ -9,12 +9,16 @@ export default {
         thong_tin_cau_hinh: {},
         cau_hinh_da_co_mon: "",
         sum_cau_hinh: "",
-        err_form: {}
+        err_form: {},
+        reset_form: false
     },
 
     mutations: {
         reset_thong_tin_cau_hinh(state) {
             state.thong_tin_cau_hinh = {};
+        },
+        reset_form(state) {
+            state.reset_form = false;
         }
     },
 
@@ -82,6 +86,7 @@ export default {
                             title: "Thành công",
                             text: res.data.message
                         });
+                        state.reset_form = true;
                     } else {
                         state.err_form = res.data.message;
                     }
@@ -91,7 +96,6 @@ export default {
                 });
         },
         add_mon_to_cau_hinh({ state, commit, rootState }, data) {
-            console.log(data);
             axios
                 .post(`api/cauhinhmon/capnhat`, {
                     ...data
