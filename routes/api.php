@@ -76,6 +76,17 @@ Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVu']], function () {
         ->name('api.phong.delete');
     Route::any('phong/chitiet', 'Api\PhongController@hienThiPhong')
         ->name('api.phong.hienThiPhong');
+    Route::any('phong/cauhinhphong', 'Api\PhongController@thietBiWithPhong')
+        ->name('api.phong.thietBiWithPhong');
+});
+
+//ThietBiPhongController
+
+Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVu']], function () {
+    Route::any('thietbiphong/taohoacsua', 'Api\ThietBiPhongController@taoHoacSua')
+        ->name('api.thietbiphong.taoHoacSua');
+    Route::any('thietbiphong/xoa', 'Api\ThietBiPhongController@xoaThietBi')
+        ->name('api.thietbiphong.xoaThietBi');
 });
 //LoaiController
 //--Giáo Vụ

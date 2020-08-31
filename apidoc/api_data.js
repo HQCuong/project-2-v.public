@@ -5263,6 +5263,157 @@ define({ "api": [
   },
   {
     "type": "POST",
+    "url": "thietbiphong/taohoacsua",
+    "title": "1.1. Tạo hoặc cập nhật thông tin Thiết Bị Phòng",
+    "version": "0.1.0",
+    "name": "Tạo_Hoặc_Sửa",
+    "group": "Thiết_Bị_Phòng",
+    "description": "<p>Tạo hoặc cập nhật thông tin Thiết Bị Phòng<br></p> <h1 class=\"display-1\">-Lưu ý: </h1> <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\"> <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button> <!-- <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button> <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button>  --></div><br> +Truyền vào mã cấu hình và mã phong.<br>",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:8080/project-2/public/api/thietbiphong/taohoacsua"
+      }
+    ],
+    "examples": [
+      {
+        "title": "Truy Vấn Mẫu:",
+        "content": "{\n    \"key\": \"1\",\n    \"ma_cau_hinh\": 1,\n    \"ma_phong\": 2\n}",
+        "type": "php"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "key",
+            "description": "<p>Mã Key của Người Dùng.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "ma_cau_hinh",
+            "description": "<p>Mã Cấu Hình.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "ma_phong",
+            "description": "<p>Mã của Phòng.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "data",
+            "description": "<p>Dữ liệu Phòng.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Thành Công:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"message\": \"Tạo thành công\",\n    \"data\": []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Không Thành Công:",
+          "content": "HTTP/1.1 200 OK\n+ Có nhiều dạng trả về không thành công như key sai,lỗi truy vấn sql\n+ Tất cả các lỗi đều có \"message\" kèm theo như ví dụ bên dưới\n{\n    \"success\": false,\n    \"message\": {\n        \"ma_phong\": \"Phòng không tồn tại\",\n        \"ma_cau_hinh\": \"Cấu hình không tồn tại\"\n    },\n    \"data\": []\n}\n{\n    \"success\": false,\n    \"message\": \"Bạn không có quyền truy cập\",\n    \"data\": []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "duong_doc/thiet_bi_phong.php",
+    "groupTitle": "Thiết_Bị_Phòng"
+  },
+  {
+    "type": "POST",
+    "url": "thietbiphong/xoa",
+    "title": "1.2. Xóa Thiết Bị Phòng",
+    "version": "0.1.0",
+    "name": "Xóa",
+    "group": "Thiết_Bị_Phòng",
+    "description": "<p>Dùng để Xóa Thiết Bị Phòng<br></p> <h1 class=\"display-1\">-Lưu ý: </h1> <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\"> <button type=\"button\" class=\"btn btn-danger\">Giáo Vụ</button> <!-- <button type=\"button\" class=\"btn btn-warning\">Kĩ Thuật</button> --> <!-- <button type=\"button\" class=\"btn btn-info\">Giáo Viên</button> --> </div><br> +Truyền vào đầy đủ các thông tin để có thể xóa.<br>",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:8080/project-2/public/api/thietbiphong/xoa"
+      }
+    ],
+    "examples": [
+      {
+        "title": "Truy Vấn Mẫu:",
+        "content": "{\n    \"key\": \"1\",\n    \"ma_phong\": 2\n}",
+        "type": "php"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "key",
+            "description": "<p>Mã Key của Người Dùng.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "ma_phong",
+            "description": "<p>Mã Phòng.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "data",
+            "description": "<p>Dữ liệu Môn.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Thành Công:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"message\": \"Xóa thành công\",\n    \"data\": []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Không Thành Công:",
+          "content": "HTTP/1.1 200 OK\n+ Có nhiều dạng trả về không thành công như key sai,lỗi truy vấn sql\n+ Tất cả các lỗi đều có \"message\" kèm theo như ví dụ bên dưới\n{\n    \"success\": false,\n    \"message\": {\n        \"ma_phong\": \"Phòng không tồn tại\",\n        \"ma_cau_hinh\": \"Cấu hình không tồn tại\"\n    },\n    \"data\": []\n}\n{\n    \"success\": false,\n    \"message\": \"Bạn không có quyền truy cập\",\n    \"data\": []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "duong_doc/thiet_bi_phong.php",
+    "groupTitle": "Thiết_Bị_Phòng"
+  },
+  {
+    "type": "POST",
     "url": "toa/kiemtra",
     "title": "1.3. Kiểm tra thông tin hợp lệ",
     "version": "0.1.0",
