@@ -9,7 +9,7 @@
 
 <script>
 import thongKeLichNghi from "./thongke/ThongKeLichNghi";
-import selectGiaoVien from "./select/SelectGiaoVien";
+import selectGiaoVien from "./select/SelectNgayNghi";
 import tableLichNghi from "./table/TableLichNghi";
 
 export default {

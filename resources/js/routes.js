@@ -34,6 +34,7 @@ import them_lich_nghi from "./views/giaovu/components/quanlylichlamviec/themLich
 import them_lich_day from "./views/giaovu/components/quanlylichlamviec/ThemLichDay.vue";
 import xem_phan_cong from "./views/giaovu/components/quanlylichlamviec/XemPhanCongChiTiet.vue";
 import phan_cong from "./views/giaovu/components/quanlylichlamviec/PhanCongChiTiet.vue";
+import xem_lich_bo_sung from "./views/giaovu/components/quanlylichlamviec/XemLichBoXung.vue";
 
 import user from "./views/giaovu/QuanLyUsers.vue";
 import danh_sach_user from "./views/giaovu/components/quanlyusers/DanhSachUser.vue";
@@ -129,7 +130,8 @@ export default [
             { path: "them_lich_nghi", component: them_lich_nghi },
             { path: "them_lich_day", component: them_lich_day },
             { path: "xem_phan_cong_chi_tiet", component: xem_phan_cong },
-            { path: "phan_cong_chi_tiet", component: phan_cong }
+            { path: "phan_cong_chi_tiet", component: phan_cong },
+            { path: "xem_lich_bo_sung", component: xem_lich_bo_sung }
         ],
         beforeEnter: (to, from, next) => {
             if (getCookie("level") == 1) {

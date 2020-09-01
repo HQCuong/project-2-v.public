@@ -1,5 +1,5 @@
 <template>
-    <form>
+    <form id="form_update_lab" @submit="update_lab">
         <label>Tòa</label>
         <multiselect
             v-model="toa"
@@ -38,6 +38,7 @@
             deselectLabel="Click hoặc nhấn Enter để bỏ chọn"
             selectLabel="Click hoặc nhấn Enter để chọn"
             :searchable="false"
+            :custom-label="labelLab"
         >
             <template slot="noOptions">Chưa chọn tầng</template>
         </multiselect>
@@ -46,12 +47,13 @@
         <div class="form-group">
             <label for="insertName">Tên phòng</label>
             <input
-                type="number"
+                type="text"
                 class="form-control"
                 id="insertName"
                 placeholder="Nhập tên phòng"
-                v-model="ten_lab"
+                v-model="current_name"
             />
+            <span v-if="err.ten_phong" class="text-danger">{{err.ten_phong}}</span>
         </div>
         <br />
         <div class="form-group">
@@ -61,8 +63,9 @@
                 class="form-control"
                 id="insertSeats"
                 placeholder="Nhập số chõ ngồi"
-                v-model="so_cho_ngoi"
+                v-model="current_seats"
             />
+            <span v-if="err.so_cho_ngoi" class="text-danger">{{err.so_cho_ngoi}}</span>
         </div>
         <br />
         <label>Cấu hình</label>
@@ -71,7 +74,7 @@
             :options="arr_cau_hinh"
             :close-on-select="true"
             :show-labels="true"
-            placeholder="Chọn cấu hình"
+            :placeholder="current_cau_hinh"
             deselectLabel="Click hoặc nhấn Enter để bỏ chọn"
             selectLabel="Click hoặc nhấn Enter để chọn"
             :searchable="false"
@@ -79,7 +82,7 @@
         ></multiselect>
         <br />
         <br />
-        <button type="submit" class="btn btn-info">Submit</button>
+        <button type="submit" class="btn btn-info">Xác nhận</button>
     </form>
 </template>
 <script>
@@ -87,6 +90,13 @@ export default {
     created() {
         this.$store.dispatch("toa/get_toa");
         this.$store.dispatch("cau_hinh/get_cau_hinh");
+        if (this.$route.params.ma_lab) {
+            this.$store.dispatch("lab/get_info_lab", this.$route.params.ma_lab);
+        } else {
+            this.$store.commit("lab/reset_info_lab");
+        }
+
+        this.$store.commit("lab/reset_err");
     },
     mounted() {
         // change label color
@@ -108,12 +118,16 @@ export default {
             toa: "",
             lab: "",
             ten_lab: "",
-            arr_lab: [],
+            seats: "",
             cau_hinh: "",
-            so_cho_ngoi: 0,
         };
     },
     computed: {
+        err() {
+            return this.$store.state.lab.err
+                ? this.$store.state.lab.err
+                : false;
+        },
         arr_toa() {
             return this.$store.state.toa.arr_toa;
         },
@@ -123,6 +137,39 @@ export default {
         arr_cau_hinh() {
             return this.$store.state.cau_hinh.arr_cau_hinh;
         },
+        arr_lab() {
+            return this.$store.state.lab.arr_lab;
+        },
+
+        current_cau_hinh() {
+            return this.$store.state.lab.info_lab.cau_hinh
+                ? this.$store.state.lab.info_lab.cau_hinh.mo_ta
+                      .split("`")
+                      .join(" ")
+                : "Chọn cấu hình";
+        },
+
+        current_name: {
+            get() {
+                return this.$store.state.lab.info_lab
+                    ? this.$store.state.lab.info_lab.ten_phong
+                    : this.ten_lab;
+            },
+            set(val) {
+                this.ten_lab = val;
+            },
+        },
+
+        current_seats: {
+            get() {
+                return this.$store.state.lab.info_lab
+                    ? this.$store.state.lab.info_lab.so_cho_ngoi
+                    : this.seats;
+            },
+            set(val) {
+                this.seats = val;
+            },
+        },
     },
     methods: {
         labelToa({ ten_toa, dia_chi }) {
@@ -131,17 +178,38 @@ export default {
         labelTang({ ten_tang }) {
             return `${ten_tang}`;
         },
-        labelCauHinh({ mo_ta }) {
-            return `${mo_ta}`;
+        labelCauHinh({ cpu, ram, main, o_cung, vga }) {
+            return `Cpu: ${cpu} - RAM: ${ram} - Main: ${main} -  Ổ cứng: ${o_cung} - VGA: ${vga}`;
+        },
+        labelLab({ ten_phong }) {
+            return `${ten_phong}`;
+        },
+        update_lab(e) {
+            e.preventDefault();
+            var data = [];
+            var obj = {
+                ma_phong: this.$store.state.lab.info_lab.ma_phong,
+            };
+            if (this.ten_lab) {
+                obj.ten_phong = this.ten_lab;
+            }
+            if (this.seats) {
+                obj.so_cho_ngoi = this.seats;
+            }
+
+            data.push(obj);
+
+            if (this.cau_hinh) {
+                data.push(this.cau_hinh);
+            }
+
+            this.$store.dispatch("lab/update_thong_tin", data);
         },
     },
     watch: {
         toa() {
             this.tang = "";
             this.lab = "";
-            this.ten_lab = "";
-            this.so_cho_ngoi = "";
-            this.cau_hinh = "";
             if (!this.toa) {
                 this.$store.commit("tang/reset_arr_tang");
                 return false;
@@ -150,26 +218,24 @@ export default {
         },
         tang() {
             this.lab = "";
-            this.ten_lab = "";
-            this.so_cho_ngoi = "";
-            this.cau_hinh = "";
             if (!this.tang) {
-                this.arr_lab = [];
-                // this.$store.commit('toa/reset_arr_toa');
+                this.$store.commit("lab/reset_arr_lab");
                 return false;
+            } else {
+                this.$store.dispatch("lab/get_lab", this.tang.ma_tang);
             }
-            this.arr_lab = ["lab 1", "lab 2", "lab 3"];
         },
         lab() {
             if (!this.lab) {
-                this.ten_lab = "";
-                this.so_cho_ngoi = "";
-                this.cau_hinh = "";
+                this.$store.commit("lab/reset_info_lab");
             } else if (this.toa && this.tang) {
-                this.ten_lab = "201";
-                this.so_cho_ngoi = 20;
-                this.cau_hinh = this.arr_cau_hinh[0];
-                // this.$store.commit('toa/get_info_toa', this.lab.ma_phong);
+                this.$router.push(
+                    `/quan_ly_lab/update_lab/${this.lab.ma_phong}`
+                );
+                this.$store.dispatch(
+                    "lab/get_info_lab",
+                    this.$route.params.ma_lab
+                );
             }
         },
         arr_toa() {

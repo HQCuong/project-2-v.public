@@ -18,6 +18,7 @@
                             title="Thay đổi tình trạng"
                             data-toggle="tooltip"
                             data-placement="top"
+                            @click="thay_doi_state(props.row)"
                         >
                             <i class="material-icons">power_settings_new</i>
                         </button>
@@ -50,21 +51,15 @@ export default {
                 },
                 {
                     label: "Cấu hình",
-                    field: "cau_hinh",
+                    field: "cau_hinh.mo_ta",
                     sortable: false,
                     thClass: "text-info",
                     tdClass: "font-weight-bold",
+                    formatFn: this.formatCH,
                 },
                 {
                     label: "Số chỗ ngồi",
-                    field: "cho_ngoi",
-                    type: "number",
-                    thClass: "text-info",
-                    tdClass: "font-weight-bold",
-                },
-                {
-                    label: "Số máy",
-                    field: "may",
+                    field: "so_cho_ngoi",
                     type: "number",
                     thClass: "text-info",
                     tdClass: "font-weight-bold",
@@ -74,6 +69,7 @@ export default {
                     field: "tinh_trang",
                     thClass: "text-info",
                     tdClass: "font-weight-bold",
+                    formatFn: this.formatState,
                 },
                 {
                     label: "Tùy chỉnh",
@@ -84,6 +80,24 @@ export default {
                 },
             ],
         };
+    },
+    methods: {
+        formatState(row) {
+            return row.ten_tinh_trang;
+        },
+        formatCH(row) {
+            var row = row.split("`");
+            row.shift();
+            row = row.join(" ");
+            return row;
+        },
+        thay_doi_state(row) {
+            var obj = {
+                ma_phong: row.ma_phong,
+                ma_tinh_trang: row.tinh_trang.ma_tinh_trang == 1 ? 2 : 1,
+            };
+            this.$store.dispatch("lab/update_tinh_trang", obj);
+        },
     },
     watch: {
         arr_lab() {

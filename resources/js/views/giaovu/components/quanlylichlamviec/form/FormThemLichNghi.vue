@@ -18,13 +18,14 @@
             ></multiselect>
             <br />
             <br />
-            <label>Ngày nghỉ</label>
-            <v-date-picker
-                :min-date="new Date()"
-                v-model="ngay_nghi"
-                :input-props="{placeholder: 'Chọn ngày nghỉ', class: 'form-control'}"
-            />
-            <br />
+            <div class="form-group">
+                <label>Ngày nghỉ</label>
+                <v-date-picker
+                    :min-date="new Date()"
+                    v-model="ngay_nghi"
+                    :input-props="{placeholder: 'Chọn ngày nghỉ', class: 'form-control'}"
+                />
+            </div>
             <br />
             <label>Ca nghỉ</label>
             <multiselect

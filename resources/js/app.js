@@ -50,6 +50,12 @@ const router = new VueRouter({
                 block: "end",
                 inline: "nearest"
             });
+        } else if (to.params.ma_lab) {
+            document.getElementById("form_update_lab").scrollIntoView({
+                behavior: "smooth",
+                block: "end",
+                inline: "nearest"
+            });
         }
     }
 });

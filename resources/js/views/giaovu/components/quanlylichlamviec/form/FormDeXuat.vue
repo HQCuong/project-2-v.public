@@ -1,19 +1,17 @@
 <template>
-    <div>
-        <div>
-            <label>Chọn giáo viên</label>
-            <multiselect
-                v-model="giao_vien"
-                :options="arr_gv"
-                :close-on-select="true"
-                :show-labels="true"
-                placeholder="Chọn giáo viên"
-                deselectLabel="Click hoặc nhấn Enter để bỏ chọn"
-                selectLabel="Click hoặc nhấn Enter để chọn"
-                :searchable="true"
-                :custom-label="labelUser"
-            ></multiselect>
-        </div>
+    <form @submit="get_de_xuat">
+        <label>Chọn giáo viên</label>
+        <multiselect
+            v-model="giao_vien"
+            :options="arr_gv"
+            :close-on-select="true"
+            :show-labels="true"
+            placeholder="Chọn giáo viên"
+            deselectLabel="Click hoặc nhấn Enter để bỏ chọn"
+            selectLabel="Click hoặc nhấn Enter để chọn"
+            :searchable="true"
+            :custom-label="labelUser"
+        ></multiselect>
         <br />
         <label>Chọn phân công</label>
         <multiselect
@@ -44,18 +42,49 @@
             :searchable="false"
             :custom-label="gioLabel"
         ></multiselect>
-    </div>
+        <br />
+        <br />
+        <div class="form-group">
+            <label for="insertRange">Số ngày</label>
+            <input
+                type="number"
+                class="form-control"
+                id="insertRange"
+                v-model="ngay"
+                placeholder="Nhập khoảng thời gian muốn thêm lịch (tính từ ngày hôm nay)"
+            />
+        </div>
+        <br />
+        <button class="btn btn-info">Xác nhận</button>
+    </form>
 </template>
 <script>
 export default {
     created() {
         this.$store.dispatch("user/get_all_user");
     },
+    mounted() {
+        // change label color
+        $(".form-group").addClass("bmd-form-group");
+        $("label").addClass("bmd-label-static");
+        $(".form-group").on("click", function () {
+            $(".form-group").removeClass("is-focused");
+            $(this).addClass("is-focused");
+        });
+
+        // remove color while move out input
+        $("input").blur(function () {
+            $(".form-group").removeClass("is-focused");
+        });
+
+        this.so_gio = this.arr_gio_day[0];
+    },
     data() {
         return {
             phan_cong: "",
             giao_vien: "",
             so_gio: "",
+            ngay: 7,
             arr_gio_day: [
                 {
                     value: 2,
@@ -82,11 +111,14 @@ export default {
                 );
             });
         },
+        reset_form() {
+            return this.$store.state.de_xuat.reset_form;
+        },
     },
     watch: {
         giao_vien() {
+            this.phan_cong = "";
             if (!this.giao_vien) {
-                this.phan_cong = "";
                 this.$store.commit("phan_cong/reset_arr_phan_cong");
             } else {
                 this.$store.dispatch(
@@ -95,10 +127,13 @@ export default {
                 );
             }
         },
-        phan_cong() {
-            if (!this.phan_cong) {
-            } else {
-                console.log(this.phan_cong);
+        reset_form() {
+            if (this.reset_form) {
+                this.phan_cong = "";
+                this.giao_vien = "";
+                this.so_gio = "";
+                this.ngay = "";
+                this.$emit("hide_table");
             }
         },
     },
@@ -111,6 +146,24 @@ export default {
         },
         gioLabel({ title }) {
             return `${title}`;
+        },
+        get_de_xuat(e) {
+            e.preventDefault();
+            var obj = {
+                ma_giao_vien: this.giao_vien.ma_nguoi_dung,
+                so_gio: this.so_gio.value,
+                ma_lop: this.phan_cong.ma_lop,
+                so_ngay: this.ngay,
+                ma_mon_hoc: this.phan_cong.ma_mon_hoc,
+            };
+            this.$store.dispatch("de_xuat/get_de_xuat", obj);
+            this.$emit(
+                "data_up",
+                this.giao_vien.ma_nguoi_dung,
+                this.phan_cong.ma_mon_hoc,
+                this.phan_cong.ma_lop
+            );
+            this.$emit("show_table");
         },
     },
 };

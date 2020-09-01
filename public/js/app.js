@@ -15891,6 +15891,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -16180,6 +16185,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -16254,6 +16262,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -16277,6 +16291,11 @@ __webpack_require__.r(__webpack_exports__);
           left: "prev,next today",
           center: "title",
           right: this.modi_calendar_button()
+        },
+        eventContent: this.eventContent,
+        eventClick: function eventClick(info) {
+          console.log(info);
+          console.log(info.event.extendedProps.data);
         }
       }
     };
@@ -16294,6 +16313,13 @@ __webpack_require__.r(__webpack_exports__);
         return "listWeek";
       } else {
         return "dayGridMonth";
+      }
+    },
+    eventContent: function eventContent(info) {
+      if (info.event.title == "") {
+        return {
+          html: "<div class=\"only-time-events\">".concat(info.timeText, "</div>")
+        };
       }
     }
   },
@@ -16575,6 +16601,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -16582,7 +16613,8 @@ __webpack_require__.r(__webpack_exports__);
       isAddWork: false,
       isPcong: false,
       isListPcong: false,
-      isListDayOff: false
+      isListDayOff: false,
+      isXemBoSung: false
     };
   },
   mounted: function mounted() {
@@ -16601,6 +16633,9 @@ __webpack_require__.r(__webpack_exports__);
     } else if (this.$route.path.includes("xem_lich_nghi")) {
       this.reset_btn_class();
       this.isListDayOff = true;
+    } else if (this.$route.path.includes("xem_lich_bo_sung")) {
+      this.reset_btn_class();
+      this.isXemBoSung = true;
     } else {
       this.reset_btn_class();
     }
@@ -16622,6 +16657,9 @@ __webpack_require__.r(__webpack_exports__);
       } else if (to.path.includes("xem_lich_nghi")) {
         this.reset_btn_class();
         this.isListDayOff = true;
+      } else if (this.$route.path.includes("xem_lich_bo_sung")) {
+        this.reset_btn_class();
+        this.isXemBoSung = true;
       } else {
         this.reset_btn_class();
       }
@@ -16634,6 +16672,7 @@ __webpack_require__.r(__webpack_exports__);
       this.isDayOff = false;
       this.isListPcong = false;
       this.isPcong = false;
+      this.isXemBoSung = false;
     }
   }
 });
@@ -16738,15 +16777,88 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     this.$store.commit("content/page_title", "Thêm lịch làm việc");
   },
+  data: function data() {
+    return {
+      table: false,
+      ma_gv: "",
+      ma_mon: "",
+      ma_lop: ""
+    };
+  },
+  methods: {
+    pass_data: function pass_data(ma_gv, ma_mon, ma_lop) {
+      this.ma_gv = ma_gv;
+      this.ma_mon = ma_mon;
+      this.ma_lop = ma_lop;
+    },
+    hide_table: function hide_table() {
+      this.table = false;
+    },
+    show_table: function show_table() {
+      this.table = true;
+    }
+  },
   components: {
     formThemLichDay: _form_formDeXuat__WEBPACK_IMPORTED_MODULE_0__["default"],
     tableDeXuat: _table_TableDeXuatLichDay__WEBPACK_IMPORTED_MODULE_1__["default"]
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/giaovu/components/quanlylichlamviec/XemLichBoXung.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/giaovu/components/quanlylichlamviec/XemLichBoXung.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _select_SelectLichBoSung__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./select/SelectLichBoSung */ "./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectLichBoSung.vue");
+/* harmony import */ var _table_TableLichBoSung__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./table/TableLichBoSung */ "./resources/js/views/giaovu/components/quanlylichlamviec/table/TableLichBoSung.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    this.$store.commit("content/page_title", "Xem lịch dạy bổ sung");
+  },
+  data: function data() {
+    return {
+      show: false
+    };
+  },
+  methods: {
+    hide_talbe: function hide_talbe() {
+      this.show = false;
+    },
+    show_talbe: function show_talbe() {
+      this.show = true;
+    }
+  },
+  components: {
+    selectLichBoSung: _select_SelectLichBoSung__WEBPACK_IMPORTED_MODULE_0__["default"],
+    tableLichBoSung: _table_TableLichBoSung__WEBPACK_IMPORTED_MODULE_1__["default"]
   }
 });
 
@@ -16762,7 +16874,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _thongke_ThongKeLichNghi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./thongke/ThongKeLichNghi */ "./resources/js/views/giaovu/components/quanlylichlamviec/thongke/ThongKeLichNghi.vue");
-/* harmony import */ var _select_SelectGiaoVien__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./select/SelectGiaoVien */ "./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectGiaoVien.vue");
+/* harmony import */ var _select_SelectNgayNghi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./select/SelectNgayNghi */ "./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectNgayNghi.vue");
 /* harmony import */ var _table_TableLichNghi__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./table/TableLichNghi */ "./resources/js/views/giaovu/components/quanlylichlamviec/table/TableLichNghi.vue");
 //
 //
@@ -16788,7 +16900,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   components: {
     thongKeLichNghi: _thongke_ThongKeLichNghi__WEBPACK_IMPORTED_MODULE_0__["default"],
-    selectGiaoVien: _select_SelectGiaoVien__WEBPACK_IMPORTED_MODULE_1__["default"],
+    selectGiaoVien: _select_SelectNgayNghi__WEBPACK_IMPORTED_MODULE_1__["default"],
     tableLichNghi: _table_TableLichNghi__WEBPACK_IMPORTED_MODULE_2__["default"]
   }
 });
@@ -16854,6 +16966,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -17087,15 +17200,42 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.$store.dispatch("user/get_all_user");
+  },
+  mounted: function mounted() {
+    // change label color
+    $(".form-group").addClass("bmd-form-group");
+    $("label").addClass("bmd-label-static");
+    $(".form-group").on("click", function () {
+      $(".form-group").removeClass("is-focused");
+      $(this).addClass("is-focused");
+    }); // remove color while move out input
+
+    $("input").blur(function () {
+      $(".form-group").removeClass("is-focused");
+    });
+    this.so_gio = this.arr_gio_day[0];
   },
   data: function data() {
     return {
       phan_cong: "",
       giao_vien: "",
       so_gio: "",
+      ngay: 7,
       arr_gio_day: [{
         value: 2,
         title: "2 giờ"
@@ -17117,20 +17257,28 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.state.phan_cong.arr_phan_cong.filter(function (each) {
         return each.nguoidung && each.nguoidung.ma_nguoi_dung == _this.giao_vien.ma_nguoi_dung;
       });
+    },
+    reset_form: function reset_form() {
+      return this.$store.state.de_xuat.reset_form;
     }
   },
   watch: {
     giao_vien: function giao_vien() {
+      this.phan_cong = "";
+
       if (!this.giao_vien) {
-        this.phan_cong = "";
         this.$store.commit("phan_cong/reset_arr_phan_cong");
       } else {
         this.$store.dispatch("phan_cong/get_phan_cong", this.giao_vien.ma_nguoi_dung);
       }
     },
-    phan_cong: function phan_cong() {
-      if (!this.phan_cong) {} else {
-        console.log(this.phan_cong);
+    reset_form: function reset_form() {
+      if (this.reset_form) {
+        this.phan_cong = "";
+        this.giao_vien = "";
+        this.so_gio = "";
+        this.ngay = "";
+        this.$emit("hide_table");
       }
     }
   },
@@ -17148,15 +17296,89 @@ __webpack_require__.r(__webpack_exports__);
     gioLabel: function gioLabel(_ref3) {
       var title = _ref3.title;
       return "".concat(title);
+    },
+    get_de_xuat: function get_de_xuat(e) {
+      e.preventDefault();
+      var obj = {
+        ma_giao_vien: this.giao_vien.ma_nguoi_dung,
+        so_gio: this.so_gio.value,
+        ma_lop: this.phan_cong.ma_lop,
+        so_ngay: this.ngay,
+        ma_mon_hoc: this.phan_cong.ma_mon_hoc
+      };
+      this.$store.dispatch("de_xuat/get_de_xuat", obj);
+      this.$emit("data_up", this.giao_vien.ma_nguoi_dung, this.phan_cong.ma_mon_hoc, this.phan_cong.ma_lop);
+      this.$emit("show_table");
     }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectGiaoVien.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectLichBoSung.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectLichBoSung.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  created: function created() {
+    this.$store.dispatch("user/get_all_user");
+  },
+  computed: {
+    arr_user: function arr_user() {
+      return this.$store.state.user.arr_user;
+    }
+  },
+  data: function data() {
+    return {
+      user: ""
+    };
+  },
+  methods: {
+    userLabel: function userLabel(_ref) {
+      var ho_ten = _ref.ho_ten,
+          email = _ref.email;
+      return "".concat(ho_ten, " - ").concat(email);
+    }
+  },
+  watch: {
+    user: function user() {
+      if (this.user) {
+        this.$store.dispatch("de_xuat/get_lich_bo_sung", this.user.ma_nguoi_dung);
+        this.$emit("show_table");
+      } else {
+        this.$emit("hide_table");
+      }
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectNgayNghi.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectGiaoVien.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectNgayNghi.vue?vue&type=script&lang=js& ***!
   \***************************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -17406,7 +17628,86 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["ma_gv", "ma_mon", "ma_lop"],
+  computed: {
+    arr_de_xuat: function arr_de_xuat() {
+      return this.$store.state.de_xuat.arr_de_xuat;
+    }
+  },
+  data: function data() {
+    return {
+      columns: [{
+        label: "Thứ",
+        field: "thu",
+        thClass: "text-info",
+        tdClass: "font-weight-bold",
+        sortable: false
+      }, {
+        label: "Giờ bắt đầu",
+        field: "gio_bat_dau",
+        thClass: "text-info",
+        tdClass: "font-weight-bold"
+      }, {
+        label: "Giờ kết thức",
+        field: "gio_ket_thuc",
+        thClass: "text-info",
+        tdClass: "font-weight-bold"
+      }, {
+        label: "Tên phòng",
+        field: "ten_phong",
+        thClass: "text-info",
+        tdClass: "font-weight-bold"
+      }, {
+        label: "Tùy chỉnh",
+        field: "ma_ca",
+        thClass: "text-info",
+        sortable: false
+      }]
+    };
+  },
+  methods: {
+    add_lich_bo_sung: function add_lich_bo_sung(row) {
+      var _this = this;
+
+      var obj = {
+        ma_giao_vien: this.ma_gv,
+        ma_lop: this.ma_lop,
+        ma_mon_hoc: this.ma_mon,
+        ngay: row.ngay.split("-").reverse().join("-"),
+        ma_phong: row.ma_phong,
+        ma_ca: row.ma_ca
+      };
+      this.$store.dispatch("de_xuat/add_de_xuat", obj).then(setTimeout(function () {
+        _this.$emit("hide_table");
+      }, 200));
+    },
+    prevent: function prevent(e) {
+      e.preventDefault();
+    }
+  }
+});
 
 /***/ }),
 
@@ -17494,6 +17795,96 @@ __webpack_require__.r(__webpack_exports__);
     },
     selectionChanged: function selectionChanged(row) {
       this.selected_rows = row.selectedRows;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/giaovu/components/quanlylichlamviec/table/TableLichBoSung.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/giaovu/components/quanlylichlamviec/table/TableLichBoSung.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  computed: {
+    arr_lich_bo_sung: function arr_lich_bo_sung() {
+      return this.$store.state.de_xuat.arr_lich_bo_sung;
+    }
+  },
+  data: function data() {
+    return {
+      columns: [{
+        label: "Ngày",
+        field: "ngay",
+        thClass: "text-info",
+        tdClass: "font-weight-bold"
+      }, {
+        label: "Lớp",
+        field: "ma_lop",
+        thClass: "text-info",
+        tdClass: "font-weight-bold"
+      }, {
+        label: "Ca",
+        field: this.formatCa,
+        thClass: "text-info",
+        tdClass: "font-weight-bold",
+        sortable: false
+      }, {
+        label: "Phòng",
+        field: "phong.ten_phong",
+        thClass: "text-info",
+        tdClass: "font-weight-bold"
+      }, {
+        label: "Tùy chỉnh",
+        field: "ma_lich_day_bo_sung",
+        sortable: false,
+        thClass: "text-info"
+      }]
+    };
+  },
+  methods: {
+    formatCa: function formatCa(row) {
+      return "".concat(row.ca.ma_ca, " (").concat(row.ca.gio_bat_dau, " - ").concat(row.ca.gio_ket_thuc, ")");
+    },
+    delete_lich_bo_sung: function delete_lich_bo_sung(row) {
+      this.$store.dispatch("de_xuat/delete_lich_bo_sung", row.ma_lich_day_bo_sung);
     }
   }
 });
@@ -19721,10 +20112,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.$store.dispatch("toa/get_toa");
     this.$store.dispatch("cau_hinh/get_cau_hinh");
+
+    if (this.$route.params.ma_lab) {
+      this.$store.dispatch("lab/get_info_lab", this.$route.params.ma_lab);
+    } else {
+      this.$store.commit("lab/reset_info_lab");
+    }
+
+    this.$store.commit("lab/reset_err");
   },
   mounted: function mounted() {
     // change label color
@@ -19745,12 +20147,14 @@ __webpack_require__.r(__webpack_exports__);
       toa: "",
       lab: "",
       ten_lab: "",
-      arr_lab: [],
-      cau_hinh: "",
-      so_cho_ngoi: 0
+      seats: "",
+      cau_hinh: ""
     };
   },
   computed: {
+    err: function err() {
+      return this.$store.state.lab.err ? this.$store.state.lab.err : false;
+    },
     arr_toa: function arr_toa() {
       return this.$store.state.toa.arr_toa;
     },
@@ -19759,6 +20163,28 @@ __webpack_require__.r(__webpack_exports__);
     },
     arr_cau_hinh: function arr_cau_hinh() {
       return this.$store.state.cau_hinh.arr_cau_hinh;
+    },
+    arr_lab: function arr_lab() {
+      return this.$store.state.lab.arr_lab;
+    },
+    current_cau_hinh: function current_cau_hinh() {
+      return this.$store.state.lab.info_lab.cau_hinh ? this.$store.state.lab.info_lab.cau_hinh.mo_ta.split("`").join(" ") : "Chọn cấu hình";
+    },
+    current_name: {
+      get: function get() {
+        return this.$store.state.lab.info_lab ? this.$store.state.lab.info_lab.ten_phong : this.ten_lab;
+      },
+      set: function set(val) {
+        this.ten_lab = val;
+      }
+    },
+    current_seats: {
+      get: function get() {
+        return this.$store.state.lab.info_lab ? this.$store.state.lab.info_lab.so_cho_ngoi : this.seats;
+      },
+      set: function set(val) {
+        this.seats = val;
+      }
     }
   },
   methods: {
@@ -19772,17 +20198,45 @@ __webpack_require__.r(__webpack_exports__);
       return "".concat(ten_tang);
     },
     labelCauHinh: function labelCauHinh(_ref3) {
-      var mo_ta = _ref3.mo_ta;
-      return "".concat(mo_ta);
+      var cpu = _ref3.cpu,
+          ram = _ref3.ram,
+          main = _ref3.main,
+          o_cung = _ref3.o_cung,
+          vga = _ref3.vga;
+      return "Cpu: ".concat(cpu, " - RAM: ").concat(ram, " - Main: ").concat(main, " -  \u1ED4 c\u1EE9ng: ").concat(o_cung, " - VGA: ").concat(vga);
+    },
+    labelLab: function labelLab(_ref4) {
+      var ten_phong = _ref4.ten_phong;
+      return "".concat(ten_phong);
+    },
+    update_lab: function update_lab(e) {
+      e.preventDefault();
+      var data = [];
+      var obj = {
+        ma_phong: this.$store.state.lab.info_lab.ma_phong
+      };
+
+      if (this.ten_lab) {
+        obj.ten_phong = this.ten_lab;
+      }
+
+      if (this.seats) {
+        obj.so_cho_ngoi = this.seats;
+      }
+
+      data.push(obj);
+
+      if (this.cau_hinh) {
+        data.push(this.cau_hinh);
+      }
+
+      this.$store.dispatch("lab/update_thong_tin", data);
     }
   },
   watch: {
     toa: function toa() {
       this.tang = "";
       this.lab = "";
-      this.ten_lab = "";
-      this.so_cho_ngoi = "";
-      this.cau_hinh = "";
 
       if (!this.toa) {
         this.$store.commit("tang/reset_arr_tang");
@@ -19793,27 +20247,20 @@ __webpack_require__.r(__webpack_exports__);
     },
     tang: function tang() {
       this.lab = "";
-      this.ten_lab = "";
-      this.so_cho_ngoi = "";
-      this.cau_hinh = "";
 
       if (!this.tang) {
-        this.arr_lab = []; // this.$store.commit('toa/reset_arr_toa');
-
+        this.$store.commit("lab/reset_arr_lab");
         return false;
+      } else {
+        this.$store.dispatch("lab/get_lab", this.tang.ma_tang);
       }
-
-      this.arr_lab = ["lab 1", "lab 2", "lab 3"];
     },
     lab: function lab() {
       if (!this.lab) {
-        this.ten_lab = "";
-        this.so_cho_ngoi = "";
-        this.cau_hinh = "";
+        this.$store.commit("lab/reset_info_lab");
       } else if (this.toa && this.tang) {
-        this.ten_lab = "201";
-        this.so_cho_ngoi = 20;
-        this.cau_hinh = this.arr_cau_hinh[0]; // this.$store.commit('toa/get_info_toa', this.lab.ma_phong);
+        this.$router.push("/quan_ly_lab/update_lab/".concat(this.lab.ma_phong));
+        this.$store.dispatch("lab/get_info_lab", this.$route.params.ma_lab);
       }
     },
     arr_toa: function arr_toa() {
@@ -19972,6 +20419,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["arr_lab"],
   data: function data() {
@@ -19983,19 +20431,14 @@ __webpack_require__.r(__webpack_exports__);
         tdClass: "font-weight-bold"
       }, {
         label: "Cấu hình",
-        field: "cau_hinh",
+        field: "cau_hinh.mo_ta",
         sortable: false,
         thClass: "text-info",
-        tdClass: "font-weight-bold"
+        tdClass: "font-weight-bold",
+        formatFn: this.formatCH
       }, {
         label: "Số chỗ ngồi",
-        field: "cho_ngoi",
-        type: "number",
-        thClass: "text-info",
-        tdClass: "font-weight-bold"
-      }, {
-        label: "Số máy",
-        field: "may",
+        field: "so_cho_ngoi",
         type: "number",
         thClass: "text-info",
         tdClass: "font-weight-bold"
@@ -20003,7 +20446,8 @@ __webpack_require__.r(__webpack_exports__);
         label: "Tình trạng",
         field: "tinh_trang",
         thClass: "text-info",
-        tdClass: "font-weight-bold"
+        tdClass: "font-weight-bold",
+        formatFn: this.formatState
       }, {
         label: "Tùy chỉnh",
         field: "ma_phong",
@@ -20012,6 +20456,24 @@ __webpack_require__.r(__webpack_exports__);
         tdClass: "font-weight-bold"
       }]
     };
+  },
+  methods: {
+    formatState: function formatState(row) {
+      return row.ten_tinh_trang;
+    },
+    formatCH: function formatCH(row) {
+      var row = row.split("`");
+      row.shift();
+      row = row.join(" ");
+      return row;
+    },
+    thay_doi_state: function thay_doi_state(row) {
+      var obj = {
+        ma_phong: row.ma_phong,
+        ma_tinh_trang: row.tinh_trang.ma_tinh_trang == 1 ? 2 : 1
+      };
+      this.$store.dispatch("lab/update_tinh_trang", obj);
+    }
   },
   watch: {
     arr_lab: function arr_lab() {
@@ -20848,7 +21310,7 @@ exports = module.exports = __webpack_require__(/*! ../../css-loader/lib/css-base
 
 
 // module
-exports.push([module.i, "\r\n:root {\r\n  --fc-daygrid-event-dot-width: 8px;\r\n}\r\n.fc .fc-popover {\r\n    position: fixed;\r\n    top: 0; /* for when not positioned yet */\r\n    box-shadow: 0 2px 6px rgba(0,0,0,.15);\r\n  }\r\n.fc .fc-popover-header {\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    padding: 3px 4px;\r\n  }\r\n.fc .fc-popover-title {\r\n    margin: 0 2px;\r\n  }\r\n.fc .fc-popover-close {\r\n    cursor: pointer;\r\n    opacity: 0.65;\r\n    font-size: 1.1em;\r\n  }\r\n.fc-theme-standard .fc-popover {\r\n    border: 1px solid #ddd;\r\n    border: 1px solid var(--fc-border-color, #ddd);\r\n    background: #fff;\r\n    background: var(--fc-page-bg-color, #fff);\r\n  }\r\n.fc-theme-standard .fc-popover-header {\r\n    background: rgba(208, 208, 208, 0.3);\r\n    background: var(--fc-neutral-bg-color, rgba(208, 208, 208, 0.3));\r\n  }\r\n/* help things clear margins of inner content */\r\n.fc-daygrid-day-frame,\r\n.fc-daygrid-day-events,\r\n.fc-daygrid-event-harness { /* for event top/bottom margins */\r\n}\r\n.fc-daygrid-day-frame:before, .fc-daygrid-day-events:before, .fc-daygrid-event-harness:before {\r\n  content: \"\";\r\n  clear: both;\r\n  display: table; }\r\n.fc-daygrid-day-frame:after, .fc-daygrid-day-events:after, .fc-daygrid-event-harness:after {\r\n  content: \"\";\r\n  clear: both;\r\n  display: table; }\r\n.fc .fc-daygrid-body { /* a <div> that wraps the table */\r\n    position: relative;\r\n    z-index: 1; /* container inner z-index's because <tr>s can't do it */\r\n  }\r\n.fc .fc-daygrid-day.fc-day-today {\r\n      background-color: rgba(255, 220, 40, 0.15);\r\n      background-color: var(--fc-today-bg-color, rgba(255, 220, 40, 0.15));\r\n    }\r\n.fc .fc-daygrid-day-frame {\r\n    position: relative;\r\n    min-height: 100%; /* seems to work better than `height` because sets height after rows/cells naturally do it */\r\n  }\r\n.fc {\r\n\r\n  /* cell top */\r\n\r\n}\r\n.fc .fc-daygrid-day-top {\r\n    position: relative;\r\n    z-index: 4;\r\n    display: flex;\r\n    flex-direction: row-reverse;\r\n  }\r\n.fc .fc-day-other .fc-daygrid-day-top {\r\n    opacity: 0.3;\r\n  }\r\n.fc {\r\n\r\n  /* day number (within cell top) */\r\n\r\n}\r\n.fc .fc-daygrid-day-number {\r\n    padding: 4px;\r\n  }\r\n.fc {\r\n\r\n  /* event container */\r\n\r\n}\r\n.fc .fc-daygrid-day-events {\r\n    margin-top: 1px; /* needs to be margin, not padding, so that available cell height can be computed */\r\n  }\r\n.fc {\r\n\r\n  /* positioning for balanced vs natural */\r\n\r\n}\r\n.fc .fc-daygrid-body-balanced .fc-daygrid-day-events {\r\n      position: absolute;\r\n      left: 0;\r\n      right: 0;\r\n    }\r\n.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {\r\n      position: relative; /* for containing abs positioned event harnesses */\r\n      min-height: 2em; /* in addition to being a min-height during natural height, equalizes the heights a little bit */\r\n    }\r\n.fc .fc-daygrid-body-natural { /* can coexist with -unbalanced */\r\n  }\r\n.fc .fc-daygrid-body-natural .fc-daygrid-day-events {\r\n      margin-bottom: 1em;\r\n    }\r\n.fc {\r\n\r\n  /* event harness */\r\n\r\n}\r\n.fc .fc-daygrid-event-harness {\r\n    position: relative;\r\n  }\r\n.fc .fc-daygrid-event-harness-abs {\r\n    position: absolute;\r\n    top: 0; /* fallback coords for when cannot yet be computed */\r\n    left: 0; /* */\r\n    right: 0; /* */\r\n  }\r\n.fc .fc-daygrid-bg-harness {\r\n    position: absolute;\r\n    top: 0;\r\n    bottom: 0;\r\n  }\r\n.fc {\r\n\r\n  /* bg content */\r\n\r\n}\r\n.fc .fc-daygrid-day-bg .fc-non-business { z-index: 1 }\r\n.fc .fc-daygrid-day-bg .fc-bg-event { z-index: 2 }\r\n.fc .fc-daygrid-day-bg .fc-highlight { z-index: 3 }\r\n.fc {\r\n\r\n  /* events */\r\n\r\n}\r\n.fc .fc-daygrid-event {\r\n    z-index: 6;\r\n    margin-top: 1px;\r\n  }\r\n.fc .fc-daygrid-event.fc-event-mirror {\r\n    z-index: 7;\r\n  }\r\n.fc {\r\n\r\n  /* cell bottom (within day-events) */\r\n\r\n}\r\n.fc .fc-daygrid-day-bottom {\r\n    position: relative;\r\n    z-index: 4;\r\n    font-size: .85em;\r\n    margin: 2px 3px 0;\r\n  }\r\n.fc .fc-daygrid-more-link {\r\n    cursor: pointer;\r\n  }\r\n.fc {\r\n\r\n  /* week number (within frame) */\r\n\r\n}\r\n.fc .fc-daygrid-week-number {\r\n    position: absolute;\r\n    z-index: 5;\r\n    top: 0;\r\n    padding: 2px;\r\n    min-width: 1.5em;\r\n    text-align: center;\r\n    background-color: rgba(208, 208, 208, 0.3);\r\n    background-color: var(--fc-neutral-bg-color, rgba(208, 208, 208, 0.3));\r\n    color: #808080;\r\n    color: var(--fc-neutral-text-color, #808080);\r\n  }\r\n.fc {\r\n\r\n  /* popover */\r\n\r\n}\r\n.fc .fc-more-popover {\r\n    z-index: 8;\r\n  }\r\n.fc .fc-more-popover .fc-popover-body {\r\n    min-width: 220px;\r\n    padding: 10px;\r\n  }\r\n.fc-direction-ltr .fc-daygrid-event.fc-event-start,\r\n.fc-direction-rtl .fc-daygrid-event.fc-event-end {\r\n  margin-left: 2px;\r\n}\r\n.fc-direction-ltr .fc-daygrid-event.fc-event-end,\r\n.fc-direction-rtl .fc-daygrid-event.fc-event-start {\r\n  margin-right: 2px;\r\n}\r\n.fc-direction-ltr .fc-daygrid-week-number {\r\n    left: 0;\r\n    border-radius: 0 0 3px 0;\r\n  }\r\n.fc-direction-rtl .fc-daygrid-week-number {\r\n    right: 0;\r\n    border-radius: 0 0 0 3px;\r\n  }\r\n.fc-liquid-hack .fc-daygrid-day-frame {\r\n    position: static; /* will cause inner absolute stuff to expand to <td> */\r\n  }\r\n.fc-daygrid-event { /* make root-level, because will be dragged-and-dropped outside of a component root */\r\n  position: relative; /* for z-indexes assigned later */\r\n  white-space: nowrap;\r\n  border-radius: 3px; /* dot event needs this to when selected */\r\n  font-size: .85em;\r\n  font-size: var(--fc-small-font-size, .85em);\r\n}\r\n/* --- the rectangle (\"block\") style of event --- */\r\n.fc-daygrid-block-event .fc-event-time {\r\n    font-weight: bold;\r\n  }\r\n.fc-daygrid-block-event .fc-event-time,\r\n  .fc-daygrid-block-event .fc-event-title {\r\n    padding: 1px;\r\n  }\r\n/* --- the dot style of event --- */\r\n.fc-daygrid-dot-event {\r\n  display: block;\r\n  padding: 2px 0;\r\n  overflow: hidden\r\n\r\n}\r\n.fc-daygrid-dot-event .fc-event-title {\r\n    font-weight: bold;\r\n  }\r\n.fc-daygrid-dot-event .fc-event-time,\r\n  .fc-daygrid-dot-event .fc-event-title {\r\n    display: inline-block; /* better than inline, for sitting next to dot */\r\n  }\r\n.fc-daygrid-dot-event:hover,\r\n  .fc-daygrid-dot-event.fc-event-mirror {\r\n    background: rgba(0, 0, 0, 0.1);\r\n  }\r\n.fc-daygrid-event-dot { /* the actual dot */\r\n  display: inline-block;\r\n  margin: 0 4px;\r\n  box-sizing: content-box;\r\n  width: 0;\r\n  height: 0;\r\n  border: 4px solid #3788d8;\r\n  border: calc(var(--fc-daygrid-event-dot-width, 8px) / 2) solid var(--fc-event-border-color, #3788d8);\r\n  border-radius: 4px;\r\n  border-radius: calc(var(--fc-daygrid-event-dot-width, 8px) / 2);\r\n}\r\n/* --- spacing between time and title --- */\r\n.fc-direction-ltr .fc-daygrid-event .fc-event-time {\r\n    margin-right: 3px;\r\n  }\r\n.fc-direction-rtl .fc-daygrid-event .fc-event-time {\r\n    margin-left: 3px;\r\n  }\r\n\r\n/* --- Custom setting --- */\r\n.fc-event-main-frame {\r\n  flex-direction: column;\r\n  line-height: normal;\r\n}\r\n\r\n.fc-event-title {\r\n  white-space: normal;\r\n  font-weight: bold;\r\n}\r\n\r\n\r\n", ""]);
+exports.push([module.i, "\r\n:root {\r\n  --fc-daygrid-event-dot-width: 8px;\r\n}\r\n.fc .fc-popover {\r\n    position: fixed;\r\n    top: 0; /* for when not positioned yet */\r\n    box-shadow: 0 2px 6px rgba(0,0,0,.15);\r\n  }\r\n.fc .fc-popover-header {\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    padding: 3px 4px;\r\n  }\r\n.fc .fc-popover-title {\r\n    margin: 0 2px;\r\n  }\r\n.fc .fc-popover-close {\r\n    cursor: pointer;\r\n    opacity: 0.65;\r\n    font-size: 1.1em;\r\n  }\r\n.fc-theme-standard .fc-popover {\r\n    border: 1px solid #ddd;\r\n    border: 1px solid var(--fc-border-color, #ddd);\r\n    background: #fff;\r\n    background: var(--fc-page-bg-color, #fff);\r\n  }\r\n.fc-theme-standard .fc-popover-header {\r\n    background: rgba(208, 208, 208, 0.3);\r\n    background: var(--fc-neutral-bg-color, rgba(208, 208, 208, 0.3));\r\n  }\r\n/* help things clear margins of inner content */\r\n.fc-daygrid-day-frame,\r\n.fc-daygrid-day-events,\r\n.fc-daygrid-event-harness { /* for event top/bottom margins */\r\n}\r\n.fc-daygrid-day-frame:before, .fc-daygrid-day-events:before, .fc-daygrid-event-harness:before {\r\n  content: \"\";\r\n  clear: both;\r\n  display: table; }\r\n.fc-daygrid-day-frame:after, .fc-daygrid-day-events:after, .fc-daygrid-event-harness:after {\r\n  content: \"\";\r\n  clear: both;\r\n  display: table; }\r\n.fc .fc-daygrid-body { /* a <div> that wraps the table */\r\n    position: relative;\r\n    z-index: 1; /* container inner z-index's because <tr>s can't do it */\r\n  }\r\n.fc .fc-daygrid-day.fc-day-today {\r\n      background-color: rgba(255, 220, 40, 0.15);\r\n      background-color: var(--fc-today-bg-color, rgba(255, 220, 40, 0.15));\r\n    }\r\n.fc .fc-daygrid-day-frame {\r\n    position: relative;\r\n    min-height: 100%; /* seems to work better than `height` because sets height after rows/cells naturally do it */\r\n  }\r\n.fc {\r\n\r\n  /* cell top */\r\n\r\n}\r\n.fc .fc-daygrid-day-top {\r\n    position: relative;\r\n    z-index: 4;\r\n    display: flex;\r\n    flex-direction: row-reverse;\r\n  }\r\n.fc .fc-day-other .fc-daygrid-day-top {\r\n    opacity: 0.3;\r\n  }\r\n.fc {\r\n\r\n  /* day number (within cell top) */\r\n\r\n}\r\n.fc .fc-daygrid-day-number {\r\n    padding: 4px;\r\n  }\r\n.fc {\r\n\r\n  /* event container */\r\n\r\n}\r\n.fc .fc-daygrid-day-events {\r\n    margin-top: 1px; /* needs to be margin, not padding, so that available cell height can be computed */\r\n  }\r\n.fc {\r\n\r\n  /* positioning for balanced vs natural */\r\n\r\n}\r\n.fc .fc-daygrid-body-balanced .fc-daygrid-day-events {\r\n      position: absolute;\r\n      left: 0;\r\n      right: 0;\r\n    }\r\n.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {\r\n      position: relative; /* for containing abs positioned event harnesses */\r\n      min-height: 2em; /* in addition to being a min-height during natural height, equalizes the heights a little bit */\r\n    }\r\n.fc .fc-daygrid-body-natural { /* can coexist with -unbalanced */\r\n  }\r\n.fc .fc-daygrid-body-natural .fc-daygrid-day-events {\r\n      margin-bottom: 1em;\r\n    }\r\n.fc {\r\n\r\n  /* event harness */\r\n\r\n}\r\n.fc .fc-daygrid-event-harness {\r\n    position: relative;\r\n  }\r\n.fc .fc-daygrid-event-harness-abs {\r\n    position: absolute;\r\n    top: 0; /* fallback coords for when cannot yet be computed */\r\n    left: 0; /* */\r\n    right: 0; /* */\r\n  }\r\n.fc .fc-daygrid-bg-harness {\r\n    position: absolute;\r\n    top: 0;\r\n    bottom: 0;\r\n  }\r\n.fc {\r\n\r\n  /* bg content */\r\n\r\n}\r\n.fc .fc-daygrid-day-bg .fc-non-business { z-index: 1 }\r\n.fc .fc-daygrid-day-bg .fc-bg-event { z-index: 2 }\r\n.fc .fc-daygrid-day-bg .fc-highlight { z-index: 3 }\r\n.fc {\r\n\r\n  /* events */\r\n\r\n}\r\n.fc .fc-daygrid-event {\r\n    z-index: 6;\r\n    margin-top: 1px;\r\n  }\r\n.fc .fc-daygrid-event.fc-event-mirror {\r\n    z-index: 7;\r\n  }\r\n.fc {\r\n\r\n  /* cell bottom (within day-events) */\r\n\r\n}\r\n.fc .fc-daygrid-day-bottom {\r\n    position: relative;\r\n    z-index: 4;\r\n    font-size: .85em;\r\n    margin: 2px 3px 0;\r\n  }\r\n.fc .fc-daygrid-more-link {\r\n    cursor: pointer;\r\n  }\r\n.fc {\r\n\r\n  /* week number (within frame) */\r\n\r\n}\r\n.fc .fc-daygrid-week-number {\r\n    position: absolute;\r\n    z-index: 5;\r\n    top: 0;\r\n    padding: 2px;\r\n    min-width: 1.5em;\r\n    text-align: center;\r\n    background-color: rgba(208, 208, 208, 0.3);\r\n    background-color: var(--fc-neutral-bg-color, rgba(208, 208, 208, 0.3));\r\n    color: #808080;\r\n    color: var(--fc-neutral-text-color, #808080);\r\n  }\r\n.fc {\r\n\r\n  /* popover */\r\n\r\n}\r\n.fc .fc-more-popover {\r\n    z-index: 8;\r\n  }\r\n.fc .fc-more-popover .fc-popover-body {\r\n    min-width: 220px;\r\n    padding: 10px;\r\n  }\r\n.fc-direction-ltr .fc-daygrid-event.fc-event-start,\r\n.fc-direction-rtl .fc-daygrid-event.fc-event-end {\r\n  margin-left: 2px;\r\n}\r\n.fc-direction-ltr .fc-daygrid-event.fc-event-end,\r\n.fc-direction-rtl .fc-daygrid-event.fc-event-start {\r\n  margin-right: 2px;\r\n}\r\n.fc-direction-ltr .fc-daygrid-week-number {\r\n    left: 0;\r\n    border-radius: 0 0 3px 0;\r\n  }\r\n.fc-direction-rtl .fc-daygrid-week-number {\r\n    right: 0;\r\n    border-radius: 0 0 0 3px;\r\n  }\r\n.fc-liquid-hack .fc-daygrid-day-frame {\r\n    position: static; /* will cause inner absolute stuff to expand to <td> */\r\n  }\r\n.fc-daygrid-event { /* make root-level, because will be dragged-and-dropped outside of a component root */\r\n  position: relative; /* for z-indexes assigned later */\r\n  white-space: nowrap;\r\n  border-radius: 3px; /* dot event needs this to when selected */\r\n  font-size: .85em;\r\n  font-size: var(--fc-small-font-size, .85em);\r\n}\r\n/* --- the rectangle (\"block\") style of event --- */\r\n.fc-daygrid-block-event .fc-event-time {\r\n    font-weight: bold;\r\n  }\r\n.fc-daygrid-block-event .fc-event-time,\r\n  .fc-daygrid-block-event .fc-event-title {\r\n    padding: 1px;\r\n  }\r\n/* --- the dot style of event --- */\r\n.fc-daygrid-dot-event {\r\n  display: block;\r\n  padding: 2px 0;\r\n  overflow: hidden\r\n\r\n}\r\n.fc-daygrid-dot-event .fc-event-title {\r\n    font-weight: bold;\r\n  }\r\n.fc-daygrid-dot-event .fc-event-time,\r\n  .fc-daygrid-dot-event .fc-event-title {\r\n    display: inline-block; /* better than inline, for sitting next to dot */\r\n  }\r\n.fc-daygrid-dot-event:hover,\r\n  .fc-daygrid-dot-event.fc-event-mirror {\r\n    background: rgba(0, 0, 0, 0.1);\r\n  }\r\n.fc-daygrid-event-dot { /* the actual dot */\r\n  display: inline-block;\r\n  margin: 0 4px;\r\n  box-sizing: content-box;\r\n  width: 0;\r\n  height: 0;\r\n  border: 4px solid #3788d8;\r\n  border: calc(var(--fc-daygrid-event-dot-width, 8px) / 2) solid var(--fc-event-border-color, #3788d8);\r\n  border-radius: 4px;\r\n  border-radius: calc(var(--fc-daygrid-event-dot-width, 8px) / 2);\r\n}\r\n/* --- spacing between time and title --- */\r\n.fc-direction-ltr .fc-daygrid-event .fc-event-time {\r\n    margin-right: 3px;\r\n  }\r\n.fc-direction-rtl .fc-daygrid-event .fc-event-time {\r\n    margin-left: 3px;\r\n  }\r\n\r\n/* --- Custom setting --- */\r\n.fc-event-main-frame {\r\n  flex-direction: column;\r\n  line-height: normal;\r\n}\r\n\r\n.fc-event-title {\r\n  white-space: normal;\r\n  font-weight: bold;\r\n}\r\n\r\n.only-time-events {\r\n  font-weight: bold;\r\n  white-space: normal;\r\n  margin: 0;\r\n}\r\n\r\n\r\n", ""]);
 
 // exports
 
@@ -20924,7 +21386,7 @@ exports = module.exports = __webpack_require__(/*! ../../css-loader/lib/css-base
 
 
 // module
-exports.push([module.i, "\n:root {\r\n  --fc-daygrid-event-dot-width: 8px;\n}\n.fc .fc-popover {\r\n    position: fixed;\r\n    top: 0; /* for when not positioned yet */\r\n    box-shadow: 0 2px 6px rgba(0,0,0,.15);\n}\n.fc .fc-popover-header {\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    padding: 3px 4px;\n}\n.fc .fc-popover-title {\r\n    margin: 0 2px;\n}\n.fc .fc-popover-close {\r\n    cursor: pointer;\r\n    opacity: 0.65;\r\n    font-size: 1.1em;\n}\n.fc-theme-standard .fc-popover {\r\n    border: 1px solid #ddd;\r\n    border: 1px solid var(--fc-border-color, #ddd);\r\n    background: #fff;\r\n    background: var(--fc-page-bg-color, #fff);\n}\n.fc-theme-standard .fc-popover-header {\r\n    background: rgba(208, 208, 208, 0.3);\r\n    background: var(--fc-neutral-bg-color, rgba(208, 208, 208, 0.3));\n}\r\n/* help things clear margins of inner content */\n.fc-daygrid-day-frame,\r\n.fc-daygrid-day-events,\r\n.fc-daygrid-event-harness { /* for event top/bottom margins */\n}\n.fc-daygrid-day-frame:before, .fc-daygrid-day-events:before, .fc-daygrid-event-harness:before {\r\n  content: \"\";\r\n  clear: both;\r\n  display: table;\n}\n.fc-daygrid-day-frame:after, .fc-daygrid-day-events:after, .fc-daygrid-event-harness:after {\r\n  content: \"\";\r\n  clear: both;\r\n  display: table;\n}\n.fc .fc-daygrid-body { /* a <div> that wraps the table */\r\n    position: relative;\r\n    z-index: 1; /* container inner z-index's because <tr>s can't do it */\n}\n.fc .fc-daygrid-day.fc-day-today {\r\n      background-color: rgba(255, 220, 40, 0.15);\r\n      background-color: var(--fc-today-bg-color, rgba(255, 220, 40, 0.15));\n}\n.fc .fc-daygrid-day-frame {\r\n    position: relative;\r\n    min-height: 100%; /* seems to work better than `height` because sets height after rows/cells naturally do it */\n}\n.fc {\r\n\r\n  /* cell top */\n}\n.fc .fc-daygrid-day-top {\r\n    position: relative;\r\n    z-index: 4;\r\n    display: flex;\r\n    flex-direction: row-reverse;\n}\n.fc .fc-day-other .fc-daygrid-day-top {\r\n    opacity: 0.3;\n}\n.fc {\r\n\r\n  /* day number (within cell top) */\n}\n.fc .fc-daygrid-day-number {\r\n    padding: 4px;\n}\n.fc {\r\n\r\n  /* event container */\n}\n.fc .fc-daygrid-day-events {\r\n    margin-top: 1px; /* needs to be margin, not padding, so that available cell height can be computed */\n}\n.fc {\r\n\r\n  /* positioning for balanced vs natural */\n}\n.fc .fc-daygrid-body-balanced .fc-daygrid-day-events {\r\n      position: absolute;\r\n      left: 0;\r\n      right: 0;\n}\n.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {\r\n      position: relative; /* for containing abs positioned event harnesses */\r\n      min-height: 2em; /* in addition to being a min-height during natural height, equalizes the heights a little bit */\n}\n.fc .fc-daygrid-body-natural { /* can coexist with -unbalanced */\n}\n.fc .fc-daygrid-body-natural .fc-daygrid-day-events {\r\n      margin-bottom: 1em;\n}\n.fc {\r\n\r\n  /* event harness */\n}\n.fc .fc-daygrid-event-harness {\r\n    position: relative;\n}\n.fc .fc-daygrid-event-harness-abs {\r\n    position: absolute;\r\n    top: 0; /* fallback coords for when cannot yet be computed */\r\n    left: 0; /* */\r\n    right: 0; /* */\n}\n.fc .fc-daygrid-bg-harness {\r\n    position: absolute;\r\n    top: 0;\r\n    bottom: 0;\n}\n.fc {\r\n\r\n  /* bg content */\n}\n.fc .fc-daygrid-day-bg .fc-non-business { z-index: 1\n}\n.fc .fc-daygrid-day-bg .fc-bg-event { z-index: 2\n}\n.fc .fc-daygrid-day-bg .fc-highlight { z-index: 3\n}\n.fc {\r\n\r\n  /* events */\n}\n.fc .fc-daygrid-event {\r\n    z-index: 6;\r\n    margin-top: 1px;\n}\n.fc .fc-daygrid-event.fc-event-mirror {\r\n    z-index: 7;\n}\n.fc {\r\n\r\n  /* cell bottom (within day-events) */\n}\n.fc .fc-daygrid-day-bottom {\r\n    position: relative;\r\n    z-index: 4;\r\n    font-size: .85em;\r\n    margin: 2px 3px 0;\n}\n.fc .fc-daygrid-more-link {\r\n    cursor: pointer;\n}\n.fc {\r\n\r\n  /* week number (within frame) */\n}\n.fc .fc-daygrid-week-number {\r\n    position: absolute;\r\n    z-index: 5;\r\n    top: 0;\r\n    padding: 2px;\r\n    min-width: 1.5em;\r\n    text-align: center;\r\n    background-color: rgba(208, 208, 208, 0.3);\r\n    background-color: var(--fc-neutral-bg-color, rgba(208, 208, 208, 0.3));\r\n    color: #808080;\r\n    color: var(--fc-neutral-text-color, #808080);\n}\n.fc {\r\n\r\n  /* popover */\n}\n.fc .fc-more-popover {\r\n    z-index: 8;\n}\n.fc .fc-more-popover .fc-popover-body {\r\n    min-width: 220px;\r\n    padding: 10px;\n}\n.fc-direction-ltr .fc-daygrid-event.fc-event-start,\r\n.fc-direction-rtl .fc-daygrid-event.fc-event-end {\r\n  margin-left: 2px;\n}\n.fc-direction-ltr .fc-daygrid-event.fc-event-end,\r\n.fc-direction-rtl .fc-daygrid-event.fc-event-start {\r\n  margin-right: 2px;\n}\n.fc-direction-ltr .fc-daygrid-week-number {\r\n    left: 0;\r\n    border-radius: 0 0 3px 0;\n}\n.fc-direction-rtl .fc-daygrid-week-number {\r\n    right: 0;\r\n    border-radius: 0 0 0 3px;\n}\n.fc-liquid-hack .fc-daygrid-day-frame {\r\n    position: static; /* will cause inner absolute stuff to expand to <td> */\n}\n.fc-daygrid-event { /* make root-level, because will be dragged-and-dropped outside of a component root */\r\n  position: relative; /* for z-indexes assigned later */\r\n  white-space: nowrap;\r\n  border-radius: 3px; /* dot event needs this to when selected */\r\n  font-size: .85em;\r\n  font-size: var(--fc-small-font-size, .85em);\n}\r\n/* --- the rectangle (\"block\") style of event --- */\n.fc-daygrid-block-event .fc-event-time {\r\n    font-weight: bold;\n}\n.fc-daygrid-block-event .fc-event-time,\r\n  .fc-daygrid-block-event .fc-event-title {\r\n    padding: 1px;\n}\r\n/* --- the dot style of event --- */\n.fc-daygrid-dot-event {\r\n  display: block;\r\n  padding: 2px 0;\r\n  overflow: hidden\n}\n.fc-daygrid-dot-event .fc-event-title {\r\n    font-weight: bold;\n}\n.fc-daygrid-dot-event .fc-event-time,\r\n  .fc-daygrid-dot-event .fc-event-title {\r\n    display: inline-block; /* better than inline, for sitting next to dot */\n}\n.fc-daygrid-dot-event:hover,\r\n  .fc-daygrid-dot-event.fc-event-mirror {\r\n    background: rgba(0, 0, 0, 0.1);\n}\n.fc-daygrid-event-dot { /* the actual dot */\r\n  display: inline-block;\r\n  margin: 0 4px;\r\n  box-sizing: content-box;\r\n  width: 0;\r\n  height: 0;\r\n  border: 4px solid #3788d8;\r\n  border: calc(var(--fc-daygrid-event-dot-width, 8px) / 2) solid var(--fc-event-border-color, #3788d8);\r\n  border-radius: 4px;\r\n  border-radius: calc(var(--fc-daygrid-event-dot-width, 8px) / 2);\n}\r\n/* --- spacing between time and title --- */\n.fc-direction-ltr .fc-daygrid-event .fc-event-time {\r\n    margin-right: 3px;\n}\n.fc-direction-rtl .fc-daygrid-event .fc-event-time {\r\n    margin-left: 3px;\n}\r\n\r\n/* --- Custom setting --- */\n.fc-event-main-frame {\r\n  flex-direction: column;\r\n  line-height: normal;\n}\n.fc-event-title {\r\n  white-space: normal;\r\n  font-weight: bold;\n}\r\n\r\n\r\n", ""]);
+exports.push([module.i, "\n:root {\r\n  --fc-daygrid-event-dot-width: 8px;\n}\n.fc .fc-popover {\r\n    position: fixed;\r\n    top: 0; /* for when not positioned yet */\r\n    box-shadow: 0 2px 6px rgba(0,0,0,.15);\n}\n.fc .fc-popover-header {\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    padding: 3px 4px;\n}\n.fc .fc-popover-title {\r\n    margin: 0 2px;\n}\n.fc .fc-popover-close {\r\n    cursor: pointer;\r\n    opacity: 0.65;\r\n    font-size: 1.1em;\n}\n.fc-theme-standard .fc-popover {\r\n    border: 1px solid #ddd;\r\n    border: 1px solid var(--fc-border-color, #ddd);\r\n    background: #fff;\r\n    background: var(--fc-page-bg-color, #fff);\n}\n.fc-theme-standard .fc-popover-header {\r\n    background: rgba(208, 208, 208, 0.3);\r\n    background: var(--fc-neutral-bg-color, rgba(208, 208, 208, 0.3));\n}\r\n/* help things clear margins of inner content */\n.fc-daygrid-day-frame,\r\n.fc-daygrid-day-events,\r\n.fc-daygrid-event-harness { /* for event top/bottom margins */\n}\n.fc-daygrid-day-frame:before, .fc-daygrid-day-events:before, .fc-daygrid-event-harness:before {\r\n  content: \"\";\r\n  clear: both;\r\n  display: table;\n}\n.fc-daygrid-day-frame:after, .fc-daygrid-day-events:after, .fc-daygrid-event-harness:after {\r\n  content: \"\";\r\n  clear: both;\r\n  display: table;\n}\n.fc .fc-daygrid-body { /* a <div> that wraps the table */\r\n    position: relative;\r\n    z-index: 1; /* container inner z-index's because <tr>s can't do it */\n}\n.fc .fc-daygrid-day.fc-day-today {\r\n      background-color: rgba(255, 220, 40, 0.15);\r\n      background-color: var(--fc-today-bg-color, rgba(255, 220, 40, 0.15));\n}\n.fc .fc-daygrid-day-frame {\r\n    position: relative;\r\n    min-height: 100%; /* seems to work better than `height` because sets height after rows/cells naturally do it */\n}\n.fc {\r\n\r\n  /* cell top */\n}\n.fc .fc-daygrid-day-top {\r\n    position: relative;\r\n    z-index: 4;\r\n    display: flex;\r\n    flex-direction: row-reverse;\n}\n.fc .fc-day-other .fc-daygrid-day-top {\r\n    opacity: 0.3;\n}\n.fc {\r\n\r\n  /* day number (within cell top) */\n}\n.fc .fc-daygrid-day-number {\r\n    padding: 4px;\n}\n.fc {\r\n\r\n  /* event container */\n}\n.fc .fc-daygrid-day-events {\r\n    margin-top: 1px; /* needs to be margin, not padding, so that available cell height can be computed */\n}\n.fc {\r\n\r\n  /* positioning for balanced vs natural */\n}\n.fc .fc-daygrid-body-balanced .fc-daygrid-day-events {\r\n      position: absolute;\r\n      left: 0;\r\n      right: 0;\n}\n.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {\r\n      position: relative; /* for containing abs positioned event harnesses */\r\n      min-height: 2em; /* in addition to being a min-height during natural height, equalizes the heights a little bit */\n}\n.fc .fc-daygrid-body-natural { /* can coexist with -unbalanced */\n}\n.fc .fc-daygrid-body-natural .fc-daygrid-day-events {\r\n      margin-bottom: 1em;\n}\n.fc {\r\n\r\n  /* event harness */\n}\n.fc .fc-daygrid-event-harness {\r\n    position: relative;\n}\n.fc .fc-daygrid-event-harness-abs {\r\n    position: absolute;\r\n    top: 0; /* fallback coords for when cannot yet be computed */\r\n    left: 0; /* */\r\n    right: 0; /* */\n}\n.fc .fc-daygrid-bg-harness {\r\n    position: absolute;\r\n    top: 0;\r\n    bottom: 0;\n}\n.fc {\r\n\r\n  /* bg content */\n}\n.fc .fc-daygrid-day-bg .fc-non-business { z-index: 1\n}\n.fc .fc-daygrid-day-bg .fc-bg-event { z-index: 2\n}\n.fc .fc-daygrid-day-bg .fc-highlight { z-index: 3\n}\n.fc {\r\n\r\n  /* events */\n}\n.fc .fc-daygrid-event {\r\n    z-index: 6;\r\n    margin-top: 1px;\n}\n.fc .fc-daygrid-event.fc-event-mirror {\r\n    z-index: 7;\n}\n.fc {\r\n\r\n  /* cell bottom (within day-events) */\n}\n.fc .fc-daygrid-day-bottom {\r\n    position: relative;\r\n    z-index: 4;\r\n    font-size: .85em;\r\n    margin: 2px 3px 0;\n}\n.fc .fc-daygrid-more-link {\r\n    cursor: pointer;\n}\n.fc {\r\n\r\n  /* week number (within frame) */\n}\n.fc .fc-daygrid-week-number {\r\n    position: absolute;\r\n    z-index: 5;\r\n    top: 0;\r\n    padding: 2px;\r\n    min-width: 1.5em;\r\n    text-align: center;\r\n    background-color: rgba(208, 208, 208, 0.3);\r\n    background-color: var(--fc-neutral-bg-color, rgba(208, 208, 208, 0.3));\r\n    color: #808080;\r\n    color: var(--fc-neutral-text-color, #808080);\n}\n.fc {\r\n\r\n  /* popover */\n}\n.fc .fc-more-popover {\r\n    z-index: 8;\n}\n.fc .fc-more-popover .fc-popover-body {\r\n    min-width: 220px;\r\n    padding: 10px;\n}\n.fc-direction-ltr .fc-daygrid-event.fc-event-start,\r\n.fc-direction-rtl .fc-daygrid-event.fc-event-end {\r\n  margin-left: 2px;\n}\n.fc-direction-ltr .fc-daygrid-event.fc-event-end,\r\n.fc-direction-rtl .fc-daygrid-event.fc-event-start {\r\n  margin-right: 2px;\n}\n.fc-direction-ltr .fc-daygrid-week-number {\r\n    left: 0;\r\n    border-radius: 0 0 3px 0;\n}\n.fc-direction-rtl .fc-daygrid-week-number {\r\n    right: 0;\r\n    border-radius: 0 0 0 3px;\n}\n.fc-liquid-hack .fc-daygrid-day-frame {\r\n    position: static; /* will cause inner absolute stuff to expand to <td> */\n}\n.fc-daygrid-event { /* make root-level, because will be dragged-and-dropped outside of a component root */\r\n  position: relative; /* for z-indexes assigned later */\r\n  white-space: nowrap;\r\n  border-radius: 3px; /* dot event needs this to when selected */\r\n  font-size: .85em;\r\n  font-size: var(--fc-small-font-size, .85em);\n}\r\n/* --- the rectangle (\"block\") style of event --- */\n.fc-daygrid-block-event .fc-event-time {\r\n    font-weight: bold;\n}\n.fc-daygrid-block-event .fc-event-time,\r\n  .fc-daygrid-block-event .fc-event-title {\r\n    padding: 1px;\n}\r\n/* --- the dot style of event --- */\n.fc-daygrid-dot-event {\r\n  display: block;\r\n  padding: 2px 0;\r\n  overflow: hidden\n}\n.fc-daygrid-dot-event .fc-event-title {\r\n    font-weight: bold;\n}\n.fc-daygrid-dot-event .fc-event-time,\r\n  .fc-daygrid-dot-event .fc-event-title {\r\n    display: inline-block; /* better than inline, for sitting next to dot */\n}\n.fc-daygrid-dot-event:hover,\r\n  .fc-daygrid-dot-event.fc-event-mirror {\r\n    background: rgba(0, 0, 0, 0.1);\n}\n.fc-daygrid-event-dot { /* the actual dot */\r\n  display: inline-block;\r\n  margin: 0 4px;\r\n  box-sizing: content-box;\r\n  width: 0;\r\n  height: 0;\r\n  border: 4px solid #3788d8;\r\n  border: calc(var(--fc-daygrid-event-dot-width, 8px) / 2) solid var(--fc-event-border-color, #3788d8);\r\n  border-radius: 4px;\r\n  border-radius: calc(var(--fc-daygrid-event-dot-width, 8px) / 2);\n}\r\n/* --- spacing between time and title --- */\n.fc-direction-ltr .fc-daygrid-event .fc-event-time {\r\n    margin-right: 3px;\n}\n.fc-direction-rtl .fc-daygrid-event .fc-event-time {\r\n    margin-left: 3px;\n}\r\n\r\n/* --- Custom setting --- */\n.fc-event-main-frame {\r\n  flex-direction: column;\r\n  line-height: normal;\n}\n.fc-event-title {\r\n  white-space: normal;\r\n  font-weight: bold;\n}\n.only-time-events {\r\n  font-weight: bold;\r\n  white-space: normal;\r\n  margin: 0;\n}\r\n\r\n\r\n", ""]);
 
 // exports
 
@@ -45334,6 +45796,10 @@ var render = function() {
   return _c(
     "div",
     [
+      _c("p", { staticClass: "font-weight-bold" }, [_vm._v("Chú thích:")]),
+      _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
       _c("thongtin"),
       _vm._v(" "),
       _c("br"),
@@ -45343,7 +45809,29 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticStyle: { display: "flex" } }, [
+      _c(
+        "p",
+        { staticClass: "font-weight-bold", staticStyle: { color: "blue" } },
+        [_vm._v("Lịch dạy")]
+      ),
+      _vm._v(" "),
+      _c(
+        "p",
+        {
+          staticClass: "font-weight-bold",
+          staticStyle: { color: "#2C3E50", padding: "0 10px" }
+        },
+        [_vm._v("Lịch nghỉ")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -45603,7 +46091,9 @@ var render = function() {
               _c("br"),
               _vm._v(" "),
               _vm.lich_lam_viec.length == 0
-                ? _c("span", [_vm._v(_vm._s(_vm.empty_message))])
+                ? _c("span", { staticClass: "font-weight-bold" }, [
+                    _vm._v(_vm._s(_vm.empty_message))
+                  ])
                 : _vm._e(),
               _vm._v(" "),
               _vm.show_lich_lam_viec
@@ -45644,6 +46134,10 @@ var render = function() {
   return _c(
     "div",
     [
+      _c("p", { staticClass: "font-weight-bold" }, [_vm._v("Chú thích:")]),
+      _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
       _c("thongKe"),
       _vm._v(" "),
       _c("br"),
@@ -45653,7 +46147,35 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticStyle: { display: "flex" } }, [
+      _c(
+        "p",
+        { staticClass: "font-weight-bold", staticStyle: { color: "blue" } },
+        [_vm._v("Lịch dạy")]
+      ),
+      _vm._v(" "),
+      _c(
+        "p",
+        {
+          staticClass: "font-weight-bold",
+          staticStyle: { color: "#2C3E50", padding: "0 10px" }
+        },
+        [_vm._v("Lịch nghỉ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "p",
+        { staticClass: "font-weight-bold", staticStyle: { color: "gray" } },
+        [_vm._v("Lịch đã hoàn thành")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -45768,7 +46290,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_c("p", [_vm._v(_vm._s(_vm.lich_ket_thuc))])])
+  return _c("div", [
+    _c("p", { staticClass: "font-weight-bold" }, [
+      _vm._v(_vm._s(_vm.lich_ket_thuc))
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -45909,6 +46435,16 @@ var render = function() {
         "router-link",
         {
           staticClass: "btn btn-info",
+          class: { disabled: _vm.isXemBoSung },
+          attrs: { to: "/quan_ly_lich_lam_viec/xem_lich_bo_sung" }
+        },
+        [_vm._v("Xem lịch dạy bổ sung")]
+      ),
+      _vm._v(" "),
+      _c(
+        "router-link",
+        {
+          staticClass: "btn btn-info",
           class: { disabled: _vm.isAddWork },
           attrs: { to: "/quan_ly_lich_lam_viec/them_lich_day" }
         },
@@ -46017,11 +46553,54 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("formThemLichDay"),
+      _c("formThemLichDay", {
+        on: { data_up: _vm.pass_data, show_table: _vm.show_table }
+      }),
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
-      _c("tableDeXuat")
+      _vm.table
+        ? _c("tableDeXuat", {
+            attrs: { ma_gv: _vm.ma_gv, ma_mon: _vm.ma_mon, ma_lop: _vm.ma_lop },
+            on: { hide_table: _vm.hide_table }
+          })
+        : _vm._e()
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/giaovu/components/quanlylichlamviec/XemLichBoXung.vue?vue&type=template&id=9be10012&":
+/*!***********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/giaovu/components/quanlylichlamviec/XemLichBoXung.vue?vue&type=template&id=9be10012& ***!
+  \***********************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("selectLichBoSung", {
+        on: { hide_table: _vm.hide_talbe, show_table: _vm.show_talbe }
+      }),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _vm.show ? _c("tableLichBoSung") : _vm._e()
     ],
     1
   )
@@ -46156,26 +46735,31 @@ var render = function() {
         _vm._v(" "),
         _c("br"),
         _vm._v(" "),
-        _c("label", [_vm._v("Ngày nghỉ")]),
-        _vm._v(" "),
-        _c("v-date-picker", {
-          attrs: {
-            "min-date": new Date(),
-            "input-props": {
-              placeholder: "Chọn ngày nghỉ",
-              class: "form-control"
-            }
-          },
-          model: {
-            value: _vm.ngay_nghi,
-            callback: function($$v) {
-              _vm.ngay_nghi = $$v
-            },
-            expression: "ngay_nghi"
-          }
-        }),
-        _vm._v(" "),
-        _c("br"),
+        _c(
+          "div",
+          { staticClass: "form-group" },
+          [
+            _c("label", [_vm._v("Ngày nghỉ")]),
+            _vm._v(" "),
+            _c("v-date-picker", {
+              attrs: {
+                "min-date": new Date(),
+                "input-props": {
+                  placeholder: "Chọn ngày nghỉ",
+                  class: "form-control"
+                }
+              },
+              model: {
+                value: _vm.ngay_nghi,
+                callback: function($$v) {
+                  _vm.ngay_nghi = $$v
+                },
+                expression: "ngay_nghi"
+              }
+            })
+          ],
+          1
+        ),
         _vm._v(" "),
         _c("br"),
         _vm._v(" "),
@@ -46275,35 +46859,30 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
+    "form",
+    { on: { submit: _vm.get_de_xuat } },
     [
-      _c(
-        "div",
-        [
-          _c("label", [_vm._v("Chọn giáo viên")]),
-          _vm._v(" "),
-          _c("multiselect", {
-            attrs: {
-              options: _vm.arr_gv,
-              "close-on-select": true,
-              "show-labels": true,
-              placeholder: "Chọn giáo viên",
-              deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
-              selectLabel: "Click hoặc nhấn Enter để chọn",
-              searchable: true,
-              "custom-label": _vm.labelUser
-            },
-            model: {
-              value: _vm.giao_vien,
-              callback: function($$v) {
-                _vm.giao_vien = $$v
-              },
-              expression: "giao_vien"
-            }
-          })
-        ],
-        1
-      ),
+      _c("label", [_vm._v("Chọn giáo viên")]),
+      _vm._v(" "),
+      _c("multiselect", {
+        attrs: {
+          options: _vm.arr_gv,
+          "close-on-select": true,
+          "show-labels": true,
+          placeholder: "Chọn giáo viên",
+          deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
+          selectLabel: "Click hoặc nhấn Enter để chọn",
+          searchable: true,
+          "custom-label": _vm.labelUser
+        },
+        model: {
+          value: _vm.giao_vien,
+          callback: function($$v) {
+            _vm.giao_vien = $$v
+          },
+          expression: "giao_vien"
+        }
+      }),
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
@@ -46362,6 +46941,95 @@ var render = function() {
           },
           expression: "so_gio"
         }
+      }),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "insertRange" } }, [_vm._v("Số ngày")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.ngay,
+              expression: "ngay"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            type: "number",
+            id: "insertRange",
+            placeholder:
+              "Nhập khoảng thời gian muốn thêm lịch (tính từ ngày hôm nay)"
+          },
+          domProps: { value: _vm.ngay },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.ngay = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("button", { staticClass: "btn btn-info" }, [_vm._v("Xác nhận")])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectLichBoSung.vue?vue&type=template&id=4964c36b&":
+/*!*********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectLichBoSung.vue?vue&type=template&id=4964c36b& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("label", [_vm._v("Giáo viên")]),
+      _vm._v(" "),
+      _c("multiselect", {
+        attrs: {
+          options: _vm.arr_user,
+          "close-on-select": true,
+          "show-labels": true,
+          placeholder: "Chọn giáo viên",
+          deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
+          selectLabel: "Click hoặc nhấn Enter để chọn",
+          searchable: true,
+          "custom-label": _vm.userLabel
+        },
+        model: {
+          value: _vm.user,
+          callback: function($$v) {
+            _vm.user = $$v
+          },
+          expression: "user"
+        }
       })
     ],
     1
@@ -46374,9 +47042,9 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectGiaoVien.vue?vue&type=template&id=6b200da6&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectNgayNghi.vue?vue&type=template&id=059eb3a8&":
 /*!*******************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectGiaoVien.vue?vue&type=template&id=6b200da6& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectNgayNghi.vue?vue&type=template&id=059eb3a8& ***!
   \*******************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -46563,7 +47231,75 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("table de xuát")])
+  return _c(
+    "form",
+    { on: { submit: _vm.prevent } },
+    [
+      _c(
+        "vue-good-table",
+        {
+          attrs: {
+            columns: _vm.columns,
+            rows: _vm.arr_de_xuat,
+            "search-options": { enabled: true },
+            "group-options": { enabled: true, collapsable: true },
+            styleClass: "vgt-table"
+          },
+          scopedSlots: _vm._u([
+            {
+              key: "table-row",
+              fn: function(props) {
+                return [
+                  props.column.field == "ma_ca"
+                    ? _c("span", [
+                        _c(
+                          "button",
+                          {
+                            directives: [
+                              {
+                                name: "tooltip",
+                                rawName: "v-tooltip.top",
+                                value: "Xếp lịch",
+                                expression: "'Xếp lịch'",
+                                modifiers: { top: true }
+                              }
+                            ],
+                            staticClass: "btn btn-info",
+                            on: {
+                              click: function($event) {
+                                return _vm.add_lich_bo_sung(props.row)
+                              }
+                            }
+                          },
+                          [
+                            _c("i", { staticClass: "material-icons" }, [
+                              _vm._v("assignment_turned_in")
+                            ])
+                          ]
+                        )
+                      ])
+                    : _vm._e()
+                ]
+              }
+            }
+          ])
+        },
+        [
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "font-weight-bold",
+              attrs: { slot: "emptystate" },
+              slot: "emptystate"
+            },
+            [_vm._v("Không tìm được lịch đề xuất phù hợp")]
+          )
+        ]
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -46630,6 +47366,112 @@ var render = function() {
   )
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/giaovu/components/quanlylichlamviec/table/TableLichBoSung.vue?vue&type=template&id=648e93ee&":
+/*!*******************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/giaovu/components/quanlylichlamviec/table/TableLichBoSung.vue?vue&type=template&id=648e93ee& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "card" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "card-body table-responsive" },
+      [
+        _c(
+          "vue-good-table",
+          {
+            attrs: {
+              columns: _vm.columns,
+              rows: _vm.arr_lich_bo_sung,
+              "search-options": { enabled: true },
+              styleClass: "vgt-table"
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "table-row",
+                fn: function(props) {
+                  return [
+                    props.column.field == "ma_lich_day_bo_sung"
+                      ? _c("span", [
+                          _c(
+                            "button",
+                            {
+                              directives: [
+                                {
+                                  name: "tooltip",
+                                  rawName: "v-tooltip.top",
+                                  value: "Xóa",
+                                  expression: "'Xóa'",
+                                  modifiers: { top: true }
+                                }
+                              ],
+                              staticClass: "btn btn-info",
+                              on: {
+                                click: function($event) {
+                                  return _vm.delete_lich_bo_sung(props.row)
+                                }
+                              }
+                            },
+                            [
+                              _c("i", { staticClass: "material-icons" }, [
+                                _vm._v("delete")
+                              ])
+                            ]
+                          )
+                        ])
+                      : _vm._e()
+                  ]
+                }
+              }
+            ])
+          },
+          [
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "font-weight-bold",
+                attrs: { slot: "emptystate" },
+                slot: "emptystate"
+              },
+              [_vm._v("Giáo viên chưa có lịch dạy bổ sung nào")]
+            )
+          ]
+        )
+      ],
+      1
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header card-header-info" }, [
+      _c("h4", { staticClass: "card-title" }, [
+        _vm._v("Bảng danh sách lịch dạy bổ sung")
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -48924,6 +49766,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "form",
+    { attrs: { id: "form_update_lab" }, on: { submit: _vm.update_lab } },
     [
       _c("label", [_vm._v("Tòa")]),
       _vm._v(" "),
@@ -48990,7 +49833,8 @@ var render = function() {
             placeholder: "Chọn phòng",
             deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
             selectLabel: "Click hoặc nhấn Enter để chọn",
-            searchable: false
+            searchable: false,
+            "custom-label": _vm.labelLab
           },
           model: {
             value: _vm.lab,
@@ -49016,26 +49860,32 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.ten_lab,
-              expression: "ten_lab"
+              value: _vm.current_name,
+              expression: "current_name"
             }
           ],
           staticClass: "form-control",
           attrs: {
-            type: "number",
+            type: "text",
             id: "insertName",
             placeholder: "Nhập tên phòng"
           },
-          domProps: { value: _vm.ten_lab },
+          domProps: { value: _vm.current_name },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.ten_lab = $event.target.value
+              _vm.current_name = $event.target.value
             }
           }
-        })
+        }),
+        _vm._v(" "),
+        _vm.err.ten_phong
+          ? _c("span", { staticClass: "text-danger" }, [
+              _vm._v(_vm._s(_vm.err.ten_phong))
+            ])
+          : _vm._e()
       ]),
       _vm._v(" "),
       _c("br"),
@@ -49048,8 +49898,8 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.so_cho_ngoi,
-              expression: "so_cho_ngoi"
+              value: _vm.current_seats,
+              expression: "current_seats"
             }
           ],
           staticClass: "form-control",
@@ -49058,16 +49908,22 @@ var render = function() {
             id: "insertSeats",
             placeholder: "Nhập số chõ ngồi"
           },
-          domProps: { value: _vm.so_cho_ngoi },
+          domProps: { value: _vm.current_seats },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.so_cho_ngoi = $event.target.value
+              _vm.current_seats = $event.target.value
             }
           }
-        })
+        }),
+        _vm._v(" "),
+        _vm.err.so_cho_ngoi
+          ? _c("span", { staticClass: "text-danger" }, [
+              _vm._v(_vm._s(_vm.err.so_cho_ngoi))
+            ])
+          : _vm._e()
       ]),
       _vm._v(" "),
       _c("br"),
@@ -49079,7 +49935,7 @@ var render = function() {
           options: _vm.arr_cau_hinh,
           "close-on-select": true,
           "show-labels": true,
-          placeholder: "Chọn cấu hình",
+          placeholder: _vm.current_cau_hinh,
           deselectLabel: "Click hoặc nhấn Enter để bỏ chọn",
           selectLabel: "Click hoặc nhấn Enter để chọn",
           searchable: false,
@@ -49099,7 +49955,7 @@ var render = function() {
       _c("br"),
       _vm._v(" "),
       _c("button", { staticClass: "btn btn-info", attrs: { type: "submit" } }, [
-        _vm._v("Submit")
+        _vm._v("Xác nhận")
       ])
     ],
     1
@@ -49240,6 +50096,11 @@ var render = function() {
                                 title: "Thay đổi tình trạng",
                                 "data-toggle": "tooltip",
                                 "data-placement": "top"
+                              },
+                              on: {
+                                click: function($event) {
+                                  return _vm.thay_doi_state(props.row)
+                                }
                               }
                             },
                             [
@@ -67933,6 +68794,12 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_5__["default"]({
         block: "end",
         inline: "nearest"
       });
+    } else if (to.params.ma_lab) {
+      document.getElementById("form_update_lab").scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+        inline: "nearest"
+      });
     }
   }
 }); // Vuex
@@ -68078,6 +68945,7 @@ function formatEvents(arr, phan_cong) {
       var clone_obj = {};
       clone_obj.start = arr[each].ngay + "T".concat(arr[each].gio_bat_dau);
       clone_obj.end = arr[each].ngay + "T".concat(arr[each].gio_ket_thuc);
+      clone_obj.className = "fc-event-title-fix";
       var current = Date.parse(Object(_getCurrentDate__WEBPACK_IMPORTED_MODULE_0__["default"])("all"));
       var check = Date.parse(arr[each].ngay);
 
@@ -68256,7 +69124,12 @@ function groupCollection(arr, prop) {
       mode: "span" // mode span chỉ dành cho phân công chi tiết, có thể bỏ
 
     };
-    child_obj.label = "Thứ " + arr_key[i]; // label chỉ dành cho phân công chi tiết, có thể bỏ
+
+    if (prop == "thu") {
+      child_obj.label = "Thứ " + arr_key[i]; // label chỉ dành cho phân công chi tiết, có thể bỏ
+    } else if (prop == "ngay") {
+      child_obj.label = "Ngày " + arr_key[i]; // label chỉ dành cho phân công chi tiết, có thể bỏ
+    }
 
     var _iterator2 = _createForOfIteratorHelper(arr),
         _step2;
@@ -68521,13 +69394,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _views_giaovu_components_quanlylichlamviec_ThemLichDay_vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./views/giaovu/components/quanlylichlamviec/ThemLichDay.vue */ "./resources/js/views/giaovu/components/quanlylichlamviec/ThemLichDay.vue");
 /* harmony import */ var _views_giaovu_components_quanlylichlamviec_XemPhanCongChiTiet_vue__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./views/giaovu/components/quanlylichlamviec/XemPhanCongChiTiet.vue */ "./resources/js/views/giaovu/components/quanlylichlamviec/XemPhanCongChiTiet.vue");
 /* harmony import */ var _views_giaovu_components_quanlylichlamviec_PhanCongChiTiet_vue__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./views/giaovu/components/quanlylichlamviec/PhanCongChiTiet.vue */ "./resources/js/views/giaovu/components/quanlylichlamviec/PhanCongChiTiet.vue");
-/* harmony import */ var _views_giaovu_QuanLyUsers_vue__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./views/giaovu/QuanLyUsers.vue */ "./resources/js/views/giaovu/QuanLyUsers.vue");
-/* harmony import */ var _views_giaovu_components_quanlyusers_DanhSachUser_vue__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./views/giaovu/components/quanlyusers/DanhSachUser.vue */ "./resources/js/views/giaovu/components/quanlyusers/DanhSachUser.vue");
-/* harmony import */ var _views_giaovu_components_quanlyusers_UserProfile_vue__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./views/giaovu/components/quanlyusers/UserProfile.vue */ "./resources/js/views/giaovu/components/quanlyusers/UserProfile.vue");
-/* harmony import */ var _views_nguoidung_Profile_vue__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./views/nguoidung/Profile.vue */ "./resources/js/views/nguoidung/Profile.vue");
-/* harmony import */ var _views_nguoidung_ForgotPassword_vue__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./views/nguoidung/ForgotPassword.vue */ "./resources/js/views/nguoidung/ForgotPassword.vue");
-/* harmony import */ var _views_error_CantDirectComponent_vue__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./views/error/CantDirectComponent.vue */ "./resources/js/views/error/CantDirectComponent.vue");
-/* harmony import */ var _views_error_AuthorErrComponent_vue__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./views/error/AuthorErrComponent.vue */ "./resources/js/views/error/AuthorErrComponent.vue");
+/* harmony import */ var _views_giaovu_components_quanlylichlamviec_XemLichBoXung_vue__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./views/giaovu/components/quanlylichlamviec/XemLichBoXung.vue */ "./resources/js/views/giaovu/components/quanlylichlamviec/XemLichBoXung.vue");
+/* harmony import */ var _views_giaovu_QuanLyUsers_vue__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./views/giaovu/QuanLyUsers.vue */ "./resources/js/views/giaovu/QuanLyUsers.vue");
+/* harmony import */ var _views_giaovu_components_quanlyusers_DanhSachUser_vue__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./views/giaovu/components/quanlyusers/DanhSachUser.vue */ "./resources/js/views/giaovu/components/quanlyusers/DanhSachUser.vue");
+/* harmony import */ var _views_giaovu_components_quanlyusers_UserProfile_vue__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./views/giaovu/components/quanlyusers/UserProfile.vue */ "./resources/js/views/giaovu/components/quanlyusers/UserProfile.vue");
+/* harmony import */ var _views_nguoidung_Profile_vue__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./views/nguoidung/Profile.vue */ "./resources/js/views/nguoidung/Profile.vue");
+/* harmony import */ var _views_nguoidung_ForgotPassword_vue__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./views/nguoidung/ForgotPassword.vue */ "./resources/js/views/nguoidung/ForgotPassword.vue");
+/* harmony import */ var _views_error_CantDirectComponent_vue__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./views/error/CantDirectComponent.vue */ "./resources/js/views/error/CantDirectComponent.vue");
+/* harmony import */ var _views_error_AuthorErrComponent_vue__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./views/error/AuthorErrComponent.vue */ "./resources/js/views/error/AuthorErrComponent.vue");
  // import store
 
  // home
@@ -68549,6 +69423,7 @@ __webpack_require__.r(__webpack_exports__);
  // giao vien
 
  // giao vu
+
 
 
 
@@ -68670,6 +69545,9 @@ __webpack_require__.r(__webpack_exports__);
   }, {
     path: "phan_cong_chi_tiet",
     component: _views_giaovu_components_quanlylichlamviec_PhanCongChiTiet_vue__WEBPACK_IMPORTED_MODULE_21__["default"]
+  }, {
+    path: "xem_lich_bo_sung",
+    component: _views_giaovu_components_quanlylichlamviec_XemLichBoXung_vue__WEBPACK_IMPORTED_MODULE_22__["default"]
   }],
   beforeEnter: function beforeEnter(to, from, next) {
     if (Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("level") == 1) {
@@ -68680,16 +69558,16 @@ __webpack_require__.r(__webpack_exports__);
   }
 }, {
   path: "/quan_ly_user",
-  component: _views_giaovu_QuanLyUsers_vue__WEBPACK_IMPORTED_MODULE_22__["default"],
+  component: _views_giaovu_QuanLyUsers_vue__WEBPACK_IMPORTED_MODULE_23__["default"],
   children: [{
     path: "danh_sach_nguoi_dung",
-    component: _views_giaovu_components_quanlyusers_DanhSachUser_vue__WEBPACK_IMPORTED_MODULE_23__["default"]
+    component: _views_giaovu_components_quanlyusers_DanhSachUser_vue__WEBPACK_IMPORTED_MODULE_24__["default"]
   }, {
     path: "update_thong_tin_user",
-    component: _views_giaovu_components_quanlyusers_UserProfile_vue__WEBPACK_IMPORTED_MODULE_24__["default"]
+    component: _views_giaovu_components_quanlyusers_UserProfile_vue__WEBPACK_IMPORTED_MODULE_25__["default"]
   }, {
     path: "update_thong_tin_user/:ma_nguoi_dung",
-    component: _views_giaovu_components_quanlyusers_UserProfile_vue__WEBPACK_IMPORTED_MODULE_24__["default"]
+    component: _views_giaovu_components_quanlyusers_UserProfile_vue__WEBPACK_IMPORTED_MODULE_25__["default"]
   }],
   beforeEnter: function beforeEnter(to, from, next) {
     if (Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("level") == 1) {
@@ -68701,17 +69579,17 @@ __webpack_require__.r(__webpack_exports__);
 }, // user
 {
   path: "/profile",
-  component: _views_nguoidung_Profile_vue__WEBPACK_IMPORTED_MODULE_25__["default"]
+  component: _views_nguoidung_Profile_vue__WEBPACK_IMPORTED_MODULE_26__["default"]
 }, {
   path: "/quen_mat_khau",
-  component: _views_nguoidung_ForgotPassword_vue__WEBPACK_IMPORTED_MODULE_26__["default"]
+  component: _views_nguoidung_ForgotPassword_vue__WEBPACK_IMPORTED_MODULE_27__["default"]
 }, // error
 {
   path: "/err_author",
-  component: _views_error_AuthorErrComponent_vue__WEBPACK_IMPORTED_MODULE_28__["default"]
+  component: _views_error_AuthorErrComponent_vue__WEBPACK_IMPORTED_MODULE_29__["default"]
 }, {
   path: "*",
-  component: _views_error_CantDirectComponent_vue__WEBPACK_IMPORTED_MODULE_27__["default"]
+  component: _views_error_CantDirectComponent_vue__WEBPACK_IMPORTED_MODULE_28__["default"]
 }]);
 
 /***/ }),
@@ -68952,6 +69830,137 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/store/modules/DeXuat.js":
+/*!**********************************************!*\
+  !*** ./resources/js/store/modules/DeXuat.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../customfunc/getCookie.js */ "./resources/js/customfunc/getCookie.js");
+/* harmony import */ var _customfunc_groupCollection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../customfunc/groupCollection */ "./resources/js/customfunc/groupCollection.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_2__);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: {
+    arr_de_xuat: [],
+    reset_form: false,
+    arr_lich_bo_sung: []
+  },
+  mutations: {
+    reset_arr_de_xuat: function reset_arr_de_xuat(state) {
+      state.arr_de_xuat = [];
+    },
+    refresh_arr_lich_bo_sung: function refresh_arr_lich_bo_sung(state, data) {
+      state.arr_lich_bo_sung = state.arr_lich_bo_sung.filter(function (each) {
+        return each.ma_lich_day_bo_sung != data;
+      });
+    }
+  },
+  actions: {
+    get_de_xuat: function get_de_xuat(_ref, user_input) {
+      var state = _ref.state,
+          commit = _ref.commit,
+          rootState = _ref.rootState;
+      state.reset_form = false;
+      state.arr_de_xuat = [];
+      axios.post("api/lichdaybosung/dexuat", _objectSpread({
+        key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("key")
+      }, user_input)).then(function (res) {
+        if (res.data.success) {
+          var clone_arr = [];
+          var result = res.data.data;
+
+          for (var each in result) {
+            for (var i = 0; i < result[each].length; i++) {
+              result[each][i].ngay = each;
+              clone_arr.push(result[each][i]);
+            }
+          }
+
+          state.arr_de_xuat = Object(_customfunc_groupCollection__WEBPACK_IMPORTED_MODULE_1__["default"])(clone_arr, "ngay");
+        } else {
+          vue__WEBPACK_IMPORTED_MODULE_2___default.a.notify({
+            group: "nofi",
+            title: "Thất bại",
+            type: "error",
+            text: res.data.message.ma_lop
+          });
+        }
+      })["catch"](function (err) {
+        console.error(err);
+      });
+    },
+    add_de_xuat: function add_de_xuat(_ref2, user_input) {
+      var state = _ref2.state,
+          commit = _ref2.commit,
+          rootState = _ref2.rootState;
+      axios.post("api/lichdaybosung/them", _objectSpread({
+        key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("key")
+      }, user_input)).then(function (res) {
+        if (res.data.success) {
+          vue__WEBPACK_IMPORTED_MODULE_2___default.a.notify({
+            group: "nofi",
+            title: "Thành công",
+            text: res.data.message
+          });
+        }
+      })["catch"](function (err) {
+        console.error(err);
+      });
+    },
+    get_lich_bo_sung: function get_lich_bo_sung(_ref3, ma_giao_vien) {
+      var state = _ref3.state,
+          commit = _ref3.commit,
+          rootState = _ref3.rootState;
+      state.arr_lich_bo_sung = [];
+      var obj = {
+        key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("key"),
+        ma_giao_vien: ma_giao_vien
+      };
+      axios.post("api/lichdaybosung", obj).then(function (res) {
+        state.arr_lich_bo_sung = res.data.data;
+      })["catch"](function (err) {
+        console.error(err);
+      });
+    },
+    delete_lich_bo_sung: function delete_lich_bo_sung(_ref4, data) {
+      var state = _ref4.state,
+          commit = _ref4.commit,
+          rootState = _ref4.rootState;
+      axios.post("api/lichdaybosung/xoa", {
+        key: Object(_customfunc_getCookie_js__WEBPACK_IMPORTED_MODULE_0__["default"])("key"),
+        ma_lich_day_bo_sung: data
+      }).then(function (res) {
+        if (res.data.success) {
+          vue__WEBPACK_IMPORTED_MODULE_2___default.a.notify({
+            group: "nofi",
+            title: "Thành công",
+            text: res.data.message
+          });
+        }
+      })["catch"](function (err) {
+        console.error(err);
+      });
+      commit("refresh_arr_lich_bo_sung", data);
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/store/modules/GiaoVien.js":
 /*!************************************************!*\
   !*** ./resources/js/store/modules/GiaoVien.js ***!
@@ -68965,6 +69974,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _customfunc_formatEvents__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../customfunc/formatEvents */ "./resources/js/customfunc/formatEvents.js");
+/* harmony import */ var _customfunc_getCurrentDate__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../customfunc/getCurrentDate */ "./resources/js/customfunc/getCurrentDate.js");
+
 
 
 
@@ -68983,6 +69994,7 @@ __webpack_require__.r(__webpack_exports__);
     get_lich_lam_viec: function get_lich_lam_viec(_ref, ma_giao_vien) {
       var state = _ref.state,
           commit = _ref.commit,
+          dispatch = _ref.dispatch,
           rootState = _ref.rootState;
       state.lich_lam_viec = [];
       state.lich_ket_thuc = "";
@@ -68996,6 +70008,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.post("api/lichhoc/giaovien", obj).then(function (res) {
         state.lich_lam_viec = Object(_customfunc_formatEvents__WEBPACK_IMPORTED_MODULE_2__["default"])(res.data.data);
+        dispatch("get_lich_bo_sung", obj);
       })["catch"](function (err) {
         console.error(err);
       });
@@ -69012,6 +70025,39 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         state.lich_ket_thuc = res.data.message;
         state.lich_lam_viec = Object(_customfunc_formatEvents__WEBPACK_IMPORTED_MODULE_2__["default"])(res.data.data.lich_day, true);
+      })["catch"](function (err) {
+        console.error(err);
+      });
+    },
+    get_lich_bo_sung: function get_lich_bo_sung(_ref3, data) {
+      var state = _ref3.state,
+          commit = _ref3.commit,
+          rootState = _ref3.rootState;
+      var arr_bo_sung = [];
+      axios.post("api/lichdaybosung", data).then(function (res) {
+        console.log(res.data);
+
+        if (res.data.success) {
+          var result = res.data.data;
+
+          for (var each in result) {
+            var clone_obj = {
+              start: result[each].ngay + "T".concat(result[each].ca.gio_bat_dau),
+              end: result[each].ngay + "T".concat(result[each].ca.gio_ket_thuc),
+              title: "".concat(result[each].ma_lop, " - ").concat(result[each].ma_mon_hoc)
+            };
+            var current = Date.parse(Object(_customfunc_getCurrentDate__WEBPACK_IMPORTED_MODULE_3__["default"])("all"));
+            var check = Date.parse(result[each].ngay);
+
+            if (check < current) {
+              clone_obj.backgroundColor = "gray";
+            }
+
+            arr_bo_sung.push(clone_obj);
+          }
+
+          state.lich_lam_viec = state.lich_lam_viec.concat(arr_bo_sung);
+        }
       })["catch"](function (err) {
         console.error(err);
       });
@@ -69032,6 +70078,15 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _customfunc_getCookie__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../customfunc/getCookie */ "./resources/js/customfunc/getCookie.js");
 /* harmony import */ var _customfunc_formatEvents__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../customfunc/formatEvents */ "./resources/js/customfunc/formatEvents.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_2__);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -69039,7 +70094,8 @@ __webpack_require__.r(__webpack_exports__);
   state: {
     lich_su_dung: [],
     arr_lab: [],
-    info_lab: {}
+    info_lab: {},
+    err: {}
   },
   mutations: {
     reset_lich_su_dung: function reset_lich_su_dung(state) {
@@ -69047,6 +70103,25 @@ __webpack_require__.r(__webpack_exports__);
     },
     reset_arr_lab: function reset_arr_lab(state) {
       state.arr_lab = [];
+    },
+    refresh_tinh_trang: function refresh_tinh_trang(state, data) {
+      for (var i = 0; i < state.arr_lab.length; i++) {
+        if (state.arr_lab[i].ma_phong == data) {
+          if (state.arr_lab[i].tinh_trang.ma_tinh_trang == 1) {
+            state.arr_lab[i].tinh_trang.ten_tinh_trang = "Đã Đóng";
+            state.arr_lab[i].tinh_trang.ma_tinh_trang = 2;
+          } else {
+            state.arr_lab[i].tinh_trang.ten_tinh_trang = "Hoạt Động";
+            state.arr_lab[i].tinh_trang.ma_tinh_trang = 1;
+          }
+        }
+      }
+    },
+    reset_info_lab: function reset_info_lab(state) {
+      state.info_lab = {};
+    },
+    reset_err: function reset_err(state) {
+      state.err = {};
     }
   },
   actions: {
@@ -69059,7 +70134,9 @@ __webpack_require__.r(__webpack_exports__);
         key: Object(_customfunc_getCookie__WEBPACK_IMPORTED_MODULE_0__["default"])("key"),
         ma_tang: ma_tang
       }).then(function (res) {
-        state.arr_lab = res.data.data;
+        state.arr_lab = res.data.data.filter(function (each) {
+          return each.ma_phong != 1;
+        });
       })["catch"](function (err) {
         console.error(err);
       });
@@ -69088,6 +70165,67 @@ __webpack_require__.r(__webpack_exports__);
         ma_phong: ma_phong
       }).then(function (res) {
         state.lich_su_dung = Object(_customfunc_formatEvents__WEBPACK_IMPORTED_MODULE_1__["default"])(res.data.data);
+      })["catch"](function (err) {
+        console.error(err);
+      });
+    },
+    update_tinh_trang: function update_tinh_trang(_ref4, user_input) {
+      var state = _ref4.state,
+          commit = _ref4.commit,
+          rootState = _ref4.rootState;
+      axios.post("api/phong/taohoaccapnhat", _objectSpread({
+        key: Object(_customfunc_getCookie__WEBPACK_IMPORTED_MODULE_0__["default"])("key")
+      }, user_input)).then(function (res) {
+        if (res.data.success) {
+          vue__WEBPACK_IMPORTED_MODULE_2___default.a.notify({
+            group: "nofi",
+            title: "Thành công",
+            text: res.data.message
+          });
+        }
+      })["catch"](function (err) {
+        console.error(err);
+      });
+      commit("refresh_tinh_trang", user_input.ma_phong);
+    },
+    update_thong_tin: function update_thong_tin(_ref5, user_input) {
+      var state = _ref5.state,
+          commit = _ref5.commit,
+          dispatch = _ref5.dispatch,
+          rootState = _ref5.rootState;
+      axios.post("api/phong/taohoaccapnhat", _objectSpread({
+        key: Object(_customfunc_getCookie__WEBPACK_IMPORTED_MODULE_0__["default"])("key")
+      }, user_input[0])).then(function (res) {
+        if (user_input[1]) {
+          dispatch("update_cau_hinh", {
+            ma_phong: user_input[0].ma_phong,
+            ma_cau_hinh: user_input[1].ma_cau_hinh
+          });
+        }
+
+        if (res.data.success) {
+          dispatch("get_info_lab", state.info_lab.ma_phong);
+          commit("reset_err");
+          vue__WEBPACK_IMPORTED_MODULE_2___default.a.notify({
+            group: "nofi",
+            title: "Thành công",
+            text: res.data.message
+          });
+        } else {
+          state.err = res.data.message;
+        }
+      })["catch"](function (err) {
+        console.error(err);
+      });
+    },
+    update_cau_hinh: function update_cau_hinh(_ref6, data) {
+      var state = _ref6.state,
+          commit = _ref6.commit,
+          rootState = _ref6.rootState;
+      axios.post("api/thietbiphong/taohoacsua", _objectSpread({
+        key: Object(_customfunc_getCookie__WEBPACK_IMPORTED_MODULE_0__["default"])("key")
+      }, data)).then(function (res) {
+        console.log(res);
       })["catch"](function (err) {
         console.error(err);
       });
@@ -69709,7 +70847,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             ma_nguoi_dung: user.ma_nguoi_dung
           };
           vue__WEBPACK_IMPORTED_MODULE_1___default.a.notify({
-            group: "update_success",
+            group: "nofi",
             title: "Thành công",
             text: res.data.message,
             duration: 1500
@@ -69809,9 +70947,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_User_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./modules/User.js */ "./resources/js/store/modules/User.js");
 /* harmony import */ var _modules_GiaoVien__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./modules/GiaoVien */ "./resources/js/store/modules/GiaoVien.js");
 /* harmony import */ var _modules_ThietBi__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./modules/ThietBi */ "./resources/js/store/modules/ThietBi.js");
+/* harmony import */ var _modules_DeXuat__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./modules/DeXuat */ "./resources/js/store/modules/DeXuat.js");
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
+
 
 
 
@@ -69837,7 +70977,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     ngay_nghi: _modules_Ngaynghi_js__WEBPACK_IMPORTED_MODULE_7__["default"],
     phan_cong: _modules_PhanCong_js__WEBPACK_IMPORTED_MODULE_8__["default"],
     giao_vien: _modules_GiaoVien__WEBPACK_IMPORTED_MODULE_12__["default"],
-    thiet_bi: _modules_ThietBi__WEBPACK_IMPORTED_MODULE_13__["default"]
+    thiet_bi: _modules_ThietBi__WEBPACK_IMPORTED_MODULE_13__["default"],
+    de_xuat: _modules_DeXuat__WEBPACK_IMPORTED_MODULE_14__["default"]
   }
 }));
 
@@ -71070,6 +72211,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/views/giaovu/components/quanlylichlamviec/XemLichBoXung.vue":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/views/giaovu/components/quanlylichlamviec/XemLichBoXung.vue ***!
+  \**********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _XemLichBoXung_vue_vue_type_template_id_9be10012___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./XemLichBoXung.vue?vue&type=template&id=9be10012& */ "./resources/js/views/giaovu/components/quanlylichlamviec/XemLichBoXung.vue?vue&type=template&id=9be10012&");
+/* harmony import */ var _XemLichBoXung_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./XemLichBoXung.vue?vue&type=script&lang=js& */ "./resources/js/views/giaovu/components/quanlylichlamviec/XemLichBoXung.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _XemLichBoXung_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _XemLichBoXung_vue_vue_type_template_id_9be10012___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _XemLichBoXung_vue_vue_type_template_id_9be10012___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/views/giaovu/components/quanlylichlamviec/XemLichBoXung.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/views/giaovu/components/quanlylichlamviec/XemLichBoXung.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************!*\
+  !*** ./resources/js/views/giaovu/components/quanlylichlamviec/XemLichBoXung.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_XemLichBoXung_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./XemLichBoXung.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/giaovu/components/quanlylichlamviec/XemLichBoXung.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_XemLichBoXung_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/views/giaovu/components/quanlylichlamviec/XemLichBoXung.vue?vue&type=template&id=9be10012&":
+/*!*****************************************************************************************************************!*\
+  !*** ./resources/js/views/giaovu/components/quanlylichlamviec/XemLichBoXung.vue?vue&type=template&id=9be10012& ***!
+  \*****************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_XemLichBoXung_vue_vue_type_template_id_9be10012___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./XemLichBoXung.vue?vue&type=template&id=9be10012& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/giaovu/components/quanlylichlamviec/XemLichBoXung.vue?vue&type=template&id=9be10012&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_XemLichBoXung_vue_vue_type_template_id_9be10012___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_XemLichBoXung_vue_vue_type_template_id_9be10012___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/views/giaovu/components/quanlylichlamviec/XemLichNghi.vue":
 /*!********************************************************************************!*\
   !*** ./resources/js/views/giaovu/components/quanlylichlamviec/XemLichNghi.vue ***!
@@ -71346,17 +72556,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectGiaoVien.vue":
-/*!******************************************************************************************!*\
-  !*** ./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectGiaoVien.vue ***!
-  \******************************************************************************************/
+/***/ "./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectLichBoSung.vue":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectLichBoSung.vue ***!
+  \********************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _SelectGiaoVien_vue_vue_type_template_id_6b200da6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SelectGiaoVien.vue?vue&type=template&id=6b200da6& */ "./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectGiaoVien.vue?vue&type=template&id=6b200da6&");
-/* harmony import */ var _SelectGiaoVien_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SelectGiaoVien.vue?vue&type=script&lang=js& */ "./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectGiaoVien.vue?vue&type=script&lang=js&");
+/* harmony import */ var _SelectLichBoSung_vue_vue_type_template_id_4964c36b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SelectLichBoSung.vue?vue&type=template&id=4964c36b& */ "./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectLichBoSung.vue?vue&type=template&id=4964c36b&");
+/* harmony import */ var _SelectLichBoSung_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SelectLichBoSung.vue?vue&type=script&lang=js& */ "./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectLichBoSung.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -71366,9 +72576,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _SelectGiaoVien_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _SelectGiaoVien_vue_vue_type_template_id_6b200da6___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _SelectGiaoVien_vue_vue_type_template_id_6b200da6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _SelectLichBoSung_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SelectLichBoSung_vue_vue_type_template_id_4964c36b___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _SelectLichBoSung_vue_vue_type_template_id_4964c36b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -71378,38 +72588,107 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/views/giaovu/components/quanlylichlamviec/select/SelectGiaoVien.vue"
+component.options.__file = "resources/js/views/giaovu/components/quanlylichlamviec/select/SelectLichBoSung.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectGiaoVien.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectLichBoSung.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************!*\
+  !*** ./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectLichBoSung.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectLichBoSung_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./SelectLichBoSung.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectLichBoSung.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectLichBoSung_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectLichBoSung.vue?vue&type=template&id=4964c36b&":
+/*!***************************************************************************************************************************!*\
+  !*** ./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectLichBoSung.vue?vue&type=template&id=4964c36b& ***!
+  \***************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectLichBoSung_vue_vue_type_template_id_4964c36b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./SelectLichBoSung.vue?vue&type=template&id=4964c36b& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectLichBoSung.vue?vue&type=template&id=4964c36b&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectLichBoSung_vue_vue_type_template_id_4964c36b___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectLichBoSung_vue_vue_type_template_id_4964c36b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectNgayNghi.vue":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectNgayNghi.vue ***!
+  \******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _SelectNgayNghi_vue_vue_type_template_id_059eb3a8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SelectNgayNghi.vue?vue&type=template&id=059eb3a8& */ "./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectNgayNghi.vue?vue&type=template&id=059eb3a8&");
+/* harmony import */ var _SelectNgayNghi_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SelectNgayNghi.vue?vue&type=script&lang=js& */ "./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectNgayNghi.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _SelectNgayNghi_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SelectNgayNghi_vue_vue_type_template_id_059eb3a8___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _SelectNgayNghi_vue_vue_type_template_id_059eb3a8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/views/giaovu/components/quanlylichlamviec/select/SelectNgayNghi.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectNgayNghi.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************!*\
-  !*** ./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectGiaoVien.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectNgayNghi.vue?vue&type=script&lang=js& ***!
   \*******************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectGiaoVien_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./SelectGiaoVien.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectGiaoVien.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectGiaoVien_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectNgayNghi_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./SelectNgayNghi.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectNgayNghi.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectNgayNghi_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectGiaoVien.vue?vue&type=template&id=6b200da6&":
+/***/ "./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectNgayNghi.vue?vue&type=template&id=059eb3a8&":
 /*!*************************************************************************************************************************!*\
-  !*** ./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectGiaoVien.vue?vue&type=template&id=6b200da6& ***!
+  !*** ./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectNgayNghi.vue?vue&type=template&id=059eb3a8& ***!
   \*************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectGiaoVien_vue_vue_type_template_id_6b200da6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./SelectGiaoVien.vue?vue&type=template&id=6b200da6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectGiaoVien.vue?vue&type=template&id=6b200da6&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectGiaoVien_vue_vue_type_template_id_6b200da6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectNgayNghi_vue_vue_type_template_id_059eb3a8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./SelectNgayNghi.vue?vue&type=template&id=059eb3a8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/giaovu/components/quanlylichlamviec/select/SelectNgayNghi.vue?vue&type=template&id=059eb3a8&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectNgayNghi_vue_vue_type_template_id_059eb3a8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectGiaoVien_vue_vue_type_template_id_6b200da6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectNgayNghi_vue_vue_type_template_id_059eb3a8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -71686,6 +72965,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TableDeXuatPhanCongChiTiet_vue_vue_type_template_id_0a801c1e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TableDeXuatPhanCongChiTiet_vue_vue_type_template_id_0a801c1e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/views/giaovu/components/quanlylichlamviec/table/TableLichBoSung.vue":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/views/giaovu/components/quanlylichlamviec/table/TableLichBoSung.vue ***!
+  \******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TableLichBoSung_vue_vue_type_template_id_648e93ee___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TableLichBoSung.vue?vue&type=template&id=648e93ee& */ "./resources/js/views/giaovu/components/quanlylichlamviec/table/TableLichBoSung.vue?vue&type=template&id=648e93ee&");
+/* harmony import */ var _TableLichBoSung_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TableLichBoSung.vue?vue&type=script&lang=js& */ "./resources/js/views/giaovu/components/quanlylichlamviec/table/TableLichBoSung.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _TableLichBoSung_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TableLichBoSung_vue_vue_type_template_id_648e93ee___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TableLichBoSung_vue_vue_type_template_id_648e93ee___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/views/giaovu/components/quanlylichlamviec/table/TableLichBoSung.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/views/giaovu/components/quanlylichlamviec/table/TableLichBoSung.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************!*\
+  !*** ./resources/js/views/giaovu/components/quanlylichlamviec/table/TableLichBoSung.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TableLichBoSung_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./TableLichBoSung.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/giaovu/components/quanlylichlamviec/table/TableLichBoSung.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TableLichBoSung_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/views/giaovu/components/quanlylichlamviec/table/TableLichBoSung.vue?vue&type=template&id=648e93ee&":
+/*!*************************************************************************************************************************!*\
+  !*** ./resources/js/views/giaovu/components/quanlylichlamviec/table/TableLichBoSung.vue?vue&type=template&id=648e93ee& ***!
+  \*************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TableLichBoSung_vue_vue_type_template_id_648e93ee___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./TableLichBoSung.vue?vue&type=template&id=648e93ee& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/giaovu/components/quanlylichlamviec/table/TableLichBoSung.vue?vue&type=template&id=648e93ee&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TableLichBoSung_vue_vue_type_template_id_648e93ee___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TableLichBoSung_vue_vue_type_template_id_648e93ee___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

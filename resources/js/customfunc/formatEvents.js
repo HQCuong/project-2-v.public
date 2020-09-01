@@ -8,6 +8,7 @@ export default function formatEvents(arr, phan_cong) {
             var clone_obj = {};
             clone_obj.start = arr[each].ngay + `T${arr[each].gio_bat_dau}`;
             clone_obj.end = arr[each].ngay + `T${arr[each].gio_ket_thuc}`;
+            clone_obj.className = "fc-event-title-fix";
 
             var current = Date.parse(getCurrentDate("all"));
             var check = Date.parse(arr[each].ngay);

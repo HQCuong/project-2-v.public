@@ -17,7 +17,11 @@ export default function groupCollection(arr, prop) {
             mode: "span" // mode span chỉ dành cho phân công chi tiết, có thể bỏ
         };
 
-        child_obj.label = "Thứ " + arr_key[i]; // label chỉ dành cho phân công chi tiết, có thể bỏ
+        if (prop == "thu") {
+            child_obj.label = "Thứ " + arr_key[i]; // label chỉ dành cho phân công chi tiết, có thể bỏ
+        } else if (prop == "ngay") {
+            child_obj.label = "Ngày " + arr_key[i]; // label chỉ dành cho phân công chi tiết, có thể bỏ
+        }
 
         for (e of arr) {
             if (e[prop] == arr_key[i]) {

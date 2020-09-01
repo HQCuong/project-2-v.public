@@ -15,6 +15,7 @@ import toa from "./modules/Toa.js";
 import user from "./modules/User.js";
 import giao_vien from "./modules/GiaoVien";
 import thiet_bi from "./modules/ThietBi";
+import de_xuat from "./modules/DeXuat";
 
 export default new Vuex.Store({
     modules: {
@@ -29,6 +30,7 @@ export default new Vuex.Store({
         ngay_nghi: ngay_nghi,
         phan_cong: phan_cong,
         giao_vien: giao_vien,
-        thiet_bi: thiet_bi
+        thiet_bi: thiet_bi,
+        de_xuat: de_xuat
     }
 });

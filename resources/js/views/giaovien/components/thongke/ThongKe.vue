@@ -1,6 +1,6 @@
 <template>
     <div>
-        <p>{{lich_ket_thuc}}</p>
+        <p class="font-weight-bold">{{lich_ket_thuc}}</p>
     </div>
 </template>
 

@@ -81,7 +81,7 @@ export default {
                         this.dispatch("user/get_user_info", user.ma_nguoi_dung);
                         user = { ma_nguoi_dung: user.ma_nguoi_dung };
                         Vue.notify({
-                            group: "update_success",
+                            group: "nofi",
                             title: "Thành công",
                             text: res.data.message,
                             duration: 1500

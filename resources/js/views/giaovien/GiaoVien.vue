@@ -6,7 +6,10 @@
                     <div class="card-body">
                         <selectGiaovien :is_giao_vien="is_giao_vien"></selectGiaovien>
                         <br />
-                        <span v-if="lich_lam_viec.length == 0">{{empty_message}}</span>
+                        <span
+                            v-if="lich_lam_viec.length == 0"
+                            class="font-weight-bold"
+                        >{{empty_message}}</span>
                         <lichLamViec v-if="show_lich_lam_viec" :lich_lam_viec="lich_lam_viec"></lichLamViec>
                     </div>
                 </div>

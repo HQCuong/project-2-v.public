@@ -1,5 +1,11 @@
 <template>
     <div>
+        <p class="font-weight-bold">Chú thích:</p>
+        <div style="display:flex;">
+            <p class="font-weight-bold" style="color:blue">Lịch dạy</p>
+            <p class="font-weight-bold" style="color:#2C3E50; padding: 0 10px">Lịch nghỉ</p>
+            <p class="font-weight-bold" style="color:gray">Lịch đã hoàn thành</p>
+        </div>
         <thongKe></thongKe>
         <br />
         <FullCalendar :options="calendar_options" />
@@ -31,6 +37,11 @@ export default {
                     center: "title",
                     right: this.modi_calendar_button(),
                 },
+                eventContent: this.eventContent,
+                eventClick: function (info) {
+                    console.log(info);
+                    console.log(info.event.extendedProps.data);
+                },
             },
         };
     },
@@ -47,6 +58,13 @@ export default {
                 return "listWeek";
             } else {
                 return "dayGridMonth";
+            }
+        },
+        eventContent(info) {
+            if (info.event.title == "") {
+                return {
+                    html: `<div class="only-time-events">${info.timeText}</div>`,
+                };
             }
         },
     },

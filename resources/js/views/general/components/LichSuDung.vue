@@ -1,5 +1,10 @@
 <template>
     <div>
+        <p class="font-weight-bold">Chú thích:</p>
+        <div style="display:flex;">
+            <p class="font-weight-bold" style="color:blue">Lịch dạy</p>
+            <p class="font-weight-bold" style="color:#2C3E50; padding: 0 10px">Lịch nghỉ</p>
+        </div>
         <thongtin></thongtin>
         <br />
         <FullCalendar :options="calendar_options" />
