@@ -35,7 +35,7 @@ Vue.use(VueRouter);
 import routes from "./routes.js";
 
 const router = new VueRouter({
-    base: "project-2/public",
+    // base: "project-2/public",
     routes,
     mode: "history",
     scrollBehavior(to, from, savedPosition) {
