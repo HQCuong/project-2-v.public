@@ -11,7 +11,7 @@ class CauHinh extends Migration {
      * @return void
      */
     private $name    = 'cau_hinh';
-    private $mo_ta   = ['`CPU:I9-9900XE`Main:Z350`Ram:8Gb`', '`CPU:XEON E5-2670`Main:Z10PA-D8C`Ram:16Gb`', 'DELL U2417H', 'DURGOD'];
+    private $mo_ta   = ['`CPU:I9-9900XE``RAM:8Gb``MAIN:Z350`', '`CPU:XEON E5-2670``RAM:16Gb``MAIN:Z10PA-D8C`', 'DELL U2417H', 'DURGOD'];
     private $ma_loai = ['1', '1', '2', '3'];
     public function up() {
         Schema::create($this->name, function (Blueprint $table) {
