@@ -81,8 +81,10 @@ export default {
 
             this.$store.dispatch("de_xuat/add_de_xuat", obj).then(
                 setTimeout(() => {
-                    this.$emit("hide_table");
-                }, 200)
+                    this.$router.push(
+                        "/quan_ly_lich_lam_viec/xem_lich_bo_sung"
+                    );
+                }, 500)
             );
         },
         prevent(e) {

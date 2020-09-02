@@ -8,7 +8,9 @@ export default {
         lich_su_dung: [],
         arr_lab: [],
         info_lab: {},
-        err: {}
+        err: {},
+        reset_form: false,
+        all_lab_calendar: []
     },
     mutations: {
         reset_lich_su_dung(state) {
@@ -36,6 +38,9 @@ export default {
         },
         reset_err(state) {
             state.err = {};
+        },
+        reset_all_lab_calendar(state) {
+            state.all_lab_calendar = [];
         }
     },
     actions: {
@@ -105,26 +110,36 @@ export default {
         },
 
         update_thong_tin({ state, commit, dispatch, rootState }, user_input) {
+            state.reset_form = false;
             axios
                 .post(`api/phong/taohoaccapnhat`, {
                     key: getCookie("key"),
                     ...user_input[0]
                 })
                 .then(res => {
-                    if (user_input[1]) {
-                        dispatch("update_cau_hinh", {
-                            ma_phong: user_input[0].ma_phong,
-                            ma_cau_hinh: user_input[1].ma_cau_hinh
-                        });
-                    }
                     if (res.data.success) {
+                        state.reset_form = true;
+                        if (user_input[1]) {
+                            dispatch("update_cau_hinh", {
+                                ma_phong: res.data.data.ma_phong,
+                                ma_cau_hinh: user_input[1].ma_cau_hinh
+                            });
+                        }
                         dispatch("get_info_lab", state.info_lab.ma_phong);
                         commit("reset_err");
-                        Vue.notify({
-                            group: "nofi",
-                            title: "Thành công",
-                            text: res.data.message
-                        });
+                        if (user_input[1]) {
+                            Vue.notify({
+                                group: "nofi",
+                                title: "Thành công",
+                                text: "Cập nhập thành công"
+                            });
+                        } else {
+                            Vue.notify({
+                                group: "nofi",
+                                title: "Thành công",
+                                text: res.data.message
+                            });
+                        }
                     } else {
                         state.err = res.data.message;
                     }
@@ -142,6 +157,35 @@ export default {
                 })
                 .then(res => {
                     console.log(res);
+                })
+                .catch(err => {
+                    console.error(err);
+                });
+        },
+
+        get_all_calendar({ state, commit, rootState }, data) {
+            state.all_lab_calendar = [];
+            var obj = {
+                key: getCookie("key"),
+                ma_phong: [],
+                so_ngay: 1,
+                so_gio: 2
+            };
+
+            if (data) {
+                obj.so_gio = data;
+            }
+
+            axios
+                .post(`api/lichhoc/lichtrong`, obj)
+                .then(res => {
+                    if (res.data.success) {
+                        var result = res.data.data;
+                        for (const each in result) {
+                            console.log(result[each]);
+                            state.all_lab_calendar = result[each];
+                        }
+                    }
                 })
                 .catch(err => {
                     console.error(err);

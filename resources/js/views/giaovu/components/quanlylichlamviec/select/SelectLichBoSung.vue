@@ -12,6 +12,8 @@
             :searchable="true"
             :custom-label="userLabel"
         ></multiselect>
+        <br />
+        <p class="font-weight-bold" v-if="loading">Đang tải</p>
     </div>
 </template>
 
@@ -28,6 +30,7 @@ export default {
     data() {
         return {
             user: "",
+            loading: false,
         };
     },
     methods: {
@@ -37,14 +40,20 @@ export default {
     },
     watch: {
         user() {
+            this.$emit("hide_table");
             if (this.user) {
-                this.$store.dispatch(
-                    "de_xuat/get_lich_bo_sung",
-                    this.user.ma_nguoi_dung
-                );
-                this.$emit("show_table");
-            } else {
-                this.$emit("hide_table");
+                this.loading = true;
+                this.$store
+                    .dispatch(
+                        "de_xuat/get_lich_bo_sung",
+                        this.user.ma_nguoi_dung
+                    )
+                    .then(
+                        setTimeout(() => {
+                            this.loading = false;
+                            this.$emit("show_table");
+                        }, 5000)
+                    );
             }
         },
     },

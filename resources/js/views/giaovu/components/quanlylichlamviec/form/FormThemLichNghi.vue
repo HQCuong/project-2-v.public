@@ -177,7 +177,11 @@ export default {
             if (this.ghi_chu) {
                 user_input.ghi_chu = this.ghi_chu;
             }
-            this.$store.dispatch("ngay_nghi/add_ngay_nghi", user_input);
+            this.$store.dispatch("ngay_nghi/add_ngay_nghi", user_input).then(
+                setTimeout(() => {
+                    this.$router.push("/quan_ly_lich_lam_viec/xem_lich_nghi");
+                }, 500)
+            );
         },
     },
     watch: {

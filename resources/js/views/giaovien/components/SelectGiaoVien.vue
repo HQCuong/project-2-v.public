@@ -31,6 +31,8 @@
                 slot="noOptions"
             >Chưa chọn giáo viên hoặc giáo viên đã chọn chưa được phân công</template>
         </multiselect>
+        <br />
+        <p class="font-weight-bold" v-if="loading">Đang tải</p>
     </div>
 </template>
 <script>
@@ -40,6 +42,7 @@ export default {
         return {
             phan_cong: "",
             giao_vien: "",
+            loading: false,
         };
     },
     computed: {
@@ -64,6 +67,7 @@ export default {
     watch: {
         giao_vien() {
             this.phan_cong = "";
+            this.loading = true;
             if (!this.giao_vien) {
                 this.$store.commit("giao_vien/reset_lich_lam_viec");
                 this.$store.commit("phan_cong/reset_arr_phan_cong");
@@ -72,23 +76,42 @@ export default {
                     "phan_cong/get_phan_cong",
                     this.giao_vien.ma_nguoi_dung
                 );
-                this.$store.dispatch(
-                    "giao_vien/get_lich_lam_viec",
-                    this.giao_vien.ma_nguoi_dung
-                );
+                this.$store
+                    .dispatch(
+                        "giao_vien/get_lich_lam_viec",
+                        this.giao_vien.ma_nguoi_dung
+                    )
+                    .then(
+                        setTimeout(() => {
+                            this.loading = false;
+                        }, 500)
+                    );
             }
         },
         phan_cong() {
+            this.loading = true;
             if (this.phan_cong) {
-                this.$store.dispatch(
-                    "giao_vien/get_lich_lam_viec_by_phan_cong",
-                    this.phan_cong.ma_phan_cong
-                );
+                this.$store
+                    .dispatch(
+                        "giao_vien/get_lich_lam_viec_by_phan_cong",
+                        this.phan_cong.ma_phan_cong
+                    )
+                    .then(
+                        setTimeout(() => {
+                            this.loading = false;
+                        }, 500)
+                    );
             } else {
-                this.$store.dispatch(
-                    "giao_vien/get_lich_lam_viec",
-                    this.giao_vien.ma_nguoi_dung
-                );
+                this.$store
+                    .dispatch(
+                        "giao_vien/get_lich_lam_viec",
+                        this.giao_vien.ma_nguoi_dung
+                    )
+                    .then(
+                        setTimeout(() => {
+                            this.loading = false;
+                        }, 500)
+                    );
             }
         },
         arr_gv() {

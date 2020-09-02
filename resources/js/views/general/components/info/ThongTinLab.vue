@@ -2,7 +2,6 @@
     <div>
         <br />
         <p class="font-weight-bold">Số chỗ ngồi: {{so_cho_ngoi}}</p>
-        <p class="font-weight-bold">Những môn có thể học: PHP, PHP2, PTS</p>
         <p class="font-weight-bold">Tình trạng: {{tinh_trang}}</p>
     </div>
 </template>

@@ -2,6 +2,7 @@ import getCookie from "../../customfunc/getCookie.js";
 import formatNgayNghi from "../../customfunc/formatNgayNghi";
 import getCurrentDate from "../../customfunc/getCurrentDate";
 import Vue from "vue";
+import router from "../../routes";
 
 export default {
     namespaced: true,
@@ -37,7 +38,7 @@ export default {
                 .then(res => {
                     if (res.data.success) {
                         for (const each in res.data.data) {
-                            if (each == getCurrentDate("date")) {
+                            if (each.split("-")[2] == getCurrentDate("date")) {
                                 state.thong_ke_ngay_nghi =
                                     res.data.data[each].length;
                             }

@@ -203,7 +203,7 @@ export default {
             };
             this.$store.dispatch("cau_hinh/update_cau_hinh", [
                 user_input,
-                this.mon.map((each) => each.ma_mon_hoc),
+                this.mon ? this.mon.map((each) => each.ma_mon_hoc) : [],
                 this.$route.params.ma_cau_hinh,
             ]);
         },

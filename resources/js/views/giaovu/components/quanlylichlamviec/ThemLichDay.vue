@@ -1,6 +1,6 @@
 <template>
     <div>
-        <formThemLichDay @data_up="pass_data" @show_table="show_table"></formThemLichDay>
+        <formThemLichDay @data_up="pass_data" @show_table="show_table" @hide_table="hide_table"></formThemLichDay>
         <br />
         <tableDeXuat
             :ma_gv="ma_gv"

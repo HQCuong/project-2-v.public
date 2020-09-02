@@ -97,6 +97,8 @@ export default {
         }
 
         this.$store.commit("lab/reset_err");
+
+        this.$store.commit("lab/reset_arr_lab");
     },
     mounted() {
         // change label color

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <selectLichBoSung @hide_table="hide_talbe" @show_table="show_talbe"></selectLichBoSung>
+        <selectLichBoSung @hide_table="hide_table" @show_table="show_table"></selectLichBoSung>
         <br />
         <tableLichBoSung v-if="show"></tableLichBoSung>
     </div>
@@ -20,10 +20,10 @@ export default {
         };
     },
     methods: {
-        hide_talbe() {
+        hide_table() {
             this.show = false;
         },
-        show_talbe() {
+        show_table() {
             this.show = true;
         },
     },

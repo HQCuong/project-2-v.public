@@ -1,5 +1,5 @@
 <template>
-    <form>
+    <form @submit="add_phong">
         <label>Tòa</label>
         <multiselect
             v-model="toa"
@@ -27,6 +27,7 @@
         >
             <template slot="noOptions">Chưa chọn tòa</template>
         </multiselect>
+        <span class="text-danger" v-if="err.ma_tang">{{err.ma_tang}}</span>
         <br />
         <br />
         <div class="form-group">
@@ -38,6 +39,7 @@
                 placeholder="Nhập tên phòng"
                 v-model="ten_lab"
             />
+            <span class="text-danger" v-if="err.ten_phong">{{err.ten_phong}}</span>
         </div>
         <br />
         <div class="form-group">
@@ -74,6 +76,7 @@ export default {
     created() {
         this.$store.dispatch("toa/get_toa");
         this.$store.dispatch("cau_hinh/get_cau_hinh");
+        this.$store.commit("lab/reset_err");
     },
     mounted() {
         // change label color
@@ -99,6 +102,9 @@ export default {
         };
     },
     computed: {
+        err() {
+            return this.$store.state.lab.err;
+        },
         arr_toa() {
             return this.$store.state.toa.arr_toa;
         },
@@ -108,6 +114,9 @@ export default {
         arr_cau_hinh() {
             return this.$store.state.cau_hinh.arr_cau_hinh;
         },
+        reset_form() {
+            return this.$store.state.lab.reset_form;
+        },
     },
     methods: {
         labelToa({ ten_toa, dia_chi }) {
@@ -116,8 +125,26 @@ export default {
         labelTang({ ten_tang }) {
             return `${ten_tang}`;
         },
-        labelCauHinh({ mo_ta }) {
-            return `${mo_ta}`;
+        labelCauHinh({ cpu, ram, main, o_cung, vga }) {
+            return `Cpu: ${cpu} - RAM: ${ram} - Main: ${main} -  Ổ cứng: ${o_cung} - VGA: ${vga}`;
+        },
+        add_phong(e) {
+            e.preventDefault();
+            var data = [];
+            var obj = {
+                ten_phong: this.ten_lab ? this.ten_lab : "",
+                ma_tang: this.tang ? this.tang.ma_tang : "",
+                so_cho_ngoi: this.so_cho_ngoi ? this.so_cho_ngoi : "",
+            };
+            data.push(obj);
+            if (this.cau_hinh) {
+                data.push(this.cau_hinh);
+            }
+            this.$store.dispatch("lab/update_thong_tin", data).then(
+                setTimeout(() => {
+                    this.$router.push("/quan_ly_lab/danh_sach_lab");
+                }, 500)
+            );
         },
     },
     watch: {
@@ -132,6 +159,12 @@ export default {
         arr_toa() {
             if (this.arr_toa.length != 0) {
                 this.toa = this.arr_toa[0];
+            }
+        },
+        reset_form() {
+            if (this.reset_form) {
+                this.ten_lab = "";
+                this.cau_hinh = "";
             }
         },
     },

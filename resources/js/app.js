@@ -25,8 +25,8 @@ Vue.use(Tooltip, {
 
 // Axios
 window.axios = require("axios");
-// axios.defaults.baseURL = "http://localhost:8080/project-2/public/";
-axios.defaults.baseURL = "https://bkacad.xyz";
+axios.defaults.baseURL = "http://localhost:8080/project-2/public/";
+// axios.defaults.baseURL = "https://bkacad.xyz";
 
 // Vue-router
 import VueRouter from "vue-router";
@@ -35,8 +35,8 @@ Vue.use(VueRouter);
 import routes from "./routes.js";
 
 const router = new VueRouter({
-    // base: "project-2/public",
-    base: "bkacad.xyz",
+    base: "project-2/public",
+    // base: "bkacad.xyz",
     routes,
     mode: "history",
     scrollBehavior(to, from, savedPosition) {

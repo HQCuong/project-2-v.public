@@ -7,8 +7,8 @@
                         <!-- button -->
                         <dirButton></dirButton>
                         <br />
-                        <thongKe></thongKe>
-                        <br />
+                        <!-- <thongKe></thongKe> -->
+                        <!-- <br /> -->
                         <!-- main view -->
                         <router-view></router-view>
                     </div>

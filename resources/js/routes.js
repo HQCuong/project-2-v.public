@@ -34,7 +34,7 @@ import them_lich_nghi from "./views/giaovu/components/quanlylichlamviec/themLich
 import them_lich_day from "./views/giaovu/components/quanlylichlamviec/ThemLichDay.vue";
 import xem_phan_cong from "./views/giaovu/components/quanlylichlamviec/XemPhanCongChiTiet.vue";
 import phan_cong from "./views/giaovu/components/quanlylichlamviec/PhanCongChiTiet.vue";
-import xem_lich_bo_sung from "./views/giaovu/components/quanlylichlamviec/XemLichBoXung.vue";
+import xem_lich_bo_sung from "./views/giaovu/components/quanlylichlamviec/XemLichBoSung.vue";
 
 import user from "./views/giaovu/QuanLyUsers.vue";
 import danh_sach_user from "./views/giaovu/components/quanlyusers/DanhSachUser.vue";

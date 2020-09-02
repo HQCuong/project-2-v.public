@@ -56,6 +56,7 @@
         </div>
         <br />
         <button class="btn btn-info">Xác nhận</button>
+        <p class="font-weight-bold" v-if="loading">Đang tải</p>
     </form>
 </template>
 <script>
@@ -95,6 +96,7 @@ export default {
                     title: "4 giờ",
                 },
             ],
+            loading: false,
         };
     },
     computed: {
@@ -118,6 +120,7 @@ export default {
     watch: {
         giao_vien() {
             this.phan_cong = "";
+            this.$emit("hide_table");
             if (!this.giao_vien) {
                 this.$store.commit("phan_cong/reset_arr_phan_cong");
             } else {
@@ -133,7 +136,6 @@ export default {
                 this.giao_vien = "";
                 this.so_gio = "";
                 this.ngay = "";
-                this.$emit("hide_table");
             }
         },
     },
@@ -148,6 +150,8 @@ export default {
             return `${title}`;
         },
         get_de_xuat(e) {
+            this.$emit("hide_table");
+            this.loading = true;
             e.preventDefault();
             var obj = {
                 ma_giao_vien: this.giao_vien.ma_nguoi_dung,
@@ -156,14 +160,18 @@ export default {
                 so_ngay: this.ngay,
                 ma_mon_hoc: this.phan_cong.ma_mon_hoc,
             };
-            this.$store.dispatch("de_xuat/get_de_xuat", obj);
+            this.$store.dispatch("de_xuat/get_de_xuat", obj).then(
+                setTimeout(() => {
+                    this.$emit("show_table");
+                    this.loading = false;
+                }, 1000)
+            );
             this.$emit(
                 "data_up",
                 this.giao_vien.ma_nguoi_dung,
                 this.phan_cong.ma_mon_hoc,
                 this.phan_cong.ma_lop
             );
-            this.$emit("show_table");
         },
     },
 };

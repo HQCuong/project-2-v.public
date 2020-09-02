@@ -15,9 +15,7 @@
                     <span v-if="props.column.field == 'ma_phong'">
                         <button
                             class="btn btn-info"
-                            title="Thay đổi tình trạng"
-                            data-toggle="tooltip"
-                            data-placement="top"
+                            v-tooltip.top="'Thay đổi tình trạng'"
                             @click="thay_doi_state(props.row)"
                         >
                             <i class="material-icons">power_settings_new</i>
@@ -25,9 +23,7 @@
                         <router-link
                             class="btn btn-info"
                             :to="{path: `/quan_ly_lab/update_lab/${props.row.ma_phong}`}"
-                            title="Thay đổi tình trạng"
-                            data-toggle="tooltip"
-                            data-placement="top"
+                            v-tooltip.top="'Tùy chỉnh'"
                         >
                             <i class="material-icons">settings</i>
                         </router-link>

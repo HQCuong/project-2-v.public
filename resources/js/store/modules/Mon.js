@@ -20,7 +20,7 @@ export default {
         get_mon({ state, commit, rootState }) {
             state.arr_mon = [];
             axios
-                .post("http://localhost:8080/project-2/public/api/monhoc", {
+                .post("api/monhoc", {
                     key: getCookie("key")
                 })
                 .then(res => {

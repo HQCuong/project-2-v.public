@@ -133,14 +133,22 @@ export default {
                 o_cung: this.hard_drive,
                 vga: this.vga,
             };
-            this.$store.dispatch("cau_hinh/add_cau_hinh", [
-                user_input,
-                this.mon
-                    ? this.mon.map((each) => {
-                          return each.ma_mon_hoc;
-                      })
-                    : "",
-            ]);
+            this.$store
+                .dispatch("cau_hinh/add_cau_hinh", [
+                    user_input,
+                    this.mon
+                        ? this.mon.map((each) => {
+                              return each.ma_mon_hoc;
+                          })
+                        : "",
+                ])
+                .then(
+                    setTimeout(() => {
+                        this.$router.push(
+                            "/quan_ly_cau_hinh/danh_sach_cau_hinh"
+                        );
+                    }, 500)
+                );
         },
     },
     watch: {
