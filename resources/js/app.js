@@ -25,7 +25,8 @@ Vue.use(Tooltip, {
 
 // Axios
 window.axios = require("axios");
-axios.defaults.baseURL = "http://localhost:8080/project-2/public/";
+// axios.defaults.baseURL = "http://localhost:8080/project-2/public/";
+axios.defaults.baseURL = "https://bkacad.xyz";
 
 // Vue-router
 import VueRouter from "vue-router";
