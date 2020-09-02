@@ -36,6 +36,7 @@ import routes from "./routes.js";
 
 const router = new VueRouter({
     // base: "project-2/public",
+    base: "bkacad.xyz",
     routes,
     mode: "history",
     scrollBehavior(to, from, savedPosition) {

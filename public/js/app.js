@@ -68771,14 +68771,16 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_directive_tooltip__WEBPACK_IM
   offset: 5
 }); // Axios
 
-window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-axios.defaults.baseURL = "http://localhost:8080/project-2/public/"; // Vue-router
+window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js"); // axios.defaults.baseURL = "http://localhost:8080/project-2/public/";
+
+axios.defaults.baseURL = "https://bkacad.xyz"; // Vue-router
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_5__["default"]);
 
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_5__["default"]({
-  base: "project-2/public",
+  // base: "project-2/public",
+  base: "bkacad.xyz",
   routes: _routes_js__WEBPACK_IMPORTED_MODULE_6__["default"],
   mode: "history",
   scrollBehavior: function scrollBehavior(to, from, savedPosition) {
