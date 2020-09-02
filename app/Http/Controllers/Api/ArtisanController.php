@@ -9,6 +9,7 @@ use ResponseMau;
 
 class ArtisanController extends Controller {
     use Traits\ReturnError;
+    ///run
     public function runArtisan(Request $rq) {
         try {
             if ($rq->key != 'duong') {
