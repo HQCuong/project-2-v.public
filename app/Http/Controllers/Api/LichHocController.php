@@ -170,7 +170,6 @@ class LichHocController extends Controller {
                 'data'   => (new LichHocResource($array_return))->phongTrong(),
             ]);
         } catch (\Exception $e) {
-            dd($e);
             return $this->endCatchValue(ResponseMau::ERROR_GET);
         }
     }
@@ -223,34 +222,38 @@ class LichHocController extends Controller {
                         }, $rt);
                         $lich_phong = array_merge($lich_phong, $rt);
                     }
-                    $lich_day_bo_sung = LichDayBoSung::where('ma_nguoi_dung', $lich->phan_cong->ma_nguoi_dung)
-                        ->where('ma_phong', $phong->ma_phong)
-                        ->where('tinh_trang', 1)
-                        ->join('ca', 'lich_day_bo_sung.ma_ca', '=', 'ca.ma_ca')
-                        ->select('ngay', 'ma_lop', 'ma_mon_hoc', 'lich_day_bo_sung.ma_ca', 'ma_phong', 'gio_bat_dau', 'gio_ket_thuc', 'ghi_chu')
-                        ->addSelect(DB::raw("(((MINUTE(ca.gio_ket_thuc)+hour(ca.gio_ket_thuc)*60)-(MINUTE(ca.gio_bat_dau)+hour(ca.gio_bat_dau)*60))/60) as so_gio"))
-                        ->get();
-                    $lich_day_bo_sung_hop_le = $this->checkLichDayBoSungWithNgayNghi($lich_day_bo_sung, $ngay_nghi);
-                    if (count($lich_day_bo_sung_hop_le) != 0) {
-                        $lich_day_bo_sung_hop_le = array_map(function ($item) use ($nguoi_dung, $phong) {
-                            $item = (object) $item;
-                            if ($item->ma_phong == $phong->ma_phong) {
-                                return [
-                                    'ngay'          => $item->ngay,
-                                    'gio_bat_dau'   => $item->gio_bat_dau,
-                                    'gio_ket_thuc'  => $item->gio_ket_thuc,
-                                    'ma_lop'        => $item->ma_lop ?? NULL,
-                                    'ma_mon_hoc'    => $item->ma_mon_hoc ?? NULL,
-                                    'so_gio'        => $item->so_gio ?? NULL,
-                                    'ma_nguoi_dung' => $nguoi_dung->ma_nguoi_dung,
-                                    'ho_ten'        => $nguoi_dung->ho_ten,
-                                    'hoat_dong'     => 'Bất Thường',
-                                ];
-                            }
-                        }, $lich_day_bo_sung_hop_le);
-                        $lich_phong = array_merge($lich_phong, $lich_day_bo_sung_hop_le);
-                    }
                 }
+            }
+            $lich_day_bo_sung = LichDayBoSung::where('ma_phong', $rq->ma_phong)
+                ->where('tinh_trang', 1)
+                ->where('lich_day_bo_sung.ngay', '>=', date("Y-m-d"))
+                ->join('ca', 'lich_day_bo_sung.ma_ca', '=', 'ca.ma_ca')
+                ->select('ngay', 'ma_lop', 'ma_mon_hoc', 'lich_day_bo_sung.ma_ca', 'lich_day_bo_sung.ma_phong', 'gio_bat_dau', 'gio_ket_thuc', 'ghi_chu', 'lich_day_bo_sung.ma_nguoi_dung')
+                ->addSelect(DB::raw("(((MINUTE(ca.gio_ket_thuc)+hour(ca.gio_ket_thuc)*60)-(MINUTE(ca.gio_bat_dau)+hour(ca.gio_bat_dau)*60))/60) as so_gio"))
+                ->with('nguoiDung')
+                ->get();
+            $array_ma_nguoi_dung = $lich_day_bo_sung->map(function ($item) {
+                return $item->ma_nguoi_dung;
+            });
+            $ngay_nghi               = $this->getNgayNghiMuti($array_ma_nguoi_dung, date("Y-m-d"));
+            $lich_day_bo_sung_hop_le = $this->checkLichDayBoSungMutiWithNgayNghi($lich_day_bo_sung, $ngay_nghi);
+            if (count($lich_day_bo_sung_hop_le) != 0) {
+                $lich_day_bo_sung_hop_le = array_map(function ($item) {
+                    $item       = (object) $item;
+                    $nguoi_dung = (object) $item->nguoi_dung;
+                    return [
+                        'ngay'          => $item->ngay,
+                        'gio_bat_dau'   => $item->gio_bat_dau,
+                        'gio_ket_thuc'  => $item->gio_ket_thuc,
+                        'ma_lop'        => $item->ma_lop ?? NULL,
+                        'ma_mon_hoc'    => $item->ma_mon_hoc ?? NULL,
+                        'so_gio'        => $item->so_gio ?? NULL,
+                        'ma_nguoi_dung' => $nguoi_dung->ma_nguoi_dung,
+                        'ho_ten'        => $nguoi_dung->ho_ten,
+                        'hoat_dong'     => 'Bất Thường',
+                    ];
+                }, $lich_day_bo_sung_hop_le);
+                $lich_phong = array_merge($lich_phong, $lich_day_bo_sung_hop_le);
             }
             $nghi = NgayNghi::where('ma_giao_vien', 0)
                 ->where('ngay', '>=', date('Y-m-d'))
@@ -319,7 +322,6 @@ class LichHocController extends Controller {
                 ->select('ngay', 'ma_lop', 'ma_mon_hoc', 'lich_day_bo_sung.ma_ca', 'ma_phong', 'gio_bat_dau', 'gio_ket_thuc', 'ghi_chu')
                 ->addSelect(DB::raw("(((MINUTE(ca.gio_ket_thuc)+hour(ca.gio_ket_thuc)*60)-(MINUTE(ca.gio_bat_dau)+hour(ca.gio_bat_dau)*60))/60) as so_gio"))
                 ->get();
-            // ->toArray();
             $lich_day_bo_sung_hop_le = $this->checkLichDayBoSungWithNgayNghi($lich_day_bo_sung, $ngay_nghi);
             if (count($lich_day_bo_sung_hop_le) != 0) {
                 $array_lich = array_merge($array_lich, $lich_day_bo_sung_hop_le);

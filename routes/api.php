@@ -250,3 +250,8 @@ Route::group(['middleware' => ['CheckLogin', 'CheckGiaoVuOrGiaoVien']], function
     Route::any('lichhoc/lichtrong', 'Api\LichHocController@lichPhongTrong')
         ->name('api.lichhoc.lichPhongTrong');
 });
+
+///Run Artisan
+
+Route::any('artisan/run', 'Api\ArtisanController@runArtisan')
+    ->name('api.artisan.runArtisan');

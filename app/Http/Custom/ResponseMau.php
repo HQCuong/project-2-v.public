@@ -23,6 +23,7 @@ class ResponseMau {
     const SUCCESS_UPDATE         = 'Cập nhật thành công';
     const SUCCESS_CREATE         = 'Tạo thành công';
     const SUCCESS_DELETE         = 'Xóa thành công';
+    const SUCCESS_RUN            = 'Chạy thành công';
     const SUCCESS_NO_DATA_UPDATE = 'Không có dữ liệu nào mới để thay đổi';
     ///success return
     const SUCCESS_USER_CREATE         = 'Tạo tài khoản thành công';
@@ -47,6 +48,7 @@ class ResponseMau {
     //NguoiDung
     const ERROR_NOT_DETERMINED = 'Có lỗi từ hệ thống hãy thực hiện lại hoặc liên hệ kĩ thuật';
     const ERROR_GET            = 'Lấy dữ liệu thất bại';
+    const ERROR_RUN            = 'Chạy thất bại';
     const ERROR_UPDATE         = 'Cập nhật dữ liệu thất bại';
     const ERROR_KEY            = 'Bạn không có quyền truy cập';
     const ERROR_CREATE         = 'Tạo thất bại hay kiểm tra lại dữ liệu';

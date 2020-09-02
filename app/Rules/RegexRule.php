@@ -71,10 +71,11 @@ class RegexRule {
     const REGEX_EXISTS_MA_CAU_HINH         = ['exists:cau_hinh,ma_cau_hinh'];
     const REGEX_EXISTS_MA_MON_HOC          = ['exists:mon_hoc,ma_mon_hoc'];
     const REGEX_EXISTS_MA_LICH_DAY_BO_SUNG = ['exists:lich_day_bo_sung,ma_lich_day_bo_sung'];
+    const REGEX_EXISTS_MA_THIET_BI         = ['exists:thiet_bi_phong,ma_thiet_bi'];
     const REGEX_GIO_BAT_DAU                = ['regex:/^(?:[01]\d|2[0-3]):(?:[0-5]\d):(?:[0-5]\d)$/', 'exists:ca,gio_bat_dau'];
     const REGEX_GIO_KET_THUC               = ['regex:/^(?:[01]\d|2[0-3]):(?:[0-5]\d):(?:[0-5]\d)$/', 'exists:ca,gio_ket_thuc', 'after:gio_bat_dau'];
     const REGEX_SO_GIO                     = ['regex:/^[2,4]$/'];
-    const REGEX_SO_NGAY                    = ['regex:/^[1-2][0-9]|[1-9]$/'];
+    const REGEX_SO_NGAY                    = ['regex:/^(([1-2][0-9])|([1-9]))$/'];
     const REGEX_ARRAY_MIN_1                = ['array', 'min:1'];
     const REGEX_TEN_LIMIT_100              = ['nullable', 'regex:/^\w[a-zA-Z0-9ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹêếềễệ\ \_\.]{0,100}$/'];
 }

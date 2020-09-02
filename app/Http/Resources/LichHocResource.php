@@ -33,7 +33,7 @@ class LichHocResource extends JsonResource {
                 return (array) $item;
             }
         }, $this->resource);
-        $data = collect($data)->sortBy('ngay')->groupBy('ngay');
+        $data = collect($data)->unique()->sortBy('ngay')->groupBy('ngay');
         return $data->toArray();
     }
     public function lichPhong() {
@@ -56,7 +56,7 @@ class LichHocResource extends JsonResource {
                 return (array) $item;
             }
         }, $this->resource);
-        $data = collect($data)->sortBy('ngay')->groupBy('ngay');
+        $data = collect($data)->unique()->sortBy('ngay')->groupBy('ngay');
         return $data->toArray();
     }
     public function phongTrong() {
@@ -75,7 +75,7 @@ class LichHocResource extends JsonResource {
                 return (array) $item;
             }
         }, $this->resource);
-        $data = collect($data)->sortBy('ngay')->groupBy('ngay')->map(function ($item) {
+        $data = collect($data)->unique()->sortBy('ngay')->groupBy('ngay')->map(function ($item) {
             return array_values(Arr::sort($item, function ($value) {
                 return $value['ma_phong'];
             }));
